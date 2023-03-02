@@ -2,7 +2,7 @@
   "id": "animecampaign",
   "title": "Anime Campaign",
   "description": "The Anime Campaign system for FoundryVTT.",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "compatibility": {
     "minimum": 10,
     "verified": "10.291",
@@ -27,8 +27,8 @@
   "primaryTokenAttribute": "",
   "secondaryTokenAttribute": "",
   "url": "https://github.com/holipop/animecampaign",
-  "manifest": "https://github.com/holipop/animecampaign/releases/download/0.0.3/system.json",
-  "download": "https://github.com/holipop/animecampaign/releases/download/0.0.3/animecampaign.zip",
+  "manifest": "https://github.com/holipop/animecampaign/releases/download/0.0.5/system.json",
+  "download": "https://github.com/holipop/animecampaign/releases/download/0.0.5/animecampaign.zip",
   "license": "LICENSE.txt",
   "changelog": "CHANGELOG.md"
 }
