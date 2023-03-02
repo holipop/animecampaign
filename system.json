@@ -1,11 +1,11 @@
 {
   "id": "animecampaign",
-  "title": "AnimeCampaign",
-  "description": "The Anime Campaign system for FoundryVTT!",
+  "title": "Anime Campaign",
+  "description": "The Anime Campaign system for FoundryVTT.",
   "version": "0.0.3",
   "compatibility": {
     "minimum": 10,
-    "verified": "10.287",
+    "verified": "10.291",
     "maximum": 10
   },
   "authors": [{
