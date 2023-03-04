@@ -1,6 +1,7 @@
 {
     "Actors": {},
     "Item": {
+        "types": ["Weapon", "Passive", "Talent", "Ability"],
         "templates": {
             "base": {
                 "description": ""
