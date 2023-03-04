@@ -1,73 +1,27 @@
 {
-  "Actor": {
-    "types": ["character", "npc"],
-    "templates": {
-      "base": {
-        "health": {
-          "value": 10,
-          "min": 0,
-          "max": 10
+    "Actors": {},
+    "Item": {
+        "types": ["Weapon", "Passive", "Talent", "Ability"],
+        "templates": {
+            "base": {
+                "description": ""
+            }
         },
-        "power": {
-          "value": 5,
-          "min": 0,
-          "max": 5
+        "Weapon": {
+            "templates": ["base"],
+            "damage": 0,
+            "range": 0
         },
-        "biography": "the plumpin ploy plussy til i plum!!!"
-      }
-    },
-    "character": {
-      "templates": ["base"],
-      "attributes": {
-        "level": {
-          "value": 1
+        "Passive": {
+            "templates": ["base"]
+        },
+        "Talent": {
+            "templates": ["base"],
+            "bonus": 0
+        },
+        "Ability": {
+            "templates": ["base"],
+            "cost": 0
         }
-      },
-      "abilities": {
-        "str": {
-          "value": 10
-        },
-        "dex": {
-          "value": 10
-        },
-        "con": {
-          "value": 10
-        },
-        "int": {
-          "value": 10
-        },
-        "wis": {
-          "value": 10
-        },
-        "cha": {
-          "value": 10
-        }
-      }
-    },
-    "npc": {
-      "templates": ["base"],
-      "cr": 0
     }
-  },
-  "Item": {
-    "types": ["item", "feature", "spell"],
-    "templates": {
-      "base": {
-        "description": ""
-      }
-    },
-    "item": {
-      "templates": ["base"],
-      "quantity": 1,
-      "weight": 0,
-      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
-    },
-    "feature": {
-      "templates": ["base"]
-    },
-    "spell": {
-      "templates": ["base"],
-      "spellLevel": 1
-    }
-  }
 }

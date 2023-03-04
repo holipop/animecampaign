@@ -1,34 +1,25 @@
 {
-  "id": "animecampaign",
-  "title": "Anime Campaign",
-  "description": "The Anime Campaign system for FoundryVTT.",
-  "version": "0.0.6",
-  "compatibility": {
-    "minimum": 10,
-    "verified": "10.291",
-    "maximum": 10
-  },
-  "authors": [{
-    "name": "Holipop"
-  }],
-  "esmodules": ["module/animecampaign.mjs"],
-  "styles": ["css/animecampaign.css"],
-  "scripts": [],
-  "packs": [],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    }
-  ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
-  "primaryTokenAttribute": "",
-  "secondaryTokenAttribute": "",
-  "url": "https://github.com/holipop/animecampaign",
-  "manifest": "https://github.com/holipop/animecampaign/releases/download/0.0.6/system.json",
-  "download": "https://github.com/holipop/animecampaign/releases/download/0.0.6/animecampaign.zip",
-  "license": "LICENSE.txt",
-  "changelog": "CHANGELOG.md"
+    "id": "animecampaign",
+    "title": "Anime Campaign",
+    "description": "An unoffocial fanmade system based on JelloApocalypse's Epithet/Anime Campaign system.",
+    "authors": "Holipop",
+    "version": "0.0.1",
+    "compatibility": {
+        "minimum": 10.291,
+        "verified": "10.291"
+    },
+    "esmodules": [
+        "animecampaign.js"
+    ],
+    "styles": [
+        "animecampaign.css"
+    ],
+    "packs": [],
+    "languages": [],
+    "gridDistance": 5,
+    "gridUnits": "ft",
+    "initiative": "1d20",
+    "primaryTokenAttribute": "stamina",
+    "manifest": "https://github.com/holipop/animecampaign/releases/download/0.0.1/system.json",
+    "download": "https://github.com/holipop/animecampaign/releases/download/0.0.1/animecampaign.zip"
 }
