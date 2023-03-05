@@ -1,0 +1,12 @@
+.animecampaign.item.sheet form {
+  display: flex;
+  flex-direction: column;
+}
+.animecampaign.item.sheet .sheet-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.animecampaign.item.sheet .sheet-content .editor {
+  height: 100%;
+}

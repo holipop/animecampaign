@@ -2,7 +2,9 @@
     "id": "animecampaign",
     "title": "Anime Campaign",
     "description": "An unoffocial fanmade system based on JelloApocalypse's Epithet/Anime Campaign system.",
-    "authors": "Holipop",
+    "authors": [{
+        "name": "Holipop"
+    }],
     "version": "0.0.1",
     "compatibility": {
         "minimum": 10.291,

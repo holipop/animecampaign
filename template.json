@@ -1,5 +1,20 @@
 {
-    "Actors": {},
+    "Actors": {
+        "stats": {
+            "stamina": {
+                "value": 0,
+                "max": 0
+            },
+            "proficiency": 0
+        },
+        "type": "",
+        "word": "",
+        "class": "",
+        "build": "Average",
+        "gender": "",
+        "age": "",
+        "critTheme": ""
+    },
     "Item": {
         "types": ["Weapon", "Passive", "Talent", "Ability"],
         "templates": {

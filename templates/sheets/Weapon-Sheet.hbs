@@ -1,0 +1,19 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64">
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"></h1>
+    </header>
+    <div class="sheet-content item animecampaign">
+        <table>
+            <tr>
+                <th>Damage</th>
+                <th>Range</th>
+            </tr>
+            <tr>
+                <td><input name="system.damage" type="text" value="{{system.damage}}" data-dtype="Number"/></td>
+                <td><input name="system.range" type="text" value="{{system.range}}" data-dtype="Number"/></td>
+            </tr>
+        </table>
+        {{editor description target="system.description" button=true editable=editable}}</td>
+    </div>
+</form>
