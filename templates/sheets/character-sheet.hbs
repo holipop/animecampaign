@@ -10,9 +10,15 @@
     </nav>
 
     <section class="content">
-        <div class="tab" data-group="primary-tabs" data-tab="kit">HEY!!! IM THE KIT</div>
-        <div class="tab" data-group="primary-tabs" data-tab="upgrades">HEY!!! IM THE UPGRADES</div>
-        <div class="tab" data-group="primary-tabs" data-tab="biography">HEY!!! IM THE BIOGRAPHY</div>
+        <div class="tab" data-group="primary-tabs" data-tab="kit">
+            {{> "systems/animecampaign/templates/sheets/partials/kit.hbs"}}
+        </div>
+        <div class="tab" data-group="primary-tabs" data-tab="upgrades">
+            {{> "systems/animecampaign/templates/sheets/partials/upgrades.hbs"}}
+        </div>
+        <div class="tab" data-group="primary-tabs" data-tab="biography">
+            {{> "systems/animecampaign/templates/sheets/partials/biography.hbs"}}
+        </div>
     </section>
     
     <!-- 
