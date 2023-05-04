@@ -59,6 +59,7 @@
   margin-left: 1rem;
   place-self: end end;
   border: 1px solid black;
+  background-color: purple;
 }
 .animecampaign.sheet .name {
   place-self: end start;

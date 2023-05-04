@@ -80,6 +80,7 @@ export default class ACActorSheet extends ActorSheet {
         const BACKGROUND_INPUT = _html.find('.background-input');
         const NAME = _html.find('.name');
         const CLASS = _html.find('.class');
+        const IMG = _html.find('.img');
 
         let color = BACKGROUND_INPUT[0].defaultValue
 
@@ -99,6 +100,7 @@ export default class ACActorSheet extends ActorSheet {
             CLASS.css( 'color', "#000000" );
         }
 
-        BACKGROUND.css("background-color", BACKGROUND_INPUT[0].defaultValue)
+        BACKGROUND.css( "background-color", BACKGROUND_INPUT[0].defaultValue );
+        IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
     }
 }
