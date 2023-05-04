@@ -98,7 +98,7 @@
 }
 .animecampaign.actor.sheet .proficiency-class {
   margin-right: 0.675rem;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   flex-grow: 1;
   font: 1.875rem 'Gloock';
   line-height: 0;
@@ -121,7 +121,7 @@
 .animecampaign.actor.sheet .stat-containers > * {
   border-right: 1px solid black;
   border-left: 1px solid black;
-  background-color: rgba(0, 0, 0, 0.0375);
+  background-color: rgba(0, 0, 0, 0.035);
 }
 .animecampaign.actor.sheet .divider {
   margin: 0 auto;
