@@ -48,6 +48,8 @@ export default class ACActorSheet extends ActorSheet {
         this.updateIsInscribed();
 
         super.activateListeners(html);
+
+        // Test!
     }
 
     adjustFontSize(_div, _rem, _max) {
