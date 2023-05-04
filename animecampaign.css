@@ -2,10 +2,10 @@
   min-width: 520px;
   min-height: 530px;
 }
-.animecampaign.sheet {
+.animecampaign.actor.sheet {
   /* -- CHARACTER SUMMARY -- */
 }
-.animecampaign.sheet .background {
+.animecampaign.actor.sheet .background {
   position: absolute;
   height: calc(6.2rem * (5/8) + 0.8rem);
   width: 100%;
@@ -13,17 +13,17 @@
   top: 30px;
   border-bottom: 1px solid black;
 }
-.animecampaign.sheet .background-input {
+.animecampaign.actor.sheet .background-input {
   height: 1.3rem;
   width: 1rem;
   position: absolute;
-  left: -4px;
+  left: 0px;
   top: 30px;
   border: 0;
   padding: 0;
   margin: 0;
 }
-.animecampaign.sheet .sheet-header {
+.animecampaign.actor.sheet .sheet-header {
   height: 6.2rem;
   width: calc(80% + 6.75rem);
   max-width: 100%;
@@ -32,36 +32,35 @@
   grid-template-rows: 7fr 3fr;
   z-index: 2;
 }
-.animecampaign.sheet .sheet-header > * {
+.animecampaign.actor.sheet .sheet-header > * {
   z-index: 2;
 }
-.animecampaign.sheet .header-top {
+.animecampaign.actor.sheet .header-top {
   display: grid;
   align-self: end;
   grid-template-columns: 1fr auto;
 }
-.animecampaign.sheet .header-bottom {
+.animecampaign.actor.sheet .header-bottom {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.animecampaign.sheet .header-graphic {
+.animecampaign.actor.sheet .header-graphic {
   grid-column-start: 2;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
   border-top: 1px solid black;
 }
-.animecampaign.sheet .img {
+.animecampaign.actor.sheet .img {
   grid-row: span 2;
   height: 5.4rem;
   width: 5.4rem;
   margin-left: 1rem;
   place-self: end end;
   border: 1px solid black;
-  background-color: purple;
 }
-.animecampaign.sheet .name {
+.animecampaign.actor.sheet .name {
   place-self: end start;
   margin-left: 0.75rem;
   margin-bottom: 0.545rem;
@@ -72,7 +71,7 @@
   text-transform: uppercase;
   line-height: 0.85;
 }
-.animecampaign.sheet .class {
+.animecampaign.actor.sheet .class {
   place-self: end;
   text-align: end;
   max-height: calc(6.825rem * 0.7 - 0.975rem);
@@ -84,24 +83,74 @@
   overflow-y: hidden;
   font: 0.9rem 'Arial';
 }
-.animecampaign.sheet .type {
+.animecampaign.actor.sheet .type {
   margin-right: 0.25rem;
   height: 1.6rem;
   padding: 0;
   flex-grow: 1;
   font: 0.75rem 'Arial';
 }
-.animecampaign.sheet .word {
+.animecampaign.actor.sheet .word {
   overflow: hidden;
   height: 1.6rem;
   flex-grow: 1;
   font: 1rem 'Philosopher';
 }
-.animecampaign.sheet .proficiency-class {
+.animecampaign.actor.sheet .proficiency-class {
   margin-right: 0.675rem;
   margin-left: 1rem;
   flex-grow: 1;
   font: 1.875rem 'Gloock';
   line-height: 0;
   transform: skew(-15deg);
+}
+.animecampaign.actor.sheet .stat-block {
+  margin: 0.75rem auto;
+  height: 5rem;
+  width: auto;
+  border: 0;
+  background-color: transparent;
+}
+.animecampaign.actor.sheet .stat-labels > * {
+  height: 0.75rem;
+  width: 9rem;
+  padding: 0;
+  font: bold 0.75rem 'Arial';
+  text-transform: uppercase;
+}
+.animecampaign.actor.sheet .stat-containers > * {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  background-color: rgba(0, 0, 0, 0.0375);
+}
+.animecampaign.actor.sheet .divider {
+  margin: 0 auto;
+  width: 55%;
+  border-top: 1px solid black;
+}
+.animecampaign.actor.sheet .stat-primary,
+.animecampaign.actor.sheet .stat-secondary,
+.animecampaign.actor.sheet .stat-single {
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  font-family: 'Philosopher';
+  line-height: 1;
+  font-weight: bold;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+}
+.animecampaign.actor.sheet .stat-primary {
+  height: 3rem;
+  font-size: 3rem;
+}
+.animecampaign.actor.sheet .stat-secondary {
+  height: 1.5rem;
+  font-size: 1.5rem;
+}
+.animecampaign.actor.sheet .stat-single {
+  height: 4rem;
+  font-size: 4rem;
 }

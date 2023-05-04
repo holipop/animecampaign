@@ -7,11 +7,11 @@
                 "description": "",
                 "stats": {
                     "stamina": {
-                        "value": 0,
-                        "max": 0
+                        "value": "",
+                        "max": ""
                     },
                     "movement": {
-                        "value": 0
+                        "value": ""
                     }
                 }
             }
@@ -20,14 +20,14 @@
             "templates": ["base"],
             "stats": {
                 "proficiency": {
-                    "value": 0
+                    "value": ""
                 },
                 "movement": {
                     "build": "Average"
                 }
             },
             "word": "",
-            "type": "",
+            "type": "epithet",
             "isInscribed": true,
             "class": "Class"
         },
