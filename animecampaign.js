@@ -5,7 +5,8 @@ import ACActorSheet from "./module/sheets/ACActorSheet.js";
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
         "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
-        "systems/animecampaign/templates/sheets/partials/character-stats.hbs"
+        "systems/animecampaign/templates/sheets/partials/character-stats.hbs",
+        "systems/animecampaign/templates/sheets/partials/character-navigation.hbs"
     ];
     return loadTemplates(templatePaths);
 }

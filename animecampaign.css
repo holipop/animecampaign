@@ -154,3 +154,11 @@
   height: 4rem;
   font-size: 4rem;
 }
+.animecampaign.actor.sheet nav {
+  margin: 0 1rem;
+}
+.animecampaign.actor.sheet nav > * {
+  margin: 0 1.2rem;
+  font: 1.25rem 'Philosopher';
+  text-align: center;
+}
