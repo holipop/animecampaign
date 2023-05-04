@@ -2,8 +2,12 @@
     {{> "systems/animecampaign/templates/sheets/partials/character-summary.hbs"}}
 
     {{> "systems/animecampaign/templates/sheets/partials/character-stats.hbs"}}
-
-    {{> "systems/animecampaign/templates/sheets/partials/character-navigation.hbs"}}
+    
+    <nav class="flexrow tabs" data-group="primary-tabs">
+        <a class="item" data-group="primary-tabs" data-tab="kit">{{ localize config.navigationLabels.kit }}</a>
+        <a class="item" data-group="primary-tabs" data-tab="upgrades">{{ localize config.navigationLabels.upgrades }}</a>
+        <a class="item" data-group="primary-tabs" data-tab="biography">{{ localize config.navigationLabels.biography }}</a>
+    </nav>
 
     <section class="content">
         <div class="tab" data-group="primary-tabs" data-tab="kit">HEY!!! IM THE KIT</div>

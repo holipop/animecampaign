@@ -46,6 +46,7 @@ export default class ACActorSheet extends ActorSheet {
         // Create Navigation Tabs
         const tabs = new Tabs({navSelector: ".tabs", contentSelector: ".content", initial: "kit"});
         tabs.bind(html[0]);
+        // !!! triggers an error but only on foundry's side? TODO
 
         this.updateBackground(html, 0.5);
         this.updateIsInscribed();
