@@ -36,6 +36,6 @@ animecampaign.statLabels = {
 
 animecampaign.navigationLabels = {
     kit: "animecampaign.navigationLabels.kit",
-    proficiency: "animecampaign.navigationLabels.proficiency",
+    upgrades: "animecampaign.navigationLabels.upgrades",
     biography: "animecampaign.navigationLabels.biography",
 }
