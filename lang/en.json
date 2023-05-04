@@ -1,0 +1,33 @@
+{
+    "animecampaign": {
+        "test": "Testing Testing One Two Three!",
+        "build": {
+            "svelte": "Svelte",
+            "average": "Average",
+            "heavyset": "Heavyset"
+        },
+        "type": {
+            "inscribed": {
+                "epithet": "Epithet"
+            },
+            "mundie": {
+                "expert": "Expert",
+                "powerhouse": "Powerhouse"
+            }
+        },
+        "powerset": {
+            "inscribed": "Inscribed",
+            "mundie": "Mundie"
+        },
+        "statLabels": {
+            "stamina": "Stamina",
+            "proficiency": "Proficiency",
+            "movement": "Movement",
+            "damage": "Damage",
+            "range": "Range",
+            "cost": "Cost",
+            "bonus": "Bonus",
+            "action": "Action"
+        }
+    }
+}

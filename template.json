@@ -1,0 +1,52 @@
+{
+    "Actor": {
+        "types": ["Character", "Unit"],
+        "templates": {
+            "base": {
+                "backgroundColor": "#FFFFFF",
+                "description": "",
+                "stamina": {
+                    "value": 0,
+                    "max": 0
+                },
+                "movement": 0
+            }
+        },
+        "Character": {
+            "templates": ["base"],
+            "proficiency": 0,
+            "word": "",
+            "type": "",
+            "isInscribed": true,
+            "class": "Class"
+        },
+        "Unit": {
+            "templates": ["base"]
+        }
+    },
+    "Item": {
+        "types": ["Weapon", "Passive", "Talent", "Ability"],
+        "templates": {
+            "base": {
+                "backgroundColor": "#FFFFFF",
+                "description": ""
+            }
+        },
+        "Weapon": {
+            "templates": ["base"],
+            "damage": 0,
+            "range": 0
+        },
+        "Passive": {
+            "templates": ["base"]
+        },
+        "Talent": {
+            "templates": ["base"],
+            "bonus": 0
+        },
+        "Ability": {
+            "templates": ["base"],
+            "cost": 0
+        }
+    }
+}

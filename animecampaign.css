@@ -1,0 +1,106 @@
+.animecampaign.actor.sheet {
+  min-width: 520px;
+  min-height: 530px;
+}
+.animecampaign.sheet {
+  /* -- CHARACTER SUMMARY -- */
+}
+.animecampaign.sheet .background {
+  position: absolute;
+  height: calc(6.2rem * (5/8) + 0.8rem);
+  width: 100%;
+  left: 0;
+  top: 30px;
+  border-bottom: 1px solid black;
+}
+.animecampaign.sheet .background-input {
+  height: 1.3rem;
+  width: 1rem;
+  position: absolute;
+  left: -4px;
+  top: 30px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.animecampaign.sheet .sheet-header {
+  height: 6.2rem;
+  width: calc(80% + 6.75rem);
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 7fr 3fr;
+  z-index: 2;
+}
+.animecampaign.sheet .sheet-header > * {
+  z-index: 2;
+}
+.animecampaign.sheet .header-top {
+  display: grid;
+  align-self: end;
+  grid-template-columns: 1fr auto;
+}
+.animecampaign.sheet .header-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.animecampaign.sheet .header-graphic {
+  grid-column-start: 2;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid black;
+}
+.animecampaign.sheet .img {
+  grid-row: span 2;
+  height: 5.4rem;
+  width: 5.4rem;
+  margin-left: 1rem;
+  place-self: end end;
+  border: 1px solid black;
+}
+.animecampaign.sheet .name {
+  place-self: end start;
+  margin-left: 0.75rem;
+  margin-bottom: 0.545rem;
+  max-width: 95%;
+  min-width: 2.25rem;
+  overflow-wrap: break-word;
+  font-family: 'Gloock';
+  text-transform: uppercase;
+  line-height: 0.85;
+}
+.animecampaign.sheet .class {
+  place-self: end;
+  text-align: end;
+  max-height: calc(6.825rem * 0.7 - 0.975rem);
+  max-width: 7.5rem;
+  min-width: 2.25rem;
+  margin-left: 0.75rem;
+  margin-right: 0.375rem;
+  margin-bottom: 0.375rem;
+  overflow-y: hidden;
+  font: 0.9rem 'Arial';
+}
+.animecampaign.sheet .type {
+  margin-right: 0.25rem;
+  height: 1.6rem;
+  padding: 0;
+  flex-grow: 1;
+  font: 0.75rem 'Arial';
+}
+.animecampaign.sheet .word {
+  overflow: hidden;
+  height: 1.6rem;
+  flex-grow: 1;
+  font: 1rem 'Philosopher';
+}
+.animecampaign.sheet .proficiency-class {
+  margin-right: 0.675rem;
+  margin-left: 1rem;
+  flex-grow: 1;
+  font: 1.875rem 'Gloock';
+  line-height: 0;
+  transform: skew(-15deg);
+}
