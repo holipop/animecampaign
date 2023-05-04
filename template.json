@@ -3,18 +3,29 @@
         "types": ["Character", "Unit"],
         "templates": {
             "base": {
-                "backgroundColor": "#FFFFFF",
+                "backgroundColor": "#CCCCCC",
                 "description": "",
-                "stamina": {
-                    "value": 0,
-                    "max": 0
-                },
-                "movement": 0
+                "stats": {
+                    "stamina": {
+                        "value": 0,
+                        "max": 0
+                    },
+                    "movement": {
+                        "value": 0
+                    }
+                }
             }
         },
         "Character": {
             "templates": ["base"],
-            "proficiency": 0,
+            "stats": {
+                "proficiency": {
+                    "value": 0
+                },
+                "movement": {
+                    "build": "Average"
+                }
+            },
             "word": "",
             "type": "",
             "isInscribed": true,
@@ -28,7 +39,7 @@
         "types": ["Weapon", "Passive", "Talent", "Ability"],
         "templates": {
             "base": {
-                "backgroundColor": "#FFFFFF",
+                "backgroundColor": "#CCCCCC",
                 "description": ""
             }
         },
