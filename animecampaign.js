@@ -1,7 +1,10 @@
 import { animecampaign } from "./module/config.js";
-import ACItemSheet from "./module/sheets/ACItemSheet.js";
+
 import ACActorSheet from "./module/sheets/ACActorSheet.js";
 import { CharacterData } from "./module/ACActor.js";
+
+import ACItemSheet from "./module/sheets/ACItemSheet.js";
+import { KitPieceData } from "./module/ACItem.js";
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
@@ -19,11 +22,11 @@ Hooks.once("init", () => {
 
     CONFIG.animecampaign = animecampaign;
 
-    CONFIG.Actor.systemDataModels.Character = CharacterData;
-
+    CONFIG.Actor.systemDataModels["Character"] = CharacterData;
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("animecampaign", ACActorSheet, { makeDefault: true });
 
+    CONFIG.Item.systemDataModels["Kit Piece"] = KitPieceData;
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", ACItemSheet, { makeDefault: true });
 

@@ -10,6 +10,7 @@ export class CharacterData extends foundry.abstract.DataModel {
             word: new fields.StringField(),
             type: new fields.StringField(),
             color: new fields.StringField({
+                required: true,
                 initial: "#CCCCCC"
             }),
             stats: new fields.SchemaField({

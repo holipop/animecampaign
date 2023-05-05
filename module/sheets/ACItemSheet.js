@@ -9,13 +9,17 @@ export default class ACItemSheet extends ItemSheet {
     }
 
     get template() {
-        return `systems/animecampaign/templates/sheets/${this.item.type}-sheet.hbs`;
+        if (this.item.type) {
+            return `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`;
+        }
     }
 
     async getData() {
         const data = super.getData()
-        data.config = CONFIG.animecampaign; //This is the localization
-        data.system = data.item.system; //THIS IS THE SHIT WE DEFINED!!!
+
+        data.config = CONFIG.animecampaign;
+        data.system = data.item.system; 
+
         return data;
     }
 }
