@@ -36,28 +36,18 @@
         }
     },
     "Item": {
-        "types": ["Weapon", "Passive", "Talent", "Ability"],
+        "types": ["Kit Piece"],
         "templates": {
             "base": {
                 "backgroundColor": "#CCCCCC",
                 "description": ""
             }
         },
-        "Weapon": {
+        "Kit Piece": {
             "templates": ["base"],
-            "damage": 0,
-            "range": 0
-        },
-        "Passive": {
-            "templates": ["base"]
-        },
-        "Talent": {
-            "templates": ["base"],
-            "bonus": 0
-        },
-        "Ability": {
-            "templates": ["base"],
-            "cost": 0
+            "type": "",
+            "stats": [],
+            "values": []
         }
     }
 }
