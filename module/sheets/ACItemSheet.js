@@ -35,7 +35,7 @@ export default class ACItemSheet extends ItemSheet {
         html.ready(() => this.adjustFontSize(NAME, 2.5, 60));
 
         // Update Name
-        NAME.on('blur', e => this.actor.update({ 'name': NAME.text() }));
+        NAME.on('blur', e => this.item.update({ 'name': NAME.text() }));
         NAME[0].addEventListener('paste', e => e.preventDefault())
 
         this.updateBackground(html, 0.5);
