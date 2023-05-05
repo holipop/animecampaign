@@ -49,12 +49,8 @@ export default class ACActorSheet extends ActorSheet {
             callback: () => {}
         });
         tabs.bind(html[0]);
-        // !!! triggers an error but only on foundry's side? TODO
 
         this.updateBackground(html, 0.5);
-        this.updateIsInscribed();
-        this.updateProficiencyClass(html)
-
         super.activateListeners(html);
     }
 
@@ -69,19 +65,6 @@ export default class ACActorSheet extends ActorSheet {
             text.css( 'fontSize', `${_rem}rem`);
             console.log('Anime Campaign | Resizing Text');
         } 
-    }
-
-    updateIsInscribed() {
-        let values = Object
-            .values(CONFIG.animecampaign.type.inscribed)
-            .map(element => game.i18n.localize(element).toLowerCase());
-        let type = this.actor.system.type;
-
-        if (values.includes(type)) {
-            this.actor.update({ 'system.isInscribed': true })
-        } else {
-            this.actor.update({ 'system.isInscribed': false })
-        }
     }
 
     updateBackground(_html, _threshold) {
@@ -111,18 +94,5 @@ export default class ACActorSheet extends ActorSheet {
 
         BACKGROUND.css( "background-color", BACKGROUND_INPUT[0].defaultValue );
         IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
-    }
-
-    updateProficiencyClass(_html) {
-        const PROF_CLASS = _html.find('.proficiency-class');
-        let proficiency = this.actor.system.stats.proficiency.value;
-
-        if (proficiency < 60) {
-            PROF_CLASS.text( 'I' );
-        } else if ((60 <= proficiency) && (proficiency < 100)) {
-            PROF_CLASS.text( 'II' );
-        } else {
-            PROF_CLASS.text( 'III' );
-        }
     }
 }

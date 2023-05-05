@@ -9,7 +9,7 @@ export default class ACItemSheet extends ItemSheet {
     }
 
     get template() {
-        if (this.item.type) {
+        if (this.item.type == 'Kit Piece') {
             return `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`;
         }
     }
