@@ -43,17 +43,24 @@ export default class ACActorSheet extends ActorSheet {
         CLASS.on('blur', e => this.actor.update({ 'system.class':  CLASS.text() }));
         CLASS[0].addEventListener('paste', e => e.preventDefault());
 
+        // Create Navigation Tabs
+        const tabs = new Tabs({
+            navSelector: ".tabs", 
+            contentSelector: ".content", 
+            initial: "kit", 
+            callback: () => {}
+        });
+        tabs.bind(html[0]);
+        // !!! triggers an error but only on foundry's side? TODO
+
         this.updateBackground(html, 0.5);
-
         this.updateIsInscribed();
-
         this.updateProficiencyClass(html)
 
         super.activateListeners(html);
-
-        // Test!
     }
 
+    // shit i defined
     adjustFontSize(_div, _rem, _max) {
         const text = $(_div);
 

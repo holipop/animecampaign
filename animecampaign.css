@@ -2,6 +2,11 @@
   min-width: 520px;
   min-height: 530px;
 }
+.animecampaign.actor.sheet nav > * {
+  margin: 0 1.2rem;
+  font: 1.25rem 'Philosopher';
+  text-align: center;
+}
 .animecampaign.actor.sheet {
   /* -- CHARACTER SUMMARY -- */
 }

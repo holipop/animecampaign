@@ -33,3 +33,9 @@ animecampaign.statLabels = {
     bonus: "animecampaign.statLabels.bonus",
     action: "animecampaign.statLabels.action"
 }
+
+animecampaign.navigationLabels = {
+    kit: "animecampaign.navigationLabels.kit",
+    upgrades: "animecampaign.navigationLabels.upgrades",
+    biography: "animecampaign.navigationLabels.biography",
+}

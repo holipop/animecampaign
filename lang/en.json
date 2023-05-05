@@ -28,6 +28,11 @@
             "cost": "Cost",
             "bonus": "Bonus",
             "action": "Action"
+        },
+        "navigationLabels": {
+            "kit": "Kit",
+            "upgrades": "Upgrades",
+            "biography": "Biography"
         }
     }
 }
