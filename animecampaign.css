@@ -1,3 +1,7 @@
+.animecampaign.item.sheet {
+  min-width: 450px;
+  min-height: 350px;
+}
 .animecampaign.item.sheet .background {
   position: absolute;
   height: calc(6.2rem * (5/8) + 0.8rem);
