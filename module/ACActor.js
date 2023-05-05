@@ -44,4 +44,25 @@ export class CharacterData extends foundry.abstract.DataModel {
             })
         }
     }
+
+    get profClass() {
+        const proficiency = this.parent.system.stats.proficiency.value;
+
+        if (proficiency < 60) {
+            return "I";
+        } else if ((60 <= proficiency) && (proficiency < 100)) {
+            return "II";
+        } else {
+            return "III";
+        }
+    }
+
+    get isInscribed() {
+        let inscribedValues = Object
+            .values(CONFIG.animecampaign.type.inscribed)
+            .map(element => game.i18n.localize(element).toLowerCase());
+        const type = this.parent.system.type;
+
+        return inscribedValues.includes(type);
+    }
 }
