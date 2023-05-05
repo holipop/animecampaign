@@ -28,16 +28,17 @@
   z-index: 2;
 }
 .animecampaign.item.sheet .header-top {
-  height: calc(6.2rem * (5/8));
+  height: calc(6.2rem * (5/8) + 0.4rem);
   display: grid;
   align-self: end;
   grid-template-columns: 1fr auto;
 }
 .animecampaign.item.sheet .img {
   grid-row: span 2;
-  height: 5.4rem;
-  width: 5.4rem;
+  height: 4.4rem;
+  width: 4.4rem;
   margin-left: 1rem;
+  margin-top: 1rem;
   place-self: end end;
   border: 1px solid black;
 }
