@@ -5,8 +5,6 @@ export default class ACActorSheet extends ActorSheet {
             width: 520,
             height: 500,
             classes: ["animecampaign", "sheet", "actor"]
-        },{
-            overwrite: true
         });
     }
 
