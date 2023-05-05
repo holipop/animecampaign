@@ -9,6 +9,10 @@ export default class ACItemSheet extends ItemSheet {
     }
 
     get template() {
+        let kit = ['Weapon', 'Talent', 'Passive', 'Ability'];
+        if (kit.includes(this.item.type)) {
+            return `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`;
+        }
         return `systems/animecampaign/templates/sheets/${this.item.type}-sheet.hbs`;
     }
 
