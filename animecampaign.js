@@ -1,6 +1,7 @@
 import { animecampaign } from "./module/config.js";
 import ACItemSheet from "./module/sheets/ACItemSheet.js";
 import ACActorSheet from "./module/sheets/ACActorSheet.js";
+import { CharacterData } from "./module/ACActor.js";
 
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
@@ -17,6 +18,8 @@ Hooks.once("init", () => {
     console.log("Anime Campaign | Initializing Anime Campaign System");
 
     CONFIG.animecampaign = animecampaign;
+
+    CONFIG.Actor.systemDataModels.Character = CharacterData;
 
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("animecampaign", ACActorSheet, { makeDefault: true });
