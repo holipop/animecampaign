@@ -4,7 +4,9 @@ export class CharacterData extends foundry.abstract.DataModel {
 
         return {
             description: new fields.HTMLField(),
-            class: new fields.StringField(),
+            class: new fields.StringField({
+                initial: "Class"
+            }),
             word: new fields.StringField(),
             type: new fields.StringField(),
             color: new fields.StringField({
