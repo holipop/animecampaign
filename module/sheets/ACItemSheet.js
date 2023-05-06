@@ -42,20 +42,18 @@ export default class ACItemSheet extends ItemSheet {
         const CREATE_STAT = html.find('.stat-create');
         CREATE_STAT.on('click', e => {
             let d = new Dialog({
-                title: `Add Stat: ${this.item.name}`,
-                content: `<p>Enter stat name:</p><input class="stat-submit" type="text" placeholder="Stat name">`,
+                title: `Create Stat: ${this.item.name}`,
+                content: `<p>Enter stat name:</p><input type="text" placeholder="Stat name"><hr>`,
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
                         label: "Confirm",
-                        callback: e => this.item.system.createStat(e.find('.stat-submit').val())
+                        callback: e => this.item.system.createStat(e.find('input').val())
                     }
                 },
                 default: "confirm",
                 render: html => {},
                 close: html => {}
-            }, {
-                classes: ["animecampaign", "sheet", "item", "dialog"]
             });
             d.render(true);
         })
