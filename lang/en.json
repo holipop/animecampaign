@@ -15,6 +15,12 @@
                 "powerhouse": "Powerhouse"
             }
         },
+        "kitTypes": {
+            "weapon": "Weapon",
+            "talent": "Talent",
+            "passive": "Passive",
+            "ability": "Ability"
+        },
         "powerset": {
             "inscribed": "Inscribed",
             "mundie": "Mundie"

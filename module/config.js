@@ -18,6 +18,13 @@ animecampaign.type = {
     }
 }
 
+animecampaign.kitTypes = {
+    weapon: "animecampaign.kitTypes.weapon",
+    talent: "animecampaign.kitTypes.talent",
+    passive: "animecampaign.kitTypes.passive",
+    ability: "animecampaign.kitTypes.ability"
+}
+
 animecampaign.powerset = {
     inscribed: "animecampaign.powerset.inscribed",
     mundie: "animecampaign.powerset.mundie"
