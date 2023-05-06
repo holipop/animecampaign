@@ -54,7 +54,6 @@ export default class ACActorSheet extends ActorSheet {
         super.activateListeners(html);
     }
 
-    // shit i defined
     adjustFontSize(_div, _rem, _max) {
         const text = $(_div);
 
