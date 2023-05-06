@@ -13,38 +13,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                 required: true,
                 initial: "#CCCCCC"
             }),
-            stats: new fields.SchemaField({
-                stamina: new fields.SchemaField({
-                    value: new fields.NumberField({
-                        required: true,
-                        initial: 0,
-                        integer: true
-                    }),
-                    max: new fields.NumberField({
-                        required: true,
-                        initial: 0,
-                        integer: true
-                    })
-                }),
-                proficiency: new fields.SchemaField({
-                    value: new fields.NumberField({
-                        required: true,
-                        initial: 0,
-                        integer: true
-                    })
-                }),
-                movement: new fields.SchemaField({
-                    value: new fields.NumberField({
-                        required: true,
-                        initial: 5,
-                        integer: true
-                    }),
-                    build: new fields.StringField({
-                        required: true,
-                        initial: "Average"
-                    })
-                })
-            })
+            stats: new fields.ObjectField()
         }
     }
 
@@ -67,5 +36,30 @@ export class CharacterData extends foundry.abstract.DataModel {
         const type = this.parent.system.type;
 
         return inscribedValues.includes(type);
+    }
+
+    createStat(key, value = "") {
+        this.parent.update({ [`system.stats.${key}`]: value });
+    }
+
+    deleteStat(key) {
+        this.parent.update({ [`system.stats.-=${key}`]: null })
+    }
+
+    createDefaultStats() {
+        this.parent.update({ 
+            'system.stats.stamina': {
+                value: 0,
+                max: 0
+            },
+            'system.stats.proficiency': {
+                value: 0,
+                ladder: []
+            },
+            'system.stats.movement': {
+                value: 0,
+                build: "Average"
+            }
+        });
     }
 }
