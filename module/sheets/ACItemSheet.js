@@ -43,18 +43,17 @@ export default class ACItemSheet extends ItemSheet {
         CREATE_STAT.on('click', e => {
             let d = new Dialog({
                 title: `Add Stat: ${this.item.name}`,
-                content: `<p>Enter stat name:</p>
-                <input type="text" placeholder="Stat name">`,
+                content: `<p>Enter stat name:</p><input class="stat-submit" type="text" placeholder="Stat name">`,
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
                         label: "Confirm",
-                        callback: () => {}
+                        callback: e => this.item.system.createStat(e.find('.stat-submit').val())
                     }
                 },
                 default: "confirm",
-                render: html => console.log("Register interactivity in the rendered dialog"),
-                close: html => console.log("This always is logged no matter which option is chosen")
+                render: html => {},
+                close: html => {}
             }, {
                 classes: ["animecampaign", "sheet", "item", "dialog"]
             });

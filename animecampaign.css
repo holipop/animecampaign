@@ -278,6 +278,7 @@
   height: 4rem;
   font-size: 4rem;
 }
-.animecampaign.item.sheet.dialog p {
+.animecampaign.item.sheet.dialog p,
+.animecampaign.item.sheet.dialog input {
   font-family: Arial;
 }
