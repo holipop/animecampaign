@@ -19,4 +19,8 @@ export class KitPieceData extends foundry.abstract.DataModel {
     addStat(key, value) {
         this.parent.update({ [`system.stats.${key}`]: value });
     }
+
+    deleteStat(key) {
+        this.parent.update({ [`system.stats.-=${key}`]: null })
+    }
 }
