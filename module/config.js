@@ -23,13 +23,6 @@ animecampaign.powerset = {
     mundie: "animecampaign.powerset.mundie"
 }
 
-animecampaign.kitTypes = {
-    weapon: "animecampaign.kitTypes.weapon",
-    talent: "animecampaign.kitTypes.talent",
-    passive: "animecampaign.kitTypes.passive",
-    ability: "animecampaign.kitTypes.ability"
-}
-
 animecampaign.statLabels = {
     stamina: "animecampaign.statLabels.stamina",
     proficiency: "animecampaign.statLabels.proficiency",
