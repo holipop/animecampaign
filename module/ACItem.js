@@ -11,7 +11,12 @@ export class KitPieceData extends foundry.abstract.DataModel {
             type: new fields.StringField({
                 required: true,
                 initial: "Weapon"
-            })
+            }),
+            stats: new fields.ObjectField()
         }
+    }
+
+    addStat(key, value) {
+        this.parent.update({ [`system.stats.${key}`]: value });
     }
 }
