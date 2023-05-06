@@ -19,6 +19,12 @@
             "inscribed": "Inscribed",
             "mundie": "Mundie"
         },
+        "kitTypes": {
+            "weapon": "Weapon",
+            "talent": "Talent",
+            "passive": "Passive",
+            "ability": "Ability"
+        },
         "statLabels": {
             "stamina": "Stamina",
             "proficiency": "Proficiency",
