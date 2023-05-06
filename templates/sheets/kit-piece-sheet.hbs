@@ -25,14 +25,12 @@
 
     <section class="sheet-body">
         <section class="stats">
-            <div>
-                <input class="stat-label" type="text" placeholder="LABEL">
-                <input class="stat-value" type="number" placeholder="0">
-            </div>
-            <div>
-                <input class="stat-label" type="text" placeholder="LABEL">
-                <input class="stat-value" type="number" placeholder="0">
-            </div>
+            {{#each system.stats as |value key|}}
+                <div>
+                    <div class="stat-label">{{key}}</div>
+                    <input class="stat-value" type="text" name="system.stats.{{key}}" value="{{value}}" placeholder="0">
+                </div>
+            {{/each}}
             <a class="stat-create" title="Add Stat">
                 <i class="fas fa-plus"></i>
             </a>

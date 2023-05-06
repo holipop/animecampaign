@@ -89,9 +89,9 @@
     }
     .stats {
         > * {
-            height: 4.3rem;
+            min-height: 4.3rem;
             width: 80%;
-            min-width: 5.55rem;
+            min-width: 7rem;
             margin-bottom: 0.33rem;
             margin-left: auto;
             padding: 0.2rem 3%;
@@ -105,19 +105,21 @@
         margin: 0;
         border: 0;
         border-radius: 0;
+        background-color: transparent;
     }
     .stat-label {
-        height: 1rem;
-        background-color: transparent;
+        min-height: 1rem;
 
         font: bold .8rem 'Arial';
+        line-height: 1;
         text-transform: uppercase;
-        border-radius: 2px;
     }
     .stat-value {
         height: 2.5rem;
+        padding: 0 2%;
 
         font: bold 2.5rem "Philosopher";
+        border-radius: 2px;
         text-align: end;
     }
     .stat-create {
@@ -126,5 +128,12 @@
         
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 2px;
+    }
+
+    .text {
+        margin-left: .4rem;
+
+        outline: red solid 1px;
+        background-color: rgba(255, 0, 0, 0.075);
     }
 }
