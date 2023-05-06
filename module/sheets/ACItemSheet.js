@@ -42,7 +42,7 @@ export default class ACItemSheet extends ItemSheet {
         super.activateListeners(html)
     }
 
-    adjustFontSize(_div, _rem, _max) {
+    static adjustFontSize(_div, _rem, _max) {
         const text = $(_div);
 
         text.css( 'fontSize', `${_rem}rem`);
@@ -54,7 +54,7 @@ export default class ACItemSheet extends ItemSheet {
         } 
     }
     
-    updateBackground(_html, _threshold) {
+    static updateBackground(_html, _threshold) {
         const BACKGROUND = _html.find('.background');
         const BACKGROUND_INPUT = _html.find('.background-input');
         const NAME = _html.find('.name');

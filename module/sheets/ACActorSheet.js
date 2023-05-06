@@ -54,8 +54,7 @@ export default class ACActorSheet extends ActorSheet {
         super.activateListeners(html);
     }
 
-    // shit i defined
-    adjustFontSize(_div, _rem, _max) {
+    static adjustFontSize(_div, _rem, _max) {
         const text = $(_div);
 
         text.css( 'fontSize', `${_rem}rem`);
@@ -67,7 +66,7 @@ export default class ACActorSheet extends ActorSheet {
         } 
     }
 
-    updateBackground(_html, _threshold) {
+    static updateBackground(_html, _threshold) {
         const BACKGROUND = _html.find('.background');
         const BACKGROUND_INPUT = _html.find('.background-input');
         const NAME = _html.find('.name');
