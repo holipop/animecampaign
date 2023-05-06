@@ -26,6 +26,7 @@
   max-width: 100%;
   display: grid;
   grid-template-columns: 1fr 4fr;
+  grid-template-rows: 4fr 1fr;
   z-index: 2;
 }
 .animecampaign.item.sheet .sheet-header > * {
@@ -36,6 +37,21 @@
   display: grid;
   align-self: end;
   grid-template-columns: 1fr auto;
+}
+.animecampaign.item.sheet .header-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.animecampaign.item.sheet .type {
+  margin-left: 0.25rem;
+  height: 1rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  font: italic bold 0.75rem 'Arial';
 }
 .animecampaign.item.sheet .img {
   grid-row: span 2;

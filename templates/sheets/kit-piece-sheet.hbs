@@ -10,5 +10,18 @@
                 {{item.name}}
             </div>
         </section>
+
+        <section class="header-bottom">
+            <select class="type" name="system.type">
+                {{#select system.type}}
+                    <option value="Weapon">Weapon</option>
+                    <option value="Talent">Talent</option>
+                    <option value="Passive">Passive</option>
+                    <option value="Ability">Ability</option>
+                    <option class="custom">Custom</option>
+                {{/select}}
+            </select>
+        </section>
+
     </header>
 </form>
