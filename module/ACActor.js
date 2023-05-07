@@ -1,3 +1,5 @@
+import { ACEntityMixin } from "./config.js";
+
 export class CharacterData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;
@@ -36,14 +38,6 @@ export class CharacterData extends foundry.abstract.DataModel {
         const type = this.parent.system.type;
 
         return inscribedValues.includes(type);
-    }
-
-    createStat(key, value = "") {
-        this.parent.update({ [`system.stats.${key}`]: value });
-    }
-
-    deleteStat(key) {
-        this.parent.update({ [`system.stats.-=${key}`]: null })
     }
 
     createDefaultStats() {
@@ -100,3 +94,5 @@ export class CharacterData extends foundry.abstract.DataModel {
         this.parent.update({ 'system.stats.proficiency.ladder': output });
     }
 }
+
+Object.assign(CharacterData.prototype, ACEntityMixin);

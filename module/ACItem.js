@@ -1,3 +1,5 @@
+import { ACEntityMixin } from "./config.js";
+
 export class KitPieceData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;
@@ -15,12 +17,6 @@ export class KitPieceData extends foundry.abstract.DataModel {
             stats: new fields.ObjectField()
         }
     }
-
-    createStat(key, value = "") {
-        this.parent.update({ [`system.stats.${key}`]: value });
-    }
-
-    deleteStat(key) {
-        this.parent.update({ [`system.stats.-=${key}`]: null })
-    }
 }
+
+Object.assign(KitPieceData.prototype, ACEntityMixin);
