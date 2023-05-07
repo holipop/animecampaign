@@ -78,7 +78,9 @@ export class CharacterData extends foundry.abstract.DataModel {
         const rand = (_l, _u) => Math.floor(Math.random() * (_u - _l + 1) + _l);
     
         let n = x;
-        let output = [n];
+        let output = new Map([
+            [n, {}]
+        ]);
     
         for (let i = 0; n < y; i++) {
             let l, u;
@@ -95,11 +97,13 @@ export class CharacterData extends foundry.abstract.DataModel {
                 n = 60;
             }  else if ( ((n + u) > 100) && (n < 100) ) {
                 n = 100;
+            } else if ((n + u) > y) {
+                n = y;
             } else {
                 n += rand(l, u);
             }
     
-            output.push(n)
+            output.set(n, {});
         }
         
         ui.notifications.info(`Anime Campaign | Generated proficiency ladder for ${this.parent.name}.`);
