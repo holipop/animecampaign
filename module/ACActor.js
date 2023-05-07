@@ -40,7 +40,7 @@ export class CharacterData extends foundry.abstract.DataModel {
         return inscribedValues.includes(type);
     }
 
-    createDefaultStats() {
+    addDefaultStats() {
         this.parent.update({ 
             'system.stats.stamina': {
                 value: 0,
@@ -55,9 +55,20 @@ export class CharacterData extends foundry.abstract.DataModel {
                 build: "Average"
             }
         });
+
+        ui.notifications.info(`Anime Campaign | Added default stats for ${this.parent.name}.`);
     }
 
     generateProficiencyLadder(x = 1, y = 100) {
+        if (x < 1) {
+            ui.notifications.error(`Anime Campaign | Initial value cannot be less than 1.`);
+            return;
+        }
+        if (x > y) {
+            ui.notifications.error(`Anime Campaign | Initial value cannot be greater than the max value`);
+            return;
+        }
+
         const bounds = _n => {
             let lowerBound = _n * (_n + 1) + 2;
             let upperBound = lowerBound + _n + 2;
@@ -90,7 +101,8 @@ export class CharacterData extends foundry.abstract.DataModel {
     
             output.push(n)
         }
-    
+        
+        ui.notifications.info(`Anime Campaign | Generated proficiency ladder for ${this.parent.name}.`);
         this.parent.update({ 'system.stats.proficiency.ladder': output });
     }
 }
