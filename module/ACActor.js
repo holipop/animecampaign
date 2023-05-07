@@ -62,4 +62,41 @@ export class CharacterData extends foundry.abstract.DataModel {
             }
         });
     }
+
+    generateProficiencyLadder(x = 1, y = 100) {
+        const bounds = _n => {
+            let lowerBound = _n * (_n + 1) + 2;
+            let upperBound = lowerBound + _n + 2;
+            return [lowerBound, upperBound];
+        }
+        const delta = _n => Math.ceil( (_n - 79) / 25 ) + 1;
+        const rand = (_l, _u) => Math.floor(Math.random() * (_u - _l + 1) + _l);
+    
+        let n = x;
+        let output = [n];
+    
+        for (let i = 0; n < y; i++) {
+            let l, u;
+    
+            if ( n < 45 ) {
+                [l, u] = bounds(0)
+            } else if ( (n >= 45) && (n < 80) ) {
+                [l, u] = bounds(1)
+            } else {
+                [l, u] = bounds(delta(n));
+            }
+    
+            if ( ((n + u) > 60) && (n < 60) ) {
+                n = 60;
+            }  else if ( ((n + u) > 100) && (n < 100) ) {
+                n = 100;
+            } else {
+                n += rand(l, u);
+            }
+    
+            output.push(n)
+        }
+    
+        this.parent.update({ 'system.stats.proficiency.ladder': output });
+    }
 }

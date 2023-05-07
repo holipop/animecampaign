@@ -48,7 +48,10 @@ export default class ACItemSheet extends ItemSheet {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
                         label: "Confirm",
-                        callback: e => this.item.system.createStat(e.find('input').val())
+                        callback: e => {
+                            this.item.system.createStat(e.find('input').val())
+                            //if stat name is already taken, throw error
+                        }
                     }
                 },
                 default: "confirm",
@@ -98,5 +101,10 @@ export default class ACItemSheet extends ItemSheet {
 
         BACKGROUND.css( "background-color", BACKGROUND_INPUT[0].defaultValue );
         IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
+    }
+
+    blankStatName() {
+        // check how many stats in item are named "new stat"
+        // return "new stat" or "new stat (x)" 
     }
 }
