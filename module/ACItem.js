@@ -1,6 +1,7 @@
 import { ACEntityMixin } from "./config.js";
 
 export class KitPieceData extends foundry.abstract.DataModel {
+
     static defineSchema() {
         const fields = foundry.data.fields;
 

@@ -1,3 +1,5 @@
+import { ACSheetMixin } from "../config.js";
+
 export default class ACActorSheet extends ActorSheet {
     
     static get defaultOptions() {
@@ -53,45 +55,6 @@ export default class ACActorSheet extends ActorSheet {
         this.updateBackground(html, 0.5);
         super.activateListeners(html);
     }
-
-    adjustFontSize(_div, _rem, _max) {
-        const text = $(_div);
-
-        text.css( 'fontSize', `${_rem}rem`);
-
-        while (text.height() > _max) {
-            _rem *= 0.85;
-            text.css( 'fontSize', `${_rem}rem`);
-            console.log('Anime Campaign | Resizing Text');
-        } 
-    }
-
-    updateBackground(_html, _threshold) {
-        const BACKGROUND = _html.find('.background');
-        const BACKGROUND_INPUT = _html.find('.background-input');
-        const NAME = _html.find('.name');
-        const CLASS = _html.find('.class');
-        const IMG = _html.find('.img');
-
-        let color = BACKGROUND_INPUT[0].defaultValue
-
-        let rgb = [color.slice(1, 3), color.slice(3, 5), color.slice(5)]
-            .map(element => Number(`0x${element}`));
-        rgb[0] *= 0.2126;
-        rgb[1] *= 0.7152;
-        rgb[2] *= 0.0722;
-
-        let perceivedLightness = rgb.reduce((n, m) => n + m) / 255;
-
-        if (perceivedLightness <= _threshold) {
-            NAME.css( 'color', "#FFFFFF" );
-            CLASS.css( 'color', "#FFFFFF" );
-        } else {
-            NAME.css( 'color', "#000000" );
-            CLASS.css( 'color', "#000000" );
-        }
-
-        BACKGROUND.css( "background-color", BACKGROUND_INPUT[0].defaultValue );
-        IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
-    }
 }
+
+Object.assign(ACActorSheet.prototype, ACSheetMixin);

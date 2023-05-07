@@ -1,6 +1,7 @@
 import { ACEntityMixin } from "./config.js";
 
 export class CharacterData extends foundry.abstract.DataModel {
+    
     static defineSchema() {
         const fields = foundry.data.fields;
 
@@ -59,55 +60,59 @@ export class CharacterData extends foundry.abstract.DataModel {
         ui.notifications.info(`Anime Campaign | Added default stats for ${this.parent.name}.`);
     }
 
-    generateProficiencyLadder(x = 1, y = 100) {
-        if (x < 1) {
+    generateProficiencyLadder(start = 1, end = 100) {
+        if (start < 1) {
             ui.notifications.error(`Anime Campaign | Initial value cannot be less than 1.`);
             return;
         }
-        if (x > y) {
+        if (start > end) {
             ui.notifications.error(`Anime Campaign | Initial value cannot be greater than the max value`);
             return;
         }
 
         const bounds = _n => {
-            let lowerBound = _n * (_n + 1) + 2;
-            let upperBound = lowerBound + _n + 2;
-            return [lowerBound, upperBound];
+            let _lower = _n * (_n + 1) + 2;
+            let _upper = _lower + _n + 2;
+            return [_lower, _upper];
         }
-        const delta = _n => Math.ceil( (_n - 79) / 25 ) + 1;
-        const rand = (_l, _u) => Math.floor(Math.random() * (_u - _l + 1) + _l);
+        const delta = _prof => Math.ceil( (_prof - 79) / 25 ) + 1;
+        const rand = (_lower, _upper) => Math.floor(Math.random() * (_upper - _lower + 1) + _lower);
     
-        let n = x;
+        let prof = start;
         let output = new Map([
-            [n, {}]
+            [prof, {}]
         ]);
     
-        for (let i = 0; n < y; i++) {
-            let l, u;
+        for (let i = 0; prof < end; i++) {
+            let lowerBound, upperBound;
     
-            if ( n < 45 ) {
-                [l, u] = bounds(0)
-            } else if ( (n >= 45) && (n < 80) ) {
-                [l, u] = bounds(1)
+            if ( prof < 45 ) {
+                [lowerBound, upperBound] = bounds(0)
+            } else if ( (prof >= 45) && (prof < 80) ) {
+                [lowerBound, upperBound] = bounds(1)
             } else {
-                [l, u] = bounds(delta(n));
+                [lowerBound, upperBound] = bounds(delta(prof));
             }
     
-            if ( ((n + u) > 60) && (n < 60) ) {
-                n = 60;
-            }  else if ( ((n + u) > 100) && (n < 100) ) {
-                n = 100;
-            } else if ((n + u) > y) {
-                n = y;
+            if ( ((prof + upperBound) > 60) && (prof < 60) ) {
+                prof = 60;
+            }  else if ( ((prof + upperBound) > 100) && (prof < 100) ) {
+                prof = 100;
+            } else if ((prof + upperBound) > end) {
+                prof = end;
             } else {
-                n += rand(l, u);
+                prof += rand(lowerBound, upperBound);
             }
     
-            output.set(n, {});
+            output.set(prof, {});
         }
         
         ui.notifications.info(`Anime Campaign | Generated proficiency ladder for ${this.parent.name}.`);
         this.parent.update({ 'system.stats.proficiency.ladder': output });
+    }
+
+    _testAddProficiencyUpgrades() {
+
     }
 }
 
