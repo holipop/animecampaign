@@ -1,9 +1,23 @@
 export const ACEntityMixin = {
     createStat(key, value = "") {
+        const stats = Object.keys(this.parent.system.stats);
+        if (stats.includes(key)) {
+            ui.notifications.error(`${this.parent.name} already has a "${key}" stat.`);
+            return;
+        }
+
+        ui.notifications.info(`Created the "${key}" stat on ${this.parent.name}.`);
         this.parent.update({ [`system.stats.${key}`]: value });
     },
 
     deleteStat(key) {
+        const stats = Object.keys(this.parent.system.stats);
+        if (!stats.includes(key)) {
+            ui.notifications.error(`${this.parent.name} doesn't have a "${key}" stat.`);
+            return;
+        }
+
+        ui.notifications.info(`Deleted the "${key}" stat on ${this.parent.name}.`);
         this.parent.update({ [`system.stats.-=${key}`]: null })
     }
 }
