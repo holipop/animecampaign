@@ -1,7 +1,7 @@
 import { ACEntityMixin } from "./config.js";
 
 export class CharacterData extends foundry.abstract.DataModel {
-    
+
     static defineSchema() {
         const fields = foundry.data.fields;
 
@@ -79,9 +79,9 @@ export class CharacterData extends foundry.abstract.DataModel {
         const rand = (_lower, _upper) => Math.floor(Math.random() * (_upper - _lower + 1) + _lower);
     
         let prof = start;
-        let output = new Map([
-            [prof, {}]
-        ]);
+        let output = [
+            [n, {}]
+        ];
     
         for (let i = 0; prof < end; i++) {
             let lowerBound, upperBound;
@@ -104,7 +104,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                 prof += rand(lowerBound, upperBound);
             }
     
-            output.set(prof, {});
+            output.push([prof, {}]);
         }
         
         ui.notifications.info(`Anime Campaign | Generated proficiency ladder for ${this.parent.name}.`);
