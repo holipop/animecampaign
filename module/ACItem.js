@@ -1,7 +1,12 @@
-import { ACEntityMixin } from "./config.js";
+import { ACEntityMixin } from "./mixins.js";
 
+//
+//  Defining the schema for Kit Pieces.
+//
 export class KitPieceData extends foundry.abstract.DataModel {
 
+    //  The object being returned is everything a Kit Piece will have on creation.
+    //? Foundry uses the DataField object to allow for strongly-typed data and strictness.
     static defineSchema() {
         const fields = foundry.data.fields;
 
@@ -20,4 +25,5 @@ export class KitPieceData extends foundry.abstract.DataModel {
     }
 }
 
+//  Composites mixins with this class
 Object.assign(KitPieceData.prototype, ACEntityMixin);
