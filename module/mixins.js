@@ -81,8 +81,6 @@ export const ACSheetMixin = {
 
         _html.ready(() => this.adjustFontSize(NAME, _rem, _max));
 
-        console.log(this)
-
         NAME.on('blur', e => this.object.update({ 'name': NAME.text() }));
         NAME[0].addEventListener('paste', e => e.preventDefault())
     },

@@ -22,4 +22,8 @@
     </section>
 
     <p>{{localize config.test}}</p>
+
+    {{#each items as |item id|}}
+        <p>{{item.name}}</p>
+    {{/each}}
 </form>

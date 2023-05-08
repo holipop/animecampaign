@@ -100,9 +100,10 @@ export class CharacterData extends foundry.abstract.DataModel {
         const delta = _prof => Math.ceil( (_prof - 79) / 25 ) + 1;
     
         let currentProficiency = _start;
-        let advancementOutput = [
-            [currentProficiency]
-        ];
+        let advancementOutput = [{
+            value: currentProficiency,
+            upgrades: {}
+        }];
     
         for (let i = 0; currentProficiency < _end; i++) {
             let lowerBound, upperBound;
@@ -125,7 +126,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                 currentProficiency += randomInt(lowerBound, upperBound);
             }
     
-            advancementOutput.push([currentProficiency]);
+            advancementOutput.push({ value: currentProficiency, upgrades: {} });
         }
         
         ui.notifications.info(`Anime Campaign | Generated proficiency advancement for ${this.parent.name}.`);
