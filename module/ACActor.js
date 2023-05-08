@@ -175,11 +175,6 @@ export class CharacterData extends foundry.abstract.DataModel {
         advancement[upgradeIndex].value = _newValue;
         this.parent.update({ 'system.stats.proficiency.advancement': advancement });
     }
-
-    //  Clears every entry in the advancement.
-    clearAdvancement() {
-        this.parent.update({ 'system.stats.proficiency.advancement': [] });
-    }
 }
 
 //  Composites mixins with this class
