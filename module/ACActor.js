@@ -60,7 +60,7 @@ export class CharacterData extends foundry.abstract.DataModel {
         ui.notifications.info(`Anime Campaign | Added default stats for ${this.parent.name}.`);
     }
 
-    generateProficiencyLadder(start = 1, end = 100) {
+    generateProficiencyAdvancement(start = 1, end = 100) {
         if (start < 1) {
             ui.notifications.error(`Anime Campaign | Initial value cannot be less than 1.`);
             return;
@@ -107,8 +107,27 @@ export class CharacterData extends foundry.abstract.DataModel {
             output.push([prof, {}]);
         }
         
-        ui.notifications.info(`Anime Campaign | Generated proficiency ladder for ${this.parent.name}.`);
+        ui.notifications.info(`Anime Campaign | Generated proficiency advancement for ${this.parent.name}.`);
         this.parent.update({ 'system.stats.proficiency.advancement': output });
+    }
+
+    getUpgrade(_proficiency) {
+        const PROFICIENCY_INDEX = 0;
+        const advancement = this.parent.system.stats.proficiency.advancement;
+
+        return advancement.find(element => element[PROFICIENCY_INDEX] == _proficiency);
+    }
+
+    changeUpgradeValue(_proficiency, _newValue) {
+        const PROFICIENCY_INDEX = 0;
+        const advancement = this.parent.system.stats.proficiency.advancement;
+
+        let upgradeIndex = advancement.findIndex(element => {
+            return element[PROFICIENCY_INDEX] == _proficiency;
+        });
+
+        advancement[upgradeIndex][PROFICIENCY_INDEX] = _newValue;
+        this.parent.update({ 'system.stats.proficiency.advancement': advancement });
     }
 }
 
