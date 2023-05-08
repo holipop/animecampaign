@@ -71,7 +71,7 @@ export class CharacterData extends foundry.abstract.DataModel {
 
     //  Generates an array of arrays, the 0th index of each array being the proficiency value
     //  and the rest containing the Kit Piece objects.
-    //* Note that proficiency values 60 and 100 are hard-coded; 
+    //* Note that proficiency values 60 and 100 are hard-coded
     //? This generation method is based off of how GansleyBot generates proficiency advancements,
     //? however it is not entirely true in order to scale infinitely.
     //      _start  (?integer)  : The first proficiency value in the advancement
@@ -133,23 +133,22 @@ export class CharacterData extends foundry.abstract.DataModel {
         this.parent.update({ 'system.stats.proficiency.advancement': advancementOutput });
     }
 
-    //  Returns the array of a proficiency upgrade.
+    //  Returns the object of a proficiency upgrade.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     getUpgrade(_proficiency) {
         const PROFICIENCY_INDEX = 0;
         const advancement = this.parent.system.stats.proficiency.advancement;
 
-        return advancement.find(element => element[PROFICIENCY_INDEX] == _proficiency);
+        return advancement.find(element => element[PROFICIENCY_INDEX].value == _proficiency);
     }
 
     //  Deletes an upgrade on the proficiency advancement.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     deleteUpgrade(_proficiency) {
-        const PROFICIENCY_INDEX = 0;
         const advancement = this.parent.system.stats.proficiency.advancement;
 
         let upgradeIndex = advancement.findIndex(element => {
-            return element[PROFICIENCY_INDEX] == _proficiency;
+            return element.value == _proficiency;
         });
         
         advancement.splice(upgradeIndex, upgradeIndex);
@@ -159,7 +158,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     //  Adds a blank entry onto the proficiency advancement.
     addUpgrade() {
         const advancement = this.parent.system.stats.proficiency.advancement;
-        advancement.push([]);
+        advancement.push({ value: '', upgrades: {} });
         this.parent.update({ 'system.stats.proficiency.advancement': advancement });
     }
 
@@ -167,14 +166,13 @@ export class CharacterData extends foundry.abstract.DataModel {
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     //      _newValue       (integer)   : Self-explanatory
     changeUpgradeValue(_proficiency, _newValue) {
-        const PROFICIENCY_INDEX = 0;
         const advancement = this.parent.system.stats.proficiency.advancement;
 
         let upgradeIndex = advancement.findIndex(element => {
-            return element[PROFICIENCY_INDEX] == _proficiency;
+            return element.value == _proficiency;
         });
 
-        advancement[upgradeIndex][PROFICIENCY_INDEX] = _newValue;
+        advancement[upgradeIndex].value = _newValue;
         this.parent.update({ 'system.stats.proficiency.advancement': advancement });
     }
 
