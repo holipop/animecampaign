@@ -1,53 +1,8 @@
 {
     "Actor": {
-        "types": ["Character", "Unit"],
-        "templates": {
-            "base": {
-                "backgroundColor": "#CCCCCC",
-                "description": "",
-                "stats": {
-                    "stamina": {
-                        "value": "",
-                        "max": ""
-                    },
-                    "movement": {
-                        "value": ""
-                    }
-                }
-            }
-        },
-        "Character": {
-            "templates": ["base"],
-            "stats": {
-                "proficiency": {
-                    "value": ""
-                },
-                "movement": {
-                    "build": "Average"
-                }
-            },
-            "word": "",
-            "type": "epithet",
-            "isInscribed": true,
-            "class": "Class"
-        },
-        "Unit": {
-            "templates": ["base"]
-        }
+        "types": ["Character"]
     },
     "Item": {
-        "types": ["Kit Piece"],
-        "templates": {
-            "base": {
-                "backgroundColor": "#CCCCCC",
-                "description": ""
-            }
-        },
-        "Kit Piece": {
-            "templates": ["base"],
-            "type": "",
-            "stats": [],
-            "values": []
-        }
+        "types": ["Kit Piece"]
     }
 }

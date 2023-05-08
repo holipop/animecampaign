@@ -1,5 +1,5 @@
 <div class="background"></div>
-<input class="background-input" type="color" name="system.backgroundColor" data-edit="system.backgroundColor" value="{{system.backgroundColor}}">
+<input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
 <header class="sheet-header">
     <img class="img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
@@ -32,7 +32,7 @@
         </select>
         <input class="word" name="system.word" type="text" value="{{system.word}}" placeholder="Epithet/Core Word">
         {{#if system.isInscribed}}
-            <div class="proficiency-class">III</div>
+            <div class="proficiency-class">{{system.profClass}}</div>
         {{/if}}
     </section>
     
