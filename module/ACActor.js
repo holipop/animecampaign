@@ -80,7 +80,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     
         let prof = start;
         let output = [
-            [n, {}]
+            [prof, {}]
         ];
     
         for (let i = 0; prof < end; i++) {
