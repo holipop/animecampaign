@@ -49,7 +49,7 @@ export class CharacterData extends foundry.abstract.DataModel {
             },
             'system.stats.proficiency': {
                 value: 0,
-                ladder: []
+                advancement: []
             },
             'system.stats.movement': {
                 value: 0,
@@ -108,11 +108,7 @@ export class CharacterData extends foundry.abstract.DataModel {
         }
         
         ui.notifications.info(`Anime Campaign | Generated proficiency ladder for ${this.parent.name}.`);
-        this.parent.update({ 'system.stats.proficiency.ladder': output });
-    }
-
-    _testAddProficiencyUpgrades() {
-
+        this.parent.update({ 'system.stats.proficiency.advancement': output });
     }
 }
 
