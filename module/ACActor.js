@@ -76,7 +76,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     //? however it is not entirely true in order to scale infinitely.
     //      _start  (?integer)  : The first proficiency value in the advancement
     //      _end    (?integer)  : The last proficiency value in the advancement
-    generateProficiencyAdvancement(_start = 1, _end = 100) {
+    generateAdvancement(_start = 1, _end = 100) {
         if (_start < 1) {
             ui.notifications.error(`Anime Campaign | Initial value cannot be less than 1.`);
             return;
@@ -101,7 +101,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     
         let currentProficiency = _start;
         let advancementOutput = [
-            [currentProficiency, {}]
+            [currentProficiency]
         ];
     
         for (let i = 0; currentProficiency < _end; i++) {
@@ -125,7 +125,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                 currentProficiency += randomInt(lowerBound, upperBound);
             }
     
-            advancementOutput.push([currentProficiency, {}]);
+            advancementOutput.push([currentProficiency]);
         }
         
         ui.notifications.info(`Anime Campaign | Generated proficiency advancement for ${this.parent.name}.`);
@@ -141,6 +141,27 @@ export class CharacterData extends foundry.abstract.DataModel {
         return advancement.find(element => element[PROFICIENCY_INDEX] == _proficiency);
     }
 
+    //  Deletes an upgrade on the proficiency advancement.
+    //      _proficiency    (integer)   : The proficiency value of the upgrade
+    deleteUpgrade(_proficiency) {
+        const PROFICIENCY_INDEX = 0;
+        const advancement = this.parent.system.stats.proficiency.advancement;
+
+        let upgradeIndex = advancement.findIndex(element => {
+            return element[PROFICIENCY_INDEX] == _proficiency;
+        });
+        
+        advancement.splice(upgradeIndex, upgradeIndex);
+        this.parent.update({ 'system.stats.proficiency.advancement': advancement });
+    }
+
+    //  Adds a blank entry onto the proficiency advancement.
+    addUpgrade() {
+        const advancement = this.parent.system.stats.proficiency.advancement;
+        advancement.push([]);
+        this.parent.update({ 'system.stats.proficiency.advancement': advancement });
+    }
+
     //  Changes the proficiency value of an upgrade.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     //      _newValue       (integer)   : Self-explanatory
@@ -154,6 +175,11 @@ export class CharacterData extends foundry.abstract.DataModel {
 
         advancement[upgradeIndex][PROFICIENCY_INDEX] = _newValue;
         this.parent.update({ 'system.stats.proficiency.advancement': advancement });
+    }
+
+    //  Clears every entry in the advancement.
+    clearAdvancement() {
+        this.parent.update({ 'system.stats.proficiency.advancement': [] });
     }
 }
 

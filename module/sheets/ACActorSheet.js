@@ -25,6 +25,7 @@ export default class ACActorSheet extends ActorSheet {
         
         data.config = CONFIG.animecampaign; //  Localization paths
         data.system = data.actor.system;    //  Actor schema that we defined
+        data.advancement = data.actor.system.stats.proficiency.advancement  // Proficiency
 
         return data;
     }
