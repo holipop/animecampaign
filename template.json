@@ -1,63 +1,8 @@
 {
     "Actor": {
-        "types": ["Character", "Unit"],
-        "templates": {
-            "base": {
-                "backgroundColor": "#CCCCCC",
-                "description": "",
-                "stats": {
-                    "stamina": {
-                        "value": "",
-                        "max": ""
-                    },
-                    "movement": {
-                        "value": ""
-                    }
-                }
-            }
-        },
-        "Character": {
-            "templates": ["base"],
-            "stats": {
-                "proficiency": {
-                    "value": ""
-                },
-                "movement": {
-                    "build": "Average"
-                }
-            },
-            "word": "",
-            "type": "epithet",
-            "isInscribed": true,
-            "class": "Class"
-        },
-        "Unit": {
-            "templates": ["base"]
-        }
+        "types": ["Character"]
     },
     "Item": {
-        "types": ["Weapon", "Passive", "Talent", "Ability"],
-        "templates": {
-            "base": {
-                "backgroundColor": "#CCCCCC",
-                "description": ""
-            }
-        },
-        "Weapon": {
-            "templates": ["base"],
-            "damage": 0,
-            "range": 0
-        },
-        "Passive": {
-            "templates": ["base"]
-        },
-        "Talent": {
-            "templates": ["base"],
-            "bonus": 0
-        },
-        "Ability": {
-            "templates": ["base"],
-            "cost": 0
-        }
+        "types": ["Kit Piece"]
     }
 }
