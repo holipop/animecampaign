@@ -1,7 +1,11 @@
 import { ACSheetMixin } from "../config.js";
 
+//
+//  Defining the schema for Actor Sheets.
+//
 export default class ACActorSheet extends ActorSheet {
     
+    //  Sets the default options for the ActorSheet.
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             width: 520,
@@ -10,20 +14,24 @@ export default class ACActorSheet extends ActorSheet {
         });
     }
 
+    //  Retrieves the Handlebars filepath to load depending on the type of Actor.
     get template() {
         return `systems/animecampaign/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
+    //  Returns an object for Handlebars usage.
     async getData() {
         const data = super.getData()
         
-        data.config = CONFIG.animecampaign; 
-        data.system = data.actor.system; 
+        data.config = CONFIG.animecampaign; //  Localization paths
+        data.system = data.actor.system;    //  Actor schema that we defined
 
         return data;
     }
 
+    //  This is where we put any custom event listeners for our sheets.
     activateListeners(html) {
+
         // Adjust Name Font Size
         const NAME = html.find('.name');
         const nameResize = new ResizeObserver(e => {
@@ -53,8 +61,10 @@ export default class ACActorSheet extends ActorSheet {
         tabs.bind(html[0]);
 
         this.updateBackground(html, 0.5);
+
         super.activateListeners(html);
     }
 }
 
+//  Composites mixins with this class
 Object.assign(ACActorSheet.prototype, ACSheetMixin);

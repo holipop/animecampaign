@@ -1,26 +1,38 @@
+//
+//  A mixin containing shared methods between Character and Kit Piece schema.
+//
 export const ACEntityMixin = {
-    createStat(key, value = "") {
+
+    //  Creates a stat within an entity's 'system.stats' object.
+    //      _key    (string)    : The name of the stat
+    //      _value  (?any)      : The value assigned
+    createStat(_key, _value = "") {
         const stats = Object.keys(this.parent.system.stats);
-        if (stats.includes(key)) {
-            ui.notifications.error(`Anime Campaign | ${this.parent.name} already has a "${key}" stat.`);
+        if (stats.includes(_key)) {
+            ui.notifications.error(`Anime Campaign | ${this.parent.name} already has a "${_key}" stat.`);
             return;
         }
 
-        ui.notifications.info(`Anime Campaign | Created the "${key}" stat on ${this.parent.name}.`);
-        this.parent.update({ [`system.stats.${key}`]: value });
+        ui.notifications.info(`Anime Campaign | Created the "${_key}" stat on ${this.parent.name}.`);
+        this.parent.update({ [`system.stats.${_key}`]: _value });
     },
 
-    deleteStat(key) {
+    //  Deletes a stat within an entity's 'system.stats' object.
+    //      _key    (string)    : The name of the stat
+    deleteStat(_key) {
         const stats = Object.keys(this.parent.system.stats);
-        if (!stats.includes(key)) {
-            ui.notifications.error(`Anime Campaign | ${this.parent.name} doesn't have a "${key}" stat.`);
+        if (!stats.includes(_key)) {
+            ui.notifications.error(`Anime Campaign | ${this.parent.name} doesn't have a "${_key}" stat.`);
             return;
         }
 
-        ui.notifications.info(`Anime Campaign | Deleted the "${key}" stat on ${this.parent.name}.`);
-        this.parent.update({ [`system.stats.-=${key}`]: null })
+        ui.notifications.info(`Anime Campaign | Deleted the "${_key}" stat on ${this.parent.name}.`);
+        this.parent.update({ [`system.stats.-=${_key}`]: null })
     },
 
+    //  Deletes all stats within an entity's 'system.stats' object.
+    //  !!! If done on a Character, their Character Sheet cannot be opened due to it attempting to fetch default stats.
+    //  !!! Be sure to re-add them via the 'addDefaultStats()' method.
     deleteAllStats() {
         const stats = Object.keys(this.parent.system.stats);
 
@@ -34,7 +46,15 @@ export const ACEntityMixin = {
     }
 }
 
+//
+//  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
+//
 export const ACSheetMixin = {
+
+    //  Shrinks the font size of a div as more content is added.
+    //      _div    (html)      : The desired HTML element for adjusting font
+    //      _rem    (number)    : The default size of the font in rem units
+    //      _max    (integer)   : The max amount of vertical space the div can take up in pixels
     adjustFontSize(_div, _rem, _max) {
         const text = $(_div);
 
@@ -47,6 +67,10 @@ export const ACSheetMixin = {
         } 
     },
 
+    //  Updates the background color of the header of entity sheets.
+    //      _html       (jQuery)    : The entity sheet form as a jQuery object
+    //      _threshold  (number)    : A number between 0 and 1, when the foreground text should change
+    //                                  based on percieved lightness value of the background color
     updateBackground(_html, _threshold) {
         const BACKGROUND = _html.find('.background');
         const BACKGROUND_INPUT = _html.find('.background-input');
@@ -75,13 +99,11 @@ export const ACSheetMixin = {
         BACKGROUND.css( "background-color", BACKGROUND_INPUT[0].defaultValue );
         IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
     },
-
-    blankStatName() {
-        // check how many stats in item are named "new stat"
-        // return "new stat" or "new stat (x)" 
-    }
 }
 
+//
+//  An object containing localization paths.
+//
 export const animecampaign = {};
 
 animecampaign.test = "animecampaign.test"
