@@ -1,4 +1,4 @@
-import { ACSheetMixin } from "../config.js";
+import { ACSheetMixin } from "../mixins.js";
 
 //
 //  Defining the schema for Actor Sheets.
@@ -32,19 +32,7 @@ export default class ACActorSheet extends ActorSheet {
     //  This is where we put any custom event listeners for our sheets.
     activateListeners(html) {
 
-        // Adjust Name Font Size
-        const NAME = html.find('.name');
-        const nameResize = new ResizeObserver(e => {
-            this.adjustFontSize(NAME, 3, 60)
-        })
-        nameResize.observe(NAME[0]);
-        nameResize.observe(html[0]);
-
-        html.ready(() => this.adjustFontSize(NAME, 3, 60));
-
-        // Update Name
-        NAME.on('blur', e => this.actor.update({ 'name': NAME.text() }));
-        NAME[0].addEventListener('paste', e => e.preventDefault())
+        this.updateName(html, 3, 60);
 
         // Update Class
         const CLASS = html.find('.class');

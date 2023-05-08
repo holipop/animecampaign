@@ -1,4 +1,4 @@
-import { ACEntityMixin } from "./config.js";
+import { ACEntityMixin } from "./mixins.js";
 
 //
 //  Defining the schema for Kit Pieces.
