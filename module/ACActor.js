@@ -43,7 +43,7 @@ export class CharacterData extends foundry.abstract.DataModel {
         let inscribedValues = Object
             .values(CONFIG.animecampaign.type.inscribed)
             .map(element => game.i18n.localize(element).toLowerCase());
-        const type = this.parent.system.type;
+        const type = this.type;
 
         return inscribedValues.includes(type);
     }
@@ -137,7 +137,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     getUpgrade(_proficiency) {
         const PROFICIENCY_INDEX = 0;
-        const advancement = this.parent.system.stats.proficiency.advancement;
+        const advancement = this.stats.proficiency.advancement;
 
         return advancement.find(element => element[PROFICIENCY_INDEX].value == _proficiency);
     }
@@ -145,19 +145,19 @@ export class CharacterData extends foundry.abstract.DataModel {
     //  Deletes an upgrade on the proficiency advancement.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     deleteUpgrade(_proficiency) {
-        const advancement = this.parent.system.stats.proficiency.advancement;
+        const advancement = this.stats.proficiency.advancement;
 
         let upgradeIndex = advancement.findIndex(element => {
             return element.value == _proficiency;
         });
         
-        advancement.splice(upgradeIndex, upgradeIndex);
+        advancement.splice(upgradeIndex, 1);
         this.parent.update({ 'system.stats.proficiency.advancement': advancement });
     }
 
     //  Adds a blank entry onto the proficiency advancement.
     addUpgrade() {
-        const advancement = this.parent.system.stats.proficiency.advancement;
+        const advancement = this.stats.proficiency.advancement;
         advancement.push({ value: '', upgrades: {} });
         this.parent.update({ 'system.stats.proficiency.advancement': advancement });
     }
@@ -166,7 +166,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     //      _newValue       (integer)   : Self-explanatory
     changeUpgradeValue(_proficiency, _newValue) {
-        const advancement = this.parent.system.stats.proficiency.advancement;
+        const advancement = this.stats.proficiency.advancement;
 
         let upgradeIndex = advancement.findIndex(element => {
             return element.value == _proficiency;
