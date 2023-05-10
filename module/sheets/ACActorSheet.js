@@ -60,14 +60,15 @@ export default class ACActorSheet extends ActorSheet {
         // Create Kit Pieces
         html.find(".kit-piece-create").on("click", evenet => {
             let type = evenet.currentTarget.dataset.type
+            let itemData
             if (type == undefined) {
-                let itemData = [{
+                itemData = [{
                     name: game.i18n.localize(CONFIG.animecampaign.kitText.newkitpiece),
                     type: "Kit Piece",
                 }]
             }
             else {
-                let itemData = [{
+                itemData = [{
                     name: game.i18n.localize(CONFIG.animecampaign.kitText.newkitpiece),
                     type: "Kit Piece",
                     system: {
