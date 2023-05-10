@@ -105,6 +105,12 @@ animecampaign.kitTypes = {
     passive: "animecampaign.kitTypes.passive",
     ability: "animecampaign.kitTypes.ability"
 }
+animecampaign.kitTypesPlural = {
+    weapons: "animecampaign.kitTypesPlural.weapons",
+    talents: "animecampaign.kitTypesPlural.talents",
+    passives: "animecampaign.kitTypesPlural.passives",
+    abilities: "animecampaign.kitTypesPlural.abilities"
+}
 animecampaign.powerset = {
     inscribed: "animecampaign.powerset.inscribed",
     mundie: "animecampaign.powerset.mundie"
