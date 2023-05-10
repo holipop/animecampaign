@@ -132,7 +132,6 @@ animecampaign.navigationLabels = {
 }
 
 animecampaign.kitText = {
-    kitbartitle: "animecampaign.kitText.kitbartitle",
     addkitpiece: "animecampaign.kitText.addkitpiece",
     newkitpiece: "animecampaign.kitText.newkitpiece",
     deletekitpiece: "animecampaign.kitText.deletekitpiece",

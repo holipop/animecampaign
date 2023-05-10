@@ -59,10 +59,24 @@ export default class ACActorSheet extends ActorSheet {
 
         // Create Kit Pieces
         html.find(".kit-piece-create").on("click", evenet => {
-            this.actor.createEmbeddedDocuments('Item', [{
-                name: game.i18n.localize(CONFIG.animecampaign.kitText.newkitpiece),
-                type: "Kit Piece"
-            }]);
+            let type = evenet.currentTarget.dataset.type
+            if (type == undefined) {
+                let itemData = [{
+                    name: game.i18n.localize(CONFIG.animecampaign.kitText.newkitpiece),
+                    type: "Kit Piece",
+                }]
+            }
+            else {
+                let itemData = [{
+                    name: game.i18n.localize(CONFIG.animecampaign.kitText.newkitpiece),
+                    type: "Kit Piece",
+                    system: {
+                        type: type
+                    }
+                }]
+            }
+
+            this.actor.createEmbeddedDocuments('Item', itemData);
         })
 
         // Delete Kit Pieces
