@@ -61,7 +61,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                 advancement: []
             },
             'system.stats.movement': {
-                value: 0,
+                value: "0",
                 build: "Average"
             }
         });
