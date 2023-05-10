@@ -13,7 +13,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
             }),
             type: new fields.StringField({
                 required: true,
-                initial: "Weapon"
+                initial: "weapon"
             }),
             stats: new fields.ObjectField()
         }

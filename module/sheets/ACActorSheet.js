@@ -18,7 +18,12 @@ export default class ACActorSheet extends ActorSheet {
         const data = super.getData()
         
         data.config = CONFIG.animecampaign; 
-        data.system = data.actor.system; 
+        data.system = data.actor.system;
+
+        data.weapons = data.items.filter(e => e.system.type == "weapon");
+        data.talents = data.items.filter(e => e.system.type == "talent");
+        data.passives = data.items.filter(e => e.system.type == "passive");
+        data.abilities = data.items.filter(e => e.system.type == "ability");
 
         return data;
     }
