@@ -15,6 +15,18 @@
                 "powerhouse": "Powerhouse"
             }
         },
+        "kitTypes": {
+            "weapon": "Weapon",
+            "talent": "Talent",
+            "passive": "Passive",
+            "ability": "Ability"
+        },
+        "kitTypesPlural": {
+            "weapons": "Weapons",
+            "talents": "Talents",
+            "passives": "Passives",
+            "abilities": "Abilities"
+        },
         "powerset": {
             "inscribed": "Inscribed",
             "mundie": "Mundie"
@@ -28,6 +40,17 @@
             "cost": "Cost",
             "bonus": "Bonus",
             "action": "Action"
+        },
+        "navigationLabels": {
+            "kit": "Kit",
+            "upgrades": "Upgrades",
+            "biography": "Biography"
+        },
+        "kitText": {
+            "addkitpiece": "Create new kit piece",
+            "newkitpiece": "New Kit Piece",
+            "deletekitpiece": "Delete Kit Piece",
+            "editkitpiece": "Edit Kit Piece"
         }
     }
 }

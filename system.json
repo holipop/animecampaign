@@ -10,7 +10,7 @@
             "name":"zanzaKlaus"
         }
     ],
-    "version": "0.0.2",
+    "version": "0.0.1",
     "compatibility": {
         "minimum": 10.291,
         "verified": "10.291"
@@ -33,6 +33,6 @@
     "gridUnits": "ft",
     "initiative": "1d20",
     "primaryTokenAttribute": "stamina",
-    "manifest": "https://github.com/holipop/animecampaign/releases/download/0.0.2/system.json",
-    "download": "https://github.com/holipop/animecampaign/releases/download/0.0.2/animecampaign.zip"
+    "manifest": "https://github.com/holipop/animecampaign/releases/download/0.0.1/system.json",
+    "download": "https://github.com/holipop/animecampaign/releases/download/0.0.1/animecampaign.zip"
 }

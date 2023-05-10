@@ -1,0 +1,44 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="background"></div>
+    <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
+
+    <header class="sheet-header">
+        <img class="img" src="{{item.img}}" data-edit="img" title="{{item.name}}">
+
+        <section class="header-top">
+            <div class="name" data-edit="name" spellcheck='false' contenteditable>
+                {{item.name}}
+            </div>
+        </section>
+
+        <section class="header-bottom">
+            <select class="type" name="system.type">
+                {{#select system.type}}
+                    {{#each config.kitTypes as |name key|}}
+                        <option value="{{key}}">{{localize name}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+        </section>
+
+    </header>
+
+    <section class="sheet-body">
+        <section class="stats">
+            {{#each system.stats as |value key|}}
+                <div>
+                    <div class="stat-label">{{key}}</div>
+                    <input class="stat-value" type="text" name="system.stats.{{key}}" value="{{value}}" placeholder="0">
+                </div>
+            {{/each}}
+            <a class="stat-create" title="Add Stat">
+                <i class="fas fa-plus"></i>
+            </a>
+        </section>
+        <section class="text">
+            {{!-- This is the text editor field. It allows us to add in the body text for our kit pieces. --}}
+            {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}} 
+        </section>
+    </section>
+
+</form>
