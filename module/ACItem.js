@@ -10,7 +10,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;
 
-        defaultSettings = {
+        const defaultSettings = {
             required: false, 
             nullable: true
         }
