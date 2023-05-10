@@ -36,7 +36,8 @@
             </a>
         </section>
         <section class="text">
-            {{localize config.test}} 
+            {{!-- This is the text editor field. It allows us to add in the body text for our kit pieces. --}}
+            {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}} 
         </section>
     </section>
 

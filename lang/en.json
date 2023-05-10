@@ -21,6 +21,12 @@
             "passive": "Passive",
             "ability": "Ability"
         },
+        "kitTypesPlural": {
+            "weapons": "Weapons",
+            "talents": "Talents",
+            "passives": "Passives",
+            "abilities": "Abilities"
+        },
         "powerset": {
             "inscribed": "Inscribed",
             "mundie": "Mundie"
@@ -39,6 +45,12 @@
             "kit": "Kit",
             "upgrades": "Upgrades",
             "biography": "Biography"
+        },
+        "kitText": {
+            "addkitpiece": "Create new kit piece",
+            "newkitpiece": "New Kit Piece",
+            "deletekitpiece": "Delete Kit Piece",
+            "editkitpiece": "Edit Kit Piece"
         }
     }
 }
