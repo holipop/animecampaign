@@ -10,15 +10,20 @@ export class KitPieceData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;
 
+        defaultSettings = {
+            required: false, 
+            nullable: true
+        }
+
         return {
             description: new fields.HTMLField(),
-            color: new fields.StringField({
-                required: true,
-                initial: "#CCCCCC"
+            color: new fields.StringField({ 
+                ...defaultSettings, 
+                initial: "#CCCCCC" 
             }),
-            type: new fields.StringField({
-                required: true,
-                initial: "Weapon"
+            type: new fields.StringField({ 
+                ...defaultSettings, 
+                initial: "Weapon" 
             }),
             stats: new fields.ObjectField()
         }
