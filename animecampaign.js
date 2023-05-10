@@ -11,6 +11,7 @@ async function preloadHandlebarsTemplates() {
         "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
         "systems/animecampaign/templates/sheets/partials/character-stats.hbs",
         "systems/animecampaign/templates/sheets/partials/kit.hbs",
+        "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs",
         "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
         "systems/animecampaign/templates/sheets/partials/biography.hbs"
     ];

@@ -1,10 +1,4 @@
-<ol>
-    <li>Weapons</li>
-    <ol>
-        <li>Gun | 3 damage, 3 range | - gun.</li>
-        <li>bigger Gun | 7 damage, 3 range | - gun.</li>
-    </ol>
-    <li>Talents</li>
-    <li>Passives</li>
-    <li>Abilities</li>
-</ol>
+
+    {{#each items as |item id|}}
+        {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
+    {{/each}}

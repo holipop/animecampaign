@@ -11,7 +11,12 @@
 
     <section class="content">
         <div class="tab" data-group="primary-tabs" data-tab="kit">
-            {{> "systems/animecampaign/templates/sheets/partials/kit.hbs"}}
+            <div>
+                {{#each items as |item id|}}
+                    {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
+                {{/each}}
+            </div>
+            {{!"systems/animecampaign/templates/sheets/partials/kit.hbs"}}
         </div>
         <div class="tab" data-group="primary-tabs" data-tab="upgrades">
             {{> "systems/animecampaign/templates/sheets/partials/upgrades.hbs"}}
