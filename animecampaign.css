@@ -79,6 +79,7 @@
   margin-top: 1.75rem;
   width: calc(80% + 6.75rem);
   max-width: 100%;
+  height: 75%;
 }
 .animecampaign.item.sheet .stats > * {
   min-height: 4.3rem;
@@ -119,8 +120,9 @@
 }
 .animecampaign.item.sheet .text {
   margin-left: 0.4rem;
-  outline: red solid 1px;
-  background-color: rgba(255, 0, 0, 0.075);
+}
+.animecampaign.item.sheet .editor {
+  height: 100%;
 }
 .animecampaign.actor.sheet {
   min-width: 520px;
@@ -283,6 +285,44 @@
 .animecampaign.actor.sheet .stat-single {
   height: 4rem;
   font-size: 4rem;
+}
+.animecampaign.actor.sheet {
+  /* -- Styling for kit section -- */
+}
+.animecampaign.actor.sheet {
+  /* -- Styling for kit piece cards -- */
+}
+.animecampaign.actor.sheet .kit-piece-card {
+  font-size: 16px;
+  width: 100%;
+  height: auto;
+  margin: auto 0;
+}
+.animecampaign.actor.sheet .kit-piece-block {
+  border: 1px;
+  border-color: #3d3d3d;
+  border-style: solid;
+  background-color: #e9e9e9;
+  padding: 4px;
+  text-align: left center;
+}
+.animecampaign.actor.sheet .kit-piece-title {
+  margin: 3px;
+}
+.animecampaign.actor.sheet .kit-piece-edit {
+  float: right;
+  margin: auto 6px;
+}
+.animecampaign.actor.sheet .kit-piece-delete {
+  float: right;
+  margin: auto 6px;
+}
+.animecampaign.actor.sheet .kit-piece-card .img {
+  position: relative;
+  float: left;
+  height: auto;
+  width: 1.5rem;
+  margin: -3px 6px;
 }
 .animecampaign.actor.sheet .upgrade-list,
 .animecampaign.actor.sheet .upgrade-item {
