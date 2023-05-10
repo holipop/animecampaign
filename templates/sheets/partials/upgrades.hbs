@@ -1,3 +1,7 @@
-<p>
-    FUCK YOURSELF SIDEWAYS
-</p>
+<ol class="upgrades-list">
+    {{#each advancement}}
+        <li class="upgrade-item">
+            <div class="upgrade-value flexcol">{{ this.value }}</div>
+        </li>
+    {{/each}}
+</ol>

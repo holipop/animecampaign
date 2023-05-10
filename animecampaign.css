@@ -128,8 +128,12 @@
   min-width: 520px;
   min-height: 530px;
 }
-.animecampaign.actor.sheet {
-  /* -- CHARACTER SUMMARY -- */
+.animecampaign.actor.sheet form {
+  overflow-y: hidden;
+}
+.animecampaign.actor.sheet .scrollable {
+  overflow-y: scroll;
+  height: calc(100% - 6.25rem);
 }
 .animecampaign.actor.sheet .background {
   position: absolute;
@@ -207,7 +211,9 @@
   margin-right: 0.375rem;
   margin-bottom: 0.375rem;
   overflow-y: hidden;
+  padding: 0.1rem;
   font: 0.9rem 'Arial';
+  line-height: 0.85;
 }
 .animecampaign.actor.sheet .type {
   margin-right: 0.25rem;
@@ -317,6 +323,16 @@
   height: auto;
   width: 1.5rem;
   margin: -3px 6px;
+}
+.animecampaign.actor.sheet .upgrade-list,
+.animecampaign.actor.sheet .upgrade-item {
+  list-style-type: none;
+}
+.animecampaign.actor.sheet .upgrade-item {
+  height: 2rem;
+  margin-bottom: 0.2rem;
+  outline: pink 1px solid;
+  background-color: rgba(255, 191, 0, 0.183);
 }
 .animecampaign.item.sheet.dialog .dialog-content,
 .animecampaign.item.sheet.dialog .dialog-buttons {

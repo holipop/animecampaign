@@ -1,7 +1,11 @@
-import { ACSheetMixin } from "../config.js";
+import { ACSheetMixin } from "../mixins.js";
 
+//
+//  Defining the schema for Actor Sheets.
+//
 export default class ACActorSheet extends ActorSheet {
     
+    //  Sets the default options for the ActorSheet.
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             width: 520,
@@ -10,16 +14,20 @@ export default class ACActorSheet extends ActorSheet {
         });
     }
 
+    //  Retrieves the Handlebars filepath to load depending on the type of Actor.
     get template() {
         return `systems/animecampaign/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
+    //  Returns an object for Handlebars usage.
     async getData() {
         const data = super.getData()
         
-        data.config = CONFIG.animecampaign; 
-        data.system = data.actor.system;
-
+        data.config = CONFIG.animecampaign; //  Localization paths
+        data.system = data.actor.system;    //  Actor schema that we defined
+        data.items = data.actor.items       //  Actor's owned items
+        data.advancement = data.actor.system.stats.proficiency.advancement  // Proficiency
+        
         data.weapons = data.items.filter(e => e.system.type == "weapon");
         data.talents = data.items.filter(e => e.system.type == "talent");
         data.passives = data.items.filter(e => e.system.type == "passive");
@@ -28,20 +36,10 @@ export default class ACActorSheet extends ActorSheet {
         return data;
     }
 
+    //  This is where we put any custom event listeners for our sheets.
     activateListeners(html) {
-        // Adjust Name Font Size
-        const NAME = html.find('.name');
-        const nameResize = new ResizeObserver(e => {
-            this.adjustFontSize(NAME, 3, 60)
-        })
-        nameResize.observe(NAME[0]);
-        nameResize.observe(html[0]);
 
-        html.ready(() => this.adjustFontSize(NAME, 3, 60));
-
-        // Update Name
-        NAME.on('blur', e => this.actor.update({ 'name': NAME.text() }));
-        NAME[0].addEventListener('paste', e => e.preventDefault())
+        this.updateName(html, 3, 60);
 
         // Update Class
         const CLASS = html.find('.class');
@@ -94,8 +92,10 @@ export default class ACActorSheet extends ActorSheet {
         })
 
         this.updateBackground(html, 0.5);
+
         super.activateListeners(html);
     }
 }
 
+//  Composites mixins with this class
 Object.assign(ACActorSheet.prototype, ACSheetMixin);
