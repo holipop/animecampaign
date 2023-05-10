@@ -44,7 +44,8 @@
             "kitbartitle": "Kit Features",
             "addkitpiece": "Create new kit piece",
             "newkitpiece": "New Kit Piece",
-            "deletekitpiece": "Delete Kit Piece"
+            "deletekitpiece": "Delete Kit Piece",
+            "editkitpiece": "Edit Kit Piece"
         }
     }
 }

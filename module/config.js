@@ -129,5 +129,6 @@ animecampaign.kitText = {
     kitbartitle: "animecampaign.kitText.kitbartitle",
     addkitpiece: "animecampaign.kitText.addkitpiece",
     newkitpiece: "animecampaign.kitText.newkitpiece",
-    deletekitpiece: "animecampaign.kitText.deletekitpiece"
+    deletekitpiece: "animecampaign.kitText.deletekitpiece",
+    editkitpiece: "animecampaign.kitText.editkitpiece"
 }

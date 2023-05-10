@@ -66,6 +66,13 @@ export default class ACActorSheet extends ActorSheet {
             this.actor.deleteEmbeddedDocuments("Item", [itemId]);
         })
 
+        // Edit Kit Pieces
+        html.find(".kit-piece-edit").on("click", e=> {
+            let itemId = e.currentTarget.dataset.id
+            let item = this.actor.getEmbeddedDocument("Item", itemId);
+            item.sheet.render(true);
+        })
+
         this.updateBackground(html, 0.5);
         super.activateListeners(html);
     }
