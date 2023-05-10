@@ -133,6 +133,24 @@ export class CharacterData extends foundry.abstract.DataModel {
         this.parent.update({ 'system.stats.proficiency.advancement': advancementOutput });
     }
 
+    //  Takes in a string of a numbers and parses it so it can be converted into a new proficiency advancement.
+    //  TODO THIS IS A WIP
+    //  !! THIS WILL DELETE THE OLD PROFLINE
+    //      _string (?string)   : A string of numbers seperated by some whitespace and characters.
+    parseAdvancement(_string) {
+        const regex = /\d{1,}/g;
+        let advancement = [];
+
+        string.match(regex).forEach(i => {
+            advancement.push({
+                value: i,
+                upgrades: {}
+            })
+        })
+
+        this.parent.update({ 'system.stats.proficiency.advancement': advancement })
+    }
+
     //  Returns the object of a proficiency upgrade.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     getUpgrade(_proficiency) {
