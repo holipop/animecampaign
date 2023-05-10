@@ -52,6 +52,20 @@ export default class ACActorSheet extends ActorSheet {
         });
         tabs.bind(html[0]);
 
+        // Create Kit Pieces
+        html.find(".kit-piece-create").on("click", evenet => {
+            this.actor.createEmbeddedDocuments('Item', [{
+                name: game.i18n.localize(CONFIG.animecampaign.kitText.newkitpiece),
+                type: "Kit Piece"
+            }]);
+        })
+
+        // Delete Kit Pieces
+        html.find(".kit-piece-delete").on("click", e => {
+            let itemId = e.currentTarget.dataset.id
+            this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+        })
+
         this.updateBackground(html, 0.5);
         super.activateListeners(html);
     }

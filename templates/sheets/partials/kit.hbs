@@ -1,4 +1,11 @@
-
-    {{#each items as |item id|}}
-        {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
-    {{/each}}
+<section class="kit-bar">
+    <h2>
+        <div>{{localize config.kitText.kitbartitle}}</div>
+        <a class="kit-piece-create" title="{{localize config.kitText.addkitpiece}}">
+            <i class="fas fa-plus"></i>
+        </a>  
+    </h2>
+</section>
+{{#each items as |item id|}}
+    {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
+{{/each}}

@@ -39,6 +39,12 @@
             "kit": "Kit",
             "upgrades": "Upgrades",
             "biography": "Biography"
+        },
+        "kitText": {
+            "kitbartitle": "Kit Features",
+            "addkitpiece": "Create new kit piece",
+            "newkitpiece": "New Kit Piece",
+            "deletekitpiece": "Delete Kit Piece"
         }
     }
 }

@@ -124,3 +124,10 @@ animecampaign.navigationLabels = {
     upgrades: "animecampaign.navigationLabels.upgrades",
     biography: "animecampaign.navigationLabels.biography",
 }
+
+animecampaign.kitText = {
+    kitbartitle: "animecampaign.kitText.kitbartitle",
+    addkitpiece: "animecampaign.kitText.addkitpiece",
+    newkitpiece: "animecampaign.kitText.newkitpiece",
+    deletekitpiece: "animecampaign.kitText.deletekitpiece"
+}
