@@ -6,11 +6,18 @@ import { Stat } from "./ACStat.js";
 export const ACEntityMixin = {
 
     //  Creates a new Stat object inside the stats list.
-    //      _obj    (?object)   : An object of parameters for constructing a Stat.
-    createStat(_obj) {
-        let stats = this.stats;
+    //      _arr    (?array)   : An array of objects, each parameters for constructing a Stat.
+    createStats(_arr) {
+        const inputIsArray = Array.isArray(_arr);
+        const elementsAreStats = _arr.every(i => typeof i == 'object' && !Array.isArray(i));
 
-        stats = [...stats, new Stat(_obj)];
+        if (!inputIsArray) return console.error("Parameter must be an array.");
+        if (!elementsAreStats) return console.error("Elements must be objects.");
+
+        let stats = this.stats;
+        let createdStats = _arr.map(obj => new Stat(obj));
+
+        stats = [...stats, ...createdStats];
 
         this.parent.update({ 'system.stats': stats });
     },
@@ -24,7 +31,8 @@ export const ACEntityMixin = {
             i.name == _name;
         });
 
-        if (targetIndex == -1) return;
+        const noTargetExists = targetIndex == -1
+        if (noTargetExists) return;
 
         stats.splice(targetIndex, 1);
 
