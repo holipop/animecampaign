@@ -5,13 +5,13 @@ import { Stat } from "./ACStat.js";
 //
 export const ACEntityMixin = {
 
-    //  Creates a new Stat object inside the stats list.
+    //  Create new Stat objects inside the stats list.
     //      _arr    (?array)   : An array of objects, each parameters for constructing a Stat.
     createStats(_arr) {
         const inputIsArray = Array.isArray(_arr);
-        const elementsAreStats = _arr.every(i => typeof i == 'object' && !Array.isArray(i));
-
         if (!inputIsArray) return console.error("Parameter must be an array.");
+
+        const elementsAreStats = _arr.every(i => typeof i == 'object' && !Array.isArray(i));
         if (!elementsAreStats) return console.error("Elements must be objects.");
 
         let stats = this.stats;
@@ -20,23 +20,32 @@ export const ACEntityMixin = {
         stats = [...stats, ...createdStats];
 
         this.parent.update({ 'system.stats': stats });
+        return console.log(`Created stats ${createdStats.map(i => i.name).toString()} for ${this.parent.name}`)
     },
 
-    //  Deletes an existing Stat from the stats list.
-    //      _name   (string)    : The name of the target Stat.
-    deleteStat(_name) {
+    //  Deletes existing Stat objects from the stats list.
+    //      _arr    (array)     : An array of strings, each the names of Stats.
+    deleteStats(_arr) {
+        const inputIsArray = Array.isArray(_arr);
+        if (!inputIsArray) return console.error("Parameter must be an array.");
+
+        const elementsAreStrngs = _arr.every(i => typeof i == 'string')
+        if (!elementsAreStrngs) return console.error("Elements must be strings.");
+
         let stats = this.stats;
-        
-        let targetIndex = stats.findIndex(i => {
-            i.name == _name;
-        });
 
-        const noTargetExists = targetIndex == -1
-        if (noTargetExists) return;
+        //? For some reason, this works but not a .forEach() or a for...in loop.
+        for (let j = 0; j < _arr.length; j++) {
+            let targetIndex = stats.findIndex(i => i.name == _arr[j])
 
-        stats.splice(targetIndex, 1);
+            const noTargetExists = targetIndex == -1
+            if (noTargetExists) return console.error(`${_arr[j]} is not a stat.`);
+            
+            stats.splice(targetIndex, 1)
+        }    
 
         this.parent.update({ 'system.stats': stats });
+        return console.log(`Deleted stats ${_arr.toString()} for ${this.parent.name}`)
     },
 
     // !!!
