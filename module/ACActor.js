@@ -21,7 +21,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                 required: true,
                 initial: "#CCCCCC"
             }),
-            stats: new fields.ObjectField()
+            stats: new fields.ArrayField(new fields.ObjectField())
         }
     }
 
@@ -49,8 +49,9 @@ export class CharacterData extends foundry.abstract.DataModel {
     }
 
     //  Adds the main three stats to a Character's 'stats' object.
+    //  TODO for allowing new Stat objects.
     //? If the Character already has these stats, they are reset to the ones assigned here.
-    addDefaultStats() {
+    __addDefaultStats() {
         this.parent.update({ 
             'system.stats.stamina': {
                 value: 0,

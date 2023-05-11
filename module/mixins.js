@@ -1,12 +1,25 @@
+import { Stat } from "./ACStat.js";
+
 //
 //  A mixin containing shared methods between Character and Kit Piece schema.
 //
 export const ACEntityMixin = {
+    //  Creates a new Stat object inside the stats list.
+    //      _obj    ({ name: string, value?: any, max?: any })  : An object of parameters for constructing a Stat.
+    createStat(_obj) {
+        let stats = this.stats;
 
+        stats = [...stats, new Stat(_obj)];
+
+        this.parent.update({ 'system.stats': stats });
+    },
+
+    // !!!
+    // !!! EVERYTHING ELSE BELOW HERE IS DEPRECIATED.
     //  Creates a stat within an entity's 'system.stats' object.
     //      _key    (string)    : The name of the stat
     //      _value  (?any)      : The value assigned
-    createStat(_key, _value = "") {
+    __createStat(_key, _value = "") {
         const stats = Object.keys(this.parent.system.stats);
         if (stats.includes(_key)) {
             ui.notifications.error(`Anime Campaign | ${this.parent.name} already has a "${_key}" stat.`);
@@ -19,7 +32,7 @@ export const ACEntityMixin = {
 
     //  Deletes a stat within an entity's 'system.stats' object.
     //      _key    (string)    : The name of the stat
-    deleteStat(_key) {
+    __deleteStat(_key) {
         const stats = Object.keys(this.parent.system.stats);
         if (!stats.includes(_key)) {
             ui.notifications.error(`Anime Campaign | ${this.parent.name} doesn't have a "${_key}" stat.`);
@@ -33,7 +46,7 @@ export const ACEntityMixin = {
     //  Deletes all stats within an entity's 'system.stats' object.
     //  !!! If done on a Character, their Character Sheet cannot be opened due to it attempting to fetch default stats.
     //  !!! Be sure to re-add them via the 'addDefaultStats()' method.
-    deleteAllStats() {
+    __deleteAllStats() {
         const stats = Object.keys(this.parent.system.stats);
 
         if (stats.length == 0) {
