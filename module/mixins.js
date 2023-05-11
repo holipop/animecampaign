@@ -4,12 +4,29 @@ import { Stat } from "./ACStat.js";
 //  A mixin containing shared methods between Character and Kit Piece schema.
 //
 export const ACEntityMixin = {
+
     //  Creates a new Stat object inside the stats list.
-    //      _obj    ({ name: string, value?: any, max?: any })  : An object of parameters for constructing a Stat.
+    //      _obj    (?object)   : An object of parameters for constructing a Stat.
     createStat(_obj) {
         let stats = this.stats;
 
         stats = [...stats, new Stat(_obj)];
+
+        this.parent.update({ 'system.stats': stats });
+    },
+
+    //  Deletes an existing Stat from the stats list.
+    //      _name   (string)    : The name of the target Stat.
+    deleteStat(_name) {
+        let stats = this.stats;
+        
+        let targetIndex = stats.findIndex(i => {
+            i.name == _name;
+        });
+
+        if (targetIndex == -1) return;
+
+        stats.splice(targetIndex, 1);
 
         this.parent.update({ 'system.stats': stats });
     },
