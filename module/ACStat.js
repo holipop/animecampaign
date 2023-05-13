@@ -8,8 +8,7 @@ export class Stat {
     get percent() {
         let value = Number(this.value)
         let max = Number(this.max)
-        if (!value || !max) {
-            //console.error("Anime Campaign | Stats cannot be converted to percentage.");
+        if (isNaN(value) || isNaN(max)) {
             return NaN;
         }
         return value / max;

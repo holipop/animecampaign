@@ -6,50 +6,43 @@ import { Stat } from "./ACStat.js";
 export const ACEntityMixin = {
 
     //  Create new Stat objects inside the stats list.
-    //      _arr    (?array)   : An array of objects, each parameters for constructing a Stat.
-    createStats(_arr) {
-        const inputIsArray = Array.isArray(_arr);
-        if (!inputIsArray) return console.error("Parameter must be an array.");
-
-        const elementsAreStats = _arr.every(i => typeof i == 'object' && !Array.isArray(i));
-        if (!elementsAreStats) return console.error("Elements must be objects.");
-
+    //      _stats  (?array)   : An array of objects, each parameters for constructing a Stat.
+    createStats(_stats) {
         let stats = this.stats;
-        let createdStats = _arr.map(obj => new Stat(obj));
+        let createdStats = _stats.map(obj => new Stat(obj));
 
         stats = [...stats, ...createdStats];
 
         this.parent.update({ 'system.stats': stats });
-        return console.log(`Created stats ${createdStats.map(i => i.name).toString()} for ${this.parent.name}`)
+        return console.log(`Created stats "${createdStats.map(i => i.name).toString()}" for ${this.parent.name}`)
     },
 
     //  Deletes existing Stat objects from the stats list.
-    //      _arr    (array)     : An array of strings, each the names of Stats.
-    deleteStats(_arr) {
-        const inputIsArray = Array.isArray(_arr);
-        if (!inputIsArray) return console.error("Parameter must be an array.");
-
-        const elementsAreStrngs = _arr.every(i => typeof i == 'string')
-        if (!elementsAreStrngs) return console.error("Elements must be strings.");
-
+    //      _stats  (array)     : An array of strings, each the names of Stats.
+    deleteStats(_stats) {
         let stats = this.stats;
 
-        //? For some reason, this works but not a .forEach() or a for...in loop.
-        for (let j = 0; j < _arr.length; j++) {
-            let targetIndex = stats.findIndex(i => i.name == _arr[j])
+        for (const element of _stats) {
+            let targetIndex = stats.findIndex(stat => stat.name == element)
 
-            const noTargetExists = targetIndex == -1
-            if (noTargetExists) return console.error(`${_arr[j]} is not a stat.`);
-            
-            stats.splice(targetIndex, 1)
-        }    
+            if (targetIndex == -1) return console.error(`"${element}" is not a stat.`);
+
+            stats.splice(targetIndex, 1);
+        }
 
         this.parent.update({ 'system.stats': stats });
-        return console.log(`Deleted stats ${_arr.toString()} for ${this.parent.name}`)
+        return console.log(`Deleted stats "${_stats.toString()}" for ${this.parent.name}`)
+    },
+
+    clearStats() {
+        this.parent.update({ 'system.stats': [] });
+        return console.log(`Deleted all stats for ${this.parent.name}`)
+
     },
 
     // !!!
     // !!! EVERYTHING ELSE BELOW HERE IS DEPRECIATED.
+    // !!! 
     //  Creates a stat within an entity's 'system.stats' object.
     //      _key    (string)    : The name of the stat
     //      _value  (?any)      : The value assigned
