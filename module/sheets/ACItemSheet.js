@@ -1,4 +1,4 @@
-import { ACSheetMixin } from "../mixins.js";
+import { ACSheetMixin } from "./SheetMixin.js";
 
 //
 //  Defining the schema for Item Sheets.

@@ -1,4 +1,4 @@
-import { ACSheetMixin } from "../mixins.js";
+import { ACSheetMixin } from "./SheetMixin.js";
 
 //
 //  Defining the schema for Actor Sheets.
@@ -48,6 +48,8 @@ export default class ACActorSheet extends ActorSheet {
         this.createKitPiece(_html);
         this.deleteKitPiece(_html);
         this.editKitPiece(_html);
+
+        this.createBlankStat(_html);
 
         super.activateListeners(_html);
     }

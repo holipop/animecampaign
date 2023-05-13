@@ -1,8 +1,20 @@
-export class Stat {
-    constructor({ name = "", value = null, max = null}) {
-        this.name = name;
-        this.value = value;
-        this.max = max;
+//
+//  Defining the schema for Stats
+//
+export class Stat extends foundry.abstract.DataModel {
+    static defineSchema() {
+        const fields = foundry.data.fields;
+
+        const defaultSettings = {
+            required: false,
+            nullable: true
+        }
+
+        return {
+            name: new fields.StringField(defaultSettings),
+            value: new fields.StringField(defaultSettings),
+            max: new fields.StringField(defaultSettings)
+        }
     }
 
     get percent() {

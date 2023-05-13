@@ -1,11 +1,25 @@
 <table class="stat-block">
     <tr class="stat-labels">
-        <th>{{localize config.statLabels.stamina }}</th>
-        <th>{{localize config.statLabels.proficiency }}</th>
-        <th>{{localize config.statLabels.movement }}</th>
+        {{#each system.stats as |stat index|}}
+            <th>
+                <input type="text" name="system.stats.{{index}}.name" value="{{name}}">
+            </th>
+        {{/each}}
     </tr>
     <tr class="stat-containers">
+        {{#each system.stats as |stat index|}}
+            <td>
+                <input type="text" name="system.stats.{{index}}.value" value="{{value}}">
+            </td>
+        {{/each}}
+        
         <td>
+            <a class="stat-create" title="Add Stat">
+                <i class="fas fa-plus"></i>
+            </a>
+        </td>
+
+        <!-- td>
             <input class="stat-primary" type="number" name="system.stats.stamina.value" value="{{system.stats.stamina.value}}" data-dtype="Number" placeholder="0">
             <div class="divider"></div>
             <input class="stat-secondary" type="number" name="system.stats.stamina.max" value="{{system.stats.stamina.max}}" data-dtype="Number" placeholder="0">
@@ -17,6 +31,6 @@
             <input class="stat-primary" type="text" name="system.stats.movement.value" value="{{system.stats.movement.value}}" placeholder="0">
             <div class="divider"></div>
             <input class="stat-secondary" type="text" name="system.stats.movement.build" value="{{system.stats.movement.build}}" placeholder="Average">
-        </td>
+        </td -->
     </tr>
 </table>

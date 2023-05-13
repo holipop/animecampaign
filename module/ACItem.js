@@ -1,4 +1,5 @@
-import { ACEntityMixin } from "./mixins.js";
+import { ACEntityMixin } from "./EntityMixin.js";
+import { Stat } from "./ACStat.js";
 
 //
 //  Defining the schema for Kit Pieces.
@@ -25,7 +26,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
                 ...defaultSettings,
                 initial: "weapon"
             }),
-            stats: new fields.ArrayField(new fields.ObjectField())
+            stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) )
         }
     }
 }

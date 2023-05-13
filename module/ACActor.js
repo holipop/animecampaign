@@ -1,4 +1,5 @@
-import { ACEntityMixin } from "./mixins.js";
+import { ACEntityMixin } from "./EntityMixin.js";
+import { Stat } from "./ACStat.js";
 
 //
 //  Defining the schema for Characters.
@@ -21,20 +22,7 @@ export class CharacterData extends foundry.abstract.DataModel {
                 required: true,
                 initial: "#CCCCCC"
             }),
-            stats: new fields.ArrayField(new fields.ObjectField())
-        }
-    }
-
-    //  Returns the proficiency class of a character in roman numerals for the Actor Sheet.
-    get profClass() {
-        const proficiency = this.parent.system.stats.proficiency.value;
-
-        if (proficiency < 60) {
-            return "I";
-        } else if ((60 <= proficiency) && (proficiency < 100)) {
-            return "II";
-        } else {
-            return "III";
+            stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) )
         }
     }
 
@@ -43,9 +31,45 @@ export class CharacterData extends foundry.abstract.DataModel {
         let inscribedValues = Object
             .values(CONFIG.animecampaign.type.inscribed)
             .map(element => game.i18n.localize(element).toLowerCase());
-        const type = this.parent.system.type;
+        const type = this.type;
 
         return inscribedValues.includes(type);
+    }
+
+    addDefaultStats() {
+        let defaultStats = [
+            {
+                name: "stamina",
+                value: 0,
+                max: 0
+            },
+            {
+                name: "proficiency",
+                value: 0,
+            },
+            {
+                name: "movement",
+                value: 5
+            }
+        ]
+
+        this.createStats(defaultStats);
+    }
+    
+    // !!!
+    // !!! EVERYTHING BELOW IS DEPRECIATED
+    // !!!
+    //  Returns the proficiency class of a character in roman numerals for the Actor Sheet.
+    get __profClass() {
+        const proficiency = this.stats.proficiency.value;
+
+        if (proficiency < 60) {
+            return "I";
+        } else if ((60 <= proficiency) && (proficiency < 100)) {
+            return "II";
+        } else {
+            return "III";
+        }
     }
 
     //  Adds the main three stats to a Character's 'stats' object.
@@ -77,7 +101,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     //? however it is not entirely true in order to scale infinitely.
     //      _start  (?integer)  : The first proficiency value in the advancement
     //      _end    (?integer)  : The last proficiency value in the advancement
-    generateAdvancement(_start = 1, _end = 100) {
+    __generateAdvancement(_start = 1, _end = 100) {
         if (_start < 1) {
             ui.notifications.error(`Anime Campaign | Initial value cannot be less than 1.`);
             return;
@@ -136,7 +160,7 @@ export class CharacterData extends foundry.abstract.DataModel {
 
     //  Returns the object of a proficiency upgrade.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
-    getUpgrade(_proficiency) {
+    __getUpgrade(_proficiency) {
         const PROFICIENCY_INDEX = 0;
         const advancement = this.parent.system.stats.proficiency.advancement;
 
@@ -145,7 +169,7 @@ export class CharacterData extends foundry.abstract.DataModel {
 
     //  Deletes an upgrade on the proficiency advancement.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
-    deleteUpgrade(_proficiency) {
+    __deleteUpgrade(_proficiency) {
         const advancement = this.parent.system.stats.proficiency.advancement;
 
         let upgradeIndex = advancement.findIndex(element => {
@@ -157,7 +181,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     }
 
     //  Adds a blank entry onto the proficiency advancement.
-    addUpgrade() {
+    __addUpgrade() {
         const advancement = this.parent.system.stats.proficiency.advancement;
         advancement.push({ value: '', upgrades: {} });
         this.parent.update({ 'system.stats.proficiency.advancement': advancement });
@@ -166,7 +190,7 @@ export class CharacterData extends foundry.abstract.DataModel {
     //  Changes the proficiency value of an upgrade.
     //      _proficiency    (integer)   : The proficiency value of the upgrade
     //      _newValue       (integer)   : Self-explanatory
-    changeUpgradeValue(_proficiency, _newValue) {
+    __changeUpgradeValue(_proficiency, _newValue) {
         const advancement = this.parent.system.stats.proficiency.advancement;
 
         let upgradeIndex = advancement.findIndex(element => {

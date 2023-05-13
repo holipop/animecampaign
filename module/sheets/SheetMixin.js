@@ -39,29 +39,15 @@ export const ACSheetMixin = {
         NAME[0].addEventListener('paste', e => e.preventDefault())
     },
 
-    //  Creates a dialog box for creating a new stat.
+    //  Creates a blank stat.
     //      _html   (jQuery)    : The entity sheet form as a jQuery object
-    createStatDialog(_html) {
-        const CREATE_STAT = _html.find('.stat-create');
-        CREATE_STAT.on('click', e => {
-            let dialog = new Dialog({
-                title: `Create Stat: ${this.item.name}`,
-                content: `<p>Enter stat name:</p><input type="text" placeholder="Stat name"><hr>`,
-                buttons: {
-                    confirm: {
-                        icon: '<i class="fas fa-check"></i>',
-                        label: "Confirm",
-                        callback: e => {
-                            this.object.system.createStat(e.find('input').val())
-                            //TODO  if stat name is already taken/empty, throw error
-                        }
-                    }
-                },
-                default: "confirm",
-                render: html => {},
-                close: html => {}
-            });
-            dialog.render(true);
+    createBlankStat(_html) {
+        let stats = this.object.system.stats;
+
+        _html.find('.stat-create').on('click', event => {
+            let blankStat = new Stat()
+
+            this.object.update({ 'system.stats': [...stats, blankStat] })
         })
     },
 
@@ -76,15 +62,15 @@ export const ACSheetMixin = {
         const CLASS = _html.find('.class');
         const IMG = _html.find('.img');
 
-        let color = BACKGROUND_INPUT[0].defaultValue
+        const inputColor = BACKGROUND_INPUT[0].defaultValue
 
-        let rgb = [color.slice(1, 3), color.slice(3, 5), color.slice(5)]
+        let rgb = [inputColor.slice(1, 3), inputColor.slice(3, 5), inputColor.slice(5)]
             .map(element => Number(`0x${element}`));
         rgb[0] *= 0.2126;
         rgb[1] *= 0.7152;
         rgb[2] *= 0.0722;
 
-        let perceivedLightness = rgb.reduce((n, m) => n + m) / 255;
+        const perceivedLightness = rgb.reduce((n, m) => n + m) / 255;
 
         if (perceivedLightness <= _threshold) {
             NAME.css( 'color', "#FFFFFF" );
