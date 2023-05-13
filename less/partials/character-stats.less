@@ -10,12 +10,19 @@
         background-color: transparent;
     }
     .stat-labels > * {
-        height: .75rem;
-        width: 9rem;
+        height: 0.75rem;
+        margin: 0;
         padding: 0;
+        width: 9rem;
+        > * {
+            height: .75rem;
+            padding: 0;
+            border: 0;
 
-        font: bold .75rem 'Arial';
-        text-transform: uppercase;
+            font: bold .75rem 'Arial';
+            text-transform: uppercase;
+            background-color: transparent;
+        }
     }
     .stat-containers > * {
         border-right: 1px solid black;

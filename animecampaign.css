@@ -245,10 +245,17 @@
 }
 .animecampaign.actor.sheet .stat-labels > * {
   height: 0.75rem;
-  width: 9rem;
+  margin: 0;
   padding: 0;
+  width: 9rem;
+}
+.animecampaign.actor.sheet .stat-labels > * > * {
+  height: 0.75rem;
+  padding: 0;
+  border: 0;
   font: bold 0.75rem 'Arial';
   text-transform: uppercase;
+  background-color: transparent;
 }
 .animecampaign.actor.sheet .stat-containers > * {
   border-right: 1px solid black;

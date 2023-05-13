@@ -9,7 +9,7 @@
     <tr class="stat-containers">
         {{#each system.stats as |stat index|}}
             <td>
-                <input type="text" name="system.stats.{{index}}.value" value="{{value}}">
+                <input class="stat-single" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
             </td>
         {{/each}}
         
