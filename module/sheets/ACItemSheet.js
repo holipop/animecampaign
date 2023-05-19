@@ -32,15 +32,15 @@ export default class ACItemSheet extends ItemSheet {
     }
 
     //  This is where we put any custom event listeners for our sheets.
-    activateListeners(html) {
+    activateListeners(_html) {
 
-        this.updateName(html, 2.5, 60);
+        this.updateName(_html, 2.5, 60);
 
-        this.createStatDialog(html);
+        this.createBlankStat(_html);
 
-        this.updateBackground(html, 0.5);
+        this.updateBackground(_html, 0.5);
         
-        super.activateListeners(html);
+        super.activateListeners(_html);
     }
 }
 

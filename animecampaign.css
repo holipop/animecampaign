@@ -216,17 +216,26 @@
   line-height: 0.85;
 }
 .animecampaign.actor.sheet .type {
+  width: 5.75rem;
   margin-right: 0.25rem;
+  margin-left: 0.25rem;
   height: 1.6rem;
   padding: 0;
   flex-grow: 1;
-  font: 0.75rem 'Arial';
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  font: italic bold 0.75rem 'Arial';
 }
 .animecampaign.actor.sheet .word {
   overflow: hidden;
   height: 1.6rem;
   flex-grow: 1;
-  font: 1rem 'Philosopher';
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  font: bold 1.25rem 'Philosopher';
 }
 .animecampaign.actor.sheet .proficiency-class {
   margin-right: 0.675rem;
@@ -292,9 +301,6 @@
 .animecampaign.actor.sheet .stat-single {
   height: 4rem;
   font-size: 4rem;
-}
-.animecampaign.actor.sheet {
-  /* -- Styling for kit section -- */
 }
 .animecampaign.actor.sheet {
   /* -- Styling for kit piece cards -- */
