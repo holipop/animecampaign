@@ -1,6 +1,6 @@
 // out: false
 
-.animecampaign.actor.sheet {
+/*.animecampaign.actor.sheet {
     .stat-block {
         margin: .75rem auto;
         height: 5rem;
@@ -62,5 +62,72 @@
         height: 4rem;
 
         font-size: 4rem;
+    }
+}*/
+
+.animecampaign.actor.sheet{
+    .new-stat-block {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        margin: 1rem auto .25rem;
+        max-width: 26rem;
+    }
+    .stat {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: .75rem;
+        max-width: 9rem;
+        min-width: 6rem;
+    }
+    .element:nth-child(4n) {
+        > .stat-content {
+            border-right: 1px solid black;
+        }
+    }
+    .element:nth-child(4n+1) {
+        > .stat-create {
+            border: 0;
+        }
+    }
+    .stat-label {
+        text-align: center;
+        height: .75rem;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+
+        font: bold .75rem 'Arial';
+        text-transform: uppercase;
+        background-color: transparent;
+    }
+    .stat-content {
+        border-left: .25px solid black;
+
+        .stat-single {
+            font-size: 2.25rem;
+        }
+        > * {
+            text-align: center;
+            height: 2.25rem;
+            width: 100%;
+    
+            font-family: 'Philosopher';
+            line-height: 1;
+            font-weight: bold;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            background-color: transparent;
+        }
+    }
+    .stat-create {
+        display: grid;
+        align-items: center;
+        margin-top: .75rem;
+        padding-left: .1rem;
+        height: 2.25rem;
+        border-left: .25px solid black;
     }
 }

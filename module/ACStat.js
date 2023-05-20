@@ -12,8 +12,12 @@ export class Stat extends foundry.abstract.DataModel {
 
         return {
             name: new fields.StringField(defaultSettings),
+            img: new fields.StringField(defaultSettings),
             value: new fields.StringField(defaultSettings),
-            max: new fields.StringField(defaultSettings)
+            min: new fields.StringField(defaultSettings),
+            max: new fields.StringField(defaultSettings),
+            states: new fields.ArrayField( new fields.ObjectField(), defaultSettings ),
+            advancement: new fields.ArrayField( new fields.ObjectField(), defaultSettings ),
         }
     }
 

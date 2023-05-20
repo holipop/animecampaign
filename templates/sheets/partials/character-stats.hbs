@@ -1,4 +1,4 @@
-<table class="stat-block">
+<!--table class="stat-block">
     <tr class="stat-labels">
         {{#each system.stats as |stat index|}}
             <th>
@@ -19,7 +19,7 @@
             </a>
         </td>
 
-        <!-- td>
+        <td>
             <input class="stat-primary" type="number" name="system.stats.stamina.value" value="{{system.stats.stamina.value}}" data-dtype="Number" placeholder="0">
             <div class="divider"></div>
             <input class="stat-secondary" type="number" name="system.stats.stamina.max" value="{{system.stats.stamina.max}}" data-dtype="Number" placeholder="0">
@@ -31,6 +31,22 @@
             <input class="stat-primary" type="text" name="system.stats.movement.value" value="{{system.stats.movement.value}}" placeholder="0">
             <div class="divider"></div>
             <input class="stat-secondary" type="text" name="system.stats.movement.build" value="{{system.stats.movement.build}}" placeholder="Average">
-        </td -->
+        </td>
     </tr>
-</table>
+</table-->
+
+<div class="new-stat-block flexcol">
+    {{#each system.stats as |stat index|}}
+    <div class="element stat">
+        <input class="stat-label" type="text" name="system.stats.{{index}}.name" value="{{name}}" placeholder="name">
+        <section class="stat-content">
+            <input class="stat-single" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
+        </section>
+    </div>
+    {{/each}}
+    <div class="element flex0">
+        <a class="stat-create" title="Add Stat">
+            <i class="fas fa-plus"></i>
+        </a>
+    </div>
+</div>

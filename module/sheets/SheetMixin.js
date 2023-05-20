@@ -39,6 +39,24 @@ export const ACSheetMixin = {
         NAME[0].addEventListener('paste', e => e.preventDefault())
     },
 
+    updateStat(_html) {
+        const STAT_CONTENT = _html.find('.stat-content');
+        const regex = new RegExp(/[A-Z]|[a-z]/, 'g');
+
+        STAT_CONTENT.children().on('keydown', e => {
+            const stat = e.currentTarget;
+
+            if (regex.test(stat.value)) {
+                $(stat)
+                    .css('transform', 'scaleX(0.8)')
+                    .css('font-weight', 'normal')
+                ;
+            }
+
+            //TODO MAKE IT STAY AS IT IS
+        })
+    },
+
     //  Creates a blank stat.
     //      _html   (jQuery)    : The entity sheet form as a jQuery object
     createBlankStat(_html) {
@@ -83,4 +101,8 @@ export const ACSheetMixin = {
         BACKGROUND.css( "background-color", BACKGROUND_INPUT[0].defaultValue );
         IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
     },
+
+    updateStatBlocks() {
+        //TODO Add in Background functionality for Stats.
+    }
 }

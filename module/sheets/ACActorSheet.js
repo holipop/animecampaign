@@ -51,6 +51,8 @@ export default class ACActorSheet extends ActorSheet {
 
         this.createBlankStat(_html);
 
+        this.updateStat(_html);
+
         super.activateListeners(_html);
     }
 
