@@ -39,22 +39,47 @@ export const ACSheetMixin = {
         NAME[0].addEventListener('paste', e => e.preventDefault())
     },
 
-    updateStat(_html) {
+    adjustFontWidth(_div, _scale) {
+        const stat = $(_div)
+        const regex = /[A-Z]|[a-z]/g;
+
+        console.log(1/_scale);
+
+        const width = 1 / _scale;
+        const left = (1 - _scale) / (2 * _scale);
+
+        if (regex.test(stat[0].value)) {
+            stat
+                .css('transform',       `scaleX(${_scale})`)
+                .css('width',           `${width * 100}%`)
+                .css('position',        'relative')
+                .css('left',            `${left * -100}%`)
+                .css('font-weight',     'normal')
+            ;
+        } else {
+            stat
+                .css('transform',       `scaleX(1)`)
+                .css('width',           `100%`)
+                .css('position',        'static')
+                .css('font-weight',     'bold')
+            ;
+        }
+
+        //console.log([stat, regex]);
+    },
+
+    updateStat(_html, _scale) {
         const STAT_CONTENT = _html.find('.stat-content');
-        const regex = new RegExp(/[A-Z]|[a-z]/, 'g');
+
+        _html.ready(() => {
+            for (let i = 0; i < STAT_CONTENT.children().length; i++) {
+                this.adjustFontWidth(STAT_CONTENT.children()[i], _scale)
+            }
+        })
 
         STAT_CONTENT.children().on('keydown', e => {
-            const stat = e.currentTarget;
-
-            if (regex.test(stat.value)) {
-                $(stat)
-                    .css('transform', 'scaleX(0.8)')
-                    .css('font-weight', 'normal')
-                ;
-            }
-
-            //TODO MAKE IT STAY AS IT IS
-        })
+            this.adjustFontWidth(e.currentTarget, _scale);
+        });
     },
 
     //  Creates a blank stat.

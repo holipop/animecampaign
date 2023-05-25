@@ -130,6 +130,7 @@
 }
 .animecampaign.actor.sheet form {
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 .animecampaign.actor.sheet .scrollable {
   overflow-y: scroll;
@@ -342,15 +343,16 @@
 }
 .animecampaign.actor.sheet .stat-content {
   border-left: 0.25px solid black;
+  overflow-x: hidden;
 }
 .animecampaign.actor.sheet .stat-content .stat-single {
   font-size: 2.25rem;
 }
 .animecampaign.actor.sheet .stat-content > * {
-  text-align: center;
   height: 2.25rem;
   width: 100%;
   font-family: 'Philosopher';
+  text-align: center;
   line-height: 1;
   font-weight: bold;
   border: 0;
