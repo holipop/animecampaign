@@ -4,7 +4,7 @@ import { ACSheetMixin } from "./SheetMixin.js";
 //  Defining the schema for Actor Sheets.
 //
 export default class ACActorSheet extends ActorSheet {
-    
+
     //  Sets the default options for the ActorSheet.
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -38,7 +38,6 @@ export default class ACActorSheet extends ActorSheet {
 
     //  This is where we put any custom event listeners for our sheets.
     activateListeners(_html) {
-
         this.updateName(_html, 3, 60);
         
         this.updateClass(_html)
@@ -49,9 +48,9 @@ export default class ACActorSheet extends ActorSheet {
         this.deleteKitPiece(_html);
         this.editKitPiece(_html);
 
-        this.createBlankStat(_html);
+        this.updateStatWidth(_html, .75);
 
-        this.updateStat(_html, .75);
+        new ContextMenu(_html, '.stat', this.contextMenuEntries)
 
         super.activateListeners(_html);
     }
@@ -101,6 +100,41 @@ export default class ACActorSheet extends ActorSheet {
             item.sheet.render(true);
         })
     }
+
+    contextMenuEntries = [
+        {
+            name: "Add Stat Left",
+            icon: `<i class="fas fa-arrow-left"></i>`,
+            callback: event => {
+                const index = event.data().index;
+                this.object.system.createStats([{}], index);
+            }
+        },
+        {
+            name: "Add Stat Right",
+            icon: `<i class="fas fa-arrow-right"></i>`,
+            callback: event => {
+                const index = event.data().index;
+                this.object.system.createStats([{}], index + 1);
+            }
+        },
+        {
+            name: "Configure",
+            icon: `<i class="fas fa-gear"></i>`,
+            callback: event => {
+                console.log("WIP");
+                //TODO ADD CONFIG MENU
+            }
+        },
+        {
+            name: "Delete",
+            icon: `<i class="fas fa-trash-can-xmark"></i>`,
+            callback: event => {
+                const index = event.data().index;
+                this.object.system.deleteStatIndex(index);
+            }
+        },
+    ]
 }
 
 //  Composites mixins with this class

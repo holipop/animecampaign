@@ -1,25 +1,18 @@
 <div class="new-stat-block flexcol">
-{{#each system.stats as |stat index|}}
-    <div class="element stat">
-        <div class="stat-wrap">
-            <img src="{{stat.img}}" data-edit="system.stats.{{index}}.img">
+    {{#each system.stats as |stat index|}}
+        <div class="stat" data-index={{index}}>
+            <div class="stat-img">
+                <img src="{{stat.img}}" data-edit="system.stats.{{index}}.img">
+            </div>
+
+            <input class="stat-label" type="text" name="system.stats.{{index}}.name" value="{{name}}" placeholder="name">
+
+            <section class="stat-content">
+                {{#if (eq stat.settings.display "single")}}
+                    <input class="stat-single" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
+                {{/if}}
+            </section>
+
         </div>
-
-        <!-- TODO   PUT THE IMAGE BEHIND THE LABEL TEXT -->
-
-        <input class="stat-label" type="text" name="system.stats.{{index}}.name" value="{{name}}" placeholder="name">
-
-        <section class="stat-content">
-            {{#if (eq stat.settings.display "single")}}
-                <input class="stat-single" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
-            {{/if}}
-        </section>
-
-    </div>
-{{/each}}
-    <div class="element flex0">
-        <a class="stat-create" title="Add Stat">
-            <i class="fas fa-plus"></i>
-        </a>
-    </div>
+    {{/each}}
 </div>

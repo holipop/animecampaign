@@ -66,7 +66,7 @@ export const ACSheetMixin = {
         //console.log([stat, regex]);
     },
 
-    updateStat(_html, _scale) {
+    updateStatWidth(_html, _scale) {
         const STAT_CONTENT = _html.find('.stat-content');
 
         _html.ready(() => {
@@ -82,7 +82,7 @@ export const ACSheetMixin = {
 
     //  Creates a blank stat.
     //      _html   (jQuery)    : The entity sheet form as a jQuery object
-    createBlankStat(_html) {
+    __createBlankStat(_html) {
         let stats = this.object.system.stats;
 
         _html.find('.stat-create').on('click', event => {

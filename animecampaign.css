@@ -261,24 +261,24 @@
   max-width: 9rem;
   min-width: 6rem;
 }
-.animecampaign.actor.sheet .element:nth-child(4n) > .stat-content {
+.animecampaign.actor.sheet .stat:nth-child(4n) > .stat-content {
   border-right: 1px solid black;
 }
-.animecampaign.actor.sheet .element:nth-child(4n+1) > .stat-create {
-  border: 0;
+.animecampaign.actor.sheet .stat:last-child > .stat-content {
+  border-right: 1px solid black;
 }
-.animecampaign.actor.sheet .stat-wrap {
+.animecampaign.actor.sheet .stat-img {
   position: relative;
   top: -0.55rem;
   width: 100%;
   display: grid;
   justify-items: center;
 }
-.animecampaign.actor.sheet .stat-wrap img {
+.animecampaign.actor.sheet .stat-img img {
   position: absolute;
   height: 4rem;
-  aspect-ratio: 5 / 1;
-  opacity: 30%;
+  pointer-events: none;
+  opacity: 25%;
   filter: brightness(0) saturate(100%);
   border: 0;
   z-index: 1;

@@ -7,11 +7,15 @@ export const ACEntityMixin = {
 
     //  Create new Stat objects inside the stats list.
     //      _stats  (Stat[])     : An array of objects, each parameters for constructing a Stat.
-    createStats(_stats) {
+    createStats(_stats = [{}], _index = null) {
         let stats = this.stats;
         let createdStats = _stats.map(obj => new Stat(obj));
 
-        stats = [...stats, ...createdStats];
+        if (_index == null) {
+            stats = [...stats, ...createdStats];
+        } else {
+            stats.splice(_index, 0, ...createdStats);
+        }
 
         this.parent.update({ 'system.stats': stats });
         return console.log(`Created stats "${createdStats.map(i => i.name).toString()}" for ${this.parent.name}`)
@@ -34,19 +38,28 @@ export const ACEntityMixin = {
         return console.log(`Deleted stats "${_stats.toString()}" for ${this.parent.name}`)
     },
 
-updateStat(_name, _schema) {
-    const stats = this.stats;
-    let targetStat = stats.find(stat => stat.name == _name);
+    deleteStatIndex(_index) {
+        let stats = this.stats;
 
-    if (targetStat == undefined) return console.error(`"${_name}" is not a stat.`);
+        stats.splice(_index, 1);
 
-    Object.assign(targetStat, _schema);
+        this.parent.update({ 'system.stats': stats });
+        return console.log(`Deleted stat at index ${_index} for ${this.parent.name}`)
+    },
 
-    console.log(stats)
+    updateStat(_name, _schema) {
+        const stats = this.stats;
+        let targetStat = stats.find(stat => stat.name == _name);
 
-    this.parent.update({ 'system.stats': [...stats] });
-    return console.log(`Updated the "${_name}" stat for ${this.parent.name}`);
-},
+        if (targetStat == undefined) return console.error(`"${_name}" is not a stat.`);
+
+        Object.assign(targetStat, _schema);
+
+        console.log(stats)
+
+        this.parent.update({ 'system.stats': [...stats] });
+        return console.log(`Updated the "${_name}" stat for ${this.parent.name}`);
+    },
 
     clearStats() {
         this.parent.update({ 'system.stats': [] });
