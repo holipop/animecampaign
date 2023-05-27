@@ -6,7 +6,7 @@ import { Stat } from "./ACStat.js";
 export const ACEntityMixin = {
 
     //  Create new Stat objects inside the stats list.
-    //      _stats  (?array)   : An array of objects, each parameters for constructing a Stat.
+    //      _stats  (Stat[])     : An array of objects, each parameters for constructing a Stat.
     createStats(_stats) {
         let stats = this.stats;
         let createdStats = _stats.map(obj => new Stat(obj));
@@ -18,7 +18,7 @@ export const ACEntityMixin = {
     },
 
     //  Deletes existing Stat objects from the stats list.
-    //      _stats  (array)     : An array of strings, each the names of Stats.
+    //      _stats  (string[])  : An array of strings, each the names of Stats.
     deleteStats(_stats) {
         let stats = this.stats;
 
@@ -34,10 +34,23 @@ export const ACEntityMixin = {
         return console.log(`Deleted stats "${_stats.toString()}" for ${this.parent.name}`)
     },
 
+updateStat(_name, _schema) {
+    const stats = this.stats;
+    let targetStat = stats.find(stat => stat.name == _name);
+
+    if (targetStat == undefined) return console.error(`"${_name}" is not a stat.`);
+
+    Object.assign(targetStat, _schema);
+
+    console.log(stats)
+
+    this.parent.update({ 'system.stats': [...stats] });
+    return console.log(`Updated the "${_name}" stat for ${this.parent.name}`);
+},
+
     clearStats() {
         this.parent.update({ 'system.stats': [] });
         return console.log(`Deleted all stats for ${this.parent.name}`)
-
     },
 
     // !!!

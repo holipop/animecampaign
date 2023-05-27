@@ -43,8 +43,6 @@ export const ACSheetMixin = {
         const stat = $(_div)
         const regex = /[A-Z]|[a-z]/g;
 
-        console.log(1/_scale);
-
         const width = 1 / _scale;
         const left = (1 - _scale) / (2 * _scale);
 
