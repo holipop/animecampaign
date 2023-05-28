@@ -5,7 +5,7 @@
         display: flex;
         justify-content: center;
         flex-flow: row wrap;
-        margin: .2rem auto .25rem;
+        margin: .3rem auto 0;
         max-width: 26rem;
     }
     .stat {
@@ -38,7 +38,7 @@
             height: 4rem;
             pointer-events: none;
 
-            opacity: 25%;
+            opacity: 15%;
             filter: brightness(0) saturate(100%);
             border: 0;
             z-index: 0;
@@ -79,7 +79,7 @@
         }
     }
     .empty-stats {
-        height: 3.8rem;
+        height: 3.85rem;
         margin: .2rem 4rem;
         border-radius: .25rem;
         border: 2px dashed rgba(0, 0, 0, 0.66);
@@ -104,14 +104,22 @@
     .create-default {
         border-right: 1px solid black;
     }
+    .collapse-stats {
+        width: 26rem;
+        margin: 0 auto .2rem;
+        line-height: 1.4rem;
+        text-align: center;
 
-    //! depreceated
-    .stat-create {
-        display: grid;
-        align-items: center;
-        margin-top: 1.2rem;
-        padding-left: .1rem;
-        height: 2.25rem;
-        border-left: .25px solid black;
+        font-size: 1.6rem;
+        > div {
+            height: .8rem;
+            border-bottom: 1px solid black;
+        }
+        > a {
+            margin: 0 3px;
+        }
+    }
+    .hidden {
+        display: none;
     }
 }

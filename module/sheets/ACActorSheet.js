@@ -51,6 +51,7 @@ export default class ACActorSheet extends ActorSheet {
         this.updateStatWidth(_html, .75);
         this.createBlankStat(_html);
         this.addDefaultStats(_html);
+        this.collapseStatBlock(_html)
 
         new ContextMenu(_html, '.stat', this.contextMenuEntries());
 

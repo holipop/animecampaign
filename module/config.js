@@ -42,7 +42,14 @@ animecampaign.statLabels = {
     range: "animecampaign.statLabels.range",
     cost: "animecampaign.statLabels.cost",
     bonus: "animecampaign.statLabels.bonus",
-    action: "animecampaign.statLabels.action"
+}
+animecampaign.statButtons = {
+    addDefault: "animecampaign.statButtons.addDefault",
+    addLeft: "animecampaign.statButtons.addLeft",
+    addRight: "animecampaign.statButtons.addRight",
+    createBlank: "animecampaign.statButtons.createBlank",
+    configure: "animecampaign.statButtons.configure",
+    delete: "animecampaign.statButtons.delete"
 }
 animecampaign.navigationLabels = {
     kit: "animecampaign.navigationLabels.kit",
@@ -51,8 +58,8 @@ animecampaign.navigationLabels = {
 }
 
 animecampaign.kitText = {
-    addkitpiece: "animecampaign.kitText.addkitpiece",
-    newkitpiece: "animecampaign.kitText.newkitpiece",
-    deletekitpiece: "animecampaign.kitText.deletekitpiece",
-    editkitpiece: "animecampaign.kitText.editkitpiece"
+    addKitPiece: "animecampaign.kitText.addKitPiece",
+    newKitPiece: "animecampaign.kitText.newKitPiece",
+    deleteKitPiece: "animecampaign.kitText.deleteKitPiece",
+    editKitPiece: "animecampaign.kitText.editKitPiece"
 }

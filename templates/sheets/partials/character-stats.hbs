@@ -18,13 +18,18 @@
     {{#if (eq system.stats.length 0)}}
         <div class="empty-stats flexrow">
             <a class="create-default">
-                <p>Add Default Stats</p>
+                <p>{{ localize config.statButtons.addDefault }}</p>
                 <i class="fas fa-clone"></i>
             </a>
             <a class="create-blank">
-                <p>Create Blank Stat</p>
+                <p>{{ localize config.statButtons.createBlank }}</p>
                 <i class="fas fa-square-plus"></i>
             </a>
         </div>
     {{/if}}
+</div>
+<div class="collapse-stats flexrow">
+    <div></div>
+    <a class="collapse-button flex0">&#9876;</a>
+    <div></div>
 </div>

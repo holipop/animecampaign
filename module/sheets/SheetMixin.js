@@ -134,12 +134,29 @@ export const ACSheetMixin = {
         })
     },
 
+    collapseStatBlock(_html) {
+        const COLLAPSE_STATS = _html.find('.collapse-button')
+        
+        COLLAPSE_STATS.on('click', event => {
+            const STAT_BLOCK = _html.find('.stat-block')
+
+            const isHidden = STAT_BLOCK.hasClass('hidden');
+
+            if (isHidden) {
+                STAT_BLOCK.removeClass('hidden');
+            } else {
+                STAT_BLOCK.addClass('hidden');
+            }
+        })
+    },
+
     contextMenuEntries() {
         const parent = this;
+        const localize = _key => game.i18n.localize(CONFIG.animecampaign.statButtons[`${_key}`]);
 
         return [
             {
-                name: "Add Stat Left",
+                name: localize("addLeft"),
                 icon: `<i class="fas fa-arrow-left"></i>`,
                 callback: event => {
                     const index = event.data().index;
@@ -148,7 +165,7 @@ export const ACSheetMixin = {
                 }
             },
             {
-                name: "Add Stat Right",
+                name: localize("addRight"),
                 icon: `<i class="fas fa-arrow-right"></i>`,
                 callback: event => {
                     const index = event.data().index;
@@ -156,7 +173,7 @@ export const ACSheetMixin = {
                 }
             },
             {
-                name: "Configure",
+                name: localize("configure"),
                 icon: `<i class="fas fa-gear"></i>`,
                 callback: event => {
                     console.log("WIP");
@@ -164,7 +181,7 @@ export const ACSheetMixin = {
                 }
             },
             {
-                name: "Delete",
+                name: localize("delete"),
                 icon: `<i class="fas fa-trash-can-xmark"></i>`,
                 callback: event => {
                     const index = event.data().index;

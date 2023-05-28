@@ -18,7 +18,7 @@ export const ACEntityMixin = {
         }
 
         this.parent.update({ 'system.stats': stats });
-        return console.log(`Created stats "${createdStats.map(i => i.name).toString()}" for ${this.parent.name}`)
+        return console.log(`Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
     },
 
     //  Deletes existing Stat objects from the stats list.
