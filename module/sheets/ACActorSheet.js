@@ -28,10 +28,10 @@ export default class ACActorSheet extends ActorSheet {
         data.items = data.actor.items       //  Actor's owned items
         //data.advancement = data.actor.system.stats.proficiency.advancement  // Proficiency
         
-        data.weapons = data.items.filter(e => e.system.type == "weapon");
-        data.talents = data.items.filter(e => e.system.type == "talent");
-        data.passives = data.items.filter(e => e.system.type == "passive");
-        data.abilities = data.items.filter(e => e.system.type == "ability");
+        data.weapons = data.items.filter(element => element.system.type == "weapon");
+        data.talents = data.items.filter(element => element.system.type == "talent");
+        data.passives = data.items.filter(element => element.system.type == "passive");
+        data.abilities = data.items.filter(element => element.system.type == "ability");
 
         return data;
     }
@@ -40,17 +40,19 @@ export default class ACActorSheet extends ActorSheet {
     activateListeners(_html) {
         this.updateName(_html, 3, 60);
         
-        this.updateClass(_html)
+        this.updateClass(_html);
         this.updateBackground(_html, 0.5);
-        this.createNavigation(_html)
+        this.createNavigation(_html);
 
         this.createKitPiece(_html);
         this.deleteKitPiece(_html);
         this.editKitPiece(_html);
 
         this.updateStatWidth(_html, .75);
+        this.createBlankStat(_html);
+        this.addDefaultStats(_html);
 
-        new ContextMenu(_html, '.stat', this.contextMenuEntries())
+        new ContextMenu(_html, '.stat', this.contextMenuEntries());
 
         super.activateListeners(_html);
     }

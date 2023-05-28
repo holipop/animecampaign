@@ -1,4 +1,5 @@
 import { Stat } from "../ACStat.js"
+import { defaultStats } from "./DefaultStats.js";
 
 //
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
@@ -27,7 +28,7 @@ export const ACSheetMixin = {
     //      _max    (integer)   : The max amount of vertical space the div can take up in pixels
     updateName(_html, _rem, _max) {
         const NAME = _html.find('.name');
-        const nameResize = new ResizeObserver(e => {
+        const nameResize = new ResizeObserver(event => {
             this.adjustFontSize(NAME, _rem, _max)
         })
         nameResize.observe(NAME[0]);
@@ -35,8 +36,8 @@ export const ACSheetMixin = {
 
         _html.ready(() => this.adjustFontSize(NAME, _rem, _max));
 
-        NAME.on('blur', e => this.object.update({ 'name': NAME.text() }));
-        NAME[0].addEventListener('paste', e => e.preventDefault())
+        NAME.on('blur', event => this.object.update({ 'name': NAME.text() }));
+        NAME[0].addEventListener('paste', event => event.preventDefault())
     },
 
     adjustFontWidth(_div, _scale) {
@@ -108,9 +109,29 @@ export const ACSheetMixin = {
             }
         })
 
-        STAT_CONTENT.children().on('keydown', e => {
-            this.adjustFontWidth(e.currentTarget, _scale);
+        STAT_CONTENT.children().on('keydown', event => {
+            this.adjustFontWidth(event.currentTarget, _scale);
         });
+    },
+
+    createBlankStat(_html) {
+        _html.find('.create-blank').on('click', event => {
+            this.object.system.createStats();
+        })
+    },
+
+    addDefaultStats(_html) {
+        _html.find('.create-default').on('click', event => {
+            let type = this.object.type.toLowerCase();
+
+            if (type == 'Kit Piece') {
+                type = this.object.system.type.toLowerCase();
+            }
+
+            const stats = defaultStats[`${type}Stats`];
+
+            this.object.system.createStats(stats);
+        })
     },
 
     contextMenuEntries() {

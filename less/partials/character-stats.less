@@ -1,7 +1,7 @@
 // out: false
 
 .animecampaign.actor.sheet{
-    .new-stat-block {
+    .stat-block {
         display: flex;
         justify-content: center;
         flex-flow: row wrap;
@@ -78,6 +78,34 @@
             background-color: transparent;
         }
     }
+    .empty-stats {
+        height: 3.8rem;
+        margin: .2rem 4rem;
+        border-radius: .25rem;
+        border: 2px dashed rgba(0, 0, 0, 0.66);
+
+        opacity: 50%;
+        * > {
+            display: grid;
+            justify-items: center;
+            margin: .5rem 0;
+            > * {
+                margin: 0;
+            }
+        }
+        p > {
+            line-height: 0;
+
+            font: bold .75rem 'Arial';
+            text-transform: uppercase;
+            
+        }
+    }
+    .create-default {
+        border-right: 1px solid black;
+    }
+
+    //! depreceated
     .stat-create {
         display: grid;
         align-items: center;

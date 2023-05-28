@@ -1,4 +1,4 @@
-<div class="new-stat-block flexcol">
+<div class="stat-block flexcol">
     {{#each system.stats as |stat index|}}
         <div class="stat" data-index={{index}}>
             <div class="stat-img">
@@ -15,4 +15,16 @@
 
         </div>
     {{/each}}
+    {{#if (eq system.stats.length 0)}}
+        <div class="empty-stats flexrow">
+            <a class="create-default">
+                <p>Add Default Stats</p>
+                <i class="fas fa-clone"></i>
+            </a>
+            <a class="create-blank">
+                <p>Create Blank Stat</p>
+                <i class="fas fa-square-plus"></i>
+            </a>
+        </div>
+    {{/if}}
 </div>
