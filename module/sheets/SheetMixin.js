@@ -5,46 +5,6 @@ import { Stat } from "../ACStat.js"
 //
 export const ACSheetMixin = {
 
-    contextMenuEntries() {
-        const parent = this;
-
-        return [
-            {
-                name: "Add Stat Left",
-                icon: `<i class="fas fa-arrow-left"></i>`,
-                callback: event => {
-                    const index = event.data().index;
-                    console.log( parent );
-                    parent.object.system.createStats([{}], index);
-                }
-            },
-            {
-                name: "Add Stat Right",
-                icon: `<i class="fas fa-arrow-right"></i>`,
-                callback: event => {
-                    const index = event.data().index;
-                    parent.object.system.createStats([{}], index + 1);
-                }
-            },
-            {
-                name: "Configure",
-                icon: `<i class="fas fa-gear"></i>`,
-                callback: event => {
-                    console.log("WIP");
-                    //TODO ADD CONFIG MENU
-                }
-            },
-            {
-                name: "Delete",
-                icon: `<i class="fas fa-trash-can-xmark"></i>`,
-                callback: event => {
-                    const index = event.data().index;
-                    parent.object.system.deleteStatIndex(index);
-                }
-            },
-        ]
-    },
-
     //  Shrinks the font size of a div as more content is added.
     //      _div    (html)      : The desired HTML element for adjusting font
     //      _rem    (number)    : The default size of the font in rem units
@@ -106,32 +66,6 @@ export const ACSheetMixin = {
         //console.log([stat, regex]);
     },
 
-    updateStatWidth(_html, _scale) {
-        const STAT_CONTENT = _html.find('.stat-content');
-
-        _html.ready(() => {
-            for (let i = 0; i < STAT_CONTENT.children().length; i++) {
-                this.adjustFontWidth(STAT_CONTENT.children()[i], _scale)
-            }
-        })
-
-        STAT_CONTENT.children().on('keydown', e => {
-            this.adjustFontWidth(e.currentTarget, _scale);
-        });
-    },
-
-    //  Creates a blank stat.
-    //      _html   (jQuery)    : The entity sheet form as a jQuery object
-    __createBlankStat(_html) {
-        let stats = this.object.system.stats;
-
-        _html.find('.stat-create').on('click', event => {
-            let blankStat = new Stat()
-
-            this.object.update({ 'system.stats': [...stats, blankStat] })
-        })
-    },
-
     //  Updates the background color of the header of entity sheets.
     //      _html       (jQuery)    : The entity sheet form as a jQuery object
     //      _threshold  (number)    : A number between 0 and 1, when the foreground text should change
@@ -165,7 +99,70 @@ export const ACSheetMixin = {
         IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
     },
 
-    updateStatBlocks() {
-        //TODO Add in Background functionality for Stats.
-    }
+    updateStatWidth(_html, _scale) {
+        const STAT_CONTENT = _html.find('.stat-content');
+
+        _html.ready(() => {
+            for (let i = 0; i < STAT_CONTENT.children().length; i++) {
+                this.adjustFontWidth(STAT_CONTENT.children()[i], _scale)
+            }
+        })
+
+        STAT_CONTENT.children().on('keydown', e => {
+            this.adjustFontWidth(e.currentTarget, _scale);
+        });
+    },
+
+    contextMenuEntries() {
+        const parent = this;
+
+        return [
+            {
+                name: "Add Stat Left",
+                icon: `<i class="fas fa-arrow-left"></i>`,
+                callback: event => {
+                    const index = event.data().index;
+                    console.log( parent );
+                    parent.object.system.createStats([{}], index);
+                }
+            },
+            {
+                name: "Add Stat Right",
+                icon: `<i class="fas fa-arrow-right"></i>`,
+                callback: event => {
+                    const index = event.data().index;
+                    parent.object.system.createStats([{}], index + 1);
+                }
+            },
+            {
+                name: "Configure",
+                icon: `<i class="fas fa-gear"></i>`,
+                callback: event => {
+                    console.log("WIP");
+                    //TODO ADD CONFIG MENU
+                }
+            },
+            {
+                name: "Delete",
+                icon: `<i class="fas fa-trash-can-xmark"></i>`,
+                callback: event => {
+                    const index = event.data().index;
+                    parent.object.system.deleteStatIndex(index);
+                }
+            },
+        ]
+    },
+
+    // !!! DEPRECIATED
+    //  Creates a blank stat.
+    //      _html   (jQuery)    : The entity sheet form as a jQuery object
+    __createBlankStat(_html) {
+        let stats = this.object.system.stats;
+
+        _html.find('.stat-create').on('click', event => {
+            let blankStat = new Stat()
+
+            this.object.update({ 'system.stats': [...stats, blankStat] })
+        })
+    },
 }

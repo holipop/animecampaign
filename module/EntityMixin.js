@@ -27,7 +27,7 @@ export const ACEntityMixin = {
         let stats = this.stats;
 
         for (const element of _stats) {
-            let targetIndex = stats.findIndex(stat => stat.name == element)
+            let targetIndex = stats.findIndex(stat => stat.label == element)
 
             if (targetIndex == -1) return console.error(`"${element}" is not a stat.`);
 
@@ -49,7 +49,7 @@ export const ACEntityMixin = {
 
     updateStat(_name, _schema) {
         const stats = this.stats;
-        let targetStat = stats.find(stat => stat.name == _name);
+        let targetStat = stats.find(stat => stat.label == _name);
 
         if (targetStat == undefined) return console.error(`"${_name}" is not a stat.`);
 

@@ -46,4 +46,8 @@ export class Stat extends foundry.abstract.DataModel {
         }
         return value / max;
     }
+
+    get label() {
+        return this.name.toLowerCase();
+    }
 }
