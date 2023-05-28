@@ -5,6 +5,46 @@ import { Stat } from "../ACStat.js"
 //
 export const ACSheetMixin = {
 
+    contextMenuEntries() {
+        const parent = this;
+
+        return [
+            {
+                name: "Add Stat Left",
+                icon: `<i class="fas fa-arrow-left"></i>`,
+                callback: event => {
+                    const index = event.data().index;
+                    console.log( parent );
+                    parent.object.system.createStats([{}], index);
+                }
+            },
+            {
+                name: "Add Stat Right",
+                icon: `<i class="fas fa-arrow-right"></i>`,
+                callback: event => {
+                    const index = event.data().index;
+                    parent.object.system.createStats([{}], index + 1);
+                }
+            },
+            {
+                name: "Configure",
+                icon: `<i class="fas fa-gear"></i>`,
+                callback: event => {
+                    console.log("WIP");
+                    //TODO ADD CONFIG MENU
+                }
+            },
+            {
+                name: "Delete",
+                icon: `<i class="fas fa-trash-can-xmark"></i>`,
+                callback: event => {
+                    const index = event.data().index;
+                    parent.object.system.deleteStatIndex(index);
+                }
+            },
+        ]
+    },
+
     //  Shrinks the font size of a div as more content is added.
     //      _div    (html)      : The desired HTML element for adjusting font
     //      _rem    (number)    : The default size of the font in rem units
