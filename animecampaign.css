@@ -363,3 +363,12 @@
 .animecampaign.sheet .hidden {
   display: none;
 }
+.animecampaign.sheet #context-menu {
+  min-width: 7rem;
+}
+.animecampaign.sheet #context-menu > * {
+  font: 0.75rem 'Philosopher';
+}
+.animecampaign.sheet #context-menu > * > * {
+  line-height: 1.5rem;
+}
