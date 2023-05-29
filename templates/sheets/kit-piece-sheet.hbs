@@ -20,25 +20,13 @@
                 {{/select}}
             </select>
         </section>
-
     </header>
 
-    <section class="sheet-body">
-        <section class="stats">
-            {{#each system.stats as |value key|}}
-                <div>
-                    <div class="stat-label">{{key}}</div>
-                    <input class="stat-value" type="text" name="system.stats.{{key}}" value="{{value}}" placeholder="0">
-                </div>
-            {{/each}}
-            <a class="stat-create" title="Add Stat">
-                <i class="fas fa-plus"></i>
-            </a>
-        </section>
-        <section class="text">
-            {{!-- This is the text editor field. It allows us to add in the body text for our kit pieces. --}}
-            {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}} 
-        </section>
+    {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
+
+    <section class="text">
+        {{!-- This is the text editor field. It allows us to add in the body text for our kit pieces. --}}
+        {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}} 
     </section>
 
 </form>

@@ -24,6 +24,7 @@
   height: calc(6.2rem * (5/8) + 0.8rem);
   width: calc(80% + 6.75rem);
   max-width: 100%;
+  margin-bottom: 1rem;
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 4fr 1fr;
@@ -80,43 +81,6 @@
   width: calc(80% + 6.75rem);
   max-width: 100%;
   height: 75%;
-}
-.animecampaign.item.sheet .stats > * {
-  min-height: 4.3rem;
-  width: 80%;
-  min-width: 7rem;
-  margin-bottom: 0.33rem;
-  margin-left: auto;
-  padding: 0.2rem 3%;
-  border-bottom: 1px solid black;
-}
-.animecampaign.item.sheet .stat-label,
-.animecampaign.item.sheet .stat-value {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  background-color: transparent;
-}
-.animecampaign.item.sheet .stat-label {
-  min-height: 1rem;
-  font: bold 0.8rem 'Arial';
-  line-height: 1;
-  text-transform: uppercase;
-}
-.animecampaign.item.sheet .stat-value {
-  height: 2.5rem;
-  padding: 0 2%;
-  font: bold 2.5rem "Philosopher";
-  border-radius: 2px;
-  text-align: end;
-}
-.animecampaign.item.sheet .stat-create {
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
 }
 .animecampaign.item.sheet .text {
   margin-left: 0.4rem;
@@ -245,115 +209,6 @@
   line-height: 0;
   transform: skew(-15deg);
 }
-.animecampaign.actor.sheet .stat-block {
-  display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
-  margin: 0.3rem auto 0;
-  max-width: 26rem;
-}
-.animecampaign.actor.sheet .stat {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 0.25rem;
-  height: 4rem;
-  max-width: 9rem;
-  min-width: 6rem;
-}
-.animecampaign.actor.sheet .stat:nth-child(4n) > .stat-content {
-  border-right: 1px solid black;
-}
-.animecampaign.actor.sheet .stat:last-child > .stat-content {
-  border-right: 1px solid black;
-}
-.animecampaign.actor.sheet .stat-img {
-  position: relative;
-  top: -0.55rem;
-  width: 100%;
-  display: grid;
-  justify-items: center;
-}
-.animecampaign.actor.sheet .stat-img img {
-  position: absolute;
-  height: 4rem;
-  pointer-events: none;
-  opacity: 15%;
-  filter: brightness(0) saturate(100%);
-  border: 0;
-  z-index: 0;
-}
-.animecampaign.actor.sheet .stat-label {
-  text-align: center;
-  height: 0.75rem;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  z-index: 1;
-  font: bold 0.75rem 'Arial';
-  text-transform: uppercase;
-  background-color: transparent;
-}
-.animecampaign.actor.sheet .stat-content {
-  border-left: 0.25px solid black;
-  overflow-x: hidden;
-}
-.animecampaign.actor.sheet .stat-content .stat-single {
-  font-size: 2.25rem;
-}
-.animecampaign.actor.sheet .stat-content > * {
-  height: 2.25rem;
-  width: 100%;
-  font-family: 'Philosopher';
-  text-align: center;
-  line-height: 1;
-  font-weight: bold;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background-color: transparent;
-}
-.animecampaign.actor.sheet .empty-stats {
-  height: 3.85rem;
-  margin: 0.2rem 4rem;
-  border-radius: 0.25rem;
-  border: 2px dashed rgba(0, 0, 0, 0.66);
-  opacity: 50%;
-}
-.animecampaign.actor.sheet .empty-stats * {
-  display: grid;
-  justify-items: center;
-  margin: 0.5rem 0;
-}
-.animecampaign.actor.sheet .empty-stats * > * {
-  margin: 0;
-}
-.animecampaign.actor.sheet .empty-stats p {
-  line-height: 0;
-  font: bold 0.75rem 'Arial';
-  text-transform: uppercase;
-}
-.animecampaign.actor.sheet .create-default {
-  border-right: 1px solid black;
-}
-.animecampaign.actor.sheet .collapse-stats {
-  width: 26rem;
-  margin: 0 auto 0.2rem;
-  line-height: 1.4rem;
-  text-align: center;
-  font-size: 1.6rem;
-}
-.animecampaign.actor.sheet .collapse-stats > div {
-  height: 0.8rem;
-  border-bottom: 1px solid black;
-}
-.animecampaign.actor.sheet .collapse-stats > a {
-  margin: 0 3px;
-}
-.animecampaign.actor.sheet .hidden {
-  display: none;
-}
 .animecampaign.actor.sheet {
   /* -- Styling for kit piece cards -- */
 }
@@ -399,12 +254,112 @@
   outline: pink 1px solid;
   background-color: rgba(255, 191, 0, 0.183);
 }
-.animecampaign.item.sheet.dialog .dialog-content,
-.animecampaign.item.sheet.dialog .dialog-buttons {
-  height: 3rem;
+.animecampaign.sheet .stat-block {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  margin: 0.3rem auto 0;
+  max-width: 26rem;
 }
-.animecampaign.item.sheet.dialog p,
-.animecampaign.item.sheet.dialog input {
-  font-family: Arial;
-  height: min-content;
+.animecampaign.sheet .stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+  height: 4rem;
+  max-width: 9rem;
+  min-width: 6rem;
+}
+.animecampaign.sheet .stat:nth-child(4n) > .stat-content {
+  border-right: 1px solid black;
+}
+.animecampaign.sheet .stat:last-child > .stat-content {
+  border-right: 1px solid black;
+}
+.animecampaign.sheet .stat-img {
+  position: relative;
+  top: -0.55rem;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+}
+.animecampaign.sheet .stat-img img {
+  position: absolute;
+  height: 4rem;
+  pointer-events: none;
+  opacity: 15%;
+  filter: brightness(0) saturate(100%);
+  border: 0;
+  z-index: 0;
+}
+.animecampaign.sheet .stat-label {
+  text-align: center;
+  height: 0.75rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  z-index: 1;
+  font: bold 0.75rem 'Arial';
+  text-transform: uppercase;
+  background-color: transparent;
+}
+.animecampaign.sheet .stat-content {
+  border-left: 0.25px solid black;
+  overflow-x: hidden;
+}
+.animecampaign.sheet .stat-content .stat-single {
+  font-size: 2.25rem;
+}
+.animecampaign.sheet .stat-content > * {
+  height: 2.25rem;
+  width: 100%;
+  font-family: 'Philosopher';
+  text-align: center;
+  line-height: 1;
+  font-weight: bold;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+}
+.animecampaign.sheet .empty-stats {
+  height: 3.85rem;
+  margin: 0.2rem 4rem;
+  border-radius: 0.25rem;
+  border: 2px dashed rgba(0, 0, 0, 0.66);
+  opacity: 50%;
+}
+.animecampaign.sheet .empty-stats * {
+  display: grid;
+  justify-items: center;
+  margin: 0.5rem 0;
+}
+.animecampaign.sheet .empty-stats * > * {
+  margin: 0;
+}
+.animecampaign.sheet .empty-stats p {
+  line-height: 0;
+  font: bold 0.75rem 'Arial';
+  text-transform: uppercase;
+}
+.animecampaign.sheet .create-default {
+  border-right: 1px solid black;
+}
+.animecampaign.sheet .collapse-stats {
+  width: 26rem;
+  margin: 0 auto 0.2rem;
+  line-height: 1.4rem;
+  text-align: center;
+  font-size: 1.6rem;
+}
+.animecampaign.sheet .collapse-stats > div {
+  height: 0.8rem;
+  border-bottom: 1px solid black;
+}
+.animecampaign.sheet .collapse-stats > a {
+  margin: 0 3px;
+}
+.animecampaign.sheet .hidden {
+  display: none;
 }

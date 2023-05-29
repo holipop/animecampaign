@@ -36,9 +36,13 @@ export default class ACItemSheet extends ItemSheet {
 
         this.updateName(_html, 2.5, 60);
 
-        this.createBlankStat(_html);
-
         this.updateBackground(_html, 0.5);
+
+        this.updateStatWidth(_html, .75);
+        this.createBlankStat(_html);
+        this.addDefaultStats(_html);
+        this.collapseStatBlock(_html)
+        new ContextMenu(_html, '.stat', this.contextMenuEntries());
         
         super.activateListeners(_html);
     }

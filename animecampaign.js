@@ -12,7 +12,7 @@ import { KitPieceData } from "./module/ACItem.js";
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
         "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
-        "systems/animecampaign/templates/sheets/partials/character-stats.hbs",
+        "systems/animecampaign/templates/sheets/partials/stats.hbs",
         "systems/animecampaign/templates/sheets/partials/kit.hbs",
         "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs",
         "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
