@@ -1,5 +1,6 @@
 import { Stat } from "../ACStat.js"
 import { defaultStats } from "./DefaultStats.js";
+import { StatConfigMenu } from "./StatConfigMenu.js";
 
 //
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
@@ -182,8 +183,9 @@ export const ACSheetMixin = {
                 name: localize("configure"),
                 icon: `<i class="fas fa-gear"></i>`,
                 callback: event => {
-                    console.log("WIP");
-                    //TODO ADD CONFIG MENU
+                    const index = event.data().index;
+                    const stat = parent.object.system.stats[index];
+                    new StatConfigMenu({}, stat).render(true);
                 }
             },
             {
