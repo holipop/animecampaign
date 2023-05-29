@@ -5,11 +5,15 @@ import { Stat } from "./ACStat.js";
 //
 export const ACEntityMixin = {
 
+    testThis() {
+        console.log(this);
+    },
+
     //  Create new Stat objects inside the stats list.
     //      _stats  (Stat[])     : An array of objects, each parameters for constructing a Stat.
     createStats(_stats = [{}], _index = null) {
         let stats = this.stats;
-        let createdStats = _stats.map(obj => new Stat(obj));
+        let createdStats = _stats.map(obj => new Stat(obj, { parent: this }));
 
         if (_index == null) {
             stats = [...stats, ...createdStats];
@@ -54,8 +58,6 @@ export const ACEntityMixin = {
         if (targetStat == undefined) return console.error(`"${_name}" is not a stat.`);
 
         Object.assign(targetStat, _schema);
-
-        console.log(stats)
 
         this.parent.update({ 'system.stats': [...stats] });
         return console.log(`Updated the "${_name}" stat for ${this.parent.name}`);

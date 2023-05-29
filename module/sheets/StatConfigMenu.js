@@ -1,28 +1,31 @@
-export class StatConfigMenu extends Application {
-    constructor(_options = {}, _stat = {}) {
-        super(_options);
-        this.stat = _stat;
-    }
+export class StatConfigMenu extends FormApplication {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            width: 400,
-            height: 300,
+            width: 300,
+            height: 145,
             template: 'systems/animecampaign/templates/sheets/stats-config.hbs',
-            resizable: true
         });
     }
 
     get title() {
-        return `Stat Configuration: ${this.stat.label}`;
+        return `Stat Configuration: ${this.object.label}`;
     }
 
     async getData() {
         const data = super.getData();
 
         data.config = CONFIG.animecampaign;
-        data.stat = this.stat;
+        data.stat = this.object;
 
         return data;
+    }
+
+    _updateObject(_event, _formData) {
+        const entity = this.object.parent.parent;
+
+        console.log(_formData);
+
+        entity.system.updateStat(this.object.label, _formData);
     }
 }

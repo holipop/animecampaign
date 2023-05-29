@@ -58,6 +58,17 @@
             "newKitPiece": "New Kit Piece",
             "deleteKitPiece": "Delete Kit Piece",
             "editKitPiece": "Edit Kit Piece"
+        },
+        "statDisplay": {
+            "single": "Single",
+            "double": "Double",
+            "phase": "Phase",
+            "state": "State",
+            "advancement": "Advancement"
+        },
+        "statConfigLabels": {
+            "image": "Image",
+            "display": "Display"
         }
     }
 }

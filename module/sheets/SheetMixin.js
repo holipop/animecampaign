@@ -165,8 +165,8 @@ export const ACSheetMixin = {
             {
                 name: localize("addLeft"),
                 icon: `<i class="fas fa-arrow-left"></i>`,
-                callback: event => {
-                    const index = event.data().index;
+                callback: element => {
+                    const index = element.data().index;
                     console.log( parent );
                     parent.object.system.createStats([{}], index);
                 }
@@ -174,25 +174,34 @@ export const ACSheetMixin = {
             {
                 name: localize("addRight"),
                 icon: `<i class="fas fa-arrow-right"></i>`,
-                callback: event => {
-                    const index = event.data().index;
+                callback: element => {
+                    const index = element.data().index;
                     parent.object.system.createStats([{}], index + 1);
                 }
             },
             {
                 name: localize("configure"),
                 icon: `<i class="fas fa-gear"></i>`,
-                callback: event => {
-                    const index = event.data().index;
+                callback: element => {
+                    const statPosition = element.position();
+                    const sheetPosition = element.parents().find('.animecampaign.sheet').position();
+                    const PADDING_PX = 5;
+
+                    const options = {
+                        top: statPosition.top + sheetPosition.top + element.height() + PADDING_PX,
+                        left: statPosition.left + sheetPosition.left - PADDING_PX
+                    }
+
+                    const index = element.data().index;
                     const stat = parent.object.system.stats[index];
-                    new StatConfigMenu({}, stat).render(true);
+                    new StatConfigMenu(stat, options).render(true);
                 }
             },
             {
                 name: localize("delete"),
                 icon: `<i class="fas fa-trash-can-xmark"></i>`,
-                callback: event => {
-                    const index = event.data().index;
+                callback: element => {
+                    const index = element.data().index;
                     parent.object.system.deleteStatIndex(index);
                 }
             },

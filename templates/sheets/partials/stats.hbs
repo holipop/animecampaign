@@ -8,13 +8,34 @@
             <input class="stat-label" type="text" name="system.stats.{{index}}.name" value="{{name}}" placeholder="name">
 
             <section class="stat-content">
+
                 {{#if (eq stat.settings.display "single")}}
                     <input class="stat-single" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
                 {{/if}}
+
+                {{#if (eq stat.settings.display "double")}}
+                    <input class="stat-double value" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
+                    <input class="stat-double max" type="text" name="system.stats.{{index}}.max" value="{{max}}" placeholder="0">
+                {{/if}}
+
+                <!--
+
+                {{#if (eq stat.settings.display "phase")}}
+                {{/if}}
+
+                {{#if (eq stat.settings.display "state")}}
+                {{/if}}
+
+                {{#if (eq stat.settings.display "advancement")}}
+                {{/if}}
+
+                -->
+
             </section>
 
         </div>
     {{/each}}
+
     {{#if (eq system.stats.length 0)}}
         <div class="empty-stats flexrow">
             <a class="create-default">

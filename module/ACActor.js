@@ -35,8 +35,11 @@ export class CharacterData extends foundry.abstract.DataModel {
 
         return inscribedValues.includes(type);
     }
-
-    addDefaultStats() {
+    
+    // !!!
+    // !!! EVERYTHING BELOW IS DEPRECIATED
+    // !!!
+    __addDefaultStats() {
         let defaultStats = [
             {
                 name: "stamina",
@@ -56,9 +59,6 @@ export class CharacterData extends foundry.abstract.DataModel {
         this.createStats(defaultStats);
     }
     
-    // !!!
-    // !!! EVERYTHING BELOW IS DEPRECIATED
-    // !!!
     //  Returns the proficiency class of a character in roman numerals for the Actor Sheet.
     get __profClass() {
         const proficiency = this.stats.proficiency.value;

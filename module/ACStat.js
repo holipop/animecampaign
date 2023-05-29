@@ -33,14 +33,14 @@ export class Stat extends foundry.abstract.DataModel {
                 display: new fields.StringField({
                     initial: "single", 
                     ...defaultSettings
-                }, ['single', 'double', 'enumeration', 'state', 'advancement']),
+                }, ['single', 'double', 'phase', 'state', 'advancement']),
             })
         }
     }
 
     get percent() {
-        let value = Number(this.value)
-        let max = Number(this.max)
+        const value = Number(this.value)
+        const max = Number(this.max)
         if (isNaN(value) || isNaN(max)) {
             return NaN;
         }

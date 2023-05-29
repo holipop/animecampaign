@@ -56,10 +56,20 @@ animecampaign.navigationLabels = {
     upgrades: "animecampaign.navigationLabels.upgrades",
     biography: "animecampaign.navigationLabels.biography",
 }
-
 animecampaign.kitText = {
     addKitPiece: "animecampaign.kitText.addKitPiece",
     newKitPiece: "animecampaign.kitText.newKitPiece",
     deleteKitPiece: "animecampaign.kitText.deleteKitPiece",
     editKitPiece: "animecampaign.kitText.editKitPiece"
+}
+animecampaign.statDisplay = {
+    single: "animecampaign.statDisplay.single",
+    double: "animecampaign.statDisplay.double",
+    phase: "animecampaign.statDisplay.phase",
+    state: "animecampaign.statDisplay.state",
+    advancement: "animecampaign.statDisplay.advancement"
+}
+animecampaign.statConfigLabels = {
+    image: "animecampaign.statConfigLabels.image",
+    display: "animecampaign.statConfigLabels.display"
 }
