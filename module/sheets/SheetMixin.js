@@ -124,7 +124,7 @@ export const ACSheetMixin = {
         _html.find('.create-default').on('click', event => {
             let type = this.object.type.toLowerCase();
 
-            if (type == 'Kit Piece') {
+            if (type == 'kit piece') {
                 type = this.object.system.type.toLowerCase();
             }
 
@@ -136,9 +136,15 @@ export const ACSheetMixin = {
 
     collapseStatBlock(_html) {
         const COLLAPSE_STATS = _html.find('.collapse-button')
+        const STAT_BLOCK = _html.find('.stat-block')
+
+        _html.ready(() => {
+            if (STAT_BLOCK.find('.stat').length == 0) {
+                STAT_BLOCK.addClass('hidden');
+            }
+        });
         
         COLLAPSE_STATS.on('click', event => {
-            const STAT_BLOCK = _html.find('.stat-block')
 
             const isHidden = STAT_BLOCK.hasClass('hidden');
 
