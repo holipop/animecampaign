@@ -7,6 +7,79 @@
 @header-font: 'Philosopher';
 @body-font: 'Arial';
 
+@thin-border: 1px solid black;
+
+.HeaderBackground() {
+    position: absolute;
+    height: calc(6.2rem * (5/8) + 0.80rem);
+    width: 100%;
+    left: 0;
+    top: 30px;
+    
+    border-bottom: @thin-border;
+}
+
+.HeaderBackgroundButton() {
+    height: 1.3rem;
+    width: 1rem;
+    position: absolute;
+    left: 0px;
+    top: 30px;
+}
+
+.HeaderTop() {
+    display: grid;
+    align-self: end;
+    grid-template-columns: 1fr auto;
+}
+
+.HeaderBottom() {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.HeaderImage(@size) {
+    grid-row: span 2;
+    height: @size;
+    width: @size;
+    place-self: end end;
+
+    border: @thin-border;
+}
+
+.HeaderName() {
+    place-self: end start;
+    margin-left: .75rem;
+    margin-bottom: 0.545rem;
+    max-width: 95%;
+    min-width: 2.25rem;
+    overflow-wrap: break-word;
+
+    font-family: @display-font;
+    text-transform: uppercase;
+    line-height: 0.85;
+}
+
+.StatSize(@size) {
+    font-size: @size;
+    height: @size;
+}
+
+.Divider(@width) {
+    width: @width;
+    margin: 0 auto;
+    border-bottom: @thin-border;
+}
+
+.InputSkinning() {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+}
+
 @import "./kit-piece-sheet.less";
 @import "./actor-sheet.less";
 

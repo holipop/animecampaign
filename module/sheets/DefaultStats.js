@@ -3,6 +3,8 @@ export const defaultStats = {
     characterStats: [
         {
             name: 'stamina',
+            value: '15',
+            max: '15',
             img: 'NB-healing.png',
             settings: {
                 display: 'double'
@@ -15,6 +17,8 @@ export const defaultStats = {
         {
             name: 'movement',
             img: 'NB-transport.png',
+            value: '5',
+            max: 'Average',
             settings: {
                 display: 'double'
             }
