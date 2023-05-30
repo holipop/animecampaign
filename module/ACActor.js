@@ -1,4 +1,4 @@
-import { ACEntityMixin } from "./EntityMixin.js";
+import { ACStatMixin } from "./StatMixin.js";
 import { Stat } from "./ACStat.js";
 
 //
@@ -203,4 +203,4 @@ export class CharacterData extends foundry.abstract.DataModel {
 }
 
 //  Composites mixins with this class
-Object.assign(CharacterData.prototype, ACEntityMixin);
+Object.assign(CharacterData.prototype, ACStatMixin);

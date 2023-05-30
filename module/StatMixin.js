@@ -1,13 +1,9 @@
 import { Stat } from "./ACStat.js";
 
 //
-//  A mixin containing shared methods between Character and Kit Piece schema.
+//  A mixin containing shared methods between Character and Kit Piece schemas for Stat usage.
 //
-export const ACEntityMixin = {
-
-    testThis() {
-        console.log(this);
-    },
+export const ACStatMixin = {
 
     //  Create new Stat objects inside the stats list.
     //      _stats  (Stat[])     : An array of objects, each parameters for constructing a Stat.
