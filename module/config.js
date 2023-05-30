@@ -1,6 +1,4 @@
-//
-//  An object containing localization paths.
-//
+//  A config object, currently for containing all our localization paths.
 export const animecampaign = {};
 
 animecampaign.test = "animecampaign.test"

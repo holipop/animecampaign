@@ -1,7 +1,7 @@
-//
-//  Defining the schema for Stats
-//
+//  Defining the schema for Stat objects
 export class Stat extends foundry.abstract.DataModel {
+
+    //*     () : StatSchema
     static defineSchema() {
         const fields = foundry.data.fields;
 
@@ -10,7 +10,6 @@ export class Stat extends foundry.abstract.DataModel {
             nullable: true
         }
 
-        const IMAGE = CONST.FILE_CATEGORIES.IMAGE;
         const imgSettings = {
             categories: ["IMAGE"],
         }
@@ -19,7 +18,7 @@ export class Stat extends foundry.abstract.DataModel {
             name: new fields.StringField(defaultSettings),
             img: new fields.FilePathField({
                 ...imgSettings,
-                initial: 'icons/dice/d20black.svg'
+                ...defaultSettings
             }),
 
             value: new fields.StringField(defaultSettings),
@@ -38,6 +37,7 @@ export class Stat extends foundry.abstract.DataModel {
         }
     }
 
+    //*     () : number
     get percent() {
         const value = Number(this.value)
         const max = Number(this.max)
@@ -47,6 +47,7 @@ export class Stat extends foundry.abstract.DataModel {
         return value / max;
     }
 
+    //*     () : string
     get label() {
         return this.name.toLowerCase();
     }

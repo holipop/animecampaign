@@ -1,18 +1,14 @@
-import { Stat } from "../ACStat.js"
 import { defaultStats } from "./DefaultStats.js";
 import { StatConfigMenu } from "./StatConfigMenu.js";
 
-//
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
-//
 export const ACSheetMixin = {
 
-    //  Shrinks the font size of a div as more content is added.
-    //      _div    (html)      : The desired HTML element for adjusting font
-    //      _rem    (number)    : The default size of the font in rem units
-    //      _max    (integer)   : The max amount of vertical space the div can take up in pixels
-    adjustFontSize(_div, _rem, _max) {
-        const text = $(_div);
+    //  Shrinks the font size of an HTML element given a default size in rem units and
+    //  the max pixel height the element can take up.
+    //*     (_element: html, _rem: number, _max: number) : void
+    adjustFontSize(_element, _rem, _max) {
+        const text = $(_element);
 
         text.css( 'fontSize', `${_rem}rem`);
 
@@ -23,10 +19,9 @@ export const ACSheetMixin = {
         } 
     },
 
-    //  Updates the entity's name and resizes it on the entity sheet.
-    //      _html   (jQuery)    : The entity sheet form as a jQuery object
-    //      _rem    (number)    : The default size of the font in rem units
-    //      _max    (integer)   : The max amount of vertical space the div can take up in pixels
+    //  Updates the entity's name and resizes it on the entity's sheet via 
+    //  adjustFontSize().
+    //*     (_html: jQuery, _rem: number, _max: number) : void
     updateName(_html, _rem, _max) {
         const NAME = _html.find('.name');
         const nameResize = new ResizeObserver(event => {
@@ -41,37 +36,9 @@ export const ACSheetMixin = {
         NAME[0].addEventListener('paste', event => event.preventDefault())
     },
 
-    adjustFontWidth(_div, _scale) {
-        const stat = $(_div)
-        const regex = /[A-Z]|[a-z]/g;
-
-        const width = 1 / _scale;
-        const left = (1 - _scale) / (2 * _scale);
-
-        if (regex.test(stat[0].value)) {
-            stat
-                .css('transform',       `scaleX(${_scale})`)
-                .css('width',           `${width * 100}%`)
-                .css('position',        'relative')
-                .css('left',            `${left * -100}%`)
-                .css('font-weight',     'normal')
-            ;
-        } else {
-            stat
-                .css('transform',       `scaleX(1)`)
-                .css('width',           `100%`)
-                .css('position',        'static')
-                .css('font-weight',     'bold')
-            ;
-        }
-
-        //console.log([stat, regex]);
-    },
-
-    //  Updates the background color of the header of entity sheets.
-    //      _html       (jQuery)    : The entity sheet form as a jQuery object
-    //      _threshold  (number)    : A number between 0 and 1, when the foreground text should change
-    //                                  based on percieved lightness value of the background color
+    //  Updates the background color of the header of entity sheets as well as changing
+    //  the color of the name and class to always contrast with the backgroud.
+    //*     (_html: jQuery, _threshold: number) : void
     updateBackground(_html, _threshold) {
         const BACKGROUND = _html.find('.background');
         const BACKGROUND_INPUT = _html.find('.background-input');
@@ -101,14 +68,15 @@ export const ACSheetMixin = {
         IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
     },
 
-    adjustFontWidth(_div, _scale) {
-        const stat = $(_div)
+    //  Narrows the text of a '.stat-' element if it has an alphabetical value given 
+    //  a number between 0-1.
+    //*     (_element: _html, _scale: number) : void
+    adjustFontWidth(_element, _scale) {
+        const stat = $(_element)
         const regex = /[A-Z]|[a-z]/g;
 
         const width = 1 / _scale;
         const left = (1 - _scale) / (2 * _scale);
-
-        console.log(stat);
 
         if (stat.data('ignore')) return;
 
@@ -128,10 +96,10 @@ export const ACSheetMixin = {
                 .css('font-weight',     'bold')
             ;
         }
-
-        //console.log([stat, regex]);
     },
 
+    //  Updates the font widths of stats via adjustFontWidth() on form events.
+    //*     (_html: jQuery, _scale: number) : void
     updateStatWidth(_html, _scale) {
         const STATS = _html.find('.stat-wrapper');
 
@@ -146,12 +114,17 @@ export const ACSheetMixin = {
         });
     },
 
+    //  Creates a blank Stat object via the Create Blank Stat button.
+    //*     (_html: jQuery) : void
     createBlankStat(_html) {
         _html.find('.create-blank').on('click', event => {
             this.object.system.createStats();
         })
     },
 
+    //  Adds Stat object(s) defined in DefaultStats.js depending on Actor type or
+    //  Kit Piece type.
+    //*     (_html: jQuery) : void
     addDefaultStats(_html) {
         _html.find('.create-default').on('click', event => {
             let type = this.object.type.toLowerCase();
@@ -166,6 +139,8 @@ export const ACSheetMixin = {
         })
     },
 
+    //  Collapses the stats area. Automatically does this if the entity has no stats.
+    //*     (_html: jQuery) : void
     collapseStatBlock(_html) {
         const COLLAPSE_STATS = _html.find('.collapse-button')
         const STAT_BLOCK = _html.find('.stat-block')
@@ -188,6 +163,8 @@ export const ACSheetMixin = {
         })
     },
 
+    //  Defining the ContextMenu options for when a Stat is right-clicked.
+    //*     () : ContextMenuEntry[]
     contextMenuEntries() {
         const parent = this;
         const localize = _key => game.i18n.localize(CONFIG.animecampaign.statButtons[`${_key}`]);
@@ -198,7 +175,6 @@ export const ACSheetMixin = {
                 icon: `<i class="fas fa-arrow-left"></i>`,
                 callback: element => {
                     const index = element.data().index;
-                    console.log( parent );
                     parent.object.system.createStats([{}], index);
                 }
             },
@@ -237,18 +213,5 @@ export const ACSheetMixin = {
                 }
             },
         ]
-    },
-
-    // !!! DEPRECIATED
-    //  Creates a blank stat.
-    //      _html   (jQuery)    : The entity sheet form as a jQuery object
-    __createBlankStat(_html) {
-        let stats = this.object.system.stats;
-
-        _html.find('.stat-create').on('click', event => {
-            let blankStat = new Stat()
-
-            this.object.update({ 'system.stats': [...stats, blankStat] })
-        })
-    },
+    }
 }

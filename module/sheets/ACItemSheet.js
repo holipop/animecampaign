@@ -1,11 +1,10 @@
 import { ACSheetMixin } from "./SheetMixin.js";
 
-//
 //  Defining the schema for Item Sheets.
-//
 export default class ACItemSheet extends ItemSheet {
     
     //  Sets the default options for the ItemSheet.
+    //*     () : ApplicationOptions
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             width: 450,
@@ -15,6 +14,7 @@ export default class ACItemSheet extends ItemSheet {
     }
 
     //  Retrieves the Handlebars filepath to load depending on the type of Item.
+    //*     () : string
     get template() {
         if (this.item.type == 'Kit Piece') {
             return `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`;
@@ -22,6 +22,7 @@ export default class ACItemSheet extends ItemSheet {
     }
 
     //  Returns an object for Handlebars usage.
+    //*     () : object
     async getData() {
         const data = super.getData()
 
@@ -32,6 +33,7 @@ export default class ACItemSheet extends ItemSheet {
     }
 
     //  This is where we put any custom event listeners for our sheets.
+    //*     (_html: jQuery) : void
     activateListeners(_html) {
 
         this.updateName(_html, 2.5, 60);

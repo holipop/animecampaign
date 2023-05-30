@@ -1,11 +1,10 @@
 import { ACSheetMixin } from "./SheetMixin.js";
 
-//
 //  Defining the schema for Actor Sheets.
-//
 export default class ACActorSheet extends ActorSheet {
 
     //  Sets the default options for the ActorSheet.
+    //*     () : ApplicationOptions
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             width: 520,
@@ -15,11 +14,13 @@ export default class ACActorSheet extends ActorSheet {
     }
 
     //  Retrieves the Handlebars filepath to load depending on the type of Actor.
+    //*     () : string
     get template() {
         return `systems/animecampaign/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
     //  Returns an object for Handlebars usage.
+    //*     () : object
     async getData() {
         const data = super.getData()
         
@@ -37,6 +38,7 @@ export default class ACActorSheet extends ActorSheet {
     }
 
     //  This is where we put any custom event listeners for our sheets.
+    //*     (_html: jQuery) : void
     activateListeners(_html) {
         this.updateName(_html, 3, 60);
         
@@ -58,6 +60,8 @@ export default class ACActorSheet extends ActorSheet {
         super.activateListeners(_html);
     }
 
+    //  Manually updates the Character's class since it's a contenteditable div
+    //*     (_html: jQuery) : void
     updateClass(_html) {
         const CLASS = _html.find('.class');
         CLASS.on('blur', e => this.actor.update({ 'system.class':  CLASS.text() }));
@@ -65,6 +69,8 @@ export default class ACActorSheet extends ActorSheet {
         CLASS[0].addEventListener('paste', event => event.preventDefault());
     }
 
+    //  Creating a Tabs object for sheet navigation.
+    //*     (_html: jQuery) : void
     createNavigation(_html) {
         const tabs = new Tabs({
             navSelector: ".tabs", 
@@ -75,20 +81,27 @@ export default class ACActorSheet extends ActorSheet {
         tabs.bind(_html[0]);
     }
 
+    //  Creates a new Kit Piece within the Character's owned Items collection.
+    //*     (_html: jQuery) : void
     createKitPiece(_html) {
         _html.find(".kit-piece-create").on("click", event => {
             const type = event.currentTarget.dataset.type
+
+            console.log(type);
+
             let itemData = [{
-                name: game.i18n.localize(CONFIG.animecampaign.kitText.newkitpiece),
+                name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                 type: "Kit Piece",
             }]
 
-            if (type != undefined) itemData.system = { type: type };
+            if (type != undefined) itemData[0].system = { type: type };
     
             this.actor.createEmbeddedDocuments('Item', itemData);
         })
     }
 
+    //  Deletes a Kit Piece from the Character's owned Items.
+    //*     (_html: jQuery) : void
     deleteKitPiece(_html) {
         _html.find(".kit-piece-delete").on("click", e => {
             let itemId = e.currentTarget.dataset.id
@@ -96,6 +109,8 @@ export default class ACActorSheet extends ActorSheet {
         })
     }
 
+    //  Renders an owned Kit Piece.
+    //*     (_html: jQuery) : void
     editKitPiece(_html) {
         _html.find(".kit-piece-edit").on("click", e=> {
             let itemId = e.currentTarget.dataset.id

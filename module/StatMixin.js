@@ -1,12 +1,11 @@
 import { Stat } from "./ACStat.js";
 
-//
 //  A mixin containing shared methods between Character and Kit Piece schemas for Stat usage.
-//
 export const ACStatMixin = {
 
-    //  Create new Stat objects inside the stats list.
-    //      _stats  (Stat[])     : An array of objects, each parameters for constructing a Stat.
+    //  Create new Stat objects inside the stats list via a list of objects defining Stats.
+    //  Optionally at a desired index.
+    //*     (_stat?: StatSchema[], _index?: number) : void
     createStats(_stats = [{}], _index = null) {
         let stats = this.stats;
         let createdStats = _stats.map(obj => new Stat(obj, { parent: this }));
@@ -21,8 +20,8 @@ export const ACStatMixin = {
         return console.log(`Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
     },
 
-    //  Deletes existing Stat objects from the stats list.
-    //      _stats  (string[])  : An array of strings, each the names of Stats.
+    //  Deletes existing Stat objects from the stats list given a list of Stat names.
+    //*     (_stats: string[]) : void
     deleteStats(_stats) {
         let stats = this.stats;
 
@@ -38,6 +37,8 @@ export const ACStatMixin = {
         return console.log(`Deleted stats "${_stats.toString()}" for ${this.parent.name}`)
     },
 
+    //  Delete a Stat object at the desired index.
+    //*     (_index: number) : void
     deleteStatIndex(_index) {
         let stats = this.stats;
 
@@ -47,6 +48,8 @@ export const ACStatMixin = {
         return console.log(`Deleted stat at index ${_index} for ${this.parent.name}`)
     },
 
+    //  Updates a Stat object's schema
+    //*     (_name: string, _schema: StatSchema) : void
     updateStat(_name, _schema) {
         const stats = this.stats;
         let targetStat = stats.find(stat => stat.label == _name);
@@ -59,53 +62,10 @@ export const ACStatMixin = {
         return console.log(`Updated the "${_name}" stat for ${this.parent.name}`);
     },
 
+    //  Deletes all Stat objects within the stats list.
+    //*     () : void
     clearStats() {
         this.parent.update({ 'system.stats': [] });
         return console.log(`Deleted all stats for ${this.parent.name}`)
-    },
-
-    // !!!
-    // !!! EVERYTHING ELSE BELOW HERE IS DEPRECIATED.
-    // !!! 
-    //  Creates a stat within an entity's 'system.stats' object.
-    //      _key    (string)    : The name of the stat
-    //      _value  (?any)      : The value assigned
-    __createStat(_key, _value = "") {
-        const stats = Object.keys(this.parent.system.stats);
-        if (stats.includes(_key)) {
-            ui.notifications.error(`Anime Campaign | ${this.parent.name} already has a "${_key}" stat.`);
-            return;
-        }
-
-        ui.notifications.info(`Anime Campaign | Created the "${_key}" stat on ${this.parent.name}.`);
-        this.parent.update({ [`system.stats.${_key}`]: _value });
-    },
-
-    //  Deletes a stat within an entity's 'system.stats' object.
-    //      _key    (string)    : The name of the stat
-    __deleteStat(_key) {
-        const stats = Object.keys(this.parent.system.stats);
-        if (!stats.includes(_key)) {
-            ui.notifications.error(`Anime Campaign | ${this.parent.name} doesn't have a "${_key}" stat.`);
-            return;
-        }
-
-        ui.notifications.info(`Anime Campaign | Deleted the "${_key}" stat on ${this.parent.name}.`);
-        this.parent.update({ [`system.stats.-=${_key}`]: null })
-    },
-
-    //  Deletes all stats within an entity's 'system.stats' object.
-    //  !!! If done on a Character, their Character Sheet cannot be opened due to it attempting to fetch default stats.
-    //  !!! Be sure to re-add them via the 'addDefaultStats()' method.
-    __deleteAllStats() {
-        const stats = Object.keys(this.parent.system.stats);
-
-        if (stats.length == 0) {
-            ui.notifications.error(`Anime Campaign | ${this.parent.name} doesn't have any stats.`);
-            return;
-        }
-
-        ui.notifications.info(`Anime Campaign | Deleted all stats on ${this.parent.name}.`);
-        stats.forEach(element => this.parent.update({ [`system.stats.-=${element}`]: null }));
     }
 }

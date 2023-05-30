@@ -1,5 +1,7 @@
+//  Defining the application for Stat configuration.
 export class StatConfigMenu extends FormApplication {
-
+    
+    //*     () : ApplicationOptions
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             width: 300,
@@ -8,10 +10,13 @@ export class StatConfigMenu extends FormApplication {
         });
     }
 
+    //*     () : string
     get title() {
         return `Stat Configuration: ${this.object.label}`;
     }
 
+    //  Defining the data object to use within the Handlebars template.
+    //*     () : object
     async getData() {
         const data = super.getData();
 
@@ -21,6 +26,8 @@ export class StatConfigMenu extends FormApplication {
         return data;
     }
 
+    //  Passing submitted data into the Stat object to be updated.
+    //*     (_event: jQuery, _formData: object) : void
     _updateObject(_event, _formData) {
         const entity = this.object.parent.parent;
 

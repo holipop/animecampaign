@@ -1,13 +1,23 @@
+//  An object containing default StatSchema for Characters and Kit Pieces.
 export const defaultStats = {
     characterStats: [
         {
-            name: 'stamina'
+            name: 'stamina',
+            img: 'NB-healing.png',
+            settings: {
+                display: 'double'
+            }
         },
         {
-            name: 'proficiency'
+            name: 'proficiency',
+            img: 'NB-proficiency.png'
         },
         {
-            name: 'movement'
+            name: 'movement',
+            img: 'NB-transport.png',
+            settings: {
+                display: 'double'
+            }
         }
     ],
 
