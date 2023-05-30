@@ -101,16 +101,43 @@ export const ACSheetMixin = {
         IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
     },
 
+    adjustFontWidth(_div, _scale) {
+        const stat = $(_div)
+        const regex = /[A-Z]|[a-z]/g;
+
+        const width = 1 / _scale;
+        const left = (1 - _scale) / (2 * _scale);
+
+        if (regex.test(stat[0].value)) {
+            stat
+                .css('transform',       `scaleX(${_scale})`)
+                .css('width',           `${width * 100}%`)
+                .css('position',        'relative')
+                .css('left',            `${left * -100}%`)
+                .css('font-weight',     'normal')
+            ;
+        } else {
+            stat
+                .css('transform',       `scaleX(1)`)
+                .css('width',           `100%`)
+                .css('position',        'static')
+                .css('font-weight',     'bold')
+            ;
+        }
+
+        //console.log([stat, regex]);
+    },
+
     updateStatWidth(_html, _scale) {
-        const STAT_CONTENT = _html.find('.stat-content');
+        const STATS = _html.find('.stat-wrapper');
 
         _html.ready(() => {
-            for (let i = 0; i < STAT_CONTENT.children().length; i++) {
-                this.adjustFontWidth(STAT_CONTENT.children()[i], _scale)
+            for (let i = 0; i < STATS.children().length; i++) {
+                this.adjustFontWidth(STATS.children()[i], _scale)
             }
         })
 
-        STAT_CONTENT.children().on('keydown', event => {
+        STATS.children().on('keydown', event => {
             this.adjustFontWidth(event.currentTarget, _scale);
         });
     },

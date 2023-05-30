@@ -59,23 +59,33 @@
     }
     .stat-content {
         border-left: .25px solid black;
-        overflow-x: hidden;
+        max-height: 2.25rem;
+        overflow-y: visible;
 
         .stat-single {
+            height: 2.25rem;
             font-size: 2.25rem;
         }
-        > * {
-            height: 2.25rem;
-            width: 100%;
-    
-            font-family: 'Philosopher';
-            text-align: center;
-            line-height: 1;
-            font-weight: bold;
-            border: 0;
-            border-radius: 0;
-            box-shadow: none;
-            background-color: transparent;
+        .stat-double.value {
+            background-color: pink;
+        }
+        .stat-double.max {
+            background-color: red;
+        }
+        > .stat-wrapper {
+            overflow-x: hidden;
+            > * {
+                width: 100%;
+        
+                font-family: 'Philosopher';
+                text-align: center; 
+                font-weight: bold;
+                padding: 0;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                background-color: transparent;
+            }
         }
     }
     .empty-stats {
