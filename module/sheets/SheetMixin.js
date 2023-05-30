@@ -108,6 +108,10 @@ export const ACSheetMixin = {
         const width = 1 / _scale;
         const left = (1 - _scale) / (2 * _scale);
 
+        console.log(stat);
+
+        if (stat.data('ignore')) return;
+
         if (regex.test(stat[0].value)) {
             stat
                 .css('transform',       `scaleX(${_scale})`)

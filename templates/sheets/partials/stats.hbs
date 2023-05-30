@@ -16,8 +16,9 @@
                     {{/if}}
 
                     {{#if (eq stat.settings.display "double")}}
-                        <input class="stat-double value" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
-                        <input class="stat-double max" type="text" name="system.stats.{{index}}.max" value="{{max}}" placeholder="0">
+                        <input class="stat-double value" data-ignore="true" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
+                        <div class="divider" data-ignore="true"></div>
+                        <input class="stat-double max" data-ignore="true" type="text" name="system.stats.{{index}}.max" value="{{max}}" placeholder="0">
                     {{/if}}
 
                     <!--
@@ -36,11 +37,12 @@
                 </div>
 
             </section>
-        </div>
 
-        <div class="hidden stat-schema">
-            <input type="text" name="system.stats.{{index}}.min" value="{{min}}">
-            <input type="text" name="system.stats.{{index}}.settings.display" value="{{settings.display}}">
+            <div class="hidden stat-schema">
+                <input type="text" name="system.stats.{{index}}.min" value="{{min}}">
+                <input type="text" name="system.stats.{{index}}.settings.display" value="{{settings.display}}">
+            </div>
+            
         </div>
     {{/each}}
 

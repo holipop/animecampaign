@@ -308,21 +308,24 @@
   border-left: 0.25px solid black;
   max-height: 2.25rem;
   overflow-y: visible;
+  z-index: 2;
 }
 .animecampaign.sheet .stat-content .stat-single {
   height: 2.25rem;
   font-size: 2.25rem;
 }
 .animecampaign.sheet .stat-content .stat-double.value {
-  background-color: pink;
+  font-size: 1.75rem;
+  height: 1.75rem;
 }
 .animecampaign.sheet .stat-content .stat-double.max {
-  background-color: red;
+  height: 1.1rem;
+  font-size: 1.1rem;
 }
-.animecampaign.sheet .stat-content > .stat-wrapper {
+.animecampaign.sheet .stat-content .stat-wrapper {
   overflow-x: hidden;
 }
-.animecampaign.sheet .stat-content > .stat-wrapper > * {
+.animecampaign.sheet .stat-content .stat-wrapper > * {
   width: 100%;
   font-family: 'Philosopher';
   text-align: center;
@@ -332,6 +335,11 @@
   border-radius: 0;
   box-shadow: none;
   background-color: transparent;
+}
+.animecampaign.sheet .stat-content .stat-wrapper .divider {
+  width: 60%;
+  margin: 0 auto;
+  border-bottom: 1px solid black;
 }
 .animecampaign.sheet .empty-stats {
   height: 3.85rem;
