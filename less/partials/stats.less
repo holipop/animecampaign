@@ -1,0 +1,153 @@
+// out: false
+
+.animecampaign.sheet{
+    .stat-block {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        margin: .3rem auto 0;
+        max-width: 26rem;
+    }
+    .stat {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: .25rem;
+        height: 4rem;
+        max-width: 9rem;
+        min-width: 6rem;
+    }
+    .stat:nth-child(4n) {
+        > .stat-content {
+            border-right: 1px solid black;
+        }
+    }
+    .stat:last-child {
+        > .stat-content {
+            border-right: 1px solid black;
+        }
+    }
+    .stat-img {
+        position: relative;
+        top: -.55rem;
+        width: 100%;
+        display: grid;
+        justify-items: center;
+        img > {
+            position: absolute;
+            height: 4rem;
+            pointer-events: none;
+
+            opacity: 15%;
+            filter: brightness(0) saturate(100%);
+            border: 0;
+            z-index: 0;
+        }
+    }
+    .stat-label {
+        text-align: center;
+        height: .75rem;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        z-index: 1;
+
+        font: bold .75rem 'Arial';
+        text-transform: uppercase;
+        background-color: transparent;
+    }
+    .stat-content {
+        border-left: .25px solid black;
+        max-height: 2.25rem;
+        overflow-y: visible;
+        z-index: 2;
+
+        .stat-single {
+            height: 2.25rem;
+            font-size: 2.25rem;
+        }
+        .stat-double.value {
+            font-size: 1.75rem;
+            height: 1.75rem;
+        }
+        .stat-double.max {
+            height: 1.1rem;
+            font-size: 1.1rem;
+        }
+        
+        .stat-wrapper {
+            overflow-x: hidden;
+            > * {
+                width: 100%;
+        
+                font-family: 'Philosopher';
+                text-align: center; 
+                font-weight: bold;
+                padding: 0;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            .divider {
+                width: 60%;
+                margin: 0 auto;
+                border-bottom: 1px solid black;
+            }
+        }
+    }
+    .empty-stats {
+        height: 3.85rem;
+        margin: .2rem 4rem;
+        border-radius: .25rem;
+        border: 2px dashed rgba(0, 0, 0, 0.66);
+
+        opacity: 50%;
+        * > {
+            display: grid;
+            justify-items: center;
+            margin: .5rem 0;
+            > * {
+                margin: 0;
+            }
+        }
+        p > {
+            line-height: 0;
+
+            font: bold .75rem 'Arial';
+            text-transform: uppercase;
+            
+        }
+    }
+    .create-default {
+        border-right: 1px solid black;
+    }
+    .collapse-stats {
+        width: 26rem;
+        margin: 0 auto .2rem;
+        line-height: 1.4rem;
+        text-align: center;
+
+        font-size: 1.6rem;
+        > div {
+            height: .8rem;
+            border-bottom: 1px solid black;
+        }
+        > a {
+            margin: 0 3px;
+        }
+    }
+    .hidden {
+        display: none;
+    }
+    #context-menu {
+        min-width: 7rem;
+        > ol {
+            font: .75rem 'Philosopher';
+            > li {
+                line-height: 1.5rem;
+            }
+        }
+    }
+}

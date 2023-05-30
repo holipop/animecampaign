@@ -1,1 +1,4 @@
 _TEST/
+.vs/
+package-lock.json
+package.json

@@ -1,0 +1,66 @@
+<div class="stat-block flexcol">
+    {{#each system.stats as |stat index|}}
+        <div class="stat" data-index={{index}}>
+            <div class="stat-img">
+                <img src="{{stat.img}}" data-edit="system.stats.{{index}}.img">
+            </div>
+
+            <input class="stat-label" type="text" name="system.stats.{{index}}.name" value="{{name}}" placeholder="name">
+
+            <section class="stat-content">
+
+                <div class="stat-wrapper">
+
+                    {{#if (eq stat.settings.display "single")}}
+                        <input class="stat-single" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
+                    {{/if}}
+
+                    {{#if (eq stat.settings.display "double")}}
+                        <input class="stat-double value" data-ignore="true" type="text" name="system.stats.{{index}}.value" value="{{value}}" placeholder="0">
+                        <div class="divider" data-ignore="true"></div>
+                        <input class="stat-double max" data-ignore="true" type="text" name="system.stats.{{index}}.max" value="{{max}}" placeholder="0">
+                    {{/if}}
+
+                    <!--
+
+                    {{#if (eq stat.settings.display "phase")}}
+                    {{/if}}
+
+                    {{#if (eq stat.settings.display "state")}}
+                    {{/if}}
+
+                    {{#if (eq stat.settings.display "advancement")}}
+                    {{/if}}
+
+                    -->
+                    
+                </div>
+
+            </section>
+
+            <div class="hidden stat-schema">
+                <input type="text" name="system.stats.{{index}}.min" value="{{min}}">
+                <input type="text" name="system.stats.{{index}}.settings.display" value="{{settings.display}}">
+            </div>
+            
+        </div>
+    {{/each}}
+
+    {{#if (eq system.stats.length 0)}}
+        <div class="empty-stats flexrow">
+            <a class="create-default">
+                <p>{{ localize config.statButtons.addDefault }}</p>
+                <i class="fas fa-clone"></i>
+            </a>
+            <a class="create-blank">
+                <p>{{ localize config.statButtons.createBlank }}</p>
+                <i class="fas fa-square-plus"></i>
+            </a>
+        </div>
+    {{/if}}
+</div>
+<div class="collapse-stats flexrow">
+    <div></div>
+    <a class="collapse-button flex0">&#9876;</a>
+    <div></div>
+</div>

@@ -6,26 +6,22 @@ import { CharacterData } from "./module/ACActor.js";
 import ACItemSheet from "./module/sheets/ACItemSheet.js";
 import { KitPieceData } from "./module/ACItem.js";
 
-//
 //  Preloads the filepaths for the Handlebars partials.
-//
+//*     () : Promise<Function[]>
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
         "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
-        "systems/animecampaign/templates/sheets/partials/character-stats.hbs",
+        "systems/animecampaign/templates/sheets/partials/stats.hbs",
         "systems/animecampaign/templates/sheets/partials/kit.hbs",
         "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs",
         "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
         "systems/animecampaign/templates/sheets/partials/biography.hbs"
     ];
 
-    //? A Foundry helper function. (Not really sure what it does but it works)
     return loadTemplates(templatePaths);
 }
 
-//
 //  All of our code that runs on initialization.
-//
 Hooks.once("init", () => {
     console.log("Anime Campaign | Initializing Anime Campaign System");
 

@@ -1,12 +1,10 @@
-import { ACEntityMixin } from "./mixins.js";
+import { ACStatMixin } from "./StatMixin.js";
+import { Stat } from "./ACStat.js";
 
-//
 //  Defining the schema for Kit Pieces.
-//
 export class KitPieceData extends foundry.abstract.DataModel {
 
-    //  The object being returned is everything a Kit Piece will have on creation.
-    //? Foundry uses the DataField object to allow for strongly-typed data and strictness.
+    //*     () : KitPieceSchema
     static defineSchema() {
         const fields = foundry.data.fields;
 
@@ -23,12 +21,12 @@ export class KitPieceData extends foundry.abstract.DataModel {
             }),
             type: new fields.StringField({
                 ...defaultSettings,
-                initial: "weapon"
+                initial: "weapon",
             }),
-            stats: new fields.ObjectField()
+            stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) )
         }
     }
 }
 
 //  Composites mixins with this class
-Object.assign(KitPieceData.prototype, ACEntityMixin);
+Object.assign(KitPieceData.prototype, ACStatMixin );
