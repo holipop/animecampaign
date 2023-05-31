@@ -1,4 +1,4 @@
-import { defaultStats } from "./DefaultStats.js";
+import { defaultStats } from "../DefaultStats.js";
 import { StatConfigMenu } from "./StatConfigMenu.js";
 
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.

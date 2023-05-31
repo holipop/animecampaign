@@ -1,4 +1,5 @@
 import { ACStatMixin } from "./StatMixin.js";
+import { defaultStats } from "./DefaultStats.js";
 import { Stat } from "./ACStat.js";
 
 //  Defining the schema for Characters.
@@ -19,8 +20,18 @@ export class CharacterData extends foundry.abstract.DataModel {
                 required: true,
                 initial: "#CCCCCC"
             }),
-            stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) )
+            stats: new fields.ArrayField( 
+                new fields.EmbeddedDataField( Stat ),
+                {
+                    initial: this.defaultStats
+                }
+            )
         }
+    }
+
+    //*     () : Stat[]
+    static get defaultStats() {
+        return defaultStats.characterStats.map(obj => new Stat(obj));
     }
 
     //*     () : boolean
