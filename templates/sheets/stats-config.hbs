@@ -13,13 +13,15 @@
         <div class="form-fields">
             <select name="settings.display">
                 {{#select stat.settings.display}}
-                    {{#each config.statDisplay as |name key|}}
+                    {{#each stat.validDisplays as |name key|}}
                         <option value="{{key}}">{{localize name}}</option>
                     {{/each}}
                 {{/select}}
             </select>
         </div>
     </div>
+
+    {{ log stat.validDisplays }}
 
     <button type="submit">Save Changes</button>
 

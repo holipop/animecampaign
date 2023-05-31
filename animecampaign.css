@@ -1,3 +1,15 @@
+.animecampaign ::-webkit-scrollbar {
+  width: 3px;
+}
+.animecampaign ::-webkit-scrollbar-thumb {
+  border: 0;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.animecampaign ::-webkit-scrollbar-track {
+  box-shadow: none;
+  border-radius: 0;
+}
 .animecampaign.item.sheet {
   min-width: 450px;
   min-height: 350px;

@@ -80,6 +80,25 @@
     background-color: transparent;
 }
 
+.ScrollbarSkinning() {
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border: 0;
+        border-radius: 0;
+        background: rgba(0, 0, 0, 0.5)
+    }
+    ::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+    }
+}
+
+.animecampaign {
+    .ScrollbarSkinning();
+}
+
 @import "./kit-piece-sheet.less";
 @import "./actor-sheet.less";
 

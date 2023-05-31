@@ -51,4 +51,16 @@ export class Stat extends foundry.abstract.DataModel {
     get label() {
         return this.name.toLowerCase();
     }
+
+    //*     () : Object
+    get validDisplays() {
+        let displays = { ...CONFIG.animecampaign.statDisplay };
+        const type = this.parent.parent.type;
+
+        if (type == 'Kit Piece') {
+            delete displays.advancement;
+        }
+
+        return displays;
+    }
 }
