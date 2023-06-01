@@ -1,7 +1,8 @@
-import { Stat } from "./ACStat.js";
+import { Stat } from "./Stat.js";
+import { AC } from "./config.js";
 
 //  A mixin containing shared methods between Character and Kit Piece schemas for Stat usage.
-export const ACStatMixin = {
+export const StatMixin = {
 
     //  Create new Stat objects inside the stats list via a list of objects defining Stats.
     //  Optionally at a desired index.
@@ -17,7 +18,7 @@ export const ACStatMixin = {
         }
 
         this.parent.update({ 'system.stats': stats });
-        return console.log(`Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
+        return console.log(`${AC} | Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
     },
 
     //  Deletes existing Stat objects from the stats list given a list of Stat names.
@@ -34,7 +35,7 @@ export const ACStatMixin = {
         }
 
         this.parent.update({ 'system.stats': stats });
-        return console.log(`Deleted stats "${_stats.toString()}" for ${this.parent.name}`)
+        return console.log(`${AC} | Deleted stats "${_stats.toString()}" for ${this.parent.name}`)
     },
 
     //  Delete a Stat object at the desired index.
@@ -45,7 +46,7 @@ export const ACStatMixin = {
         stats.splice(_index, 1);
 
         this.parent.update({ 'system.stats': stats });
-        return console.log(`Deleted stat at index ${_index} for ${this.parent.name}`)
+        return console.log(`${AC} | Deleted stat at index ${_index} for ${this.parent.name}`)
     },
 
     //  Updates a Stat object's schema
@@ -59,13 +60,13 @@ export const ACStatMixin = {
         Object.assign(targetStat, _schema);
 
         this.parent.update({ 'system.stats': [...stats] });
-        return console.log(`Updated the "${_name}" stat for ${this.parent.name}`);
+        return console.log(`${AC} | Updated the "${_name}" stat for ${this.parent.name}`);
     },
 
     //  Deletes all Stat objects within the stats list.
     //*     () : void
     clearStats() {
         this.parent.update({ 'system.stats': [] });
-        return console.log(`Deleted all stats for ${this.parent.name}`)
+        return console.log(`${AC} | Deleted all stats for ${this.parent.name}`)
     }
 }

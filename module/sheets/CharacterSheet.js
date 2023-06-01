@@ -1,7 +1,7 @@
-import { ACSheetMixin } from "./SheetMixin.js";
+import { SheetMixin } from "./SheetMixin.js";
 
 //  Defining the schema for Actor Sheets.
-export default class ACActorSheet extends ActorSheet {
+export default class CharacterSheet extends ActorSheet {
 
     //  Sets the default options for the ActorSheet.
     //*     () : ApplicationOptions
@@ -87,8 +87,6 @@ export default class ACActorSheet extends ActorSheet {
         _html.find(".kit-piece-create").on("click", event => {
             const type = event.currentTarget.dataset.type
 
-            console.log(type);
-
             let itemData = [{
                 name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                 type: "Kit Piece",
@@ -121,4 +119,4 @@ export default class ACActorSheet extends ActorSheet {
 }
 
 //  Composites mixins with this class
-Object.assign(ACActorSheet.prototype, ACSheetMixin);
+Object.assign(CharacterSheet.prototype, SheetMixin);

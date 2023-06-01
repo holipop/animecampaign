@@ -1,10 +1,10 @@
 import { animecampaign } from "./module/config.js";
 
-import ACActorSheet from "./module/sheets/ACActorSheet.js";
-import { CharacterData } from "./module/ACActor.js";
+import CharacterSheet from "./module/sheets/CharacterSheet.js";
+import { CharacterData } from "./module/CharacterData.js";
 
-import ACItemSheet from "./module/sheets/ACItemSheet.js";
-import { KitPieceData } from "./module/ACItem.js";
+import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
+import { KitPieceData } from "./module/KitPieceData.js";
 
 //  Preloads the filepaths for the Handlebars partials.
 //*     () : Promise<Function[]>
@@ -34,9 +34,9 @@ Hooks.once("init", () => {
 
     // Unregistering the default entity sheets & registering our own.
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("animecampaign", ACActorSheet, { makeDefault: true });
+    Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", ACItemSheet, { makeDefault: true });
+    Items.registerSheet("animecampaign", KitPieceSheet, { makeDefault: true });
 
     preloadHandlebarsTemplates();
 })

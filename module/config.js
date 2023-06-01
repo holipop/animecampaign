@@ -1,5 +1,10 @@
 //  A config object, currently for containing all our localization paths.
+
 export const animecampaign = {};
+
+animecampaign.title = "Anime Campaign"
+
+export const AC = animecampaign.title;
 
 animecampaign.test = "animecampaign.test"
 animecampaign.build = {

@@ -1,27 +1,15 @@
 // out: false
 
-
 .animecampaign.item.sheet {
     min-width: 450px;
     min-height: 350px;
+
     .background {
-        position: absolute;
-        height: calc(6.2rem * (5/8) + 0.80rem);
-        width: 100%;
-        left: 0;
-        top: 30px;
-        
-        border-bottom: 1px solid black;
+        .HeaderBackground();
     }
     .background-input {
-        height: 1.3rem;
-        width: 1rem;
-        position: absolute;
-        left: 0px;
-        top: 30px;
-        border: 0;
-        padding: 0;
-        margin: 0;
+        .HeaderBackgroundButton();
+        .InputSkinning();
     }
     .sheet-header {
         height: calc(6.2rem * (5/8) + 0.80rem);
@@ -38,47 +26,26 @@
     }
     .header-top {
         height: calc(6.2rem * (5/8) + 0.4rem);
-        display: grid;
-        align-self: end;
-        grid-template-columns: 1fr auto;
+        .HeaderTop();
     }
     .header-bottom {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        .HeaderBottom();
     }
     .img {
-        grid-row: span 2;
-        height: 4.4rem;
-        width: 4.4rem;
+        .HeaderImage(4.4rem);
         margin-left: 1rem;
         margin-top: 1rem;
-        place-self: end end;
-
-        border: 1px solid black;
     }
     .name {
-        place-self: end start;
-        margin-left: .75rem;
-        margin-bottom: 0.545rem;
-        max-width: 95%;
-        min-width: 2.25rem;
-        overflow-wrap: break-word;
-
-        font-family: @display-font;
-        text-transform: uppercase;
-        line-height: 0.85;
+        .HeaderName();
     }
     .type {
+        .InputSkinning();
         margin-left: .25rem;
         height: 1rem;
-        padding: 0;
-        border: none;
-        border-radius: 0;
-        border-bottom: 1px solid black;
-        background-color: transparent;
+        border-bottom: @thin-border;
 
-        font: italic bold 0.75rem 'Arial';
+        font: italic bold 0.75rem @body-font;
     }
 
     .sheet-body {

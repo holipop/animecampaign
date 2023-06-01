@@ -19,12 +19,12 @@
     }
     .stat:nth-child(4n) {
         > .stat-content {
-            border-right: 1px solid black;
+            border-right: @thin-border;
         }
     }
     .stat:last-child {
         > .stat-content {
-            border-right: 1px solid black;
+            border-right: @thin-border;
         }
     }
     .stat-img {
@@ -45,17 +45,14 @@
         }
     }
     .stat-label {
+        .InputSkinning();
         text-align: center;
         height: .75rem;
         width: 100%;
-        padding: 0;
-        border: 0;
-        border-radius: 0;
         z-index: 1;
 
-        font: bold .75rem 'Arial';
+        font: bold .75rem @body-font;
         text-transform: uppercase;
-        background-color: transparent;
     }
     .stat-content {
         border-left: .25px solid black;
@@ -64,36 +61,27 @@
         z-index: 2;
 
         .stat-single {
-            height: 2.25rem;
-            font-size: 2.25rem;
+            .StatSize(2.25rem);
         }
         .stat-double.value {
-            font-size: 1.75rem;
-            height: 1.75rem;
+            .StatSize(1.75rem);
         }
         .stat-double.max {
-            height: 1.1rem;
-            font-size: 1.1rem;
+            .StatSize(1.1rem);
         }
         
         .stat-wrapper {
             overflow-x: hidden;
             > * {
+                .InputSkinning();
                 width: 100%;
         
-                font-family: 'Philosopher';
+                font-family: @header-font;
                 text-align: center; 
                 font-weight: bold;
-                padding: 0;
-                border: 0;
-                border-radius: 0;
-                box-shadow: none;
-                background-color: transparent;
             }
             .divider {
-                width: 60%;
-                margin: 0 auto;
-                border-bottom: 1px solid black;
+                .Divider(60%)
             }
         }
     }
@@ -115,13 +103,13 @@
         p > {
             line-height: 0;
 
-            font: bold .75rem 'Arial';
+            font: bold .75rem @body-font;
             text-transform: uppercase;
             
         }
     }
     .create-default {
-        border-right: 1px solid black;
+        border-right: @thin-border;
     }
     .collapse-stats {
         width: 26rem;
@@ -132,7 +120,7 @@
         font-size: 1.6rem;
         > div {
             height: .8rem;
-            border-bottom: 1px solid black;
+            border-bottom: @thin-border;
         }
         > a {
             margin: 0 3px;
@@ -144,7 +132,7 @@
     #context-menu {
         min-width: 7rem;
         > ol {
-            font: .75rem 'Philosopher';
+            font: .75rem @header-font;
             > li {
                 line-height: 1.5rem;
             }

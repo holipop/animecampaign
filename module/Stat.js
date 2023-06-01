@@ -51,4 +51,18 @@ export class Stat extends foundry.abstract.DataModel {
     get label() {
         return this.name.toLowerCase();
     }
+
+    //  Returns the valid displays of a stat. Kit Pieces cannot have advancements as they cannot contain
+    //  other Items.
+    //*     () : Object
+    get validDisplays() {
+        let displays = { ...CONFIG.animecampaign.statDisplay };
+        const type = this.parent.parent.type;
+
+        if (type == 'Kit Piece') {
+            delete displays.advancement;
+        }
+
+        return displays;
+    }
 }
