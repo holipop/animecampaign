@@ -1,5 +1,5 @@
-import { ACStatMixin } from "./StatMixin.js";
-import { Stat } from "./ACStat.js";
+import { StatMixin } from "./StatMixin.js";
+import { Stat } from "./Stat.js";
 
 //  Defining the schema for Kit Pieces.
 export class KitPieceData extends foundry.abstract.DataModel {
@@ -29,4 +29,4 @@ export class KitPieceData extends foundry.abstract.DataModel {
 }
 
 //  Composites mixins with this class
-Object.assign(KitPieceData.prototype, ACStatMixin );
+Object.assign(KitPieceData.prototype, StatMixin );

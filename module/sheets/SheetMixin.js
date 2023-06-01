@@ -1,8 +1,9 @@
 import { defaultStats } from "../DefaultStats.js";
 import { StatConfigMenu } from "./StatConfigMenu.js";
+import { AC } from "../config.js";
 
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
-export const ACSheetMixin = {
+export const SheetMixin = {
 
     //  Shrinks the font size of an HTML element given a default size in rem units and
     //  the max pixel height the element can take up.
@@ -15,7 +16,7 @@ export const ACSheetMixin = {
         while (text.height() > _max) {
             _rem *= 0.85;
             text.css( 'fontSize', `${_rem}rem`);
-            console.log('Anime Campaign | Resizing Text');
+            console.log(`${AC} | Resizing Text`);
         } 
     },
 

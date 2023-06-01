@@ -1,7 +1,7 @@
-import { ACSheetMixin } from "./SheetMixin.js";
+import { SheetMixin } from "./SheetMixin.js";
 
 //  Defining the schema for Item Sheets.
-export default class ACItemSheet extends ItemSheet {
+export default class KitPieceSheet extends ItemSheet {
     
     //  Sets the default options for the ItemSheet.
     //*     () : ApplicationOptions
@@ -51,4 +51,4 @@ export default class ACItemSheet extends ItemSheet {
 }
 
 //  Composites mixins with this class
-Object.assign(ACItemSheet.prototype, ACSheetMixin);
+Object.assign(KitPieceSheet.prototype, SheetMixin);

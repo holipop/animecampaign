@@ -1,6 +1,7 @@
-import { ACStatMixin } from "./StatMixin.js";
+import { StatMixin } from "./StatMixin.js";
 import { defaultStats } from "./DefaultStats.js";
-import { Stat } from "./ACStat.js";
+import { Stat } from "./Stat.js";
+import { AC } from "./config.js";
 
 //  Defining the schema for Characters.
 export class CharacterData extends foundry.abstract.DataModel {
@@ -48,7 +49,8 @@ export class CharacterData extends foundry.abstract.DataModel {
     get proficiencyClass() {
         const proficiency = this.stats.find((element) => element.label == 'proficiency');
 
-        if (!proficiency) return console.log(`${this.parent.name} doesn't have a Proficiency stat.`);
+        if (!proficiency) return console.log(`${AC} | ${this.parent.name} doesn't have a Proficiency stat.`);
+        if (this.type != 'epithet') return console.log(`${AC} | ${this.parent.name} has no epithet.`);
 
         if (proficiency.value < 60) {
             return 'I';
@@ -61,4 +63,4 @@ export class CharacterData extends foundry.abstract.DataModel {
 }
 
 //  Composites mixins with this class
-Object.assign(CharacterData.prototype, ACStatMixin);
+Object.assign(CharacterData.prototype, StatMixin);
