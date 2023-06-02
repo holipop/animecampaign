@@ -1,5 +1,6 @@
 {
     "animecampaign": {
+        "title": "Anime Campaign",
         "test": "Testing Testing One Two Three!",
         "build": {
             "svelte": "Svelte",

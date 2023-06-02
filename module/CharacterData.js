@@ -49,8 +49,8 @@ export class CharacterData extends foundry.abstract.DataModel {
     get proficiencyClass() {
         const proficiency = this.stats.find((element) => element.label == 'proficiency');
 
-        if (!proficiency) return console.log(`${AC} | ${this.parent.name} doesn't have a Proficiency stat.`);
-        if (this.type != 'epithet') return console.log(`${AC} | ${this.parent.name} has no epithet.`);
+        if (!proficiency) return AC.log(`${this.parent.name} doesn't have a Proficiency stat.`);
+        if (this.type != 'epithet') return AC.log(`${this.parent.name} has no epithet.`);
 
         if (proficiency.value < 60) {
             return 'I';

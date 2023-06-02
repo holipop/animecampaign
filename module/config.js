@@ -2,9 +2,17 @@
 
 export const animecampaign = {};
 
-animecampaign.title = "Anime Campaign"
+export class AC {
+    static log(_string) {
+        console.log(`%cAnime Campaign | ${_string}`, 'color: orange');
+    }
 
-export const AC = animecampaign.title;
+    static error(_string) {
+        console.error(`%cAnime Campaign | ${_string}`, 'color: orange');
+    }
+}
+
+animecampaign.title = "animecampaign.title"
 
 animecampaign.test = "animecampaign.test"
 animecampaign.build = {

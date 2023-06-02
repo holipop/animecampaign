@@ -16,7 +16,7 @@ export const SheetMixin = {
         while (text.height() > _max) {
             _rem *= 0.85;
             text.css( 'fontSize', `${_rem}rem`);
-            console.log(`${AC} | Resizing Text`);
+            AC.log(`Resizing Text`);
         } 
     },
 

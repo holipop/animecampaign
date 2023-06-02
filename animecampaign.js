@@ -1,4 +1,4 @@
-import { animecampaign } from "./module/config.js";
+import { animecampaign, AC } from "./module/config.js";
 
 import CharacterSheet from "./module/sheets/CharacterSheet.js";
 import { CharacterData } from "./module/CharacterData.js";
@@ -23,8 +23,8 @@ async function preloadHandlebarsTemplates() {
 
 //  All of our code that runs on initialization.
 Hooks.once("init", () => {
-    console.log("Anime Campaign | Initializing Anime Campaign System");
-
+    AC.log("Initializing Anime Campaign System");
+    
     //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
 
