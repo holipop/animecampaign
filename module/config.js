@@ -1,16 +1,19 @@
-//  A config object, currently for containing all our localization paths.
-
-export const animecampaign = {};
-
+//  A helper class for utility functions and brevity.
 export class AC {
+
+    //*     (string) : void
     static log(_string) {
         console.log(`%cAnime Campaign | ${_string}`, 'color: orange');
     }
 
+    //*     (string) : void
     static error(_string) {
         console.error(`%cAnime Campaign | ${_string}`, 'color: orange');
     }
 }
+
+//  A config object, currently for containing all our localization paths.
+export const animecampaign = {};
 
 animecampaign.title = "animecampaign.title"
 
@@ -33,7 +36,8 @@ animecampaign.kitTypes = {
     weapon: "animecampaign.kitTypes.weapon",
     talent: "animecampaign.kitTypes.talent",
     passive: "animecampaign.kitTypes.passive",
-    ability: "animecampaign.kitTypes.ability"
+    ability: "animecampaign.kitTypes.ability",
+    custom: "animecampaign.kitTypes.custom"
 }
 animecampaign.kitTypesPlural = {
     weapons: "animecampaign.kitTypesPlural.weapons",

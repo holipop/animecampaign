@@ -5,18 +5,18 @@ export const defaultStats = {
             name: 'stamina',
             value: '15',
             max: '15',
-            img: 'NB-healing.png',
+            img: 'health-normal.png',
             settings: {
                 display: 'double'
             }
         },
         {
             name: 'proficiency',
-            img: 'NB-proficiency.png'
+            img: 'polar-star.png'
         },
         {
             name: 'movement',
-            img: 'NB-transport.png',
+            img: 'walking-boot.png',
             value: '5',
             max: 'Average',
             settings: {

@@ -20,7 +20,8 @@
             "weapon": "Weapon",
             "talent": "Talent",
             "passive": "Passive",
-            "ability": "Ability"
+            "ability": "Ability",
+            "custom": "Custom"
         },
         "kitTypesPlural": {
             "weapons": "Weapons",
