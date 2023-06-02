@@ -18,8 +18,9 @@
                         <option value="{{key}}">{{localize name}}</option>
                     {{/each}}
                 {{/select}}
+                
                 {{#if (eq system.type 'custom')}}
-                    <input class="custom-type" name="system.customType" value="{{system.customType}}" placeholder="Custom Type" type="text">
+                    <input class="custom-type" name="system.customType" value="{{system.customType}}" placeholder="custom type" type="text">
                 {{/if}}
             </select>
         </section>

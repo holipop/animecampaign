@@ -1,3 +1,4 @@
+import { AC } from "../config.js";
 import { SheetMixin } from "./SheetMixin.js";
 
 //  Defining the schema for Actor Sheets.
@@ -26,13 +27,10 @@ export default class CharacterSheet extends ActorSheet {
         
         data.config = CONFIG.animecampaign; //  Localization paths
         data.system = data.actor.system;    //  Actor schema that we defined
-        data.items = data.actor.items       //  Actor's owned items
-        //data.advancement = data.actor.system.stats.proficiency.advancement  // Proficiency
-        
-        data.weapons = data.items.filter(element => element.system.type == "weapon");
-        data.talents = data.items.filter(element => element.system.type == "talent");
-        data.passives = data.items.filter(element => element.system.type == "passive");
-        data.abilities = data.items.filter(element => element.system.type == "ability");
+        data.items = data.actor.items;      //  Actor's owned items
+        data.kitPieces = this.ownedKitTypes;
+
+        console.log(data);
 
         return data;
     }
@@ -60,7 +58,7 @@ export default class CharacterSheet extends ActorSheet {
         super.activateListeners(_html);
     }
 
-    //  Manually updates the Character's class since it's a contenteditable div
+    //  Manually updates the Character's class since it's a contenteditable div.
     //*     (_html: jQuery) : void
     updateClass(_html) {
         const CLASS = _html.find('.class');
@@ -85,14 +83,10 @@ export default class CharacterSheet extends ActorSheet {
     //*     (_html: jQuery) : void
     createKitPiece(_html) {
         _html.find(".kit-piece-create").on("click", event => {
-            const type = event.currentTarget.dataset.type
-
             let itemData = [{
                 name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                 type: "Kit Piece",
             }]
-
-            if (type != undefined) itemData[0].system = { type: type };
     
             this.actor.createEmbeddedDocuments('Item', itemData);
         })
@@ -115,6 +109,39 @@ export default class CharacterSheet extends ActorSheet {
             let item = this.actor.getEmbeddedDocument("Item", itemId);
             item.sheet.render(true);
         })
+    }
+
+    //*     () : Object
+    get ownedKitTypes() {
+        const data = super.getData();
+        const items = data.actor.items.values();
+        let [typeSet, sortedSet] = [new Set(), new Set()];
+        let types = {}
+
+        for (const entry of items) {
+            entry.system.type == 'custom' 
+                ? typeSet.add(entry.system.customType)
+                : typeSet.add(entry.system.type);
+        }
+
+        for (const type of ['weapon', 'talent', 'passive', 'ability']) {
+            if (typeSet.has(type)) {
+                sortedSet.add(type);
+                typeSet.delete(type);
+            }
+        }
+
+        typeSet.forEach(entry => sortedSet.add(entry));
+        
+        for (const entry of sortedSet) {
+            types[entry] = data.actor.items.filter(element => {
+                return element.system.type == 'custom'
+                    ? element.system.customType == entry
+                    : element.system.type == entry
+            });
+        }
+
+        return types;
     }
 }
 

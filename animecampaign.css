@@ -101,6 +101,7 @@
   height: 1rem;
   line-height: 0;
   font: italic bold 0.75rem 'Arial';
+  text-transform: uppercase;
 }
 .animecampaign.item.sheet .sheet-body {
   display: grid;

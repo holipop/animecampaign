@@ -1,29 +1,51 @@
-<div class="kit-block">
+<!-- div class="kit-block">
     <h2>{{localize config.kitTypesPlural.weapons}} <a class="kit-piece-create" data-type="weapon" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
     <div>
-        {{#each weapons as |item id|}}
+        {{#each weapon as |item id|}}
             {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
         {{/each}}
     </div>
     <hr>
     <h2>{{localize config.kitTypesPlural.talents}} <a class="kit-piece-create" data-type="talent" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
     <div>
-        {{#each talents as |item id|}}
+        {{#each talent as |item id|}}
         {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
         {{/each}}
     </div>
     <hr>
     <h2>{{localize config.kitTypesPlural.passives}} <a class="kit-piece-create" data-type="passive" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
     <div>
-        {{#each passives as |item id|}}
+        {{#each passive as |item id|}}
         {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
         {{/each}}
     </div>
     <hr>
     <h2>{{localize config.kitTypesPlural.abilities}} <a class="kit-piece-create" data-type="ability" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
     <div>
-        {{#each abilities as |item id|}}
+        {{#each ability as |item id|}}
         {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
         {{/each}}
     </div>
-</div>
+    <hr>
+    <h2>Custom <a class="kit-piece-create" data-type="custom" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
+    <div>
+        {{#each custom as |item id|}}
+        {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
+        {{/each}}
+    </div>
+</div -->
+
+YOURE IN THE KIT DUDE WOOOOOO
+<section class="kit-block">
+    <a class="kit-piece-create" title="{{localize config.kitText.addkitpiece}}">
+        <i class="fas fa-plus"></i>
+    </a>
+    {{#each kitPieces as |array key|}}
+        <h2>{{ key }}</h2>
+        <div>
+            {{#each array as |item id|}}
+                {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
+            {{/each}}
+        </div>
+    {{/each}}
+</section>
