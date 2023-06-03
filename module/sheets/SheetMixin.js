@@ -74,7 +74,7 @@ export const SheetMixin = {
     //*     (_element: _html, _scale: number) : void
     adjustFontWidth(_element, _scale) {
         const stat = $(_element)
-        const regex = /[A-Z]|[a-z]/g;
+        const regex = /([A-Z]|[a-z]){4}/g;
 
         const width = 1 / _scale;
         const left = (1 - _scale) / (2 * _scale);
