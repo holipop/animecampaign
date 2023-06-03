@@ -1,2 +1,84 @@
 // out: false
 
+@card-height: 1.5rem;
+
+.animecampaign.actor.sheet {
+    .kit-block {
+        width: 97.5%;
+        margin: 0 auto;
+    }
+    h2 {
+        font-family: @header-font;
+        font-weight: bold;
+        text-transform: capitalize;
+        margin-left: .75rem;
+        margin-right: 2.34rem;
+    }
+    .kit-piece- {
+        &card {
+            height: @card-height;
+            margin-bottom: 0.17rem;
+
+            background: linear-gradient(to right, currentColor, transparent 25%);
+        }
+        &img {
+            .SquareSize(@card-height);
+            .InputSkinning();
+            pointer-events: none;
+
+            border: 0;
+        }
+        &name {
+            font: bold 1.25rem @header-font;
+            height: @card-height;
+            margin: .075rem .2rem 0;
+            
+            color: black;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        &stat {
+            height: @card-height - 0.1rem;
+            min-width: 2rem;
+            display: flex;
+            flex: 0 1 auto;
+            margin: auto .15rem;
+            border-radius: 3px;
+
+            background-color: currentColor;
+        }
+        &stat-img {
+            .SquareSize(1.15rem);
+            .InputSkinning();
+            margin: auto .1rem;
+            pointer-events: none;
+
+            filter: brightness(0) saturate(100%) invert(100%);
+        }
+        &stat-value {
+            margin: .125rem .4rem 0 .2rem;
+
+            transform: scaleY(90%);
+            font: bold italic 1rem @body-font;
+            color: white;
+        }
+        &stat-divider {
+            .Divider( calc(100% - 2.5rem) );
+            margin: 0;
+            margin-bottom: 0.17rem;
+        }
+
+        &edit {
+            margin: auto 0.2rem;
+            
+            color: black;
+        }
+        &delete {
+            margin: auto 0.2rem;
+            
+            color: black;
+        }
+    }
+}

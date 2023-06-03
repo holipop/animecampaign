@@ -1,12 +1,21 @@
-<div class="kit-piece-card">
+<!-- div class="kit-piece-card">
     <div class="kit-piece-block">
         <img class="img" src="{{img}}" data-edit="img"> 
         <span class="kit-piece-title">{{name}}</span>
+
         <a class="kit-piece-delete" title="{{localize config.kitText.addkitpiece}}" data-id={{_id}}>
             <i class="fas fa-trash-can-xmark"></i>
         </a>  
         <a class="kit-piece-edit" title="{{localize config.kitText.editkitpiece}}" data-id={{_id}}>
             <i class="fas fa-feather-pointed"></i>
         </a>  
+
+        {{#each system.stats as |stat index|}}
+            <div class="kit-piece-stat" style="background-color: {{ system.color }};">
+                {{ stat.name }}: {{ stat.value }}
+            </div>
+        {{/each}}
+        
     </div>
-</div>
+</div -->
+

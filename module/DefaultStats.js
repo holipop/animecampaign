@@ -27,10 +27,12 @@ export const defaultStats = {
 
     weaponStats: [
         {
-            name: 'damage'
+            name: 'damage',
+            img: 'whirlpool-shuriken.png'
         },
         {
-            name: 'range'
+            name: 'range',
+            img: 'overhead.png'
         }
     ],
 

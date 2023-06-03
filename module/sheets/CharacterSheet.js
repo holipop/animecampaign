@@ -1,4 +1,3 @@
-import { AC } from "../config.js";
 import { SheetMixin } from "./SheetMixin.js";
 
 //  Defining the schema for Actor Sheets.

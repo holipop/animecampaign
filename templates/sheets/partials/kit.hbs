@@ -35,17 +35,36 @@
     </div>
 </div -->
 
-YOURE IN THE KIT DUDE WOOOOOO
 <section class="kit-block">
     <a class="kit-piece-create" title="{{localize config.kitText.addkitpiece}}">
         <i class="fas fa-plus"></i>
     </a>
     {{#each kitPieces as |array key|}}
         <h2>{{ key }}</h2>
-        <div>
-            {{#each array as |item id|}}
-                {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
-            {{/each}}
-        </div>
+
+        {{#each array as |item id|}}
+            <div class="kit-piece-card flexrow" style="color:{{item.system.color}};">
+                <img class="kit-piece-img flex0" src="{{item.img}}" data-edit="img">
+                <span class="kit-piece-name">{{item.name}}</span>
+
+                {{#each item.system.stats as |stat index|}}
+                    <div class="kit-piece-stat flex0" style="color:{{item.system.color}};">
+                        <img class="kit-piece-stat-img" src="{{stat.img}}" data-edit="img">
+                        <span class="kit-piece-stat-value">
+                            {{stat.value}}
+                        </span>
+                    </div>
+                {{/each}}
+                
+                <a class="kit-piece-edit flex0" title="{{localize config.kitText.editkitpiece}}" data-id={{_id}}>
+                    <i class="fas fa-feather-pointed"></i>
+                </a>
+                <a class="kit-piece-delete flex0" title="{{localize config.kitText.addkitpiece}}" data-id={{_id}}>
+                    <i class="fas fa-trash-can-xmark"></i>
+                </a>
+            </div>
+            <div class="kit-piece-stat-divider"></div>
+        {{/each}}
+
     {{/each}}
 </section>
