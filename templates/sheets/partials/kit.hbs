@@ -12,7 +12,7 @@
 
                 {{#each item.system.stats as |stat index|}}
                     <div class="kit-piece-stat flex0" {{match item.system style="background-color"}}>
-                        <img class="kit-piece-stat-img" src="{{stat.img}}" data-edit="img">
+                        <img class="kit-piece-stat-img" {{contrast item.system img='true'}} src="{{stat.img}}" data-edit="img">
                         <span class="kit-piece-stat-value" {{contrast item.system}}>
                             {{stat.value}}
                         </span>

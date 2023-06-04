@@ -17,11 +17,11 @@ export class AC {
         return {
 
             //  Matches the color of this element with the entity's color.
-            //*     (system: { color: string }, style?: string, attr?: boolean, alpha?: number) : SafeString
+            //*     (system: { color: string }, style?: string, attr?: string, alpha?: string) : SafeString
             match: function({ color }, _options) {
-                let { style='color', attr=true, alpha=1 } = _options.hash;
+                let { style='color', attr='true', alpha='1' } = _options.hash;
 
-                attr = attr == true;
+                attr = attr == 'true';
                 alpha = Number(alpha);
 
                 if (!color) return;
@@ -38,12 +38,13 @@ export class AC {
 
             //  Changes the color of this element to either black or white to contrast with 
             //  the entity's color.
-            //*     (system: { color: string }, style?: string, attr?: boolean, threshold?: number, 
-            //*     alpha?: number) : SafeString
+            //*     (system: { color: string }, style?: string, attr?: string, threshold?: string, 
+            //*     alpha?: string) : SafeString
             contrast: function({ color }, _options) {
-                let { style='color', attr=true, threshold=.5, alpha=1 } = _options.hash;
-                
-                attr = attr == true;
+                let { style='color', img='false', attr='true', threshold='.5', alpha='1' } = _options.hash;
+
+                img = img == 'true';
+                attr = attr == 'true';
                 threshold = Number(threshold);
                 alpha = Number(alpha);
 
@@ -56,6 +57,16 @@ export class AC {
                 rgb[2] *= 0.0722;
 
                 const luma = rgb.reduce((n, m) => n + m) / 255;
+                
+                if (img) {
+                    const invert = luma <= threshold
+                        ? 'invert(100%)'
+                        : '';
+                    const injection = attr
+                        ? `style="filter: brightness(0) saturate(100%) ${invert};"`
+                        : `brightness(0) saturate(100%) ${invert};`;
+                    return new Handlebars.SafeString(injection);
+                }
 
                 const contrast = luma <= threshold 
                     ? `rgb(255, 255, 255, ${alpha})` 
