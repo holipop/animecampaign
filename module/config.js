@@ -10,6 +10,39 @@ export class AC {
     static error(_string) {
         console.error(`%cAnime Campaign | ${_string}`, 'color: orange');
     }
+
+    //  Returns an object of custom Handlebars helpers.
+    //*     () : Object
+    static get hbsHelpers() {
+        return {
+
+            //  Matches the color of this element with the entity's color.
+            //*     (_obj: DataModel, bg: boolean) : string
+            match: function(_obj, bg = false) {
+                const color = Object.hasOwn(_obj, 'color') ? _obj.color : '#cccccc';
+                return `style="${bg ? 'background-' : ''}color: ${color}"`;
+            },
+
+            //  Changes the color of this element to constrast with the entity's color brightness.
+            //*     (_obj: DataModel) : string
+            contrast: function(_obj, _threshold) {
+                const color = Object.hasOwn(_obj, 'color') ? _obj.color : '#cccccc';
+                let rgb = [color.slice(1, 3), color.slice(3, 5), color.slice(5)]
+                    .map(element => Number(`0x${element}`));
+                rgb[0] *= 0.2126;
+                rgb[1] *= 0.7152;
+                rgb[2] *= 0.0722;
+
+                const luma = rgb.reduce((n, m) => n + m) / 255;
+
+                if (luma <= .5) {
+                    return `style="color: white"`;
+                } else {
+                    return `style="color: black"`;
+                }
+            }
+        }
+    }
 }
 
 //  A config object, currently for containing all our localization paths.

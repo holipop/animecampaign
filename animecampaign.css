@@ -137,6 +137,7 @@
   left: 0;
   top: 30px;
   border-bottom: 1px solid black;
+  background-color: var(--ac-color);
 }
 .animecampaign.actor.sheet .background-input {
   height: 1.3rem;

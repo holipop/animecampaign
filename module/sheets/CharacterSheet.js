@@ -29,6 +29,11 @@ export default class CharacterSheet extends ActorSheet {
         data.items = data.actor.items;      //  Actor's owned items
         data.kitPieces = this.ownedKitTypes;
 
+        data.test = {
+            pogger: 'flogger',
+            foo: "bar"
+        };
+
         console.log(data);
 
         return data;
@@ -37,10 +42,12 @@ export default class CharacterSheet extends ActorSheet {
     //  This is where we put any custom event listeners for our sheets.
     //*     (_html: jQuery) : void
     activateListeners(_html) {
+        this.cssVariables(_html);
+
         this.updateName(_html, 3, 60);
         
         this.updateClass(_html);
-        this.updateBackground(_html, 0.5);
+        //this.updateBackground(_html, 0.5);
         this.createNavigation(_html);
 
         this.createKitPiece(_html);
