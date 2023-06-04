@@ -5,12 +5,6 @@ import { AC } from "../config.js";
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
 export const SheetMixin = {
 
-    cssVariables(_html) {
-        const input_color = _html.find('.background-input').val();
-        $(':root').css('--input-color', input_color);
-        console.log(input_color);
-    },
-
     //  Shrinks the font size of an HTML element given a default size in rem units and
     //  the max pixel height the element can take up.
     //*     (_element: html, _rem: number, _max: number) : void

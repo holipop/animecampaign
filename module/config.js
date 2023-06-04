@@ -1,12 +1,12 @@
 //  A helper class for utility functions and brevity.
 export class AC {
 
-    //*     (string) : void
+    //*     (string | number | boolean) : void
     static log(_string) {
         console.log(`%cAnime Campaign | ${_string}`, 'color: orange');
     }
 
-    //*     (string) : void
+    //*     (string | number | boolean) : void
     static error(_string) {
         console.error(`%cAnime Campaign | ${_string}`, 'color: orange');
     }
@@ -17,16 +17,38 @@ export class AC {
         return {
 
             //  Matches the color of this element with the entity's color.
-            //*     (_obj: DataModel, bg: boolean) : string
-            match: function(_obj, bg) {
-                const color = Object.hasOwn(_obj, 'color') ? _obj.color : '#cccccc';
-                return new Handlebars.SafeString(`style="${bg ? 'background-' : ''}color: ${color}"`);
+            //*     (system: { color: string }, style?: string, attr?: boolean, alpha?: number) : SafeString
+            match: function({ color }, _options) {
+                let { style='color', attr=true, alpha=1 } = _options.hash;
+
+                attr = attr == true;
+                alpha = Number(alpha);
+
+                if (!color) return;
+
+                let [red, green, blue] = [color.slice(1, 3), color.slice(3, 5), color.slice(5)]
+                    .map(element => Number(`0x${element}`));
+
+                const injection = attr
+                    ? `style="${style}: rgb(${red}, ${green}, ${blue}, ${alpha});"` 
+                    : `${style}: rgb(${red}, ${green}, ${blue}, ${alpha});`;
+
+                return new Handlebars.SafeString(injection);
             },
 
-            //  Changes the color of this element to constrast with the entity's color brightness.
-            //*     (_obj: DataModel) : string
-            contrast: function(_obj) {
-                const color = Object.hasOwn(_obj, 'color') ? _obj.color : '#cccccc';
+            //  Changes the color of this element to either black or white to contrast with 
+            //  the entity's color.
+            //*     (system: { color: string }, style?: string, attr?: boolean, threshold?: number, 
+            //*     alpha?: number) : SafeString
+            contrast: function({ color }, _options) {
+                let { style='color', attr=true, threshold=.5, alpha=1 } = _options.hash;
+                
+                attr = attr == true;
+                threshold = Number(threshold);
+                alpha = Number(alpha);
+
+                if (!color) return;
+                
                 let rgb = [color.slice(1, 3), color.slice(3, 5), color.slice(5)]
                     .map(element => Number(`0x${element}`));
                 rgb[0] *= 0.2126;
@@ -35,11 +57,15 @@ export class AC {
 
                 const luma = rgb.reduce((n, m) => n + m) / 255;
 
-                if (luma <= .5) {
-                    return new Handlebars.SafeString(`style="color: white"`);
-                } else {
-                    return new Handlebars.SafeString(`style="color: black"`);
-                }
+                const contrast = luma <= threshold 
+                    ? `rgb(255, 255, 255, ${alpha})` 
+                    : `rgb(0, 0, 0, ${alpha})`;
+
+                const injection = attr 
+                    ? `style="${style}: ${contrast};"` 
+                    : `${style}: ${contrast};` ;
+
+                return new Handlebars.SafeString(injection);
             }
         }
     }

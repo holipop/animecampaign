@@ -42,7 +42,6 @@ export default class CharacterSheet extends ActorSheet {
     //  This is where we put any custom event listeners for our sheets.
     //*     (_html: jQuery) : void
     activateListeners(_html) {
-        this.cssVariables(_html);
 
         this.updateName(_html, 3, 60);
         
