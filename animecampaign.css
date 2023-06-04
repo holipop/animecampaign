@@ -305,6 +305,7 @@
   margin: auto 0.1rem;
   pointer-events: none;
   filter: brightness(0) saturate(100%) invert(100%);
+  color: red;
 }
 .animecampaign.actor.sheet .kit-piece-stat-value {
   margin: 0.125rem 0.4rem 0 0.2rem;

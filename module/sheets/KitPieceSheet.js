@@ -38,7 +38,6 @@ export default class KitPieceSheet extends ItemSheet {
 
         this.updateName(_html, 2.5, 60);
 
-        this.updateBackground(_html, 0.5);
         this.customTypeToLowercase(_html);
 
         this.updateStatWidth(_html, .75);

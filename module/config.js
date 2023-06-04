@@ -18,14 +18,14 @@ export class AC {
 
             //  Matches the color of this element with the entity's color.
             //*     (_obj: DataModel, bg: boolean) : string
-            match: function(_obj, bg = false) {
+            match: function(_obj, bg) {
                 const color = Object.hasOwn(_obj, 'color') ? _obj.color : '#cccccc';
-                return `style="${bg ? 'background-' : ''}color: ${color}"`;
+                return new Handlebars.SafeString(`style="${bg ? 'background-' : ''}color: ${color}"`);
             },
 
             //  Changes the color of this element to constrast with the entity's color brightness.
             //*     (_obj: DataModel) : string
-            contrast: function(_obj, _threshold) {
+            contrast: function(_obj) {
                 const color = Object.hasOwn(_obj, 'color') ? _obj.color : '#cccccc';
                 let rgb = [color.slice(1, 3), color.slice(3, 5), color.slice(5)]
                     .map(element => Number(`0x${element}`));
@@ -36,9 +36,9 @@ export class AC {
                 const luma = rgb.reduce((n, m) => n + m) / 255;
 
                 if (luma <= .5) {
-                    return `style="color: white"`;
+                    return new Handlebars.SafeString(`style="color: white"`);
                 } else {
-                    return `style="color: black"`;
+                    return new Handlebars.SafeString(`style="color: black"`);
                 }
             }
         }

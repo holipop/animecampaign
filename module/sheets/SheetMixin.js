@@ -43,38 +43,6 @@ export const SheetMixin = {
         NAME[0].addEventListener('paste', event => event.preventDefault())
     },
 
-    //  Updates the background color of the header of entity sheets as well as changing
-    //  the color of the name and class to always contrast with the backgroud.
-    //*     (_html: jQuery, _threshold: number) : void
-    __updateBackground(_html, _threshold) {
-        const BACKGROUND = _html.find('.background');
-        const BACKGROUND_INPUT = _html.find('.background-input');
-        const NAME = _html.find('.name');
-        const CLASS = _html.find('.class');
-        const IMG = _html.find('.img');
-
-        const inputColor = BACKGROUND_INPUT[0].defaultValue
-
-        let rgb = [inputColor.slice(1, 3), inputColor.slice(3, 5), inputColor.slice(5)]
-            .map(element => Number(`0x${element}`));
-        rgb[0] *= 0.2126;
-        rgb[1] *= 0.7152;
-        rgb[2] *= 0.0722;
-
-        const perceivedLightness = rgb.reduce((n, m) => n + m) / 255;
-
-        if (perceivedLightness <= _threshold) {
-            NAME.css( 'color', "#FFFFFF" );
-            CLASS.css( 'color', "#FFFFFF" );
-        } else {
-            NAME.css( 'color', "#000000" );
-            CLASS.css( 'color', "#000000" );
-        }
-
-        BACKGROUND.css( "background-color", BACKGROUND_INPUT[0].defaultValue );
-        IMG.css( 'background-color', BACKGROUND_INPUT[0].defaultValue );
-    },
-
     //  Narrows the text of a '.stat-' element if it has an alphabetical value given 
     //  a number between 0-1.
     //*     (_element: _html, _scale: number) : void

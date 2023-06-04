@@ -47,7 +47,6 @@ export default class CharacterSheet extends ActorSheet {
         this.updateName(_html, 3, 60);
         
         this.updateClass(_html);
-        //this.updateBackground(_html, 0.5);
         this.createNavigation(_html);
 
         this.createKitPiece(_html);

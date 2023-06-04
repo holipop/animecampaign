@@ -43,14 +43,14 @@
         <h2>{{ key }}</h2>
 
         {{#each array as |item id|}}
-            <div class="kit-piece-card flexrow" style="color:{{item.system.color}};">
+            <div class="kit-piece-card flexrow" {{match item.system false}}>
                 <img class="kit-piece-img flex0" src="{{item.img}}" data-edit="img">
                 <span class="kit-piece-name">{{item.name}}</span>
 
                 {{#each item.system.stats as |stat index|}}
-                    <div class="kit-piece-stat flex0" style="color:{{item.system.color}};">
+                    <div class="kit-piece-stat flex0" {{match item.system false}}>
                         <img class="kit-piece-stat-img" src="{{stat.img}}" data-edit="img">
-                        <span class="kit-piece-stat-value">
+                        <span class="kit-piece-stat-value" {{contrast item.system}}>
                             {{stat.value}}
                         </span>
                     </div>
