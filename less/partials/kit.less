@@ -1,30 +1,36 @@
 // main: ../animecampaign.less
 
-@card-height: 1.5rem;
+@card-height: 1.75rem;
 
 .animecampaign.actor.sheet {
     .kit-block {
         width: 97.5%;
         margin: 0 auto;
     }
-    h2 {
-        font-family: @header-font;
-        font-weight: bold;
-        text-transform: capitalize;
-        margin-left: .75rem;
-        margin-right: 2.34rem;
+    .kit-type {
+        padding: 0.1rem 7.5%;
+        padding-right: 0;
+        border-radius: 1rem 1rem 0 0;
+
+        font: bold italic .75rem @body-font;
+        text-transform: uppercase;
+        background: linear-gradient(to right, transparent 1%, currentColor 10%, currentColor 60%, transparent 99%);
+
+        &-group {
+            margin-bottom: 0.5rem;
+        }
     }
     .kit-piece- {
         &card {
             height: @card-height;
-            margin-bottom: 0.17rem;
             
-            background: linear-gradient(to right, currentColor, transparent 25%);
+            background: linear-gradient(to right, currentColor .5rem, transparent 25%);
         }
         &img {
             .SquareSize(@card-height);
             .InputSkinning();
             pointer-events: none;
+            margin-left: 0.5rem;
 
             border: 0;
         }
@@ -40,43 +46,43 @@
         }
 
         &stat {
-            height: @card-height - 0.1rem;
-            min-width: 2rem;
+            height: @card-height - 0.32rem;
+            min-width: 0.5rem;
             display: flex;
             flex: 0 1 auto;
-            margin: auto .15rem;
+            padding: 0 .4rem 0 .2rem;
+            margin: auto .1rem;
             border-radius: 3px;
         }
         &stat-img {
             .SquareSize(1.15rem);
             .InputSkinning();
-            margin: auto .1rem;
+            margin: auto 0.1rem auto 0;
             pointer-events: none;
 
             filter: brightness(0) saturate(100%) invert(100%);
         }
         &stat-value {
-            margin: .125rem .4rem 0 .2rem;
-
             transform: scaleY(90%);
             font: bold italic 1rem @body-font;
             color: white;
+            margin: auto 0 auto .1rem;
         }
         &stat-divider {
             .Divider( calc(100% - 2.5rem) );
             margin: 0;
-            margin-bottom: 0.17rem;
+            margin-bottom: 2px;
         }
 
-        &edit {
+        &edit, &delete {
             margin: auto 0.2rem;
-            
-            color: black;
+
+            color: rgba(0, 0, 0, 0.1)
         }
-        &delete {
-            margin: auto 0.2rem;
-            
-            color: black;
+    }
+    .kit-piece-card:hover {
+        > .kit-piece-edit, .kit-piece-delete {
+            color: rgba(0, 0, 0, 0.5);
         }
     }
 }

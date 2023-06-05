@@ -16,8 +16,16 @@ export class AC {
     static get hbsHelpers() {
         return {
 
+            //  Logs the context of the Handlebars object.
+            //*     () : void
+            debug: function(_options) {
+                console.log(_options);
+                return;
+            },
+
             //  Matches the color of this element with the entity's color.
-            //*     (system: { color: string }, style?: string, attr?: string, alpha?: string) : SafeString
+            //*     (system: { color: string }, style?: string, attr?: string, alpha?: string) 
+            //*     : SafeString
             match: function({ color }, _options) {
                 let { style='color', attr='true', alpha='1' } = _options.hash;
 
@@ -38,8 +46,8 @@ export class AC {
 
             //  Changes the color of this element to either black or white to contrast with 
             //  the entity's color.
-            //*     (system: { color: string }, style?: string, attr?: string, threshold?: string, 
-            //*     alpha?: string) : SafeString
+            //*     (system: { color: string }, img?: string, style?: string, attr?: string, 
+            //*     threshold?: string, alpha?: string) : SafeString
             contrast: function({ color }, _options) {
                 let { style='color', img='false', attr='true', threshold='.5', alpha='1' } = _options.hash;
 
