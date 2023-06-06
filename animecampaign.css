@@ -134,7 +134,7 @@
   width: 26rem;
   margin: 0 auto;
 }
-.animecampaign.actor.sheet .item.active {
+.animecampaign.actor.sheet .tabs > .item.active {
   text-decoration: underline;
 }
 .animecampaign.actor.sheet .divider {

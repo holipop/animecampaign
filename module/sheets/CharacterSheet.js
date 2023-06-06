@@ -9,7 +9,12 @@ export default class CharacterSheet extends ActorSheet {
         return mergeObject(super.defaultOptions, {
             width: 520,
             height: 500,
-            classes: ["animecampaign", "sheet", "actor"]
+            classes: ["animecampaign", "sheet", "actor"],
+            tabs: [{
+                navSelector: ".tabs", 
+                contentSelector: ".content", 
+                initial: "kit", 
+            }]
         });
     }
 
@@ -37,9 +42,7 @@ export default class CharacterSheet extends ActorSheet {
     activateListeners(_html) {
 
         this.updateName(_html, 3, 60);
-        
         this.updateClass(_html);
-        this.createNavigation(_html);
 
         this.createKitPiece(_html);
         this.deleteKitPiece(_html);
@@ -62,18 +65,6 @@ export default class CharacterSheet extends ActorSheet {
         CLASS.on('blur', e => this.actor.update({ 'system.class':  CLASS.text() }));
 
         CLASS[0].addEventListener('paste', event => event.preventDefault());
-    }
-
-    //  Creating a Tabs object for sheet navigation.
-    //*     (_html: jQuery) : void
-    createNavigation(_html) {
-        const tabs = new Tabs({
-            navSelector: ".tabs", 
-            contentSelector: ".content", 
-            initial: "kit", 
-            callback: () => {}
-        });
-        tabs.bind(_html[0]);
     }
 
     //  Creates a new Kit Piece within the Character's owned Items collection.
