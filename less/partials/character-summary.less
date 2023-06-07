@@ -1,26 +1,15 @@
-// out: false
+// main: ../animecampaign.less
 
 .animecampaign.actor.sheet {
-    /* -- CHARACTER SUMMARY -- */
     .background {
-        position: absolute;
-        height: calc(6.2rem * (5/8) + 0.80rem);
-        width: 100%;
-        left: 0;
-        top: 30px;
-        
-        border-bottom: 1px solid black;
+        .HeaderBackground();
+        background-color: var(--ac-color);
     }
     .background-input {
-        height: 1.3rem;
-        width: 1rem;
-        position: absolute;
-        left: 0px;
-        top: 30px;
-        border: 0;
-        padding: 0;
-        margin: 0;
+        .HeaderBackgroundButton();
+        .InputSkinning();
     }
+
     .sheet-header {
         height: 6.2rem;
         width: calc(80% + 6.75rem);
@@ -34,14 +23,10 @@
         }
     }
     .header-top {
-        display: grid;
-        align-self: end;
-        grid-template-columns: 1fr auto;
+        .HeaderTop();
     }
     .header-bottom {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        .HeaderBottom();
     }
     .header-graphic {
         grid-column-start: 2;
@@ -49,28 +34,14 @@
         margin-left: auto;
         margin-right: auto;
 
-        border-top: 1px solid black;
+        border-top: @thin-border;
     }
     .img {
-        grid-row: span 2;
-        height: 5.4rem;
-        width: 5.4rem;
+        .HeaderImage(5.4rem);
         margin-left: 1rem;
-        place-self: end end;
-
-        border: 1px solid black;
     }
     .name {
-        place-self: end start;
-        margin-left: .75rem;
-        margin-bottom: 0.545rem;
-        max-width: 95%;
-        min-width: 2.25rem;
-        overflow-wrap: break-word;
-
-        font-family: @display-font;
-        text-transform: uppercase;
-        line-height: 0.85;
+        .HeaderName();
     }
     .class {
         place-self: end;
@@ -82,23 +53,31 @@
         margin-right: 0.375rem;
         margin-bottom: 0.375rem;
         overflow-y: hidden;
+        padding: 0.1rem;
 
         font: .9rem 'Arial';
+        line-height: 0.85;
     }
     .type {
+        .InputSkinning();
+        width: 5.75rem;
         margin-right: .25rem;
+        margin-left: .25rem;
         height: 1.6rem;
-        padding: 0;
         flex-grow: 1;
+        border-bottom: @thin-border;
 
-        font: 0.75rem 'Arial';
+        font: italic bold .75rem @body-font;
     }
     .word {
         overflow: hidden;
         height: 1.6rem;
         flex-grow: 1;
+        border: none;
+        border-bottom: @thin-border;
+        background-color: transparent;
 
-        font: 1rem @header-font;
+        font: bold 1.25rem @header-font;
     }
     .proficiency-class {
         margin-right: 0.675rem;

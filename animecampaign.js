@@ -1,35 +1,44 @@
-import { animecampaign } from "./module/config.js";
+import { animecampaign, AC } from "./module/config.js";
 
-import ACActorSheet from "./module/sheets/ACActorSheet.js";
-import { CharacterData } from "./module/ACActor.js";
+import CharacterSheet from "./module/sheets/CharacterSheet.js";
+import { CharacterData } from "./module/CharacterData.js";
 
-import ACItemSheet from "./module/sheets/ACItemSheet.js";
-import { KitPieceData } from "./module/ACItem.js";
+import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
+import { KitPieceData } from "./module/KitPieceData.js";
 
+//  Preloads the filepaths for the Handlebars partials.
+//*     () : Promise<Function[]>
 async function preloadHandlebarsTemplates() {
     const templatePaths = [
         "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
-        "systems/animecampaign/templates/sheets/partials/character-stats.hbs",
+        "systems/animecampaign/templates/sheets/partials/stats.hbs",
         "systems/animecampaign/templates/sheets/partials/kit.hbs",
-        "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs",
         "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
         "systems/animecampaign/templates/sheets/partials/biography.hbs"
     ];
+
     return loadTemplates(templatePaths);
 }
 
+//  All of our code that runs on initialization.
 Hooks.once("init", () => {
-    console.log("Anime Campaign | Initializing Anime Campaign System");
-
+    AC.log("Initializing Anime Campaign System");
+    
+    //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
 
+    //  Assigning Character and Kit Piece schema.
     CONFIG.Actor.systemDataModels["Character"] = CharacterData;
-    Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("animecampaign", ACActorSheet, { makeDefault: true });
-
     CONFIG.Item.systemDataModels["Kit Piece"] = KitPieceData;
+
+    //  Unregistering the default entity sheets & registering our own.
+    Actors.unregisterSheet("core", ActorSheet);
+    Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", ACItemSheet, { makeDefault: true });
+    Items.registerSheet("animecampaign", KitPieceSheet, { makeDefault: true });
 
     preloadHandlebarsTemplates();
+
+    //  Adding our custom Handlebars helpers.
+    Handlebars.registerHelper(AC.hbsHelpers);
 })

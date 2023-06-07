@@ -1,14 +1,14 @@
-<div class="background"></div>
+<div class="background" {{match system style='background-color'}}></div>
 <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
 <header class="sheet-header">
     <img class="img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
 
     <section class="header-top">
-        <div class="name" data-edit="name" spellcheck='false' contenteditable>
+        <div class="name" {{contrast system}} data-edit="name" spellcheck='false' contenteditable>
             {{actor.name}}
         </div>
-        <div class="class" data-edit="system.class" spellcheck='false' contenteditable>
+        <div class="class" {{contrast system}} data-edit="system.class" spellcheck='false' contenteditable>
             {{system.class}}
         </div>
     </section>
@@ -32,9 +32,7 @@
         </select>
         <input class="word" name="system.word" type="text" value="{{system.word}}" placeholder="Epithet/Core Word">
         {{#if system.isInscribed}}
-            <div class="proficiency-class">{{system.profClass}}</div>
+            <div class="proficiency-class">{{system.proficiencyClass}}</div>
         {{/if}}
     </section>
-    
-    <div class="header-graphic"></div>
 </header>

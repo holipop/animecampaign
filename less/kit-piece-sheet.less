@@ -1,32 +1,21 @@
-// out: false
-
+// main: ./animecampaign.less
 
 .animecampaign.item.sheet {
     min-width: 450px;
     min-height: 350px;
+
     .background {
-        position: absolute;
-        height: calc(6.2rem * (5/8) + 0.80rem);
-        width: 100%;
-        left: 0;
-        top: 30px;
-        
-        border-bottom: 1px solid black;
+        .HeaderBackground();
     }
     .background-input {
-        height: 1.3rem;
-        width: 1rem;
-        position: absolute;
-        left: 0px;
-        top: 30px;
-        border: 0;
-        padding: 0;
-        margin: 0;
+        .HeaderBackgroundButton();
+        .InputSkinning();
     }
     .sheet-header {
         height: calc(6.2rem * (5/8) + 0.80rem);
         width: calc(80% + 6.75rem);
         max-width: 100%;
+        margin-bottom: 1rem;
         display: grid;
         grid-template-columns: 1fr 4fr;
         grid-template-rows: 4fr 1fr;
@@ -37,47 +26,37 @@
     }
     .header-top {
         height: calc(6.2rem * (5/8) + 0.4rem);
-        display: grid;
-        align-self: end;
-        grid-template-columns: 1fr auto;
+        .HeaderTop();
     }
     .header-bottom {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        .HeaderBottom();
     }
     .img {
-        grid-row: span 2;
-        height: 4.4rem;
-        width: 4.4rem;
+        .HeaderImage(4.4rem);
         margin-left: 1rem;
         margin-top: 1rem;
-        place-self: end end;
-
-        border: 1px solid black;
     }
     .name {
-        place-self: end start;
-        margin-left: .75rem;
-        margin-bottom: 0.545rem;
-        max-width: 95%;
-        min-width: 2.25rem;
-        overflow-wrap: break-word;
-
-        font-family: @display-font;
-        text-transform: uppercase;
-        line-height: 0.85;
+        .HeaderName();
     }
     .type {
+        .InputSkinning();
         margin-left: .25rem;
         height: 1rem;
-        padding: 0;
-        border: none;
-        border-radius: 0;
-        border-bottom: 1px solid black;
-        background-color: transparent;
+        border-bottom: @thin-border;
 
-        font: italic bold 0.75rem 'Arial';
+        font: italic bold 0.75rem @body-font;
+    }
+    .custom-type {
+        .InputSkinning();
+        border-bottom: @thin-border;
+        margin-left: .5rem;
+        width: 75%;
+        height: 1rem;
+        line-height: 0;
+
+        font: italic bold 0.75rem @body-font;
+        text-transform: uppercase;
     }
 
     .sheet-body {
@@ -88,53 +67,9 @@
         max-width: 100%;
         height: 75%;
     }
-    .stats {
-        > * {
-            min-height: 4.3rem;
-            width: 80%;
-            min-width: 7rem;
-            margin-bottom: 0.33rem;
-            margin-left: auto;
-            padding: 0.2rem 3%;
-
-            border-bottom: 1px solid black;
-        }
-    }
-    .stat-label, .stat-value {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        border: 0;
-        border-radius: 0;
-        background-color: transparent;
-    }
-    .stat-label {
-        min-height: 1rem;
-
-        font: bold .8rem 'Arial';
-        line-height: 1;
-        text-transform: uppercase;
-    }
-    .stat-value {
-        height: 2.5rem;
-        padding: 0 2%;
-
-        font: bold 2.5rem "Philosopher";
-        border-radius: 2px;
-        text-align: end;
-    }
-    .stat-create {
-        display: grid;
-        place-items: center;
-        
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 2px;
-    }
 
     .text {
-        margin-left: .4rem;
-
-        
+        margin-left: .4rem;        
     }
 
     .editor {
