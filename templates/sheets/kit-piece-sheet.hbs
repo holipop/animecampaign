@@ -1,12 +1,12 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div class="background"></div>
+    <div class="background" {{match system style='background-color'}}></div>
     <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
     <header class="sheet-header">
         <img class="img" src="{{item.img}}" data-edit="img" title="{{item.name}}">
 
         <section class="header-top">
-            <div class="name" data-edit="name" spellcheck='false' contenteditable>
+            <div class="name" {{contrast system}} data-edit="name" spellcheck='false' contenteditable>
                 {{item.name}}
             </div>
         </section>
@@ -18,6 +18,10 @@
                         <option value="{{key}}">{{localize name}}</option>
                     {{/each}}
                 {{/select}}
+                
+                {{#if (eq system.type 'custom')}}
+                    <input class="custom-type" name="system.customType" value="{{system.customType}}" placeholder="custom type" type="text">
+                {{/if}}
             </select>
         </section>
     </header>
@@ -26,7 +30,7 @@
 
     <section class="text">
         {{!-- This is the text editor field. It allows us to add in the body text for our kit pieces. --}}
-        {{editor system.description target="system.description" button=true engine="prosemirror" collaborate=false}} 
+        {{editor system.description target="system.description" button="true" engine="prosemirror" collaborate="false"}} 
     </section>
 
 </form>

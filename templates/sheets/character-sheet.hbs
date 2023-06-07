@@ -10,6 +10,8 @@
             <a class="item" data-group="primary-tabs" data-tab="biography">{{ localize config.navigationLabels.biography }}</a>
         </nav>
 
+        <div class="divider"></div>
+
         <section class="content">
             <div class="tab" data-group="primary-tabs" data-tab="kit">
                 {{> "systems/animecampaign/templates/sheets/partials/kit.hbs"}}
@@ -21,12 +23,6 @@
                 {{> "systems/animecampaign/templates/sheets/partials/biography.hbs"}}
             </div>
         </section>
-
-    <p>{{localize config.test}}</p>
-
-    {{#each items as |item id|}}
-        <p>{{item.name}}</p>
-    {{/each}}
 
     </section>
 </form>

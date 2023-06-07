@@ -41,8 +41,7 @@
 
 .HeaderImage(@size) {
     grid-row: span 2;
-    height: @size;
-    width: @size;
+    .SquareSize(@size);
     place-self: end end;
 
     border: @thin-border;
@@ -57,7 +56,6 @@
     overflow-wrap: break-word;
 
     font-family: @display-font;
-    text-transform: uppercase;
     line-height: 0.85;
 }
 
@@ -80,6 +78,13 @@
     background-color: transparent;
 }
 
+.SquareSize(@measure) {
+    height: @measure;
+    width: @measure;
+    min-height: @measure;
+    min-width: @measure;
+}
+
 .ScrollbarSkinning() {
     ::-webkit-scrollbar {
         width: 3px;
@@ -100,11 +105,10 @@
 }
 
 @import "./kit-piece-sheet.less";
-@import "./actor-sheet.less";
+@import "./character-sheet.less";
 
 @import "./partials/character-summary.less";
 @import "./partials/kit.less";
-@import "./partials/kit-piece-card.less";
 @import "./partials/upgrades.less";
 
 @import "./partials/stats.less";

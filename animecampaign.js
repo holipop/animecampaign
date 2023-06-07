@@ -13,7 +13,6 @@ async function preloadHandlebarsTemplates() {
         "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
         "systems/animecampaign/templates/sheets/partials/stats.hbs",
         "systems/animecampaign/templates/sheets/partials/kit.hbs",
-        "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs",
         "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
         "systems/animecampaign/templates/sheets/partials/biography.hbs"
     ];
@@ -32,11 +31,14 @@ Hooks.once("init", () => {
     CONFIG.Actor.systemDataModels["Character"] = CharacterData;
     CONFIG.Item.systemDataModels["Kit Piece"] = KitPieceData;
 
-    // Unregistering the default entity sheets & registering our own.
+    //  Unregistering the default entity sheets & registering our own.
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", KitPieceSheet, { makeDefault: true });
 
     preloadHandlebarsTemplates();
+
+    //  Adding our custom Handlebars helpers.
+    Handlebars.registerHelper(AC.hbsHelpers);
 })

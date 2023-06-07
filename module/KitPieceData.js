@@ -23,6 +23,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
                 ...defaultSettings,
                 initial: "weapon",
             }),
+            customType: new fields.StringField(defaultSettings),
             stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) )
         }
     }

@@ -1,29 +1,41 @@
-<div class="kit-block">
-    <h2>{{localize config.kitTypesPlural.weapons}} <a class="kit-piece-create" data-type="weapon" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
-    <div>
-        {{#each weapons as |item id|}}
-            {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
-        {{/each}}
-    </div>
-    <hr>
-    <h2>{{localize config.kitTypesPlural.talents}} <a class="kit-piece-create" data-type="talent" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
-    <div>
-        {{#each talents as |item id|}}
-        {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
-        {{/each}}
-    </div>
-    <hr>
-    <h2>{{localize config.kitTypesPlural.passives}} <a class="kit-piece-create" data-type="passive" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
-    <div>
-        {{#each passives as |item id|}}
-        {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
-        {{/each}}
-    </div>
-    <hr>
-    <h2>{{localize config.kitTypesPlural.abilities}} <a class="kit-piece-create" data-type="ability" title="{{localize config.kitText.addkitpiece}}"><i class="fas fa-plus"></i></a></h2>
-    <div>
-        {{#each abilities as |item id|}}
-        {{> "systems/animecampaign/templates/sheets/partials/kit-piece-card.hbs" item}}
-        {{/each}}
-    </div>
-</div>
+<section class="kit-block">
+    <a class="kit-piece-create" title="{{localize config.kitText.addkitpiece}}">
+        <i class="fas fa-plus"></i>
+    </a>
+    {{#each kitPieces as |array key|}}
+        <div class="kit-type" {{match ../this.system alpha="0.7"}}>
+            <span {{contrast ../this.system}}>{{key}}</span>
+        </div>
+
+        <div class="kit-type-group">
+            {{#each array as |item id|}}
+            
+                <div class="kit-piece-card flexrow" {{match item.system alpha="0.5"}}>
+                    <img class="kit-piece-img flex0" {{match item.system}} src="{{item.img}}" data-edit="img">
+                    <span class="kit-piece-name">{{item.name}}</span>
+
+                    {{#each item.system.stats as |stat index|}}
+                        <div class="kit-piece-stat flex0" {{match item.system style="background-color"}}>
+                            {{#if stat.img}}
+                                <img class="kit-piece-stat-img" {{contrast item.system img='true'}} src="{{stat.img}}" data-edit="img">
+                            {{/if}}
+                            <span class="kit-piece-stat-value" {{contrast item.system}}>
+                                {{stat.value}}
+                            </span>
+                        </div>
+                    {{/each}}
+                    
+                    <a class="kit-piece-edit flex0" title="{{localize config.kitText.editkitpiece}}" data-id={{_id}}>
+                        <i class="fas fa-feather-pointed"></i>
+                    </a>
+                    <a class="kit-piece-delete flex0" title="{{localize config.kitText.addkitpiece}}" data-id={{_id}}>
+                        <i class="fas fa-trash-can-xmark"></i>
+                    </a>
+                </div>
+                <div class="kit-piece-stat-divider" {{match item.system style="border-color"}}></div>
+
+            {{/each}}
+        </div>
+
+    {{/each}}
+</section>
