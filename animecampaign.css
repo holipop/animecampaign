@@ -286,7 +286,6 @@
   border-radius: 0;
   box-shadow: none;
   background-color: transparent;
-  pointer-events: none;
   margin-left: 0.5rem;
   border: 0;
 }

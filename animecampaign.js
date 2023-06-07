@@ -3,6 +3,7 @@ import { animecampaign, AC } from "./module/config.js";
 import CharacterSheet from "./module/sheets/CharacterSheet.js";
 import { CharacterData } from "./module/CharacterData.js";
 
+import ACItem from "./module/ACItem.js";
 import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
 import { KitPieceData } from "./module/KitPieceData.js";
 
@@ -26,6 +27,8 @@ Hooks.once("init", () => {
     
     //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
+
+    CONFIG.Item.documentClass = ACItem;
 
     //  Assigning Character and Kit Piece schema.
     CONFIG.Actor.systemDataModels["Character"] = CharacterData;

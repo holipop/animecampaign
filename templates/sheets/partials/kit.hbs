@@ -11,7 +11,7 @@
             {{#each array as |item id|}}
             
                 <div class="kit-piece-card flexrow" {{match item.system alpha="0.5"}}>
-                    <img class="kit-piece-img flex0" {{match item.system}} src="{{item.img}}" data-edit="img">
+                    <img class="kit-piece-img flex0" {{match item.system}} src="{{item.img}}" data-id="{{item._id}}">
                     <span class="kit-piece-name">{{item.name}}</span>
 
                     {{#each item.system.stats as |stat index|}}
