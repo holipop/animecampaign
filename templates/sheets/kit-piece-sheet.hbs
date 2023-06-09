@@ -3,7 +3,7 @@
     <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
     <header class="sheet-header">
-        <img class="img" src="{{item.img}}" data-edit="img" title="{{item.name}}">
+        <img class="img" {{match system style='background-color'}} src="{{item.img}}" data-edit="img" title="{{item.name}}">
 
         <section class="header-top">
             <div class="name" {{contrast system}} data-edit="name" spellcheck='false' contenteditable>
@@ -26,11 +26,12 @@
         </section>
     </header>
 
-    {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
+    <div class="scrollable">
+        {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
 
-    <section class="text">
-        {{!-- This is the text editor field. It allows us to add in the body text for our kit pieces. --}}
-        {{editor system.description target="system.description" button="true" engine="prosemirror" collaborate="false"}} 
-    </section>
+        <div class="description">
+            {{editor item.system.description target="system.description" button='false' engine="prosemirror" collaborate='false'}}
+        </div>
+    </div>
 
 </form>

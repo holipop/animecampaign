@@ -28,6 +28,7 @@ Hooks.once("init", () => {
     //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
 
+    //  Redefining the default entity classes.
     CONFIG.Item.documentClass = ACItem;
 
     //  Assigning Character and Kit Piece schema.
