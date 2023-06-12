@@ -6,7 +6,7 @@ export class StatConfigMenu extends FormApplication {
         return mergeObject(super.defaultOptions, {
             width: 300,
             height: 145,
-            template: 'systems/animecampaign/templates/sheets/stats-config.hbs',
+            template: 'systems/animecampaign/templates/stats-config.hbs',
         });
     }
 

@@ -4,6 +4,14 @@
     min-width: 450px;
     min-height: 350px;
 
+    form {
+        overflow-y: hidden;
+    }
+    .scrollable {
+        overflow-y: scroll;
+        height: calc(100% - 6.25rem);
+    }
+
     .background {
         .HeaderBackground();
     }
@@ -68,11 +76,26 @@
         height: 75%;
     }
 
-    .text {
-        margin-left: .4rem;        
-    }
+    .description {
+        width: 95%;
+        min-height: 5rem;
+        height: inherit;
+        max-height: fit-content;
+        margin: .25rem auto 0;
 
-    .editor {
-        height: 100%;
+        border-left: @thin-border;
+        border-right: @thin-border;
+        border-radius: .2rem;
+        
+        .editor {
+            height: 100%;
+        }
+        .editor-container {
+            margin: 0;
+        }
+        p {
+            margin: .25rem;
+        }
+        // TODO DESKIN THE PROSEMIRROR EDITOR
     }
 }

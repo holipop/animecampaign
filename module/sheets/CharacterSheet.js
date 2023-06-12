@@ -43,7 +43,8 @@ export default class CharacterSheet extends ActorSheet {
 
         this.updateName(_html, 3, 60);
         this.updateClass(_html);
-
+        
+        this.rollKitPiece(_html);
         this.createKitPiece(_html);
         this.deleteKitPiece(_html);
         this.editKitPiece(_html);
@@ -65,6 +66,22 @@ export default class CharacterSheet extends ActorSheet {
         CLASS.on('blur', e => this.actor.update({ 'system.class':  CLASS.text() }));
 
         CLASS[0].addEventListener('paste', event => event.preventDefault());
+    }
+
+    rollKitPiece(_html) { 
+        const KIT_IMG = _html.find('.kit-piece-img');
+        KIT_IMG.on('click', event => {
+            const id = $(event.currentTarget).data('id');
+
+            const item = this.object.getEmbeddedDocument('Item', id);
+
+            item.roll();
+        });
+
+        //* TODO hook up button for img
+        //* TODO send message to chat
+        //  TODO roll
+        //  TODO create kit piece message
     }
 
     //  Creates a new Kit Piece within the Character's owned Items collection.
