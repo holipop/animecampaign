@@ -71,7 +71,7 @@ export default class CharacterSheet extends ActorSheet {
     rollKitPiece(_html) { 
         const KIT_IMG = _html.find('.kit-piece-img');
         KIT_IMG.on('click', event => {
-            const id = KIT_IMG.data('id');
+            const id = $(event.currentTarget).data('id');
 
             const item = this.object.getEmbeddedDocument('Item', id);
 
