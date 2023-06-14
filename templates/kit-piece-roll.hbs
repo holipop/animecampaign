@@ -1,8 +1,26 @@
-<div class="kit-piece-roll">
-    <h1>
-        {{name}}
-    </h1>
-    {{{system.description}}}
+<div class="animecampaign kit-piece-roll" {{match system style='border-color'}}>
+
+    <section class="summary">
+        <header {{match system style='background-color'}}>
+            <img class="img" {{match system style='background-color'}} src="{{img}}" data-edit="img">
+            <div class="name" {{contrast system}} >{{name}}</div>
+        </header>
+
+        <span class="type">
+            {{#if (eq system.type 'custom')}}
+                {{system.customType}}
+            {{else}}
+                {{system.type}}
+            {{/if}}
+        </span>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="text">
+        {{{system.description}}}
+    </section>
 
     {{log this}}
+
 </div>

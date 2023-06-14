@@ -1,0 +1,44 @@
+// main: ./animecampaign.less
+
+.animecampaign.kit-piece-roll {
+    border: 1px solid;
+    border-radius: 2px;
+
+    header {
+        display: grid;
+        grid-template-columns: .4rem 1fr 7fr;
+        height: fit-content;
+
+        border-bottom: @thin-border;
+    }
+    .img {
+        position: relative;
+        top: .40rem;
+        grid-column-start: 2;   
+        align-self: end;
+        pointer-events: none;
+    }
+    .name {
+        grid-column-start: 3;
+        margin: .3rem;
+        align-self: end;
+
+        font: 1.25rem @display-font;
+        line-height: 90%;
+    }
+    .type {
+        margin-left: 2.75rem;
+
+        font: bold italic .75rem @body-font;
+        text-transform: uppercase;
+    }
+
+    .divider {
+        .Divider(95%);
+    }
+
+    .text {
+        font-family: @body-font;
+        margin: .25rem;
+    }
+}

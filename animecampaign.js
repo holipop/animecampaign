@@ -29,14 +29,14 @@ Hooks.once("init", () => {
     //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
 
-    //  Redefining the default entity classes.
+    //  Redefining the default document classes.
     CONFIG.Item.documentClass = ACItem;
 
     //  Assigning Character and Kit Piece schema.
     CONFIG.Actor.systemDataModels["Character"] = CharacterData;
     CONFIG.Item.systemDataModels["Kit Piece"] = KitPieceData;
 
-    //  Unregistering the default entity sheets & registering our own.
+    //  Unregistering the default document sheets & registering our own.
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
