@@ -1,4 +1,5 @@
-import { animecampaign, AC } from "./module/config.js";
+import { animecampaign } from "./module/config.js";
+import AC from "./module/AC.js";
 
 import CharacterSheet from "./module/sheets/CharacterSheet.js";
 import { CharacterData } from "./module/CharacterData.js";
