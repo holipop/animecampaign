@@ -45,6 +45,11 @@ export default class KitPieceSheet extends ItemSheet {
         this.addDefaultStats(_html);
         this.collapseStatBlock(_html)
 
+        this.roll(_html);
+        
+        this.addSection(_html);
+        this.deleteSection(_html);
+
         new ContextMenu(_html, '.stat', this.contextMenuEntries());
         
         super.activateListeners(_html);
@@ -59,6 +64,28 @@ export default class KitPieceSheet extends ItemSheet {
         CUSTOM_TYPE.on('change', event => {
             console.log(this.object);
             this.item.update([{ 'system.customType': loweredInput }]);
+        })
+    }
+
+    roll(_html) {
+        _html.find('.roll').on('click', event => {
+            this.object.roll();
+        })
+    }
+
+    addSection(_html) {
+        const ADD_SECTION = _html.find('.add-section');
+        ADD_SECTION.on('click', event => {
+            this.object.system.createSections();
+        }) 
+    }
+
+    deleteSection(_html) {
+        const DELETE_SECTION = _html.find('.section-delete');
+        DELETE_SECTION.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+
+            this.object.system.deleteSectionIndex(index);
         })
     }
 }

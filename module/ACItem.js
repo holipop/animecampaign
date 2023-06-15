@@ -11,7 +11,6 @@ export default class ACItem extends Item {
 
         const templateData = {
             ...this,
-            owner: this.actor._id
         }
 
         chatData.content = await renderTemplate(this.chatTemplates[this.type], templateData);

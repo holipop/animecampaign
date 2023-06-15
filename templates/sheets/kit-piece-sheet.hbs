@@ -9,6 +9,9 @@
             <div class="name" {{contrast system}} data-edit="name" spellcheck='false' contenteditable>
                 {{item.name}}
             </div>
+            <a class="roll">
+                <i class="fas fa-dice-d20"></i>
+            </a>
         </section>
 
         <section class="header-bottom">
@@ -29,9 +32,31 @@
     <div class="scrollable">
         {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
 
-        <div class="description">
-            {{editor item.system.description target="system.description" button='false' engine="prosemirror" collaborate='false'}}
-        </div>
+        <section class="sections">
+            {{#each system.sections as |section index|}}
+                <div class="section" data-index="{{index}}">
+                    <!-- textarea name="system.sections.{{index}}.text">{{section.text}}</textarea -->
+                    {{!editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+
+                    {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+
+                    <div class="section-options">
+                        <a class="section-delete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+
+                    <div class="hidden section-schema">
+                        <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
+                    </div>
+
+                </div>
+            {{/each}}
+        </section>
+        
+        <a class="add-section">
+            <i class="fas fa-plus">Add Section</i>
+        </a>
     </div>
 
 </form>

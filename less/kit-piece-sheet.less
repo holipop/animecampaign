@@ -47,6 +47,15 @@
     .name {
         .HeaderName();
     }
+    .roll {
+        height: 1.1rem;
+        width: 1.1rem;
+        align-self: end;
+        margin-bottom: .5rem;
+
+        border: 1px solid black;
+        border-radius: 2px;
+    }
     .type {
         .InputSkinning();
         margin-left: .25rem;
@@ -76,26 +85,28 @@
         height: 75%;
     }
 
-    .description {
-        width: 95%;
-        min-height: 5rem;
-        height: inherit;
-        max-height: fit-content;
-        margin: .25rem auto 0;
-
-        border-left: @thin-border;
-        border-right: @thin-border;
-        border-radius: .2rem;
-        
+    .sections {
+        > * {
+            outline: pink solid 1px;
+            background-color: rgba(0, 255, 255, 0.131);
+        }
         .editor {
-            height: 100%;
+            height: fit-content;
+        }
+        .editor.prosemirror {
+            height: 14rem;
         }
         .editor-container {
             margin: 0;
         }
-        p {
-            margin: .25rem;
+        .editor-content {
+            height: fit-content;
+            min-height: 2rem;
+            padding: .5rem;
         }
-        // TODO DESKIN THE PROSEMIRROR EDITOR
+    }
+
+    .hidden {
+        display: none;
     }
 }

@@ -1,5 +1,7 @@
+import AC from "./AC.js";
 import { StatMixin } from "./StatMixin.js";
 import { Stat } from "./Stat.js";
+import { Section } from "./Section.js";
 
 //  Defining the schema for Kit Pieces.
 export class KitPieceData extends foundry.abstract.DataModel {
@@ -15,6 +17,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
 
         return {
             description: new fields.HTMLField(),
+
             color: new fields.StringField({ 
                 ...defaultSettings, 
                 initial: "#CCCCCC" 
@@ -24,8 +27,32 @@ export class KitPieceData extends foundry.abstract.DataModel {
                 initial: "weapon",
             }),
             customType: new fields.StringField(defaultSettings),
-            stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) )
+            stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) ),
+            sections: new fields.ArrayField( new fields.EmbeddedDataField( Section ) )
         }
+    }
+
+    createSections(_sections = [{}], _index = null) {
+        let sections = this.sections;
+        let createdSections = _sections.map(obj => new Stat(obj, { parent: this }));
+
+        if (_index == null) {
+            sections = [...sections, ...createdSections];
+        } else {
+            sections.splice(_index, 0, ...createdSections);
+        }
+
+        this.parent.update({ 'system.sections': sections });
+        AC.log(`Created ${createdSections.length} section(s) for ${this.parent.name}`);
+    }
+
+    deleteSectionIndex(_index) {
+        let sections = this.sections;
+
+        sections.splice(_index, 1);
+
+        this.parent.update({ 'system.sections': sections });
+        AC.log(`Deleted section at index ${_index} for ${this.parent.name}`);
     }
 }
 

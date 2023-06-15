@@ -18,7 +18,11 @@
     <div class="divider"></div>
 
     <section class="text">
-        {{{system.description}}}
+        {{#each system.sections as |section index|}}
+            <div class="section">
+                {{{section.text}}}
+            </div>
+        {{/each}}
     </section>
 
     {{log this}}

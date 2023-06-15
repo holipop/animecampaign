@@ -18,7 +18,7 @@ export const StatMixin = {
         }
 
         this.parent.update({ 'system.stats': stats });
-        AC.log(`${AC} | Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
+        AC.log(`Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
     },
 
     //  Deletes existing Stat objects from the stats list given a list of Stat names.
