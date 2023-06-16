@@ -16,8 +16,6 @@ export class KitPieceData extends foundry.abstract.DataModel {
         }
 
         return {
-            description: new fields.HTMLField(),
-
             color: new fields.StringField({ 
                 ...defaultSettings, 
                 initial: "#CCCCCC" 

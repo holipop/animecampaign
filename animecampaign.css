@@ -202,13 +202,27 @@
   font: bold italic 0.75rem 'Arial';
   text-transform: uppercase;
 }
-.animecampaign.kit-piece-roll .text {
+.animecampaign.kit-piece-roll .sections {
   margin: 0.25rem;
   padding: 0.2rem 0.1rem;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 .animecampaign.kit-piece-roll .section {
+  border: 0;
+  padding: 0;
   border-top: 1px solid black;
+}
+.animecampaign.kit-piece-roll .section-name {
+  padding-right: 0.3rem;
+  font: bold italic 0.7rem 'Arial';
+}
+.animecampaign.kit-piece-roll .collapse {
+  width: 0;
+  position: relative;
+  left: -0.3rem;
+}
+.animecampaign.kit-piece-roll .collapse > i {
+  width: 0.3rem;
 }
 .animecampaign.actor.sheet .background {
   position: absolute;

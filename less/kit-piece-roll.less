@@ -33,13 +33,28 @@
         text-transform: uppercase;
     }
 
-    .text {
+    .sections {
         margin: .25rem;
         padding: .2rem .1rem;
-        font-size: .75rem;
+        font-size: .85rem;
     }
 
     .section {
+        border: 0;
+        padding: 0;
         border-top: @thin-border;
     }
+    .section-name {
+        padding-right: .3rem;
+        font: bold italic .7rem @body-font;
+    }
+    .collapse {
+        width: 0;
+        position: relative;
+        left: -.3rem;
+        > i {
+            width: 0.3rem;
+        }
+    }
+
 }

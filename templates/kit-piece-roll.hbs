@@ -15,13 +15,24 @@
         </span>
     </section>
 
-    <div class="divider"></div>
-
-    <section class="text">
+    <section class="sections">
         {{#each system.sections as |section index|}}
-            <div class="section">
-                {{{section.text}}}
-            </div>
+            <fieldset class="section">
+
+                <legend class="section-name">
+                    <a class="collapse">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    {{#if section.name}}
+                        {{section.name}}
+                    {{/if}}
+                </legend>
+
+                <div class="section-text">
+                    {{{section.text}}}
+                </div>
+
+            </fieldset>
         {{/each}}
     </section>
 

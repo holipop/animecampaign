@@ -8,6 +8,8 @@ import ACItem from "./module/ACItem.js";
 import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
 import { KitPieceData } from "./module/KitPieceData.js";
 
+import { Roll } from "./module/Roll.js";
+
 //  Preloads the filepaths for the Handlebars partials.
 //*     () : Promise<Function[]>
 async function preloadHandlebarsTemplates() {
@@ -46,4 +48,8 @@ Hooks.once("init", () => {
 
     //  Adding our custom Handlebars helpers.
     Handlebars.registerHelper(AC.hbsHelpers);
+})
+
+Hooks.on('renderChatMessage', (_app, _html, _data) => {
+    Roll.addChatListeners(_html);
 })
