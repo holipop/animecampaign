@@ -8,7 +8,7 @@ import ACItem from "./module/ACItem.js";
 import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
 import { KitPieceData } from "./module/KitPieceData.js";
 
-import { Roll } from "./module/Roll.js";
+import { RolledItem } from "./module/RolledItem.js";
 
 //  Preloads the filepaths for the Handlebars partials.
 //*     () : Promise<Function[]>
@@ -18,7 +18,7 @@ async function preloadHandlebarsTemplates() {
         "systems/animecampaign/templates/sheets/partials/stats.hbs",
         "systems/animecampaign/templates/sheets/partials/kit.hbs",
         "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
-        "systems/animecampaign/templates/sheets/partials/biography.hbs"
+        "systems/animecampaign/templates/sheets/partials/biography.hbs",
     ];
 
     return loadTemplates(templatePaths);
@@ -51,5 +51,5 @@ Hooks.once("init", () => {
 })
 
 Hooks.on('renderChatMessage', (_app, _html, _data) => {
-    Roll.addChatListeners(_html);
+    RolledItem.addChatListeners(_html);
 })

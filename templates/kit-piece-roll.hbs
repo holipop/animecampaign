@@ -3,7 +3,9 @@
     <section class="summary">
         <header {{match system style='background-color'}}>
             <img class="img" {{match system style='background-color'}} src="{{img}}" data-edit="img">
-            <div class="name" {{contrast system}} >{{name}}</div>
+            <div class="name" {{contrast system}}>
+                {{name}}
+            </div>
         </header>
 
         <span class="type">
@@ -13,6 +15,15 @@
                 {{system.type}}
             {{/if}}
         </span>
+    </section>
+
+    <section class="roll">
+        <div class="total" {{match roll}}>
+            {{ roll.totalInt }}
+        </div>
+        <div class="result">
+            &lpar; {{ roll.result }} &rpar;
+        </div>
     </section>
 
     <section class="sections">
@@ -37,5 +48,4 @@
     </section>
 
     {{log this}}
-
 </div>

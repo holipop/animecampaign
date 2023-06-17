@@ -25,6 +25,11 @@ export class KitPieceData extends foundry.abstract.DataModel {
                 initial: "weapon",
             }),
             customType: new fields.StringField(defaultSettings),
+            formula: new fields.StringField({
+                nullable: false,
+                required: true,
+                initial: "1d20"
+            }),
             stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) ),
             sections: new fields.ArrayField( new fields.EmbeddedDataField( Section ) )
         }
