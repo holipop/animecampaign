@@ -1,0 +1,20 @@
+<section class="sections">
+    {{#each system.sections as |section index|}}
+        <div class="section" data-index="{{index}}">
+            <input type="text" name="system.sections.{{index}}.name" value="{{section.name}}" placeholder="Name (Optional)">
+
+            {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+
+            <div class="section-options">
+                <a class="section-delete">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+
+            <div class="hidden section-schema">
+                <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
+            </div>
+
+        </div>
+    {{/each}}
+</section>

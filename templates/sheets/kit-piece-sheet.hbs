@@ -30,33 +30,15 @@
     </header>
 
     <div class="scrollable">
+        
         <section class="settings">
             <label for="system.formula">Roll Formula</label>
             <input type="text" name="system.formula" value="{{system.formula}}" placeholder="1d20">
         </section>
 
         {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
-        
-        <section class="sections">
-            {{#each system.sections as |section index|}}
-                <div class="section" data-index="{{index}}">
-                    <input type="text" name="system.sections.{{index}}.name" value="{{section.name}}" placeholder="Name (Optional)">
 
-                    {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
-
-                    <div class="section-options">
-                        <a class="section-delete">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </div>
-
-                    <div class="hidden section-schema">
-                        <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
-                    </div>
-
-                </div>
-            {{/each}}
-        </section>
+        {{> "systems/animecampaign/templates/sheets/partials/sections.hbs"}}
         
         <a class="add-section">
             <i class="fas fa-plus">Add Section</i>

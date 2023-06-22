@@ -127,24 +127,6 @@
   max-width: 100%;
   height: 75%;
 }
-.animecampaign.item.sheet .sections > * {
-  outline: pink solid 1px;
-  background-color: rgba(0, 255, 255, 0.131);
-}
-.animecampaign.item.sheet .sections .editor {
-  height: fit-content;
-}
-.animecampaign.item.sheet .sections .editor.prosemirror {
-  height: 14rem;
-}
-.animecampaign.item.sheet .sections .editor-container {
-  margin: 0;
-}
-.animecampaign.item.sheet .sections .editor-content {
-  height: fit-content;
-  min-height: 2rem;
-  padding: 0.5rem;
-}
 .animecampaign.item.sheet .hidden {
   display: none;
 }
@@ -596,4 +578,22 @@
 }
 .animecampaign.sheet #context-menu > ol > li {
   line-height: 1.5rem;
+}
+.sections > * {
+  outline: pink solid 1px;
+  background-color: rgba(0, 255, 255, 0.131);
+}
+.sections .editor {
+  height: fit-content;
+}
+.sections .editor.prosemirror {
+  height: 14rem;
+}
+.sections .editor-container {
+  margin: 0;
+}
+.sections .editor-content {
+  height: fit-content;
+  min-height: 2rem;
+  padding: 0.5rem;
 }

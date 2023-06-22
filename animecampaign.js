@@ -16,6 +16,7 @@ async function preloadHandlebarsTemplates() {
     const templatePaths = [
         "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
         "systems/animecampaign/templates/sheets/partials/stats.hbs",
+        "systems/animecampaign/templates/sheets/partials/sections.hbs",
         "systems/animecampaign/templates/sheets/partials/kit.hbs",
         "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
         "systems/animecampaign/templates/sheets/partials/biography.hbs",
