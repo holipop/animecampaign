@@ -2,11 +2,11 @@ import { animecampaign } from "./module/config.js";
 import AC from "./module/AC.js";
 
 import CharacterSheet from "./module/sheets/CharacterSheet.js";
-import { CharacterData } from "./module/CharacterData.js";
+import { CharacterData } from "./module/data-models/CharacterData.js";
 
 import ACItem from "./module/ACItem.js";
 import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
-import { KitPieceData } from "./module/KitPieceData.js";
+import { KitPieceData } from "./module/data-models/KitPieceData.js";
 
 import { RolledItem } from "./module/RolledItem.js";
 

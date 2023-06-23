@@ -1,4 +1,4 @@
-import { SheetMixin } from "./SheetMixin.js";
+import { SheetMixin } from "../mixins/SheetMixin.js";
 
 //  Defining the schema for Item Sheets.
 export default class KitPieceSheet extends ItemSheet {

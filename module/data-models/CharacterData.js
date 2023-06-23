@@ -1,7 +1,7 @@
-import { StatMixin } from "./StatMixin.js";
-import { defaultStats } from "./DefaultStats.js";
+import AC from "../AC.js";
+import { StatMixin } from "../mixins/StatMixin.js";
+import { defaultStats } from "../DefaultStats.js";
 import { Stat } from "./Stat.js";
-import AC from "./AC.js";
 
 //  Defining the schema for Characters.
 export class CharacterData extends foundry.abstract.DataModel {

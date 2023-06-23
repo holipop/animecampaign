@@ -1,5 +1,5 @@
-import { Stat } from "./Stat.js";
-import AC from "./AC.js";
+import { Stat } from "../data-models/Stat.js";
+import AC from "../AC.js";
 
 //  A mixin containing shared methods between Character and Kit Piece schemas for Stat usage.
 export const StatMixin = {

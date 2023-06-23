@@ -1,5 +1,5 @@
-import AC from "./AC.js";
-import { StatMixin } from "./StatMixin.js";
+import AC from "../AC.js";
+import { StatMixin } from "../mixins/StatMixin.js";
 import { Stat } from "./Stat.js";
 import { Section } from "./Section.js";
 
