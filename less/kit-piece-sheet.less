@@ -47,15 +47,16 @@
     .name {
         .HeaderName();
     }
-    .roll {
-        height: 1.1rem;
-        width: 1.05rem;
+    .buttons {
+        display: flex;
+        flex-direction: column;
         align-self: end;
         margin-bottom: .5rem;
 
-        border: 1px solid black;
-        border-radius: 2px;
-        background-color: white;
+        font: bold .85rem @body-font;
+        > * {
+            margin-top: .2rem; 
+        }
     }
     .type {
         .InputSkinning();
@@ -101,6 +102,9 @@
         > * {
             font-family: @body-font;
             font-weight: bold;
+        }
+        > input::placeholder {
+            opacity: 50%;
         }
     }
     .roll-formula-label {

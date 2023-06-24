@@ -86,14 +86,15 @@
   font-family: 'Gloock';
   line-height: 0.85;
 }
-.animecampaign.item.sheet .roll {
-  height: 1.1rem;
-  width: 1.05rem;
+.animecampaign.item.sheet .buttons {
+  display: flex;
+  flex-direction: column;
   align-self: end;
   margin-bottom: 0.5rem;
-  border: 1px solid black;
-  border-radius: 2px;
-  background-color: white;
+  font: bold 0.85rem 'Arial';
+}
+.animecampaign.item.sheet .buttons > * {
+  margin-top: 0.2rem;
 }
 .animecampaign.item.sheet .type {
   padding: 0;
@@ -143,6 +144,9 @@
 .animecampaign.item.sheet .settings > * {
   font-family: 'Arial';
   font-weight: bold;
+}
+.animecampaign.item.sheet .settings > input::placeholder {
+  opacity: 50%;
 }
 .animecampaign.item.sheet .roll-formula-label {
   width: fit-content;
@@ -468,6 +472,9 @@
 .animecampaign.actor.sheet .kit-piece-card:hover > .kit-piece-edit,
 .animecampaign.actor.sheet .kit-piece-card:hover .kit-piece-delete {
   color: rgba(0, 0, 0, 0.5);
+}
+.animecampaign.actor.sheet .kit-piece-img:hover {
+  box-shadow: 0 0 0.5rem 0.3rem rgba(255, 0, 0, 0.5);
 }
 .animecampaign.actor.sheet .upgrade-list,
 .animecampaign.actor.sheet .upgrade-item {

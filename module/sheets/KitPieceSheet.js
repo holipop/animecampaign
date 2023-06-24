@@ -73,6 +73,10 @@ export default class KitPieceSheet extends ItemSheet {
         _html.find('.roll').on('click', event => {
             this.object.roll();
         })
+
+        _html.find('.post').on('click', event => {
+            this.object.roll({ post: true });
+        })
     }
 
     moveSection(_html, _direction) {

@@ -17,14 +17,16 @@
         </span>
     </section>
 
-    <section class="roll">
-        <div class="total" {{match roll}}>
-            {{ roll.totalInt }}
-        </div>
-        <div class="result">
-            &lpar; {{ roll.result }} &rpar;
-        </div>
-    </section>
+    {{#if roll}}
+        <section class="roll">
+            <div class="total" {{match roll}}>
+                {{ roll.totalInt }}
+            </div>
+            <div class="result">
+                &lpar; {{ roll.result }} &rpar;
+            </div>
+        </section>
+    {{/if}}
 
     <section class="sections">
         {{#each system.sections as |section index|}}
