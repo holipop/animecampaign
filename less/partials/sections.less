@@ -8,6 +8,7 @@
         margin-bottom: .1rem;
 
         border-bottom: @thin-border;
+        border-color: rgba(0, 0, 0, 0.35);
     }
     .section:hover {
         i {
@@ -34,8 +35,10 @@
         .InputSkinning();
         height: .95rem;
         margin: 0 .5rem;
-        border-bottom: @thin-border;
+        border-left: @thin-border;
+        border-right: @thin-border;
         border-radius: .15rem;
+        padding: 0 .3rem;
 
         font: bold 0.75rem @body-font;
     }
@@ -51,7 +54,7 @@
         background-color: rgba(255, 255, 255, 0.25)
     }
     .editor.prosemirror {
-        height: 14rem;
+        min-height: 14rem;
     }
     .editor-container {
         margin: 0;

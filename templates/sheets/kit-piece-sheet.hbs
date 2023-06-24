@@ -30,13 +30,13 @@
     </header>
 
     <div class="scrollable">
-        
-        <section class="settings">
-            <label for="system.formula">Roll Formula</label>
-            <input type="text" name="system.formula" value="{{system.formula}}" placeholder="1d20">
-        </section>
 
         {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
+
+        <section class="settings">
+            <div class="roll-formula-label">Roll Formula</div>
+            <input class="roll-formula" type="text" name="system.formula" value="{{system.formula}}" placeholder="1d20">
+        </section>
 
         {{> "systems/animecampaign/templates/sheets/partials/sections.hbs"}}
         

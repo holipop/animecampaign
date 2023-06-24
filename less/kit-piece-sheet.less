@@ -86,6 +86,41 @@
         height: 75%;
     }
 
+    .settings {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: fit-content;
+        width: 26rem;
+        margin: .2rem auto 1rem;
+        padding-bottom: .7rem;
+        border-bottom: @thin-border;
+
+        opacity: 80%;
+        > * {
+            font-family: @body-font;
+            font-weight: bold;
+        }
+    }
+    .roll-formula-label {
+        width: fit-content;
+        margin-right: .3rem;
+        font-size: .7rem;
+        opacity: 60%;
+    }
+    .roll-formula {
+        .InputSkinning();
+        height: 1rem;
+        width: 4.5rem;
+        border-left: @thin-border;
+        border-right: @thin-border;
+        border-radius: .2rem;
+        padding: 0 .5rem;
+
+        font-size: .9rem;
+    }
+
     .hidden {
         display: none;
     }
