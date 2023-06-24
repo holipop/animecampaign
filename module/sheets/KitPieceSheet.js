@@ -47,6 +47,8 @@ export default class KitPieceSheet extends ItemSheet {
 
         this.roll(_html);
         
+        this.moveSection(_html, 'up');
+        this.moveSection(_html, 'down');
         this.addSection(_html);
         this.deleteSection(_html);
 
@@ -70,6 +72,20 @@ export default class KitPieceSheet extends ItemSheet {
     roll(_html) {
         _html.find('.roll').on('click', event => {
             this.object.roll();
+        })
+    }
+
+    moveSection(_html, _direction) {
+        const MOVE = _html.find(`.section-move-${_direction}`);
+
+        MOVE.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+            const moveTo = (_direction == 'up')
+                ? index - 1 
+                : index + 1
+            ;
+
+            this.object.system.moveSection(index, moveTo);
         })
     }
 

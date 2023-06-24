@@ -35,6 +35,20 @@ export class KitPieceData extends foundry.abstract.DataModel {
         }
     }
 
+    moveSection(_index, _moveTo) {
+        if (_moveTo == -1 || _moveTo == this.sections.length) return AC.log('Invalid section placement.');
+
+        let sections = this.sections;
+        let targetSection = sections[_index];
+        sections.splice(_index, 1);
+
+        let topSections = sections.splice(_moveTo);
+        sections = [...sections, targetSection, ...topSections];
+
+        this.parent.update({ 'system.sections': sections });
+        AC.log(`Moved a section from index ${_index} to ${_moveTo} for ${this.parent.name}`);
+    }
+
     createSections(_sections = [{}], _index = null) {
         let sections = this.sections;
         let createdSections = _sections.map(obj => new Stat(obj, { parent: this }));
