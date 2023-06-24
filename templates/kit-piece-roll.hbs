@@ -30,12 +30,12 @@
         {{#each system.sections as |section index|}}
             <fieldset class="section">
 
-                <legend class="section-name">
+                <legend class="section-label">
                     <a class="collapse">
                         <i class="fas fa-chevron-down"></i>
                     </a>
-                    {{#if section.name}}
-                        {{section.name}}
+                    {{#if section.label}}
+                        {{section.label}}
                     {{/if}}
                 </legend>
 

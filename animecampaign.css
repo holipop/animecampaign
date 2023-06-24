@@ -221,7 +221,7 @@
   padding: 0;
   border-top: 1px solid black;
 }
-.animecampaign.kit-piece-roll .section-name {
+.animecampaign.kit-piece-roll .section-label {
   padding-right: 0.3rem;
   font: bold italic 0.7rem 'Arial';
 }
@@ -580,12 +580,52 @@
 .animecampaign.sheet #context-menu > ol > li {
   line-height: 1.5rem;
 }
-.animecampaign.item.sheet .sections > * {
-  outline: pink solid 1px;
-  background-color: rgba(0, 255, 255, 0.131);
+.animecampaign.item.sheet .sections .section {
+  display: grid;
+  border: 0;
+  padding: 0;
+  margin-bottom: 0.1rem;
+  border-bottom: 1px solid black;
+}
+.animecampaign.item.sheet .sections .section:hover i {
+  opacity: 75%;
+}
+.animecampaign.item.sheet .sections .section-wrapper {
+  padding-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+.animecampaign.item.sheet .sections .section-options {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 0 auto;
+}
+.animecampaign.item.sheet .sections .section-options > * {
+  margin: 0 0.15rem;
+}
+.animecampaign.item.sheet .sections .section-options i {
+  opacity: 10%;
+}
+.animecampaign.item.sheet .sections .section-label {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  height: 0.95rem;
+  margin: 0 0.5rem;
+  border-bottom: 1px solid black;
+  border-radius: 0.15rem;
+  font: bold 0.75rem 'Arial';
+}
+.animecampaign.item.sheet .sections .section-label::placeholder {
+  opacity: 33%;
 }
 .animecampaign.item.sheet .sections .editor {
   height: fit-content;
+  border-radius: 0.3rem;
+  margin-top: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.25);
 }
 .animecampaign.item.sheet .sections .editor.prosemirror {
   height: 14rem;
@@ -597,4 +637,18 @@
   height: fit-content;
   min-height: 2rem;
   padding: 0.5rem;
+}
+.animecampaign.item.sheet .sections .add-wrapper {
+  display: grid;
+  place-items: center;
+  width: 85%;
+  height: 2rem;
+  margin: 0.5rem auto 0;
+  border: 2px dashed rgba(0, 0, 0, 0.66);
+  border-radius: 0.25rem;
+  opacity: 50%;
+}
+.animecampaign.item.sheet .sections .add-section > i {
+  font: bold 0.75rem 'Arial';
+  text-transform: uppercase;
 }
