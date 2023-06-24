@@ -1,6 +1,6 @@
 import { defaultStats } from "../DefaultStats.js";
-import { StatConfigMenu } from "./StatConfigMenu.js";
-import { AC } from "../config.js";
+import { StatConfigMenu } from "../sheets/StatConfigMenu.js";
+import AC from "../AC.js";
 
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
 export const SheetMixin = {

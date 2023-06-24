@@ -9,6 +9,15 @@
             <div class="name" {{contrast system}} data-edit="name" spellcheck='false' contenteditable>
                 {{item.name}}
             </div>
+
+            <div class="buttons" {{contrast system}}>
+                <a class="post">
+                    <i class="fas fa-message"></i> Post
+                </a>
+                <a class="roll">
+                    <i class="fas fa-dice-d20"></i> Roll
+                </a>
+            </div>
         </section>
 
         <section class="header-bottom">
@@ -27,11 +36,16 @@
     </header>
 
     <div class="scrollable">
+
         {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
 
-        <div class="description">
-            {{editor item.system.description target="system.description" button='false' engine="prosemirror" collaborate='false'}}
-        </div>
+        <section class="settings">
+            <div class="roll-formula-label">Roll Formula</div>
+            <input class="roll-formula" type="text" name="system.formula" value="{{system.formula}}" placeholder="N/A">
+        </section>
+
+        {{> "systems/animecampaign/templates/sheets/partials/sections.hbs"}}
+        
     </div>
 
 </form>

@@ -1,4 +1,4 @@
-import { SheetMixin } from "./SheetMixin.js";
+import { SheetMixin } from "../mixins/SheetMixin.js";
 
 //  Defining the schema for Actor Sheets.
 export default class CharacterSheet extends ActorSheet {
@@ -70,18 +70,17 @@ export default class CharacterSheet extends ActorSheet {
 
     rollKitPiece(_html) { 
         const KIT_IMG = _html.find('.kit-piece-img');
-        KIT_IMG.on('click', event => {
+        KIT_IMG.on('mousedown', event => {
             const id = $(event.currentTarget).data('id');
 
             const item = this.object.getEmbeddedDocument('Item', id);
 
-            item.roll();
+            const RIGHT_CLICK = 2;
+            const settings = {
+                post: (event.button == RIGHT_CLICK)
+            }
+            item.roll(settings);
         });
-
-        //* TODO hook up button for img
-        //* TODO send message to chat
-        //  TODO roll
-        //  TODO create kit piece message
     }
 
     //  Creates a new Kit Piece within the Character's owned Items collection.

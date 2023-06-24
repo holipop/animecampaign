@@ -1,5 +1,5 @@
-import { Stat } from "./Stat.js";
-import { AC } from "./config.js";
+import { Stat } from "../data-models/Stat.js";
+import AC from "../AC.js";
 
 //  A mixin containing shared methods between Character and Kit Piece schemas for Stat usage.
 export const StatMixin = {
@@ -18,7 +18,7 @@ export const StatMixin = {
         }
 
         this.parent.update({ 'system.stats': stats });
-        AC.log(`${AC} | Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
+        AC.log(`Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
     },
 
     //  Deletes existing Stat objects from the stats list given a list of Stat names.

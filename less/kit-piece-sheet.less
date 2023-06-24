@@ -47,6 +47,17 @@
     .name {
         .HeaderName();
     }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        align-self: end;
+        margin-bottom: .5rem;
+
+        font: bold .85rem @body-font;
+        > * {
+            margin-top: .2rem; 
+        }
+    }
     .type {
         .InputSkinning();
         margin-left: .25rem;
@@ -76,26 +87,45 @@
         height: 75%;
     }
 
-    .description {
-        width: 95%;
-        min-height: 5rem;
-        height: inherit;
-        max-height: fit-content;
-        margin: .25rem auto 0;
+    .settings {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: fit-content;
+        width: 26rem;
+        margin: .2rem auto 1rem;
+        padding-bottom: .7rem;
+        border-bottom: @thin-border;
 
+        opacity: 80%;
+        > * {
+            font-family: @body-font;
+            font-weight: bold;
+        }
+        > input::placeholder {
+            opacity: 50%;
+        }
+    }
+    .roll-formula-label {
+        width: fit-content;
+        margin-right: .3rem;
+        font-size: .7rem;
+        opacity: 60%;
+    }
+    .roll-formula {
+        .InputSkinning();
+        height: 1rem;
+        width: 4.5rem;
         border-left: @thin-border;
         border-right: @thin-border;
         border-radius: .2rem;
-        
-        .editor {
-            height: 100%;
-        }
-        .editor-container {
-            margin: 0;
-        }
-        p {
-            margin: .25rem;
-        }
-        // TODO DESKIN THE PROSEMIRROR EDITOR
+        padding: 0 .5rem;
+
+        font-size: .9rem;
+    }
+
+    .hidden {
+        display: none;
     }
 }

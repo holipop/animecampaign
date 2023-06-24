@@ -1,4 +1,4 @@
-import { SheetMixin } from "./SheetMixin.js";
+import { SheetMixin } from "../mixins/SheetMixin.js";
 
 //  Defining the schema for Item Sheets.
 export default class KitPieceSheet extends ItemSheet {
@@ -45,6 +45,13 @@ export default class KitPieceSheet extends ItemSheet {
         this.addDefaultStats(_html);
         this.collapseStatBlock(_html)
 
+        this.roll(_html);
+        
+        this.moveSection(_html, 'up');
+        this.moveSection(_html, 'down');
+        this.addSection(_html);
+        this.deleteSection(_html);
+
         new ContextMenu(_html, '.stat', this.contextMenuEntries());
         
         super.activateListeners(_html);
@@ -59,6 +66,46 @@ export default class KitPieceSheet extends ItemSheet {
         CUSTOM_TYPE.on('change', event => {
             console.log(this.object);
             this.item.update([{ 'system.customType': loweredInput }]);
+        })
+    }
+
+    roll(_html) {
+        _html.find('.roll').on('click', event => {
+            this.object.roll();
+        })
+
+        _html.find('.post').on('click', event => {
+            this.object.roll({ post: true });
+        })
+    }
+
+    moveSection(_html, _direction) {
+        const MOVE = _html.find(`.section-move-${_direction}`);
+
+        MOVE.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+            const moveTo = (_direction == 'up')
+                ? index - 1 
+                : index + 1
+            ;
+
+            this.object.system.moveSection(index, moveTo);
+        })
+    }
+
+    addSection(_html) {
+        const ADD_SECTION = _html.find('.add-section');
+        ADD_SECTION.on('click', event => {
+            this.object.system.createSections();
+        }) 
+    }
+
+    deleteSection(_html) {
+        const DELETE_SECTION = _html.find('.section-delete');
+        DELETE_SECTION.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+
+            this.object.system.deleteSectionIndex(index);
         })
     }
 }
