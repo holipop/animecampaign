@@ -251,6 +251,22 @@
   overflow-x: hidden;
   font: 1rem 'Philosopher';
 }
+.animecampaign.kit-piece-roll .stat-name {
+  padding: 0.5rem 0.3rem 0;
+  text-transform: uppercase;
+  text-align: end;
+  border-right: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.25);
+  font: bold italic 0.75rem 'Arial';
+  line-height: 0.5;
+  color: rgba(0, 0, 0, 0.6);
+}
+.animecampaign.kit-piece-roll .stat-value {
+  padding: 0 0.3rem;
+  width: 65%;
+  font: bold italic 1.5rem 'Philosopher';
+  line-height: 1;
+}
 .animecampaign.kit-piece-roll .sections {
   margin: 0.25rem;
   padding: 0.2rem 0.1rem;
