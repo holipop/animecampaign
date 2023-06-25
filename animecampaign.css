@@ -499,6 +499,35 @@
   margin: auto 0.2rem;
   color: rgba(0, 0, 0, 0.1);
 }
+.animecampaign.actor.sheet .empty-kit {
+  height: 3.85rem;
+  margin: 0.2rem 4rem;
+  border-radius: 0.25rem;
+  border: 2px dashed rgba(0, 0, 0, 0.66);
+  opacity: 50%;
+}
+.animecampaign.actor.sheet .empty-kit * {
+  display: grid;
+  justify-items: center;
+  margin: 0.5rem 0;
+}
+.animecampaign.actor.sheet .empty-kit * > * {
+  margin: 0;
+}
+.animecampaign.actor.sheet .empty-kit p {
+  line-height: 0;
+  font: bold 0.75rem 'Arial';
+  text-transform: uppercase;
+}
+.animecampaign.actor.sheet .empty-kit .add-default {
+  border-right: 1px solid black;
+}
+.animecampaign.actor.sheet .kit-type .kit-piece-create {
+  opacity: 20%;
+}
+.animecampaign.actor.sheet .kit-type:hover .kit-piece-create {
+  opacity: 100%;
+}
 .animecampaign.actor.sheet .kit-piece-card:hover > .kit-piece-edit,
 .animecampaign.actor.sheet .kit-piece-card:hover .kit-piece-delete {
   color: rgba(0, 0, 0, 0.5);

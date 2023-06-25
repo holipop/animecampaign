@@ -22,7 +22,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
             }),
             type: new fields.StringField({
                 ...defaultSettings,
-                initial: "weapon",
+                initial: "ability",
             }),
             customType: new fields.StringField(defaultSettings),
             formula: new fields.StringField({

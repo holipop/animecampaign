@@ -45,6 +45,7 @@ export default class CharacterSheet extends ActorSheet {
         this.updateClass(_html);
         
         this.rollKitPiece(_html);
+        this.addDefaultKit(_html);
         this.createKitPiece(_html);
         this.deleteKitPiece(_html);
         this.editKitPiece(_html);
@@ -90,8 +91,42 @@ export default class CharacterSheet extends ActorSheet {
             let itemData = [{
                 name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                 type: "Kit Piece",
+                system: {
+                    color: this.actor.system.color,
+                    type: $(event.currentTarget).data('type') || 'ability'
+                }
             }]
     
+            this.actor.createEmbeddedDocuments('Item', itemData);
+        })
+    }
+
+    addDefaultKit(_html) {
+        _html.find(".add-default").on("click", event => {
+            const add = (_type, _quantity = 1) => {
+                if (_quantity < 1) AC.error('Cannot take values under 0.')
+
+                let arr = [];
+                for (let i = 0; i < _quantity; i++) {
+                    arr.push({
+                        name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
+                        type: "Kit Piece",
+                        system: {
+                            color: this.actor.system.color,
+                            type: _type
+                        }
+                    })
+                }
+                return arr;
+            }
+
+            let itemData = [ 
+                ...add('talent'), 
+                ...add('passive'), 
+                ...add('weapon'), 
+                ...add('ability', 3) 
+            ];
+
             this.actor.createEmbeddedDocuments('Item', itemData);
         })
     }

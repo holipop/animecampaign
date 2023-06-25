@@ -79,6 +79,42 @@
             color: rgba(0, 0, 0, 0.1)
         }
     }
+
+    .empty-kit {
+        height: 3.85rem;
+        margin: .2rem 4rem;
+        border-radius: .25rem;
+        border: 2px dashed rgba(0, 0, 0, 0.66);
+
+        opacity: 50%;
+        * > {
+            display: grid;
+            justify-items: center;
+            margin: .5rem 0;
+            > * {
+                margin: 0;
+            }
+        }
+        p > {
+            line-height: 0;
+
+            font: bold .75rem @body-font;
+            text-transform: uppercase;
+            
+        }
+        .add-default {
+            border-right: @thin-border;
+        }
+    }
+
+    .kit-type .kit-piece-create {
+        opacity: 20%;
+    }
+    .kit-type:hover {
+        .kit-piece-create {
+            opacity: 100%;
+        }
+    }
     .kit-piece-card:hover {
         > .kit-piece-edit, .kit-piece-delete {
             color: rgba(0, 0, 0, 0.5);
