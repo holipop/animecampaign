@@ -202,7 +202,7 @@
   height: 100%;
 }
 .animecampaign.actor.sheet .biography .editor {
-  height: 100%;
+  min-height: 4rem;
 }
 .animecampaign.actor.sheet .biography .editor.prosemirror {
   min-height: 15rem;
