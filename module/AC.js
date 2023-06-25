@@ -93,4 +93,24 @@ export default class AC {
             }
         }
     }
+
+    static get fonts() {
+        return {
+            "Gloock": {
+                editor: true,
+                fonts: [
+                    { urls: ['systems/animecampaign/fonts/Gloock/Gloock-Regular.ttf'] }
+                ]
+            },
+            "Philosopher": {
+                editor: true,
+                fonts: [
+                    { urls: ['systems/animecampaign/fonts/Philosopher/Philosopher-Regular.ttf'], weight: 400, style: 'normal' },
+                    { urls: ['systems/animecampaign/fonts/Philosopher/Philosopher-Bold.ttf'], weight: 700, style: 'normal' },
+                    { urls: ['systems/animecampaign/fonts/Philosopher/Philosopher-Italic.ttf'], weight: 400, style: 'italic' },
+                    { urls: ['systems/animecampaign/fonts/Philosopher/Philosopher-BoldItalic.ttf'], weight: 700, style: 'italic' }
+                ]
+            }
+        }
+    }
 }

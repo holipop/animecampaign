@@ -32,12 +32,17 @@ Hooks.once("init", () => {
     //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
 
+    //  Assigning Fonts
+    CONFIG.fontDefinitions = { ...CONFIG.fontDefinitions, ...AC.fonts };
+    CONFIG.defaultFontFamily = 'Arial';
+
     //  Redefining the default document classes.
     CONFIG.Item.documentClass = ACItem;
 
     //  Assigning Character and Kit Piece schema.
     CONFIG.Actor.systemDataModels["Character"] = CharacterData;
     CONFIG.Item.systemDataModels["Kit Piece"] = KitPieceData;
+
 
     //  Unregistering the default document sheets & registering our own.
     Actors.unregisterSheet("core", ActorSheet);
