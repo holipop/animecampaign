@@ -34,7 +34,7 @@ export const defaultStats = {
         },
         {
             name: 'range',
-            img: AC.load('overhead.png')
+            img: AC.load('horizontal-flip.png')
         }
     ],
 

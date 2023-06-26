@@ -1,4 +1,4 @@
-import { RolledItem } from "./RolledItem.js";
+import AC from "./AC.js";
 
 export default class ACItem extends Item {
     chatTemplates = {
