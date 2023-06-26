@@ -1,5 +1,6 @@
 {
     "animecampaign": {
+        "title": "Anime Campaign",
         "test": "Testing Testing One Two Three!",
         "build": {
             "svelte": "Svelte",
@@ -15,6 +16,19 @@
                 "powerhouse": "Powerhouse"
             }
         },
+        "kitTypes": {
+            "weapon": "Weapon",
+            "talent": "Talent",
+            "passive": "Passive",
+            "ability": "Ability",
+            "custom": "Custom"
+        },
+        "kitTypesPlural": {
+            "weapons": "Weapons",
+            "talents": "Talents",
+            "passives": "Passives",
+            "abilities": "Abilities"
+        },
         "powerset": {
             "inscribed": "Inscribed",
             "mundie": "Mundie"
@@ -26,8 +40,37 @@
             "damage": "Damage",
             "range": "Range",
             "cost": "Cost",
-            "bonus": "Bonus",
-            "action": "Action"
+            "bonus": "Bonus"
+        },
+        "statButtons": {
+            "addDefault": "Add Default Stats",
+            "addLeft": "Add Stat Left",
+            "addRight": "Add Stat Right",
+            "createBlank": "Create Blank Stat",
+            "configure": "Configure",
+            "delete": "Delete"
+        },
+        "navigationLabels": {
+            "kit": "Kit",
+            "upgrades": "Upgrades",
+            "biography": "Biography"
+        },
+        "kitText": {
+            "addKitPiece": "Create New Kit Piece",
+            "newKitPiece": "New Kit Piece",
+            "deleteKitPiece": "Delete Kit Piece",
+            "editKitPiece": "Edit Kit Piece"
+        },
+        "statDisplay": {
+            "single": "Single",
+            "double": "Double",
+            "phase": "Phase",
+            "state": "State",
+            "advancement": "Advancement"
+        },
+        "statConfigLabels": {
+            "image": "Image",
+            "display": "Display"
         }
     }
 }

@@ -1,0 +1,141 @@
+// main: ../animecampaign.less
+
+.animecampaign.sheet{
+    .stat-block {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        margin: .3rem auto 0;
+        max-width: 26rem;
+    }
+    .stat {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: .25rem;
+        height: 4rem;
+        max-width: 9rem;
+        min-width: 6rem;
+    }
+    .stat:nth-child(4n) {
+        > .stat-content {
+            border-right: @thin-border;
+        }
+    }
+    .stat:last-child {
+        > .stat-content {
+            border-right: @thin-border;
+        }
+    }
+    .stat-img {
+        position: relative;
+        top: -.55rem;
+        width: 100%;
+        display: grid;
+        justify-items: center;
+        img > {
+            position: absolute;
+            height: 4rem;
+            pointer-events: none;
+
+            opacity: 15%;
+            filter: brightness(0) saturate(100%);
+            border: 0;
+            z-index: 0;
+        }
+    }
+    .stat-label {
+        .InputSkinning();
+        text-align: center;
+        height: .75rem;
+        width: 100%;
+        z-index: 1;
+
+        font: bold .75rem @body-font;
+        text-transform: uppercase;
+    }
+    .stat-content {
+        border-left: .25px solid black;
+        max-height: 2.25rem;
+        overflow-y: visible;
+        z-index: 2;
+
+        .stat-single {
+            .StatSize(2.25rem);
+        }
+        .stat-double.value {
+            .StatSize(1.75rem);
+        }
+        .stat-double.max {
+            .StatSize(1.1rem);
+        }
+        
+        .stat-wrapper {
+            overflow-x: hidden;
+            > * {
+                .InputSkinning();
+                width: 100%;
+        
+                font-family: @header-font;
+                text-align: center; 
+                font-weight: bold;
+            }
+            .divider {
+                .Divider(60%)
+            }
+        }
+    }
+    .empty-stats {
+        height: 3.85rem;
+        margin: .2rem 4rem;
+        border-radius: .25rem;
+        border: 2px dashed rgba(0, 0, 0, 0.66);
+
+        opacity: 50%;
+        * > {
+            display: grid;
+            justify-items: center;
+            margin: .5rem 0;
+            > * {
+                margin: 0;
+            }
+        }
+        p > {
+            line-height: 0;
+
+            font: bold .75rem @body-font;
+            text-transform: uppercase;
+            
+        }
+    }
+    .create-default {
+        border-right: @thin-border;
+    }
+    .collapse-stats {
+        width: 26rem;
+        margin: 0 auto;
+        line-height: 1.4rem;
+        text-align: center;
+
+        font-size: 1.6rem;
+        > div {
+            height: .8rem;
+            border-bottom: @thin-border;
+        }
+        > a {
+            margin: 0 3px;
+        }
+    }
+    .hidden {
+        display: none;
+    }
+    #context-menu {
+        min-width: 7rem;
+        > ol {
+            font: .75rem @header-font;
+            > li {
+                line-height: 1.5rem;
+            }
+        }
+    }
+}

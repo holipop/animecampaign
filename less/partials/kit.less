@@ -1,0 +1,126 @@
+// main: ../animecampaign.less
+
+@card-height: 1.75rem;
+
+.animecampaign.actor.sheet {
+    .kit-block {
+        width: 97.5%;
+        margin: 0 auto;
+    }
+    .kit-type {
+        padding: 0.1rem 7.5%;
+        padding-right: 0;
+        border-radius: 1rem 1rem 0 0;
+
+        font: bold italic .75rem @body-font;
+        text-transform: uppercase;
+        background: linear-gradient(to right, transparent 1%, currentColor 10%, currentColor 60%, transparent 99%);
+
+        &-group {
+            margin-bottom: 0.5rem;
+        }
+    }
+    .kit-piece- {
+        &card {
+            height: @card-height;
+            
+            background: linear-gradient(to right, currentColor .5rem, transparent 25%);
+        }
+        &img {
+            .SquareSize(@card-height);
+            .InputSkinning();
+            margin-left: 0.5rem;
+
+            border: 0;
+        }
+        &name {
+            font: bold 1.25rem @header-font;
+            height: @card-height;
+            margin: .075rem .2rem 0;
+            
+            color: black;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        &stat {
+            height: @card-height - 0.32rem;
+            min-width: 0.5rem;
+            display: flex;
+            flex: 0 1 auto;
+            padding: 0 .4rem 0 .2rem;
+            margin: auto .1rem;
+            border-radius: 3px;
+        }
+        &stat-img {
+            .SquareSize(1.15rem);
+            .InputSkinning();
+            margin: auto 0.1rem auto 0;
+            pointer-events: none;
+
+            filter: brightness(0) saturate(100%) invert(100%);
+        }
+        &stat-value {
+            transform: scaleY(90%);
+            font: bold italic 1rem @body-font;
+            color: white;
+            margin: auto 0 auto .1rem;
+        }
+        &stat-divider {
+            .Divider( calc(100% - 2.5rem) );
+            margin: 0;
+            margin-bottom: 2px;
+        }
+
+        &edit, &delete {
+            margin: auto 0.2rem;
+
+            color: rgba(0, 0, 0, 0.1)
+        }
+    }
+
+    .empty-kit {
+        height: 3.85rem;
+        margin: .2rem 4rem;
+        border-radius: .25rem;
+        border: 2px dashed rgba(0, 0, 0, 0.66);
+
+        opacity: 50%;
+        * > {
+            display: grid;
+            justify-items: center;
+            margin: .5rem 0;
+            > * {
+                margin: 0;
+            }
+        }
+        p > {
+            line-height: 0;
+
+            font: bold .75rem @body-font;
+            text-transform: uppercase;
+            
+        }
+        .add-default {
+            border-right: @thin-border;
+        }
+    }
+
+    .kit-type .kit-piece-create {
+        opacity: 20%;
+    }
+    .kit-type:hover {
+        .kit-piece-create {
+            opacity: 100%;
+        }
+    }
+    .kit-piece-card:hover {
+        > .kit-piece-edit, .kit-piece-delete {
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+    .kit-piece-img:hover {
+        box-shadow: 0 0 .5rem .3rem rgba(255, 0, 0, 0.5);
+    }
+}

@@ -1,0 +1,74 @@
+<div class="animecampaign kit-piece-roll" {{match system style='border-color'}}>
+
+    <section class="summary">
+        <header {{match system style='background-color'}}>
+            <img class="img" {{match system style='background-color'}} src="{{img}}" data-edit="img">
+            <div class="name" {{contrast system}}>
+                {{name}}
+            </div>
+        </header>
+
+        <span class="type">
+            {{#if (eq system.type 'custom')}}
+                {{system.customType}}
+            {{else}}
+                {{system.type}}
+            {{/if}}
+        </span>
+    </section>
+
+    {{#if roll}}
+        <section class="roll">
+            <div class="total" {{match roll}}>
+                {{ roll.totalInt }}
+            </div>
+            <div class="result">
+                &lpar; {{ roll.result }} &rpar;
+            </div>
+        </section>
+    {{/if}}
+
+    {{#if system.stats}}
+        <table class="stats">
+            {{#each system.stats as |stat index|}}
+                <tr data-index="{{index}}">
+                    {{#if stat.img}}
+                        <td class="stat-img"><img src="{{stat.img}}"></td>
+                    {{/if}}
+                    <td class="stat-name">{{stat.name}}</td>
+                    <td class="stat-value">
+                        {{stat.value}}
+                        {{#if (eq stat.settings.display 'double')}}
+                            <span class="stat-max">/ {{stat.max}}</span>
+                        {{/if}}
+                    </td>
+                </tr>
+            {{/each}} 
+        </table>
+    {{/if}}
+
+    {{#if system.sections}}
+        <section class="sections">
+            {{#each system.sections as |section index|}}
+                <fieldset class="section">
+
+                    <legend class="section-label">
+                        <a class="collapse">
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        {{#if section.label}}
+                            {{section.label}}
+                        {{/if}}
+                    </legend>
+
+                    <div class="section-text">
+                        {{{section.text}}}
+                    </div>
+
+                </fieldset>
+            {{/each}}
+        </section>
+    {{/if}}
+
+    {{log this}}
+</div>
