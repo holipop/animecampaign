@@ -265,6 +265,24 @@
   overflow-x: hidden;
   font: 1rem 'Philosopher';
 }
+.animecampaign.kit-piece-roll .stat-img {
+  position: relative;
+  top: -0.75rem;
+  opacity: 30%;
+  filter: brightness(0) saturate(100%);
+}
+.animecampaign.kit-piece-roll .stat-img > img {
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+}
 .animecampaign.kit-piece-roll .stat-name {
   padding: 0.5rem 0.3rem 0;
   text-transform: uppercase;

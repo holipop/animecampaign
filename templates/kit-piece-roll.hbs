@@ -32,6 +32,7 @@
         <table class="stats">
             {{#each system.stats as |stat index|}}
                 <tr data-index="{{index}}">
+                    <td class="stat-img"><img src="{{stat.img}}"></td>
                     <td class="stat-name">{{stat.name}}</td>
                     <td class="stat-value">{{stat.value}}</td>
                 </tr>
