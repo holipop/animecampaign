@@ -2,15 +2,21 @@
 export default class AC {
 
     //  A console.log with styling, intended for debugging clarity.
-    //*     (string | number | boolean) : void
+    //*     (_log: string | number | boolean) : void
     static log(_log) {
         console.log(`%cAnime Campaign | ${_log}`, 'color: orange');
     }
 
     //  A console.error with styling, intended for debugging clarity.
-    //*     (string | number | boolean) : void
+    //*     (_error: string | number | boolean) : void
     static error(_error) {
         console.error(`%cAnime Campaign | ${_error}`, 'color: orange');
+    }
+
+    //  Get the filepath of an asset.
+    //*     (_path: string) : string
+    static load(_path) {
+        return `systems/animecampaign/assets/${_path}`
     }
 
     //  Takes a string representation of a hexidecimal color and returns an array of RGB 
