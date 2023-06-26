@@ -299,6 +299,10 @@
   font: bold italic 1.5rem 'Philosopher';
   line-height: 1;
 }
+.animecampaign.kit-piece-roll .stat-max {
+  opacity: 75%;
+  font: bold italic 1rem 'Philosopher';
+}
 .animecampaign.kit-piece-roll .sections {
   margin: 0.25rem;
   padding: 0.2rem 0.1rem;
