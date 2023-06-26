@@ -1,6 +1,7 @@
 //  Defining the application for Stat configuration.
 export class StatConfigMenu extends FormApplication {
     
+    //  Sets the default options of this application.
     //*     () : ApplicationOptions
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -10,6 +11,7 @@ export class StatConfigMenu extends FormApplication {
         });
     }
 
+    //  Sets the title of this application.
     //*     () : string
     get title() {
         return `Stat Configuration: ${this.object.label}`;

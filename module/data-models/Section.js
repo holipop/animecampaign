@@ -1,4 +1,7 @@
+//  Defining the schema for Section objects.
 export class Section extends foundry.abstract.DataModel {
+
+    //*     () : Object
     static defineSchema() {
         const fields = foundry.data.fields;
 

@@ -1,7 +1,7 @@
 //  Defining the schema for Stat objects
 export class Stat extends foundry.abstract.DataModel {
 
-    //*     () : StatSchema
+    //*     () : Object
     static defineSchema() {
         const fields = foundry.data.fields;
 
@@ -59,9 +59,7 @@ export class Stat extends foundry.abstract.DataModel {
         let displays = { ...CONFIG.animecampaign.statDisplay };
         const type = this.parent.parent.type;
 
-        if (type == 'Kit Piece') {
-            delete displays.advancement;
-        }
+        if (type == 'Kit Piece') delete displays.advancement;
 
         return displays;
     }

@@ -6,7 +6,7 @@ import { Stat } from "./Stat.js";
 //  Defining the schema for Characters.
 export class CharacterData extends foundry.abstract.DataModel {
 
-    //*     () : CharacterSchema
+    //*     () : Object
     static defineSchema() {
         const fields = foundry.data.fields;
 

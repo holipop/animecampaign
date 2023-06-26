@@ -41,8 +41,9 @@ export default class CharacterSheet extends ActorSheet {
     //  This is where we put any custom event listeners for our sheets.
     //*     (_html: jQuery) : void
     activateListeners(_html) {
-        
-        if (this.getOwnership() == 3) {
+        const OWNER = 3;
+
+        if (this.getOwnership() == OWNER) {
             this.addDefaultKit(_html);
             this.createKitPiece(_html);
             this.deleteKitPiece(_html);
@@ -73,6 +74,8 @@ export default class CharacterSheet extends ActorSheet {
         CLASS[0].addEventListener('paste', event => event.preventDefault());
     }
 
+    //  Send a chat message of the Kit Piece, right clicking will omit the Roll.
+    //*     (_html: jQuery) : void
     rollKitPiece(_html) { 
         const KIT_IMG = _html.find('.kit-piece-img');
         KIT_IMG.on('mousedown', event => {
@@ -105,6 +108,8 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
+    //  Generates a series of blank Kit Pieces, enough for a basic character sheet.
+    //*     (_html: jQuery) : void
     addDefaultKit(_html) {
         _html.find(".add-default").on("click", event => {
             const add = (_type, _quantity = 1) => {

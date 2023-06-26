@@ -55,6 +55,7 @@ Hooks.once("init", () => {
     Handlebars.registerHelper(AC.hbsHelpers);
 })
 
+//  All of the code that runs for chat messages.
 Hooks.on('renderChatMessage', (_app, _html, _data) => {
     RolledItem.addChatListeners(_html);
 })

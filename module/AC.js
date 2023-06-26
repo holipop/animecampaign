@@ -1,11 +1,13 @@
 //  A helper class for utility functions and brevity.
 export default class AC {
 
+    //  A console.log with styling, intended for debugging clarity.
     //*     (string | number | boolean) : void
     static log(_log) {
         console.log(`%cAnime Campaign | ${_log}`, 'color: orange');
     }
 
+    //  A console.error with styling, intended for debugging clarity.
     //*     (string | number | boolean) : void
     static error(_error) {
         console.error(`%cAnime Campaign | ${_error}`, 'color: orange');
@@ -16,6 +18,18 @@ export default class AC {
     //*     (_hexColor: string) : number[]
     static hexToRGB(_hex) {
         return [_hex.slice(1, 3), _hex.slice(3, 5), _hex.slice(5)].map(element => +`0x${element}`);
+    }
+
+    //  Returns a color representing the max and min value of a given roll formula.
+    //*     (_roll: string) : string
+    static critColor(_roll) {
+        const formula = _roll.formula;
+        
+        if (_roll.total == new Roll(formula).roll({ maximize: true }).total) {
+            return '#0a9b03';
+        } else if (_roll.total == new Roll(formula).roll({ minimize: true }).total) {
+            return '#e22209';
+        }
     }
 
     //  Returns an object of custom Handlebars helpers.
@@ -94,6 +108,8 @@ export default class AC {
         }
     }
 
+    //  Returns an object containing the filepaths and attributes of custom system fonts.
+    //*     () : Object
     static get fonts() {
         return {
             "Gloock": {

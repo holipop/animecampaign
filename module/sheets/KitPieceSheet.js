@@ -61,6 +61,8 @@ export default class KitPieceSheet extends ItemSheet {
         super.activateListeners(_html);
     }
 
+    //  Transforms the custom type's text to lowercase.
+    //*     (_html: jQuery) : void
     customTypeToLowercase(_html) {
         const CUSTOM_TYPE = _html.find('.custom-type');
         if (!CUSTOM_TYPE.length) return;
@@ -73,6 +75,8 @@ export default class KitPieceSheet extends ItemSheet {
         })
     }
 
+    // Sends a chat message of the Kit Piece to the chat, optionally with a Roll.
+    //*     (_html: jQuery) : void
     roll(_html) {
         _html.find('.roll').on('click', event => {
             this.object.roll();
@@ -83,6 +87,8 @@ export default class KitPieceSheet extends ItemSheet {
         })
     }
 
+    //  Shifts a section up or down by one index in the sections array.
+    //*     (_html: jQuery, _direction: string) : void
     moveSection(_html, _direction) {
         const MOVE = _html.find(`.section-move-${_direction}`);
 
@@ -97,6 +103,7 @@ export default class KitPieceSheet extends ItemSheet {
         })
     }
 
+    //*     (_html: jQuery) : void
     addSection(_html) {
         const ADD_SECTION = _html.find('.add-section');
         ADD_SECTION.on('click', event => {
@@ -104,6 +111,7 @@ export default class KitPieceSheet extends ItemSheet {
         }) 
     }
 
+    //*     (_html: jQuery) : void
     deleteSection(_html) {
         const DELETE_SECTION = _html.find('.section-delete');
         DELETE_SECTION.on('click', event => {
