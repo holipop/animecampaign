@@ -66,9 +66,6 @@ animecampaign.kitText = {
 animecampaign.statDisplay = {
     single: "animecampaign.statDisplay.single",
     double: "animecampaign.statDisplay.double",
-    phase: "animecampaign.statDisplay.phase",
-    state: "animecampaign.statDisplay.state",
-    advancement: "animecampaign.statDisplay.advancement"
 }
 animecampaign.statConfigLabels = {
     image: "animecampaign.statConfigLabels.image",

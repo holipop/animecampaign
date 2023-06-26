@@ -6,7 +6,7 @@ export const StatMixin = {
 
     //  Create new Stat objects inside the stats list via a list of objects defining Stats.
     //  Optionally at a desired index.
-    //*     (_stat?: StatSchema[], _index?: number) : void
+    //*     (_stat?: Object[], _index?: number) : void
     createStats(_stats = [{}], _index = null) {
         let stats = this.stats;
         let createdStats = _stats.map(obj => new Stat(obj, { parent: this }));

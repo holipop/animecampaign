@@ -1,4 +1,4 @@
-import { RolledItem } from "./RolledItem.js";
+import AC from "./AC.js";
 
 export default class ACItem extends Item {
     chatTemplates = {
@@ -19,7 +19,7 @@ export default class ACItem extends Item {
 
         if (!post && this.system.formula) {
             templateData.roll = await new Roll(this.system.formula).roll({ async: false });
-            templateData.roll.color = RolledItem.critColor(templateData.roll);
+            templateData.roll.color = AC.critColor(templateData.roll);
             templateData.roll.totalInt = Math.round(templateData.roll.total);
         }
 

@@ -1,3 +1,5 @@
+import AC from "./AC.js";
+
 //  An object containing default StatSchema for Characters and Kit Pieces.
 export const defaultStats = {
     characterStats: [
@@ -5,18 +7,18 @@ export const defaultStats = {
             name: 'stamina',
             value: '15',
             max: '15',
-            img: 'health-normal.png',
+            img: AC.load('health-normal.png'),
             settings: {
                 display: 'double'
             }
         },
         {
             name: 'proficiency',
-            img: 'polar-star.png'
+            img: AC.load('polar-star.png')
         },
         {
             name: 'movement',
-            img: 'walking-boot.png',
+            img: AC.load('walking-boot.png'),
             value: '5',
             max: 'Average',
             settings: {
@@ -28,17 +30,18 @@ export const defaultStats = {
     weaponStats: [
         {
             name: 'damage',
-            img: 'whirlpool-shuriken.png'
+            img: AC.load('whirlpool-shuriken.png')
         },
         {
             name: 'range',
-            img: 'overhead.png'
+            img: AC.load('horizontal-flip.png')
         }
     ],
 
     talentStats: [
         {
-            name: 'bonus'
+            name: 'bonus',
+            img: AC.load('heart-plus.png')
         }
     ],
 
@@ -46,7 +49,8 @@ export const defaultStats = {
 
     abilityStats: [
         {
-            name: 'cost'
+            name: 'cost',
+            img: AC.load('plain-arrow.png')
         }
     ]
 };

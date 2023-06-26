@@ -5,6 +5,13 @@ import AC from "../AC.js";
 //  A mixin containing shared methods between ACActorSheet and ACItemSheet schema.
 export const SheetMixin = {
 
+    //  Returns the ownership level the user has over a document.
+    //*     () : number
+    getOwnership() {
+        const userID = game.user._id;
+        return this.object.ownership[userID];
+    },
+
     //  Shrinks the font size of an HTML element given a default size in rem units and
     //  the max pixel height the element can take up.
     //*     (_element: html, _rem: number, _max: number) : void

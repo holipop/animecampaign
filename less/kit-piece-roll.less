@@ -64,6 +64,18 @@
         }
     }
 
+    .stat-img {
+        position: relative;
+        top: -.75rem;
+
+        opacity: 30%;
+        filter: brightness(0) saturate(100%);
+        > img {
+            position: absolute;
+            .SquareSize(1.5rem);
+            .InputSkinning();
+        }
+    }
     .stat-name {
         padding: .5rem .3rem 0;
         text-transform: uppercase;

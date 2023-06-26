@@ -32,6 +32,10 @@ Hooks.once("init", () => {
     //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
 
+    //  Assigning Fonts
+    CONFIG.fontDefinitions = { ...CONFIG.fontDefinitions, ...AC.fonts };
+    CONFIG.defaultFontFamily = 'Arial';
+
     //  Redefining the default document classes.
     CONFIG.Item.documentClass = ACItem;
 
@@ -51,6 +55,7 @@ Hooks.once("init", () => {
     Handlebars.registerHelper(AC.hbsHelpers);
 })
 
+//  All of the code that runs for chat messages.
 Hooks.on('renderChatMessage', (_app, _html, _data) => {
     RolledItem.addChatListeners(_html);
 })

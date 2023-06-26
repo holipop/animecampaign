@@ -6,7 +6,7 @@ import { Section } from "./Section.js";
 //  Defining the schema for Kit Pieces.
 export class KitPieceData extends foundry.abstract.DataModel {
 
-    //*     () : KitPieceSchema
+    //*     () : Object
     static defineSchema() {
         const fields = foundry.data.fields;
 
@@ -22,7 +22,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
             }),
             type: new fields.StringField({
                 ...defaultSettings,
-                initial: "weapon",
+                initial: "ability",
             }),
             customType: new fields.StringField(defaultSettings),
             formula: new fields.StringField({
@@ -34,6 +34,8 @@ export class KitPieceData extends foundry.abstract.DataModel {
         }
     }
 
+    //  Moves the given indexed Section object to a desired index.
+    //*     (_index: number, _moveTo: number) : void
     moveSection(_index, _moveTo) {
         if (_moveTo == -1 || _moveTo == this.sections.length) return AC.log('Invalid section placement.');
 
@@ -48,6 +50,9 @@ export class KitPieceData extends foundry.abstract.DataModel {
         AC.log(`Moved a section from index ${_index} to ${_moveTo} for ${this.parent.name}`);
     }
 
+    //  Creates a series of Section objects in the sections array, optionally starting at a
+    //  given index.
+    //*     (_sections: Object[], _index?: number) : void
     createSections(_sections = [{}], _index = null) {
         let sections = this.sections;
         let createdSections = _sections.map(obj => new Stat(obj, { parent: this }));
@@ -62,6 +67,8 @@ export class KitPieceData extends foundry.abstract.DataModel {
         AC.log(`Created ${createdSections.length} section(s) for ${this.parent.name}`);
     }
 
+    //  Deletes a Section object at the desired index.
+    //*     (_index: number) : void
     deleteSectionIndex(_index) {
         let sections = this.sections;
 

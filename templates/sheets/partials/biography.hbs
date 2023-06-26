@@ -1,3 +1,9 @@
-<p>
-    Hi. My name is florgum borgum. Lorem Ipsum Locum Janus
-</p>
+{{#if (eq ownership 3)}}
+    <section class="biography">
+        {{editor system.description engine='prosemirror' target="system.description" button='true'}}
+    </section>
+{{else}}
+    <section style="margin: .75rem;">
+        {{{system.description}}}
+    </section>
+{{/if}}

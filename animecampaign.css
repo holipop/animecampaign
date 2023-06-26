@@ -196,6 +196,20 @@
   border-bottom: 1px solid black;
   margin: 0.5rem auto;
 }
+.animecampaign.actor.sheet .biography {
+  background-color: rgba(255, 255, 255, 0.33);
+  border-radius: 0.3rem;
+  height: 100%;
+}
+.animecampaign.actor.sheet .biography .editor {
+  min-height: 4rem;
+}
+.animecampaign.actor.sheet .biography .editor.prosemirror {
+  min-height: 15rem;
+}
+.animecampaign.actor.sheet .biography .editor-content {
+  padding: 0.5rem;
+}
 .animecampaign.kit-piece-roll {
   border: 1px solid;
   border-radius: 2px;
@@ -250,6 +264,24 @@
   margin: 0 0.3rem;
   overflow-x: hidden;
   font: 1rem 'Philosopher';
+}
+.animecampaign.kit-piece-roll .stat-img {
+  position: relative;
+  top: -0.75rem;
+  opacity: 30%;
+  filter: brightness(0) saturate(100%);
+}
+.animecampaign.kit-piece-roll .stat-img > img {
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
 }
 .animecampaign.kit-piece-roll .stat-name {
   padding: 0.5rem 0.3rem 0;
@@ -485,6 +517,35 @@
   margin: auto 0.2rem;
   color: rgba(0, 0, 0, 0.1);
 }
+.animecampaign.actor.sheet .empty-kit {
+  height: 3.85rem;
+  margin: 0.2rem 4rem;
+  border-radius: 0.25rem;
+  border: 2px dashed rgba(0, 0, 0, 0.66);
+  opacity: 50%;
+}
+.animecampaign.actor.sheet .empty-kit * {
+  display: grid;
+  justify-items: center;
+  margin: 0.5rem 0;
+}
+.animecampaign.actor.sheet .empty-kit * > * {
+  margin: 0;
+}
+.animecampaign.actor.sheet .empty-kit p {
+  line-height: 0;
+  font: bold 0.75rem 'Arial';
+  text-transform: uppercase;
+}
+.animecampaign.actor.sheet .empty-kit .add-default {
+  border-right: 1px solid black;
+}
+.animecampaign.actor.sheet .kit-type .kit-piece-create {
+  opacity: 20%;
+}
+.animecampaign.actor.sheet .kit-type:hover .kit-piece-create {
+  opacity: 100%;
+}
 .animecampaign.actor.sheet .kit-piece-card:hover > .kit-piece-edit,
 .animecampaign.actor.sheet .kit-piece-card:hover .kit-piece-delete {
   color: rgba(0, 0, 0, 0.5);
@@ -682,6 +743,18 @@
 }
 .animecampaign.item.sheet .sections .section-label::placeholder {
   opacity: 33%;
+}
+.animecampaign.item.sheet .sections .viewer-section {
+  border: 0;
+  padding: 0;
+  margin-bottom: 0.1rem;
+  border: none;
+  border-top: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.35);
+}
+.animecampaign.item.sheet .sections .viewer-label {
+  padding-right: 0.3rem;
+  font: bold 0.75rem 'Arial';
 }
 .animecampaign.item.sheet .sections .editor {
   height: fit-content;
