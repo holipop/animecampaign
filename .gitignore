@@ -2,3 +2,4 @@ _TEST/
 .vs/
 node_modules/
 app/
+__MACOSX/
