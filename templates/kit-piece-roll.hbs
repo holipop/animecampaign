@@ -22,8 +22,8 @@
             <div class="total" {{match roll}}>
                 {{ roll.totalInt }}
             </div>
-            <div class="result">
-                &lpar; {{ roll.result }} &rpar;
+            <div class="formula">
+                &lpar; {{ roll.formula }} &rpar;
             </div>
         </section>
     {{/if}}
@@ -32,12 +32,23 @@
         <table class="stats">
             {{#each system.stats as |stat index|}}
                 <tr data-index="{{index}}">
-                    {{#if stat.img}}
-                        <td class="stat-img"><img src="{{stat.img}}"></td>
-                    {{/if}}
-                    <td class="stat-name">{{stat.name}}</td>
+                    <td class="stat-img">
+                        {{#if stat.img}}
+                            <img src="{{stat.img}}">
+                        {{/if}}
+                    </td>
+
+                    <td class="stat-name">
+                        {{#if stat.name}}
+                            {{stat.name}}
+                        {{else}}...{{/if}}
+                    </td>
+
                     <td class="stat-value">
-                        {{stat.value}}
+                        {{#if stat.value}}
+                            {{stat.value}}
+                        {{else}}0{{/if}}
+
                         {{#if (eq stat.settings.display 'double')}}
                             <span class="stat-max">/ {{stat.max}}</span>
                         {{/if}}
@@ -69,6 +80,5 @@
             {{/each}}
         </section>
     {{/if}}
-
-    {{log this}}
+    
 </div>

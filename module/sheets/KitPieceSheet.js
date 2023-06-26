@@ -9,7 +9,8 @@ export default class KitPieceSheet extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             width: 450,
             height: 500,
-            classes: ["animecampaign", "sheet", "item"]
+            classes: ["animecampaign", "sheet", "item"],
+            scrollY: ["div.scrollable"]
         });
     }
 

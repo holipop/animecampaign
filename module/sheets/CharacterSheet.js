@@ -14,7 +14,8 @@ export default class CharacterSheet extends ActorSheet {
                 navSelector: ".tabs", 
                 contentSelector: ".content", 
                 initial: "kit", 
-            }]
+            }],
+            scrollY: ["section.scrollable"]
         });
     }
 
@@ -103,12 +104,15 @@ export default class CharacterSheet extends ActorSheet {
     //*     (_html: jQuery) : void
     createKitPiece(_html) {
         _html.find(".kit-piece-create").on("click", event => {
+            const isCustom = !Object.keys(CONFIG.animecampaign.kitTypes).includes($(event.currentTarget).data('type'));
+
             let itemData = [{
                 name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                 type: "Kit Piece",
                 system: {
                     color: this.actor.system.color,
-                    type: $(event.currentTarget).data('type') || 'ability'
+                    type: (isCustom) ? 'custom' : $(event.currentTarget).data('type'),
+                    customType: (isCustom) && $(event.currentTarget).data('type')
                 }
             }]
     

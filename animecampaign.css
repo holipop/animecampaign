@@ -245,6 +245,7 @@
   flex-direction: row;
   align-items: center;
   margin: 0.1rem 0;
+  margin-bottom: 0.4rem;
   margin-left: 0.8rem;
 }
 .animecampaign.kit-piece-roll .roll .total {
@@ -260,7 +261,7 @@
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
 }
-.animecampaign.kit-piece-roll .roll .result {
+.animecampaign.kit-piece-roll .roll .formula {
   margin: 0 0.3rem;
   overflow-x: hidden;
   font: 1rem 'Philosopher';
