@@ -32,9 +32,16 @@
         <table class="stats">
             {{#each system.stats as |stat index|}}
                 <tr data-index="{{index}}">
-                    <td class="stat-img"><img src="{{stat.img}}"></td>
+                    {{#if stat.img}}
+                        <td class="stat-img"><img src="{{stat.img}}"></td>
+                    {{/if}}
                     <td class="stat-name">{{stat.name}}</td>
-                    <td class="stat-value">{{stat.value}}</td>
+                    <td class="stat-value">
+                        {{stat.value}}
+                        {{#if (eq stat.settings.display 'double')}}
+                            <span class="stat-max">/ {{stat.max}}</span>
+                        {{/if}}
+                    </td>
                 </tr>
             {{/each}} 
         </table>
