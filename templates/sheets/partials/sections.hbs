@@ -1,35 +1,43 @@
 <section class="sections">
+    
     {{#each system.sections as |section index|}}
-        <fieldset class="section" data-index="{{index}}">
+        {{#if (eq ../this.ownership 3)}}
+            <fieldset class="section" data-index="{{index}}">
+                <div class="section-wrapper">
+                        <span class="section-options">
+                            <input class="section-label" type="text" name="system.sections.{{index}}.label" value="{{section.label}}" placeholder="Label">
 
-            <div class="section-wrapper">
-                <span class="section-options">
-                    <input class="section-label" type="text" name="system.sections.{{index}}.label" value="{{section.label}}" placeholder="Label">
+                            <a class="section-move-up">
+                                <i class="fas fa-arrow-up"></i>
+                            </a>
+                            <a class="section-move-down">
+                                <i class="fas fa-arrow-down"></i>
+                            </a>
+                            <a class="section-delete">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </span>
 
-                    <a class="section-move-up">
-                        <i class="fas fa-arrow-up"></i>
-                    </a>
-                    <a class="section-move-down">
-                        <i class="fas fa-arrow-down"></i>
-                    </a>
-                    <a class="section-delete">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </span>
+                        {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+                </div>
 
-                {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
-            </div>
-
-            <div class="hidden section-schema">
-                <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
-            </div>
-
-        </fieldset>
+                <div class="hidden section-schema">
+                    <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
+                </div>
+            </fieldset>
+        {{else}}
+            <fieldset class="viewer-section">
+                <legend class="viewer-label">{{section.label}}</legend>
+                {{{section.text}}}
+            </fieldset>
+        {{/if}}
     {{/each}}
 
-    <div class="add-wrapper">
-        <a class="add-section">
-            <i class="fas fa-plus"> Add Section</i>
-        </a>
-    </div>
+    {{#if (eq ownership 3)}}
+        <div class="add-wrapper">
+            <a class="add-section">
+                <i class="fas fa-plus"> Add Section</i>
+            </a>
+        </div>
+    {{/if}}
 </section>

@@ -3,16 +3,18 @@
         <div class="kit-type" {{match ../this.system alpha="0.7"}}>
             <span {{contrast ../this.system}}>{{key}}</span>
 
-            <a class="kit-piece-create" data-type="{{key}}" title="{{localize config.kitText.addkitpiece}}">
-                <i class="fas fa-plus" {{contrast ../this.system}}></i>
-            </a>
+            {{#if (eq ../this.ownership 3)}}
+                <a class="kit-piece-create" data-type="{{key}}" title="{{localize config.kitText.addkitpiece}}">
+                    <i class="fas fa-plus" {{contrast ../this.system}}></i>
+                </a>
+            {{/if}}
         </div>
 
         <div class="kit-type-group">
             {{#each array as |item id|}}
             
                 <div class="kit-piece-card flexrow" {{match item.system alpha="0.5"}}>
-                    <img class="kit-piece-img flex0" {{match item.system}} src="{{item.img}}" data-id="{{item._id}}">
+                    <img class="kit-piece-img flex0" data-ownership="{{owndership}}" {{match item.system}} src="{{item.img}}" data-id="{{item._id}}">
                     <span class="kit-piece-name">{{item.name}}</span>
 
                     {{#each item.system.stats as |stat index|}}
@@ -29,10 +31,14 @@
                     <a class="kit-piece-edit flex0" title="{{localize config.kitText.editkitpiece}}" data-id={{_id}}>
                         <i class="fas fa-feather-pointed"></i>
                     </a>
-                    <a class="kit-piece-delete flex0" title="{{localize config.kitText.addkitpiece}}" data-id={{_id}}>
-                        <i class="fas fa-trash-can-xmark"></i>
-                    </a>
+
+                    {{#if (eq ../../this.ownership 3)}}
+                        <a class="kit-piece-delete flex0" title="{{localize config.kitText.addkitpiece}}" data-id={{_id}}>
+                            <i class="fas fa-trash-can-xmark"></i>
+                        </a>
+                    {{/if}}
                 </div>
+
                 <div class="kit-piece-stat-divider" {{match item.system style="border-color"}}></div>
 
             {{/each}}
@@ -40,16 +46,18 @@
 
     {{/each}}
 
-    {{#if (eq items.size 0)}}
-        <div class="empty-kit flexrow">
-            <a class="add-default">
-                <p>Add Default Kit</p>
-                <i class="fas fa-clone"></i>
-            </a>
-            <a class="kit-piece-create">
-                <p>Create Kit Piece</p>
-                <i class="fas fa-square-plus"></i>
-            </a>
-        </div>
+    {{#if (eq ownership 3)}}
+        {{#if (eq items.size 0)}}
+            <div class="empty-kit flexrow">
+                <a class="add-default">
+                    <p>Add Default Kit</p>
+                    <i class="fas fa-clone"></i>
+                </a>
+                <a class="kit-piece-create">
+                    <p>Create Kit Piece</p>
+                    <i class="fas fa-square-plus"></i>
+                </a>
+            </div>
+        {{/if}}
     {{/if}}
 </section>

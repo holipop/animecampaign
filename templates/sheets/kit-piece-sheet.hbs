@@ -6,18 +6,20 @@
         <img class="img" {{match system style='background-color'}} src="{{item.img}}" data-edit="img" title="{{item.name}}">
 
         <section class="header-top">
-            <div class="name" {{contrast system}} data-edit="name" spellcheck='false' contenteditable>
+            <div class="name" {{contrast system}} data-edit="name" spellcheck='false' {{#if (eq ownership 3)}}contenteditable{{/if}}>
                 {{item.name}}
             </div>
 
-            <div class="buttons" {{contrast system}}>
-                <a class="post">
-                    <i class="fas fa-message"></i> Post
-                </a>
-                <a class="roll">
-                    <i class="fas fa-dice-d20"></i> Roll
-                </a>
-            </div>
+            {{#unless (eq ownership 1)}}
+                <div class="buttons" {{contrast system}}>
+                    <a class="post">
+                        <i class="fas fa-message"></i> Post
+                    </a>
+                    <a class="roll">
+                        <i class="fas fa-dice-d20"></i> Roll
+                    </a>
+                </div>
+            {{/unless}}
         </section>
 
         <section class="header-bottom">

@@ -43,7 +43,6 @@ Hooks.once("init", () => {
     CONFIG.Actor.systemDataModels["Character"] = CharacterData;
     CONFIG.Item.systemDataModels["Kit Piece"] = KitPieceData;
 
-
     //  Unregistering the default document sheets & registering our own.
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });

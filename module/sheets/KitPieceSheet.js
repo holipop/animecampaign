@@ -28,6 +28,7 @@ export default class KitPieceSheet extends ItemSheet {
 
         data.config = CONFIG.animecampaign; //  Localization paths
         data.system = data.item.system;     //  Item schema that we defined
+        data.ownership = this.getOwnership();
 
         return data;
     }
@@ -36,23 +37,26 @@ export default class KitPieceSheet extends ItemSheet {
     //*     (_html: jQuery) : void
     activateListeners(_html) {
 
+        if (this.getOwnership() == 3) {
+            this.createBlankStat(_html);
+            this.addDefaultStats(_html);
+            
+            this.moveSection(_html, 'up');
+            this.moveSection(_html, 'down');
+            this.addSection(_html);
+            this.deleteSection(_html);
+            
+            
+            new ContextMenu(_html, '.stat', this.contextMenuEntries());
+        }
         this.updateName(_html, 2.5, 60);
-
+        
         this.customTypeToLowercase(_html);
+        
+        this.roll(_html);
 
         this.updateStatWidth(_html, .75);
-        this.createBlankStat(_html);
-        this.addDefaultStats(_html);
         this.collapseStatBlock(_html)
-
-        this.roll(_html);
-        
-        this.moveSection(_html, 'up');
-        this.moveSection(_html, 'down');
-        this.addSection(_html);
-        this.deleteSection(_html);
-
-        new ContextMenu(_html, '.stat', this.contextMenuEntries());
         
         super.activateListeners(_html);
     }

@@ -726,6 +726,18 @@
 .animecampaign.item.sheet .sections .section-label::placeholder {
   opacity: 33%;
 }
+.animecampaign.item.sheet .sections .viewer-section {
+  border: 0;
+  padding: 0;
+  margin-bottom: 0.1rem;
+  border: none;
+  border-top: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.35);
+}
+.animecampaign.item.sheet .sections .viewer-label {
+  padding-right: 0.3rem;
+  font: bold 0.75rem 'Arial';
+}
 .animecampaign.item.sheet .sections .editor {
   height: fit-content;
   border-radius: 0.3rem;

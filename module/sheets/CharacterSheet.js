@@ -33,29 +33,33 @@ export default class CharacterSheet extends ActorSheet {
         data.system = data.actor.system;    //  Actor schema that we defined
         data.items = data.actor.items;      //  Actor's owned items
         data.kitPieces = this.ownedKitTypes;
+        data.ownership = this.getOwnership();
 
-         return data;
+        return data;
     }
 
     //  This is where we put any custom event listeners for our sheets.
     //*     (_html: jQuery) : void
     activateListeners(_html) {
-
+        
+        if (this.getOwnership() == 3) {
+            this.addDefaultKit(_html);
+            this.createKitPiece(_html);
+            this.deleteKitPiece(_html);
+            this.createBlankStat(_html);
+            this.addDefaultStats(_html);
+            
+            new ContextMenu(_html, '.stat', this.contextMenuEntries());
+        }
+        
         this.updateName(_html, 3, 60);
         this.updateClass(_html);
         
         this.rollKitPiece(_html);
-        this.addDefaultKit(_html);
-        this.createKitPiece(_html);
-        this.deleteKitPiece(_html);
         this.editKitPiece(_html);
-
+        
         this.updateStatWidth(_html, .75);
-        this.createBlankStat(_html);
-        this.addDefaultStats(_html);
         this.collapseStatBlock(_html)
-
-        new ContextMenu(_html, '.stat', this.contextMenuEntries());
 
         super.activateListeners(_html);
     }
