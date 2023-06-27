@@ -27,6 +27,7 @@ export class StatConfigMenu extends FormApplication {
         data.config = CONFIG.animecampaign;
         data.stat = this.object;
         data.AC = AC;
+        data.resourceOptions = [ 'None', ...AC.resourceKeys];
 
         return data;
     }
@@ -35,6 +36,8 @@ export class StatConfigMenu extends FormApplication {
     //*     (_event: jQuery, _formData: object) : void
     _updateObject(_event, _formData) {
         const entity = this.object.parent.parent;
+
+        console.log(_formData);
 
         entity.system.updateStat(this.object.label, _formData);
     }

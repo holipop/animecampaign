@@ -26,8 +26,8 @@
         <div class="form-fields">
             <select name="settings.resource">
                 {{#select stat.settings.resource}}
-                    {{#each AC.resourceKeys as |resource index|}}
-                        <option value="{{resource}}">{{resource}}</option>
+                    {{#each resourceOptions}}
+                        <option value="{{this}}">{{this}}</option>
                     {{/each}}
                 {{/select}}
             </select>

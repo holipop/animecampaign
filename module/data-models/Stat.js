@@ -35,7 +35,11 @@ export class Stat extends foundry.abstract.DataModel {
                     initial: "single", 
                     ...defaultSettings
                 }, ['single', 'double', 'phase', 'state', 'advancement']),
-                resource: new fields.StringField({}, AC.resourceKeys )
+                
+                resource: new fields.StringField({ 
+                    initial: 'None',
+                    ...defaultSettings
+                })
             })
         }
     }
