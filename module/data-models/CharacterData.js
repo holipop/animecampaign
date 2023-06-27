@@ -10,6 +10,20 @@ export class CharacterData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;
 
+        const generateResources = () => {
+            let resources = {};
+            AC.resourceKeys.forEach(i => {
+                Object.assign(resources, { 
+                    [i]: new fields.SchemaField({
+                        stat: new fields.EmbeddedDataField( Stat ),
+                        value: new fields.NumberField(), 
+                        max: new fields.NumberField() 
+                    })
+                })
+            });
+            return resources;
+        }
+
         return {
             description: new fields.HTMLField(),
             class: new fields.StringField({
@@ -26,7 +40,9 @@ export class CharacterData extends foundry.abstract.DataModel {
                 {
                     initial: this.defaultStats
                 }
-            )
+            ),
+
+            resources: new fields.SchemaField( generateResources() )
         }
     }
 

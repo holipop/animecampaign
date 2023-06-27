@@ -1,3 +1,5 @@
+import AC from "../AC.js";
+
 //  Defining the schema for Stat objects
 export class Stat extends foundry.abstract.DataModel {
 
@@ -33,6 +35,7 @@ export class Stat extends foundry.abstract.DataModel {
                     initial: "single", 
                     ...defaultSettings
                 }, ['single', 'double', 'phase', 'state', 'advancement']),
+                resource: new fields.StringField({}, AC.resourceKeys )
             })
         }
     }

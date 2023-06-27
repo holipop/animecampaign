@@ -1,3 +1,5 @@
+import AC from "../AC.js";
+
 //  Defining the application for Stat configuration.
 export class StatConfigMenu extends FormApplication {
     
@@ -6,7 +8,7 @@ export class StatConfigMenu extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             width: 300,
-            height: 145,
+            height: 174,
             template: 'systems/animecampaign/templates/stats-config.hbs',
         });
     }
@@ -24,6 +26,7 @@ export class StatConfigMenu extends FormApplication {
 
         data.config = CONFIG.animecampaign;
         data.stat = this.object;
+        data.AC = AC;
 
         return data;
     }

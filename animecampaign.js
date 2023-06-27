@@ -40,8 +40,8 @@ Hooks.once("init", () => {
     CONFIG.Item.documentClass = ACItem;
 
     //  Assigning Character and Kit Piece schema.
-    CONFIG.Actor.systemDataModels["Character"] = CharacterData;
-    CONFIG.Item.systemDataModels["Kit Piece"] = KitPieceData;
+    CONFIG.Actor.dataModels["Character"] = CharacterData;
+    CONFIG.Item.dataModels["Kit Piece"] = KitPieceData;
 
     //  Unregistering the default document sheets & registering our own.
     Actors.unregisterSheet("core", ActorSheet);
