@@ -17,7 +17,7 @@ export class Stat extends foundry.abstract.DataModel {
         }
 
         return {
-            name: new fields.StringField(defaultSettings),
+            name: new fields.StringField({ initial: "" }),
             img: new fields.FilePathField({
                 ...imgSettings,
                 ...defaultSettings

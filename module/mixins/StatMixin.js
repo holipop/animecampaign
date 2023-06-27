@@ -57,7 +57,7 @@ export const StatMixin = {
 
         if (targetStat == undefined) return AC.error(`"${_name}" is not a stat.`);
 
-        Object.assign(targetStat, _schema);
+        targetStat = targetStat.updateSource(_schema);
 
         this.parent.update({ 'system.stats': [...stats] });
         AC.log(`Updated the "${_name}" stat for ${this.parent.name}`);

@@ -37,8 +37,6 @@ export class StatConfigMenu extends FormApplication {
     _updateObject(_event, _formData) {
         const entity = this.object.parent.parent;
 
-        console.log(_formData);
-
-        entity.system.updateStat(this.object.label, _formData);
+        entity.system.updateStat(this.object.label, expandObject(_formData));
     }
 }
