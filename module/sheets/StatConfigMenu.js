@@ -8,7 +8,6 @@ export class StatConfigMenu extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             width: 300,
-            height: 174,
             template: 'systems/animecampaign/templates/stats-config.hbs',
         });
     }
@@ -26,8 +25,7 @@ export class StatConfigMenu extends FormApplication {
 
         data.config = CONFIG.animecampaign;
         data.stat = this.object;
-        data.AC = AC;
-        data.resourceOptions = [ 'None', ...AC.resourceKeys];
+        data.resourceOptions = this.object.parent.getAvailableResources(this.object);
 
         return data;
     }
@@ -35,8 +33,15 @@ export class StatConfigMenu extends FormApplication {
     //  Passing submitted data into the Stat object to be updated.
     //*     (_event: jQuery, _formData: object) : void
     _updateObject(_event, _formData) {
-        const entity = this.object.parent.parent;
+        const document = this.object.parent.parent;
 
-        entity.system.updateStat(this.object.label, expandObject(_formData));
+        //console.log(_formData);
+
+        const { resource } = expandObject(_formData).settings;
+        if (resource) {
+            document.system.assignStatToResource(this.object, resource);
+        }
+
+        document.system.updateStat(this.object.label, expandObject(_formData));
     }
 }

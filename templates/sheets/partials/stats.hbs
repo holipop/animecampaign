@@ -1,6 +1,12 @@
 <div class="stat-block flexcol">
     {{#each system.stats as |stat index|}}
         <div class="stat" data-index={{index}}>
+            {{#unless (eq stat.settings.resource 'None')}}
+                <div class="stat-resource">
+                    <span>{{stat.settings.resource}}</span>
+                </div>
+            {{/unless}}
+            
             <div class="stat-img">
                 <img src="{{stat.img}}" data-edit="system.stats.{{index}}.img">
             </div>
@@ -22,17 +28,15 @@
                     {{/if}}
 
                     <!--
-
                     {{#if (eq stat.settings.display "phase")}}
                     {{/if}}
 
                     {{#if (eq stat.settings.display "state")}}
                     {{/if}}
                     
-                    -->
-
                     {{#if (eq stat.settings.display "advancement")}}
                     {{/if}}
+                    -->
                     
                 </div>
 

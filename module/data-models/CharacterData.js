@@ -15,7 +15,10 @@ export class CharacterData extends foundry.abstract.DataModel {
             AC.resourceKeys.forEach(i => {
                 Object.assign(resources, { 
                     [i]: new fields.SchemaField({
-                        stat: new fields.EmbeddedDataField( Stat ),
+                        stat: new fields.EmbeddedDataField( Stat, {
+                            nullable: true,
+                            initial: null
+                        }),
                         value: new fields.NumberField(), 
                         max: new fields.NumberField() 
                     })
@@ -75,6 +78,26 @@ export class CharacterData extends foundry.abstract.DataModel {
         } else {
             return 'III';
         }
+    }
+
+    getAvailableResources(_stat) {
+        const filteredResources = Object.entries(this.resources).map(i => {
+            return { key: i[0], stat: i[1].stat }
+        });
+        const openResources = filteredResources.filter(i => objectsEqual(i.stat, _stat) || i.stat == null).map(i => i.key);
+        return [ 'None', ...openResources ];
+    }
+
+    assignStatToResource(_stat, _resource) {
+        const filteredResources = Object.entries(this.resources).map(i => {
+            return { key: i[0], stat: i[1].stat }
+        });
+        const previousResource = filteredResources.find(i => objectsEqual(i.stat, _stat))
+        if (previousResource) {
+            this.parent.update({ [`system.resources.${previousResource.key}.stat`]: null });
+        }
+
+        this.parent.update({ [`system.resources.${_resource}.stat`]: _stat })
     }
 }
 

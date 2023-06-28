@@ -54,12 +54,13 @@ export const StatMixin = {
     updateStat(_name, _schema) {
         const stats = this.stats;
         let targetStat = stats.find(stat => stat.label == _name);
-
         if (targetStat == undefined) return AC.error(`"${_name}" is not a stat.`);
 
         targetStat = targetStat.updateSource(_schema);
 
-        this.parent.update({ 'system.stats': [...stats] });
+        //! This is actually one of the stupidest fixes I've ever done.
+        this.parent.update({ 'system.stats': [] });
+        this.parent.update({ 'system.stats': stats });
         AC.log(`Updated the "${_name}" stat for ${this.parent.name}`);
     },
 

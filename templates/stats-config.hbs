@@ -21,18 +21,20 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label>Resource</label>
-        <div class="form-fields">
-            <select name="settings.resource">
-                {{#select stat.settings.resource}}
-                    {{#each resourceOptions}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/each}}
-                {{/select}}
-            </select>
+    {{#if (eq stat.documentName 'Actor')}}
+        <div class="form-group">
+            <label>Resource</label>
+            <div class="form-fields">
+                <select name="settings.resource">
+                    {{#select stat.settings.resource}}
+                        {{#each resourceOptions}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    {{/select}}
+                </select>
+            </div>
         </div>
-    </div>
+    {{/if}}
 
     <button type="submit">Save Changes</button>
 

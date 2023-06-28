@@ -59,6 +59,11 @@ export class Stat extends foundry.abstract.DataModel {
         return this.name.toLowerCase();
     }
 
+    //*     () : string
+    get documentName() {
+        return this.parent.parent.documentName;
+    }
+
     //  Returns the valid displays of a stat. Kit Pieces cannot have advancements as they cannot contain
     //  other Items.
     //*     () : Object

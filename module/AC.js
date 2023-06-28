@@ -41,7 +41,7 @@ export default class AC {
     //  The names of the resource keys.
     //*     () : string[]
     static get resourceKeys() {
-        return ['0','1','2','3','4','5','6','7'];
+        return ['A','B','C','D','E','F','G','H']; 
     }
 
     //  Returns an object of custom Handlebars helpers.

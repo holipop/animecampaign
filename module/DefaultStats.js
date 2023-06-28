@@ -14,6 +14,7 @@ export const defaultStats = {
         },
         {
             name: 'proficiency',
+            value: '0',
             img: AC.load('polar-star.png')
         },
         {
