@@ -9,6 +9,7 @@ export default class ACActor extends Actor {
 
     async _onUpdate(changed, options, userId) {
         await this.updateResources(changed);
+        await this.updateStatOnBarUpdate(changed);
         super._onUpdate(changed, options, userId);
     }
 
@@ -35,4 +36,17 @@ export default class ACActor extends Actor {
         console.groupEnd();
     }
 
+    async updateStatOnBarUpdate({ system = {} }) {
+        const { resources = {} } = system;
+        const key = Object.keys(resources)[0]
+        const template =  {
+            [key]: { value: resources[key]?.value }
+        }
+        if (!objectsEqual(resources, template)) return;
+
+        const stat = this.system.resources[key].stat;
+        console.log(resources[key]);
+
+        this.system.updateStat(stat.label, resources[key]);
+    }
 }
