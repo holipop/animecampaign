@@ -55,7 +55,7 @@ export class KitPieceData extends foundry.abstract.DataModel {
     //*     (_sections: Object[], _index?: number) : void
     createSections(_sections = [{}], _index = null) {
         let sections = this.sections;
-        let createdSections = _sections.map(obj => new Stat(obj, { parent: this }));
+        let createdSections = _sections.map(obj => new Section(obj, { parent: this }));
 
         if (_index == null) {
             sections = [...sections, ...createdSections];

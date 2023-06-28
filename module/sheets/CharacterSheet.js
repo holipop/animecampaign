@@ -112,7 +112,7 @@ export default class CharacterSheet extends ActorSheet {
                 system: {
                     color: this.actor.system.color,
                     type: (isCustom) ? 'custom' : $(event.currentTarget).data('type'),
-                    customType: (isCustom) && $(event.currentTarget).data('type')
+                    customType: (isCustom) ? $(event.currentTarget).data('type') : "",
                 }
             }]
     

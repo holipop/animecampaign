@@ -1,10 +1,25 @@
-import AC from "./AC.js";
+import AC from "../AC.js";
 
+//  A custom document class to override certain Actor methods.
 export default class ACItem extends Item {
     chatTemplates = {
         'Kit Piece': 'systems/animecampaign/templates/kit-piece-roll.hbs'
     };
 
+    async _onUpdate(changed, options, userId) {
+        this.customTypeToLowercase(changed);
+
+        super._onUpdate(changed, options, userId);
+    }
+
+    customTypeToLowercase(changed) {
+        if (Object.hasOwn(changed, 'system') && Object.hasOwn(changed.system, 'customType')) {
+            this.update({ 'system.customType': changed.system.customType.toLowerCase() });
+        }
+    }
+
+    //  Posts the Kit Piece to the chat, optionally with a Roll.
+    //*     (_options?: Object) : Promise<ChatMessage>
     async roll(_options = {}) {
         let { post = false } = _options;
 

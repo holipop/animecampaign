@@ -9,11 +9,13 @@ export const defaultStats = {
             max: '15',
             img: AC.load('health-normal.png'),
             settings: {
-                display: 'double'
+                display: 'double',
+                resource: 'A'
             }
         },
         {
             name: 'proficiency',
+            value: '0',
             img: AC.load('polar-star.png')
         },
         {

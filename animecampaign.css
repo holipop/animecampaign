@@ -291,7 +291,7 @@
   border-right: 1px solid black;
   border-color: rgba(0, 0, 0, 0.25);
   font: bold italic 0.75rem 'Arial';
-  line-height: 0.5;
+  line-height: 0.8;
   color: rgba(0, 0, 0, 0.6);
 }
 .animecampaign.kit-piece-roll .stat-value {
@@ -307,6 +307,8 @@
 .animecampaign.kit-piece-roll .sections {
   margin: 0.25rem;
   padding: 0.2rem 0.1rem;
+  margin-top: 0;
+  padding-top: 0;
   font-size: 0.85rem;
 }
 .animecampaign.kit-piece-roll .section {
@@ -589,6 +591,24 @@
 }
 .animecampaign.sheet .stat:last-child > .stat-content {
   border-right: 1px solid black;
+}
+.animecampaign.sheet .stat-resource {
+  opacity: 65%;
+  position: relative;
+  left: 0.2rem;
+  top: 2.5rem;
+}
+.animecampaign.sheet .stat-resource span {
+  position: absolute;
+  border-radius: 0.1rem;
+  height: 1rem;
+  width: 1rem;
+  min-height: 1rem;
+  min-width: 1rem;
+  font: bold 1rem 'Philosopher';
+  line-height: 1;
+  text-align: center;
+  background-color: white;
 }
 .animecampaign.sheet .stat-img {
   position: relative;
