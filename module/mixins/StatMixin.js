@@ -51,15 +51,16 @@ export const StatMixin = {
 
     //  Updates a Stat object's schema
     //*     (_name: string, _schema: StatSchema) : void
-    updateStat(_name, _schema) {
+    async updateStat(_name, _schema) {
         const stats = this.stats;
         let targetStat = stats.find(stat => stat.label == _name);
-
         if (targetStat == undefined) return AC.error(`"${_name}" is not a stat.`);
 
-        Object.assign(targetStat, _schema);
+        targetStat = await targetStat.updateSource(_schema);
 
-        this.parent.update({ 'system.stats': [...stats] });
+        //! This is actually one of the stupidest fixes I've ever done.
+        await this.parent.update({ 'system.stats': [] });
+        await this.parent.update({ 'system.stats': stats });
         AC.log(`Updated the "${_name}" stat for ${this.parent.name}`);
     },
 

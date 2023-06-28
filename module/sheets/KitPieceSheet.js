@@ -9,7 +9,8 @@ export default class KitPieceSheet extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             width: 450,
             height: 500,
-            classes: ["animecampaign", "sheet", "item"]
+            classes: ["animecampaign", "sheet", "item"],
+            scrollY: ["div.scrollable"]
         });
     }
 
@@ -51,28 +52,12 @@ export default class KitPieceSheet extends ItemSheet {
         }
         this.updateName(_html, 2.5, 60);
         
-        this.customTypeToLowercase(_html);
-        
         this.roll(_html);
 
         this.updateStatWidth(_html, .75);
         this.collapseStatBlock(_html)
         
         super.activateListeners(_html);
-    }
-
-    //  Transforms the custom type's text to lowercase.
-    //*     (_html: jQuery) : void
-    customTypeToLowercase(_html) {
-        const CUSTOM_TYPE = _html.find('.custom-type');
-        if (!CUSTOM_TYPE.length) return;
-
-        const loweredInput = CUSTOM_TYPE.val().toLowerCase();
-
-        CUSTOM_TYPE.on('change', event => {
-            console.log(this.object);
-            this.item.update([{ 'system.customType': loweredInput }]);
-        })
     }
 
     // Sends a chat message of the Kit Piece to the chat, optionally with a Roll.

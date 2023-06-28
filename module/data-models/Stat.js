@@ -1,3 +1,5 @@
+import AC from "../AC.js";
+
 //  Defining the schema for Stat objects
 export class Stat extends foundry.abstract.DataModel {
 
@@ -15,7 +17,7 @@ export class Stat extends foundry.abstract.DataModel {
         }
 
         return {
-            name: new fields.StringField(defaultSettings),
+            name: new fields.StringField({ initial: "" }),
             img: new fields.FilePathField({
                 ...imgSettings,
                 ...defaultSettings
@@ -33,6 +35,11 @@ export class Stat extends foundry.abstract.DataModel {
                     initial: "single", 
                     ...defaultSettings
                 }, ['single', 'double', 'phase', 'state', 'advancement']),
+                
+                resource: new fields.StringField({ 
+                    initial: 'None',
+                    ...defaultSettings
+                })
             })
         }
     }
@@ -50,6 +57,11 @@ export class Stat extends foundry.abstract.DataModel {
     //*     () : string
     get label() {
         return this.name.toLowerCase();
+    }
+
+    //*     () : string
+    get documentName() {
+        return this.parent.parent.documentName;
     }
 
     //  Returns the valid displays of a stat. Kit Pieces cannot have advancements as they cannot contain

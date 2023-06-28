@@ -4,21 +4,21 @@
         {{#if (eq ../this.ownership 3)}}
             <fieldset class="section" data-index="{{index}}">
                 <div class="section-wrapper">
-                        <span class="section-options">
-                            <input class="section-label" type="text" name="system.sections.{{index}}.label" value="{{section.label}}" placeholder="Label">
+                    <span class="section-options">
+                        <input class="section-label" type="text" name="system.sections.{{index}}.label" value="{{section.label}}" placeholder="Label">
 
-                            <a class="section-move-up">
-                                <i class="fas fa-arrow-up"></i>
-                            </a>
-                            <a class="section-move-down">
-                                <i class="fas fa-arrow-down"></i>
-                            </a>
-                            <a class="section-delete">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </span>
+                        <a class="section-move-up">
+                            <i class="fas fa-arrow-up"></i>
+                        </a>
+                        <a class="section-move-down">
+                            <i class="fas fa-arrow-down"></i>
+                        </a>
+                        <a class="section-delete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </span>
 
-                        {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+                    {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
                 </div>
 
                 <div class="hidden section-schema">

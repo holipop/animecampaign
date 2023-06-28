@@ -10,6 +10,23 @@ export class CharacterData extends foundry.abstract.DataModel {
     static defineSchema() {
         const fields = foundry.data.fields;
 
+        const generateResources = () => {
+            let resources = {};
+            AC.resourceKeys.forEach(i => {
+                Object.assign(resources, { 
+                    [i]: new fields.SchemaField({
+                        stat: new fields.EmbeddedDataField( Stat, {
+                            nullable: true,
+                            initial: null
+                        }),
+                        value: new fields.NumberField(), 
+                        max: new fields.NumberField() 
+                    })
+                })
+            });
+            return resources;
+        }
+
         return {
             description: new fields.HTMLField(),
             class: new fields.StringField({
@@ -26,7 +43,9 @@ export class CharacterData extends foundry.abstract.DataModel {
                 {
                     initial: this.defaultStats
                 }
-            )
+            ),
+
+            resources: new fields.SchemaField( generateResources() )
         }
     }
 
@@ -49,8 +68,8 @@ export class CharacterData extends foundry.abstract.DataModel {
     get proficiencyClass() {
         const proficiency = this.stats.find((element) => element.label == 'proficiency');
 
-        if (!proficiency) return AC.log(`${this.parent.name} doesn't have a Proficiency stat.`);
-        if (this.type != 'epithet') return AC.log(`${this.parent.name} has no epithet.`);
+        if (!proficiency) return
+        if (this.type != 'epithet') return
 
         if (proficiency.value < 60) {
             return 'I';
@@ -59,6 +78,29 @@ export class CharacterData extends foundry.abstract.DataModel {
         } else {
             return 'III';
         }
+    }
+
+    getAvailableResources(_stat) {
+        const filteredResources = Object.entries(this.resources).map(i => {
+            return { key: i[0], stat: i[1].stat }
+        });
+        const openResources = filteredResources.filter(i => objectsEqual(i.stat, _stat) || i.stat == null).map(i => i.key);
+        return [ 'None', ...openResources ];
+    }
+
+    async resetResources() {
+        const blank = {}
+        AC.resourceKeys.forEach(i => {
+            Object.assign(blank, { 
+                [i]: {
+                    stat: null,
+                    value: null,
+                    max: null
+                }
+            })
+        });
+        await this.parent.update({ [`system.resources`]: blank })
+        AC.log(`Reset resources.`)
     }
 }
 
