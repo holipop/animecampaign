@@ -1,10 +1,13 @@
 import AC from "../AC.js";
 
+//  A custom document class to override certain Actor methods.
 export default class ACItem extends Item {
     chatTemplates = {
         'Kit Piece': 'systems/animecampaign/templates/kit-piece-roll.hbs'
     };
 
+    //  Posts the Kit Piece to the chat, optionally with a Roll.
+    //*     (_options?: Object) : Promise<ChatMessage>
     async roll(_options = {}) {
         let { post = false } = _options;
 

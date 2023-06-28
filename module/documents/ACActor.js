@@ -1,5 +1,6 @@
 import AC from "../AC.js";
 
+//  A custom document class to override certain Actor methods.
 export default class ACActor extends Actor {
 
     async _onCreate(data, options, userId) {
@@ -13,6 +14,8 @@ export default class ACActor extends Actor {
         super._onUpdate(changed, options, userId);
     }
 
+    //  Updates the resources of a character whenever owned Stat objects change.
+    //*     (changed: { system?: Object }) : void
     async updateResources({ system = {} }) {
         if (!Object.hasOwn(system, 'stats')) return;
         const { stats } = system;
@@ -36,6 +39,8 @@ export default class ACActor extends Actor {
         console.groupEnd();
     }
 
+    //  Updates the matching Stat object whenever the actor's token bar value changes.
+    //*     (changed: { system?: Object }) : void
     async updateStatOnBarUpdate({ system = {} }) {
         const { resources = {} } = system;
         const key = Object.keys(resources)[0]
@@ -45,7 +50,6 @@ export default class ACActor extends Actor {
         if (!objectsEqual(resources, template)) return;
 
         const stat = this.system.resources[key].stat;
-        console.log(resources[key]);
 
         this.system.updateStat(stat.label, resources[key]);
     }
