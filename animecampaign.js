@@ -4,6 +4,7 @@ import AC from "./module/AC.js";
 import CharacterSheet from "./module/sheets/CharacterSheet.js";
 import { CharacterData } from "./module/data-models/CharacterData.js";
 
+import ACActor from "./module/ACActor.js";
 import ACItem from "./module/ACItem.js";
 import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
 import { KitPieceData } from "./module/data-models/KitPieceData.js";
@@ -37,6 +38,7 @@ Hooks.once("init", () => {
     CONFIG.defaultFontFamily = 'Arial';
 
     //  Redefining the default document classes.
+    CONFIG.Actor.documentClass = ACActor;
     CONFIG.Item.documentClass = ACItem;
 
     //  Assigning Character and Kit Piece schema.

@@ -32,16 +32,8 @@ export class StatConfigMenu extends FormApplication {
 
     //  Passing submitted data into the Stat object to be updated.
     //*     (_event: jQuery, _formData: object) : void
-    _updateObject(_event, _formData) {
+    async _updateObject(_event, _formData) {
         const document = this.object.parent.parent;
-
-        //console.log(_formData);
-
-        const { resource } = expandObject(_formData).settings;
-        if (resource) {
-            document.system.assignStatToResource(this.object, resource);
-        }
-
-        document.system.updateStat(this.object.label, expandObject(_formData));
+        await document.system.updateStat(this.object.label, expandObject(_formData));
     }
 }

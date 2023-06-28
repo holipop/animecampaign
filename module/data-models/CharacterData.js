@@ -88,16 +88,19 @@ export class CharacterData extends foundry.abstract.DataModel {
         return [ 'None', ...openResources ];
     }
 
-    assignStatToResource(_stat, _resource) {
-        const filteredResources = Object.entries(this.resources).map(i => {
-            return { key: i[0], stat: i[1].stat }
+    async resetResources() {
+        const blank = {}
+        AC.resourceKeys.forEach(i => {
+            Object.assign(blank, { 
+                [i]: {
+                    stat: null,
+                    value: null,
+                    max: null
+                }
+            })
         });
-        const previousResource = filteredResources.find(i => objectsEqual(i.stat, _stat))
-        if (previousResource) {
-            this.parent.update({ [`system.resources.${previousResource.key}.stat`]: null });
-        }
-
-        this.parent.update({ [`system.resources.${_resource}.stat`]: _stat })
+        await this.parent.update({ [`system.resources`]: blank })
+        AC.log(`Reset resources.`)
     }
 }
 
