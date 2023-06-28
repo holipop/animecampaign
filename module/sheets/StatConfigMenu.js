@@ -25,7 +25,7 @@ export class StatConfigMenu extends FormApplication {
 
         data.config = CONFIG.animecampaign;
         data.stat = this.object;
-        data.resourceOptions = this.object.parent.getAvailableResources(this.object);
+        data.resourceOptions = this.object.parent.getAvailableResources?.(this.object);
 
         return data;
     }

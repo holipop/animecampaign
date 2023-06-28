@@ -1,4 +1,4 @@
-import AC from "./AC.js";
+import AC from "../AC.js";
 
 export default class ACItem extends Item {
     chatTemplates = {

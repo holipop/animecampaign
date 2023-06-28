@@ -1,4 +1,4 @@
-import AC from "./AC.js";
+import AC from "../AC.js";
 
 export default class ACActor extends Actor {
 
@@ -14,13 +14,14 @@ export default class ACActor extends Actor {
 
     async updateResources({ system = {} }) {
         if (!Object.hasOwn(system, 'stats')) return;
-
-        console.groupCollapsed(`%cAnime Campaign | Updating resources for ${this.name}.`, 'color: orange;');
-
         const { stats } = system;
-        await this.system.resetResources();
-
+        
         const filteredStats = stats.filter(stat => stat.settings.resource != 'None');
+        if (filteredStats.length < 1) return;
+        
+        console.groupCollapsed(`%cAnime Campaign | Updating resources for ${this.name}.`, 'color: orange;');
+        
+        await this.system.resetResources();
 
         for (const stat of filteredStats) {
             await this.update({ [`system.resources.${stat.settings.resource}`]: {
