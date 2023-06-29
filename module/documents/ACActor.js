@@ -3,16 +3,16 @@ import AC from "../AC.js";
 //  A custom document class to override certain Actor methods.
 export default class ACActor extends Actor {
 
-    async _onCreate(data, options, userId) {
+    /* async _onCreate(data, options, userId) {
         await this.updateResources(data);
         super._onCreate(data, options, userId);
-    }
+    } */
 
-    async _onUpdate(changed, options, userId) {
+    /* async _onUpdate(changed, options, userId) {
         await this.updateResources(changed);
         await this.updateStatOnBarUpdate(changed);
         super._onUpdate(changed, options, userId);
-    }
+    } */
 
     //  Updates the resources of a character whenever owned Stat objects change.
     //*     (changed: { system?: Object }) : void
@@ -20,7 +20,7 @@ export default class ACActor extends Actor {
         if (!Object.hasOwn(system, 'stats')) return;
         const { stats } = system;
         
-        const filteredStats = stats.filter(stat => stat.settings.resource != 'None');
+        const filteredStats = stats.filter(stat => stat.settings?.resource != 'None');
         if (filteredStats.length < 1) return;
         
         console.groupCollapsed(`%cAnime Campaign | Updating resources for ${this.name}.`, 'color: orange;');

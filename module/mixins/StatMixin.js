@@ -48,10 +48,21 @@ export const StatMixin = {
         this.parent.update({ 'system.stats': stats });
         AC.log(`Deleted stat at index ${_index} for ${this.parent.name}`);
     },
-
+    
     //  Updates a Stat object's schema
     //*     (_name: string, _schema: StatSchema) : void
-    async updateStat(_name, _schema) {
+    updateStat(_name, _schema) {
+        const stats = this.stats;
+        const targetIndex = stats.findIndex(stat => stat.label == _name);
+        if (targetIndex == -1) return AC.error(`"${_name}" is not a stat.`);
+
+        const targetStat = stats[targetIndex].toObject();
+        Object.assign(targetStat, _schema);
+
+        this.parent.update({[`system.stats.${targetIndex}`]: targetStat});
+    },
+
+    async __updateStat(_name, _schema) {
         const stats = this.stats;
         let targetStat = stats.find(stat => stat.label == _name);
         if (targetStat == undefined) return AC.error(`"${_name}" is not a stat.`);
