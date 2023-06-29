@@ -27,6 +27,22 @@
             border-right: @thin-border;
         }
     }
+    .stat-resource {
+        opacity: 65%;
+        position: relative;
+        left: .2rem;
+        top: 2.5rem;
+        span > {
+            position: absolute;
+            border-radius: .1rem;
+            .SquareSize(1rem);
+
+            font: bold 1rem @header-font;
+            line-height: 1;
+            text-align: center;
+            background-color: white;
+        }
+    }
     .stat-img {
         position: relative;
         top: -.55rem;

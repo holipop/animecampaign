@@ -2,13 +2,13 @@
 <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
 <header class="sheet-header">
-    <img class="img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
+    <img class="img" {{match system style='background-color'}} src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
 
     <section class="header-top">
-        <div class="name" {{contrast system}} data-edit="name" spellcheck='false' contenteditable>
+        <div class="name" {{contrast system}} data-edit="name" spellcheck='false' {{#if (eq ownership 3)}}contenteditable{{/if}}>
             {{actor.name}}
         </div>
-        <div class="class" {{contrast system}} data-edit="system.class" spellcheck='false' contenteditable>
+        <div class="class" {{contrast system}} data-edit="system.class" spellcheck='false' {{#if (eq ownership 3)}}contenteditable{{/if}}>
             {{system.class}}
         </div>
     </section>

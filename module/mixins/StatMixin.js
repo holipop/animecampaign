@@ -1,12 +1,12 @@
-import { Stat } from "./Stat.js";
-import { AC } from "./config.js";
+import { Stat } from "../data-models/Stat.js";
+import AC from "../AC.js";
 
 //  A mixin containing shared methods between Character and Kit Piece schemas for Stat usage.
 export const StatMixin = {
 
     //  Create new Stat objects inside the stats list via a list of objects defining Stats.
     //  Optionally at a desired index.
-    //*     (_stat?: StatSchema[], _index?: number) : void
+    //*     (_stat?: Object[], _index?: number) : void
     createStats(_stats = [{}], _index = null) {
         let stats = this.stats;
         let createdStats = _stats.map(obj => new Stat(obj, { parent: this }));
@@ -18,7 +18,7 @@ export const StatMixin = {
         }
 
         this.parent.update({ 'system.stats': stats });
-        AC.log(`${AC} | Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
+        AC.log(`Created stats ${createdStats.map(i => `"${i.name}"`).join(', ')} for ${this.parent.name}`)
     },
 
     //  Deletes existing Stat objects from the stats list given a list of Stat names.
@@ -51,15 +51,16 @@ export const StatMixin = {
 
     //  Updates a Stat object's schema
     //*     (_name: string, _schema: StatSchema) : void
-    updateStat(_name, _schema) {
+    async updateStat(_name, _schema) {
         const stats = this.stats;
         let targetStat = stats.find(stat => stat.label == _name);
-
         if (targetStat == undefined) return AC.error(`"${_name}" is not a stat.`);
 
-        Object.assign(targetStat, _schema);
+        targetStat = await targetStat.updateSource(_schema);
 
-        this.parent.update({ 'system.stats': [...stats] });
+        //! This is actually one of the stupidest fixes I've ever done.
+        await this.parent.update({ 'system.stats': [] });
+        await this.parent.update({ 'system.stats': stats });
         AC.log(`Updated the "${_name}" stat for ${this.parent.name}`);
     },
 

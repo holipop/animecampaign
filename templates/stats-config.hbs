@@ -21,7 +21,20 @@
         </div>
     </div>
 
-    {{ log stat.validDisplays }}
+    {{#if (eq stat.documentName 'Actor')}}
+        <div class="form-group">
+            <label>Resource</label>
+            <div class="form-fields">
+                <select name="settings.resource">
+                    {{#select stat.settings.resource}}
+                        {{#each resourceOptions}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    {{/if}}
 
     <button type="submit">Save Changes</button>
 

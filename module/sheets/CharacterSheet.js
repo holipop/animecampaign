@@ -1,4 +1,4 @@
-import { SheetMixin } from "./SheetMixin.js";
+import { SheetMixin } from "../mixins/SheetMixin.js";
 
 //  Defining the schema for Actor Sheets.
 export default class CharacterSheet extends ActorSheet {
@@ -14,7 +14,8 @@ export default class CharacterSheet extends ActorSheet {
                 navSelector: ".tabs", 
                 contentSelector: ".content", 
                 initial: "kit", 
-            }]
+            }],
+            scrollY: ["section.scrollable"]
         });
     }
 
@@ -33,27 +34,42 @@ export default class CharacterSheet extends ActorSheet {
         data.system = data.actor.system;    //  Actor schema that we defined
         data.items = data.actor.items;      //  Actor's owned items
         data.kitPieces = this.ownedKitTypes;
+        data.ownership = this.getOwnership();
 
-         return data;
+        return data;
+    }
+
+    //  Custom handling for sumbitted form data to update the Character.
+    //*     (_event: Event, _formData: Object) : void
+    _updateObject(_event, _formData) {
+        _formData = expandObject(_formData);
+        _formData.system.stats = Object.values(_formData.system.stats);
+        super._updateObject(_event, _formData)
     }
 
     //  This is where we put any custom event listeners for our sheets.
     //*     (_html: jQuery) : void
     activateListeners(_html) {
+        const OWNER = 3;
 
+        if (this.getOwnership() == OWNER) {
+            this.addDefaultKit(_html);
+            this.createKitPiece(_html);
+            this.deleteKitPiece(_html);
+            this.createBlankStat(_html);
+            this.addDefaultStats(_html);
+            
+            new ContextMenu(_html, '.stat', this.contextMenuEntries());
+        }
+        
         this.updateName(_html, 3, 60);
         this.updateClass(_html);
-
-        this.createKitPiece(_html);
-        this.deleteKitPiece(_html);
+        
+        this.rollKitPiece(_html);
         this.editKitPiece(_html);
-
+        
         this.updateStatWidth(_html, .75);
-        this.createBlankStat(_html);
-        this.addDefaultStats(_html);
         this.collapseStatBlock(_html)
-
-        new ContextMenu(_html, '.stat', this.contextMenuEntries());
 
         super.activateListeners(_html);
     }
@@ -67,15 +83,71 @@ export default class CharacterSheet extends ActorSheet {
         CLASS[0].addEventListener('paste', event => event.preventDefault());
     }
 
+    //  Send a chat message of the Kit Piece, right clicking will omit the Roll.
+    //*     (_html: jQuery) : void
+    rollKitPiece(_html) { 
+        const KIT_IMG = _html.find('.kit-piece-img');
+        KIT_IMG.on('mousedown', event => {
+            const id = $(event.currentTarget).data('id');
+
+            const item = this.object.getEmbeddedDocument('Item', id);
+
+            const RIGHT_CLICK = 2;
+            const settings = {
+                post: (event.button == RIGHT_CLICK)
+            }
+            item.roll(settings);
+        });
+    }
+
     //  Creates a new Kit Piece within the Character's owned Items collection.
     //*     (_html: jQuery) : void
     createKitPiece(_html) {
         _html.find(".kit-piece-create").on("click", event => {
+            const isCustom = !Object.keys(CONFIG.animecampaign.kitTypes).includes($(event.currentTarget).data('type'));
+
             let itemData = [{
                 name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                 type: "Kit Piece",
+                system: {
+                    color: this.actor.system.color,
+                    type: (isCustom) ? 'custom' : $(event.currentTarget).data('type'),
+                    customType: (isCustom) ? $(event.currentTarget).data('type') : "",
+                }
             }]
     
+            this.actor.createEmbeddedDocuments('Item', itemData);
+        })
+    }
+
+    //  Generates a series of blank Kit Pieces, enough for a basic character sheet.
+    //*     (_html: jQuery) : void
+    addDefaultKit(_html) {
+        _html.find(".add-default").on("click", event => {
+            const add = (_type, _quantity = 1) => {
+                if (_quantity < 1) AC.error('Cannot take values under 0.')
+
+                let arr = [];
+                for (let i = 0; i < _quantity; i++) {
+                    arr.push({
+                        name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
+                        type: "Kit Piece",
+                        system: {
+                            color: this.actor.system.color,
+                            type: _type
+                        }
+                    })
+                }
+                return arr;
+            }
+
+            let itemData = [ 
+                ...add('talent'), 
+                ...add('passive'), 
+                ...add('weapon'), 
+                ...add('ability', 3) 
+            ];
+
             this.actor.createEmbeddedDocuments('Item', itemData);
         })
     }

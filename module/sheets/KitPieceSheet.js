@@ -1,4 +1,4 @@
-import { SheetMixin } from "./SheetMixin.js";
+import { SheetMixin } from "../mixins/SheetMixin.js";
 
 //  Defining the schema for Item Sheets.
 export default class KitPieceSheet extends ItemSheet {
@@ -9,7 +9,8 @@ export default class KitPieceSheet extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             width: 450,
             height: 500,
-            classes: ["animecampaign", "sheet", "item"]
+            classes: ["animecampaign", "sheet", "item"],
+            scrollY: ["div.scrollable"]
         });
     }
 
@@ -28,6 +29,7 @@ export default class KitPieceSheet extends ItemSheet {
 
         data.config = CONFIG.animecampaign; //  Localization paths
         data.system = data.item.system;     //  Item schema that we defined
+        data.ownership = this.getOwnership();
 
         return data;
     }
@@ -36,29 +38,71 @@ export default class KitPieceSheet extends ItemSheet {
     //*     (_html: jQuery) : void
     activateListeners(_html) {
 
+        if (this.getOwnership() == 3) {
+            this.createBlankStat(_html);
+            this.addDefaultStats(_html);
+            
+            this.moveSection(_html, 'up');
+            this.moveSection(_html, 'down');
+            this.addSection(_html);
+            this.deleteSection(_html);
+            
+            
+            new ContextMenu(_html, '.stat', this.contextMenuEntries());
+        }
         this.updateName(_html, 2.5, 60);
-
-        this.customTypeToLowercase(_html);
+        
+        this.roll(_html);
 
         this.updateStatWidth(_html, .75);
-        this.createBlankStat(_html);
-        this.addDefaultStats(_html);
         this.collapseStatBlock(_html)
-
-        new ContextMenu(_html, '.stat', this.contextMenuEntries());
         
         super.activateListeners(_html);
     }
 
-    customTypeToLowercase(_html) {
-        const CUSTOM_TYPE = _html.find('.custom-type');
-        if (!CUSTOM_TYPE.length) return;
+    // Sends a chat message of the Kit Piece to the chat, optionally with a Roll.
+    //*     (_html: jQuery) : void
+    roll(_html) {
+        _html.find('.roll').on('click', event => {
+            this.object.roll();
+        })
 
-        const loweredInput = CUSTOM_TYPE.val().toLowerCase();
+        _html.find('.post').on('click', event => {
+            this.object.roll({ post: true });
+        })
+    }
 
-        CUSTOM_TYPE.on('change', event => {
-            console.log(this.object);
-            this.item.update([{ 'system.customType': loweredInput }]);
+    //  Shifts a section up or down by one index in the sections array.
+    //*     (_html: jQuery, _direction: string) : void
+    moveSection(_html, _direction) {
+        const MOVE = _html.find(`.section-move-${_direction}`);
+
+        MOVE.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+            const moveTo = (_direction == 'up')
+                ? index - 1 
+                : index + 1
+            ;
+
+            this.object.system.moveSection(index, moveTo);
+        })
+    }
+
+    //*     (_html: jQuery) : void
+    addSection(_html) {
+        const ADD_SECTION = _html.find('.add-section');
+        ADD_SECTION.on('click', event => {
+            this.object.system.createSections();
+        }) 
+    }
+
+    //*     (_html: jQuery) : void
+    deleteSection(_html) {
+        const DELETE_SECTION = _html.find('.section-delete');
+        DELETE_SECTION.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+
+            this.object.system.deleteSectionIndex(index);
         })
     }
 }
