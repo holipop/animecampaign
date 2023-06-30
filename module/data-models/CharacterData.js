@@ -80,6 +80,9 @@ export class CharacterData extends foundry.abstract.DataModel {
         }
     }
 
+    //  Get the resources available for a Stat to select. Resources occupied by other
+    //  stats get removed from the selection.
+    //*     (_stat: Stat) : string[]
     getAvailableResources(_stat) {
         const filteredResources = Object.entries(this.resources).map(i => {
             return { key: i[0], stat: i[1].stat }
@@ -88,6 +91,14 @@ export class CharacterData extends foundry.abstract.DataModel {
         return [ 'None', ...openResources ];
     }
 
+    //  Clear the resources manually.
+    //*     () : void
+    resetResources() {
+        this.parent.update({ [`system.resources`]: this.blankResources });
+        AC.log(`Reset resources for ${this.parent.name}.`)
+    }
+
+    //*     () : Object
     get blankResources() {
         const blank = {}
         AC.resourceKeys.forEach(i => {
@@ -100,11 +111,6 @@ export class CharacterData extends foundry.abstract.DataModel {
             })
         });
         return blank;
-    }
-
-    resetResources() {
-        this.parent.update({ [`system.resources`]: this.blankResources });
-        AC.log(`Reset resources for ${this.parent.name}.`)
     }
 }
 

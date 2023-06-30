@@ -70,19 +70,5 @@ export const StatMixin = {
     clearStats() {
         this.parent.update({ 'system.stats': [] });
         AC.log(`Deleted all stats for ${this.parent.name}`);
-    },
-
-    // !!! DEPRECEATED
-    async __updateStat(_name, _schema) {
-        const stats = this.stats;
-        let targetStat = stats.find(stat => stat.label == _name);
-        if (targetStat == undefined) return AC.error(`"${_name}" is not a stat.`);
-
-        targetStat = await targetStat.updateSource(_schema);
-
-        //! This is actually one of the stupidest fixes I've ever done.
-        await this.parent.update({ 'system.stats': [] });
-        await this.parent.update({ 'system.stats': stats });
-        AC.log(`Updated the "${_name}" stat for ${this.parent.name}`);
-    },
+    }
 }
