@@ -3,6 +3,11 @@ import AC from "../AC.js";
 //  A custom document class to override certain Actor methods.
 export default class ACActor extends Actor {
 
+    _preUpdate(changed, options, user) {
+        this.updateResources(changed);
+        super._preUpdate(changed, options, user);
+    }
+
     /* async _onCreate(data, options, userId) {
         await this.updateResources(data);
         super._onCreate(data, options, userId);
@@ -15,8 +20,32 @@ export default class ACActor extends Actor {
     } */
 
     //  Updates the resources of a character whenever owned Stat objects change.
-    //*     (changed: { system?: Object }) : void
-    async updateResources({ system = {} }) {
+    //*     (_changed: Object) : void
+    updateResources(_changed) {
+        const template = { system: { stats: [] } };
+        const stats = filterObject(_changed, template)?.system?.stats
+        if (!stats) return;
+
+        const resourceStats = stats.filter(stat => stat.settings.resource != 'None');
+        if (resourceStats.length < 1) return;
+
+        const updatedResources = this.system.blankResources;
+        for (const stat of resourceStats) {
+            let resource = {
+                [stat.settings.resource]: {
+                    stat: stat,
+                    value: Number(stat.value) || 0,
+                    max: Number(stat.max) || 0,
+                }
+            }
+            Object.assign(updatedResources, resource);
+        }
+
+        this.update({ 'system.resources': updatedResources });
+        AC.log(`Updated resources for ${this.name}.`);
+    }
+
+    async __updateResources({ system = {} }) {
         if (!Object.hasOwn(system, 'stats')) return;
         const { stats } = system;
         

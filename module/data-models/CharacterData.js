@@ -88,7 +88,7 @@ export class CharacterData extends foundry.abstract.DataModel {
         return [ 'None', ...openResources ];
     }
 
-    async resetResources() {
+    get blankResources() {
         const blank = {}
         AC.resourceKeys.forEach(i => {
             Object.assign(blank, { 
@@ -99,8 +99,12 @@ export class CharacterData extends foundry.abstract.DataModel {
                 }
             })
         });
-        await this.parent.update({ [`system.resources`]: blank })
-        AC.log(`Reset resources.`)
+        return blank;
+    }
+
+    resetResources() {
+        this.parent.update({ [`system.resources`]: this.blankResources });
+        AC.log(`Reset resources for ${this.parent.name}.`)
     }
 }
 
