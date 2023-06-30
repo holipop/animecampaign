@@ -39,14 +39,6 @@ export default class CharacterSheet extends ActorSheet {
         return data;
     }
 
-    //  Custom handling for sumbitted form data to update the Character.
-    //*     (_event: Event, _formData: Object) : void
-    _updateObject(_event, _formData) {
-        _formData = expandObject(_formData);
-        _formData.system.stats = Object.values(_formData.system.stats);
-        super._updateObject(_event, _formData)
-    }
-
     //  This is where we put any custom event listeners for our sheets.
     //*     (_html: jQuery) : void
     activateListeners(_html) {
