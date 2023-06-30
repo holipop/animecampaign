@@ -5,7 +5,13 @@ export default class ACActor extends Actor {
 
     _preUpdate(changed, options, user) {
         this.updateResources(changed);
+        this.updateStatOnToken(changed);
         super._preUpdate(changed, options, user);
+    }
+
+    _preCreate(data, options, userId) {
+        this.updateResources(data);
+        super._preCreate(data, options, userId);
     }
 
     /* async _onCreate(data, options, userId) {
@@ -41,10 +47,26 @@ export default class ACActor extends Actor {
             Object.assign(updatedResources, resource);
         }
 
-        this.update({ 'system.resources': updatedResources });
+        _changed.system.resources = updatedResources;
         AC.log(`Updated resources for ${this.name}.`);
     }
 
+    updateStatOnToken(_changed) {
+        if (hasProperty(_changed, 'system.stats')) return;
+
+        const template = { system: { resources: this.blankResources } };
+        const resource = filterObject(_changed, template)?.system?.resources;
+        if (!resource) return;
+        
+        const key = Object.keys(resource)[0];
+        const updatedStat = this.system.resources[key].stat;
+        const stats = this.system.updateStat(updatedStat.label, resource[key], false);
+
+        _changed.system.stats = stats;
+        AC.log(`Updated stats via token for ${this.name}.`);
+    }
+
+    // !!! DEPRECEATED
     async __updateResources({ system = {} }) {
         if (!Object.hasOwn(system, 'stats')) return;
         const { stats } = system;
@@ -52,7 +74,7 @@ export default class ACActor extends Actor {
         const filteredStats = stats.filter(stat => stat.settings?.resource != 'None');
         if (filteredStats.length < 1) return;
         
-        console.groupCollapsed(`%cAnime Campaign | Updating resources for ${this.name}.`, 'color: orange;');
+        console.groupCollapsed(`%cAnime Campaign | Updating resourcies for ${this.name}.`, 'color: orange;');
         
         await this.system.resetResources();
 
@@ -70,7 +92,7 @@ export default class ACActor extends Actor {
 
     //  Updates the matching Stat object whenever the actor's token bar value changes.
     //*     (changed: { system?: Object }) : void
-    async updateStatOnBarUpdate({ system = {} }) {
+    async __updateStatOnBarUpdate({ system = {} }) {
         const { resources = {} } = system;
         const key = Object.keys(resources)[0]
         const template =  {

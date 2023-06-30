@@ -51,13 +51,15 @@ export const StatMixin = {
     
     //  Updates a Stat object's schema
     //*     (_name: string, _schema: StatSchema) : void
-    updateStat(_name, _schema) {
+    updateStat(_name, _schema, _update=true) {
         const stats = [...this.stats];
         const targetIndex = stats.findIndex(stat => stat.label == _name);
         if (targetIndex == -1) return AC.error(`"${_name}" is not a stat.`);
 
         const targetStat = stats[targetIndex].toObject();
         stats[targetIndex] = Object.assign(targetStat, _schema);;
+
+        if (!_update) return stats;
 
         this.parent.update({ 'system.stats': stats });
         AC.log(`Updated the "${_name}" stat for ${this.parent.name}`);
