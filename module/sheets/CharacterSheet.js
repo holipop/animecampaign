@@ -15,14 +15,9 @@ export default class CharacterSheet extends ActorSheet {
                 contentSelector: ".content", 
                 initial: "kit", 
             }],
-            scrollY: ["section.scrollable"]
+            scrollY: ["section.scrollable"],
+            template: `systems/animecampaign/templates/sheets/character-sheet.hbs`
         });
-    }
-
-    //  Retrieves the Handlebars filepath to load depending on the type of Actor.
-    //*     () : string
-    get template() {
-        return `systems/animecampaign/templates/sheets/${this.actor.type}-sheet.hbs`;
     }
 
     //  Returns an object for Handlebars usage.

@@ -10,16 +10,9 @@ export default class KitPieceSheet extends ItemSheet {
             width: 450,
             height: 500,
             classes: ["animecampaign", "sheet", "item"],
-            scrollY: ["div.scrollable"]
+            scrollY: ["div.scrollable"],
+            template: `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`
         });
-    }
-
-    //  Retrieves the Handlebars filepath to load depending on the type of Item.
-    //*     () : string
-    get template() {
-        if (this.item.type == 'Kit Piece') {
-            return `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`;
-        }
     }
 
     //  Returns an object for Handlebars usage.
