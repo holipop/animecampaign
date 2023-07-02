@@ -285,7 +285,7 @@
   background-color: transparent;
 }
 .animecampaign.kit-piece-roll .stat-name {
-  padding: 0.5rem 0.3rem 0;
+  padding: 0.5rem 0.3rem 1px;
   text-transform: uppercase;
   text-align: end;
   border-right: 1px solid black;
