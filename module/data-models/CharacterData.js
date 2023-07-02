@@ -30,7 +30,7 @@ export class CharacterData extends foundry.abstract.DataModel {
         return {
             description: new fields.HTMLField(),
             class: new fields.StringField({
-                initial: "Class"
+                initial: "Enter Class"
             }),
             word: new fields.StringField(),
             type: new fields.StringField(),
