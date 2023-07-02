@@ -122,19 +122,18 @@ export const SheetMixin = {
         const STAT_BLOCK = _html.find('.stat-block')
 
         _html.ready(() => {
-            if (STAT_BLOCK.find('.stat').length == 0) {
+            if (this.object.getFlag('animecampaign', 'isCollapsed')) {
                 STAT_BLOCK.addClass('hidden');
             }
         });
         
         COLLAPSE_STATS.on('click', event => {
-
-            const isHidden = STAT_BLOCK.hasClass('hidden');
-
-            if (isHidden) {
-                STAT_BLOCK.removeClass('hidden');
+            STAT_BLOCK.toggleClass('hidden');
+            
+            if (STAT_BLOCK.hasClass('hidden')) {
+                this.object.setFlag('animecampaign', 'isCollapsed', true);
             } else {
-                STAT_BLOCK.addClass('hidden');
+                this.object.unsetFlag('animecampaign', 'isCollapsed');
             }
         })
     },
