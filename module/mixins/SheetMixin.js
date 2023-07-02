@@ -118,16 +118,23 @@ export const SheetMixin = {
     //  Collapses the stats area. Automatically does this if the entity has no stats.
     //*     (_html: jQuery) : void
     collapseStatBlock(_html) {
+        const isOwner = this.getOwnership == 3;
         const COLLAPSE_STATS = _html.find('.collapse-button')
         const STAT_BLOCK = _html.find('.stat-block')
-
-        if (this.object.getFlag('animecampaign', 'isCollapsed')) {
+        
+        if (STAT_BLOCK.find('.stat').length == 0 && !isOwner) {
+            STAT_BLOCK.addClass('hidden');
+            return;
+        }
+        
+        if (this.object.getFlag('animecampaign', 'isCollapsed') && isOwner) {
             STAT_BLOCK.addClass('hidden');
         }
         
         COLLAPSE_STATS.on('click', event => {
             STAT_BLOCK.toggleClass('hidden');
-            
+            if (!isOwner) return;
+
             if (STAT_BLOCK.hasClass('hidden')) {
                 this.object.setFlag('animecampaign', 'isCollapsed', true);
             } else {
