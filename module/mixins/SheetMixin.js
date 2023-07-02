@@ -121,11 +121,9 @@ export const SheetMixin = {
         const COLLAPSE_STATS = _html.find('.collapse-button')
         const STAT_BLOCK = _html.find('.stat-block')
 
-        _html.ready(() => {
-            if (this.object.getFlag('animecampaign', 'isCollapsed')) {
-                STAT_BLOCK.addClass('hidden');
-            }
-        });
+        if (this.object.getFlag('animecampaign', 'isCollapsed')) {
+            STAT_BLOCK.addClass('hidden');
+        }
         
         COLLAPSE_STATS.on('click', event => {
             STAT_BLOCK.toggleClass('hidden');
