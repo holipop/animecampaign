@@ -315,10 +315,12 @@
   border: 0;
   padding: 0;
   border-top: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 .animecampaign.kit-piece-roll .section-label {
   padding-right: 0.3rem;
   font: bold italic 0.7rem 'Arial';
+  opacity: 80%;
 }
 .animecampaign.kit-piece-roll .collapse {
   width: 0;
