@@ -457,12 +457,10 @@
   padding: 0.1rem 7.5%;
   padding-right: 0;
   border-radius: 1rem 1rem 0 0;
+  margin-top: 0.5rem;
   font: bold italic 0.75rem 'Arial';
   text-transform: uppercase;
   background: linear-gradient(to right, transparent 1%, currentColor 10%, currentColor 60%, transparent 99%);
-}
-.animecampaign.actor.sheet .kit-type-group {
-  margin-bottom: 0.5rem;
 }
 .animecampaign.actor.sheet .kit-piece-card {
   height: 1.75rem;

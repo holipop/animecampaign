@@ -51,7 +51,8 @@ export default class CharacterSheet extends ActorSheet {
         
         this.updateName(_html, 3, 60);
         this.updateClass(_html);
-        
+
+        this.collapseKitSection(_html);
         this.rollKitPiece(_html);
         this.editKitPiece(_html);
         
@@ -155,6 +156,16 @@ export default class CharacterSheet extends ActorSheet {
             let itemId = e.currentTarget.dataset.id
             let item = this.actor.getEmbeddedDocument("Item", itemId);
             item.sheet.render(true);
+        })
+    }
+
+    collapseKitSection(_html) {
+        _html.find('[data-collapse]').on('click', event => {
+            const ICON = $(event.currentTarget).children('i');
+            const SECTION = $(event.currentTarget).parent().next();
+            
+            SECTION.toggleClass('hidden');
+            ICON.toggleClass('fa-chevron-right');
         })
     }
 
