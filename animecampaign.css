@@ -1,3 +1,7 @@
+.animecampaign {
+  scrollbar-width: 3px;
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+}
 .animecampaign ::-webkit-scrollbar {
   width: 3px;
 }
