@@ -7,6 +7,9 @@
                     <span class="section-options">
                         <input class="section-label" type="text" name="system.sections.{{index}}.label" value="{{section.label}}" placeholder="Label">
 
+                        <a class="section-hide" data-hide>
+                            <i class="fas fa-eye-slash"></i>
+                        </a>
                         <a class="section-move-up">
                             <i class="fas fa-arrow-up"></i>
                         </a>
@@ -23,6 +26,7 @@
 
                 <div class="hidden section-schema">
                     <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
+                    <input type="text" name="system.sections.{{index}}.hidden" value="{{section.hidden}}">
                 </div>
             </fieldset>
         {{else}}

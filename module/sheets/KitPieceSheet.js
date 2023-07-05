@@ -35,11 +35,11 @@ export default class KitPieceSheet extends ItemSheet {
             this.createBlankStat(_html);
             this.addDefaultStats(_html);
             
+            this.hideSection(_html);
             this.moveSection(_html, 'up');
             this.moveSection(_html, 'down');
             this.addSection(_html);
             this.deleteSection(_html);
-            
             
             new ContextMenu(_html, '.stat', this.contextMenuEntries());
         }
@@ -62,6 +62,28 @@ export default class KitPieceSheet extends ItemSheet {
 
         _html.find('.post').on('click', event => {
             this.object.roll({ post: true });
+        })
+    }
+
+    hideSection(_html) {
+        const HIDE = _html.find('[data-hide]');
+
+        for (const button of HIDE) {
+            const index = $(button).parents('.section').data('index');
+            const section = this.object.system.sections[index];
+
+            if (section.hidden) $(button).addClass('active');
+        }
+        
+        HIDE.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+            $(event.currentTarget).toggleClass('active');
+
+            if ($(event.currentTarget).hasClass('active')) {
+                this.object.system.updateSection(index, {hidden: true});
+            } else {
+                this.object.system.updateSection(index, {hidden: false});
+            }
         })
     }
 

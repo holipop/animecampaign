@@ -67,6 +67,19 @@ export class KitPieceData extends foundry.abstract.DataModel {
         AC.log(`Created ${createdSections.length} section(s) for ${this.parent.name}`);
     }
 
+    updateSection(_index, _schema) {
+        const sections = [...this.sections];
+        if (_index == -1 || _index >= sections.length) return AC.error(`"Index ${_name}" is not a section.`);
+        
+        const targetSection = sections[_index].toObject();
+        sections[_index] = Object.assign(targetSection, _schema);;
+
+        console.log(sections)
+
+        this.parent.update({ 'system.sections': sections });
+        AC.log(`Updated the section at index "${_index}" for ${this.parent.name}`);
+    }
+
     //  Deletes a Section object at the desired index.
     //*     (_index: number) : void
     deleteSectionIndex(_index) {

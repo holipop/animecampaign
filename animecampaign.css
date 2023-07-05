@@ -740,6 +740,12 @@
 .animecampaign.item.sheet .sections .section:hover i {
   opacity: 75%;
 }
+.animecampaign.item.sheet .sections .section:hover .section-hide {
+  opacity: 12.5%;
+}
+.animecampaign.item.sheet .sections .section:hover .section-hide.active {
+  opacity: 100%;
+}
 .animecampaign.item.sheet .sections .section-wrapper {
   padding-top: 0.25rem;
   margin-bottom: 0.5rem;
@@ -755,6 +761,9 @@
 }
 .animecampaign.item.sheet .sections .section-options i {
   opacity: 10%;
+}
+.animecampaign.item.sheet .sections .active > i {
+  opacity: 75%;
 }
 .animecampaign.item.sheet .sections .section-label {
   padding: 0;

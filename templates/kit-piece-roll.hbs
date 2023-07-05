@@ -65,14 +65,14 @@
 
                     <legend class="section-label">
                         <a class="collapse">
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas {{ifThen section.hidden "fa-chevron-right" ""}} fa-chevron-down"></i>
                         </a>
                         {{#if section.label}}
                             <a>{{section.label}}</a>
                         {{/if}}
                     </legend>
 
-                    <div class="section-text">
+                    <div class="section-text {{ifThen section.hidden "hidden" ""}}">
                         {{{section.text}}}
                     </div>
 
