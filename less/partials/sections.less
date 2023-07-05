@@ -14,6 +14,12 @@
         i {
             opacity: 75%;
         }
+        .section-hide {
+            opacity: 12.5%;
+        }
+        .section-hide.active {
+            opacity: 100%;
+        }
     }
     .section-wrapper {
         padding-top: .25rem;
@@ -29,6 +35,11 @@
         }
         i {
             opacity: 10%
+        }
+    }
+    .active {
+        > i {
+            opacity: 75%;
         }
     }
     .section-label {
@@ -59,6 +70,13 @@
         padding-right: .3rem;
 
         font: bold 0.75rem @body-font;
+    }
+
+    textarea {
+        resize: none;
+        border-color: rgba(0, 0, 0, 0.33);
+
+        font: .8rem @body-font;
     }
 
     .editor {

@@ -1,3 +1,7 @@
+.animecampaign {
+  scrollbar-width: 3px;
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+}
 .animecampaign ::-webkit-scrollbar {
   width: 3px;
 }
@@ -285,7 +289,7 @@
   background-color: transparent;
 }
 .animecampaign.kit-piece-roll .stat-name {
-  padding: 0.5rem 0.3rem 0;
+  padding: 0.5rem 0.3rem 1px;
   text-transform: uppercase;
   text-align: end;
   border-right: 1px solid black;
@@ -315,10 +319,12 @@
   border: 0;
   padding: 0;
   border-top: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 .animecampaign.kit-piece-roll .section-label {
   padding-right: 0.3rem;
   font: bold italic 0.7rem 'Arial';
+  opacity: 80%;
 }
 .animecampaign.kit-piece-roll .collapse {
   width: 0;
@@ -327,6 +333,10 @@
 }
 .animecampaign.kit-piece-roll .collapse > i {
   width: 0.3rem;
+}
+.animecampaign.kit-piece-roll .markdown.section-text {
+  font-family: 'Arial';
+  font-size: 0.8rem;
 }
 .animecampaign.actor.sheet .background {
   position: absolute;
@@ -451,12 +461,10 @@
   padding: 0.1rem 7.5%;
   padding-right: 0;
   border-radius: 1rem 1rem 0 0;
+  margin-top: 0.5rem;
   font: bold italic 0.75rem 'Arial';
   text-transform: uppercase;
   background: linear-gradient(to right, transparent 1%, currentColor 10%, currentColor 60%, transparent 99%);
-}
-.animecampaign.actor.sheet .kit-type-group {
-  margin-bottom: 0.5rem;
 }
 .animecampaign.actor.sheet .kit-piece-card {
   height: 1.75rem;
@@ -736,6 +744,12 @@
 .animecampaign.item.sheet .sections .section:hover i {
   opacity: 75%;
 }
+.animecampaign.item.sheet .sections .section:hover .section-hide {
+  opacity: 12.5%;
+}
+.animecampaign.item.sheet .sections .section:hover .section-hide.active {
+  opacity: 100%;
+}
 .animecampaign.item.sheet .sections .section-wrapper {
   padding-top: 0.25rem;
   margin-bottom: 0.5rem;
@@ -751,6 +765,9 @@
 }
 .animecampaign.item.sheet .sections .section-options i {
   opacity: 10%;
+}
+.animecampaign.item.sheet .sections .active > i {
+  opacity: 75%;
 }
 .animecampaign.item.sheet .sections .section-label {
   padding: 0;
@@ -780,6 +797,11 @@
 .animecampaign.item.sheet .sections .viewer-label {
   padding-right: 0.3rem;
   font: bold 0.75rem 'Arial';
+}
+.animecampaign.item.sheet .sections textarea {
+  resize: none;
+  border-color: rgba(0, 0, 0, 0.33);
+  font: 0.8rem 'Arial';
 }
 .animecampaign.item.sheet .sections .editor {
   height: fit-content;

@@ -10,9 +10,9 @@ export class RolledItem {
     //  Toggle between revealing and hiding the text of a section.
     //*     (_html: jQuery) : void
     static collapse(_html) {
-        _html.find('.collapse').on('click', event => {
-            const ICON = $(event.currentTarget).children();
-            const TEXT = $(event.currentTarget).parent().next();
+        _html.find('.section-label').on('click', event => {
+            const ICON = $(event.currentTarget).children('.collapse').children();
+            const TEXT = $(event.currentTarget).next();
             
             TEXT.toggleClass('hidden');
             ICON.toggleClass('fa-chevron-right');

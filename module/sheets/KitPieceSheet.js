@@ -10,16 +10,9 @@ export default class KitPieceSheet extends ItemSheet {
             width: 450,
             height: 500,
             classes: ["animecampaign", "sheet", "item"],
-            scrollY: ["div.scrollable"]
+            scrollY: ["div.scrollable"],
+            template: `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`
         });
-    }
-
-    //  Retrieves the Handlebars filepath to load depending on the type of Item.
-    //*     () : string
-    get template() {
-        if (this.item.type == 'Kit Piece') {
-            return `systems/animecampaign/templates/sheets/kit-piece-sheet.hbs`;
-        }
     }
 
     //  Returns an object for Handlebars usage.
@@ -42,11 +35,12 @@ export default class KitPieceSheet extends ItemSheet {
             this.createBlankStat(_html);
             this.addDefaultStats(_html);
             
+            this.resizeTextArea(_html)
+            this.hideSection(_html);
             this.moveSection(_html, 'up');
             this.moveSection(_html, 'down');
             this.addSection(_html);
             this.deleteSection(_html);
-            
             
             new ContextMenu(_html, '.stat', this.contextMenuEntries());
         }
@@ -69,6 +63,37 @@ export default class KitPieceSheet extends ItemSheet {
 
         _html.find('.post').on('click', event => {
             this.object.roll({ post: true });
+        })
+    }
+
+    resizeTextArea(_html) {
+        _html.find("textarea").each(function() {
+            this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+        }).on("input", function() {
+            this.style.height = 0;
+            this.style.height = (this.scrollHeight) + "px";
+        });
+    }
+
+    hideSection(_html) {
+        const HIDE = _html.find('[data-hide]');
+
+        for (const button of HIDE) {
+            const index = $(button).parents('.section').data('index');
+            const section = this.object.system.sections[index];
+
+            if (section.hidden) $(button).addClass('active');
+        }
+        
+        HIDE.on('click', event => {
+            const index = $(event.currentTarget).parents('.section').data('index');
+            $(event.currentTarget).toggleClass('active');
+
+            if ($(event.currentTarget).hasClass('active')) {
+                this.object.system.updateSection(index, {hidden: true});
+            } else {
+                this.object.system.updateSection(index, {hidden: false});
+            }
         })
     }
 

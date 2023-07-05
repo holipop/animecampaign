@@ -78,7 +78,7 @@
         }
     }
     .stat-name {
-        padding: .5rem .3rem 0;
+        padding: .5rem .3rem 1px;
         text-transform: uppercase;
         text-align: end;
         border-right: @thin-border;
@@ -111,10 +111,12 @@
         border: 0;
         padding: 0;
         border-top: @thin-border;
+        border-color: rgba(0, 0, 0, 0.2);
     }
     .section-label {
         padding-right: .3rem;
         font: bold italic .7rem @body-font;
+        opacity: 80%;
     }
     .collapse {
         width: 0;
@@ -123,5 +125,10 @@
         > i {
             width: 0.3rem;
         }
+    }
+
+    .markdown.section-text {
+        font-family: @body-font;
+        font-size: .8rem;
     }
 }
