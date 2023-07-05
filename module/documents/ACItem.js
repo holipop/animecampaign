@@ -1,6 +1,6 @@
 import AC from "../AC.js";
 
-//  A custom document class to override certain Actor methods.
+//  A custom document class to override certain Item methods.
 export default class ACItem extends Item {
     chatTemplates = {
         'Kit Piece': 'systems/animecampaign/templates/kit-piece-roll.hbs'

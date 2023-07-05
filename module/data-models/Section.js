@@ -18,8 +18,6 @@ export class Section extends foundry.abstract.DataModel {
         const convert = new showdown.Converter();
         const markdown = this.text;
 
-        console.log({this: this, convert});
-
         return convert.makeHtml(markdown);
     }
 }
