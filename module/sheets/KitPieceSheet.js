@@ -35,6 +35,7 @@ export default class KitPieceSheet extends ItemSheet {
             this.createBlankStat(_html);
             this.addDefaultStats(_html);
             
+            this.resizeTextArea(_html)
             this.hideSection(_html);
             this.moveSection(_html, 'up');
             this.moveSection(_html, 'down');
@@ -63,6 +64,15 @@ export default class KitPieceSheet extends ItemSheet {
         _html.find('.post').on('click', event => {
             this.object.roll({ post: true });
         })
+    }
+
+    resizeTextArea(_html) {
+        _html.find("textarea").each(function() {
+            this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+        }).on("input", function() {
+            this.style.height = 0;
+            this.style.height = (this.scrollHeight) + "px";
+        });
     }
 
     hideSection(_html) {

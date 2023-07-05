@@ -21,11 +21,12 @@
                         </a>
                     </span>
 
-                    {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+                    {{!editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+                    <textarea name="system.sections.{{index}}.text">{{~section.text}}</textarea>
                 </div>
 
                 <div class="hidden section-schema">
-                    <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
+                    <!-- input type="text" name="system.sections.{{index}}.text" value="{{section.text}}" -->
                     <input type="text" name="system.sections.{{index}}.hidden" value="{{section.hidden}}">
                 </div>
             </fieldset>

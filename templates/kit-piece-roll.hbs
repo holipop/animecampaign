@@ -61,6 +61,7 @@
     {{#if system.sections}}
         <section class="sections">
             {{#each system.sections as |section index|}}
+
                 <fieldset class="section">
 
                     <legend class="section-label">
@@ -72,8 +73,9 @@
                         {{/if}}
                     </legend>
 
-                    <div class="section-text {{ifThen section.hidden "hidden" ""}}">
-                        {{{section.text}}}
+                    <div class="section-text markdown {{ifThen section.hidden "hidden" ""}}">
+                        {{! {section.text} }} 
+                        {{{section.markdown}}}
                     </div>
 
                 </fieldset>

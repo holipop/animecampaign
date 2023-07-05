@@ -334,6 +334,10 @@
 .animecampaign.kit-piece-roll .collapse > i {
   width: 0.3rem;
 }
+.animecampaign.kit-piece-roll .markdown.section-text {
+  font-family: 'Arial';
+  font-size: 0.8rem;
+}
 .animecampaign.actor.sheet .background {
   position: absolute;
   height: calc(6.2rem * (5/8) + 0.8rem);
@@ -793,6 +797,11 @@
 .animecampaign.item.sheet .sections .viewer-label {
   padding-right: 0.3rem;
   font: bold 0.75rem 'Arial';
+}
+.animecampaign.item.sheet .sections textarea {
+  resize: none;
+  border-color: rgba(0, 0, 0, 0.33);
+  font: 0.8rem 'Arial';
 }
 .animecampaign.item.sheet .sections .editor {
   height: fit-content;
