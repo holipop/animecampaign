@@ -152,25 +152,37 @@
 .animecampaign.item.sheet .settings > input::placeholder {
   opacity: 50%;
 }
-.animecampaign.item.sheet .roll-formula-label {
+.animecampaign.item.sheet .label {
   width: fit-content;
+  margin-left: 0.5rem;
   margin-right: 0.3rem;
   font-size: 0.7rem;
   opacity: 60%;
 }
-.animecampaign.item.sheet .roll-formula {
+.animecampaign.item.sheet .field {
   padding: 0;
   border: 0;
   border-radius: 0;
   box-shadow: none;
   background-color: transparent;
   height: 1rem;
-  width: 4.5rem;
   border-left: 1px solid black;
   border-right: 1px solid black;
   border-radius: 0.2rem;
-  padding: 0 0.5rem;
-  font-size: 0.9rem;
+  margin-right: 0.3rem;
+  padding: 0 0.2rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.animecampaign.item.sheet .field.roll-formula {
+  width: 3.5rem;
+}
+.animecampaign.item.sheet .field.action {
+  width: fit-content;
+  color: rgba(0, 0, 0, 0.9);
+}
+.animecampaign.item.sheet .field.usage {
+  width: 8.5rem;
 }
 .animecampaign.item.sheet .hidden {
   display: none;
@@ -342,6 +354,27 @@
 }
 .animecampaign.kit-piece-roll .collapse > i {
   width: 0.3rem;
+}
+.animecampaign.kit-piece-roll .economy {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.15);
+  padding: 0.1rem 0.3rem;
+  font: bold 0.75rem 'Arial';
+}
+.animecampaign.kit-piece-roll .economy > * {
+  opacity: 80%;
+}
+.animecampaign.kit-piece-roll .economy .action {
+  margin-left: 0.2rem;
+  text-transform: uppercase;
+  transform: scaleX(1.25);
+  font-style: italic;
+}
+.animecampaign.kit-piece-roll .economy .usage {
+  justify-self: end;
 }
 .animecampaign.kit-piece-roll .markdown.section-text {
   font-family: 'Arial';

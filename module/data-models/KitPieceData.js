@@ -25,10 +25,14 @@ export class KitPieceData extends foundry.abstract.DataModel {
                 initial: "ability",
             }),
             customType: new fields.StringField(defaultSettings),
+
             formula: new fields.StringField({
                 ...defaultSettings,
                 initial: "1d20"
             }),
+            usage: new fields.StringField(),
+            action: new fields.StringField({initial: "blank"}),
+
             stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) ),
             sections: new fields.ArrayField( new fields.EmbeddedDataField( Section ) )
         }

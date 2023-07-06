@@ -189,7 +189,7 @@ export default class CharacterSheet extends ActorSheet {
             const defaultColor = this.object.getFlag('animecampaign', `${type}Color`) ?? this.object.system.color
 
             const data = {
-                title: `${COLOR.data('type')}: Custom Color`,
+                title: `${type}: Custom Color`,
                 content: `
                     <div style="margin-bottom: 0.1rem; display: grid; place-items: center;">
                         <span>

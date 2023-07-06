@@ -42,8 +42,20 @@
         {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
 
         <section class="settings">
-            <div class="roll-formula-label">Roll Formula</div>
-            <input class="roll-formula" type="text" name="system.formula" value="{{system.formula}}" placeholder="N/A">
+            <div class="label roll-formula">Roll</div>
+            <input class="field roll-formula" type="text" name="system.formula" value="{{system.formula}}" placeholder="N/A">
+
+            <div class="label action">Action</div>
+            <select class="field action" name="system.action">
+                {{#select system.action}}
+                    {{#each config.actions as |name key|}}
+                        <option value="{{key}}">{{localize name}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+            
+            <div class="label usage">Usage</div>
+            <input class="field usage" type="text" name="system.usage" value="{{system.usage}}" placeholder="N/A">
         </section>
 
         {{~> "systems/animecampaign/templates/sheets/partials/sections.hbs"}}

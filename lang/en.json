@@ -71,6 +71,14 @@
         "statConfigLabels": {
             "image": "Image",
             "display": "Display"
+        },
+        "actions": {
+            "blank": "N/A",
+            "main": "Main",
+            "move": "Move",
+            "anytime": "Anytime",
+            "bonus": "Bonus",
+            "free": "Free"
         }
     }
 }

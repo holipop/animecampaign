@@ -19,7 +19,7 @@
 
     {{#if roll}}
         <section class="roll">
-            <div class="total" {{match roll}}>
+            <div class="total" {{match roll.color}}>
                 {{ roll.totalInt }}
             </div>
             <div class="formula">
@@ -82,5 +82,17 @@
             {{/each}}
         </section>
     {{/if}}
+
+    <div class="economy">
+        {{#unless (eq system.action "blank")}}
+            <span class="action">{{system.action}}</span>
+        {{else}}
+            <span></span>
+        {{/unless}}
+        
+        {{#if system.usage}}
+            <span class="usage">{{system.usage}}</span>
+        {{/if}}
+    </div>
     
 </div>

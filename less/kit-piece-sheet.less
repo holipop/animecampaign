@@ -107,22 +107,34 @@
             opacity: 50%;
         }
     }
-    .roll-formula-label {
+    .label {
         width: fit-content;
+        margin-left: .5rem;
         margin-right: .3rem;
         font-size: .7rem;
         opacity: 60%;
     }
-    .roll-formula {
+    .field {
         .InputSkinning();
         height: 1rem;
-        width: 4.5rem;
         border-left: @thin-border;
         border-right: @thin-border;
         border-radius: .2rem;
-        padding: 0 .5rem;
+        margin-right: .3rem;
+        padding: 0 .2rem;
 
-        font-size: .9rem;
+        text-align: center;
+        font-size: .8rem;
+        &.roll-formula {
+            width: 3.5rem;
+        }
+        &.action {
+            width: fit-content;
+            color: rgba(0, 0, 0, 0.9);
+        }
+        &.usage {
+            width: 8.5rem;
+        }
     }
 
     .hidden {
