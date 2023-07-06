@@ -1,3 +1,7 @@
+.animecampaign {
+  scrollbar-width: 3px;
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+}
 .animecampaign ::-webkit-scrollbar {
   width: 3px;
 }
@@ -148,25 +152,37 @@
 .animecampaign.item.sheet .settings > input::placeholder {
   opacity: 50%;
 }
-.animecampaign.item.sheet .roll-formula-label {
+.animecampaign.item.sheet .label {
   width: fit-content;
+  margin-left: 0.5rem;
   margin-right: 0.3rem;
   font-size: 0.7rem;
   opacity: 60%;
 }
-.animecampaign.item.sheet .roll-formula {
+.animecampaign.item.sheet .field {
   padding: 0;
   border: 0;
   border-radius: 0;
   box-shadow: none;
   background-color: transparent;
   height: 1rem;
-  width: 4.5rem;
   border-left: 1px solid black;
   border-right: 1px solid black;
   border-radius: 0.2rem;
-  padding: 0 0.5rem;
-  font-size: 0.9rem;
+  margin-right: 0.3rem;
+  padding: 0 0.2rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.animecampaign.item.sheet .field.roll-formula {
+  width: 3.5rem;
+}
+.animecampaign.item.sheet .field.action {
+  width: fit-content;
+  color: rgba(0, 0, 0, 0.9);
+}
+.animecampaign.item.sheet .field.usage {
+  width: 8.5rem;
 }
 .animecampaign.item.sheet .hidden {
   display: none;
@@ -285,7 +301,7 @@
   background-color: transparent;
 }
 .animecampaign.kit-piece-roll .stat-name {
-  padding: 0.5rem 0.3rem 0;
+  padding: 0.5rem 0.3rem 1px;
   text-transform: uppercase;
   text-align: end;
   border-right: 1px solid black;
@@ -299,6 +315,15 @@
   width: 65%;
   font: bold italic 1.5rem 'Philosopher';
   line-height: 1;
+}
+.animecampaign.kit-piece-roll .stat-value .inline-roll {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  width: fit-content;
+}
+.animecampaign.kit-piece-roll .stat-value .inline-roll i {
+  scale: 0.8;
 }
 .animecampaign.kit-piece-roll .stat-max {
   opacity: 75%;
@@ -315,10 +340,12 @@
   border: 0;
   padding: 0;
   border-top: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 .animecampaign.kit-piece-roll .section-label {
   padding-right: 0.3rem;
   font: bold italic 0.7rem 'Arial';
+  opacity: 80%;
 }
 .animecampaign.kit-piece-roll .collapse {
   width: 0;
@@ -327,6 +354,31 @@
 }
 .animecampaign.kit-piece-roll .collapse > i {
   width: 0.3rem;
+}
+.animecampaign.kit-piece-roll .economy {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid black;
+  border-color: rgba(0, 0, 0, 0.15);
+  padding: 0.1rem 0.3rem;
+  font: bold 0.75rem 'Arial';
+}
+.animecampaign.kit-piece-roll .economy > * {
+  opacity: 80%;
+}
+.animecampaign.kit-piece-roll .economy .action {
+  margin-left: 0.2rem;
+  text-transform: uppercase;
+  transform: scaleX(1.25);
+  font-style: italic;
+}
+.animecampaign.kit-piece-roll .economy .usage {
+  justify-self: end;
+}
+.animecampaign.kit-piece-roll .markdown.section-text {
+  font-family: 'Arial';
+  font-size: 0.8rem;
 }
 .animecampaign.actor.sheet .background {
   position: absolute;
@@ -451,12 +503,10 @@
   padding: 0.1rem 7.5%;
   padding-right: 0;
   border-radius: 1rem 1rem 0 0;
+  margin-top: 0.5rem;
   font: bold italic 0.75rem 'Arial';
   text-transform: uppercase;
   background: linear-gradient(to right, transparent 1%, currentColor 10%, currentColor 60%, transparent 99%);
-}
-.animecampaign.actor.sheet .kit-type-group {
-  margin-bottom: 0.5rem;
 }
 .animecampaign.actor.sheet .kit-piece-card {
   height: 1.75rem;
@@ -547,10 +597,19 @@
 .animecampaign.actor.sheet .empty-kit .add-default {
   border-right: 1px solid black;
 }
-.animecampaign.actor.sheet .kit-type .kit-piece-create {
+.animecampaign.actor.sheet .kit-type-color {
   opacity: 20%;
 }
-.animecampaign.actor.sheet .kit-type:hover .kit-piece-create {
+.animecampaign.actor.sheet .kit-type .kit-piece-create,
+.animecampaign.actor.sheet .kit-type .kit-type-collapse > i {
+  opacity: 20%;
+}
+.animecampaign.actor.sheet .kit-type .kit-type-color.active {
+  opacity: 75%;
+}
+.animecampaign.actor.sheet .kit-type:hover .kit-piece-create,
+.animecampaign.actor.sheet .kit-type:hover .kit-type-collapse > i,
+.animecampaign.actor.sheet .kit-type:hover .kit-type-color.active {
   opacity: 100%;
 }
 .animecampaign.actor.sheet .kit-piece-card:hover > .kit-piece-edit,
@@ -736,6 +795,12 @@
 .animecampaign.item.sheet .sections .section:hover i {
   opacity: 75%;
 }
+.animecampaign.item.sheet .sections .section:hover .section-hide {
+  opacity: 12.5%;
+}
+.animecampaign.item.sheet .sections .section:hover .section-hide.active {
+  opacity: 100%;
+}
 .animecampaign.item.sheet .sections .section-wrapper {
   padding-top: 0.25rem;
   margin-bottom: 0.5rem;
@@ -751,6 +816,9 @@
 }
 .animecampaign.item.sheet .sections .section-options i {
   opacity: 10%;
+}
+.animecampaign.item.sheet .sections .active > i {
+  opacity: 75%;
 }
 .animecampaign.item.sheet .sections .section-label {
   padding: 0;
@@ -780,6 +848,13 @@
 .animecampaign.item.sheet .sections .viewer-label {
   padding-right: 0.3rem;
   font: bold 0.75rem 'Arial';
+}
+.animecampaign.item.sheet .sections textarea {
+  resize: none;
+  margin-top: 0.1rem;
+  border-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.02);
+  font: 0.8rem 'Arial';
 }
 .animecampaign.item.sheet .sections .editor {
   height: fit-content;

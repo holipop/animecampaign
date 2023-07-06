@@ -33,6 +33,9 @@ Hooks.once("init", () => {
     //  Adding our localization object to Foundry's CONFIG object.
     CONFIG.animecampaign = animecampaign;
 
+    //  Assigning diagonal rule.
+    SquareGrid.prototype.measureDistances = AC.measureDistances;
+
     //  Assigning Fonts
     CONFIG.fontDefinitions = { ...CONFIG.fontDefinitions, ...AC.fonts };
     CONFIG.defaultFontFamily = 'Arial';

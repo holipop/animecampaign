@@ -48,22 +48,23 @@ export const StatMixin = {
         this.parent.update({ 'system.stats': stats });
         AC.log(`Deleted stat at index ${_index} for ${this.parent.name}`);
     },
-
+    
     //  Updates a Stat object's schema
     //*     (_name: string, _schema: StatSchema) : void
-    async updateStat(_name, _schema) {
-        const stats = this.stats;
-        let targetStat = stats.find(stat => stat.label == _name);
-        if (targetStat == undefined) return AC.error(`"${_name}" is not a stat.`);
+    updateStat(_name, _schema, _update=true) {
+        const stats = [...this.stats];
+        const targetIndex = stats.findIndex(stat => stat.label == _name);
+        if (targetIndex == -1) return AC.error(`"${_name}" is not a stat.`);
 
-        targetStat = await targetStat.updateSource(_schema);
+        const targetStat = stats[targetIndex].toObject();
+        stats[targetIndex] = Object.assign(targetStat, _schema);;
 
-        //! This is actually one of the stupidest fixes I've ever done.
-        await this.parent.update({ 'system.stats': [] });
-        await this.parent.update({ 'system.stats': stats });
+        if (!_update) return stats;
+
+        this.parent.update({ 'system.stats': stats });
         AC.log(`Updated the "${_name}" stat for ${this.parent.name}`);
     },
-
+    
     //  Deletes all Stat objects within the stats list.
     //*     () : void
     clearStats() {

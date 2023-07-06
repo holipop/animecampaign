@@ -11,14 +11,11 @@
         padding: 0.1rem 7.5%;
         padding-right: 0;
         border-radius: 1rem 1rem 0 0;
+        margin-top: 0.5rem;
 
         font: bold italic .75rem @body-font;
         text-transform: uppercase;
         background: linear-gradient(to right, transparent 1%, currentColor 10%, currentColor 60%, transparent 99%);
-
-        &-group {
-            margin-bottom: 0.5rem;
-        }
     }
     .kit-piece- {
         &card {
@@ -107,11 +104,19 @@
         }
     }
 
-    .kit-type .kit-piece-create {
+    .kit-type-color {
         opacity: 20%;
     }
+    .kit-type > {
+        .kit-piece-create, .kit-type-collapse>i {
+            opacity: 20%;
+        }
+        .kit-type-color.active {
+            opacity: 75%;
+        }
+    }
     .kit-type:hover {
-        .kit-piece-create {
+        .kit-piece-create, .kit-type-collapse>i, .kit-type-color.active {
             opacity: 100%;
         }
     }

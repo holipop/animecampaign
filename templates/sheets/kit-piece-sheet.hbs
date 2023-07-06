@@ -1,17 +1,17 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <div class="background" {{match system style='background-color'}}></div>
+    <div class="background" {{match color style='background-color'}}></div>
     <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
     <header class="sheet-header">
-        <img class="img" {{match system style='background-color'}} src="{{item.img}}" data-edit="img" title="{{item.name}}">
+        <img class="img" {{match color style='background-color'}} src="{{item.img}}" data-edit="img" title="{{item.name}}">
 
         <section class="header-top">
-            <div class="name" {{contrast system}} data-edit="name" spellcheck='false' {{#if (eq ownership 3)}}contenteditable{{/if}}>
+            <div class="name" {{contrast color}} data-edit="name" spellcheck='false' {{#if (eq ownership 3)}}contenteditable{{/if}}>
                 {{item.name}}
             </div>
 
             {{#unless (eq ownership 1)}}
-                <div class="buttons" {{contrast system}}>
+                <div class="buttons" {{contrast color}}>
                     <a class="post">
                         <i class="fas fa-message"></i> Post
                     </a>
@@ -42,11 +42,23 @@
         {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
 
         <section class="settings">
-            <div class="roll-formula-label">Roll Formula</div>
-            <input class="roll-formula" type="text" name="system.formula" value="{{system.formula}}" placeholder="N/A">
+            <div class="label roll-formula">Roll</div>
+            <input class="field roll-formula" type="text" name="system.formula" value="{{system.formula}}" placeholder="N/A">
+
+            <div class="label action">Action</div>
+            <select class="field action" name="system.action">
+                {{#select system.action}}
+                    {{#each config.actions as |name key|}}
+                        <option value="{{key}}">{{localize name}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+            
+            <div class="label usage">Usage</div>
+            <input class="field usage" type="text" name="system.usage" value="{{system.usage}}" placeholder="N/A">
         </section>
 
-        {{> "systems/animecampaign/templates/sheets/partials/sections.hbs"}}
+        {{~> "systems/animecampaign/templates/sheets/partials/sections.hbs"}}
         
     </div>
 
