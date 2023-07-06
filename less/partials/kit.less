@@ -104,11 +104,19 @@
         }
     }
 
-    .kit-type .kit-piece-create {
+    .kit-type-color {
         opacity: 20%;
     }
+    .kit-type > {
+        .kit-piece-create, .kit-type-collapse>i {
+            opacity: 20%;
+        }
+        .kit-type-color.active {
+            opacity: 75%;
+        }
+    }
     .kit-type:hover {
-        .kit-piece-create {
+        .kit-piece-create, .kit-type-collapse>i, .kit-type-color.active {
             opacity: 100%;
         }
     }

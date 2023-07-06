@@ -1,9 +1,9 @@
-<div class="animecampaign kit-piece-roll" {{match system style='border-color'}}>
+<div class="animecampaign kit-piece-roll" {{match color style='border-color'}}>
 
     <section class="summary">
-        <header {{match system style='background-color'}}>
-            <img class="img" {{match system style='background-color'}} src="{{img}}" data-edit="img">
-            <div class="name" {{contrast system}}>
+        <header {{match color style='background-color'}}>
+            <img class="img" {{match color style='background-color'}} src="{{img}}" data-edit="img">
+            <div class="name" {{contrast color}}>
                 {{name}}
             </div>
         </header>
@@ -19,7 +19,7 @@
 
     {{#if roll}}
         <section class="roll">
-            <div class="total" {{match roll}}>
+            <div class="total" {{match roll.color}}>
                 {{ roll.totalInt }}
             </div>
             <div class="formula">
@@ -82,5 +82,17 @@
             {{/each}}
         </section>
     {{/if}}
+
+    <div class="economy">
+        {{#unless (eq system.action "blank")}}
+            <span class="action">{{system.action}}</span>
+        {{else}}
+            <span></span>
+        {{/unless}}
+        
+        {{#if system.usage}}
+            <span class="usage">{{system.usage}}</span>
+        {{/if}}
+    </div>
     
 </div>

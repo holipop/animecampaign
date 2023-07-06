@@ -1,4 +1,5 @@
 import { SheetMixin } from "../mixins/SheetMixin.js";
+import AC from "../AC.js";
 
 //  Defining the schema for Actor Sheets.
 export default class CharacterSheet extends ActorSheet {
@@ -30,6 +31,7 @@ export default class CharacterSheet extends ActorSheet {
         data.items = data.actor.items;      //  Actor's owned items
         data.kitPieces = this.ownedKitTypes;
         data.ownership = this.getOwnership();
+        data.color = data.actor.system.color;
 
         return data;
     }
@@ -45,12 +47,14 @@ export default class CharacterSheet extends ActorSheet {
             this.deleteKitPiece(_html);
             this.createBlankStat(_html);
             this.addDefaultStats(_html);
+            this.setCustomTypeColor(_html);
             
             new ContextMenu(_html, '.stat', this.contextMenuEntries());
         }
         
         this.updateName(_html, 3, 60);
         this.updateClass(_html);
+        this.applyCustomTypeColor(_html);
 
         this.collapseKitSection(_html);
         this.rollKitPiece(_html);
@@ -92,13 +96,15 @@ export default class CharacterSheet extends ActorSheet {
     //*     (_html: jQuery) : void
     createKitPiece(_html) {
         _html.find(".kit-piece-create").on("click", event => {
-            const isCustom = !Object.keys(CONFIG.animecampaign.kitTypes).includes($(event.currentTarget).data('type'));
+            const type = $(event.currentTarget).data('type');
+            const isCustom = !Object.keys(CONFIG.animecampaign.kitTypes).includes(type);
+            const customColor = this.object.getFlag('animecampaign', `${type}Color`);
 
             let itemData = [{
                 name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                 type: "Kit Piece",
                 system: {
-                    color: this.actor.system.color,
+                    color: customColor ?? this.actor.system.color,
                     type: (isCustom) ? 'custom' : $(event.currentTarget).data('type'),
                     customType: (isCustom) ? $(event.currentTarget).data('type') : "",
                 }
@@ -167,6 +173,80 @@ export default class CharacterSheet extends ActorSheet {
             SECTION.toggleClass('hidden');
             ICON.toggleClass('fa-chevron-right');
         })
+    }
+
+    setCustomTypeColor(_html) {
+        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign).filter(i => i.endsWith("Color"));
+        for (const key of typeColorFlagKeys) {
+            const type = key.replace("Color", "");
+            const COLOR = _html.find(`.kit-type-color[data-type=${type}]`);
+            COLOR.addClass('active');
+        }
+
+        _html.find('[data-typeColor]').on('click', event => {
+            const COLOR = $(event.currentTarget);
+            const type = COLOR.data('type');
+            const defaultColor = this.object.getFlag('animecampaign', `${type}Color`) ?? this.object.system.color
+
+            const data = {
+                title: `${type}: Custom Color`,
+                content: `
+                    <div style="margin-bottom: 0.1rem; display: grid; place-items: center;">
+                        <span>
+                            Select a custom color: 
+                            <input data-color type="color" value="${defaultColor}">
+                        </span>
+                    </div>
+                `,
+                buttons: {
+                    confirm: {
+                        icon: '<i class="fas fa-check"></i>',
+                        label: "Confirm",
+                        callback: (_html) => {
+                            const colorInput = _html.find('[data-color]').val();
+                            this.object.setFlag('animecampaign', `${type}Color`, colorInput);
+                        }
+                    },
+                    reset: {
+                        icon: '<i class="fas fa-rotate"></i>',
+                        label: "Reset",
+                        callback: () => {
+                            this.object.unsetFlag('animecampaign', `${type}Color`)
+                        }
+                    },
+                    cancel: {
+                        icon: '<i class="fas fa-times"></i>',
+                        label: "Cancel",
+                        callback: () => {}
+                    }
+                },
+                default: "cancel",
+            }
+            
+            const options = {
+                width: 300,
+            }
+
+            const dialog = new Dialog(data, options);
+            dialog.render(true);
+        })
+    }
+
+    applyCustomTypeColor(_html) {
+        const match = AC.hbsHelpers.match;
+        const contrast = AC.hbsHelpers.contrast;
+
+        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign).filter(i => i.endsWith("Color"));
+        for (const key of typeColorFlagKeys) {
+            const type = key.replace("Color", "");
+            const TYPE = _html.find(`.kit-type[data-type=${type}]`);
+            const color = this.object.getFlag('animecampaign', key);
+
+            TYPE.attr( 'style', match(color, {hash: {alpha: .7, attr: false}}) );
+            TYPE.find('a').each(function(i) {
+                $(this).attr( 'style', contrast(color, {hash: {attr: false}}) )
+            })
+        }
     }
 
     //*     () : Object

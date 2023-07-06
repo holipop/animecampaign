@@ -1,31 +1,36 @@
 <section class="kit-block">
     {{#each kitPieces as |array key|}}
-        <div class="kit-type" {{match ../this.system alpha="0.7"}}>
-            <a data-collapse>
-                <i class="fas fa-chevron-down" {{contrast ../this.system}}></i>
-                <span {{contrast ../this.system}}>{{key}}</span>
+
+        <div class="kit-type" data-type="{{key}}" {{match ../this.system.color alpha="0.7"}}>
+            <a class="kit-type-collapse" data-collapse {{contrast ../this.system.color}}>
+                <i class="fas fa-chevron-down"></i>
+                <span>{{key}}</span>
             </a>
 
             {{#if (eq ../this.ownership 3)}}
-                <a class="kit-piece-create" data-type="{{key}}" title="{{localize config.kitText.addkitpiece}}">
-                    <i class="fas fa-plus" {{contrast ../this.system}}></i>
+                <a class="kit-piece-create" data-type="{{key}}" {{contrast ../this.system.color}} title="{{localize config.kitText.addkitpiece}}">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <a class="kit-type-color" data-typeColor data-type="{{key}}" {{contrast ../this.system.color}}>
+                    <i class="fas fa-palette"></i>
                 </a>
             {{/if}}
+
         </div>
 
         <div class="kit-type-group">
             {{#each array as |item id|}}
             
-                <div class="kit-piece-card flexrow" {{match item.system alpha="0.5"}}>
-                    <img class="kit-piece-img flex0" {{match item.system}} src="{{item.img}}" data-id="{{item._id}}">
+                <div class="kit-piece-card flexrow" {{match item.system.color alpha="0.5"}}>
+                    <img class="kit-piece-img flex0" {{match item.system.color}} src="{{item.img}}" data-id="{{item._id}}">
                     <span class="kit-piece-name">{{item.name}}</span>
 
                     {{#each item.system.stats as |stat index|}}
-                        <div class="kit-piece-stat flex0" {{match item.system style="background-color"}}>
+                        <div class="kit-piece-stat flex0" {{match item.system.color style="background-color"}}>
                             {{#if stat.img}}
-                                <img class="kit-piece-stat-img" {{contrast item.system img='true'}} src="{{stat.img}}" data-edit="img">
+                                <img class="kit-piece-stat-img" {{contrast item.system.color img='true'}} src="{{stat.img}}" data-edit="img">
                             {{/if}}
-                            <span class="kit-piece-stat-value" {{contrast item.system}}>
+                            <span class="kit-piece-stat-value" {{contrast item.system.color}}>
                                 {{stat.value}}
                             </span>
                         </div>
@@ -42,7 +47,7 @@
                     {{/if}}
                 </div>
 
-                <div class="kit-piece-stat-divider" {{match item.system style="border-color"}}></div>
+                <div class="kit-piece-stat-divider" {{match item.system.color style="border-color"}}></div>
 
             {{/each}}
         </div>

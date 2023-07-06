@@ -118,7 +118,7 @@ export const SheetMixin = {
     //  Collapses the stats area. Automatically does this if the entity has no stats.
     //*     (_html: jQuery) : void
     collapseStatBlock(_html) {
-        const isOwner = this.getOwnership == 3;
+        const isOwner = this.getOwnership() == 3;
         const COLLAPSE_STATS = _html.find('.collapse-button')
         const STAT_BLOCK = _html.find('.stat-block')
         

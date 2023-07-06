@@ -94,6 +94,16 @@
         
         font: bold italic 1.5rem @header-font;
         line-height: 1;
+
+        .inline-roll {
+            background-color: transparent;
+            border: none;
+            margin: 0;
+            width: fit-content;
+            i {
+                scale: .8;
+            }
+        }
     }
     .stat-max {
         opacity: 75%;
@@ -124,6 +134,30 @@
         left: -.3rem;
         > i {
             width: 0.3rem;
+        }
+    }
+
+    .economy {
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-top: @thin-border;
+        border-color: rgba(0, 0, 0, 0.15);
+        padding: .1rem .3rem;
+
+        font: bold .75rem @body-font;
+        > * {
+            opacity: 80%;
+        }
+        .action {
+            margin-left: .2rem;
+            text-transform: uppercase;
+            transform: scaleX(1.25);
+
+            font-style: italic;
+        }
+        .usage {
+            justify-self: end;
         }
     }
 

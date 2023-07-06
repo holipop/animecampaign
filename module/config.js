@@ -71,3 +71,11 @@ animecampaign.statConfigLabels = {
     image: "animecampaign.statConfigLabels.image",
     display: "animecampaign.statConfigLabels.display"
 }
+animecampaign.actions = {
+    blank: "animecampaign.actions.blank",
+    main: "animecampaign.actions.main",
+    move: "animecampaign.actions.move",
+    anytime: "animecampaign.actions.anytime",
+    bonus: "animecampaign.actions.bonus",
+    free: "animecampaign.actions.free",
+}

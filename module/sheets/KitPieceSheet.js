@@ -23,6 +23,8 @@ export default class KitPieceSheet extends ItemSheet {
         data.config = CONFIG.animecampaign; //  Localization paths
         data.system = data.item.system;     //  Item schema that we defined
         data.ownership = this.getOwnership();
+        data.color = data.item.system.color;
+        data.hasNoEconomy = (data.system.action == 'blank') && (data.system.usage == "");
 
         return data;
     }
