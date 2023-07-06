@@ -30,6 +30,7 @@ export default class ACItem extends Item {
 
         const templateData = {
             ...this,
+            color: this.system.color
         }
 
         if (!post && this.system.formula) {

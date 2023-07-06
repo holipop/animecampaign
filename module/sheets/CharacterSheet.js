@@ -30,6 +30,7 @@ export default class CharacterSheet extends ActorSheet {
         data.items = data.actor.items;      //  Actor's owned items
         data.kitPieces = this.ownedKitTypes;
         data.ownership = this.getOwnership();
+        data.color = data.actor.system.color;
 
         return data;
     }

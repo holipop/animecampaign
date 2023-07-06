@@ -85,9 +85,9 @@ export default class AC {
             },
 
             //  Matches the color of this element with the entity's color.
-            //*     (system: { color: string }, style?: string, attr?: string, alpha?: string) 
+            //*     (color: string, style?: string, attr?: string, alpha?: string) 
             //*     : SafeString
-            match: function({ color }, _options) {
+            match: function(color, _options) {
                 let { style='color', attr='true', alpha='1' } = _options.hash;
 
                 attr = attr == 'true';
@@ -106,9 +106,9 @@ export default class AC {
 
             //  Changes the color of this element to either black or white to contrast with 
             //  the entity's color.
-            //*     (system: { color: string }, img?: string, style?: string, attr?: string, 
+            //*     (color: string, img?: string, style?: string, attr?: string, 
             //*     threshold?: string, alpha?: string) : SafeString
-            contrast: function({ color }, _options) {
+            contrast: function(color, _options) {
                 let { style='color', img='false', attr='true', threshold='.5', alpha='1' } = _options.hash;
 
                 img = img == 'true';
