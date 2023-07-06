@@ -176,7 +176,8 @@ export default class CharacterSheet extends ActorSheet {
     }
 
     setCustomTypeColor(_html) {
-        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign).filter(i => i.endsWith("Color"));
+        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign ?? {}).filter(i => i.endsWith("Color"));
+
         for (const key of typeColorFlagKeys) {
             const type = key.replace("Color", "");
             const COLOR = _html.find(`.kit-type-color[data-type=${type}]`);
@@ -236,7 +237,9 @@ export default class CharacterSheet extends ActorSheet {
         const match = AC.hbsHelpers.match;
         const contrast = AC.hbsHelpers.contrast;
 
-        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign).filter(i => i.endsWith("Color"));
+        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign ?? {}).filter(i => i.endsWith("Color"));
+        if (!typeColorFlagKeys) return;
+
         for (const key of typeColorFlagKeys) {
             const type = key.replace("Color", "");
             const TYPE = _html.find(`.kit-type[data-type=${type}]`);
