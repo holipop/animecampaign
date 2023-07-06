@@ -564,10 +564,19 @@
 .animecampaign.actor.sheet .empty-kit .add-default {
   border-right: 1px solid black;
 }
-.animecampaign.actor.sheet .kit-type .kit-piece-create {
+.animecampaign.actor.sheet .kit-type-color {
   opacity: 20%;
 }
-.animecampaign.actor.sheet .kit-type:hover .kit-piece-create {
+.animecampaign.actor.sheet .kit-type .kit-piece-create,
+.animecampaign.actor.sheet .kit-type .kit-type-collapse > i {
+  opacity: 20%;
+}
+.animecampaign.actor.sheet .kit-type .kit-type-color.active {
+  opacity: 75%;
+}
+.animecampaign.actor.sheet .kit-type:hover .kit-piece-create,
+.animecampaign.actor.sheet .kit-type:hover .kit-type-collapse > i,
+.animecampaign.actor.sheet .kit-type:hover .kit-type-color.active {
   opacity: 100%;
 }
 .animecampaign.actor.sheet .kit-piece-card:hover > .kit-piece-edit,
