@@ -362,7 +362,6 @@
   border-top: 1px solid black;
   border-color: rgba(0, 0, 0, 0.15);
   padding: 0.1rem 0.3rem;
-  font: bold 0.75rem 'Arial';
 }
 .animecampaign.kit-piece-roll .economy > * {
   opacity: 80%;
@@ -370,10 +369,11 @@
 .animecampaign.kit-piece-roll .economy .action {
   margin-left: 0.2rem;
   text-transform: uppercase;
-  transform: scaleX(1.25);
-  font-style: italic;
+  font: italic bold 1rem 'Philosopher';
+  line-height: 1;
 }
 .animecampaign.kit-piece-roll .economy .usage {
+  font: bold 0.78rem 'Arial';
   justify-self: end;
 }
 .animecampaign.kit-piece-roll .markdown.section-text {
@@ -601,7 +601,8 @@
   opacity: 20%;
 }
 .animecampaign.actor.sheet .kit-type .kit-piece-create,
-.animecampaign.actor.sheet .kit-type .kit-type-collapse > i {
+.animecampaign.actor.sheet .kit-type .kit-type-collapse > i,
+.animecampaign.actor.sheet .kit-type .kit-type-flood {
   opacity: 20%;
 }
 .animecampaign.actor.sheet .kit-type .kit-type-color.active {
@@ -609,7 +610,8 @@
 }
 .animecampaign.actor.sheet .kit-type:hover .kit-piece-create,
 .animecampaign.actor.sheet .kit-type:hover .kit-type-collapse > i,
-.animecampaign.actor.sheet .kit-type:hover .kit-type-color.active {
+.animecampaign.actor.sheet .kit-type:hover .kit-type-color.active,
+.animecampaign.actor.sheet .kit-type:hover .kit-type-flood {
   opacity: 100%;
 }
 .animecampaign.actor.sheet .kit-piece-card:hover > .kit-piece-edit,

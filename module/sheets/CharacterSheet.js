@@ -48,6 +48,7 @@ export default class CharacterSheet extends ActorSheet {
             this.createBlankStat(_html);
             this.addDefaultStats(_html);
             this.setCustomTypeColor(_html);
+            this.floodCustomTypeColor(_html);
             
             new ContextMenu(_html, '.stat', this.contextMenuEntries());
         }
@@ -176,7 +177,8 @@ export default class CharacterSheet extends ActorSheet {
     }
 
     setCustomTypeColor(_html) {
-        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign).filter(i => i.endsWith("Color"));
+        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign ?? {}).filter(i => i.endsWith("Color"));
+
         for (const key of typeColorFlagKeys) {
             const type = key.replace("Color", "");
             const COLOR = _html.find(`.kit-type-color[data-type=${type}]`);
@@ -236,7 +238,9 @@ export default class CharacterSheet extends ActorSheet {
         const match = AC.hbsHelpers.match;
         const contrast = AC.hbsHelpers.contrast;
 
-        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign).filter(i => i.endsWith("Color"));
+        const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign ?? {}).filter(i => i.endsWith("Color"));
+        if (!typeColorFlagKeys) return;
+
         for (const key of typeColorFlagKeys) {
             const type = key.replace("Color", "");
             const TYPE = _html.find(`.kit-type[data-type=${type}]`);
@@ -247,6 +251,32 @@ export default class CharacterSheet extends ActorSheet {
                 $(this).attr( 'style', contrast(color, {hash: {attr: false}}) )
             })
         }
+    }
+
+    floodCustomTypeColor(_html) {
+        _html.find('[data-flood]').on('click', event => {
+            const type = $(event.currentTarget).data('type');
+            const kitPieces = this.object.items.filter(item => {
+                return item.system.type == 'custom'
+                    ? item.system.customType == type
+                    : item.system.type == type
+                ;
+            });
+
+            const embedUpdate = [];
+            for (const item of kitPieces) {
+                const data = {
+                    _id: item.id,
+                    name: item.name,
+                    system: {
+                        color: this.object.getFlag('animecampaign', `${type}Color`) ?? this.object.system.color
+                    }
+                }
+                embedUpdate.push(data)
+            }
+
+            this.object.updateEmbeddedDocuments('Item', embedUpdate);
+        })
     }
 
     //*     () : Object
