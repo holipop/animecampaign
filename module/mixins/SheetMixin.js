@@ -7,7 +7,7 @@ export const SheetMixin = {
 
     //  Returns the ownership level the user has over a document.
     //*     () : number
-    getOwnership() {
+    getOwnership () {
         const userID = game.user._id;
         return this.object.ownership[userID];
     },
@@ -15,7 +15,7 @@ export const SheetMixin = {
     //  Shrinks the font size of an HTML element given a default size in rem units and
     //  the max pixel height the element can take up.
     //*     (_element: html, _rem: number, _max: number) : void
-    adjustFontSize(_element, _rem, _max) {
+    adjustFontSize (_element, _rem, _max) {
         const text = $(_element);
 
         text.css( 'fontSize', `${_rem}rem`);
@@ -30,7 +30,7 @@ export const SheetMixin = {
     //  Updates the entity's name and resizes it on the entity's sheet via 
     //  adjustFontSize().
     //*     (_html: jQuery, _rem: number, _max: number) : void
-    updateName(_html, _rem, _max) {
+    updateName (_html, _rem, _max) {
         const NAME = _html.find('.name');
         const nameResize = new ResizeObserver(event => {
             this.adjustFontSize(NAME, _rem, _max)
@@ -47,7 +47,7 @@ export const SheetMixin = {
     //  Narrows the text of a '.stat-' element if it has an alphabetical value given 
     //  a number between 0-1.
     //*     (_element: _html, _scale: number) : void
-    adjustFontWidth(_element, _scale) {
+    adjustFontWidth (_element, _scale) {
         const stat = $(_element)
         const regex = /([A-Z]|[a-z]){4}/g;
 
@@ -76,7 +76,7 @@ export const SheetMixin = {
 
     //  Updates the font widths of stats via adjustFontWidth() on form events.
     //*     (_html: jQuery, _scale: number) : void
-    updateStatWidth(_html, _scale) {
+    updateStatWidth (_html, _scale) {
         const STATS = _html.find('.stat-wrapper');
 
         _html.ready(() => {
@@ -92,7 +92,7 @@ export const SheetMixin = {
 
     //  Creates a blank Stat object via the Create Blank Stat button.
     //*     (_html: jQuery) : void
-    createBlankStat(_html) {
+    createBlankStat (_html) {
         _html.find('.create-blank').on('click', event => {
             this.object.system.createStats();
         })
@@ -101,7 +101,7 @@ export const SheetMixin = {
     //  Adds Stat object(s) defined in DefaultStats.js depending on Actor type or
     //  Kit Piece type.
     //*     (_html: jQuery) : void
-    addDefaultStats(_html) {
+    addDefaultStats (_html) {
         _html.find('.create-default').on('click', event => {
             let type = this.object.type.toLowerCase();
 
@@ -117,7 +117,7 @@ export const SheetMixin = {
 
     //  Collapses the stats area. Automatically does this if the entity has no stats.
     //*     (_html: jQuery) : void
-    collapseStatBlock(_html) {
+    collapseStatBlock (_html) {
         const isOwner = this.getOwnership() == 3;
         const COLLAPSE_STATS = _html.find('.collapse-button')
         const STAT_BLOCK = _html.find('.stat-block')
@@ -145,7 +145,7 @@ export const SheetMixin = {
 
     //  Defining the ContextMenu options for when a Stat is right-clicked.
     //*     () : ContextMenuEntry[]
-    contextMenuEntries() {
+    contextMenuEntries () {
         const parent = this;
         const localize = _key => game.i18n.localize(CONFIG.animecampaign.statButtons[`${_key}`]);
 

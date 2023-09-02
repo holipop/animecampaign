@@ -3,9 +3,10 @@ import { SheetMixin } from "../mixins/SheetMixin.js";
 //  Defining the schema for Item Sheets.
 export default class KitPieceSheet extends ItemSheet {
     
-    //  Sets the default options for the ItemSheet.
-    //*     () : ApplicationOptions
-    static get defaultOptions() {
+    /** Sets the default options of this application.
+     * @returns {ApplicationOptions} 
+     */
+    static get defaultOptions () {
         return mergeObject(super.defaultOptions, {
             width: 450,
             height: 500,
@@ -15,9 +16,10 @@ export default class KitPieceSheet extends ItemSheet {
         });
     }
 
-    //  Returns an object for Handlebars usage.
-    //*     () : object
-    async getData() {
+    /** Returns an object for Handlebars usage.
+     * @returns {Object}
+     */
+    async getData () {
         const data = super.getData()
 
         data.config = CONFIG.animecampaign; //  Localization paths
@@ -28,47 +30,51 @@ export default class KitPieceSheet extends ItemSheet {
         return data;
     }
 
-    //  This is where we put any custom event listeners for our sheets.
-    //*     (_html: jQuery) : void
-    activateListeners(_html) {
-
+    /** This is where we put any custom event listeners for our sheets.
+     * @param {jQuery} html 
+     */
+    activateListeners (html) {
         if (this.getOwnership() == 3) {
-            this.createBlankStat(_html);
-            this.addDefaultStats(_html);
+            this.createBlankStat(html);
+            this.addDefaultStats(html);
             
-            this.resizeTextArea(_html)
-            this.hideSection(_html);
-            this.moveSection(_html, 'up');
-            this.moveSection(_html, 'down');
-            this.addSection(_html);
-            this.deleteSection(_html);
+            this.resizeTextArea(html)
+            this.hideSection(html);
+            this.moveSection(html, 'up');
+            this.moveSection(html, 'down');
+            this.addSection(html);
+            this.deleteSection(html);
             
-            new ContextMenu(_html, '.stat', this.contextMenuEntries());
+            new ContextMenu(html, '.stat', this.contextMenuEntries());
         }
-        this.updateName(_html, 2.5, 60);
+        this.updateName(html, 2.5, 60);
         
-        this.roll(_html);
+        this.roll(html);
 
-        this.updateStatWidth(_html, .75);
-        this.collapseStatBlock(_html)
+        this.updateStatWidth(html, .75);
+        this.collapseStatBlock(html)
         
-        super.activateListeners(_html);
+        super.activateListeners(html);
     }
 
-    // Sends a chat message of the Kit Piece to the chat, optionally with a Roll.
-    //*     (_html: jQuery) : void
-    roll(_html) {
-        _html.find('.roll').on('click', event => {
+    /** Sends a chat message of the Kit Piece to the chat, optionally with a Roll.
+     * @param {jQuery} html 
+     */
+    roll (html) {
+        html.find('.roll').on('click', event => {
             this.object.roll();
         })
 
-        _html.find('.post').on('click', event => {
+        html.find('.post').on('click', event => {
             this.object.roll({ post: true });
         })
     }
 
-    resizeTextArea(_html) {
-        _html.find("textarea").each(function() {
+    /** Automatically resizes the textbox with the content.
+     * @param {jQuery} html 
+     */
+    resizeTextArea (html) {
+        html.find("textarea").each(function() {
             this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
         }).on("input", function() {
             this.style.height = 0;
@@ -76,8 +82,11 @@ export default class KitPieceSheet extends ItemSheet {
         });
     }
 
-    hideSection(_html) {
-        const HIDE = _html.find('[data-hide]');
+    /** Toggles the visibility of sections.
+     * @param {*} html 
+     */
+    hideSection (html) {
+        const HIDE = html.find('[data-hide]');
 
         for (const button of HIDE) {
             const index = $(button).parents('.section').data('index');
@@ -98,14 +107,16 @@ export default class KitPieceSheet extends ItemSheet {
         })
     }
 
-    //  Shifts a section up or down by one index in the sections array.
-    //*     (_html: jQuery, _direction: string) : void
-    moveSection(_html, _direction) {
-        const MOVE = _html.find(`.section-move-${_direction}`);
+    /** Shifts a section up or down by one index in the sections array.
+     * @param {jQuery} html 
+     * @param {string} direction 
+     */
+    moveSection (html, direction) {
+        const MOVE = html.find(`.section-move-${direction}`);
 
         MOVE.on('click', event => {
             const index = $(event.currentTarget).parents('.section').data('index');
-            const moveTo = (_direction == 'up')
+            const moveTo = (direction == 'up')
                 ? index - 1 
                 : index + 1
             ;
@@ -114,16 +125,20 @@ export default class KitPieceSheet extends ItemSheet {
         })
     }
 
-    //*     (_html: jQuery) : void
-    addSection(_html) {
-        const ADD_SECTION = _html.find('.add-section');
+    /** Event listener for creating a section.
+     * @param {jQuery} html 
+     */
+    addSection (html) {
+        const ADD_SECTION = html.find('.add-section');
         ADD_SECTION.on('click', event => {
             this.object.system.createSections();
         }) 
     }
 
-    //*     (_html: jQuery) : void
-    deleteSection(_html) {
+    /** Event listener for deleting a section.
+     * @param {jQuery} _html 
+     */
+    deleteSection (_html) {
         const DELETE_SECTION = _html.find('.section-delete');
         DELETE_SECTION.on('click', event => {
             const index = $(event.currentTarget).parents('.section').data('index');

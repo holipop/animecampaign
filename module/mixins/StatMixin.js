@@ -7,7 +7,7 @@ export const StatMixin = {
     //  Create new Stat objects inside the stats list via a list of objects defining Stats.
     //  Optionally at a desired index.
     //*     (_stat?: Object[], _index?: number) : void
-    createStats(_stats = [{}], _index = null) {
+    createStats (_stats = [{}], _index = null) {
         let stats = this.stats;
         let createdStats = _stats.map(obj => new Stat(obj, { parent: this }));
 
@@ -23,7 +23,7 @@ export const StatMixin = {
 
     //  Deletes existing Stat objects from the stats list given a list of Stat names.
     //*     (_stats: string[]) : void
-    deleteStats(_stats) {
+    deleteStats (_stats) {
         let stats = this.stats;
 
         for (const element of _stats) {
@@ -40,7 +40,7 @@ export const StatMixin = {
 
     //  Delete a Stat object at the desired index.
     //*     (_index: number) : void
-    deleteStatIndex(_index) {
+    deleteStatIndex (_index) {
         let stats = this.stats;
 
         stats.splice(_index, 1);
@@ -51,7 +51,7 @@ export const StatMixin = {
     
     //  Updates a Stat object's schema
     //*     (_name: string, _schema: StatSchema) : void
-    updateStat(_name, _schema, _update=true) {
+    updateStat (_name, _schema, _update=true) {
         const stats = [...this.stats];
         const targetIndex = stats.findIndex(stat => stat.label == _name);
         if (targetIndex == -1) return AC.error(`"${_name}" is not a stat.`);
@@ -67,7 +67,7 @@ export const StatMixin = {
     
     //  Deletes all Stat objects within the stats list.
     //*     () : void
-    clearStats() {
+    clearStats () {
         this.parent.update({ 'system.stats': [] });
         AC.log(`Deleted all stats for ${this.parent.name}`);
     }

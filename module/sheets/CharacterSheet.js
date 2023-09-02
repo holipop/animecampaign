@@ -4,9 +4,10 @@ import AC from "../AC.js";
 //  Defining the schema for Actor Sheets.
 export default class CharacterSheet extends ActorSheet {
 
-    //  Sets the default options for the ActorSheet.
-    //*     () : ApplicationOptions
-    static get defaultOptions() {
+    /** Sets the default options of this application.
+     * @returns {ApplicationOptions} 
+     */
+    static get defaultOptions () {
         return mergeObject(super.defaultOptions, {
             width: 520,
             height: 500,
@@ -21,9 +22,10 @@ export default class CharacterSheet extends ActorSheet {
         });
     }
 
-    //  Returns an object for Handlebars usage.
-    //*     () : object
-    async getData() {
+    /** Returns an object for Handlebars usage.
+     * @returns {Object}
+     */
+    async getData () {
         const data = super.getData()
         
         data.config = CONFIG.animecampaign; //  Localization paths
@@ -36,50 +38,53 @@ export default class CharacterSheet extends ActorSheet {
         return data;
     }
 
-    //  This is where we put any custom event listeners for our sheets.
-    //*     (_html: jQuery) : void
-    activateListeners(_html) {
+    /** This is where we put any custom event listeners for our sheets.
+     * @param {jQuery} html 
+     */
+    activateListeners (html) {
         const OWNER = 3;
 
         if (this.getOwnership() == OWNER) {
-            this.addDefaultKit(_html);
-            this.createKitPiece(_html);
-            this.deleteKitPiece(_html);
-            this.createBlankStat(_html);
-            this.addDefaultStats(_html);
-            this.setCustomTypeColor(_html);
-            this.floodCustomTypeColor(_html);
+            this.addDefaultKit(html);
+            this.createKitPiece(html);
+            this.deleteKitPiece(html);
+            this.createBlankStat(html);
+            this.addDefaultStats(html);
+            this.setCustomTypeColor(html);
+            this.floodCustomTypeColor(html);
             
-            new ContextMenu(_html, '.stat', this.contextMenuEntries());
+            new ContextMenu(html, '.stat', this.contextMenuEntries());
         }
         
-        this.updateName(_html, 3, 60);
-        this.updateClass(_html);
-        this.applyCustomTypeColor(_html);
+        this.updateName(html, 3, 60);
+        this.updateClass(html);
+        this.applyCustomTypeColor(html);
 
-        this.collapseKitSection(_html);
-        this.rollKitPiece(_html);
-        this.editKitPiece(_html);
+        this.collapseKitSection(html);
+        this.rollKitPiece(html);
+        this.editKitPiece(html);
         
-        this.updateStatWidth(_html, .75);
-        this.collapseStatBlock(_html)
+        this.updateStatWidth(html, .75);
+        this.collapseStatBlock(html)
 
-        super.activateListeners(_html);
+        super.activateListeners(html);
     }
 
-    //  Manually updates the Character's class since it's a contenteditable div.
-    //*     (_html: jQuery) : void
-    updateClass(_html) {
-        const CLASS = _html.find('.class');
+    /** Manually updates the Character's class since it's a contenteditable div.
+     * @param {jQuery} html 
+     */
+    updateClass (html) {
+        const CLASS = html.find('.class');
         CLASS.on('blur', e => this.actor.update({ 'system.class':  CLASS.text() }));
 
         CLASS[0].addEventListener('paste', event => event.preventDefault());
     }
 
-    //  Send a chat message of the Kit Piece, right clicking will omit the Roll.
-    //*     (_html: jQuery) : void
-    rollKitPiece(_html) { 
-        const KIT_IMG = _html.find('.kit-piece-img');
+    /** Send a chat message of the Kit Piece, right clicking will omit the Roll.
+     * @param {jQuery} html 
+     */
+    rollKitPiece (html) { 
+        const KIT_IMG = html.find('.kit-piece-img');
         KIT_IMG.on('mousedown', event => {
             const id = $(event.currentTarget).data('id');
 
@@ -93,9 +98,10 @@ export default class CharacterSheet extends ActorSheet {
         });
     }
 
-    //  Creates a new Kit Piece within the Character's owned Items collection.
-    //*     (_html: jQuery) : void
-    createKitPiece(_html) {
+    /** Creates a new Kit Piece within the Character's owned Items collection.
+     * @param {jQuery} _html 
+     */
+    createKitPiece (_html) {
         _html.find(".kit-piece-create").on("click", event => {
             const type = $(event.currentTarget).data('type');
             const isCustom = !Object.keys(CONFIG.animecampaign.kitTypes).includes(type);
@@ -115,21 +121,22 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
-    //  Generates a series of blank Kit Pieces, enough for a basic character sheet.
-    //*     (_html: jQuery) : void
-    addDefaultKit(_html) {
+    /** Generates a series of blank Kit Pieces, enough for a basic character sheet.
+     * @param {jQuery} _html 
+     */
+    addDefaultKit (_html) {
         _html.find(".add-default").on("click", event => {
-            const add = (_type, _quantity = 1) => {
-                if (_quantity < 1) AC.error('Cannot take values under 0.')
+            const add = (type, quantity = 1) => {
+                if (quantity < 1) AC.error('Cannot take values under 0.')
 
                 let arr = [];
-                for (let i = 0; i < _quantity; i++) {
+                for (let i = 0; i < quantity; i++) {
                     arr.push({
                         name: game.i18n.localize(CONFIG.animecampaign.kitText.newKitPiece),
                         type: "Kit Piece",
                         system: {
                             color: this.actor.system.color,
-                            type: _type
+                            type: type
                         }
                     })
                 }
@@ -147,27 +154,32 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
-    //  Deletes a Kit Piece from the Character's owned Items.
-    //*     (_html: jQuery) : void
-    deleteKitPiece(_html) {
-        _html.find(".kit-piece-delete").on("click", e => {
+    /** Deletes a Kit Piece from the Character's owned Items.
+     * @param {jQuery} html 
+     */
+    deleteKitPiece (html) {
+        html.find(".kit-piece-delete").on("click", e => {
             let itemId = e.currentTarget.dataset.id
             this.actor.deleteEmbeddedDocuments("Item", [itemId]);
         })
     }
 
-    //  Renders an owned Kit Piece.
-    //*     (_html: jQuery) : void
-    editKitPiece(_html) {
-        _html.find(".kit-piece-edit").on("click", e=> {
+    /** Renders an owned Kit Piece.
+     * @param {jQuery} html 
+     */
+    editKitPiece (html) {
+        html.find(".kit-piece-edit").on("click", e=> {
             let itemId = e.currentTarget.dataset.id
             let item = this.actor.getEmbeddedDocument("Item", itemId);
             item.sheet.render(true);
         })
     }
 
-    collapseKitSection(_html) {
-        _html.find('[data-collapse]').on('click', event => {
+    /** Event listener for collapsing a Kit Section.
+     * @param {jQuery} html 
+     */
+    collapseKitSection (html) {
+        html.find('[data-collapse]').on('click', event => {
             const ICON = $(event.currentTarget).children('i');
             const SECTION = $(event.currentTarget).parent().next();
             
@@ -176,16 +188,19 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
-    setCustomTypeColor(_html) {
+    /** 
+     * @param {jQuery} html 
+     */
+    setCustomTypeColor (html) {
         const typeColorFlagKeys = Object.keys(this.object.flags.animecampaign ?? {}).filter(i => i.endsWith("Color"));
 
         for (const key of typeColorFlagKeys) {
             const type = key.replace("Color", "");
-            const COLOR = _html.find(`.kit-type-color[data-type=${type}]`);
+            const COLOR = html.find(`.kit-type-color[data-type=${type}]`);
             COLOR.addClass('active');
         }
 
-        _html.find('[data-typeColor]').on('click', event => {
+        html.find('[data-typeColor]').on('click', event => {
             const COLOR = $(event.currentTarget);
             const type = COLOR.data('type');
             const defaultColor = this.object.getFlag('animecampaign', `${type}Color`) ?? this.object.system.color
@@ -234,7 +249,7 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
-    applyCustomTypeColor(_html) {
+    applyCustomTypeColor (html) {
         const match = AC.hbsHelpers.match;
         const contrast = AC.hbsHelpers.contrast;
 
@@ -243,7 +258,7 @@ export default class CharacterSheet extends ActorSheet {
 
         for (const key of typeColorFlagKeys) {
             const type = key.replace("Color", "");
-            const TYPE = _html.find(`.kit-type[data-type=${type}]`);
+            const TYPE = html.find(`.kit-type[data-type=${type}]`);
             const color = this.object.getFlag('animecampaign', key);
 
             TYPE.attr( 'style', match(color, {hash: {alpha: .7, attr: false}}) );
@@ -253,8 +268,8 @@ export default class CharacterSheet extends ActorSheet {
         }
     }
 
-    floodCustomTypeColor(_html) {
-        _html.find('[data-flood]').on('click', event => {
+    floodCustomTypeColor (html) {
+        html.find('[data-flood]').on('click', event => {
             const type = $(event.currentTarget).data('type');
             const kitPieces = this.object.items.filter(item => {
                 return item.system.type == 'custom'
@@ -280,7 +295,7 @@ export default class CharacterSheet extends ActorSheet {
     }
 
     //*     () : Object
-    get ownedKitTypes() {
+    get ownedKitTypes () {
         const data = super.getData();
         const items = data.actor.items.values();
         let [typeSet, sortedSet] = [new Set(), new Set()];
