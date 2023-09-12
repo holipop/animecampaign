@@ -47,7 +47,7 @@ export default class KitPieceSheet extends ItemSheet {
             
             new ContextMenu(html, '.stat', this.contextMenuEntries());
         }
-        this.updateName(html, 2.5, 60);
+        //this.updateName(html, 2.5, 60);
         
         this.roll(html);
 

@@ -56,8 +56,8 @@ export default class CharacterSheet extends ActorSheet {
             new ContextMenu(html, '.stat', this.contextMenuEntries());
         }
         
-        this.updateName(html, 3, 60);
-        this.updateClass(html);
+        //this.updateName(html, 3, 60);
+        //this.updateClass(html);
         this.applyCustomTypeColor(html);
 
         this.collapseKitSection(html);
@@ -73,7 +73,7 @@ export default class CharacterSheet extends ActorSheet {
     /** Manually updates the Character's class since it's a contenteditable div.
      * @param {jQuery} html 
      */
-    updateClass (html) {
+    _updateClass (html) {
         const CLASS = html.find('.class');
         CLASS.on('blur', e => this.actor.update({ 'system.class':  CLASS.text() }));
 

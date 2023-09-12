@@ -30,7 +30,8 @@ export const SheetMixin = {
     //  Updates the entity's name and resizes it on the entity's sheet via 
     //  adjustFontSize().
     //*     (_html: jQuery, _rem: number, _max: number) : void
-    updateName (_html, _rem, _max) {
+    _updateName (_html, _rem, _max) {
+        return;
         const NAME = _html.find('.name');
         const nameResize = new ResizeObserver(event => {
             this.adjustFontSize(NAME, _rem, _max)
