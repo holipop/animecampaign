@@ -1,7 +1,7 @@
 import AC from "../AC.js";
 import { StatMixin } from "../mixins/StatMixin.js";
 import { defaultStats } from "../DefaultStats.js";
-import { Stat } from "./Stat.js";
+import { _Stat } from "./_Stat.js";
 
 //  Defining the schema for Characters.
 export class CharacterData extends foundry.abstract.DataModel {
@@ -15,7 +15,7 @@ export class CharacterData extends foundry.abstract.DataModel {
             AC.resourceKeys.forEach(i => {
                 Object.assign(resources, { 
                     [i]: new fields.SchemaField({
-                        stat: new fields.EmbeddedDataField( Stat, {
+                        stat: new fields.EmbeddedDataField( _Stat, {
                             nullable: true,
                             initial: null
                         }),
@@ -38,20 +38,12 @@ export class CharacterData extends foundry.abstract.DataModel {
                 required: true,
                 initial: "#CCCCCC"
             }),
-            stats: new fields.ArrayField( 
-                new fields.EmbeddedDataField( Stat ),
-                {
-                    initial: this.defaultStats
-                }
-            ),
-
-            resources: new fields.SchemaField( generateResources() )
         }
     }
 
     //*     () : Stat[]
     static get defaultStats() {
-        return defaultStats.characterStats.map(obj => new Stat(obj));
+        return defaultStats.characterStats.map(obj => new _Stat(obj));
     }
 
     //*     () : boolean
@@ -64,9 +56,10 @@ export class CharacterData extends foundry.abstract.DataModel {
         return inscribedValues.includes(type);
     }
 
-    //*     () : string
+    // !!!!!!!
     get proficiencyClass() {
-        const proficiency = this.stats.find((element) => element.label == 'proficiency');
+        return;
+        //const proficiency = this.stats.find((element) => element.label == 'proficiency');
 
         if (!proficiency) return
         if (this.type != 'epithet') return

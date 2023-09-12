@@ -1,4 +1,4 @@
-import { Stat } from "../data-models/Stat.js";
+import { _Stat } from "../data-models/_Stat.js";
 import AC from "../AC.js";
 
 //  A mixin containing shared methods between Character and Kit Piece schemas for Stat usage.
@@ -9,7 +9,7 @@ export const StatMixin = {
     //*     (_stat?: Object[], _index?: number) : void
     createStats (_stats = [{}], _index = null) {
         let stats = this.stats;
-        let createdStats = _stats.map(obj => new Stat(obj, { parent: this }));
+        let createdStats = _stats.map(obj => new _Stat(obj, { parent: this }));
 
         if (_index == null) {
             stats = [...stats, ...createdStats];

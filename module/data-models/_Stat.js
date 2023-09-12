@@ -1,7 +1,7 @@
 import AC from "../AC.js";
 
 //  Defining the schema for Stat objects
-export class Stat extends foundry.abstract.DataModel {
+export class _Stat extends foundry.abstract.DataModel {
 
     //*     () : Object
     static defineSchema() {

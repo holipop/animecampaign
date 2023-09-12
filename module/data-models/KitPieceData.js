@@ -1,6 +1,6 @@
 import AC from "../AC.js";
 import { StatMixin } from "../mixins/StatMixin.js";
-import { Stat } from "./Stat.js";
+import { _Stat } from "./_Stat.js";
 import { Section } from "./Section.js";
 
 //  Defining the schema for Kit Pieces.
@@ -33,7 +33,6 @@ export class KitPieceData extends foundry.abstract.DataModel {
             usage: new fields.StringField(),
             action: new fields.StringField({initial: "blank"}),
 
-            stats: new fields.ArrayField( new fields.EmbeddedDataField( Stat ) ),
             sections: new fields.ArrayField( new fields.EmbeddedDataField( Section ) )
         }
     }
