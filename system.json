@@ -1,40 +1,40 @@
 {
-  "id": "animecampaign",
-  "title": "Anime Campaign",
-  "description": "An unofficial fanmade system based on JelloApocalypse's Epithet/Anime Campaign system.",
-  "authors": [
-    {
-      "name": "Holipop",
-      "flags": {}
+    "id": "animecampaign",
+    "title": "Anime Campaign",
+    "description": "An unofficial fanmade system based on JelloApocalypse's Epithet/Anime Campaign system.",
+    "authors": [
+        {
+            "name": "Holipop",
+            "flags": {}
+        },
+        {
+            "name": "zanzaKlaus",
+            "flags": {}
+        }
+    ],
+    "version": "v0.1.4",
+    "compatibility": {
+        "minimum": "11.302",
+        "verified": "11.302"
     },
-    {
-      "name": "zanzaKlaus",
-      "flags": {}
-    }
-  ],
-  "version": "v0.1.4",
-  "compatibility": {
-    "minimum": "11.302",
-    "verified": "11.302"
-  },
-  "esmodules": [
-    "animecampaign.js"
-  ],
-  "styles": [
-    "animecampaign.css"
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json",
-      "flags": {}
-    }
-  ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
-  "initiative": "1d20",
-  "primaryTokenAttribute": "resource.A",
-  "manifest": "https://github.com/holipop/animecampaign/releases/download/0.1.4/system.json",
-  "download": "https://github.com/holipop/animecampaign/releases/download/0.1.4/animecampaign.zip"
+    "esmodules": [
+        "animecampaign.js"
+    ],
+    "styles": [
+        "animecampaign.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json",
+            "flags": {}
+        }
+    ],
+    "gridDistance": 5,
+    "gridUnits": "ft",
+    "initiative": "1d20",
+    "primaryTokenAttribute": "resource.A",
+    "manifest": "https://github.com/holipop/animecampaign/releases/download/0.1.4/system.json",
+    "download": "https://github.com/holipop/animecampaign/releases/download/0.1.4/animecampaign.zip"
 }

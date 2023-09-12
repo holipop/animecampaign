@@ -55,7 +55,7 @@ export default class AC {
      * @returns {string[]}
      */
     static get resourceKeys () {
-        return ['A', 'B', 'C', 'D']; //,'E','F','G','H']; 
+        return ['red', 'blue', 'yellow', 'green']; //,'orange', 'cyan', 'purple', 'grey']; 
     }
 
     /** Taken from: https://github.com/foundryvtt/dnd5e/blob/master/module/canvas/grid.mjs
