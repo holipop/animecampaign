@@ -25,7 +25,10 @@ export default class CharacterSheet extends ActorSheet {
     async getData () {
         const data = super.getData();
 
+        console.log(data)
+
         data.config = CONFIG.animecampaign;
+        data.system = this.object.system;
         
         return data;
     }

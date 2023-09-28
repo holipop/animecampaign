@@ -1,19 +1,37 @@
 <header class="summary">
+
     <div class="background"></div>
-    <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{actor.system.color}}">
+    <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
     <img class="img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100px" width="100px">
 
     <section class="summary-top">
+        <!-- NAME -->
         <textarea class="name" name="name" placeholder="Name">{{actor.name}}</textarea>
-        <textarea class="class" name="system.class" placeholder="Class">{{actor.system.class}}</textarea>
+
+        <!-- CLASS for actors, ROLL for items -->
+        <textarea class="class" name="system.class" placeholder="Class">{{system.class}}</textarea>
     </section>
 
     <section class="summary-bottom">
-        <select class="type">
-            <option value="epithet">Epithet</option>
-            <option value="mundie">Mundie</option>
+        <!-- TYPE of mundie or epithet user -->
+        <select class="type" name="system.type">
+            <optgroup label="{{localize config.powerset.inscribed}}">
+                {{#select system.type}}
+                    {{#each config.type.inscribed as |name key|}}
+                        <option value="{{key}}">{{localize name}}</option>
+                    {{/each}}
+                {{/select}}
+            </optgroup>
+            <optgroup label="{{localize config.powerset.mundie}}">
+                {{#select system.type}}
+                    {{#each config.type.mundie as |name key|}}
+                        <option value="{{key}}">{{localize name}}</option>
+                    {{/each}}
+                {{/select}}
+            </optgroup>
         </select>
-        <input class="word" name="system.word" type="text" value="{{actor.system.word}}" placeholder="Epithet/Core Word">
+
+        <input class="word" name="system.word" type="text" value="{{system.word}}" placeholder="Epithet/Core Word">
     </section>
     
 </header>

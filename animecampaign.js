@@ -17,4 +17,6 @@ Hooks.once('init', function () {
     Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
 
     AC.preloadHandlebarsTemplates();
+
+    console.log(config.animecampaign);
 })

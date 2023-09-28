@@ -8,6 +8,10 @@
                 "expert": "Expert",
                 "powerhouse": "Powerhouse"
             }
+        },
+        "powerset": {
+            "inscribed": "Inscribed",
+            "mundie": "Mundie"
         }
     }
 }

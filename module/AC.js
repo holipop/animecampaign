@@ -26,8 +26,8 @@ export async function preloadHandlebarsTemplates () {
 }
 
 /** Assigns the values of an object a string of that property's dot notation.
- * @param {Object} obj
- * @returns {Object}
+ * @param {object} obj
+ * @returns {object}
  */
 export function facadeObject (obj) {
     let paths = Object.keys(flattenObject(obj));
