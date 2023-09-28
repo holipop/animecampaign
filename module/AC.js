@@ -19,8 +19,20 @@ export function error (text) {
  */
 export async function preloadHandlebarsTemplates () {
     const paths = [
-        "systems/animecampaign/templates/partials/summary.hbs",
+        'systems/animecampaign/templates/partials/summary.hbs',
     ];
 
     return loadTemplates(paths);
+}
+
+/** Assigns the values of an object a string of that property's dot notation.
+ * @param {Object} obj
+ * @returns {Object}
+ */
+export function facadeObject (obj) {
+    let paths = Object.keys(flattenObject(obj));
+    paths.forEach(element => {
+        setProperty(obj, element, element);
+    });
+    return obj;
 }

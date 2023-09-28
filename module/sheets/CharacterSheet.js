@@ -18,4 +18,15 @@ export default class CharacterSheet extends ActorSheet {
             scrollY: ["section.scrollable"]
         });
     }
+
+    /** Returns the context object for Handlebars.
+     * @returns {Object}
+     */
+    async getData () {
+        const data = super.getData();
+
+        data.config = CONFIG.animecampaign;
+        
+        return data;
+    }
 }

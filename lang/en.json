@@ -1,3 +1,13 @@
 {
-    "animecampaign": {}
+    "animecampaign": {
+        "type": {
+            "inscribed": {
+                "epithet": "Epithet"
+            },
+            "mundie": {
+                "expert": "Expert",
+                "powerhouse": "Powerhouse"
+            }
+        }
+    }
 }
