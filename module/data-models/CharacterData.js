@@ -9,10 +9,17 @@ export default class CharacterData extends foundry.abstract.DataModel {
     static defineSchema () {
         const fields = foundry.data.fields;
 
+        const stats = CONFIG.animecampaign.colorStat;
+        for (const key in stats) {
+            stats[key] = new fields.EmbeddedDataField(Stat);
+        }
+
         return {
             stamina: new fields.EmbeddedDataField(Stat),
             proficiency: new fields.EmbeddedDataField(Stat),
             movement: new fields.EmbeddedDataField(Stat),
+
+            stats: new fields.SchemaField(stats),
 
             description: new fields.HTMLField(),
             class: new fields.StringField(),

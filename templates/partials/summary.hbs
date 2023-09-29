@@ -5,15 +5,15 @@
     <img class="img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100px" width="100px">
 
     <section class="summary-top">
-        <!-- NAME -->
+        <!-- Name -->
         <textarea class="name" name="name" placeholder="Name">{{actor.name}}</textarea>
 
-        <!-- CLASS for actors, ROLL for items -->
+        <!-- Class for actors, Roll for items -->
         <textarea class="class" name="system.class" placeholder="Class">{{system.class}}</textarea>
     </section>
 
     <section class="summary-bottom">
-        <!-- TYPE of mundie or epithet user -->
+        <!-- Type of mundie or epithet user -->
         <select class="type" name="system.type">
             <optgroup label="{{localize config.powerset.inscribed}}">
                 {{#select system.type}}
@@ -31,7 +31,8 @@
             </optgroup>
         </select>
 
-        <input class="word" name="system.word" type="text" value="{{system.word}}" placeholder="Epithet/Core Word">
+        <!-- Core Word or Epithet -->
+        <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="Epithet/Core Word">
     </section>
     
 </header>

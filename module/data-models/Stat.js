@@ -8,12 +8,13 @@ export default class Stat extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
 
         return {
+            label: new fields.StringField(),
+
             value: new fields.NumberField(),
             max: new fields.NumberField(),
             min: new fields.NumberField(),
 
-            stringValue: new fields.StringField(),
-            stringMax: new fields.StringField(),
+            content: new fields.StringField(),
         }
     }
 }

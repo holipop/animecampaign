@@ -12,6 +12,21 @@
         "powerset": {
             "inscribed": "Inscribed",
             "mundie": "Mundie"
+        },
+        "mainStat": {
+            "stamina": "Stamina",
+            "proficiency": "Proficiency",
+            "movement": "Movement"
+        },
+        "colorStat": {
+            "red": "Red",
+            "blue": "Blue",
+            "yellow": "Yellow",
+            "green": "Green",
+            "orange": "Orange",
+            "cyan": "Cyan",
+            "purple": "Purple",
+            "grey": "Cyan"
         }
     }
 }
