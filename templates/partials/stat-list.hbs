@@ -1,5 +1,18 @@
 <ol class="stat-list">
-    {{#each system.stats as |value key|}}
-        <li>{{key}}</li>
+    {{#each system.usedStats as |stat key|}}
+        <li>
+            <label>{{key}}</label>
+            <select class="color" name="system.stats.{{key}}.color">
+                {{#select stat.color}}
+                    {{#each ../config.colorStat as |color key|}}
+                        <option value="{{key}}">{{localize color}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+            <span><a data-delete="{{key}}">Delete Stat</a></span>
+            <input type="number" name="system.stats.{{key}}.value" value="{{stat.value}}">
+        </li>
     {{/each}}
+
+    <a data-add><h5>Add Stat</h5></a>
 </ol>

@@ -22,7 +22,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             proficiency: new fields.EmbeddedDataField(Stat),
             movement: new fields.EmbeddedDataField(Stat),
 
-            stats: new fields.SchemaField(stats),
+            stats: new fields.SchemaField(colorStats),
 
             description: new fields.HTMLField(),
             class: new fields.StringField(),
@@ -33,5 +33,16 @@ export default class CharacterData extends foundry.abstract.DataModel {
                 initial: "#CCCCCC"
             }),
         };
+    }
+
+    /** Returns the color stats in use.
+     * @returns {Object}
+     */
+    get usedStats () {
+        const usedStats = {};
+        for (const stat in this.stats) {
+            if (this.stats[stat] != null) usedStats[stat] = this.stats[stat];
+        }
+        return usedStats;
     }
 }

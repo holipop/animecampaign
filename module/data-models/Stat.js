@@ -9,6 +9,7 @@ export default class Stat extends foundry.abstract.DataModel {
 
         return {
             label: new fields.StringField(),
+            color: new fields.StringField(),
 
             value: new fields.NumberField(),
             max: new fields.NumberField(),

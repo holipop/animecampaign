@@ -38,3 +38,16 @@ export function facadeObject (obj) {
     });
     return obj;
 }
+
+/** Create an object where all of the properties have identical values.
+ * @param {string[]} keyArr The names of each property.
+ * @param {*} value The value for each property.
+ * @returns {Object}
+ */
+export function uniformObject (keyArr, value) {
+    const obj = {};
+    keyArr.forEach(element => {
+        obj[element] = value;
+    });
+    return obj;
+}

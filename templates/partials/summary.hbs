@@ -2,37 +2,44 @@
 
     <div class="background"></div>
     <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
-    <img class="img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100px" width="100px">
+    <img class="img" src="{{document.img}}" data-edit="img" title="{{document.name}}" height="100px" width="100px">
 
     <section class="summary-top">
         <!-- Name -->
-        <textarea class="name" name="name" placeholder="Name">{{actor.name}}</textarea>
+        <textarea class="name" name="name" placeholder="Name">{{document.name}}</textarea>
 
-        <!-- Class for actors, Roll for items -->
-        <textarea class="class" name="system.class" placeholder="Class">{{system.class}}</textarea>
+        {{#if (eq documentName "Actor")}}
+            <!-- Class for actors, Roll for items -->
+            <textarea class="class" name="system.class" placeholder="Class">{{system.class}}</textarea>
+        {{/if}}
+
     </section>
 
     <section class="summary-bottom">
-        <!-- Type of mundie or epithet user -->
-        <select class="type" name="system.type">
-            <optgroup label="{{localize config.powerset.inscribed}}">
-                {{#select system.type}}
-                    {{#each config.type.inscribed as |name key|}}
-                        <option value="{{key}}">{{localize name}}</option>
-                    {{/each}}
-                {{/select}}
-            </optgroup>
-            <optgroup label="{{localize config.powerset.mundie}}">
-                {{#select system.type}}
-                    {{#each config.type.mundie as |name key|}}
-                        <option value="{{key}}">{{localize name}}</option>
-                    {{/each}}
-                {{/select}}
-            </optgroup>
-        </select>
+        
+        {{#if (eq documentName "Actor")}}
+            <!-- Type of mundie or epithet user -->
+            <select class="type" name="system.type">
+                <optgroup label="{{localize config.powerset.inscribed}}">
+                    {{#select system.type}}
+                        {{#each config.type.inscribed as |name key|}}
+                            <option value="{{key}}">{{localize name}}</option>
+                        {{/each}}
+                    {{/select}}
+                </optgroup>
+                <optgroup label="{{localize config.powerset.mundie}}">
+                    {{#select system.type}}
+                        {{#each config.type.mundie as |name key|}}
+                            <option value="{{key}}">{{localize name}}</option>
+                        {{/each}}
+                    {{/select}}
+                </optgroup>
+            </select>
 
-        <!-- Core Word or Epithet -->
-        <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="Epithet/Core Word">
+            <!-- Core Word or Epithet -->
+            <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="Epithet/Core Word">
+        {{/if}}
+
     </section>
     
 </header>
