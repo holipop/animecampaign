@@ -1,14 +1,17 @@
-<ol class="stat-list color-stats">
-    {{#each system.usedStats as |stat key|}}
+<ol class="stat-list">
+    {{#each statList as |stat key|}}
         <li data-stat="{{key}}">
-            <!-- Color Select -->
-            <select class="color" name="system.stats.{{key}}.color">
-                {{#select stat.color}}
-                    {{#each ../config.colorStat as |color key|}}
-                        <option value="{{key}}" data-color="{{key}}">{{localize color}}</option>
-                    {{/each}}
-                {{/select}}
-            </select>
+
+            {{#if (eq ../documentName "Actor")}}
+                <!-- Color Select -->
+                <select class="color" name="system.stats.{{key}}.color">
+                    {{#select stat.color}}
+                        {{#each ../config.colorStat as |color key|}}
+                            <option value="{{key}}" data-color="{{key}}">{{localize color}}</option>
+                        {{/each}}
+                    {{/select}}
+                </select>
+            {{/if}}
             
             <!-- Buttons -->
             <span><a data-toggle="{{key}}">Toggle View</a></span>
@@ -21,10 +24,14 @@
                 <input type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
                 <input type="number" name="system.stats.{{key}}.max" value="{{stat.max}}" placeholder="Max">
             {{/if}}
-
             {{#if (eq stat.view 'label')}}
                 <input type="text" name="system.stats.{{key}}.label" value="{{stat.label}}" placeholder="Label">
             {{/if}}
+
+            <!-- Hidden Fields -->
+            <div hidden>
+                <input type="text" name="system.stats.{{key}}.view" value="{{stat.view}}">
+            </div>
         </li>
     {{/each}}
 

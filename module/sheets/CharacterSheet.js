@@ -30,6 +30,7 @@ export default class CharacterSheet extends ActorSheet {
         data.config = CONFIG.animecampaign;
         data.system = this.object.system;
         data.documentName = this.object.documentName;
+        data.statList = data.system.usedStats;
 
         return data;
     }
@@ -55,7 +56,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     disableStatOptions (html) {
         const stats = this.object.system.stats;
-        const colorKeys = Object.keys(stats);
+        const colorKeys = CONFIG.animecampaign.colors;
         const populatedColors = colorKeys.filter(element => stats[element] != null);
 
         populatedColors.forEach(element => {
@@ -141,12 +142,11 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     updateColorStats (data) {
-        const stats = getProperty(expandObject(data), 'system.stats');
-        const colorKeys = Object.keys(CONFIG.animecampaign.colorStat);
-        const blankStats = uniformObject(colorKeys, null)
+        const statChanges = getProperty(expandObject(data), 'system.stats');
+        const blankStats = uniformObject(CONFIG.animecampaign.colors, null)
 
-        for (const stat in stats) {
-            blankStats[stats[stat].color] = stats[stat];
+        for (const stat in statChanges) {
+            blankStats[statChanges[stat].color] = statChanges[stat];
         }
 
         const updatedData = mergeObject(data, { system: { stats: blankStats } });

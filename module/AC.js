@@ -21,7 +21,7 @@ export async function preloadHandlebarsTemplates () {
     const paths = [
         'systems/animecampaign/templates/partials/summary.hbs',
         'systems/animecampaign/templates/partials/main-stats.hbs',
-        'systems/animecampaign/templates/partials/color-stats.hbs'
+        'systems/animecampaign/templates/partials/stat-list.hbs'
     ];
 
     return loadTemplates(paths);
