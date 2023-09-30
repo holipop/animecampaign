@@ -1,0 +1,32 @@
+<ol class="stat-list color-stats">
+    {{#each system.usedStats as |stat key|}}
+        <li data-stat="{{key}}">
+            <!-- Color Select -->
+            <select class="color" name="system.stats.{{key}}.color">
+                {{#select stat.color}}
+                    {{#each ../config.colorStat as |color key|}}
+                        <option value="{{key}}" data-color="{{key}}">{{localize color}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+            
+            <!-- Buttons -->
+            <span><a data-toggle="{{key}}">Toggle View</a></span>
+            <span><a data-delete="{{key}}">Delete Stat</a></span>
+
+            <!-- Inputs -->
+            <input type="text" name="system.stats.{{key}}.tag" value="{{stat.tag}}" placeholder="Name">
+
+            {{#if (eq stat.view 'resource')}}
+                <input type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
+                <input type="number" name="system.stats.{{key}}.max" value="{{stat.max}}" placeholder="Max">
+            {{/if}}
+
+            {{#if (eq stat.view 'label')}}
+                <input type="text" name="system.stats.{{key}}.label" value="{{stat.label}}" placeholder="Label">
+            {{/if}}
+        </li>
+    {{/each}}
+
+    <a data-add><h5>Add Stat</h5></a>
+</ol>

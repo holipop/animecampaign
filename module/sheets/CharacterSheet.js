@@ -42,22 +42,46 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
+        this.disableStatOptions(html);
         this.addColorStat(html);
         this.deleteColorStat(html);
+        this.toggleStatView(html);
 
         super.activateListeners(html);
     }
 
-    /** Occupies a color stat by finding the first null stat. Does nothing if all stats 
-     *  are occupied.
+    /** Disables the options of the color selection that are occupied by other stats.
+     * @param {*} html 
+     */
+    disableStatOptions (html) {
+        const stats = this.object.system.stats;
+        const colorKeys = Object.keys(stats);
+        const populatedColors = colorKeys.filter(element => stats[element] != null);
+
+        populatedColors.forEach(element => {
+            const color = html.find(`[data-color=${element}]`);
+
+            color.each((index, element) => {
+                const isSelected = $(element).attr('selected')
+
+                if (!isSelected) $(element).attr('disabled', 'true');
+            });
+        });
+    }
+
+    /** Occupies a color stat by finding the first null stat. Removes the button if all stats are occupied.
      * @param {*} html 
      */
     addColorStat (html) {
         const add = html.find("[data-add]");
         const stats = this.object.system.stats;
-        const blankStats = uniformObject(Object.keys(stats), null);
+        const areStatsPopulated = Object.values(stats).every(element => element != null);
 
-        // TODO: Remove the button when all stats are occupied.
+        if (areStatsPopulated) {
+            add.hide();
+        } else {
+            add.show();
+        }
 
         add.on('click', () => {
             for (const stat in stats) {
@@ -73,12 +97,29 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html 
      */
     deleteColorStat (html) {
-        const del = html.find("[data-delete]");
+        const del = html.find('[data-delete]');
 
         del.on('click', event => {
-            const stat = $(event.target).data('delete');
-            this.object.update({ [`system.stats.${stat}`]: null });
+            const key = $(event.target).data('delete');
+            this.object.update({ [`system.stats.${key}`]: null });
         });
+    }
+
+    /** Toggles the view of a stat between resource and label.
+     * @param {*} html 
+     */
+    toggleStatView (html) {
+        const toggle = html.find('[data-toggle]');
+
+        toggle.on('click', event => {
+            const key = $(event.target).data('toggle');
+            const stat = this.object.system.stats[key];
+
+            if (stat.view == 'resource') stat.view = 'label';
+            else if (stat.view == 'label') stat.view = 'resource';
+
+            this.object.update({ [`system.stats.${key}`]: stat });
+        })
     }
 
     
@@ -95,8 +136,7 @@ export default class CharacterSheet extends ActorSheet {
         super._updateObject(event, data);
     }
 
-    /** Checks the color property of the stats and ensures they're assigned to its 
-     *  matching key.
+    /** Checks the color property of the stats and ensures they're assigned to its matching key.
      * @param {Object} data 
      * @returns {Object}
      */
