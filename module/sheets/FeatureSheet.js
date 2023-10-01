@@ -13,6 +13,10 @@ export default class FeatureSheet extends ItemSheet {
         });
     }
 
+
+    //* DATA PREPARATION */
+    //* ---------------- */ 
+
     /** Returns the context object for Handlebars.
      * @returns {Object}
      */
@@ -24,7 +28,25 @@ export default class FeatureSheet extends ItemSheet {
         data.documentName = this.object.documentName;
         data.statList = data.system.stats;
 
+        // Prepared Data
+        data.categories = this.categories();
+
         return data;
+    }
+
+    /** Returns an array of available categories to select, including the default ones.
+     * @returns {string[]}
+     */
+    categories () {
+        const defaultCategories = CONFIG.animecampaign.defaultCategories;
+        const currentCategory = this.object.system.category;
+        const categories = new Set([...defaultCategories, currentCategory])
+
+        if (this.isOwned) {
+            
+        }
+        
+        return [...categories];
     }
 
 

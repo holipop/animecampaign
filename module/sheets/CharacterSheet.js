@@ -21,6 +21,10 @@ export default class CharacterSheet extends ActorSheet {
         });
     }
 
+
+    //* DATA PREPARATION */
+    //* ---------------- */
+
     /** Returns the context object for Handlebars.
      * @returns {Object}
      */
@@ -31,10 +35,11 @@ export default class CharacterSheet extends ActorSheet {
         data.system = this.object.system;
         data.documentName = this.object.documentName;
         data.statList = data.system.usedStats;
+        data.categorizedFeatures = data.system.categorizedFeatures;
 
         return data;
     }
-
+ 
 
     //* EVENT LISTENERS */
     //* --------------- */ 
@@ -43,10 +48,17 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
+
+        // Color Stats
         this.disableStatOptions(html);
         this.addColorStat(html);
         this.deleteColorStat(html);
         this.toggleStatView(html);
+
+        // Kit
+        this.createCategory(html);
+        this.deleteCategory(html);
+        this.viewFeature(html);
 
         super.activateListeners(html);
     }
@@ -60,7 +72,7 @@ export default class CharacterSheet extends ActorSheet {
         const populatedColors = colorKeys.filter(element => stats[element] != null);
 
         populatedColors.forEach(element => {
-            const color = html.find(`[data-color=${element}]`);
+            const color = html.find(`[data-color-stat=${element}]`);
 
             color.each((index, element) => {
                 const isSelected = $(element).attr('selected')
@@ -74,7 +86,7 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html 
      */
     addColorStat (html) {
-        const add = html.find("[data-add]");
+        const add = html.find("[data-add-stat]");
         const stats = this.object.system.stats;
         const areStatsPopulated = Object.values(stats).every(element => element != null);
 
@@ -98,10 +110,10 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html 
      */
     deleteColorStat (html) {
-        const del = html.find('[data-delete]');
+        const del = html.find('[data-delete-stat]');
 
         del.on('click', event => {
-            const key = $(event.target).data('delete');
+            const key = $(event.target).data('delete-stat');
             this.object.update({ [`system.stats.${key}`]: null });
         });
     }
@@ -110,10 +122,10 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html 
      */
     toggleStatView (html) {
-        const toggle = html.find('[data-toggle]');
+        const toggle = html.find('[data-toggle-stat]');
 
         toggle.on('click', event => {
-            const key = $(event.target).data('toggle');
+            const key = $(event.target).data('toggle-stat');
             const stat = this.object.system.stats[key];
 
             if (stat.view == 'resource') stat.view = 'label';
@@ -123,7 +135,84 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
+    /** Creates a new category given a name via a dialog.
+     * @param {*} html 
+     */
+    createCategory (html) {
+        const add = html.find('[data-create-category]');
+
+        add.on('click', () => {
+            const dialog = new Dialog({
+                title: `Create New Category: ${this.object.name}`,
+                content: CONFIG.animecampaign.createCategoryDialogContent,
+                buttons: {
+                    confirm: {
+                        icon: '<i class="fas fa-check"></i>',
+                        label: "Create New Category",
+                        callback: html => {
+                            const name = html.find('[name="name"]').val() || "new category";
+                            const categories = this.object.system.categories;
     
+                            categories.add(name.toLowerCase());
+    
+                            this.object.update({ 'system.categories': [...categories] });
+                        }
+                    },
+                },
+                default: "confirm",
+            }, { width: 325 });
+
+            dialog.render(true);
+        })
+    }
+
+    /** Deletes a category given its index via a dialog.
+     * @param {*} html 
+     */
+    deleteCategory (html) {
+        const del = html.find('[data-delete-category]');
+        const categories = this.object.system.categories;
+
+        del.on('click', event => {
+            const category = $(event.target).data('delete-category');
+            
+            Dialog.confirm({
+                title: `Delete Category [${category.toUpperCase()}]: ${this.object.name}`,
+                content: 
+                    `<p>Delete the "${category.toUpperCase()}" category?</p>
+                    <p><b>Warning: This will delete all kit features within this category.</b><p>`,
+                yes: () => {
+                    const features = this.object.system.categorizedFeatures[category];
+                    const ids = [];
+
+                    features.forEach(feature => ids.push(feature._id));
+
+                    categories.delete(category);
+
+                    this.object.update({ 'system.categories': [...categories] });
+                    this.object.deleteEmbeddedDocuments('Item', ids);
+                },
+                no: () => {},
+                defaultYes: true,
+            });
+        });
+    }
+
+    /** Renders a kit feature's sheet.
+     * @param {*} html 
+     */
+    viewFeature (html) {
+        const view = html.find('[data-view-feature]');
+
+        view.on('click', event => {
+            const id = $(event.target).data('view-feature');
+            const feature = this.object.getEmbeddedDocument('Item', id);
+
+            feature.sheet.render(true);
+        })
+    }
+
+
     //* FORM SUBMISSION */
     //* --------------- */
 

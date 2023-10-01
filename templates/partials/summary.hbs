@@ -40,6 +40,18 @@
             <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="Epithet/Core Word">
         {{/if}}
 
+        {{#if (eq documentName "Item")}}
+            <!-- Category -->
+            <select class="category-select" name="! system.category">
+                {{! #select system.category}}
+                    {{#each categories as |category index|}}
+                        <option>{{category}}</option>
+                    {{/each}}
+                {{! /select}}
+            </select>
+            <input class="category-input" type="text" name="system.category" value="{{system.category}}">
+        {{/if}}
+
     </section>
     
 </header>

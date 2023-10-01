@@ -2,6 +2,7 @@
 import * as AC from './module/AC.js'
 import * as config from './module/config.js'
 
+import ACActor from './module/documents/ACActor.js';
 import CharacterData from './module/data-models/CharacterData.js';
 import CharacterSheet from './module/sheets/CharacterSheet.js';
 
@@ -14,7 +15,9 @@ Hooks.once('init', function () {
 
     CONFIG.animecampaign = config.animecampaign;
 
+    CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
+
     CONFIG.Item.dataModels["Feature"] = FeatureData;
 
     Actors.unregisterSheet("core", ActorSheet);

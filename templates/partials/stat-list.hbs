@@ -7,15 +7,15 @@
                 <select class="color" name="system.stats.{{key}}.color">
                     {{#select stat.color}}
                         {{#each ../config.colorStat as |color key|}}
-                            <option value="{{key}}" data-color="{{key}}">{{localize color}}</option>
+                            <option value="{{key}}" data-color-stat="{{key}}">{{localize color}}</option>
                         {{/each}}
                     {{/select}}
                 </select>
             {{/if}}
             
             <!-- Buttons -->
-            <span><a data-toggle="{{key}}">Toggle View</a></span>
-            <span><a data-delete="{{key}}">Delete Stat</a></span>
+            <span><a data-toggle-stat="{{key}}">Toggle View</a></span>
+            <span><a data-delete-stat="{{key}}">Delete Stat</a></span>
 
             <!-- Inputs -->
             <input type="text" name="system.stats.{{key}}.tag" value="{{stat.tag}}" placeholder="Name">
@@ -35,5 +35,5 @@
         </li>
     {{/each}}
 
-    <a data-add><h5>Add Stat</h5></a>
+    <a data-add-stat><h5>Add Stat</h5></a>
 </ol>

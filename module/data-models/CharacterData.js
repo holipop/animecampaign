@@ -24,13 +24,17 @@ export default class CharacterData extends foundry.abstract.DataModel {
 
             stats: new fields.SchemaField(colorStats),
 
+            categories: new fields.SetField(new fields.StringField(), {
+                initial: CONFIG.animecampaign.defaultCategories
+            }),
+
             description: new fields.HTMLField(),
             class: new fields.StringField(),
             word: new fields.StringField(),
             type: new fields.StringField(),
             color: new fields.StringField({
                 required: true,
-                initial: "#CCCCCC"
+                initial: CONFIG.animecampaign.defaultColor
             }),
         };
     }
@@ -44,5 +48,20 @@ export default class CharacterData extends foundry.abstract.DataModel {
             if (this.stats[stat] != null) usedStats[stat] = this.stats[stat];
         }
         return usedStats;
+    }
+
+    /** Sorts all owned features by their category into an object.
+     * @returns {Object}
+     */
+    get categorizedFeatures () {
+        const items = [...this.parent.items];
+        const categories = [...this.categories];
+        const features = {};
+
+        categories.forEach(category => {
+            features[category] = items.filter(item => item.system.category == category);
+        })
+
+        return features;
     }
 }

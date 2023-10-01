@@ -5,3 +5,16 @@ import { facadeObject } from "./AC.js";
 export const animecampaign = facadeObject(lang).animecampaign;
 
 animecampaign.colors = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
+animecampaign.defaultCategories = ['weapon', 'talent', 'passive', 'ability'];
+animecampaign.defaultColor = "#CCCCCC";
+
+animecampaign.createCategoryDialogContent = `
+    <form autocomplete="off">
+        <div class="form-group">
+            <label>Name</label>
+            <div class="form-fields">
+                <input type="text" name="name" placeholder="New Category" autofocus>
+            </div>
+        </div>
+    </form>
+`;

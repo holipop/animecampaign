@@ -1,0 +1,28 @@
+<section class="kit">
+    <ol>
+        {{#each categorizedFeatures as |features category|}}
+            <li>
+                <h2>{{category}}</h2>
+
+                <!-- Category Buttons -->
+                <a data-delete-category="{{category}}">Delete Category</a>
+                
+                <!-- Items -->
+                <ol>
+                    {{#each features as |feature index|}}
+                        <li>
+                            <span>{{feature.name}} -{{feature.system.category}}-</span>
+
+                            <!-- Feature Buttons -->
+                            <span>
+                                <a data-view-feature="{{feature._id}}">/View Feature/</a>
+                            </span>
+                        </li>
+                    {{/each}}
+                </ol>
+            </li>
+        {{/each}}
+
+        <a data-create-category><h5>Create Category</h5></a>
+    </ol>
+</section>
