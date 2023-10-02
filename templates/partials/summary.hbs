@@ -6,11 +6,11 @@
 
     <section class="summary-top">
         <!-- Name -->
-        <textarea class="name" name="name" placeholder="Name">{{document.name}}</textarea>
+        <textarea class="name" name="name" placeholder="Name" data-name data-enter>{{~document.name}}</textarea>
 
         {{#if (eq documentName "Actor")}}
             <!-- Class for actors, Roll for items -->
-            <textarea class="class" name="system.class" placeholder="Class">{{system.class}}</textarea>
+            <textarea class="class" name="system.class" placeholder="Class" data-resize data-enter>{{~system.class}}</textarea>
         {{/if}}
 
     </section>

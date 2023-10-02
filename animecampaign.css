@@ -1,0 +1,9 @@
+.animecampaign.actor.sheet .name {
+  font-size: 3rem;
+  font-family: "Gloock";
+  height: 3.75rem;
+  line-height: 0.85;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  resize: none;
+}

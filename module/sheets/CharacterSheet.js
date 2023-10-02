@@ -48,6 +48,10 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
+        // Summary
+        this.submitOnEnter(html);
+        this.resizeName(html);
+        this.resizeTextArea(html);
 
         // Color Stats
         this.disableStatOptions(html);
@@ -61,6 +65,71 @@ export default class CharacterSheet extends ActorSheet {
         this.viewFeature(html);
 
         super.activateListeners(html);
+    }
+
+    /** Submits the form for textareas whenever the enter key is pressed.
+     * @param {*} html 
+     */
+    submitOnEnter (html) {
+        const enter = html.find('[data-enter]');
+
+        enter.each((index, element) => {
+            $(element).on('keypress', event => {
+                if (event.code == 'Enter') this.submit();
+            });
+        });
+    }
+
+    // TODO: Still a work in progress, the text resizes too early.
+    /** Resizes the font of the name such that any length fits cleanly.
+     * @param {*} html 
+     */
+    resizeName (html) {
+        const INITIAL_REM_SIZE = 3;
+        const MAX_PX_HEIGHT = 60;
+        const name = html.find("[data-name]");
+
+        /** Returns an rem size depending on the initial height of the textarea.
+         * @param {Number} px 
+         * @returns {Number}
+         */
+        const scale = px => {
+            const scaledRemSize = (MAX_PX_HEIGHT / px) * (INITIAL_REM_SIZE);
+
+            if (scaledRemSize >= INITIAL_REM_SIZE) return INITIAL_REM_SIZE;
+            else return scaledRemSize;
+        };
+
+        html.ready(() => {
+            name.each(function() {
+                const styles = [
+                    'overflow-y: hidden;',
+                    `font-size: ${scale(this.scrollHeight)}rem;`
+                ]; 
+                this.setAttribute("style", styles.join(''));
+            });
+        });
+
+        name.on("input", function() {
+            this.style.fontSize = INITIAL_REM_SIZE + "rem";
+            this.style.fontSize = scale(this.scrollHeight) + "rem";
+        });
+    }
+    
+    /** Resizes the height of a textarea dynamically as you type more.
+     * @param {*} html 
+     */
+    resizeTextArea (html) {
+        const resize = html.find('textarea[data-resize]');
+
+        resize.each(function() {
+            this.setAttribute("style", `height:${this.scrollHeight}px;overflow-y:hidden;`);
+        });
+
+        resize.on("input", function() {
+            this.style.height = 0;
+            this.style.height = this.scrollHeight + "px";
+        });
     }
 
     /** Disables the options of the color selection that are occupied by other stats.
