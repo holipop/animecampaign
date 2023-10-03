@@ -75,45 +75,47 @@ export default class CharacterSheet extends ActorSheet {
 
         enter.each((index, element) => {
             $(element).on('keypress', event => {
-                if (event.code == 'Enter') this.submit();
+                if (event.code == 'Enter') {
+                    event.preventDefault();
+                    this.submit();
+                }
             });
         });
     }
 
-    // TODO: Still a work in progress, the text resizes too early.
     /** Resizes the font of the name such that any length fits cleanly.
      * @param {*} html 
      */
     resizeName (html) {
-        const INITIAL_REM_SIZE = 3;
-        const MAX_PX_HEIGHT = 60;
+        const SCALE_DELTA = .05;
+        const PX_PER_REM = 16;
+
         const name = html.find("[data-name]");
+        const initialRem = parseInt(name.css('font-size')) / PX_PER_REM;
+        const maxPxHeight = parseInt(name.css('height'));
 
-        /** Returns an rem size depending on the initial height of the textarea.
-         * @param {Number} px 
-         * @returns {Number}
-         */
-        const scale = px => {
-            const scaledRemSize = (MAX_PX_HEIGHT / px) * (INITIAL_REM_SIZE);
+        const scale = () => {
+            const element = name[0];
 
-            if (scaledRemSize >= INITIAL_REM_SIZE) return INITIAL_REM_SIZE;
-            else return scaledRemSize;
-        };
+            element.style.height = 0;
+            element.style.height = element.scrollHeight + "px";
+            
+            element.style.fontSize = `${initialRem}rem`;
+    
+            for (let i = 1; i > 0; i -= SCALE_DELTA) {
+                element.style.fontSize = `${initialRem * i}rem`;
 
-        html.ready(() => {
-            name.each(function() {
-                const styles = [
-                    'overflow-y: hidden;',
-                    `font-size: ${scale(this.scrollHeight)}rem;`
-                ]; 
-                this.setAttribute("style", styles.join(''));
-            });
-        });
+                if (element.scrollHeight <= maxPxHeight) break;
+            }
+        }
 
-        name.on("input", function() {
-            this.style.fontSize = INITIAL_REM_SIZE + "rem";
-            this.style.fontSize = scale(this.scrollHeight) + "rem";
-        });
+        const resizeObserver = new ResizeObserver(scale);
+
+        resizeObserver.observe(name[0]);
+        resizeObserver.observe(html[0]);
+
+        html.ready(scale);
+        name.on('input', scale);
     }
     
     /** Resizes the height of a textarea dynamically as you type more.
