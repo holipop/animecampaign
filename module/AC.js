@@ -52,3 +52,13 @@ export function uniformObject (keyArr, value) {
     });
     return obj;
 }
+
+/** Converts a string hexadecimal color into an array of RGB values in base 10.
+ * @param {string} hexcode 
+ * @returns {number[]}
+ */
+export function hexToRGB (hexcode) {
+    const channels = [hexcode.slice(1, 3), hexcode.slice(3, 5), hexcode.slice(5)];
+
+    return channels.map(value => parseInt(value, 16));
+}

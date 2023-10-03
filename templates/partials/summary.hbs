@@ -1,16 +1,31 @@
 <header class="summary">
 
-    <div class="background"></div>
-    <input class="background-input" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
-    <img class="img" src="{{document.img}}" data-edit="img" title="{{document.name}}" height="100px" width="100px">
+    <!-- Background -->
+    <div class="background" data-match="background-color"></div>
+
+    <section class="profile">
+        <!-- Color -->
+        <input class="color" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
+
+        <!-- Image -->
+        <img class="img" src="{{document.img}}" data-edit="img" title="{{document.name}}">
+    </section>
 
     <section class="summary-top">
         <!-- Name -->
-        <textarea class="name" name="name" placeholder="Name" data-name data-enter>{{~document.name}}</textarea>
+        <!-- TODO: 
+        Add a div facade. Whenever the text isn't being edited, 
+        display that so it can be vertically aligned to the bottom. -->
+        <textarea class="name" name="name" placeholder="Name" data-name data-enter data-contrast>{{~document.name}}</textarea>
 
         {{#if (eq documentName "Actor")}}
-            <!-- Class for actors, Roll for items -->
-            <textarea class="class" name="system.class" placeholder="Class" data-resize data-enter>{{~system.class}}</textarea>
+            <!-- Class -->
+            <textarea class="class" name="system.class" placeholder="Class" data-resize data-enter data-contrast>{{~system.class}}</textarea>
+        {{/if}}
+
+        {{#if (eq documentName "Item")}}
+            <!-- Chat Messaging -->
+
         {{/if}}
 
     </section>

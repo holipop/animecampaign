@@ -1,3 +1,5 @@
+import { hexToRGB } from "../AC.js";
+
 // A mixin for shared methods between sheets.
 export const SheetMixin = {
 
@@ -59,7 +61,7 @@ export const SheetMixin = {
         const resize = html.find('textarea[data-resize]');
 
         resize.each(function() {
-            this.setAttribute("style", `height:${this.scrollHeight}px;overflow-y:hidden;`);
+            this.setAttribute("style", `height:${this.scrollHeight}px;`);
         });
 
         resize.on("input", function() {
@@ -67,4 +69,37 @@ export const SheetMixin = {
             this.style.height = this.scrollHeight + "px";
         });
     },
+
+    /** Matches the color of each element with the document's system color.
+     * @param {*} html 
+     */
+    matchColor (html) {
+        const match = html.find('[data-match]');
+
+        match.each((index, element) => {
+            const property = $(element).data('match') || "color";
+
+            $(element).css(property, this.object.system.color);
+        })
+    },
+    
+    contrastColor (html) {
+        const contrast = html.find('[data-contrast]');
+
+        contrast.each((index, element) => {
+            const property = $(element).data('contrast') || "color";
+
+            const rgb = hexToRGB(this.object.system.color);
+            rgb[0] *= 0.2126;
+            rgb[1] *= 0.7152;
+            rgb[2] *= 0.0722;
+
+            const luma = rgb.reduce((n, m) => n + m) / 255;
+            const color = (luma <= .5) ? "white" : "black";
+
+            console.log(color);
+
+            $(element).css(property, color);
+        })
+    }
 }
