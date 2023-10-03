@@ -93,13 +93,10 @@ export default class CharacterSheet extends ActorSheet {
     addColorStat (html) {
         const add = html.find("[data-add-stat]");
         const stats = this.object.system.stats;
-        const areStatsPopulated = Object.values(stats).every(element => element != null);
+        const areAllStatsPopulated = Object.values(stats).every(element => element != null);
 
-        if (areStatsPopulated) {
-            add.hide();
-        } else {
-            add.show();
-        }
+        if (areAllStatsPopulated) add.hide();
+        else add.show();
 
         add.on('click', () => {
             for (const stat in stats) {
@@ -198,7 +195,7 @@ export default class CharacterSheet extends ActorSheet {
                     this.object.deleteEmbeddedDocuments('Item', ids);
                 },
                 no: () => {},
-                defaultYes: true,
+                defaultYes: false,
             });
         });
     }

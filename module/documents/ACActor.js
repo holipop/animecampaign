@@ -15,7 +15,7 @@ export default class ACActor extends Actor {
         super._onCreateDescendantDocuments(parent, collection, documents, ...args);
     }
 
-    /** Creates a new category for each created owned feature that can't be included.
+    /** Creates a new category for each created owned feature that can't be sorted.
      * @param {Document[]} documents 
      */
     createMissingCategories (documents) {

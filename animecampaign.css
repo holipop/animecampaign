@@ -1,16 +1,37 @@
+@font-face {
+  font-family: "Gloock";
+  src: url("fonts/Gloock/Gloock-Regular.ttf");
+}
+@font-face {
+  font-family: "Philosopher";
+  src: url("fonts/Philosopher/Philosopher-Regular.ttf");
+}
+@font-face {
+  font-family: "Philosopher";
+  src: url("fonts/Philosopher/Philosopher-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Philosopher";
+  src: url("fonts/Philosopher/Philosopher-BoldItalic.ttf");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Philosopher";
+  src: url("fonts/Philosopher/Philosopher-Italic.ttf");
+  font-style: italic;
+  font-weight: bold;
+}
+.animecampaign.sheet .name {
+  height: 3.75rem;
+  resize: none;
+  overflow-y: hidden;
+  font-family: "Gloock";
+  line-height: 0.85;
+}
 .animecampaign.actor.sheet .name {
   font-size: 3rem;
-  font-family: "Gloock";
-  height: 3.75rem;
-  line-height: 0.85;
-  overflow-y: hidden;
-  resize: none;
 }
 .animecampaign.item.sheet .name {
   font-size: 2.5rem;
-  font-family: "Gloock";
-  height: 3.75rem;
-  line-height: 0.85;
-  overflow-y: hidden;
-  resize: none;
 }
