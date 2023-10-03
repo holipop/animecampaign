@@ -1,3 +1,5 @@
+import { SheetMixin } from "./SheetMixin.js";
+
 // The application for Kit Features.
 export default class FeatureSheet extends ItemSheet {
 
@@ -57,6 +59,12 @@ export default class FeatureSheet extends ItemSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
+        // Summary
+        this.submitOnEnter(html);
+        this.resizeName(html);
+        this.resizeTextArea(html);
+
+        // Stat List
         this.addStat(html);
         this.deleteStat(html);
         this.toggleStatView(html);
@@ -140,3 +148,6 @@ export default class FeatureSheet extends ItemSheet {
         return flattenObject(updatedData);
     }
 }
+
+// Composites mixins with this class.
+Object.assign(FeatureSheet.prototype, SheetMixin);
