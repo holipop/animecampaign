@@ -14,6 +14,14 @@ export function error (text) {
     console.error(`%cAnime Campaign | ${text}`, 'color: orange');
 }
 
+/** A shorthand for getting system-specific localizations.
+ * @param {string} path 
+ * @returns {string}
+ */
+export function localize (path) {
+    return game.i18n.localize(getProperty(CONFIG.animecampaign, path));
+}
+
 /** Preloads the filepaths for the Handlebars partials.
  * @returns {Promise<Function[]>}
  */

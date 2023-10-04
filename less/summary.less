@@ -32,9 +32,8 @@
         grid-row: 1 / -1;
         place-self: end end;
     }
-    .color-button {
-
-        // TODO: find a way to make this look good.
+    // TODO: find a way to make this look good.
+    /* .color-button {
         display: none;
 
         position: absolute;
@@ -53,7 +52,7 @@
             color: white;
             background-color: black;
         }
-    }
+    } */
     .color {
         width: 100%;
         margin: 0;
@@ -109,10 +108,10 @@
 
 .animecampaign.actor.sheet .summary {
     grid-template-rows: 7fr 3fr;
-    height: 6.2rem;
+    height: @character-summary-height;
 
     .background {
-        height: (6.2rem * .7) + .5rem;
+        height: (@character-summary-height * .7) + .5rem;
     }
     .img {
         height: 5.4rem;
@@ -137,10 +136,10 @@
 
 .animecampaign.item.sheet .summary {
     grid-template-rows: 2fr 1fr;
-    height: 5.125rem;
+    height: @feature-summary-height;
 
     .background {
-        height: (5.125rem * (2 / 3)) + .5rem;
+        height: (@feature-summary-height * (2 / 3)) + .5rem;
     }
     .img {
         height: 4.4rem;

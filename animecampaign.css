@@ -1,11 +1,3 @@
-.animecampaign.actor.sheet {
-  min-width: 520px;
-  min-height: 530px;
-}
-.animecampaign.item.sheet {
-  min-width: 450px;
-  min-height: 350px;
-}
 @font-face {
   font-family: "Gloock";
   src: url("fonts/Gloock/Gloock-Regular.ttf");
@@ -30,9 +22,49 @@
   font-style: italic;
   font-weight: bold;
 }
+.animecampaign.sheet form {
+  overflow-y: hidden;
+}
+.animecampaign.sheet form .scrollable {
+  overflow-y: scroll;
+}
+.animecampaign.actor.sheet {
+  min-width: 520px;
+  min-height: 530px;
+}
+.animecampaign.actor.sheet .scrollable {
+  height: calc(100% - 6.2rem);
+}
+.animecampaign.item.sheet {
+  min-width: 450px;
+  min-height: 350px;
+}
+.animecampaign.item.sheet .scrollable {
+  height: calc(100% - 5.125rem);
+}
 .animecampaign.sheet .summary {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  /* .color-button {
+        display: none;
+
+        position: absolute;
+        > p {
+            position: relative;
+            height: 4rem;
+            top: 16 * @rpx;
+            margin: 0 (2 * @rpx);
+            padding: (2 * @rpx) (4 * @rpx);
+            z-index: 1;
+            
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: .7rem;
+            font-weight: bold;
+            border-radius: 2 * @rpx;
+            color: white;
+            background-color: black;
+        }
+    } */
 }
 .animecampaign.sheet .summary .background {
   position: absolute;
@@ -53,24 +85,6 @@
   grid-column: 1 / 1;
   grid-row: 1 / -1;
   place-self: end end;
-}
-.animecampaign.sheet .summary .color-button {
-  display: none;
-  position: absolute;
-}
-.animecampaign.sheet .summary .color-button > p {
-  position: relative;
-  height: 4rem;
-  top: 1rem;
-  margin: 0 0.125rem;
-  padding: 0.125rem 0.25rem;
-  z-index: 1;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.7rem;
-  font-weight: bold;
-  border-radius: 0.125rem;
-  color: white;
-  background-color: black;
 }
 .animecampaign.sheet .summary .color {
   width: 100%;

@@ -1,0 +1,25 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet form {
+    overflow-y: hidden;
+
+    .scrollable {
+        overflow-y: scroll;
+    }
+}
+.animecampaign.actor.sheet {
+    min-width: 520px;
+    min-height: 530px;
+
+    .scrollable {
+        height: calc(100% - @character-summary-height);
+    }
+}
+.animecampaign.item.sheet {
+    min-width: 450px;
+    min-height: 350px;
+
+    .scrollable {
+        height: calc(100% - @feature-summary-height);
+    }
+}

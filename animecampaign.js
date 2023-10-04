@@ -10,10 +10,8 @@ import FeatureData from './module/data-models/FeatureData.js';
 import FeatureSheet from './module/sheets/FeatureSheet.js';
 
 // Everything that runs on initialization.
-Hooks.once('init', function () {
+Hooks.once('init', () => {
     AC.log('Initializing Anime Campaign System!');
-
-    CONFIG.animecampaign = config.animecampaign;
 
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
@@ -26,4 +24,10 @@ Hooks.once('init', function () {
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
     AC.preloadHandlebarsTemplates();
+})
+
+Hooks.once('i18nInit', () => {
+    CONFIG.animecampaign = config.animecampaign;
+
+    AC.log(AC.localize('test'));
 })

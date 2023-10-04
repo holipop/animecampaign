@@ -1,5 +1,6 @@
 {
     "animecampaign": {
+        "test": "Testing Testing One Two Three!",
         "type": {
             "inscribed": {
                 "epithet": "Epithet"
@@ -33,6 +34,10 @@
             "talent": "Talent",
             "passive": "Passive",
             "ability": "Ability"
+        },
+        "app": {
+            "name": "Name",
+            "newCategory": "New Category"
         }
     }
 }
