@@ -59,10 +59,14 @@ export default class FeatureSheet extends ItemSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
-        // Summary
+        // Global
         this.submitOnEnter(html);
-        this.resizeName(html);
         this.resizeTextArea(html);
+        this.matchColor(html);
+        this.contrastColor(html);
+
+        // Summary
+        this.resizeName(html);
 
         // Stat List
         this.addStat(html);

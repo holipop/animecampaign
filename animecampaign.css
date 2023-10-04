@@ -33,14 +33,11 @@
 .animecampaign.sheet .summary {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 7fr 3fr;
-  height: 6.2rem;
 }
 .animecampaign.sheet .summary .background {
   position: absolute;
   top: 30px;
   left: 0;
-  height: 4.84rem;
   width: 100%;
   z-index: 1;
   border-bottom: 1px solid black;
@@ -117,12 +114,18 @@
   display: flex;
   grid-row: 2 / -1;
 }
+.animecampaign.actor.sheet .summary {
+  grid-template-rows: 7fr 3fr;
+  height: 6.2rem;
+}
+.animecampaign.actor.sheet .summary .background {
+  height: 4.84rem;
+}
 .animecampaign.actor.sheet .summary .img {
   height: 5.4rem;
   width: 5.4rem;
 }
-.animecampaign.actor.sheet .summary .name,
-.animecampaign.actor.sheet .summary .facade {
+.animecampaign.actor.sheet .summary .name {
   font-size: 3rem;
 }
 .animecampaign.actor.sheet .summary .class {
@@ -132,11 +135,17 @@
   font-weight: bold;
   line-height: 0.9;
 }
+.animecampaign.item.sheet .summary {
+  grid-template-rows: 2fr 1fr;
+  height: 5.125rem;
+}
+.animecampaign.item.sheet .summary .background {
+  height: 3.91666667rem;
+}
 .animecampaign.item.sheet .summary .img {
   height: 4.4rem;
   width: 4.4rem;
 }
-.animecampaign.item.sheet .summary .name,
-.animecampaign.item.sheet .summary .facade {
+.animecampaign.item.sheet .summary .name {
   font-size: 2.5rem;
 }

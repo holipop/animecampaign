@@ -1,21 +1,18 @@
 // main: ./animecampaign.less
 
-//* UNIVERSAL */
-//* --------- */
+//* GLOBAL */
+//* ------ */
 
 @max-name-height: 3.75rem; // 60 pixels;
 
 .animecampaign.sheet .summary {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 7fr 3fr;
-    height: 6.2rem;
 
     .background {
         position: absolute;
         top: 30px;
         left: 0;
-        height: (6.2rem * .7) + .5rem;
         width: 100%;
         z-index: 1;
 
@@ -111,11 +108,17 @@
 //* --------- */
 
 .animecampaign.actor.sheet .summary {
+    grid-template-rows: 7fr 3fr;
+    height: 6.2rem;
+
+    .background {
+        height: (6.2rem * .7) + .5rem;
+    }
     .img {
         height: 5.4rem;
         width: 5.4rem;
     }
-    .name, .facade {
+    .name {
         font-size: 3rem;
     }
     .class {
@@ -133,11 +136,17 @@
 //* ------- */
 
 .animecampaign.item.sheet .summary {
+    grid-template-rows: 2fr 1fr;
+    height: 5.125rem;
+
+    .background {
+        height: (5.125rem * (2 / 3)) + .5rem;
+    }
     .img {
         height: 4.4rem;
         width: 4.4rem;
     }
-    .name, .facade {
+    .name {
         font-size: 2.5rem;
     }
 }
