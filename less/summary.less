@@ -81,27 +81,23 @@
         resize: none;
         overflow-y: hidden;
     }
-    .facade, .name {
-        font-family: "Gloock";
-        line-height: 0.85;
-    }
-    .facade { // TODO: Make this match the same dimensions as .name
+    .name {
         position: absolute;
-        height: fit-content;
         max-height: @max-name-height;
-        width: calc((100% * (4/5) * (2/3)) - (4 * @rpx));
+        width: calc((100% * (4 / 5) * (2 / 2.8)) - 1rem);
         margin: 0;
         padding: 7 * @rpx;
         overflow-wrap: break-word;
         vertical-align: bottom;
         z-index: 1;
-    }
-    .name {
-        height: @max-name-height;
-        z-index: 2;
+
+        font-family: "Gloock";
+        line-height: 0.85;
     }
     .class {
         text-align: end;
+        grid-column: 2 / -1;
+        max-height: 4rem;
     }
     
     .summary-bottom {

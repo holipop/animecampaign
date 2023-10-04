@@ -49,11 +49,12 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
-        // Summary
+        // Global
         this.submitOnEnter(html);
-        this.resizeName(html);
-        this.facadeName(html);
         this.resizeTextArea(html);
+
+        // Summary
+        this.resizeName(html);
         this.matchColor(html);
         this.contrastColor(html);
 

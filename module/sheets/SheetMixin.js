@@ -3,7 +3,10 @@ import { hexToRGB } from "../AC.js";
 // A mixin for shared methods between sheets.
 export const SheetMixin = {
 
-    /** Submits the form for textareas whenever the enter key is pressed.
+    //* GLOBAL */
+    //* ------ */
+
+    /** Submits the form whenever the enter key is pressed.
      * @param {*} html 
      */
     submitOnEnter (html) {
@@ -17,63 +20,6 @@ export const SheetMixin = {
                 }
             });
         });
-    },
-
-    /** Resizes the font of the name such that any length fits cleanly.
-     * @param {*} html 
-     */
-    resizeName (html) {
-        const SCALE_DELTA = .05;
-        const PX_PER_REM = 16;
-
-        const name = html.find("[data-name]");
-        const facade = html.find('[data-facade]');
-
-        const initialRem = parseInt(name.css('font-size')) / PX_PER_REM;
-        const maxPxHeight = parseInt(name.css('height'));
-
-        const scale = () => {
-            const textarea = name[0];
-            const div = facade[0];
-
-            textarea.style.height = 0;
-            textarea.style.height = textarea.scrollHeight + "px";
-            
-            textarea.style.fontSize = `${initialRem}rem`;
-            div.style.fontSize = `${initialRem}rem`;
-    
-            for (let i = 1; i > 0; i -= SCALE_DELTA) {
-                textarea.style.fontSize = `${initialRem * i}rem`;
-                div.style.fontSize = `${initialRem * i}rem`;
-
-                if (textarea.scrollHeight <= maxPxHeight) break;
-            }
-        }
-
-        const resizeObserver = new ResizeObserver(scale);
-
-        resizeObserver.observe(name[0]);
-        resizeObserver.observe(html[0]);
-
-        html.ready(scale);
-        name.on('input', scale);
-    },
-
-    facadeName (html) {
-        const name = html.find('[data-name]');
-        const facade = html.find('[data-facade]');
-
-        name.css('opacity', '0');
-
-        name.on('focus', () => {
-            name.css('opacity', '1');
-            facade.hide();
-        })
-
-        name.on('blur', () => {
-            facade.show();
-            name.css('opacity', '0');
-        })
     },
     
     /** Resizes the height of a textarea dynamically as you type more.
@@ -124,5 +70,46 @@ export const SheetMixin = {
 
             $(element).css(property, color);
         })
-    }
+    },
+
+
+    //* SUMMARY */
+    //* ------- */
+
+    /** Resizes the font of the name such that any length fits cleanly.
+     * @param {*} html 
+     */
+    resizeName (html) {
+        const SCALE_DELTA = .05;
+        const PX_PER_REM = 16;
+
+        const name = html.find("[data-name]");
+
+        const initialRem = parseInt(name.css('font-size')) / PX_PER_REM;
+        const maxPxHeight = parseInt(name.css('height'));
+
+        const scale = () => {
+            const textarea = name[0];
+
+            textarea.style.height = 0;
+            textarea.style.height = textarea.scrollHeight + "px";
+            
+            textarea.style.fontSize = `${initialRem}rem`;
+    
+            for (let i = 1; i > 0; i -= SCALE_DELTA) {
+                textarea.style.fontSize = `${initialRem * i}rem`;
+
+                if (textarea.scrollHeight <= maxPxHeight) break;
+            }
+        }
+
+        const resizeObserver = new ResizeObserver(scale);
+
+        resizeObserver.observe(name[0]);
+        resizeObserver.observe(html[0]);
+
+        html.ready(scale);
+        name.on('input', scale);
+        name.on('blur', () => this.submit());
+    },
 }

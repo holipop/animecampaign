@@ -96,28 +96,22 @@
   resize: none;
   overflow-y: hidden;
 }
-.animecampaign.sheet .summary .facade,
 .animecampaign.sheet .summary .name {
-  font-family: "Gloock";
-  line-height: 0.85;
-}
-.animecampaign.sheet .summary .facade {
   position: absolute;
-  height: fit-content;
   max-height: 3.75rem;
-  width: calc((100% * (4/5) * (2/3)) - (4 * 0.0625rem));
+  width: calc((100% * (4 / 5) * (2 / 2.8)) - 1rem);
   margin: 0;
   padding: 0.4375rem;
   overflow-wrap: break-word;
   vertical-align: bottom;
   z-index: 1;
-}
-.animecampaign.sheet .summary .name {
-  height: 3.75rem;
-  z-index: 2;
+  font-family: "Gloock";
+  line-height: 0.85;
 }
 .animecampaign.sheet .summary .class {
   text-align: end;
+  grid-column: 2 / -1;
+  max-height: 4rem;
 }
 .animecampaign.sheet .summary .summary-bottom {
   display: flex;

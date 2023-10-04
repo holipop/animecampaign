@@ -14,8 +14,7 @@
 
     <section class="summary-top">
         <!-- Name -->
-        <p class="facade" data-facade data-contrast>{{~document.name}}</p>
-        <textarea class="name" name="name" placeholder="Name" data-name data-enter data-contrast>{{~document.name}}</textarea>
+        <div class="name" data-edit="name" spellcheck='false' contenteditable="plaintext-only" data-name data-enter data-contrast>{{~document.name}}</div>
 
         {{#if (eq documentName "Actor")}}
             <!-- Class -->
