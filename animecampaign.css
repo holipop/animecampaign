@@ -1,3 +1,11 @@
+.animecampaign.actor.sheet {
+  min-width: 520px;
+  min-height: 530px;
+}
+.animecampaign.item.sheet {
+  min-width: 450px;
+  min-height: 350px;
+}
 @font-face {
   font-family: "Gloock";
   src: url("fonts/Gloock/Gloock-Regular.ttf");
@@ -41,16 +49,40 @@
   z-index: 2;
 }
 .animecampaign.sheet .summary .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 120%;
   grid-column: 1 / 1;
   grid-row: 1 / -1;
   place-self: end end;
 }
-.animecampaign.sheet .summary .color {
+.animecampaign.sheet .summary .color-button {
   display: none;
+  position: absolute;
+}
+.animecampaign.sheet .summary .color-button > p {
+  position: relative;
+  height: 4rem;
+  top: 1rem;
+  margin: 0 0.125rem;
+  padding: 0.125rem 0.25rem;
+  z-index: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 0.125rem;
+  color: white;
+  background-color: black;
+}
+.animecampaign.sheet .summary .color {
+  width: 100%;
+  margin: 0;
+  z-index: 2;
+  border: none;
 }
 .animecampaign.sheet .summary .img {
-  height: 5.4rem;
-  width: 5.4rem;
+  z-index: 3;
 }
 .animecampaign.sheet .summary .summary-top {
   display: grid;
@@ -58,7 +90,7 @@
   grid-row: 1 / 2;
   grid-template-columns: 2fr 0.8fr;
   align-items: end;
-  padding-left: 0.75rem;
+  padding-left: 0.25rem;
 }
 .animecampaign.sheet .summary textarea {
   resize: none;
@@ -91,6 +123,10 @@
   display: flex;
   grid-row: 2 / -1;
 }
+.animecampaign.actor.sheet .summary .img {
+  height: 5.4rem;
+  width: 5.4rem;
+}
 .animecampaign.actor.sheet .summary .name,
 .animecampaign.actor.sheet .summary .facade {
   font-size: 3rem;
@@ -101,6 +137,10 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   line-height: 0.9;
+}
+.animecampaign.item.sheet .summary .img {
+  height: 4.4rem;
+  width: 4.4rem;
 }
 .animecampaign.item.sheet .summary .name,
 .animecampaign.item.sheet .summary .facade {

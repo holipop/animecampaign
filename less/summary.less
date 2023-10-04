@@ -27,16 +27,46 @@
     }
 
     .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 120%;
         grid-column: 1 / 1;
         grid-row: 1 / -1;
         place-self: end end;
     }
-    .color {
+    .color-button {
+
+        // TODO: find a way to make this look good.
         display: none;
+
+        position: absolute;
+        > p {
+            position: relative;
+            height: 4rem;
+            top: 16 * @rpx;
+            margin: 0 (2 * @rpx);
+            padding: (2 * @rpx) (4 * @rpx);
+            z-index: 1;
+            
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: .7rem;
+            font-weight: bold;
+            border-radius: 2 * @rpx;
+            color: white;
+            background-color: black;
+        }
+    }
+    .color {
+        width: 100%;
+        margin: 0;
+        z-index: 2;
+
+        border: none;
+        // opacity: 0;
     }
     .img {
-        height: 5.4rem;
-        width: 5.4rem;
+        z-index: 3;
     }
 
     .summary-top {
@@ -45,7 +75,7 @@
         grid-row: 1 / 2;
         grid-template-columns: 2fr .8fr;
         align-items: end;
-        padding-left: 12 * @rpx;
+        padding-left: 4 * @rpx;
     }
     textarea {
         resize: none;
@@ -55,7 +85,7 @@
         font-family: "Gloock";
         line-height: 0.85;
     }
-    .facade {
+    .facade { // TODO: Make this match the same dimensions as .name
         position: absolute;
         height: fit-content;
         max-height: @max-name-height;
@@ -85,6 +115,10 @@
 //* --------- */
 
 .animecampaign.actor.sheet .summary {
+    .img {
+        height: 5.4rem;
+        width: 5.4rem;
+    }
     .name, .facade {
         font-size: 3rem;
     }
@@ -103,6 +137,10 @@
 //* ------- */
 
 .animecampaign.item.sheet .summary {
+    .img {
+        height: 4.4rem;
+        width: 4.4rem;
+    }
     .name, .facade {
         font-size: 2.5rem;
     }
