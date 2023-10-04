@@ -16,6 +16,7 @@
         <!-- TODO: 
         Add a div facade. Whenever the text isn't being edited, 
         display that so it can be vertically aligned to the bottom. -->
+        <p class="facade" data-facade data-contrast>{{~document.name}}</p>
         <textarea class="name" name="name" placeholder="Name" data-name data-enter data-contrast>{{~document.name}}</textarea>
 
         {{#if (eq documentName "Actor")}}

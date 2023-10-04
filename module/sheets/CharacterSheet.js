@@ -52,6 +52,7 @@ export default class CharacterSheet extends ActorSheet {
         // Summary
         this.submitOnEnter(html);
         this.resizeName(html);
+        this.facadeName(html);
         this.resizeTextArea(html);
         this.matchColor(html);
         this.contrastColor(html);

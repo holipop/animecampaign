@@ -1,6 +1,9 @@
 // main: ./animecampaign.less
 
-//* UNIVERSAL RULES */
+//* UNIVERSAL */
+//* --------- */
+
+@max-name-height: 3.75rem; // 60 pixels;
 
 .animecampaign.sheet .summary {
     display: grid;
@@ -36,42 +39,53 @@
         width: 5.4rem;
     }
 
-    .summary-top, .summary-bottom {
-        display: flex;
-        grid-column: 2 / -1;
-    }
-
     .summary-top {
-        grid-row: 1 / 1;
-        align-items: flex-end;
+        display: grid;
+        grid-column: 2 / -1;
+        grid-row: 1 / 2;
+        grid-template-columns: 2fr .8fr;
+        align-items: end;
+        padding-left: 12 * @rpx;
     }
     textarea {
         resize: none;
         overflow-y: hidden;
     }
-    .name {
-        height: 3.75rem;
-        flex: 2;
-
+    .facade, .name {
         font-family: "Gloock";
         line-height: 0.85;
     }
+    .facade {
+        position: absolute;
+        height: fit-content;
+        max-height: @max-name-height;
+        width: calc((100% * (4/5) * (2/3)) - (4 * @rpx));
+        margin: 0;
+        padding: 7 * @rpx;
+        overflow-wrap: break-word;
+        vertical-align: bottom;
+        z-index: 1;
+    }
+    .name {
+        height: @max-name-height;
+        z-index: 2;
+    }
     .class {
-        flex: 1;
-
         text-align: end;
     }
     
     .summary-bottom {
+        display: flex;
         grid-row: 2 / -1;
     }
 }
 
 
-//* CHARACTER RULES */
+//* CHARACTER */
+//* --------- */
 
 .animecampaign.actor.sheet .summary {
-    .name {
+    .name, .facade {
         font-size: 3rem;
     }
     .class {
@@ -85,10 +99,11 @@
 }
 
 
-//* FEATURE RULES */
+//* FEATURE */
+//* ------- */
 
 .animecampaign.item.sheet .summary {
-    .name {
+    .name, .facade {
         font-size: 2.5rem;
     }
 }

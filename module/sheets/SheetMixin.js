@@ -27,21 +27,26 @@ export const SheetMixin = {
         const PX_PER_REM = 16;
 
         const name = html.find("[data-name]");
+        const facade = html.find('[data-facade]');
+
         const initialRem = parseInt(name.css('font-size')) / PX_PER_REM;
         const maxPxHeight = parseInt(name.css('height'));
 
         const scale = () => {
-            const element = name[0];
+            const textarea = name[0];
+            const div = facade[0];
 
-            element.style.height = 0;
-            element.style.height = element.scrollHeight + "px";
+            textarea.style.height = 0;
+            textarea.style.height = textarea.scrollHeight + "px";
             
-            element.style.fontSize = `${initialRem}rem`;
+            textarea.style.fontSize = `${initialRem}rem`;
+            div.style.fontSize = `${initialRem}rem`;
     
             for (let i = 1; i > 0; i -= SCALE_DELTA) {
-                element.style.fontSize = `${initialRem * i}rem`;
+                textarea.style.fontSize = `${initialRem * i}rem`;
+                div.style.fontSize = `${initialRem * i}rem`;
 
-                if (element.scrollHeight <= maxPxHeight) break;
+                if (textarea.scrollHeight <= maxPxHeight) break;
             }
         }
 
@@ -52,6 +57,23 @@ export const SheetMixin = {
 
         html.ready(scale);
         name.on('input', scale);
+    },
+
+    facadeName (html) {
+        const name = html.find('[data-name]');
+        const facade = html.find('[data-facade]');
+
+        name.css('opacity', '0');
+
+        name.on('focus', () => {
+            name.css('opacity', '1');
+            facade.hide();
+        })
+
+        name.on('blur', () => {
+            facade.show();
+            name.css('opacity', '0');
+        })
     },
     
     /** Resizes the height of a textarea dynamically as you type more.
@@ -70,7 +92,7 @@ export const SheetMixin = {
         });
     },
 
-    /** Matches the color of each element with the document's system color.
+    /** Matches the color of each element with the document's color.
      * @param {*} html 
      */
     matchColor (html) {
@@ -83,6 +105,9 @@ export const SheetMixin = {
         })
     },
     
+    /** Contrasts the color of each element against the document's color luminosity.
+     * @param {*} html 
+     */
     contrastColor (html) {
         const contrast = html.find('[data-contrast]');
 
@@ -96,8 +121,6 @@ export const SheetMixin = {
 
             const luma = rgb.reduce((n, m) => n + m) / 255;
             const color = (luma <= .5) ? "white" : "black";
-
-            console.log(color);
 
             $(element).css(property, color);
         })
