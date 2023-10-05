@@ -10,7 +10,7 @@ export default class Stat extends foundry.abstract.DataModel {
         return {
             tag: new fields.StringField(),
             color: new fields.StringField(),
-            view: new fields.StringField({ initial: 'resource' }),
+            view: new fields.StringField({ initial: 'value' }),
 
             value: new fields.NumberField(),
             max: new fields.NumberField(),

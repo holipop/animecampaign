@@ -60,13 +60,15 @@ export default class CharacterSheet extends ActorSheet {
 
         // Color Stats
         this.disableStatOptions(html);
+        this.setColorStatView(html);
         this.addColorStat(html);
         this.deleteColorStat(html);
-        this.toggleStatView(html);
 
-        // Kit
+        // Category
         this.createCategory(html);
         this.deleteCategory(html);
+
+        // Feature
         this.viewFeature(html);
 
         super.activateListeners(html);
@@ -88,6 +90,23 @@ export default class CharacterSheet extends ActorSheet {
 
                 if (!isSelected) $(element).attr('disabled', 'true');
             });
+        });
+    }
+
+    /** Sets the view of the color stat.
+     * @param {*} html 
+     */
+    setColorStatView (html) {
+        const view = html.find('[data-view-stat]');
+
+        view.on('click', event => {
+            const value = $(event.target).data('view-stat');
+            const key = $(event.target).parents('[data-stat]').data('stat');
+            const stat = this.object.system.stats[key];
+
+            stat.view = value;
+
+            this.object.update({ [`system.stats.${key}`]: stat });
         });
     }
 
@@ -124,23 +143,6 @@ export default class CharacterSheet extends ActorSheet {
         });
     }
 
-    /** Toggles the view of a stat between resource and label.
-     * @param {*} html 
-     */
-    toggleStatView (html) {
-        const toggle = html.find('[data-toggle-stat]');
-
-        toggle.on('click', event => {
-            const key = $(event.target).data('toggle-stat');
-            const stat = this.object.system.stats[key];
-
-            if (stat.view == 'resource') stat.view = 'label';
-            else if (stat.view == 'label') stat.view = 'resource';
-
-            this.object.update({ [`system.stats.${key}`]: stat });
-        })
-    }
-
     /** Creates a new category given a name via a dialog.
      * @param {*} html 
      */
@@ -157,11 +159,8 @@ export default class CharacterSheet extends ActorSheet {
                         label: "Create New Category",
                         callback: html => {
                             const name = html.find('[name="name"]').val() || "new category";
-                            const categories = this.object.system.categories;
     
-                            categories.add(name.toLowerCase());
-    
-                            this.object.update({ 'system.categories': [...categories] });
+                            this.object.update({ 'system.categories': { [name]: [] } });
                         }
                     },
                 },
@@ -177,7 +176,6 @@ export default class CharacterSheet extends ActorSheet {
      */
     deleteCategory (html) {
         const del = html.find('[data-delete-category]');
-        const categories = this.object.system.categories;
 
         del.on('click', event => {
             const category = $(event.target).data('delete-category');
@@ -193,9 +191,7 @@ export default class CharacterSheet extends ActorSheet {
 
                     features.forEach(feature => ids.push(feature._id));
 
-                    categories.delete(category);
-
-                    this.object.update({ 'system.categories': [...categories] });
+                    this.object.update({ 'system.categories': { [`-=${category}`]: null } });
                     this.object.deleteEmbeddedDocuments('Item', ids);
                 },
                 no: () => {},

@@ -40,7 +40,7 @@ export default class FeatureSheet extends ItemSheet {
      * @returns {string[]}
      */
     categories () {
-        const defaultCategories = CONFIG.animecampaign.defaultCategories;
+        const defaultCategories = Object.keys(CONFIG.animecampaign.defaultCategories);
         const currentCategory = this.object.system.category;
         const categories = new Set([...defaultCategories, currentCategory])
 
@@ -68,19 +68,38 @@ export default class FeatureSheet extends ItemSheet {
         // Summary
         this.resizeName(html);
 
-        // Stat List
+        // Stats
+        this.setStatView(html);
         this.addStat(html);
         this.deleteStat(html);
-        this.toggleStatView(html);
 
         super.activateListeners(html);
+    }
+    
+    /** Sets the view of the stat.
+     * @param {*} html 
+     */
+    setStatView (html) {
+        const view = html.find('[data-view-stat]');
+        const stats = this.object.system.stats;
+
+        view.on('click', event => {
+            const value = $(event.target).data('view-stat');
+            const key = $(event.target).parents('[data-stat]').data('stat');
+            const stat = stats[key].toObject();
+
+            stat.view = value;
+            stats[key] = stat;
+
+            this.object.update({ 'system.stats': stats });
+        });
     }
 
     /** Adds a stat to the end of the stats list.
      * @param {*} html 
      */
     addStat (html) {
-        const add = html.find('[data-add]');
+        const add = html.find('[data-add-stat]');
         const stats = this.object.system.stats;
 
         add.on('click', () => {
@@ -93,34 +112,15 @@ export default class FeatureSheet extends ItemSheet {
      * @param {*} html 
      */
     deleteStat (html) {
-        const del = html.find('[data-delete]');
+        const del = html.find('[data-delete-stat]');
         const stats = this.object.system.stats;
 
         del.on('click', event => {
-            const index = $(event.target).data('delete');
+            const index = $(event.target).data('delete-stat');
             stats.splice(index, 1);
 
             this.object.update({ 'system.stats': stats });
         });
-    }
-
-    /** Toggles the view of a stat between resource and label.
-     * @param {*} html 
-     */
-    toggleStatView (html) {
-        const toggle = html.find('[data-toggle]');
-
-        toggle.on('click', event => {
-            const index = $(event.target).data('toggle');
-            const stats = this.object.system.stats;
-            const stat = stats[index].toObject();
-
-            if (stat.view == 'resource') stat.view = 'label';
-            else if (stat.view == 'label') stat.view = 'resource';
-
-            stats[index] = stat;
-            this.object.update({ 'system.stats': stats });
-        })
     }
 
 

@@ -9,7 +9,7 @@ import CharacterSheet from './module/sheets/CharacterSheet.js';
 import FeatureData from './module/data-models/FeatureData.js';
 import FeatureSheet from './module/sheets/FeatureSheet.js';
 
-// Everything that runs on initialization.
+// Fires right before Foundry starts initialization steps.
 Hooks.once('init', () => {
     AC.log('Initializing Anime Campaign System!');
 
@@ -26,8 +26,7 @@ Hooks.once('init', () => {
     AC.preloadHandlebarsTemplates();
 })
 
+// Fires once localization translations have been loaded and are ready for use.
 Hooks.once('i18nInit', () => {
     CONFIG.animecampaign = config.animecampaign;
-
-    AC.log(AC.localize('test'));
 })

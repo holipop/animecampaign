@@ -24,7 +24,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
 
             stats: new fields.SchemaField(colorStats),
 
-            categories: new fields.SetField(new fields.StringField(), {
+            categories: new fields.ObjectField({
                 initial: CONFIG.animecampaign.defaultCategories
             }),
 
@@ -55,7 +55,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
      */
     get categorizedFeatures () {
         const items = [...this.parent.items];
-        const categories = [...this.categories];
+        const categories = Object.keys(this.categories);
         const features = {};
 
         categories.forEach(category => {

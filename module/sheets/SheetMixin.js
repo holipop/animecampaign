@@ -89,17 +89,12 @@ export const SheetMixin = {
         const maxPxHeight = parseInt(name.css('height'));
 
         const scale = () => {
-            const textarea = name[0];
-
-            textarea.style.height = 0;
-            textarea.style.height = textarea.scrollHeight + "px";
-            
-            textarea.style.fontSize = `${initialRem}rem`;
+            name.css('font-size', `${initialRem}rem`)
     
             for (let i = 1; i > 0; i -= SCALE_DELTA) {
-                textarea.style.fontSize = `${initialRem * i}rem`;
+                name.css('font-size', `${initialRem * i}rem`)
 
-                if (textarea.scrollHeight <= maxPxHeight) break;
+                if (name[0].scrollHeight <= maxPxHeight) break;
             }
         }
 

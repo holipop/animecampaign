@@ -5,7 +5,7 @@
  */
 export function log (text) {
     console.log(`%cAnime Campaign | ${text}`, 'color: orange');
-} 
+}
 
 /** A console.error with styling, intended for debugging clarity.
  * @param {string|number|boolean} text 
@@ -21,6 +21,9 @@ export function error (text) {
 export function localize (path) {
     return game.i18n.localize(getProperty(CONFIG.animecampaign, path));
 }
+
+// TODO: A function that pre-localizes the config object in i18nInit
+export function prelocalize (obj) {}
 
 /** Preloads the filepaths for the Handlebars partials.
  * @returns {Promise<Function[]>}
