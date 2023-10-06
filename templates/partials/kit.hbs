@@ -4,9 +4,9 @@
             <header>
                 <!-- Collapse -->
                 <a class="control collapse" title="{{localize config.app.collapseStats}}">
-                    <i class="fas fa-chevron-down" data-collapse=".feature-list"></i>
+                    <i class="fas fa-chevron-down" data-collapse="categories.{{category}}"></i>
                 </a>
-
+                
                 <h2>{{category}}</h2>
 
                 <!-- Settings -->
@@ -50,8 +50,8 @@
                 </div>
             </header>
             
-            <!-- Items -->
-            <ol>
+            <!-- Features -->
+            <ol class="feature-list" data-collapse="target categories.{{category}}">
                 {{#each features as |feature index|}}
                     <li>
                         <span>{{feature.name}} -{{feature.system.category}}-</span>

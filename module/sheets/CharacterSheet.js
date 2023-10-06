@@ -54,6 +54,7 @@ export default class CharacterSheet extends ActorSheet {
         this.resizeTextArea(html);
         this.matchColor(html);
         this.contrastColor(html);
+        this.collapse(html);
 
         // Summary
         this.resizeName(html);
@@ -163,7 +164,7 @@ export default class CharacterSheet extends ActorSheet {
         add.on('click', () => {
             const dialog = new Dialog({
                 title: `Create New Category: ${this.object.name}`,
-                content: CONFIG.animecampaign.createCategoryDialogContent,
+                content: CONFIG.animecampaign.textInputDialogContent('Name', 'New Category'),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',

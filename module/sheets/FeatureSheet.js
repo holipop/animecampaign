@@ -64,6 +64,7 @@ export default class FeatureSheet extends ItemSheet {
         this.resizeTextArea(html);
         this.matchColor(html);
         this.contrastColor(html);
+        this.collapse(html);
 
         // Summary
         this.resizeName(html);

@@ -14,12 +14,12 @@ animecampaign.defaultCategories = {
     'ability': ['cost'],
 };
 
-animecampaign.createCategoryDialogContent = `
+animecampaign.textInputDialogContent = (name, placeholder) => `
     <form autocomplete="off">
         <div class="form-group">
-            <label>Name</label>
+            <label>${name}</label>
             <div class="form-fields">
-                <input type="text" name="name" placeholder="New Category" autofocus>
+                <input type="text" name="name" placeholder="${placeholder}" autofocus>
             </div>
         </div>
     </form>

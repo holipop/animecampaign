@@ -74,6 +74,47 @@ export const SheetMixin = {
         })
     },
 
+    /** Collapse an element given a sender and a target where its data-attr value leads with "target ".
+     * Both the sender and target's data-attr value should point to its respective flag.
+     * @param {*} html 
+     */
+    collapse (html) {
+        const collapse = html.find('[data-collapse]').filter((index, element) => {
+            const key = $(element).data('collapse');
+            return (!key.startsWith('target'));
+        });
+
+        collapse.each((index, element) => {            
+            const key = $(element).data('collapse');
+            const target = html.find(`[data-collapse="target ${key}"]`);
+            const flag = this.object.getFlag('animecampaign', key) ?? { visible: true };
+            const isChevron = $(element).hasClass('fas');
+
+            if (flag?.visible) {
+                target.show();
+
+                if (isChevron) {
+                    $(element).addClass('fa-chevron-down');
+                    $(element).removeClass('fa-chevron-right');
+                }
+            } else {
+                target.hide(); 
+
+                if (isChevron) {
+                    $(element).removeClass('fa-chevron-down');
+                    $(element).addClass('fa-chevron-right');
+                }
+            }
+        });
+
+        collapse.on('click', event => {
+            const key = $(event.target).data('collapse');
+            const flag = this.object.getFlag('animecampaign', key) ?? { visible: true };
+
+            this.object.setFlag('animecampaign', key, { visible: !flag?.visible })
+        });
+    },
+
 
     //* SUMMARY */
     //* ------- */

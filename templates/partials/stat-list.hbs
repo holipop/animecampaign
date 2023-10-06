@@ -3,7 +3,7 @@
     <header class="stat-header" data-match="background-color">
         <!-- Collapse -->
         <a class="control collapse" title="{{localize config.app.collapseStats}}">
-            <i class="fas fa-chevron-down" data-collapse=".stat" data-contrast></i>
+            <i class="fas fa-chevron-down" data-collapse="stats" data-contrast></i>
         </a>
 
         {{#if (eq documentName "Actor")}}
@@ -24,7 +24,7 @@
 
     <!-- Stat Entry -->
     {{#each statList as |stat key|}}
-        <li class="stat" data-stat="{{key}}">
+        <li class="stat" data-stat="{{key}}" data-collapse="target stats">
 
             {{#if (eq ../documentName "Actor")}}
 
