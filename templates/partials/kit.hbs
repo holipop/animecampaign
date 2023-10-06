@@ -31,7 +31,7 @@
                         {{#each this as |stat index|}}
                             <div class="tracked-stat" data-contrast-category="border-color">
                                 <a class="control" title="Untrack Stat">
-                                    <i class="fas fa-xmark" data-track="{{category}}"></i>
+                                    <i class="fas fa-xmark" data-untrack="{{stat}}"></i>
                                 </a>
                                 <span class="label">{{stat}}</span>
                             </div>
@@ -42,7 +42,7 @@
                 <!-- Controls -->
                 <div class="list-controls" data-contrast-category="color border-color">
                     <a class="control" title="Add Feature">
-                        <i class="fas fa-plus" data-add-feature="{{category}}"></i>
+                        <i class="fas fa-plus" data-create-feature="{{category}}"></i>
                     </a>
                     <a class="control" title="Delete Category">
                         <i class="fas fa-sack-xmark" data-delete-category="{{category}}"></i>
@@ -59,6 +59,7 @@
                         <!-- Feature Buttons -->
                         <span>
                             <a data-view-feature="{{feature._id}}">/View Feature/</a>
+                            <a data-delete-feature="{{feature._id}}">/Delete Feature/</a>
                         </span>
                     </li>
                 {{/each}}

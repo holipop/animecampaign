@@ -9,7 +9,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     static get defaultOptions () {
         return mergeObject(super.defaultOptions, {
-            width: 520,
+            width: 650,
             height: 500,
             classes: ["animecampaign", "sheet", "actor"],
             template: 'systems/animecampaign/templates/sheets/character-sheet.hbs',
@@ -72,9 +72,14 @@ export default class CharacterSheet extends ActorSheet {
         this.colorCategory(html);
         this.matchCategory(html);
         this.contrastCategory(html);
+        this.disableTrackStat(html);
+        this.trackStat(html);
+        this.untrackStat(html);
 
         // Feature
+        this.createFeature(html);
         this.viewFeature(html);
+        this.deleteFeature(html);
 
         super.activateListeners(html);
     }
@@ -356,10 +361,100 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
-    
+    /** Disables the ability to track more stats after a maximum amount.
+     * @param {*} html 
+     */
+    disableTrackStat (html) {
+        const MAX_TRACKERS = 4;
+        const track = html.find('[data-track]');
+
+        track.each((index, element) => {
+            const key = $(element).data('track');
+            const category = this.object.system.categories[key];
+
+            if (category.length >= MAX_TRACKERS) $(element).hide();
+        })
+    };
+
+    /** Adds a stat tracker to a category via a dialog.
+     * @param {*} html 
+     */
+    trackStat (html) {
+        const track = html.find('[data-track]');
+
+        track.on('click', event => {
+            const category = $(event.target).parents('[data-category]').data('category');
+
+            const callback = html => {
+                const name = html.find('[name="name"]').val()
+                const trackers = this.object.system.categories[category];
+
+                if (name == '') return ui.notifications.warn(`Name field can't be blank.`);
+
+                trackers.push(name.toLowerCase());
+                this.object.update({ [`system.categories.${category}`]: trackers });
+            }
+
+            const dialog = new Dialog({
+                title: `Track Stat [${category}]: ${this.object.name}`,
+                content: CONFIG.animecampaign.textInputDialogContent('Stat Name', ''),
+                buttons: {
+                    confirm: {
+                        icon: '<i class="fas fa-check"></i>',
+                        label: "Track Stat",
+                        callback: callback
+                    },
+                },
+                default: "confirm",
+            }, { width: 325 });
+
+            dialog.render(true);
+        })
+    }
+
+    /** Removes a stat tracker from a category.
+     * @param {*} html 
+     */
+    untrackStat (html) {
+        const untrack = html.find('[data-untrack]');
+
+        untrack.on('click', event => {
+            const key = $(event.target).data('untrack');
+            const category = $(event.target).parents('[data-category]').data('category');
+            const trackers = this.object.system.categories[category];
+
+            //trackers.remove(key);
+            const update = trackers.filter(tracker => tracker != key);
+
+            this.object.update({ [`system.categories.${category}`]: update });
+        })
+    }
 
     
     //* Feature
+
+    /** Creates a new feature under a category.
+     * @param {*} html 
+     */
+    createFeature (html) {
+        const create = html.find('[data-create-feature]');
+
+        create.on('click', event => {
+            const key = $(event.target).data('create-feature');
+            const category = this.object.system.categories[key];
+            const stats = category.map(tracker => {
+                return { tag: tracker }
+            });
+
+            const data = [{
+                name: 'New Feature',
+                type: 'Feature',
+                system: { stats: stats }
+            }];
+
+            this.object.createEmbeddedDocuments('Item', data)
+        })
+    }
 
     /** Renders a kit feature's sheet.
      * @param {*} html 
@@ -372,6 +467,19 @@ export default class CharacterSheet extends ActorSheet {
             const feature = this.object.getEmbeddedDocument('Item', id);
 
             feature.sheet.render(true);
+        })
+    }
+
+    /** Deletes a feature given its id.
+     * @param {*} html 
+     */
+    deleteFeature (html) {
+        const del = html.find('[data-delete-feature]');
+
+        del.on('click', event => {
+            const id = $(event.target).data('delete-feature');
+
+            this.object.deleteEmbeddedDocuments('Item', [id]);
         })
     }
 

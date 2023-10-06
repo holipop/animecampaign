@@ -33,7 +33,7 @@
   overflow-y: scroll;
 }
 .animecampaign.actor.sheet {
-  min-width: 520px;
+  min-width: 650px;
   min-height: 530px;
 }
 .animecampaign.actor.sheet .scrollable {
