@@ -68,12 +68,15 @@ export default class CharacterSheet extends ActorSheet {
         // Category
         this.createCategory(html);
         this.deleteCategory(html);
+        this.renameCategory(html);
 
         // Feature
         this.viewFeature(html);
 
         super.activateListeners(html);
     }
+
+    //* Color Stats
 
     /** Disables the options of the color selection that are occupied by other stats.
      * @param {*} html 
@@ -155,13 +158,22 @@ export default class CharacterSheet extends ActorSheet {
         });
     }
 
+
+    //* Category
+
     /** Creates a new category given a name via a dialog.
      * @param {*} html 
      */
     createCategory (html) {
-        const add = html.find('[data-create-category]');
+        const create = html.find('[data-create-category]');
 
-        add.on('click', () => {
+        create.on('click', () => {
+            const callback = html => {
+                const name = html.find('[name="name"]').val() || "new category";
+    
+                this.object.update({ 'system.categories': { [name]: [] } });
+            }
+
             const dialog = new Dialog({
                 title: `Create New Category: ${this.object.name}`,
                 content: CONFIG.animecampaign.textInputDialogContent('Name', 'New Category'),
@@ -169,11 +181,7 @@ export default class CharacterSheet extends ActorSheet {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
                         label: "Create New Category",
-                        callback: html => {
-                            const name = html.find('[name="name"]').val() || "new category";
-    
-                            this.object.update({ 'system.categories': { [name]: [] } });
-                        }
+                        callback: callback
                     },
                 },
                 default: "confirm",
@@ -191,26 +199,73 @@ export default class CharacterSheet extends ActorSheet {
 
         del.on('click', event => {
             const category = $(event.target).data('delete-category');
+
+            const callback = () => {
+                const features = this.object.system.categorizedFeatures[category];
+
+                const ids = features.map(feature => feature._id);
+    
+                this.object.update({ 'system.categories': { [`-=${category}`]: null } });
+                this.object.deleteEmbeddedDocuments('Item', ids);
+            }
             
             Dialog.confirm({
                 title: `Delete Category [${category.toUpperCase()}]: ${this.object.name}`,
                 content: 
                     `<p>Delete the "${category.toUpperCase()}" category?</p>
                     <p><b>Warning: This will delete all kit features within this category.</b><p>`,
-                yes: () => {
-                    const features = this.object.system.categorizedFeatures[category];
-                    const ids = [];
-
-                    features.forEach(feature => ids.push(feature._id));
-
-                    this.object.update({ 'system.categories': { [`-=${category}`]: null } });
-                    this.object.deleteEmbeddedDocuments('Item', ids);
-                },
+                yes: callback,
                 no: () => {},
                 defaultYes: false,
             });
         });
     }
+
+    /** Renames a category, moving all items to the new category name and deleting the old one.
+     * @param {*} html 
+     */
+    renameCategory (html) {
+        const rename = html.find('[data-rename-category]');
+
+        rename.on('click', event => {
+            const key = $(event.target).data('rename-category');
+
+            const callback = html => {
+                const category = this.object.system.categories[key];
+                const features = this.object.system.categorizedFeatures[key];
+                const name = html.find('[name="name"]').val() || key;
+
+                const updates = features.map(feature => {
+                    return {
+                        _id: feature._id,
+                        system: { category: name }
+                    }
+                });
+
+                this.object.update({ 'system.categories': { [name]: category } });
+                this.object.update({ 'system.categories': { [`-=${key}`]: null } });
+                this.object.updateEmbeddedDocuments('Item', updates);
+            }
+
+            const dialog = new Dialog({
+                title: `Rename Category [${key.toUpperCase()}]: ${this.object.name}`,
+                content: CONFIG.animecampaign.textInputDialogContent('Name', key),
+                buttons: {
+                    confirm: {
+                        icon: '<i class="fas fa-check"></i>',
+                        label: "Rename Category",
+                        callback: callback
+                    },
+                },
+                default: "confirm",
+            }, { width: 325 });
+
+            dialog.render(true);
+        })
+    }
+
+    
+    //* Feature
 
     /** Renders a kit feature's sheet.
      * @param {*} html 
