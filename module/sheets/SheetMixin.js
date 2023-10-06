@@ -87,10 +87,11 @@ export const SheetMixin = {
         collapse.each((index, element) => {            
             const key = $(element).data('collapse');
             const target = html.find(`[data-collapse="target ${key}"]`);
-            const flag = this.object.getFlag('animecampaign', key) ?? { visible: true };
+            const flag = this.object.getFlag('animecampaign', key);
+            const isVisible = flag?.visible ?? true;
             const isChevron = $(element).hasClass('fas');
 
-            if (flag?.visible) {
+            if (isVisible) {
                 target.show();
 
                 if (isChevron) {

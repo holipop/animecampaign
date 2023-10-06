@@ -484,7 +484,10 @@ export default class CharacterSheet extends ActorSheet {
             const data = [{
                 name: 'New Feature',
                 type: 'Feature',
-                system: { stats: stats }
+                system: {
+                    category: key,
+                    stats: stats,
+                }
             }];
 
             this.object.createEmbeddedDocuments('Item', data)
