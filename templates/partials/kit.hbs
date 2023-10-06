@@ -1,16 +1,16 @@
 <ol class="kit">
     {{#each categorizedFeatures as |features category|}}
-        <li class="category">
-            <header>
+        <li class="category" data-category="{{category}}">
+            <header data-match-category="background-color">
                 <!-- Collapse -->
-                <a class="control collapse" title="{{localize config.app.collapseStats}}">
+                <a class="control collapse" title="{{localize config.app.collapseStats}}" data-contrast-category>
                     <i class="fas fa-chevron-down" data-collapse="categories.{{category}}"></i>
                 </a>
                 
-                <h2>{{category}}</h2>
+                <h2 data-contrast-category>{{category}}</h2>
 
                 <!-- Settings -->
-                <div class="category-controls">
+                <div class="category-controls" data-contrast-category>
                     <a class="control" title="Rename Category">
                         <i class="fas fa-pencil" data-rename-category="{{category}}"></i>
                     </a>
@@ -23,13 +23,13 @@
                 </div>
 
                 <!-- Tracked Stats -->
-                <div class="tracked-stat-list">
+                <div class="tracked-stat-list" data-contrast-category>
                     <a class="control" title="Track Stat">
                         <i class="fas fa-square-plus" data-track="{{category}}"></i>
                     </a>
                     {{#search (concat 'system.categories.' category)}}
                         {{#each this as |stat index|}}
-                            <div class="tracked-stat">
+                            <div class="tracked-stat" data-contrast-category="border-color">
                                 <a class="control" title="Untrack Stat">
                                     <i class="fas fa-xmark" data-track="{{category}}"></i>
                                 </a>
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Controls -->
-                <div class="list-controls">
+                <div class="list-controls" data-contrast-category="color border-color">
                     <a class="control" title="Add Feature">
                         <i class="fas fa-plus" data-add-feature="{{category}}"></i>
                     </a>

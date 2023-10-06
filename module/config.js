@@ -24,3 +24,14 @@ animecampaign.textInputDialogContent = (name, placeholder) => `
         </div>
     </form>
 `;
+
+animecampaign.colorCategoryDialogContent = hexcode => `
+    <form autocomplete="off">
+        <div class="form-group">
+            <label>Color</label>
+            <div class="form-fields">
+                <input type="color" name="color" value="${hexcode}">
+            </div>
+        </div>
+    </form>
+`;

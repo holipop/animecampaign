@@ -1,4 +1,4 @@
-import { uniformObject } from "../AC.js";
+import * as AC from "../AC.js";
 import { SheetMixin } from "./SheetMixin.js";
 
 // The application for Characters.
@@ -69,6 +69,9 @@ export default class CharacterSheet extends ActorSheet {
         this.createCategory(html);
         this.deleteCategory(html);
         this.renameCategory(html);
+        this.colorCategory(html);
+        this.matchCategory(html);
+        this.contrastCategory(html);
 
         // Feature
         this.viewFeature(html);
@@ -206,6 +209,7 @@ export default class CharacterSheet extends ActorSheet {
                 const ids = features.map(feature => feature._id);
     
                 this.object.update({ 'system.categories': { [`-=${category}`]: null } });
+                this.object.unsetFlag('animecampaign', `categories.${category}`)
                 this.object.deleteEmbeddedDocuments('Item', ids);
             }
             
@@ -231,6 +235,7 @@ export default class CharacterSheet extends ActorSheet {
             const key = $(event.target).data('rename-category');
 
             const callback = html => {
+                const flag = this.object.getFlag('animecampaign', `categories.${key}`)
                 const category = this.object.system.categories[key];
                 const features = this.object.system.categorizedFeatures[key];
                 const name = html.find('[name="name"]').val() || key;
@@ -244,6 +249,8 @@ export default class CharacterSheet extends ActorSheet {
 
                 this.object.update({ 'system.categories': { [name]: category } });
                 this.object.update({ 'system.categories': { [`-=${key}`]: null } });
+                this.object.setFlag('animecampaign', `categories.${name}`, flag);
+                this.object.unsetFlag('animecampaign', `categories.${key}`);
                 this.object.updateEmbeddedDocuments('Item', updates);
             }
 
@@ -263,6 +270,93 @@ export default class CharacterSheet extends ActorSheet {
             dialog.render(true);
         })
     }
+
+    /** Sets a category's color via a dialog.
+     * @param {*} html 
+     */
+    colorCategory (html) {
+        const color = html.find('[data-color-category]');
+
+        color.on('click', event => {
+            const key = $(event.target).data('color-category');
+            const flag = this.object.getFlag('animecampaign', `categories.${key}`);
+            const initialColor = flag?.color ?? this.object.system.color;
+
+            const set = html => {
+                const color = html.find('[name="color"]').val();
+
+                this.object.setFlag('animecampaign', `categories.${key}`, { color: color });
+            }
+
+            const reset = () => {
+                this.object.setFlag('animecampaign', `categories.${key}`, { '-=color': null });
+            }
+
+            const dialog = new Dialog({
+                title: `Recolor Category [${key.toUpperCase()}]: ${this.object.name}`,
+                content: CONFIG.animecampaign.colorCategoryDialogContent(initialColor),
+                buttons: {
+                    confirm: {
+                        icon: '<i class="fas fa-check"></i>',
+                        label: 'Color Category',
+                        callback: set
+                    },
+                    reset: {
+                        icon: '<i class="fas fa-arrow-rotate-left"></i>',
+                        label: 'Reset Color',
+                        callback: reset
+                    }
+                },
+                default: "confirm",
+            }, { width: 325 });
+
+            dialog.render(true);
+        });
+    }
+
+    /** Matches the color of each element with the category's flag color.
+     * @param {*} html 
+     */
+    matchCategory (html) {
+        const match = html.find('[data-match-category]');
+
+        match.each((index, element) => {
+            const properties = $(element).data('match-category') || "color";
+            const key = $(element).parents('[data-category]').data('category');
+            const flag = this.object.getFlag('animecampaign', `categories.${key}`);
+
+            const color = flag?.color ?? this.object.system.color;
+
+            const obj = AC.uniformObject(properties.split(' '), color);
+            $(element).css(obj);
+        })
+    }
+
+    /** Contrasts the color of each element against the category's flag color luminosity.
+     * @param {*} html 
+     */
+    contrastCategory (html) {
+        const contrast = html.find('[data-contrast-category]');
+
+        contrast.each((index, element) => {
+            const properties = $(element).data('contrast-category') || "color";
+            const key = $(element).parents('[data-category]').data('category');
+            const flag = this.object.getFlag('animecampaign', `categories.${key}`);
+
+            const rgb = AC.hexToRGB(flag?.color ?? this.object.system.color);
+            rgb[0] *= 0.2126;
+            rgb[1] *= 0.7152;
+            rgb[2] *= 0.0722;
+
+            const luma = rgb.reduce((n, m) => n + m) / 255;
+            const color = (luma <= .5) ? "white" : "black";
+
+            const obj = AC.uniformObject(properties.split(' '), color);
+            $(element).css(obj);
+        })
+    }
+
+    
 
     
     //* Feature
@@ -301,7 +395,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     updateColorStats (data) {
         const statChanges = getProperty(expandObject(data), 'system.stats');
-        const blankStats = uniformObject(CONFIG.animecampaign.colors, null)
+        const blankStats = AC.uniformObject(CONFIG.animecampaign.colors, null)
 
         for (const stat in statChanges) {
             blankStats[statChanges[stat].color] = statChanges[stat];
