@@ -1,4 +1,4 @@
-import { hexToRGB } from "../AC.js";
+import * as AC from "../AC.js";
 
 // A mixin for shared methods between sheets.
 export const SheetMixin = {
@@ -45,9 +45,10 @@ export const SheetMixin = {
         const match = html.find('[data-match]');
 
         match.each((index, element) => {
-            const property = $(element).data('match') || "color";
+            const properties = $(element).data('match') || "color";
 
-            $(element).css(property, this.object.system.color);
+            const obj = AC.uniformObject(properties.split(' '), this.object.system.color);
+            $(element).css(obj);
         })
     },
     
@@ -58,9 +59,9 @@ export const SheetMixin = {
         const contrast = html.find('[data-contrast]');
 
         contrast.each((index, element) => {
-            const property = $(element).data('contrast') || "color";
+            const properties = $(element).data('contrast') || "color";
 
-            const rgb = hexToRGB(this.object.system.color);
+            const rgb = AC.hexToRGB(this.object.system.color);
             rgb[0] *= 0.2126;
             rgb[1] *= 0.7152;
             rgb[2] *= 0.0722;
@@ -68,7 +69,8 @@ export const SheetMixin = {
             const luma = rgb.reduce((n, m) => n + m) / 255;
             const color = (luma <= .5) ? "white" : "black";
 
-            $(element).css(property, color);
+            const obj = AC.uniformObject(properties.split(' '), color);
+            $(element).css(obj);
         })
     },
 

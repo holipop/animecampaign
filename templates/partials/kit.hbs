@@ -4,7 +4,7 @@
             <header>
                 <!-- Collapse -->
                 <a class="control collapse" title="{{localize config.app.collapseStats}}">
-                    <i class="fas fa-chevron-down" data-collapse=".feature-list" data-contrast></i>
+                    <i class="fas fa-chevron-down" data-collapse=".feature-list"></i>
                 </a>
 
                 <h2>{{category}}</h2>
@@ -30,7 +30,7 @@
                     {{#search (concat 'system.categories.' category)}}
                         {{#each this as |stat index|}}
                             <div class="tracked-stat">
-                                <a class="setting" title="Untrack Stat">
+                                <a class="control" title="Untrack Stat">
                                     <i class="fas fa-xmark" data-track="{{category}}"></i>
                                 </a>
                                 <span class="label">{{stat}}</span>

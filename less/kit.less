@@ -2,6 +2,9 @@
 
 @category-header-height: 2rem;
 
+//* KIT */
+//* --- */
+
 .animecampaign.actor.sheet .kit {
     list-style-type: none;
     margin: 0;
@@ -13,6 +16,10 @@
         width: 1.25rem;
     }
 }
+
+
+//* CATEGORY */
+//* -------- */
 
 .animecampaign.actor.sheet .kit .category {
     header {
@@ -34,12 +41,10 @@
             text-transform: uppercase;
 
             #AC.HeadingSkinning();
-        }
 
-        .tracked-stat-list .tracked-stat .label {
-            font-family: "Fungka City";
-            font-size: 1.1rem;
-            text-transform: capitalize;
+            &::first-letter {
+                font-size: 1.5rem;
+            }
         }
     }
 
@@ -57,5 +62,48 @@
         i {
             font-size: .75rem;
         }
+    }
+
+    .tracked-stat-list {
+        .tracked-stat {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: @category-header-height * .75;
+            width: 4.5rem;
+            padding: 0 (4 * @rpx);
+            border-left: (1 * @rpx) solid black;
+
+            .control {
+                position: relative;
+                height: min-content;
+                width: min-content;
+                top: 4 * @rpx;
+                left: -4 * @rpx;
+
+                align-self: flex-end;
+            }
+            i {
+                position: absolute;
+
+                font-size: .75rem;
+            }
+        }
+        .label {
+            overflow: hidden;
+            white-space: no-wrap;
+            text-overflow: ellipsis;
+
+            font-family: "Fungka City";
+            line-height: .95;
+            text-transform: capitalize;
+        }
+    }
+
+    .list-controls {
+        height: @category-header-height * .75;
+        width: 3.25rem;
+        justify-content: space-evenly;
+        border-left: (1 * @rpx) solid black;
     }
 }

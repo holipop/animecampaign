@@ -39,7 +39,7 @@ export async function preloadHandlebarsTemplates () {
     return loadTemplates(paths);
 }
 
-/** Assigns the values of an object a string of that property's dot notation.
+/** Assigns each property a string of its own dot notation.
  * @param {object} obj
  * @returns {object}
  */

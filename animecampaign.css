@@ -271,10 +271,8 @@
   margin: 0;
   border: 0;
 }
-.animecampaign.actor.sheet .kit .category header .tracked-stat-list .tracked-stat .label {
-  font-family: "Fungka City";
-  font-size: 1.1rem;
-  text-transform: capitalize;
+.animecampaign.actor.sheet .kit .category header h2::first-letter {
+  font-size: 1.5rem;
 }
 .animecampaign.actor.sheet .kit .category .collapse {
   width: 1.75rem;
@@ -288,4 +286,39 @@
 }
 .animecampaign.actor.sheet .kit .category .category-controls i {
   font-size: 0.75rem;
+}
+.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 1.5rem;
+  width: 4.5rem;
+  padding: 0 0.25rem;
+  border-left: 0.0625rem solid black;
+}
+.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat .control {
+  position: relative;
+  height: min-content;
+  width: min-content;
+  top: 0.25rem;
+  left: -0.25rem;
+  align-self: flex-end;
+}
+.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat i {
+  position: absolute;
+  font-size: 0.75rem;
+}
+.animecampaign.actor.sheet .kit .category .tracked-stat-list .label {
+  overflow: hidden;
+  white-space: no-wrap;
+  text-overflow: ellipsis;
+  font-family: "Fungka City";
+  line-height: 0.95;
+  text-transform: capitalize;
+}
+.animecampaign.actor.sheet .kit .category .list-controls {
+  height: 1.5rem;
+  width: 3.25rem;
+  justify-content: space-evenly;
+  border-left: 0.0625rem solid black;
 }
