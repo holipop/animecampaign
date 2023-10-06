@@ -72,6 +72,7 @@ export default class CharacterSheet extends ActorSheet {
         this.colorCategory(html);
         this.matchCategory(html);
         this.contrastCategory(html);
+        this.floodCategory(html);
         this.disableTrackStat(html);
         this.trackStat(html);
         this.untrackStat(html);
@@ -222,7 +223,7 @@ export default class CharacterSheet extends ActorSheet {
                 title: `Delete Category [${category.toUpperCase()}]: ${this.object.name}`,
                 content: 
                     `<p>Delete the "${category.toUpperCase()}" category?</p>
-                    <p><b>Warning: This will delete all kit features within this category.</b><p>`,
+                    <p><b>Warning: This will delete all kit features within this category.</b></p>`,
                 yes: callback,
                 no: () => {},
                 defaultYes: false,
@@ -358,6 +359,40 @@ export default class CharacterSheet extends ActorSheet {
 
             const obj = AC.uniformObject(properties.split(' '), color);
             $(element).css(obj);
+        })
+    }
+
+    /** Sets a category's color to all of its features.
+     * @param {*} html 
+     */
+    floodCategory (html) {
+        const flood = html.find('[data-flood-category]');
+
+        flood.on('click', event => {
+            const key = $(event.target).data('flood-category');
+            const features = this.object.system.categorizedFeatures[key];
+            const flag = this.object.getFlag('animecampaign', `categories.${key}`);
+            const color = flag?.color ?? this.object.system.color;
+
+            const callback = () => {
+                const update = features.map(feature => {
+                    return {
+                        _id: feature._id,
+                        system: { color: color }
+                    }
+                });
+
+                this.object.updateEmbeddedDocuments('Item', update);
+            }
+
+            Dialog.confirm({
+                title: `Flood Category [${key.toUpperCase()}]: ${this.object.name}`,
+                content: 
+                    `<p>Flood each feature under the "${key.toUpperCase()}" category with ${color}?</p>`,
+                yes: callback,
+                no: () => {},
+                defaultYes: false,
+            });
         })
     }
 
