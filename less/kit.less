@@ -1,0 +1,61 @@
+// main: animecampaign.less
+
+@category-header-height: 2rem;
+
+.animecampaign.actor.sheet .kit {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    .control {
+        display: grid;
+        place-items: center;
+        width: 1.25rem;
+    }
+}
+
+.animecampaign.actor.sheet .kit .category {
+    header {
+        display: flex;
+        height: @category-header-height;
+        align-items: center;
+
+        #AC.Border();
+
+        > div {
+            display: flex;
+            align-items: center;
+        }
+        h2 {
+            padding-right: 4 * @rpx;
+
+            font-family: "Gloock";
+            font-size: 1.2rem;
+            text-transform: uppercase;
+
+            #AC.HeadingSkinning();
+        }
+
+        .tracked-stat-list .tracked-stat .label {
+            font-family: "Fungka City";
+            font-size: 1.1rem;
+            text-transform: capitalize;
+        }
+    }
+
+    .collapse {
+        width: 1.75rem;
+    }
+
+    .category-controls {
+        flex: 1;
+        margin-top: @category-header-height * .2;
+        
+        .control {
+            width: 1rem;
+        }
+        i {
+            font-size: .75rem;
+        }
+    }
+}

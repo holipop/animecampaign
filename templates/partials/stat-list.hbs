@@ -1,12 +1,30 @@
 <ol class="stat-list">
-    <header>
-        <a title="Add Stat">
-            <i data-add-stat class="fas fa-plus"></i>
+    <!-- Header -->
+    <header class="stat-header" data-match="background-color">
+        <!-- Collapse -->
+        <a class="control collapse" title="{{localize config.app.collapseStats}}">
+            <i class="fas fa-chevron-down" data-collapse=".stat" data-contrast></i>
+        </a>
+
+        {{#if (eq documentName "Actor")}}
+            <h2 data-contrast>{{localize config.app.colorStats}}</h2>
+        {{/if}}
+
+        {{#if (eq documentName "Item")}}
+            <h2 data-contrast>{{localize config.app.stats}}</h2>
+        {{/if}}
+
+        <span class="label view" data-contrast data-contrast="border-color">View</span> 
+
+        <!-- Add Stat -->
+        <a class="control add-stat" data-contrast="border-color" title="{{localize config.app.addStat}}">
+            <i class="fas fa-plus" data-add-stat data-contrast></i>
         </a>
     </header>
 
+    <!-- Stat Entry -->
     {{#each statList as |stat key|}}
-        <li data-stat="{{key}}">
+        <li class="stat" data-stat="{{key}}">
 
             {{#if (eq ../documentName "Actor")}}
 
@@ -20,35 +38,43 @@
                 </select>
 
             {{/if}}
-            
-            <!-- Buttons -->
-            <a title="Set View to Value">
-                <i class="fas fa-hashtag" data-view-stat="value"></i>
-            </a>
-            <a title="Set View to Resource">
-                <i class="fas fa-percent" data-view-stat="resource"></i>
-            </a>
-            <a title="Set View to Label">
-                <i class="fas fa-font" data-view-stat="label"></i>
-            </a>
 
-            <a title="Delete Stat">
+            <!-- Tag -->
+            <input class="tag" type="text" name="system.stats.{{key}}.tag" value="{{stat.tag}}" placeholder="Name">
+
+            <!-- Content -->
+            <div class="content">
+                {{#if (eq stat.view 'value')}}
+                    <input class="content" type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
+                {{/if}}
+
+                {{#if (eq stat.view 'resource')}}
+                    <input class="content" type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
+                    <input class="content" type="number" name="system.stats.{{key}}.max" value="{{stat.max}}" placeholder="Max">
+                {{/if}}
+
+                {{#if (eq stat.view 'label')}}
+                    <input class="content" type="text" name="system.stats.{{key}}.label" value="{{stat.label}}" placeholder="Label">
+                {{/if}}
+            </div>
+            
+            <!-- View -->
+            <div class="view">
+                <a title="Set View to Value">
+                    <i class="fas fa-hashtag" data-view-stat="value"></i>
+                </a>
+                <a title="Set View to Resource">
+                    <i class="fas fa-percent" data-view-stat="resource"></i>
+                </a>
+                <a title="Set View to Label">
+                    <i class="fas fa-font" data-view-stat="label"></i>
+                </a>
+            </div>
+
+            <!-- Delete -->
+            <a class="control" title="Delete Stat">
                 <i class="fas fa-trash" data-delete-stat="{{key}}"></i>
             </a>
-
-            <!-- Inputs -->
-            <input type="text" name="system.stats.{{key}}.tag" value="{{stat.tag}}" placeholder="Name">
-
-            {{#if (eq stat.view 'value')}}
-                <input type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
-            {{/if}}
-            {{#if (eq stat.view 'resource')}}
-                <input type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
-                <input type="number" name="system.stats.{{key}}.max" value="{{stat.max}}" placeholder="Max">
-            {{/if}}
-            {{#if (eq stat.view 'label')}}
-                <input type="text" name="system.stats.{{key}}.label" value="{{stat.label}}" placeholder="Label">
-            {{/if}}
 
         </li>
     {{/each}}

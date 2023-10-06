@@ -1,28 +1,72 @@
-<section class="kit">
-    <ol>
-        {{#each categorizedFeatures as |features category|}}
-            <li>
+<ol class="kit">
+    {{#each categorizedFeatures as |features category|}}
+        <li class="category">
+            <header>
+                <!-- Collapse -->
+                <a class="control collapse" title="{{localize config.app.collapseStats}}">
+                    <i class="fas fa-chevron-down" data-collapse=".feature-list" data-contrast></i>
+                </a>
+
                 <h2>{{category}}</h2>
 
-                <!-- Category Buttons -->
-                <a data-delete-category="{{category}}">Delete Category</a>
-                
-                <!-- Items -->
-                <ol>
-                    {{#each features as |feature index|}}
-                        <li>
-                            <span>{{feature.name}} -{{feature.system.category}}-</span>
+                <!-- Settings -->
+                <div class="category-controls">
+                    <a class="control" title="Rename Category">
+                        <i class="fas fa-pencil" data-rename-category="{{category}}"></i>
+                    </a>
+                    <a class="control" title="Change Color">
+                        <i class="fas fa-palette" data-color-category="{{category}}"></i>
+                    </a>
+                    <a class="control" title="Flood Category">
+                        <i class="fas fa-fill-drip" data-flood-category="{{category}}"></i>
+                    </a>
+                </div>
 
-                            <!-- Feature Buttons -->
-                            <span>
-                                <a data-view-feature="{{feature._id}}">/View Feature/</a>
-                            </span>
-                        </li>
-                    {{/each}}
-                </ol>
-            </li>
-        {{/each}}
+                <!-- Tracked Stats -->
+                <div class="tracked-stat-list">
+                    <a class="control" title="Track Stat">
+                        <i class="fas fa-square-plus" data-track="{{category}}"></i>
+                    </a>
+                    {{#search (concat 'system.categories.' category)}}
+                        {{#each this as |stat index|}}
+                            <div class="tracked-stat">
+                                <a class="setting" title="Untrack Stat">
+                                    <i class="fas fa-xmark" data-track="{{category}}"></i>
+                                </a>
+                                <span class="label">{{stat}}</span>
+                            </div>
+                        {{/each}}
+                    {{/search}}
+                </div>
 
-        <a data-create-category><h5>Create Category</h5></a>
-    </ol>
-</section>
+                <!-- Controls -->
+                <div class="list-controls">
+                    <a class="control" title="Add Feature">
+                        <i class="fas fa-plus" data-add-feature="{{category}}"></i>
+                    </a>
+                    <a class="control" title="Delete Category">
+                        <i class="fas fa-sack-xmark" data-delete-category="{{category}}"></i>
+                    </a>
+                </div>
+            </header>
+            
+            <!-- Items -->
+            <ol>
+                {{#each features as |feature index|}}
+                    <li>
+                        <span>{{feature.name}} -{{feature.system.category}}-</span>
+
+                        <!-- Feature Buttons -->
+                        <span>
+                            <a data-view-feature="{{feature._id}}">/View Feature/</a>
+                        </span>
+                    </li>
+                {{/each}}
+            </ol>
+        </li>
+    {{/each}}
+
+    <a class="" title="Create Category">
+        <i class="fas fa-plus" data-create-category></i>
+    </a>
+</ol>

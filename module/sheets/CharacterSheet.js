@@ -98,13 +98,24 @@ export default class CharacterSheet extends ActorSheet {
      */
     setColorStatView (html) {
         const view = html.find('[data-view-stat]');
+        const stat = html.find('[data-stat]');
+
+        view.removeClass('selected');
+
+        stat.each((index, element) => {
+            const key = $(element).data('stat');
+            const setting = this.object.system.usedStats[key].view;
+            const selected = $(element).find(`[data-view-stat=${setting}]`);
+            
+            selected.addClass('selected');
+        });
 
         view.on('click', event => {
-            const value = $(event.target).data('view-stat');
+            const setting = $(event.target).data('view-stat');
             const key = $(event.target).parents('[data-stat]').data('stat');
             const stat = this.object.system.stats[key];
 
-            stat.view = value;
+            stat.view = setting;
 
             this.object.update({ [`system.stats.${key}`]: stat });
         });

@@ -36,6 +36,10 @@
             "ability": "Ability"
         },
         "app": {
+            "colorStats": "Color Stats",
+            "stats": "Stats",
+            "collapseStats": "Collapse Stats",
+            "addStat": "Add Stat",
             "name": "Name",
             "newCategory": "New Category"
         }

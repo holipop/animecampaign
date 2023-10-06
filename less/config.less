@@ -4,14 +4,24 @@
 //* --------- */
 
 @rpx: (1 / 16) * 1rem;
+
 @character-summary-height: 6.2rem;
 @feature-summary-height: 5.125rem;
 
 
-//* FUNCTIONS */
-//* --------- */
+//* MIXINS */
+//* ------ */
 
-.func() {}
+#AC {
+    .Border() {
+        border: (1 * @rpx) solid black;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
+    }
+    .HeadingSkinning() {
+        margin: 0;
+        border: 0;
+    }
+}
 
 
 //* FONT FACES */
@@ -36,6 +46,7 @@
 @font-face {
     font-family: "Philosopher";
     src: url("./fonts/Philosopher/Philosopher-BoldItalic.ttf");
+    font-weight: bold;
     font-style: italic;
 }
 
@@ -43,5 +54,9 @@
     font-family: "Philosopher";
     src: url("./fonts/Philosopher/Philosopher-Italic.ttf");
     font-style: italic;
-    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Fungka City";
+    src: url("./fonts/Fungka City/fungka-city.regular.ttf");
 }

@@ -81,7 +81,18 @@ export default class FeatureSheet extends ItemSheet {
      */
     setStatView (html) {
         const view = html.find('[data-view-stat]');
+        const stat = html.find('[data-stat]');
         const stats = this.object.system.stats;
+
+        view.removeClass('selected');
+
+        stat.each((index, element) => {
+            const key = $(element).data('stat');
+            const setting = this.object.system.stats[key].view;
+            const selected = $(element).find(`[data-view-stat=${setting}]`);
+            
+            selected.addClass('selected');
+        });
 
         view.on('click', event => {
             const value = $(event.target).data('view-stat');

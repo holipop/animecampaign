@@ -14,13 +14,17 @@
 @font-face {
   font-family: "Philosopher";
   src: url("fonts/Philosopher/Philosopher-BoldItalic.ttf");
+  font-weight: bold;
   font-style: italic;
 }
 @font-face {
   font-family: "Philosopher";
   src: url("fonts/Philosopher/Philosopher-Italic.ttf");
   font-style: italic;
-  font-weight: bold;
+}
+@font-face {
+  font-family: "Fungka City";
+  src: url("fonts/Fungka City/fungka-city.regular.ttf");
 }
 .animecampaign.sheet form {
   overflow-y: hidden;
@@ -162,4 +166,126 @@
 }
 .animecampaign.item.sheet .summary .name {
   font-size: 2.5rem;
+}
+.animecampaign.sheet .stat-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.animecampaign.sheet .stat-list .control {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+}
+.animecampaign.sheet .stat-list .view {
+  width: 4rem;
+}
+.animecampaign.sheet .stat-list .stat-header {
+  display: flex;
+  height: 1.2rem;
+  align-items: center;
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+}
+.animecampaign.sheet .stat-list .stat-header h2,
+.animecampaign.sheet .stat-list .stat-header .label {
+  margin: 0;
+  border: 0;
+  font-family: "Philosopher";
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.animecampaign.sheet .stat-list .stat-header h2 {
+  flex: 1;
+  font-size: 1rem;
+  font-style: italic;
+  text-transform: uppercase;
+}
+.animecampaign.sheet .stat-list .stat-header .label {
+  text-align: center;
+}
+.animecampaign.sheet .stat-list .stat-header .label,
+.animecampaign.sheet .stat-list .stat-header .add-stat {
+  border-left: 0.0625rem solid black;
+}
+.animecampaign.sheet .stat-list .stat {
+  display: flex;
+  align-items: center;
+  height: 1.75rem;
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+}
+.animecampaign.sheet .stat-list .stat input {
+  height: 1.75rem;
+}
+.animecampaign.sheet .stat-list .stat .color {
+  width: 1.75rem;
+  padding: 0;
+  appearance: none;
+  border: 0;
+}
+.animecampaign.sheet .stat-list .stat .tag,
+.animecampaign.sheet .stat-list .stat .content {
+  flex: 1;
+}
+.animecampaign.sheet .stat-list .stat .content {
+  display: flex;
+}
+.animecampaign.sheet .stat-list .stat .content > * {
+  flex: 1;
+}
+.animecampaign.sheet .stat-list .stat .view {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.animecampaign.sheet .stat-list .selected {
+  background-color: red;
+}
+.animecampaign.actor.sheet .kit {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.animecampaign.actor.sheet .kit .control {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+}
+.animecampaign.actor.sheet .kit .category header {
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+}
+.animecampaign.actor.sheet .kit .category header > div {
+  display: flex;
+  align-items: center;
+}
+.animecampaign.actor.sheet .kit .category header h2 {
+  padding-right: 0.25rem;
+  font-family: "Gloock";
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin: 0;
+  border: 0;
+}
+.animecampaign.actor.sheet .kit .category header .tracked-stat-list .tracked-stat .label {
+  font-family: "Fungka City";
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+.animecampaign.actor.sheet .kit .category .collapse {
+  width: 1.75rem;
+}
+.animecampaign.actor.sheet .kit .category .category-controls {
+  flex: 1;
+  margin-top: 0.4rem;
+}
+.animecampaign.actor.sheet .kit .category .category-controls .control {
+  width: 1rem;
+}
+.animecampaign.actor.sheet .kit .category .category-controls i {
+  font-size: 0.75rem;
 }
