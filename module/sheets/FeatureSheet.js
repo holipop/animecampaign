@@ -1,3 +1,4 @@
+import * as AC from "../AC.js"
 import { SheetMixin } from "./SheetMixin.js";
 
 // The application for Kit Features.
@@ -15,6 +16,9 @@ export default class FeatureSheet extends ItemSheet {
         });
     }
 
+    // A shorthand for this feature's stats. 
+    get stats () { return this.object.system.stats }
+
 
     //* DATA PREPARATION */
     //* ---------------- */ 
@@ -28,7 +32,7 @@ export default class FeatureSheet extends ItemSheet {
         data.config = CONFIG.animecampaign;
         data.system = this.object.system;
         data.documentName = this.object.documentName;
-        data.statList = data.system.stats;
+        data.statList = this.stats
 
         // Prepared Data
         data.categories = this.categories();
@@ -83,24 +87,24 @@ export default class FeatureSheet extends ItemSheet {
     setStatView (html) {
         const view = html.find('[data-view-stat]');
         const stat = html.find('[data-stat]');
-        const stats = this.object.system.stats;
 
         view.removeClass('selected');
 
         stat.each((index, element) => {
             const key = $(element).data('stat');
-            const setting = this.object.system.stats[key].view;
+            const setting = this.stats[key].view;
             const selected = $(element).find(`[data-view-stat=${setting}]`);
             
             selected.addClass('selected');
         });
 
         view.on('click', event => {
-            const value = $(event.target).data('view-stat');
             const key = $(event.target).parents('[data-stat]').data('stat');
+            const setting = $(event.target).data('view-stat');
+            const stats = this.stats;
             const stat = stats[key].toObject();
 
-            stat.view = value;
+            stat.view = setting;
             stats[key] = stat;
 
             this.object.update({ 'system.stats': stats });
@@ -112,7 +116,7 @@ export default class FeatureSheet extends ItemSheet {
      */
     addStat (html) {
         const add = html.find('[data-add-stat]');
-        const stats = this.object.system.stats;
+        const stats = this.stats;
 
         add.on('click', () => {
             stats.push({});
@@ -125,7 +129,7 @@ export default class FeatureSheet extends ItemSheet {
      */
     deleteStat (html) {
         const del = html.find('[data-delete-stat]');
-        const stats = this.object.system.stats;
+        const stats = this.stats;
 
         del.on('click', event => {
             const index = $(event.target).data('delete-stat');

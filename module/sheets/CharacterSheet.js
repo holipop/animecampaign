@@ -22,6 +22,34 @@ export default class CharacterSheet extends ActorSheet {
         });
     }
 
+    // A shorthand for this character's categories. 
+    get categories () { return this.object.system.categories } 
+
+    /** A shorthand for fetching a category.
+     * @param {string} name 
+     * @returns {Object}
+     */
+    getCategory (name) {
+        return AC.getObjectEntry(this.categories, { name: name });
+    }
+
+    /** A shorthand for setting a category, returning the list of categories.
+     * @param {string} name 
+     * @param {Object} changes
+     * @returns {Object}
+     */
+    setCategory (name, changes) {
+        return AC.setObjectEntry(this.categories, { name: name }, changes);
+    }
+
+    /** A shorthand for if a category exists.
+     * @param {string} name 
+     * @returns {Object}
+     */
+    hasCategory (name) {
+        return AC.hasObjectEntry(this.categories, { name: name });
+    }
+
 
     //* DATA PREPARATION */
     //* ---------------- */
@@ -60,7 +88,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     categorizedFeatures () {
         const items = [...this.object.items];
-        const categoryList = this.object.system.categories.map(category => category.name);
+        const categoryList = this.categories.map(category => category.name);
         const features = {};
 
         categoryList.forEach(category => {
@@ -74,7 +102,7 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     categorizedTrackers () {
-        const categories = this.object.system.categories;
+        const categories = this.categories;
         const obj = {};
 
         categories.forEach(entry => {
@@ -222,9 +250,9 @@ export default class CharacterSheet extends ActorSheet {
         create.on('click', () => {
             const callback = html => {
                 const name = html.find('[name="name"]').val() || "new category";
-                const categories = this.object.system.categories;
+                const categories = this.categories;
 
-                const isNameTaken = AC.hasObjectEntry(categories, { name: name });
+                const isNameTaken = this.hasCategory(name);
 
                 if (isNameTaken) {
                     ui.notifications.warn(`"${name.toUpperCase()}" is already taken by another category.`)
@@ -264,7 +292,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const callback = () => {
                 const features = this.categorizedFeatures()[key];
-                const categories = this.object.system.categories;
+                const categories = this.categories;
 
                 const ids = features.map(feature => feature._id);
                 const index = categories.findIndex(category => category.name == key);
@@ -297,7 +325,7 @@ export default class CharacterSheet extends ActorSheet {
             const key = $(event.target).data('rename-category');
 
             const callback = html => {
-                const categories = this.object.system.categories;
+                const categories = this.categories;
                 const features = this.categorizedFeatures()[key];
                 const newName = html.find('[name="name"]').val() || key;
 
@@ -308,7 +336,7 @@ export default class CharacterSheet extends ActorSheet {
                     }
                 });
 
-                const updatedCategories = AC.setObjectEntry(categories, {name: key}, {name: newName});
+                const updatedCategories = this.setCategory(key, { name: newName });
 
                 this.object.update({ 'system.categories': updatedCategories });
                 this.object.updateEmbeddedDocuments('Item', updatedItems);
@@ -339,19 +367,19 @@ export default class CharacterSheet extends ActorSheet {
 
         color.on('click', event => {
             const key = $(event.target).data('color-category');
-            const categories = this.object.system.categories;
-            const target = AC.getObjectEntry(categories, { name: key });
+            const categories = this.categories;
+            const target = this.getCategory(key);
             const initialColor = target.color ?? this.object.system.color;
 
             const set = html => {
                 const color = html.find('[name="color"]').val();
 
-                const update = AC.setObjectEntry(categories, { name: key }, { color: color });
+                const update = this.setCategory(key, { color: color });
                 this.object.update({ 'system.categories': update });
             }
 
             const reset = () => {
-                const update = AC.setObjectEntry(categories, { name: key }, { color: null });
+                const update = this.setCategory(key, { color: null });
 
                 this.object.update({ 'system.categories': update });
             }
@@ -387,8 +415,7 @@ export default class CharacterSheet extends ActorSheet {
         match.each((index, element) => {
             const properties = $(element).data('match-category') || "color";
             const key = $(element).parents('[data-category]').data('category');
-            const categories = this.object.system.categories;
-            const target = AC.getObjectEntry(categories, { name: key });
+            const target = this.getCategory(key)
 
             const color = target.color ?? this.object.system.color;
 
@@ -406,8 +433,7 @@ export default class CharacterSheet extends ActorSheet {
         contrast.each((index, element) => {
             const properties = $(element).data('contrast-category') || "color";
             const key = $(element).parents('[data-category]').data('category');
-            const categories = this.object.system.categories;
-            const target = AC.getObjectEntry(categories, { name: key });
+            const target = this.getCategory(key);
 
             const rgb = AC.hexToRGB(target.color ?? this.object.system.color);
             rgb[0] *= 0.2126;
@@ -431,8 +457,7 @@ export default class CharacterSheet extends ActorSheet {
         flood.on('click', event => {
             const key = $(event.target).data('flood-category');
             const features = this.categorizedFeatures()[key];
-            const categories = this.object.system.categories;
-            const target = AC.getObjectEntry(categories, { name: key });
+            const target = this.getCategory(key);
 
             const color = target.color ?? this.object.system.color;
 
@@ -467,8 +492,7 @@ export default class CharacterSheet extends ActorSheet {
 
         track.each((index, element) => {
             const key = $(element).data('track');
-            const categories = this.object.system.categories;
-            const target = AC.getObjectEntry(categories, { name: key });
+            const target = this.getCategory(key);
 
             if (target.trackers.length >= MAX_TRACKERS) $(element).hide();
         })
@@ -482,8 +506,7 @@ export default class CharacterSheet extends ActorSheet {
 
         track.on('click', event => {
             const key = $(event.target).parents('[data-category]').data('category');
-            const categories = this.object.system.categories;
-            const target = AC.getObjectEntry(categories, { name: key });
+            const target = this.getCategory(key);
 
             const callback = html => {
                 const name = html.find('[name="name"]').val()
@@ -492,7 +515,7 @@ export default class CharacterSheet extends ActorSheet {
                 if (name == '') return ui.notifications.warn(`Name field can't be blank.`);
 
                 trackers.unshift({ tag: name })
-                const update = AC.setObjectEntry(categories, { name: key }, { trackers: trackers });
+                const update = this.setCategory(key, { trackers: trackers });
                 this.object.update({ 'system.categories': update });
             }
 
@@ -522,11 +545,10 @@ export default class CharacterSheet extends ActorSheet {
         untrack.on('click', event => {
             const key = $(event.target).data('untrack');
             const category = $(event.target).parents('[data-category]').data('category');
-            const categories = this.object.system.categories;
             const trackers = this.categorizedTrackers()[category];
 
             const updatedTrackers = trackers.filter(tracker => tracker.tag != key);
-            const update = AC.setObjectEntry(categories, { name: category }, { trackers: updatedTrackers });
+            const update = this.setCategory(key, { trackers: updatedTrackers });
 
             this.object.update({ 'system.categories': update });
         })
@@ -544,9 +566,8 @@ export default class CharacterSheet extends ActorSheet {
         create.on('click', event => {
             const key = $(event.target).data('create-feature');
             const trackers = this.categorizedTrackers()[key];
-            const categories = this.object.system.categories;
 
-            const color = AC.getObjectEntry(categories, { name: key }).color ?? this.object.system.color;
+            const color = this.getCategory(key).color ?? this.object.system.color;
 
             const stats = trackers.map(tracker => {
                 return { tag: tracker.tag }
