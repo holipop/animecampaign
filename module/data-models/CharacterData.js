@@ -39,30 +39,4 @@ export default class CharacterData extends foundry.abstract.DataModel {
             }),
         };
     }
-
-    /** Returns the color stats in use.
-     * @returns {Object}
-     */
-    get usedStats () {
-        const usedStats = {};
-        for (const stat in this.stats) {
-            if (this.stats[stat] != null) usedStats[stat] = this.stats[stat];
-        }
-        return usedStats;
-    }
-
-    /** Sorts all owned features by their category into an object.
-     * @returns {Object}
-     */
-    get categorizedFeatures () {
-        const items = [...this.parent.items];
-        const categories = this.categories.map(category => category.name);
-        const features = {};
-
-        categories.forEach(category => {
-            features[category] = items.filter(item => item.system.category == category);
-        })
-
-        return features;
-    }
 }

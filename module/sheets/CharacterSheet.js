@@ -36,11 +36,38 @@ export default class CharacterSheet extends ActorSheet {
         data.system = this.object.system;
         data.documentName = this.object.documentName;
 
-        data.statList = data.system.usedStats;
-        data.categorizedFeatures = data.system.categorizedFeatures;
+        data.statList = this.usedStats();
+        data.categorizedFeatures = this.categorizedFeatures();
         data.categorizedTrackers = this.categorizedTrackers();
 
         return data;
+    }
+
+    /** Returns the color stats in use.
+     * @returns {Object}
+     */
+    usedStats () {
+        const stats = this.object.system.stats;
+        const usedStats = {};
+        for (const stat in stats) {
+            if (stats[stat] != null) usedStats[stat] = stats[stat];
+        }
+        return usedStats;
+    }
+
+    /** Sorts all owned features by their category into an object.
+     * @returns {Object}
+     */
+    categorizedFeatures () {
+        const items = [...this.object.items];
+        const categoryList = this.object.system.categories.map(category => category.name);
+        const features = {};
+
+        categoryList.forEach(category => {
+            features[category] = items.filter(item => item.system.category == category);
+        })
+
+        return features;
     }
 
     /** Returns an object with category keys and their tracked stats array as the value.
@@ -133,7 +160,7 @@ export default class CharacterSheet extends ActorSheet {
 
         stat.each((index, element) => {
             const key = $(element).data('stat');
-            const setting = this.object.system.usedStats[key].view;
+            const setting = this.usedStats()[key].view;
             const selected = $(element).find(`[data-view-stat=${setting}]`);
             
             selected.addClass('selected');
@@ -236,7 +263,7 @@ export default class CharacterSheet extends ActorSheet {
             const key = $(event.target).data('delete-category');
 
             const callback = () => {
-                const features = this.object.system.categorizedFeatures[key];
+                const features = this.categorizedFeatures()[key];
                 const categories = this.object.system.categories;
 
                 const ids = features.map(feature => feature._id);
@@ -271,7 +298,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const callback = html => {
                 const categories = this.object.system.categories;
-                const features = this.object.system.categorizedFeatures[key];
+                const features = this.categorizedFeatures()[key];
                 const newName = html.find('[name="name"]').val() || key;
 
                 const updatedItems = features.map(feature => {
@@ -326,7 +353,6 @@ export default class CharacterSheet extends ActorSheet {
             const reset = () => {
                 const update = AC.setObjectEntry(categories, { name: key }, { color: null });
 
-                console.log(update);
                 this.object.update({ 'system.categories': update });
             }
 
@@ -404,7 +430,7 @@ export default class CharacterSheet extends ActorSheet {
 
         flood.on('click', event => {
             const key = $(event.target).data('flood-category');
-            const features = this.object.system.categorizedFeatures[key];
+            const features = this.categorizedFeatures()[key];
             const categories = this.object.system.categories;
             const target = AC.getObjectEntry(categories, { name: key });
 
