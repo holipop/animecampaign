@@ -25,6 +25,16 @@ export function localize (path) {
 // TODO: A function that pre-localizes the config object in i18nInit
 export function prelocalize (obj) {}
 
+/** Converts a string hexadecimal color into an array of RGB values in base 10.
+ * @param {string} hexcode 
+ * @returns {number[]}
+ */
+export function hexToRGB (hexcode) {
+    const channels = [hexcode.slice(1, 3), hexcode.slice(3, 5), hexcode.slice(5)];
+
+    return channels.map(value => parseInt(value, 16));
+}
+
 /** Preloads the filepaths for the Handlebars partials.
  * @returns {Promise<Function[]>}
  */
@@ -64,12 +74,49 @@ export function uniformObject (keyArr, value) {
     return obj;
 }
 
-/** Converts a string hexadecimal color into an array of RGB values in base 10.
- * @param {string} hexcode 
- * @returns {number[]}
+/** Returns the first entry in an array of objects that matches the query.
+ * @param {Object[]} arr 
+ * @param {Object} query 
+ * @returns {Object}
  */
-export function hexToRGB (hexcode) {
-    const channels = [hexcode.slice(1, 3), hexcode.slice(3, 5), hexcode.slice(5)];
+export function getObjectEntry (arr, query) {
+    const obj = arr.find(entry => {
+        const filteredEntry = filterObject(entry, query);
 
-    return channels.map(value => parseInt(value, 16));
+        return objectsEqual(filteredEntry, query);
+    })
+
+    return deepClone(obj);
+}
+
+/** Change an entry of an array of objects, returning an updated clone of the array.
+ * @param {Object[]} arr 
+ * @param {Object} query 
+ * @param {Object} changes 
+ * @returns {Object[]}
+ */
+export function setObjectEntry (arr, query, changes) {
+    const index = arr.findIndex(entry => {
+        const filteredEntry = filterObject(entry, query);
+
+        return objectsEqual(filteredEntry, query);
+    })
+    const entry = deepClone(arr[index]);
+    const obj = mergeObject(entry, changes);
+
+    return arr.toSpliced(index, 1, obj);
+}
+
+/** Check if an array of objects contains an entry that matches the query.
+ * @param {*} arr 
+ * @param {*} query 
+ */
+export function hasObjectEntry (arr, query) {
+    const index = arr.findIndex(entry => {
+        const filteredEntry = filterObject(entry, query);
+
+        return objectsEqual(filteredEntry, query);
+    })
+
+    return (index !== -1);
 }
