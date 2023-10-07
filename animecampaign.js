@@ -26,6 +26,15 @@ Hooks.once('init', () => {
 
     AC.preloadHandlebarsTemplates();
     Handlebars.registerHelper(hbsHelpers);
+
+    const test = {
+        thing: 'test',
+        arr: [
+            { trait: { shit: 'SHIT' } },
+            { trait: 'bar' }
+        ]
+    }
+    AC.convertToPlainObject(test);
 })
 
 // Fires once localization translations have been loaded and are ready for use.

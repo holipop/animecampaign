@@ -27,13 +27,13 @@
                     <a class="control" title="Track Stat">
                         <i class="fas fa-square-plus" data-track="{{category}}"></i>
                     </a>
-                    {{#search (concat 'system.categories.' category)}}
-                        {{#each this as |stat index|}}
+                    {{#search (concat 'categorizedTrackers.' category)}}
+                        {{#each this as |tracker index|}}
                             <div class="tracked-stat" data-contrast-category="border-color">
                                 <a class="control" title="Untrack Stat">
-                                    <i class="fas fa-xmark" data-untrack="{{stat}}"></i>
+                                    <i class="fas fa-xmark" data-untrack="{{tracker.tag}}"></i>
                                 </a>
-                                <span class="label">{{stat}}</span>
+                                <span class="label">{{tracker.tag}}</span>
                             </div>
                         {{/each}}
                     {{/search}}

@@ -74,7 +74,7 @@ export function uniformObject (keyArr, value) {
     return obj;
 }
 
-/** Returns the first entry in an array of objects that matches the query.
+/** Gets the first entry that matches a query in an array of objects. Returns as a plain object.
  * @param {Object[]} arr 
  * @param {Object} query 
  * @returns {Object}
@@ -86,10 +86,10 @@ export function getObjectEntry (arr, query) {
         return objectsEqual(filteredEntry, query);
     })
 
-    return deepClone(obj);
+    return convertToPlainObject(obj);
 }
 
-/** Change an entry of an array of objects, returning an updated clone of the array.
+/** Change an entry of an array of objects, returning an updated clone of the array with the changed entry becoming a plain object.
  * @param {Object[]} arr 
  * @param {Object} query 
  * @param {Object} changes 
@@ -104,12 +104,13 @@ export function setObjectEntry (arr, query, changes) {
     const entry = deepClone(arr[index]);
     const obj = mergeObject(entry, changes);
 
-    return arr.toSpliced(index, 1, obj);
+    return arr.toSpliced(index, 1, convertToPlainObject(obj));
 }
 
 /** Check if an array of objects contains an entry that matches the query.
- * @param {*} arr 
- * @param {*} query 
+ * @param {Object[]} arr 
+ * @param {Object} query 
+ * @return {boolean}
  */
 export function hasObjectEntry (arr, query) {
     const index = arr.findIndex(entry => {
@@ -119,4 +120,20 @@ export function hasObjectEntry (arr, query) {
     })
 
     return (index !== -1);
+}
+
+/** Converts a instance of a class into a plain object.
+ * @param {Object} instance 
+ * @returns {Object}
+ */
+export function convertToPlainObject (instance) {
+    const copy = { ...instance };
+    for (const [key, value] of Object.entries(copy)) {
+        if (value === null) { }
+        else if (Array.isArray(value)) { }
+        else if (typeof value === 'object') {
+            copy[key] = convertToPlainObject(value);
+        }
+    }
+    return copy;
 }
