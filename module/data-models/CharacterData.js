@@ -1,4 +1,5 @@
 import Stat from "./Stat.js";
+import Category from "./Category.js";
 
 // Data structure for characters.
 export default class CharacterData extends foundry.abstract.DataModel {
@@ -24,7 +25,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
 
             stats: new fields.SchemaField(colorStats),
 
-            categories: new fields.ObjectField({
+            categories: new fields.ArrayField(new fields.EmbeddedDataField(Category), {
                 initial: CONFIG.animecampaign.defaultCategories
             }),
 
@@ -55,7 +56,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
      */
     get categorizedFeatures () {
         const items = [...this.parent.items];
-        const categories = Object.keys(this.categories);
+        const categories = this.categories.map(category => category.name);
         const features = {};
 
         categories.forEach(category => {

@@ -35,6 +35,7 @@ export default class CharacterSheet extends ActorSheet {
         data.config = CONFIG.animecampaign;
         data.system = this.object.system;
         data.documentName = this.object.documentName;
+
         data.statList = data.system.usedStats;
         data.categorizedFeatures = data.system.categorizedFeatures;
 
@@ -179,8 +180,18 @@ export default class CharacterSheet extends ActorSheet {
         create.on('click', () => {
             const callback = html => {
                 const name = html.find('[name="name"]').val() || "new category";
+                const categories = this.object.system.categories;
+
+                const areCategoriesUnique = categories.every(category => category.name != name)
+
+                if (!areCategoriesUnique) {
+                    ui.notifications.warn(`"${name.toUpperCase()}" is already taken by another category.`)
+                    return;
+                };
+
+                categories.push({ name: name });
     
-                this.object.update({ 'system.categories': { [name]: [] } });
+                this.object.update({ 'system.categories': categories });
             }
 
             const dialog = new Dialog({
@@ -207,22 +218,25 @@ export default class CharacterSheet extends ActorSheet {
         const del = html.find('[data-delete-category]');
 
         del.on('click', event => {
-            const category = $(event.target).data('delete-category');
+            const key = $(event.target).data('delete-category');
 
             const callback = () => {
-                const features = this.object.system.categorizedFeatures[category];
+                const features = this.object.system.categorizedFeatures[key];
+                const categories = this.object.system.categories;
 
                 const ids = features.map(feature => feature._id);
-    
-                this.object.update({ 'system.categories': { [`-=${category}`]: null } });
-                this.object.unsetFlag('animecampaign', `categories.${category}`)
+                const index = categories.findIndex(category => category.name == key);
+
+                categories.splice(index, 1);
+
+                this.object.update({ 'system.categories': categories });
                 this.object.deleteEmbeddedDocuments('Item', ids);
             }
             
             Dialog.confirm({
-                title: `Delete Category [${category.toUpperCase()}]: ${this.object.name}`,
+                title: `Delete Category [${key.toUpperCase()}]: ${this.object.name}`,
                 content: 
-                    `<p>Delete the "${category.toUpperCase()}" category?</p>
+                    `<p>Delete the "${key.toUpperCase()}" category?</p>
                     <p><b>Warning: This will delete all kit features within this category.</b></p>`,
                 yes: callback,
                 no: () => {},
@@ -241,22 +255,22 @@ export default class CharacterSheet extends ActorSheet {
             const key = $(event.target).data('rename-category');
 
             const callback = html => {
-                const flag = this.object.getFlag('animecampaign', `categories.${key}`)
-                const category = this.object.system.categories[key];
+                const categories = this.object.system.categories;
                 const features = this.object.system.categorizedFeatures[key];
-                const name = html.find('[name="name"]').val() || key;
+                const newName = html.find('[name="name"]').val() || key;
+
+                const index = categories.findIndex(category => category.name == key);
+                categories[index].name = newName;
+                categories[index] = categories[index].toObject();
 
                 const updates = features.map(feature => {
                     return {
                         _id: feature._id,
-                        system: { category: name }
+                        system: { category: newName }
                     }
                 });
 
-                this.object.update({ 'system.categories': { [name]: category } });
-                this.object.update({ 'system.categories': { [`-=${key}`]: null } });
-                this.object.setFlag('animecampaign', `categories.${name}`, flag);
-                this.object.unsetFlag('animecampaign', `categories.${key}`);
+                this.object.update({ 'system.categories': categories });
                 this.object.updateEmbeddedDocuments('Item', updates);
             }
 
@@ -405,9 +419,9 @@ export default class CharacterSheet extends ActorSheet {
 
         track.each((index, element) => {
             const key = $(element).data('track');
-            const category = this.object.system.categories[key];
+            const category = this.object.system.categories.find(category => category.name == key);
 
-            if (category.length >= MAX_TRACKERS) $(element).hide();
+            if (category.trackers.length >= MAX_TRACKERS) $(element).hide();
         })
     };
 

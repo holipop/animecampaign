@@ -15,7 +15,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 initial: CONFIG.animecampaign.defaultColor
             }),
             category: new fields.StringField({ initial: 'weapon' }),
-            stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat))
+            stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
         };
     }
 }

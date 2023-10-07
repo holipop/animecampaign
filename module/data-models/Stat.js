@@ -1,4 +1,4 @@
-// Data structure for all stats.
+// Data structure for Stats.
 export default class Stat extends foundry.abstract.DataModel {
 
     /** Defining the data structure of this data model. This cannot be changed post-init.

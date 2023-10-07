@@ -7,12 +7,38 @@ export const animecampaign = AC.facadeObject(lang).animecampaign;
 animecampaign.colors = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 animecampaign.defaultColor = "#CCCCCC";
 
-animecampaign.defaultCategories = {
+animecampaign.defaultCategories = [
+    {
+        name: 'weapon',
+        trackers: [
+            { tag: 'damage' },
+            { tag: 'range' },
+        ],
+    },
+    {
+        name: 'talent',
+        trackers: [
+            { tag: 'bonus' },
+        ],
+    },
+    {
+        name: 'passive',
+        trackers: [],
+    },
+    {
+        name: 'ability',
+        trackers: [
+            { tag: 'cost' },
+        ],
+    }
+];
+
+/* {
     'weapon': ['damage', 'range'],
     'talent': ['bonus'],
     'passive': [],
     'ability': ['cost'],
-};
+}; */
 
 animecampaign.textInputDialogContent = (name, placeholder) => `
     <form autocomplete="off">
