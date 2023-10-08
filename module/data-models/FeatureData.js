@@ -1,4 +1,5 @@
 import Stat from "./Stat.js";
+import * as AC from "../AC.js"
 
 // Data structure for Kit Features.
 export default class FeatureData extends foundry.abstract.DataModel {
@@ -17,5 +18,32 @@ export default class FeatureData extends foundry.abstract.DataModel {
             category: new fields.StringField({ initial: 'weapon' }),
             stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
         };
+    }
+
+    get trackedStats () {
+        if (!this.parent.isOwned) return null;
+        const categories = this.parent.parent.system.categories;
+        const trackers = AC.getObjectEntry(categories, {name: this.category}).trackers;
+
+        const trackedStats = trackers.map(tracker => {
+            const stat = AC.getObjectEntry(this.stats, { tag: tracker.tag });
+            const obj = {};
+
+            if (stat === undefined) return { value: '' };
+
+            console.log(stat);
+
+            obj.tag = stat.tag;
+
+            if (stat.view == 'value') obj.value = stat.value;
+            else if (stat.view == 'label') obj.value = stat.label;
+            else if (stat.view == 'resource') {
+                obj.value = AC.clampedPercent(stat.value / stat.max);
+            }
+
+            return obj;
+        })
+
+        return trackedStats;
     }
 }

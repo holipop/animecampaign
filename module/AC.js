@@ -22,9 +22,6 @@ export function localize (path) {
     return game.i18n.localize(getProperty(CONFIG.animecampaign, path));
 }
 
-// TODO: A function that pre-localizes the config object in i18nInit
-export function prelocalize (obj) {}
-
 /** Converts a string hexadecimal color into an array of RGB values in base 10.
  * @param {string} hexcode 
  * @returns {number[]}
@@ -35,16 +32,31 @@ export function hexToRGB (hexcode) {
     return channels.map(value => parseInt(value, 16));
 }
 
+/** Converts a ratio into a percent, no decimals and clamped between 0% and 100%.
+ * @param {number} num 
+ * @returns {string}
+ */
+export function clampedPercent (num) {
+    let ratio;
+
+    if (num >= 1) ratio = 1;
+    else if (num <= 0) ratio = 0;
+    else ratio = num;
+
+    return ratio.toLocaleString(undefined, { style: 'percent' });
+}
+
 /** Preloads the filepaths for the Handlebars partials.
  * @returns {Promise<Function[]>}
  */
 export async function preloadHandlebarsTemplates () {
-    const paths = [
-        'systems/animecampaign/templates/partials/summary.hbs',
-        'systems/animecampaign/templates/partials/main-stats.hbs',
-        'systems/animecampaign/templates/partials/stat-list.hbs',
-        'systems/animecampaign/templates/partials/kit.hbs'
-    ];
+    const paths = {
+        'summary': 'systems/animecampaign/templates/partials/summary.hbs',
+        'main-stats': 'systems/animecampaign/templates/partials/main-stats.hbs',
+        'stat-list': 'systems/animecampaign/templates/partials/stat-list.hbs',
+        'kit': 'systems/animecampaign/templates/partials/kit.hbs',
+        'feature': 'systems/animecampaign/templates/partials/feature.hbs',
+    }
 
     return loadTemplates(paths);
 }
@@ -86,6 +98,7 @@ export function getObjectEntry (arr, query) {
         return objectsEqual(filteredEntry, query);
     })
 
+    if (obj === undefined) return;
     return convertToPlainObject(obj);
 }
 

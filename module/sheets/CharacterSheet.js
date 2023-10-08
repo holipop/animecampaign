@@ -325,7 +325,6 @@ export default class CharacterSheet extends ActorSheet {
             const key = $(event.target).data('rename-category');
 
             const callback = html => {
-                const categories = this.categories;
                 const features = this.categorizedFeatures()[key];
                 const newName = html.find('[name="name"]').val() || key;
 
@@ -367,7 +366,6 @@ export default class CharacterSheet extends ActorSheet {
 
         color.on('click', event => {
             const key = $(event.target).data('color-category');
-            const categories = this.categories;
             const target = this.getCategory(key);
             const initialColor = target.color ?? this.object.system.color;
 
@@ -548,7 +546,7 @@ export default class CharacterSheet extends ActorSheet {
             const trackers = this.categorizedTrackers()[category];
 
             const updatedTrackers = trackers.filter(tracker => tracker.tag != key);
-            const update = this.setCategory(key, { trackers: updatedTrackers });
+            const update = this.setCategory(category, { trackers: updatedTrackers });
 
             this.object.update({ 'system.categories': update });
         })

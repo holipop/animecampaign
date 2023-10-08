@@ -1,0 +1,44 @@
+<li class="feature">
+
+    {{log this.system.trackedStats}}
+
+    <!-- Entry -->
+    <section class="entry">
+
+        <!-- Image -->
+        <img class="img" src="{{img}}" title="{{name}}" data-match-feature="background-color">
+
+        <!-- Name -->
+        <h4 class="name">{{name}}</h4>
+
+        <!-- Tracked Stats -->
+        <div class="feature-tracked-stat-list">
+            {{#each system.trackedStats as |stat index|}}
+
+                <div class="stat">
+                    <span>{{stat.value}}</span>
+                </div>
+
+            {{/each}}
+        </div>
+
+        <!-- Controls -->
+        <div class="feature-controls">
+
+            <a class="control" title="View Feature">
+                <i class="fas fa-feather-pointed" data-view-feature="{{_id}}"></i>
+            </a>
+            <a class="control" title="Delete Feature">
+                <i class="fas fa-trash" data-delete-feature="{{_id}}"></i>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Expanded View -->
+    <section class="expanded" hidden>
+
+    </section>
+
+</li>

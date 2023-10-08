@@ -6,9 +6,7 @@
 //* --- */
 
 .animecampaign.actor.sheet .kit {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    #AC.ListSkinning();
 
     .control {
         display: grid;
@@ -23,24 +21,26 @@
 
 .animecampaign.actor.sheet .kit .category {
     header {
+        #AC.Border();
+
         display: flex;
         height: @category-header-height;
         align-items: center;
 
-        #AC.Border();
-
         > div {
             display: flex;
+            flex-shrink: 0;
             align-items: center;
         }
         h2 {
+            #AC.HeadingSkinning();
+            #AC.Overflow();
+
             padding-right: 4 * @rpx;
 
             font-family: "Gloock";
             font-size: 1.2rem;
             text-transform: uppercase;
-
-            #AC.HeadingSkinning();
 
             &::first-letter {
                 font-size: 1.5rem;
@@ -49,6 +49,7 @@
     }
 
     .collapse {
+        flex-shrink: 0;
         width: 1.75rem;
     }
 
@@ -70,7 +71,7 @@
             flex-direction: column;
             justify-content: space-between;
             height: @category-header-height * .75;
-            width: 4.5rem;
+            width: @stat-tracker-width;
             padding: 0 (4 * @rpx);
             border-left: (1 * @rpx) solid black;
 
@@ -90,9 +91,8 @@
             }
         }
         .label {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            #AC.Overflow();
+
             padding-top: 6 * @rpx;
 
             font-family: "Fungka City";
@@ -103,8 +103,12 @@
 
     .list-controls {
         height: @category-header-height * .75;
-        width: 3.25rem;
+        width: @kit-controls-width;
         justify-content: space-evenly;
         border-left: (1 * @rpx) solid black;
+    }
+
+    .feature-list {
+        #AC.ListSkinning();
     }
 }

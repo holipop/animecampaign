@@ -8,6 +8,9 @@
 @character-summary-height: 6.2rem;
 @feature-summary-height: 5.125rem;
 
+@kit-controls-width: 3.25rem;
+@stat-tracker-width: 4.5rem;
+
 
 //* MIXINS */
 //* ------ */
@@ -20,6 +23,16 @@
     .HeadingSkinning() {
         margin: 0;
         border: 0;
+    }
+    .ListSkinning() {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .Overflow() {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
 

@@ -1,7 +1,12 @@
 <ol class="kit">
+
     {{#each categorizedFeatures as |features category|}}
+
         <li class="category" data-category="{{category}}">
+
+            <!-- Header -->
             <header data-match-category="background-color">
+
                 <!-- Collapse -->
                 <a class="control collapse" title="{{localize config.app.collapseStats}}" data-contrast-category>
                     <i class="fas fa-chevron-down" data-collapse="categories.{{category}}"></i>
@@ -11,6 +16,7 @@
 
                 <!-- Settings -->
                 <div class="category-controls" data-contrast-category>
+
                     <a class="control" title="Rename Category">
                         <i class="fas fa-pencil" data-rename-category="{{category}}"></i>
                     </a>
@@ -20,51 +26,57 @@
                     <a class="control" title="Flood Category">
                         <i class="fas fa-fill-drip" data-flood-category="{{category}}"></i>
                     </a>
+
                 </div>
 
                 <!-- Tracked Stats -->
                 <div class="tracked-stat-list" data-contrast-category>
+
                     <a class="control" title="Track Stat">
                         <i class="fas fa-square-plus" data-track="{{category}}"></i>
                     </a>
-                    {{#search (concat 'categorizedTrackers.' category)}}
+
+                    {{#with (lookup @root.categorizedTrackers category)}}
                         {{#each this as |tracker index|}}
                             <div class="tracked-stat" data-contrast-category="border-color">
+
                                 <a class="control" title="Untrack Stat">
                                     <i class="fas fa-xmark" data-untrack="{{tracker.tag}}"></i>
                                 </a>
+
                                 <span class="label">{{tracker.tag}}</span>
+
                             </div>
                         {{/each}}
-                    {{/search}}
+                    {{/with}}
+
                 </div>
 
                 <!-- Controls -->
                 <div class="list-controls" data-contrast-category="color border-color">
+
                     <a class="control" title="Add Feature">
                         <i class="fas fa-plus" data-create-feature="{{category}}"></i>
                     </a>
                     <a class="control" title="Delete Category">
                         <i class="fas fa-sack-xmark" data-delete-category="{{category}}"></i>
                     </a>
+
                 </div>
+
             </header>
             
             <!-- Features -->
             <ol class="feature-list" data-collapse="target categories.{{category}}">
                 {{#each features as |feature index|}}
-                    <li>
-                        <span>{{feature.name}} -{{feature.system.category}}-</span>
 
-                        <!-- Feature Buttons -->
-                        <span>
-                            <a data-view-feature="{{feature._id}}">/View Feature/</a>
-                            <a data-delete-feature="{{feature._id}}">/Delete Feature/</a>
-                        </span>
-                    </li>
+                    {{> "feature" feature}}
+
                 {{/each}}
             </ol>
+
         </li>
+
     {{/each}}
 
     <a class="" title="Create Category">
