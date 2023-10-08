@@ -29,6 +29,7 @@
     {{#each statList as |stat key|}}
 
         <li class="stat" data-stat="{{key}}" data-collapse="target stats">
+
             {{#if (eq ../documentName "Actor")}}
 
                 <!-- Color Select -->
@@ -39,6 +40,13 @@
                         {{/each}}
                     {{/select}}
                 </select>
+
+            {{/if}}
+
+            {{#if (eq ../documentName "Item")}}
+
+                <!-- Image -->
+                <img class="img" src="{{stat.img}}" data-edit="system.stats.{{key}}.img">
 
             {{/if}}
 

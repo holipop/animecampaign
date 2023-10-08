@@ -31,9 +31,8 @@ export default class FeatureData extends foundry.abstract.DataModel {
 
             if (stat === undefined) return { value: '' };
 
-            console.log(stat);
-
             obj.tag = stat.tag;
+            obj.img = stat.img;
 
             if (stat.view == 'value') obj.value = stat.value;
             else if (stat.view == 'label') obj.value = stat.label;

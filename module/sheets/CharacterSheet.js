@@ -147,6 +147,7 @@ export default class CharacterSheet extends ActorSheet {
         this.disableTrackStat(html);
         this.trackStat(html);
         this.untrackStat(html);
+        this.editStatTrackerImage(html);
 
         // Feature
         this.createFeature(html);
@@ -541,16 +542,44 @@ export default class CharacterSheet extends ActorSheet {
         const untrack = html.find('[data-untrack]');
 
         untrack.on('click', event => {
-            const key = $(event.target).data('untrack');
+            const index = $(event.target).data('untrack');
             const category = $(event.target).parents('[data-category]').data('category');
             const trackers = this.categorizedTrackers()[category];
 
-            const updatedTrackers = trackers.filter(tracker => tracker.tag != key);
-            const update = this.setCategory(category, { trackers: updatedTrackers });
+            trackers.splice(index, 1);
 
+            const update = this.setCategory(category, { trackers: trackers });
             this.object.update({ 'system.categories': update });
         })
     }
+
+    /** Renders a FilePicker to edit the image of a stat tracker.
+     * @param {*} html 
+     */
+    editStatTrackerImage (html) {
+        const edit = html.find('[data-image-tracker]');
+
+        edit.on('click', event => {
+            const index = $(event.target).data('image-tracker');
+            const category = $(event.target).parents('[data-category]').data('category');
+            const trackers = this.categorizedTrackers()[category];
+
+            const callback = path => {
+                trackers[index].img = path;
+
+                const update = this.setCategory(category, { trackers: trackers });
+                this.object.update({ 'system.categories': update });
+            }
+
+            const filePicker = new FilePicker({
+                current: trackers[index].img,
+                callback: callback
+            });
+
+            filePicker.render(true);
+        });
+    }
+
 
     
     //* Feature

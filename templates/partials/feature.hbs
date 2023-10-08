@@ -1,12 +1,10 @@
 <li class="feature">
 
-    {{log this.system.trackedStats}}
-
     <!-- Entry -->
     <section class="entry">
 
         <!-- Image -->
-        <img class="img" src="{{img}}" title="{{name}}" data-match-feature="background-color">
+        <img class="img" src="{{img}}" title="Roll Feature" data-match-feature="background-color">
 
         <!-- Name -->
         <h4 class="name">{{name}}</h4>
@@ -16,6 +14,9 @@
             {{#each system.trackedStats as |stat index|}}
 
                 <div class="stat">
+                    <div class="stat-img">
+                        <img src="{{stat.img}}">
+                    </div>
                     <span>{{stat.value}}</span>
                 </div>
 

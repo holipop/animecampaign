@@ -9,7 +9,13 @@ export default class Stat extends foundry.abstract.DataModel {
 
         return {
             tag: new fields.StringField(),
+            
+            img: new fields.FilePathField({
+                categories: ['IMAGE'],
+                initial: 'icons/svg/circle.svg'
+            }),
             color: new fields.StringField(),
+
             view: new fields.StringField({ initial: 'value' }),
 
             value: new fields.NumberField(),

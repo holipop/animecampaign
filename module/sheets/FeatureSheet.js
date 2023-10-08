@@ -159,7 +159,7 @@ export default class FeatureSheet extends ItemSheet {
      */
     updateStatList (data) {
         const statChanges = getProperty(expandObject(data), 'system.stats');
-        const stats = Object.fromEntries(this.object.system.stats.entries());
+        const stats = Object.fromEntries(this.stats.entries());
 
         mergeObject(stats, statChanges);
 

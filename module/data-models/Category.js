@@ -13,9 +13,10 @@ export default class Category extends foundry.abstract.DataModel {
 
             trackers: new fields.ArrayField(new fields.SchemaField({
                 tag: new fields.StringField(),
-                /* img: new fields.FilePathField({
-                    categories: ['IMAGE']
-                }) */
+                img: new fields.FilePathField({
+                    categories: ['IMAGE'],
+                    initial: 'icons/svg/circle.svg'
+                })
             }))
         };
     }

@@ -73,7 +73,31 @@
             height: @category-header-height * .75;
             width: @stat-tracker-width;
             padding: 0 (4 * @rpx);
+
             border-left: (1 * @rpx) solid black;
+
+            > * {
+                z-index: 2;
+            }
+
+            .tracker-image {
+                position: relative;
+                height: 0;
+                top: -6 * @rpx;
+
+                img {
+                    #AC.ImageSkinning();
+
+                    position: absolute;
+                    height: @feature-entry-height;
+                    width: @feature-entry-height;
+                    z-index: 1;
+                    cursor: pointer;
+
+                    clip-path: inset(10% 0 10% 0);
+                    opacity: 75%;
+                }
+            }
 
             .control {
                 position: relative;
@@ -94,6 +118,7 @@
             #AC.Overflow();
 
             padding-top: 6 * @rpx;
+            pointer-events: none;
 
             font-family: "Fungka City";
             line-height: .95;

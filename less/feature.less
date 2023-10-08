@@ -1,7 +1,5 @@
 // main: ./animecampaign.less
 
-@feature-entry-height: 2.25rem;
-
 .animecampaign.actor.sheet .kit .feature-list .feature {
     #AC.Border();
 
@@ -16,11 +14,11 @@
         align-items: center;
     }
     .img {
+        #AC.ImageSkinning();
+
         height: @feature-entry-height;
         width: @feature-entry-height + .5rem + @rpx;
 
-        border: none;
-        border-radius: 0;
         border-left: .5rem solid black;
         border-right: (1 * @rpx) solid black;
     }
@@ -49,14 +47,30 @@
 
         .stat {
             display: grid;
-
             width: @stat-tracker-width;
         }
+        .stat-img {
+            position: relative;
+            left: 5 * @rpx;
+
+            > img {
+                #AC.ImageSkinning();
+
+                position: absolute;
+                z-index: 1;
+
+                height: @feature-entry-height;
+                width: @feature-entry-height;
+            }
+        }
+
         span {
             #AC.Overflow();
 
             place-self: center stretch;
-            padding: 2 * @rpx;
+            padding-right: 6 * @rpx;
+            text-align: end;
+            z-index: 2;
 
             font-family: "Philosopher";
             font-size: 2rem;

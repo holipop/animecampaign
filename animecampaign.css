@@ -224,6 +224,10 @@
   appearance: none;
   border: 0;
 }
+.animecampaign.sheet .stat-list .stat .img {
+  height: 1.75rem;
+  width: 1.75rem;
+}
 .animecampaign.sheet .stat-list .stat .tag,
 .animecampaign.sheet .stat-list .stat .content {
   flex: 1;
@@ -301,6 +305,26 @@
   padding: 0 0.25rem;
   border-left: 0.0625rem solid black;
 }
+.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat > * {
+  z-index: 2;
+}
+.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat .tracker-image {
+  position: relative;
+  height: 0;
+  top: -0.375rem;
+}
+.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat .tracker-image img {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  position: absolute;
+  height: 2.25rem;
+  width: 2.25rem;
+  z-index: 1;
+  cursor: pointer;
+  clip-path: inset(10% 0 10% 0);
+  opacity: 75%;
+}
 .animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat .control {
   position: relative;
   height: min-content;
@@ -318,6 +342,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-top: 0.375rem;
+  pointer-events: none;
   font-family: "Fungka City";
   line-height: 0.95;
   text-transform: capitalize;
@@ -347,10 +372,11 @@
   align-items: center;
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .img {
-  height: 2.25rem;
-  width: 2.8125rem;
   border: none;
   border-radius: 0;
+  box-shadow: none;
+  height: 2.25rem;
+  width: 2.8125rem;
   border-left: 0.5rem solid black;
   border-right: 0.0625rem solid black;
 }
@@ -381,12 +407,27 @@
   display: grid;
   width: 4.5rem;
 }
+.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-img {
+  position: relative;
+  left: 0.3125rem;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-img > img {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  position: absolute;
+  z-index: 1;
+  height: 2.25rem;
+  width: 2.25rem;
+}
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list span {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   place-self: center stretch;
-  padding: 0.125rem;
+  padding-right: 0.375rem;
+  text-align: end;
+  z-index: 2;
   font-family: "Philosopher";
   font-size: 2rem;
   font-weight: bold;
