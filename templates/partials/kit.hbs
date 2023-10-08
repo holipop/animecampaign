@@ -40,9 +40,11 @@
                         {{#each this as |tracker index|}}
                             <div class="tracked-stat" data-contrast-category="border-color">
 
-                                <div class="tracker-image">
-                                    <img src="{{tracker.img}}" data-image-tracker="{{index}}">
-                                </div>
+                                {{#with (lookup @root.categories category)}}
+                                    <div class="tracker-image">
+                                        <img src="{{tracker.img}}" data-image-tracker="{{index}}" data-contrast-image="{{this.color}}">
+                                    </div>
+                                {{/with}}
 
                                 <a class="control" title="Untrack Stat">
                                     <i class="fas fa-xmark" data-untrack="{{index}}"></i>

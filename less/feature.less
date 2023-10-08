@@ -47,6 +47,7 @@
 
         .stat {
             display: grid;
+            height: @feature-entry-height;
             width: @stat-tracker-width;
         }
         .stat-img {
@@ -56,11 +57,13 @@
             > img {
                 #AC.ImageSkinning();
 
+                height: @feature-entry-height;
+                width: @feature-entry-height;
                 position: absolute;
                 z-index: 1;
 
-                height: @feature-entry-height;
-                width: @feature-entry-height;
+                filter: brightness(0) saturate(100%);
+                opacity: .15;
             }
         }
 
@@ -68,8 +71,7 @@
             #AC.Overflow();
 
             place-self: center stretch;
-            padding-right: 6 * @rpx;
-            text-align: end;
+            padding-left: 1.5rem;
             z-index: 2;
 
             font-family: "Philosopher";

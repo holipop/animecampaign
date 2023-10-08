@@ -65,6 +65,7 @@ export default class CharacterSheet extends ActorSheet {
         data.documentName = this.object.documentName;
 
         data.statList = this.usedStats();
+        data.categories = this.categoriesObject();
         data.categorizedFeatures = this.categorizedFeatures();
         data.categorizedTrackers = this.categorizedTrackers();
 
@@ -81,6 +82,18 @@ export default class CharacterSheet extends ActorSheet {
             if (stats[stat] != null) usedStats[stat] = stats[stat];
         }
         return usedStats;
+    }
+
+    /** Returns the categories as an object with each key as the name of that category.
+     * @returns {Object}
+     */
+    categoriesObject () {
+        const categories = this.categories;
+        const obj = {};
+
+        categories.forEach(category => obj[category.name] = category);
+
+        return obj;
     }
 
     /** Sorts all owned features by their category into an object.
@@ -125,6 +138,7 @@ export default class CharacterSheet extends ActorSheet {
         this.resizeTextArea(html);
         this.matchColor(html);
         this.contrastColor(html);
+        this.contrastImage(html);
         this.collapse(html);
 
         // Summary
@@ -597,7 +611,7 @@ export default class CharacterSheet extends ActorSheet {
             const color = this.getCategory(key).color ?? this.object.system.color;
 
             const stats = trackers.map(tracker => {
-                return { tag: tracker.tag }
+                return { tag: tracker.tag, img: tracker.img }
             });
 
             const data = [{

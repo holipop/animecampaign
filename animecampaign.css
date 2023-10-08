@@ -323,7 +323,7 @@
   z-index: 1;
   cursor: pointer;
   clip-path: inset(10% 0 10% 0);
-  opacity: 75%;
+  opacity: 25%;
 }
 .animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat .control {
   position: relative;
@@ -405,6 +405,7 @@
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat {
   display: grid;
+  height: 2.25rem;
   width: 4.5rem;
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-img {
@@ -415,18 +416,19 @@
   border: none;
   border-radius: 0;
   box-shadow: none;
-  position: absolute;
-  z-index: 1;
   height: 2.25rem;
   width: 2.25rem;
+  position: absolute;
+  z-index: 1;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.15;
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list span {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   place-self: center stretch;
-  padding-right: 0.375rem;
-  text-align: end;
+  padding-left: 1.5rem;
   z-index: 2;
   font-family: "Philosopher";
   font-size: 2rem;

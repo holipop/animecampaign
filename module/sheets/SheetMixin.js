@@ -74,6 +74,27 @@ export const SheetMixin = {
         })
     },
 
+    contrastImage (html) {
+        const WHITE = 'brightness(0) saturate(100%) invert(100%)';
+        const BLACK = 'brightness(0) saturate(100%)';
+
+        const contrast = html.find('img[data-contrast-image]');
+
+        contrast.each((index, element) => {
+            const hexcode = $(element).data('contrast-image') || "#CCCCCC";
+
+            const rgb = AC.hexToRGB(hexcode);
+            rgb[0] *= 0.2126;
+            rgb[1] *= 0.7152;
+            rgb[2] *= 0.0722;
+
+            const luma = rgb.reduce((n, m) => n + m) / 255;
+            const filter = (luma <= .5) ? WHITE : BLACK;
+
+            $(element).css('filter', filter);
+        })
+    },
+
     /** Collapse an element given a sender and a target where its data-attr value leads with "target ".
      * Both the sender and target's data-attr value should point to its respective flag.
      * @param {*} html 
