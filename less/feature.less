@@ -76,18 +76,43 @@
             }
         }
 
-        span {
+        .stat-numbers {
             #AC.Overflow();
 
+            display: flex;
+            flex-direction: column;
             place-self: center stretch;
-            padding-right: 4 * @rpx;
             text-align: end;
+            text-overflow: clip;
             z-index: 2;
 
             font-family: "Philosopher";
             font-size: 2rem;
             font-weight: bold;
             font-style: italic;
+
+            > * {
+                padding: 0 (4 * @rpx);
+            }
+
+            .resource-value {
+                font-size: 1.7rem;
+                line-height: .75;
+            }
+            .resource-max {
+                font-size: .8rem;
+                font-weight: normal;
+                line-height: .75;
+            }
+            .label {
+                position: relative;
+                top: 3 * @rpx;
+                padding: 0 (1 * @rpx);
+                
+                font-family: "Fungka City";
+                font-size: 1.75rem;
+                font-style: normal;
+            }
         }
     }
 }

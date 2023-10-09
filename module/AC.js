@@ -32,20 +32,6 @@ export function hexToRGB (hexcode) {
     return channels.map(value => parseInt(value, 16));
 }
 
-/** Converts a ratio into a percent, no decimals and clamped between 0% and 100%.
- * @param {number} num 
- * @returns {string}
- */
-export function clampedPercent (num) {
-    let ratio;
-
-    if (num >= 1) ratio = 1;
-    else if (num <= 0) ratio = 0;
-    else ratio = num;
-
-    return ratio.toLocaleString(undefined, { style: 'percent' });
-}
-
 /** Preloads the filepaths for the Handlebars partials.
  * @returns {Promise<Function[]>}
  */

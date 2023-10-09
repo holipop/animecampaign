@@ -26,26 +26,12 @@ export default class FeatureData extends foundry.abstract.DataModel {
         const trackers = AC.getObjectEntry(categories, {name: this.category}).trackers;
 
         const trackedStats = trackers.map(tracker => {
-            const stat = AC.getObjectEntry(this.stats, { tag: tracker.tag });
-            const obj = {};
-
-            if (stat === undefined) return {
+            const fallback = {
+                view: 'value',
                 value: '',
                 img: 'icons/svg/circle.svg',
             };
-
-            obj.tag = stat.tag;
-            obj.img = stat.img;
-
-            if (stat.view == 'value') obj.value = stat.value;
-            else if (stat.view == 'label') obj.value = stat.label;
-            else if (stat.view == 'resource') {
-                obj.value = AC.clampedPercent(stat.value / stat.max);
-            }
-
-            if (!obj.value) obj.value = " ";
-
-            return obj;
+            return AC.getObjectEntry(this.stats, { tag: tracker.tag }) ?? fallback;
         })
 
         return trackedStats;

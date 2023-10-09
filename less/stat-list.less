@@ -9,6 +9,9 @@
 .animecampaign.sheet .stat-list {
     #AC.ListSkinning();
 
+    width: 75%;
+    margin: 0 auto;
+
     .control {
         display: grid;
         place-items: center;
@@ -49,11 +52,13 @@
     }
     
     .stat {
+        #AC.Border();
+
         display: flex;
         align-items: center;
         height: @stat-entry-height;
 
-        #AC.Border();
+        border-top: 0;
 
         input {
             height: @stat-entry-height;

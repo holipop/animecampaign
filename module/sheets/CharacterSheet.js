@@ -168,6 +168,7 @@ export default class CharacterSheet extends ActorSheet {
         this.viewFeature(html);
         this.deleteFeature(html);
         this.matchFeature(html);
+        this.swapStatFonts(html);
 
         super.activateListeners(html);
     }
@@ -673,8 +674,18 @@ export default class CharacterSheet extends ActorSheet {
         })
     }
 
-    swapFeatureStatFonts (html) {
-        
+    /** Swaps the fonts of a stat label if it exceeds a certain amount of characters.
+     * @param {*} html 
+     */
+    swapStatFonts (html) {
+        const MAX_CHARS = 3;
+        const swap = html.find('[data-swap-font]');
+
+        swap.each((index, element) => {
+            const text = $(element).text();
+
+            if (text.length > MAX_CHARS) $(element).addClass('label');
+        })
     }
 
 

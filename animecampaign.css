@@ -39,6 +39,14 @@
 .animecampaign.actor.sheet .scrollable {
   height: calc(100% - 6.2rem);
 }
+.animecampaign.actor.sheet .cap {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  height: 0.25rem;
+  width: 100%;
+  margin-bottom: 0.4rem;
+  border-top: 0;
+}
 .animecampaign.item.sheet {
   min-width: 450px;
   min-height: 350px;
@@ -171,6 +179,8 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 75%;
+  margin: 0 auto;
 }
 .animecampaign.sheet .stat-list .control {
   display: grid;
@@ -209,11 +219,12 @@
   border-left: 0.0625rem solid black;
 }
 .animecampaign.sheet .stat-list .stat {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
   display: flex;
   align-items: center;
   height: 1.75rem;
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  border-top: 0;
 }
 .animecampaign.sheet .stat-list .stat input {
   height: 1.75rem;
@@ -429,16 +440,38 @@
   filter: brightness(0) saturate(100%);
   opacity: 0.15;
 }
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list span {
+.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
   place-self: center stretch;
-  padding-right: 0.25rem;
   text-align: end;
+  text-overflow: clip;
   z-index: 2;
   font-family: "Philosopher";
   font-size: 2rem;
   font-weight: bold;
   font-style: italic;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers > * {
+  padding: 0 0.25rem;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers .resource-value {
+  font-size: 1.7rem;
+  line-height: 0.75;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers .resource-max {
+  font-size: 0.8rem;
+  font-weight: normal;
+  line-height: 0.75;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers .label {
+  position: relative;
+  top: 0.1875rem;
+  padding: 0 0.0625rem;
+  font-family: "Fungka City";
+  font-size: 1.75rem;
+  font-style: normal;
 }
