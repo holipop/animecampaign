@@ -12,6 +12,12 @@
         display: flex;
         height: @feature-entry-height;
         align-items: center;
+
+        background: linear-gradient(to right, currentColor 0%, transparent 15%);
+
+        > * {
+            color: black;
+        }
     }
     .img {
         #AC.ImageSkinning();
@@ -47,12 +53,15 @@
 
         .stat {
             display: grid;
-            height: @feature-entry-height;
+            height: @feature-entry-height * .8;
             width: @stat-tracker-width;
+
+            border-left: (1 * @rpx) solid rgba(0, 0, 0, 0.25);
         }
         .stat-img {
             position: relative;
             left: 5 * @rpx;
+            top: -4 * @rpx;
 
             > img {
                 #AC.ImageSkinning();
@@ -71,7 +80,8 @@
             #AC.Overflow();
 
             place-self: center stretch;
-            padding-left: 1.5rem;
+            padding-right: 4 * @rpx;
+            text-align: end;
             z-index: 2;
 
             font-family: "Philosopher";

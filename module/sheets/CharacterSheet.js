@@ -167,6 +167,7 @@ export default class CharacterSheet extends ActorSheet {
         this.createFeature(html);
         this.viewFeature(html);
         this.deleteFeature(html);
+        this.matchFeature(html);
 
         super.activateListeners(html);
     }
@@ -653,6 +654,27 @@ export default class CharacterSheet extends ActorSheet {
 
             this.object.deleteEmbeddedDocuments('Item', [id]);
         })
+    }
+
+    /** Matches the color of each element with an embedded kit feature.
+     * @param {*} html 
+     */
+    matchFeature (html) {
+        const match = html.find('[data-match-feature]');
+
+        match.each((index, element) => {
+            const properties = $(element).data('match-feature') || "color";
+            const id = $(element).parents('[data-feature]').data('feature');
+            const feature = this.object.getEmbeddedDocument('Item', id);
+            const color = feature.system.color;
+
+            const obj = AC.uniformObject(properties.split(' '), color);
+            $(element).css(obj);
+        })
+    }
+
+    swapFeatureStatFonts (html) {
+        
     }
 
 

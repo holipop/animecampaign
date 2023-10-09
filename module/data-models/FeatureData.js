@@ -45,8 +45,6 @@ export default class FeatureData extends foundry.abstract.DataModel {
 
             if (!obj.value) obj.value = " ";
 
-            console.log(obj)
-
             return obj;
         })
 

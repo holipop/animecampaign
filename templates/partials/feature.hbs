@@ -1,10 +1,10 @@
-<li class="feature">
+<li class="feature" data-feature="{{_id}}">
 
     <!-- Entry -->
-    <section class="entry">
+    <section class="entry" data-match-feature>
 
         <!-- Image -->
-        <img class="img" src="{{img}}" title="Roll Feature" data-match-feature="background-color">
+        <img class="img" src="{{img}}" title="Roll Feature" data-match-feature="background-color border-left-color">
 
         <!-- Name -->
         <h4 class="name">{{name}}</h4>
@@ -17,6 +17,7 @@
                     <div class="stat-img">
                         <img src="{{stat.img}}">
                     </div>
+                    
                     <span>{{stat.value}}</span>
                 </div>
 

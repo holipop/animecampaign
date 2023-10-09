@@ -370,6 +370,10 @@
   display: flex;
   height: 2.25rem;
   align-items: center;
+  background: linear-gradient(to right, currentColor 0%, transparent 15%);
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .entry > * {
+  color: black;
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .img {
   border: none;
@@ -405,12 +409,14 @@
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat {
   display: grid;
-  height: 2.25rem;
+  height: 1.8rem;
   width: 4.5rem;
+  border-left: 0.0625rem solid rgba(0, 0, 0, 0.25);
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-img {
   position: relative;
   left: 0.3125rem;
+  top: -0.25rem;
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-img > img {
   border: none;
@@ -428,7 +434,8 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   place-self: center stretch;
-  padding-left: 1.5rem;
+  padding-right: 0.25rem;
+  text-align: end;
   z-index: 2;
   font-family: "Philosopher";
   font-size: 2rem;
