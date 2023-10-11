@@ -118,6 +118,10 @@ export default class CharacterSheet extends ActorSheet {
             features[category] = items.filter(item => item.system.category == category);
         })
 
+        for (const list in features) {
+            features[list].sort((a, b) => a.sort - b.sort);
+        }
+
         return features;
     }
 
@@ -183,24 +187,52 @@ export default class CharacterSheet extends ActorSheet {
         super._onDrop(event);
     }
 
+    /** Inserts the dropped feature into the target category and sets its sort.
+     * @param {*} event 
+     * @param {*} data 
+     */
     onDropFeature (event, data) {
         if (data.type != 'Feature') return;
 
-        // ?? Unsure how to do this since collections are a map. I might have to manually do something.
-        // just do what the parent function does.
+        const features = this.actor.items;
+        const source = features.get(data.id);
+
+        const dropTarget = $(event.target).closest('[data-feature]');
+        const dropCategory = dropTarget.closest('[data-category]');
+        if (dropTarget.length == 0) return;
+
+        const target = features.get(dropTarget.data('feature'));
+        if (source._id == target._id) return;
+
+        const siblings = [];
+        dropCategory.find('li[data-feature]').each((index, element) => {
+            const siblingId = $(element).data('feature');
+            if (siblingId && (siblingId !== source._id)) {
+                siblings.push(features.get(siblingId))
+            }
+        })
+
+        const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
+        const updateData = sortUpdates.map(u => {
+            const update = u.update;
+            update._id = u.target._id;
+            update.system = { category: dropCategory.data('category') }
+            return update;
+        })
+
+        return this.object.updateEmbeddedDocuments('Item', updateData);
     }
 
     /** Inserts the dropped category on the index of the target category.
      * @param {*} event 
      * @param {*} data 
-     * @returns {boolean}
      */
     onDropCategory (event, data) {
-        if (data.type != 'Category') return false;
-        if (this.categories.length == 1) return false;
+        if (data.type != 'Category') return;
+        if (this.categories.length == 1) return;
 
         const dropTarget = $(event.target).closest('[data-category]');
-        if (dropTarget.length == 0) return false;
+        if (dropTarget.length == 0) return;
 
         const targetIndex = this.categories.findIndex(category => {
             return category.name == dropTarget.data('category');
@@ -219,16 +251,16 @@ export default class CharacterSheet extends ActorSheet {
     /** Inserts the dropped category on the index of the target category.
      * @param {*} event 
      * @param {*} data 
-     * @returns {boolean}
      */
     onDropTracker (event, data) {
-        if (data.type != 'Tracker') return false;
+        if (data.type != 'Tracker') return;
+        if (data.category.trackers.length == 1) return;  
 
         const dropCategory = $(event.target).closest('[data-category]');
-        if (dropCategory.data('category') != data.category.name) return false;
+        if (dropCategory.data('category') != data.category.name) return;
 
         const dropTarget =  $(event.target).closest('[data-tracker]');
-        if (dropTarget.length == 0) return false;
+        if (dropTarget.length == 0) return;
 
         const targetIndex = dropTarget.data('tracker');
 
@@ -382,7 +414,7 @@ export default class CharacterSheet extends ActorSheet {
 
         create.on('click', () => {
             const callback = html => {
-                const name = html.find('[name="name"]').val() || "new category";
+                const name = html.find('[name="name"]').val().toLowerCase() || "new category";
                 const categories = this.categories;
 
                 const isNameTaken = this.hasCategory(name);
@@ -459,7 +491,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const callback = html => {
                 const features = this.categorizedFeatures()[key];
-                const newName = html.find('[name="name"]').val() || key;
+                const newName = html.find('[name="name"]').val().toLowerCase() || key;
 
                 const updatedItems = features.map(feature => {
                     return {
