@@ -8,7 +8,7 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     static get defaultOptions () {
-        return mergeObject(super.defaultOptions, {
+        const options = mergeObject(super.defaultOptions, {
             width: 650,
             height: 500,
             classes: ["animecampaign", "sheet", "actor"],
@@ -18,8 +18,16 @@ export default class CharacterSheet extends ActorSheet {
                 contentSelector: ".content", 
                 initial: "kit", 
             }], */
-            scrollY: ["section.scrollable"]
+            scrollY: ["section.scrollable"],
         });
+
+        options.dragDrop = [
+            { dragSelector: "[data-kit] [data-feature]", dropSelector: null },
+            { dragSelector: "[data-kit] [data-category]", dropSelector: null },
+            { dragSelector: "[data-tracker-list] [data-tracker]", dropSelector: null },
+        ]
+
+        return options;
     }
 
     // A shorthand for this character's categories. 
@@ -68,6 +76,8 @@ export default class CharacterSheet extends ActorSheet {
         data.categories = this.categoriesObject();
         data.categorizedFeatures = this.categorizedFeatures();
         data.categorizedTrackers = this.categorizedTrackers();
+
+        console.log(this);
 
         return data;
     }
@@ -123,6 +133,112 @@ export default class CharacterSheet extends ActorSheet {
         })
 
         return obj;
+    }
+
+
+    //* DRAG AND DROP */
+    //* ------------- */ 
+
+    /** Fires when a draggable element is picked up.
+     * @param {*} event 
+     */
+    _onDragStart (event) {
+        const dataset = $(event.target).data();
+        let dragData;
+
+        if (dataset.feature !== undefined) {
+            const feature = this.object.getEmbeddedDocument('Item', dataset.feature);
+            dragData = { type: 'Feature', obj: feature, id: dataset.feature };
+        }
+        
+        if (dataset.category !== undefined) {
+            const category = this.getCategory(dataset.category);
+            dragData = { type: 'Category', obj: category };
+        } 
+        
+        if (dataset.tracker !== undefined) {
+            const key = $(event.target).parents('[data-category]').data('category');
+            const category = this.getCategory(key);
+            const tracker = category.trackers[dataset.tracker];
+            dragData = { type: 'Tracker', obj: tracker, category: category, index: dataset.tracker };
+        }
+
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+
+        super._onDragStart(event);
+    }
+
+    /** Fires when a draggable element is dropped.
+     * @param {*} event 
+     */
+    _onDrop (event) {
+        const data = TextEditor.getDragEventData(event);
+
+        if (!this.object.isOwner) return false;
+
+        this.onDropFeature(event, data);
+        this.onDropCategory(event, data);
+        this.onDropTracker(event, data);
+
+        super._onDrop(event);
+    }
+
+    onDropFeature (event, data) {
+        if (data.type != 'Feature') return;
+
+        // ?? Unsure how to do this since collections are a map. I might have to manually do something.
+        // just do what the parent function does.
+    }
+
+    /** Inserts the dropped category on the index of the target category.
+     * @param {*} event 
+     * @param {*} data 
+     * @returns {boolean}
+     */
+    onDropCategory (event, data) {
+        if (data.type != 'Category') return false;
+        if (this.categories.length == 1) return false;
+
+        const dropTarget = $(event.target).closest('[data-category]');
+        if (dropTarget.length == 0) return false;
+
+        const targetIndex = this.categories.findIndex(category => {
+            return category.name == dropTarget.data('category');
+        })
+        const currentIndex = this.categories.findIndex(category => {
+            return category.name == data.obj.name
+        })
+
+        const update = [...this.categories];
+        update.splice(currentIndex, 1);
+        update.splice(targetIndex, 0, data.obj);
+
+        return this.object.update({ 'system.categories': update });
+    }
+
+    /** Inserts the dropped category on the index of the target category.
+     * @param {*} event 
+     * @param {*} data 
+     * @returns {boolean}
+     */
+    onDropTracker (event, data) {
+        if (data.type != 'Tracker') return false;
+
+        const dropCategory = $(event.target).closest('[data-category]');
+        if (dropCategory.data('category') != data.category.name) return false;
+
+        const dropTarget =  $(event.target).closest('[data-tracker]');
+        if (dropTarget.length == 0) return false;
+
+        const targetIndex = dropTarget.data('tracker');
+
+        const trackerUpdate = this.getCategory(data.category.name).trackers;
+        trackerUpdate.splice(data.index, 1);
+        trackerUpdate.splice(targetIndex, 0, data.obj);
+
+        const update = this.setCategory(data.category.name, { trackers: trackerUpdate });
+
+        return this.object.update({ 'system.categories': update });
     }
  
 
@@ -511,7 +627,7 @@ export default class CharacterSheet extends ActorSheet {
 
             if (target.trackers.length >= MAX_TRACKERS) $(element).hide();
         })
-    };
+    }
 
     /** Adds a stat tracker to a category via a dialog.
      * @param {*} html 

@@ -1,4 +1,4 @@
-<ol class="kit">
+<ol class="kit" data-kit>
 
     {{#each categorizedFeatures as |features category|}}
 
@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Tracked Stats -->
-                <div class="tracked-stat-list" data-contrast-category>
+                <div class="tracked-stat-list" data-tracker-list data-contrast-category>
 
                     <a class="control" title="Track Stat">
                         <i class="fas fa-square-plus" data-track="{{category}}"></i>
@@ -38,11 +38,11 @@
 
                     {{#with (lookup @root.categorizedTrackers category)}}
                         {{#each this as |tracker index|}}
-                            <div class="tracked-stat" data-contrast-category="border-color">
+                            <div class="tracked-stat" data-tracker="{{index}}" data-contrast-category="border-color">
 
                                 {{#with (lookup @root.categories category)}}
                                     <div class="tracker-image">
-                                        <img src="{{tracker.img}}" data-image-tracker="{{index}}" data-contrast-image="{{this.color}}">
+                                        <img src="{{tracker.img}}" data-tracker="{{index}}" data-image-tracker="{{index}}" data-contrast-image="{{this.color}}">
                                     </div>
                                 {{/with}}
 
