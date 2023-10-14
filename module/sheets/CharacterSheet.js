@@ -77,8 +77,6 @@ export default class CharacterSheet extends ActorSheet {
         data.categorizedFeatures = this.categorizedFeatures();
         data.categorizedTrackers = this.categorizedTrackers();
 
-        console.log(this);
-
         return data;
     }
 
@@ -118,8 +116,8 @@ export default class CharacterSheet extends ActorSheet {
             features[category] = items.filter(item => item.system.category == category);
         })
 
-        for (const list in features) {
-            features[list].sort((a, b) => a.sort - b.sort);
+        for (const category in features) {
+            features[category].sort((a, b) => a.sort - b.sort);
         }
 
         return features;
@@ -132,8 +130,8 @@ export default class CharacterSheet extends ActorSheet {
         const categories = this.categories;
         const obj = {};
 
-        categories.forEach(entry => {
-            obj[entry.name] = entry.trackers;
+        categories.forEach(category => {
+            obj[category.name] = category.trackers;
         })
 
         return obj;

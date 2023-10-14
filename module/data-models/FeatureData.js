@@ -1,4 +1,5 @@
 import Stat from "./Stat.js";
+import Section from "./Section.js";
 import * as AC from "../AC.js"
 
 // Data structure for Kit Features.
@@ -16,10 +17,19 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 initial: CONFIG.animecampaign.defaultColor
             }),
             category: new fields.StringField({ initial: 'weapon' }),
+
             stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
+            sections: new fields.ArrayField(new fields.EmbeddedDataField(Section), {
+                initial: [{}],
+            }),
+
+            editor: new fields.StringField({ initial: 'markdown' }),
         };
     }
 
+    /** If this Feature is owned, returns the stats that are being tracked in its category.
+     * @returns {Object[]}
+     */
     get trackedStats () {
         if (!this.parent.isOwned) return null;
         const categories = this.parent.parent.system.categories;

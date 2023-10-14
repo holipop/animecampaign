@@ -1,0 +1,16 @@
+<ol class="sections" data-section-list>
+    {{#each system.sections as |section index|}}
+        <li data-section="{{index}}">
+            
+            <span>
+                <input type="text" name="system.sections.{{index}}.name" value="{{section.name}}">
+
+                <a data-delete-section="{{index}}">&lbrack; delete &rbrack;</a>
+            </span>
+
+            <textarea name="system.sections.{{index}}.text" placeholder="text">{{~section.text}}</textarea>
+        </li>
+    {{/each}}
+
+    <a data-add-section>&lbrack; add section &rbrack;</a>
+</ol>

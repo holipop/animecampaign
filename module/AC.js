@@ -42,6 +42,7 @@ export async function preloadHandlebarsTemplates () {
         'stat-list': 'systems/animecampaign/templates/partials/stat-list.hbs',
         'kit': 'systems/animecampaign/templates/partials/kit.hbs',
         'feature': 'systems/animecampaign/templates/partials/feature.hbs',
+        'sections': 'systems/animecampaign/templates/partials/sections.hbs',
     }
 
     return loadTemplates(paths);

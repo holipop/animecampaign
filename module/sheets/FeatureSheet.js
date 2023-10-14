@@ -13,11 +13,15 @@ export default class FeatureSheet extends ItemSheet {
             height: 500,
             classes: ["animecampaign", "sheet", "item"],
             template: 'systems/animecampaign/templates/sheets/feature-sheet.hbs',
+            scrollY: ["section.scrollable"],
         });
     }
 
     // A shorthand for this feature's stats. 
     get stats () { return this.object.system.stats }
+
+    // A shorthand for this feature's sections. 
+    get sections () { return this.object.system.sections }
 
 
     //* DATA PREPARATION */
@@ -32,7 +36,8 @@ export default class FeatureSheet extends ItemSheet {
         data.config = CONFIG.animecampaign;
         data.system = this.object.system;
         data.documentName = this.object.documentName;
-        data.statList = this.stats
+        data.statList = this.stats;
+        data.sections = this.sections;
 
         // Prepared Data
         data.categories = this.categories();
@@ -44,7 +49,9 @@ export default class FeatureSheet extends ItemSheet {
      * @returns {string[]}
      */
     categories () {
-        const defaultCategories = Object.keys(CONFIG.animecampaign.defaultCategories);
+        const defaultCategories = CONFIG.animecampaign.defaultCategories.map(category => {
+            return category.name;
+        })
         const currentCategory = this.object.system.category;
         const categories = new Set([...defaultCategories, currentCategory])
 
@@ -78,8 +85,14 @@ export default class FeatureSheet extends ItemSheet {
         this.addStat(html);
         this.deleteStat(html);
 
+        // Sections
+        this.addSection(html);
+        this.deleteSection(html);
+
         super.activateListeners(html);
     }
+
+    //* Stats
     
     /** Sets the view of the stat.
      * @param {*} html 
@@ -140,6 +153,33 @@ export default class FeatureSheet extends ItemSheet {
     }
 
 
+    //* Sections
+
+    addSection (html) {
+        const add = html.find('[data-add-section]');
+        const sections = this.sections;
+
+        add.on('click', () => {
+            sections.push({});
+            this.object.update({ 'system.sections': sections });
+        })
+    }
+
+    deleteSection (html) {
+        const del = html.find('[data-delete-section]');
+        const sections = this.sections;
+
+        del.on('click', event => {
+            const index = $(event.target).data('delete-section');
+            sections.splice(index, 1);
+
+            this.object.update({ 'system.sections': sections });
+        });
+    }
+
+    toggleShow (html) { }
+
+
     //* FORM SUBMISSION */
     //* --------------- */
 
@@ -149,6 +189,7 @@ export default class FeatureSheet extends ItemSheet {
      */
     _updateObject (event, data) {
         data = this.updateStatList(data);
+        data = this.updateSectionList(data);
 
         super._updateObject(event, data);
     }
@@ -164,6 +205,17 @@ export default class FeatureSheet extends ItemSheet {
         mergeObject(stats, statChanges);
 
         const updatedData = mergeObject(data, { system: { stats: stats } })
+
+        return flattenObject(updatedData);
+    }
+
+    updateSectionList (data) {
+        const sectionChanges = getProperty(expandObject(data), 'system.sections');
+        const sections = Object.fromEntries(this.sections.entries());
+
+        mergeObject(sections, sectionChanges);
+
+        const updatedData = mergeObject(data, { system: { sections: sections } })
 
         return flattenObject(updatedData);
     }
