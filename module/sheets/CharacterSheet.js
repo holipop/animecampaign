@@ -857,6 +857,10 @@ export default class CharacterSheet extends ActorSheet {
         const blankStats = AC.uniformObject(CONFIG.animecampaign.colors, null)
 
         for (const stat in statChanges) {
+            const set = statChanges[stat];
+
+            set.tag = set.tag.toLowerCase();
+
             blankStats[statChanges[stat].color] = statChanges[stat];
         }
 

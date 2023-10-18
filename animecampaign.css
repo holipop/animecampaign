@@ -358,7 +358,7 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 75%;
+  width: 29.5rem;
   margin: 0 auto;
 }
 .animecampaign.sheet .stat-list .control {
@@ -370,24 +370,26 @@
   width: 4rem;
 }
 .animecampaign.sheet .stat-list .stat-header {
-  display: flex;
-  height: 1.2rem;
-  align-items: center;
   border: 0.0625rem solid black;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  display: flex;
+  height: 1.2rem;
+  border: 0;
+  border-bottom: 0.0625rem solid black;
+  align-items: center;
 }
 .animecampaign.sheet .stat-list .stat-header h2,
 .animecampaign.sheet .stat-list .stat-header .label {
   margin: 0;
   border: 0;
-  font-family: "Philosopher";
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-family: "Libre Franklin";
+  font-weight: 600;
+  font-size: 0.65rem;
 }
 .animecampaign.sheet .stat-list .stat-header h2 {
   flex: 1;
-  font-size: 1rem;
-  font-style: italic;
+  font-size: 0.8rem;
+  font-weight: bold;
   text-transform: uppercase;
 }
 .animecampaign.sheet .stat-list .stat-header .label {
@@ -396,6 +398,11 @@
 .animecampaign.sheet .stat-list .stat-header .label,
 .animecampaign.sheet .stat-list .stat-header .add-stat {
   border-left: 0.0625rem solid black;
+  margin-right: 0.0625rem;
+}
+.animecampaign.sheet .stat-list .cap {
+  border: 0;
+  box-shadow: none;
 }
 .animecampaign.sheet .stat-list .stat {
   border: 0.0625rem solid black;
@@ -405,7 +412,14 @@
   height: 1.75rem;
   border-top: 0;
 }
+.animecampaign.sheet .stat-list .stat > * {
+  border-left: 0.0625rem solid black;
+}
 .animecampaign.sheet .stat-list .stat input {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
   height: 1.75rem;
 }
 .animecampaign.sheet .stat-list .stat .color {
@@ -422,11 +436,25 @@
 .animecampaign.sheet .stat-list .stat .content {
   flex: 1;
 }
+.animecampaign.sheet .stat-list .stat .tag {
+  height: 80%;
+  font-weight: 600;
+}
 .animecampaign.sheet .stat-list .stat .content {
   display: flex;
 }
 .animecampaign.sheet .stat-list .stat .content > * {
   flex: 1;
+  height: calc(80% + 0.0625rem);
+}
+.animecampaign.sheet .stat-list .stat .divider {
+  flex: 0;
+  position: relative;
+  top: 0.125rem;
+  font-family: "Libre Franklin";
+  font-weight: 100;
+  font-size: 1.25rem;
+  line-height: 0.75;
 }
 .animecampaign.sheet .stat-list .stat .view {
   display: flex;

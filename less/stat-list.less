@@ -9,7 +9,7 @@
 .animecampaign.sheet .stat-list {
     #AC.ListSkinning();
 
-    width: 75%;
+    width: @stat-block-width + 3.5rem;
     margin: 0 auto;
 
     .control {
@@ -22,25 +22,27 @@
     }
 
     .stat-header {
+        #AC.Border();
+
         display: flex;
         height: @stat-header-height;
+        border: 0;
+        border-bottom: (1 * @rpx) solid black;
         align-items: center;
-
-        #AC.Border();
 
         h2, .label {
             margin: 0;
             border: 0;
     
-            font-family: "Philosopher";
-            font-size: .8rem;
-            font-weight: bold;
+            font-family: "Libre Franklin";
+            font-weight: 600;
+            font-size: .65rem;
         }
         h2 {
             flex: 1;
 
-            font-size: 1rem;
-            font-style: italic;
+            font-size: .8rem;
+            font-weight: bold;
             text-transform: uppercase;
         }
         .label {
@@ -48,7 +50,12 @@
         }
         .label, .add-stat {
             border-left: (1 * @rpx) solid black;
+            margin-right: 1 * @rpx;
         }
+    }
+    .cap {
+        border: 0;
+        box-shadow: none;
     }
     
     .stat {
@@ -57,10 +64,15 @@
         display: flex;
         align-items: center;
         height: @stat-entry-height;
-
         border-top: 0;
 
+        > * {
+            border-left: (1 * @rpx) solid black;
+        }
+
         input {
+            #AC.InputSkinning();
+
             height: @stat-entry-height;
         }
 
@@ -79,11 +91,28 @@
         .tag, .content {
             flex: 1;
         }
+        .tag {
+            height: 80%;
+
+            //text-transform: uppercase;
+            font-weight: 600;
+        }
         .content {
             display: flex;
             > * {
                 flex: 1;
+                height: calc(80% + @rpx);
             }
+        }
+        .divider {
+            flex: 0;
+            position: relative;
+            top: 2 * @rpx;
+
+            font-family: "Libre Franklin";
+            font-weight: 100;
+            font-size: 1.25rem;
+            line-height: .75;
         }
         .view {
             display: flex;
