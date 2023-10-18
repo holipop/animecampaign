@@ -438,6 +438,7 @@
 }
 .animecampaign.sheet .stat-list .stat .tag {
   height: 80%;
+  text-transform: uppercase;
   font-weight: 600;
 }
 .animecampaign.sheet .stat-list .stat .content {
