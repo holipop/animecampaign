@@ -43,6 +43,8 @@ export async function preloadHandlebarsTemplates () {
         'kit': 'systems/animecampaign/templates/partials/kit.hbs',
         'feature': 'systems/animecampaign/templates/partials/feature.hbs',
         'sections': 'systems/animecampaign/templates/partials/sections.hbs',
+        'nav': 'systems/animecampaign/templates/partials/nav.hbs',
+        'biography': 'systems/animecampaign/templates/partials/biography.hbs',
     }
 
     return loadTemplates(paths);

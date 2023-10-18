@@ -9,7 +9,7 @@ export default class FeatureSheet extends ItemSheet {
      */
     static get defaultOptions () {
         return mergeObject(super.defaultOptions, {
-            width: 450,
+            width: 550,
             height: 500,
             classes: ["animecampaign", "sheet", "item"],
             template: 'systems/animecampaign/templates/sheets/feature-sheet.hbs',
@@ -217,6 +217,10 @@ export default class FeatureSheet extends ItemSheet {
         return flattenObject(updatedData);
     }
 
+    /** Ensures no data is lost when the sections array is updated.
+     * @param {Object} data 
+     * @returns {Object}
+     */
     updateSectionList (data) {
         const sectionChanges = getProperty(expandObject(data), 'system.sections');
         const sections = Object.fromEntries(this.sections.entries());
