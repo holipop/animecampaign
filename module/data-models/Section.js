@@ -10,7 +10,7 @@ export default class Section extends foundry.abstract.DataModel {
         return {
             name: new fields.StringField(),
             text: new fields.HTMLField(),
-            show: new fields.BooleanField({ initial: true }),
+            visible: new fields.BooleanField({ initial: true }),
         }
     }
 }

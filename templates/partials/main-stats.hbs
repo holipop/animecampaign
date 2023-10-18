@@ -6,15 +6,18 @@
     </tr>
     <tr>
         <td>
-            <input type="number" name="system.stamina.value" value="{{system.stamina.value}}">
-            <input type="number" name="system.stamina.max" value="{{system.stamina.max}}">
+            <input class="top" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="Value">
+            <input class="bottom" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="Max">
         </td>
         <td>
-            <input type="number" name="system.proficiency.value" value="{{system.proficiency.value}}">
+            <input type="number" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
+            <div class="class-level">
+                <div>{{system.classLevel}}</div>
+            </div>
         </td>
         <td>
-            <input type="number" name="system.movement.value" value="{{system.movement.value}}">
-            <input type="text" name="system.movement.content" value="{{system.movement.content}}">
+            <input class="top" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="Spaces">
+            <input class="bottom" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="Build">
         </td>
     </tr>
 </table>

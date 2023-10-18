@@ -28,9 +28,11 @@ export const SheetMixin = {
     resizeTextArea (html) {
         const resize = html.find('textarea[data-resize]');
 
-        resize.each(function() {
-            this.setAttribute("style", `height:${this.scrollHeight}px;`);
-        });
+        html.ready(() => {
+            resize.each(function() {
+                this.setAttribute("style", `height:${this.scrollHeight}px;`);
+            });
+        })
 
         resize.on("input", function() {
             this.style.height = 0;

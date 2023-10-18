@@ -1,0 +1,64 @@
+// main: ./animecampaign.less
+
+.animecampaign.actor.sheet .main-stats {
+    width: @stat-block-width;
+    border: 0;
+    margin: .5rem auto;
+
+    background-color: transparent;
+
+    th {
+        width: (@stat-block-width / 3);
+        padding: 0;
+
+        font-family: "Libre Franklin";
+        font-size: .75rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: .75;
+    }
+    td {
+        height: 3rem;
+        padding: 0 1rem;
+        border-left: (1 * @rpx) solid black;
+
+        background-color: rgba(0, 0, 0, 0.05);
+
+        &:last-child {
+            border-right: (1 * @rpx) solid black;
+        }
+    }
+    input {
+        #AC.InputSkinning();
+
+        position: relative;
+        height: fit-content;
+        text-align: center;
+        z-index: 2;
+
+        font: bold 2.75rem "Philosopher";
+        line-height: .5;
+
+        &.top {
+            border-bottom: (1 * @rpx) solid black;
+
+            font-size: 1.75rem;
+        }
+        &.bottom {
+            font-size: 1.1rem;
+        }
+    }
+    .class-level {
+        position: relative;
+        height: 0;
+        top: -3.7rem;
+        left: .5rem;
+        z-index: 1;
+
+        font: 3.5rem "Gloock";
+        text-align: center;
+        color: @proficiency-color;
+        opacity: .5;
+        transform: skew(-15deg);
+    }
+}

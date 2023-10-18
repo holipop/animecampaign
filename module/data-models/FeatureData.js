@@ -19,11 +19,16 @@ export default class FeatureData extends foundry.abstract.DataModel {
             category: new fields.StringField({ initial: 'weapon' }),
 
             stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
+            
             sections: new fields.ArrayField(new fields.EmbeddedDataField(Section), {
                 initial: [{}],
             }),
 
-            editor: new fields.StringField({ initial: 'markdown' }),
+            details: new fields.SchemaField({
+                editor: new fields.StringField({ initial: 'markdown' }),
+                action: new fields.StringField(),
+                formula: new fields.StringField(),
+            })
         };
     }
 

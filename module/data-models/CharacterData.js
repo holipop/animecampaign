@@ -29,7 +29,11 @@ export default class CharacterData extends foundry.abstract.DataModel {
                 initial: CONFIG.animecampaign.defaultCategories
             }),
 
-            description: new fields.HTMLField(),
+            biography: new fields.SchemaField({
+                editor: new fields.StringField({ initial: 'markdown' }),
+                text: new fields.HTMLField(),
+            }),
+
             class: new fields.StringField(),
             word: new fields.StringField(),
             type: new fields.StringField(),
@@ -38,5 +42,17 @@ export default class CharacterData extends foundry.abstract.DataModel {
                 initial: CONFIG.animecampaign.defaultColor
             }),
         };
+    }
+
+    /** Returns the class level as a roman numeral.
+     * @returns {number} 
+     */
+    get classLevel () {
+        const prof = this.proficiency.value;
+
+        if (prof >= 100) return "III";
+        else if (prof >= 60) return "II";
+        else if (prof >= 0) return "I";
+        return "";
     }
 }

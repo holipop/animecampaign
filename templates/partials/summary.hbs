@@ -5,7 +5,6 @@
 
     <section class="profile">
         <!-- Color -->
-        <!-- div class="color-button"><p>Change Color</p></div -->
         <input class="color" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
         <!-- Image -->
@@ -22,7 +21,7 @@
         {{/if}}
 
         {{#if (eq documentName "Item")}}
-            <!-- Chat Messaging -->
+            <!-- Proficiency Value -->
 
         {{/if}}
     </section>
@@ -32,6 +31,7 @@
         {{#if (eq documentName "Actor")}}
             <!-- Type of mundie or epithet user -->
             <select class="type" name="system.type">
+
                 <optgroup label="{{localize config.powerset.inscribed}}">
                     {{#select system.type}}
                         {{#each config.type.inscribed as |name key|}}
@@ -39,6 +39,7 @@
                         {{/each}}
                     {{/select}}
                 </optgroup>
+                
                 <optgroup label="{{localize config.powerset.mundie}}">
                     {{#select system.type}}
                         {{#each config.type.mundie as |name key|}}
@@ -46,6 +47,7 @@
                         {{/each}}
                     {{/select}}
                 </optgroup>
+
             </select>
 
             <!-- Core Word or Epithet -->

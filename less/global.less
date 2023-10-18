@@ -6,6 +6,32 @@
     .scrollable {
         overflow-y: scroll;
     }
+    input, select, textarea {
+        #AC.InputSkinning();
+
+        border: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+        border-left: 0;
+        border-right: 0;
+        background-color: rgba(0, 0, 0, 0.05);
+
+        font-family: "Libre Franklin";
+        font-weight: 500;
+
+        &:focus {
+            border-color: rgba(0, 0, 0, 0.66);
+        }
+    }
+    input, select {
+        border-top: 0;
+        &:focus {
+            box-shadow: inset rgba(0, 0, 0, 0.3) 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx);
+        }
+    }
+    textarea:focus {
+        box-shadow: 
+            inset rgba(0, 0, 0, 0.3) 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
+            inset rgba(0, 0, 0, 0.3) 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);
+    }
 }
 .animecampaign.actor.sheet {
     min-width: 650px;

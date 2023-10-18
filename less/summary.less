@@ -8,6 +8,7 @@
 .animecampaign.sheet .summary {
     display: grid;
     grid-template-columns: 1fr 4fr;
+    padding-bottom: 2 * @rpx;
 
     .background {
         position: absolute;
@@ -32,34 +33,14 @@
         grid-row: 1 / -1;
         place-self: end end;
     }
-    // TODO: find a way to make this look good.
-    /* .color-button {
-        display: none;
-
-        position: absolute;
-        > p {
-            position: relative;
-            height: 4rem;
-            top: 16 * @rpx;
-            margin: 0 (2 * @rpx);
-            padding: (2 * @rpx) (4 * @rpx);
-            z-index: 1;
-            
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: .7rem;
-            font-weight: bold;
-            border-radius: 2 * @rpx;
-            color: white;
-            background-color: black;
-        }
-    } */
     .color {
+        #AC.InputSkinning();
+
         width: 100%;
         margin: 0;
         z-index: 2;
 
         border: none;
-        // opacity: 0;
     }
     .img {
         z-index: 3;
@@ -94,11 +75,26 @@
         text-align: end;
         grid-column: 2 / -1;
         max-height: 4rem;
+        max-width: 9rem;
+        place-self: end end;
     }
     
     .summary-bottom {
         display: flex;
         grid-row: 2 / -1;
+        align-items: flex-end;
+        padding-left: 4 * @rpx;
+        gap: 2 * @rpx;
+
+        > * {
+            height: 1.6rem;
+        }
+    }
+    .word {
+        font-family: "Philosopher";
+        font-size: 1.25rem;
+        font-style: italic;
+        font-weight: bold;
     }
 }
 
@@ -123,9 +119,8 @@
     .class {
         min-height: 0;
         height: 1rem;
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
+        
+        font-weight: 800;
         line-height: .9;
     }
 }
