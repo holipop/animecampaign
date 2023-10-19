@@ -1,8 +1,8 @@
 import lang from "../lang/en.json" assert { type: 'json' };
-import * as AC from "./AC.js";
+import * as Obj from "./Obj.js";
 
 // An object containing language localization paths and default configurations.
-export const animecampaign = AC.facadeObject(lang).animecampaign;
+export const animecampaign = Obj.facade(lang).animecampaign;
 
 animecampaign.colors = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 animecampaign.defaultColor = "#CCCCCC";
@@ -11,14 +11,14 @@ animecampaign.defaultCategories = [
     {
         name: 'weapon',
         trackers: [
-            { tag: 'damage' },
-            { tag: 'range' },
+            { tag: 'damage', img: "icons/svg/sword.svg" },
+            { tag: 'range' , img: "icons/svg/thrust.svg" },
         ],
     },
     {
         name: 'talent',
         trackers: [
-            { tag: 'bonus' },
+            { tag: 'bonus', img: "icons/svg/heal.svg" },
         ],
     },
     {
@@ -28,7 +28,7 @@ animecampaign.defaultCategories = [
     {
         name: 'ability',
         trackers: [
-            { tag: 'cost' },
+            { tag: 'cost', img: "icons/svg/degen.svg" },
         ],
     }
 ];

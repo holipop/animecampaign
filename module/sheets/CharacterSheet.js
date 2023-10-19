@@ -1,4 +1,5 @@
 import * as AC from "../AC.js";
+import * as Obj from "../Obj.js";
 import { SheetMixin } from "./SheetMixin.js";
 
 // The application for Characters.
@@ -37,7 +38,7 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     getCategory (name) {
-        return AC.getObjectEntry(this.categories, { name: name });
+        return Obj.getEntry(this.categories, { name: name });
     }
 
     /** A shorthand for setting a category, returning the list of categories.
@@ -46,7 +47,7 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     setCategory (name, changes) {
-        return AC.setObjectEntry(this.categories, { name: name }, changes);
+        return Obj.setEntry(this.categories, { name: name }, changes);
     }
 
     /** A shorthand for if a category exists.
@@ -54,7 +55,7 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     hasCategory (name) {
-        return AC.hasObjectEntry(this.categories, { name: name });
+        return Obj.hasEntry(this.categories, { name: name });
     }
 
 
@@ -75,6 +76,8 @@ export default class CharacterSheet extends ActorSheet {
         data.categories = this.categoriesObject();
         data.categorizedFeatures = this.categorizedFeatures();
         data.categorizedTrackers = this.categorizedTrackers();
+
+        console.log(this);
 
         return data;
     }
@@ -592,7 +595,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const color = target.color ?? this.object.system.color;
 
-            const obj = AC.uniformObject(properties.split(' '), color);
+            const obj = Obj.uniform(properties.split(' '), color);
             $(element).css(obj);
         })
     }
@@ -616,7 +619,7 @@ export default class CharacterSheet extends ActorSheet {
             const luma = rgb.reduce((n, m) => n + m) / 255;
             const color = (luma <= .5) ? "white" : "black";
 
-            const obj = AC.uniformObject(properties.split(' '), color);
+            const obj = Obj.uniform(properties.split(' '), color);
             $(element).css(obj);
         })
     }
@@ -827,7 +830,7 @@ export default class CharacterSheet extends ActorSheet {
             const feature = this.object.getEmbeddedDocument('Item', id);
             const color = feature.system.color;
 
-            const obj = AC.uniformObject(properties.split(' '), color);
+            const obj = Obj.uniform(properties.split(' '), color);
             $(element).css(obj);
         })
     }
@@ -866,7 +869,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     updateColorStats (data) {
         const statChanges = getProperty(expandObject(data), 'system.stats');
-        const blankStats = AC.uniformObject(CONFIG.animecampaign.colors, null)
+        const blankStats = Obj.uniform(CONFIG.animecampaign.colors, null)
 
         for (const stat in statChanges) {
             const set = statChanges[stat];

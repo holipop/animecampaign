@@ -7,7 +7,7 @@ export const hbsHelpers = {
      * @returns {Object} 
      */
     //! This can already be accomplished with the lookup inline-helper.
-    search: function (path, options) {
+    __search: function (path, options) {
         const root = options.data.root;
         const context = typeof path == 'string' ? path : path.string; 
 

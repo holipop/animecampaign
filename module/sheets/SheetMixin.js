@@ -1,4 +1,5 @@
 import * as AC from "../AC.js";
+import * as Obj from "../Obj.js";
 
 // A mixin for shared methods between sheets.
 export const SheetMixin = {
@@ -49,7 +50,7 @@ export const SheetMixin = {
         match.each((index, element) => {
             const properties = $(element).data('match') || "color";
 
-            const obj = AC.uniformObject(properties.split(' '), this.object.system.color);
+            const obj = Obj.uniform(properties.split(' '), this.object.system.color);
             $(element).css(obj);
         })
     },
@@ -71,7 +72,7 @@ export const SheetMixin = {
             const luma = rgb.reduce((n, m) => n + m) / 255;
             const color = (luma <= .5) ? "white" : "black";
 
-            const obj = AC.uniformObject(properties.split(' '), color);
+            const obj = Obj.uniform(properties.split(' '), color);
             $(element).css(obj);
         })
     },
