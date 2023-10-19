@@ -20,7 +20,11 @@ export default class CharacterSheet extends ActorSheet {
             { dragSelector: "[data-kit] [data-feature]", dropSelector: null },
             { dragSelector: "[data-kit] [data-category]", dropSelector: null },
             { dragSelector: "[data-tracker-list] [data-tracker]", dropSelector: null },
-        ]
+        ];
+
+        options.tabs = [
+            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "bio" },
+        ];
 
         return options;
     }
@@ -291,8 +295,12 @@ export default class CharacterSheet extends ActorSheet {
         this.addColorStat(html);
         this.deleteColorStat(html);
 
+        // Navigation
+        this.setTabName(html);
+
         // Category
         this.createCategory(html);
+        this.addDefaultCategories(html);
         this.deleteCategory(html);
         this.renameCategory(html);
         this.colorCategory(html);
@@ -438,6 +446,15 @@ export default class CharacterSheet extends ActorSheet {
             dialog.render(true);
         })
     }
+
+    addDefaultCategories (html) {
+        const def = html.find('data-default-category');
+
+        def.on('click', () => {
+            
+        })
+    }
+
 
     /** Deletes a category given its index via a dialog.
      * @param {*} html 

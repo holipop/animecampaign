@@ -686,3 +686,61 @@
   font-size: 1.75rem;
   font-style: normal;
 }
+.animecampaign.sheet .navigation {
+  display: flex;
+}
+.animecampaign.sheet .navigation nav {
+  display: flex;
+  padding: 0 0.4rem;
+  gap: 0.4rem;
+}
+.animecampaign.sheet .navigation nav > * {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 1.5rem;
+  font-size: 1.1rem;
+}
+.animecampaign.sheet .navigation nav > .active {
+  background: linear-gradient(to top, rgba(100, 25, 25, 0.5), transparent);
+}
+.animecampaign.sheet .navigation .line {
+  height: 1.6rem;
+  align-self: center;
+  border-left: 0.0625rem solid black;
+}
+.animecampaign.sheet .navigation h1 {
+  margin: 0;
+  border: 0;
+  flex: 1;
+  padding: 0.25rem 0.5rem;
+  font: 1.5rem "Gloock";
+  text-transform: uppercase;
+  line-height: 1;
+}
+.animecampaign.sheet .navigation h1::first-letter {
+  font-size: 1.9rem;
+}
+.animecampaign.sheet .navigation .control-list {
+  display: flex;
+  align-items: flex-end;
+  font: 0.75rem "Libre Franklin";
+}
+.animecampaign.sheet .divider {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.6rem;
+}
+.animecampaign.sheet .divider .line {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  border-bottom: 0;
+  flex: 1;
+}
+.animecampaign.sheet .divider .icon {
+  position: relative;
+  height: 0;
+  top: -0.75rem;
+  margin: 0 0.2rem;
+  font-size: 1.25rem;
+}

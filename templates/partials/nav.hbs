@@ -1,3 +1,33 @@
-<section class="nav">
-    NAVIGATION
+<section class="navigation">
+
+    <!-- Tabs -->
+    {{#if (eq documentName "Actor")}}
+        <nav data-nav data-group="actor-tabs">
+
+            <a class="nav-tab" data-tab="biography" data-group="actor-tabs">
+                <i class="fas fa-user"></i>
+            </a>
+
+            <a class="nav-tab" data-tab="kit" data-group="actor-tabs">
+                <i class="fas fa-diamond"></i>
+            </a>
+
+        </nav>
+    {{/if}}
+
+    {{#if (eq documentName "Item")}}
+    {{/if}}
+
+    <div class="line"></div>
+
+    <!-- Name -->
+    <h1 data-tab-name></h1>
+
 </section>
+
+<!-- Divider -->
+<div class="divider">
+    <div class="line"></div>
+    <div class="icon">&#9876;</div>
+    <div class="line"></div>
+</div>

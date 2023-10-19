@@ -1,0 +1,73 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet .navigation {
+    display: flex;
+
+    nav {
+        display: flex;
+        padding: 0 .4rem;
+        gap: .4rem;
+
+        > * {
+            display: grid;
+            place-items: center;
+            height: 100%;
+            width: 1.5rem;
+
+            font-size: 1.1rem;
+        }
+        
+        > .active {
+            background: linear-gradient(to top, rgba(100, 25, 25, 0.5), transparent);
+        }
+    }
+
+    .line {
+        height: 1.6rem;
+        align-self: center;
+        border-left: (1 * @rpx) solid black;
+    }
+
+    h1 {
+        #AC.HeadingSkinning();
+
+        flex: 1;
+        padding: .25rem .5rem;
+
+        font: 1.5rem "Gloock";
+        text-transform: uppercase;
+        line-height: 1;
+
+        &::first-letter {
+            font-size: 1.9rem;
+        }
+    }
+
+    .control-list {
+        display: flex;
+        align-items: flex-end;
+
+        font: .75rem "Libre Franklin";
+    }
+}
+
+.animecampaign.sheet .divider {
+    display: flex;
+    width: 100%;
+    margin-bottom: .6rem;
+
+    .line {
+        #AC.Border();
+        border-bottom: 0;
+
+        flex: 1;
+    }
+    .icon {
+        position: relative;
+        height: 0;
+        top: -.75rem;
+        margin: 0 .2rem;
+
+        font-size: 1.25rem;
+    }
+}

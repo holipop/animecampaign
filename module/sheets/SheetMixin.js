@@ -174,4 +174,25 @@ export const SheetMixin = {
         name.on('input', scale);
         name.on('blur', () => this.submit());
     },
+
+
+    //* NAVIGATION */
+    //* ---------- */
+
+    /** Sets the name of the selected tab.
+     * @param {*} html 
+     */
+    setTabName (html) {
+        const nav = html.find('[data-nav]');
+        const name = html.find('[data-tab-name]');
+
+        const set = () => {
+            const active = nav.find('.active').data('tab');
+
+            name.text(active);
+        }
+
+        html.ready(set);
+        nav.on('click', set);
+    },
 }

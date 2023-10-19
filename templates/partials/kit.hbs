@@ -1,4 +1,4 @@
-<ol class="kit">
+<ol class="kit tab" data-tab="kit" data-group="actor-tabs">
 
     {{#each categorizedFeatures as |features category|}}
 
@@ -87,7 +87,12 @@
 
     {{/each}}
 
-    <a class="" title="Create Category">
+
+    <a title="Create Category">
         <i class="fas fa-plus" data-create-category></i>
     </a>
+    <a title="Add Defaults">
+        <i class="fas fa-bars" data-default-category></i>
+    </a>
+
 </ol>
