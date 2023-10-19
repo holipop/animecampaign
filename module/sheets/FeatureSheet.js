@@ -8,13 +8,19 @@ export default class FeatureSheet extends ItemSheet {
      * @returns {Object}
      */
     static get defaultOptions () {
-        return mergeObject(super.defaultOptions, {
+        const options = mergeObject(super.defaultOptions, {
             width: 550,
             height: 500,
             classes: ["animecampaign", "sheet", "item"],
             template: 'systems/animecampaign/templates/sheets/feature-sheet.hbs',
             scrollY: ["section.scrollable"],
         });
+
+        options.tabs = [
+            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "description" },
+        ];
+
+        return options;
     }
 
     // A shorthand for this feature's stats. 
@@ -84,6 +90,9 @@ export default class FeatureSheet extends ItemSheet {
         this.setStatView(html);
         this.addStat(html);
         this.deleteStat(html);
+
+        // Nav
+        this.setTabName(html);
 
         // Sections
         this.addSection(html);

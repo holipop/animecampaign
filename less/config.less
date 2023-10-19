@@ -25,9 +25,15 @@
 //* ------ */
 
 #AC {
+    .Color(@alpha: 1) {
+        @return: rgba(205, 50, 50, @alpha);
+    }
     .Border() {
         border: (1 * @rpx) solid black;
         box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
+    }
+    .Active() {
+        background: linear-gradient(to top, #AC.Color(.5)[@return], transparent);
     }
     .HeadingSkinning() {
         margin: 0;

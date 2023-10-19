@@ -6,6 +6,10 @@
     .scrollable {
         overflow-y: scroll;
     }
+
+    a:hover {
+        text-shadow: #AC.Color()[@return] 0 0 (8 * @rpx);
+    }   
     input, select, textarea {
         #AC.InputSkinning();
 
@@ -18,19 +22,22 @@
         font-weight: 500;
 
         &:focus {
-            border-color: rgba(0, 0, 0, 0.66);
+            border-color: #AC.Color(.66)[@return];
+        }
+        &:hover {
+            text-shadow: #AC.Color(.5)[@return] 0 0 (8 * @rpx);
         }
     }
     input, select {
         border-top: 0;
         &:focus {
-            box-shadow: inset rgba(0, 0, 0, 0.3) 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx);
+            box-shadow: inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx);
         }
     }
     textarea:focus {
         box-shadow: 
-            inset rgba(0, 0, 0, 0.3) 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
-            inset rgba(0, 0, 0, 0.3) 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);
+            inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
+            inset #AC.Color(.3)[@return] 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);
     }
 }
 .animecampaign.actor.sheet {

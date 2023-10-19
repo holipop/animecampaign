@@ -54,6 +54,8 @@
         }
     }
     .cap {
+        height: .25rem;
+        margin-bottom: .4rem;
         border: 0;
         box-shadow: none;
     }
@@ -99,7 +101,9 @@
         }
         .content {
             display: flex;
-            > * {
+            align-items: center;
+
+            > input {
                 flex: 1;
                 height: calc(80% + @rpx);
             }
@@ -107,21 +111,35 @@
         .divider {
             flex: 0;
             position: relative;
-            top: 2 * @rpx;
+            top: .3rem;
 
             font-family: "Libre Franklin";
             font-weight: 100;
             font-size: 1.25rem;
-            line-height: .75;
+            line-height: .5;
+        }
+        .line {
+            height: 55%;
+            border-left: (1 * @rpx) solid black;
         }
         .view {
             display: flex;
+            border: 0;
             justify-content: space-evenly;
-            align-items: center;
+            align-items: stretch;
+
+            a, i {
+                height: @stat-entry-height;
+                width: 1rem;
+            }
+            i {
+                text-align: center;
+                padding-top: 40%;
+            }
         }
     }
 
     .selected {
-        background-color: red;
+        #AC.Active();
     }
 }
