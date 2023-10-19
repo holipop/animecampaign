@@ -4,7 +4,7 @@
     <section class="entry" data-match-feature>
 
         <!-- Image -->
-        <img class="img" src="{{img}}" title="Roll Feature" data-feature="{{_id}}" data-match-feature="background-color border-left-color">
+        <img class="img" src="{{img}}" title="{{localize @root.config.app.rollFeature}}" data-feature="{{_id}}" data-match-feature="background-color border-left-color">
 
         <!-- Name -->
         <h4 class="name">{{name}}</h4>
@@ -42,10 +42,10 @@
         <!-- Controls -->
         <div class="feature-controls">
 
-            <a class="control" title="View Feature">
+            <a class="control" title="{{localize @root.config.app.viewFeature}}">
                 <i class="fas fa-feather-pointed" data-view-feature="{{_id}}"></i>
             </a>
-            <a class="control" title="Delete Feature">
+            <a class="control" title="{{localize @root.config.app.deleteFeature}}">
                 <i class="fas fa-trash" data-delete-feature="{{_id}}"></i>
             </a>
 

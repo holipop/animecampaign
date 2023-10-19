@@ -51,22 +51,22 @@
             {{/if}}
 
             <!-- Tag -->
-            <input class="tag" type="text" name="system.stats.{{key}}.tag" value="{{stat.tag}}" placeholder="Name">
+            <input class="tag" type="text" name="system.stats.{{key}}.tag" value="{{stat.tag}}" placeholder="{{localize @root.config.placeholder.tag}}">
 
             <!-- Content -->
             <div class="content">
                 {{#if (eq stat.view 'value')}}
-                    <input class="content" type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
+                    <input class="content" type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="{{localize @root.config.placeholder.value}}">
                 {{/if}}
 
                 {{#if (eq stat.view 'resource')}}
-                    <input class="content" type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="Value">
+                    <input class="content" type="number" name="system.stats.{{key}}.value" value="{{stat.value}}" placeholder="{{localize @root.config.placeholder.value}}">
                     <div class="divider">/</div>
-                    <input class="content" type="number" name="system.stats.{{key}}.max" value="{{stat.max}}" placeholder="Max">
+                    <input class="content" type="number" name="system.stats.{{key}}.max" value="{{stat.max}}" placeholder="{{localize @root.config.placeholder.max}}">
                 {{/if}}
 
                 {{#if (eq stat.view 'label')}}
-                    <input class="content" type="text" name="system.stats.{{key}}.label" value="{{stat.label}}" placeholder="Label">
+                    <input class="content" type="text" name="system.stats.{{key}}.label" value="{{stat.label}}" placeholder="{{localize @root.config.placeholder.label}}">
                 {{/if}}
             </div>
 

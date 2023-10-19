@@ -8,7 +8,7 @@
         <input class="color" type="color" name="system.color" data-edit="system.color" value="{{system.color}}">
 
         <!-- Image -->
-        <img class="img" src="{{document.img}}" data-edit="img" title="{{document.name}}" data-match="background-color">
+        <img class="img" src="{{document.img}}" data-edit="img" data-match="background-color">
     </section>
 
     <section class="summary-top">
@@ -17,7 +17,7 @@
 
         {{#if (eq documentName "Actor")}}
             <!-- Class -->
-            <textarea class="class" name="system.class" placeholder="Class" data-resize data-enter data-contrast>{{~system.class}}</textarea>
+            <textarea class="class" name="system.class" placeholder="{{localize config.placeholder.class}}" data-resize data-enter data-contrast>{{~system.class}}</textarea>
         {{/if}}
 
         {{#if (eq documentName "Item")}}
@@ -51,7 +51,7 @@
             </select>
 
             <!-- Core Word or Epithet -->
-            <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="Epithet/Core Word">
+            <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="{{localize config.placeholder.word}}">
         {{/if}}
 
         {{#if (eq documentName "Item")}}
@@ -63,7 +63,8 @@
                     {{/each}}
                 {{! /select}}
             </select>
-            <input class="category-input" type="text" name="system.category" value="{{system.category}}">
+
+            <input class="category-input" type="text" name="system.category" value="{{system.category}}" placeholder="{{localize config.placeholder.category}}">
         {{/if}}
 
     </section -->

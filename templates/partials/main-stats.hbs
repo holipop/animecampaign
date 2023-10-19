@@ -6,8 +6,8 @@
     </tr>
     <tr>
         <td>
-            <input class="top" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="Value">
-            <input class="bottom" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="Max">
+            <input class="top" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="{{localize @root.config.placeholder.value}}">
+            <input class="bottom" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="{{localize @root.config.placeholder.max}}">
         </td>
         <td>
             <input type="number" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
@@ -16,8 +16,8 @@
             </div>
         </td>
         <td>
-            <input class="top" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="Spaces">
-            <input class="bottom" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="Build">
+            <input class="top" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="{{localize @root.config.placeholder.spaces}}">
+            <input class="bottom" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="{{localize @root.config.placeholder.build}}">
         </td>
     </tr>
 </table>

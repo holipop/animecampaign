@@ -8,7 +8,7 @@
             <header data-match-category="background-color">
 
                 <!-- Collapse -->
-                <a class="control collapse" title="{{localize config.app.collapseStats}}" data-contrast-category>
+                <a class="control collapse" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
                     <i class="fas fa-chevron-down" data-collapse="categories.{{category}}"></i>
                 </a>
                 
@@ -17,13 +17,13 @@
                 <!-- Settings -->
                 <div class="category-controls" data-contrast-category>
 
-                    <a class="control" title="Rename Category">
+                    <a class="control" title="{{localize @root.config.app.renameCategory}}">
                         <i class="fas fa-pencil" data-rename-category="{{category}}"></i>
                     </a>
-                    <a class="control" title="Change Color">
+                    <a class="control" title="{{localize @root.config.app.colorCategory}}">
                         <i class="fas fa-palette" data-color-category="{{category}}"></i>
                     </a>
-                    <a class="control" title="Flood Category">
+                    <a class="control" title="{{localize @root.config.app.floodCategory}}">
                         <i class="fas fa-fill-drip" data-flood-category="{{category}}"></i>
                     </a>
 
@@ -32,7 +32,7 @@
                 <!-- Tracked Stats -->
                 <div class="tracked-stat-list" data-tracker-list data-contrast-category>
 
-                    <a class="control" title="Track Stat">
+                    <a class="control" title="{{localize @root.config.app.trackStat}}">
                         <i class="fas fa-square-plus" data-track="{{category}}"></i>
                     </a>
 
@@ -41,12 +41,12 @@
                             <div class="tracked-stat" data-tracker="{{index}}" data-contrast-category="border-color">
 
                                 {{#with (lookup @root.categories category)}}
-                                    <div class="tracker-image">
+                                    <div class="tracker-image" title="{{localize @root.config.app.setStatImage}}">
                                         <img src="{{tracker.img}}" data-tracker="{{index}}" data-image-tracker="{{index}}" data-contrast-image="{{this.color}}">
                                     </div>
                                 {{/with}}
 
-                                <a class="control" title="Untrack Stat">
+                                <a class="control" title="{{localize @root.config.app.untrackStat}}">
                                     <i class="fas fa-xmark" data-untrack="{{index}}"></i>
                                 </a>
 
@@ -61,10 +61,10 @@
                 <!-- Controls -->
                 <div class="list-controls" data-contrast-category="color border-color">
 
-                    <a class="control" title="Add Feature">
+                    <a class="control" title="{{localize @root.config.app.createFeature}}">
                         <i class="fas fa-plus" data-create-feature="{{category}}"></i>
                     </a>
-                    <a class="control" title="Delete Category">
+                    <a class="control" title="{{localize @root.config.app.deleteCategory}}">
                         <i class="fas fa-sack-xmark" data-delete-category="{{category}}"></i>
                     </a>
 

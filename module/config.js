@@ -33,14 +33,7 @@ animecampaign.defaultCategories = [
     }
 ];
 
-/* {
-    'weapon': ['damage', 'range'],
-    'talent': ['bonus'],
-    'passive': [],
-    'ability': ['cost'],
-}; */
-
-animecampaign.textInputDialogContent = (name, placeholder) => `
+animecampaign.textDialog = (name, placeholder) => `
     <form autocomplete="off">
         <div class="form-group">
             <label>${name}</label>
@@ -51,7 +44,7 @@ animecampaign.textInputDialogContent = (name, placeholder) => `
     </form>
 `;
 
-animecampaign.colorCategoryDialogContent = hexcode => `
+animecampaign.colorDialog = hexcode => `
     <form autocomplete="off">
         <div class="form-group">
             <label>Color</label>

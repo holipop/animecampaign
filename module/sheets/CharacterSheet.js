@@ -432,7 +432,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const dialog = new Dialog({
                 title: `Create New Category: ${this.object.name}`,
-                content: CONFIG.animecampaign.textInputDialogContent('Name', 'New Category'),
+                content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), AC.localize('app.newCategory')),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
@@ -518,7 +518,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const dialog = new Dialog({
                 title: `Rename Category [${key.toUpperCase()}]: ${this.object.name}`,
-                content: CONFIG.animecampaign.textInputDialogContent('Name', key),
+                content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), key),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
@@ -559,7 +559,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const dialog = new Dialog({
                 title: `Recolor Category [${key.toUpperCase()}]: ${this.object.name}`,
-                content: CONFIG.animecampaign.colorCategoryDialogContent(initialColor),
+                content: CONFIG.animecampaign.colorDialog(initialColor),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
@@ -694,7 +694,7 @@ export default class CharacterSheet extends ActorSheet {
 
             const dialog = new Dialog({
                 title: `Track Stat [${key}]: ${this.object.name}`,
-                content: CONFIG.animecampaign.textInputDialogContent('Stat Name', ''),
+                content: CONFIG.animecampaign.textDialog(AC.localize('app.statName'), ''),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',

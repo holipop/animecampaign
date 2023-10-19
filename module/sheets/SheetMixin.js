@@ -189,7 +189,7 @@ export const SheetMixin = {
         const set = () => {
             const active = nav.find('.active').data('tab');
 
-            name.text(active);
+            name.text(AC.localize(`nav.${active}`));
         }
 
         html.ready(set);

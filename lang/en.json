@@ -35,13 +35,45 @@
             "passive": "Passive",
             "ability": "Ability"
         },
+        "nav": {
+            "biography": "Biography",
+            "kit": "Kit",
+            "description": "Description"
+        },
         "app": {
-            "colorStats": "Color Stats",
             "stats": "Stats",
+            "name": "Name",
+            "colorStats": "Color Stats",
             "collapseStats": "Collapse Stats",
             "addStat": "Add Stat",
+            "collapseCategory": "Collapse Category",
+            "renameCategory": "Rename Category",
+            "colorCategory": "Color Category",
+            "floodCategory": "Flood Category",
+            "trackStat": "Track Stat",
+            "statName": "Stat Name",
+            "untrackStat": "Untrack Stat",
+            "setStatImage": "Set Stat Image",
+            "createCategory": "Create Category",
+            "newCategory": "New Category",
+            "deleteCategory": "Delete Category",
+            "createFeature": "Create Feature",
+            "rollFeature": "Roll Feature",
+            "viewFeature": "View Feature",
+            "deleteFeature": "Delete Feature"
+        },
+        "placeholder": {
+            "value": "Value",
+            "max": "Max",
+            "spaces": "Spaces",
+            "build": "Build",
+            "label": "Label",
+            "text": "Text",
+            "tag": "Tag",
+            "word": "Epithet/Core Word",
+            "class": "Class",
             "name": "Name",
-            "newCategory": "New Category"
+            "category": "Category"
         }
     }
 }
