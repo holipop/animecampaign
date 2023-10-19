@@ -38,7 +38,8 @@
         "nav": {
             "biography": "Biography",
             "kit": "Kit",
-            "description": "Description"
+            "description": "Description",
+            "details": "Details"
         },
         "app": {
             "stats": "Stats",

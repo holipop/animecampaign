@@ -193,7 +193,7 @@ export const SheetMixin = {
             name.text(AC.localize(`nav.${active}`));
         }
 
-        html.ready(set);
+        set();
         nav.on('click', set);
     },
 }

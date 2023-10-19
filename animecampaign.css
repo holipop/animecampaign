@@ -424,6 +424,8 @@
   align-items: center;
   height: 1.75rem;
   border-top: 0;
+  border-right-color: transparent;
+  border-left-color: transparent;
 }
 .animecampaign.sheet .stat-list .stat > * {
   border-left: 0.0625rem solid black;

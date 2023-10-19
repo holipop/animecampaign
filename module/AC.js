@@ -50,6 +50,7 @@ export async function preloadHandlebarsTemplates () {
 
         // Item
         'sections': 'systems/animecampaign/templates/partials/sections.hbs',
+        'details': 'systems/animecampaign/templates/partials/details.hbs',
     }
 
     return loadTemplates(paths);

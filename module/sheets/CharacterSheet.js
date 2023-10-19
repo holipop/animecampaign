@@ -77,8 +77,6 @@ export default class CharacterSheet extends ActorSheet {
         data.categorizedFeatures = this.categorizedFeatures();
         data.categorizedTrackers = this.categorizedTrackers();
 
-        console.log(this);
-
         return data;
     }
 

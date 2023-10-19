@@ -1,13 +1,15 @@
 <section class="navigation">
 
-    <!-- Tabs -->
+    <!-- Actor Tabs -->
     {{#if (eq documentName "Actor")}}
         <nav data-nav data-group="actor-tabs">
 
+            <!-- Biography -->
             <a class="nav-tab" title="{{localize config.nav.biography}}" data-tab="biography" data-group="actor-tabs">
                 <i class="fas fa-user"></i>
             </a>
 
+            <!-- Kit -->
             <a class="nav-tab" title="{{localize config.nav.kit}}" data-tab="kit" data-group="actor-tabs">
                 <i class="fas fa-diamond"></i>
             </a>
@@ -15,11 +17,18 @@
         </nav>
     {{/if}}
 
+    <!-- Item Tabs -->
     {{#if (eq documentName "Item")}}
         <nav data-nav data-group="item-tabs">
 
+            <!-- Description -->
             <a class="nav-tab" title="{{localize config.nav.description}}" data-tab="description" data-group="item-tabs">
                 <i class="fas fa-section"></i>
+            </a>
+
+            <!-- Details -->
+            <a class="nav-tab" title="{{localize config.nav.details}}" data-tab="details" data-group="item-tabs">
+                <i class="fas fa-circle-info"></i>
             </a>
 
         </nav>

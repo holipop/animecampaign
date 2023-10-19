@@ -1,23 +1,34 @@
 <table class="main-stats">
+
+    <!-- Headers -->
     <tr>
         <th>{{localize config.mainStat.stamina}}</th>
         <th>{{localize config.mainStat.proficiency}}</th>
         <th>{{localize config.mainStat.movement}}</th>
     </tr>
+
+    <!-- Inputs -->
     <tr>
+
+        <!-- Stamina -->
         <td>
             <input class="top" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="{{localize @root.config.placeholder.value}}">
             <input class="bottom" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="{{localize @root.config.placeholder.max}}">
         </td>
+
+        <!-- Proficiency -->
         <td>
             <input type="number" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
             <div class="class-level">
                 <div>{{system.classLevel}}</div>
             </div>
         </td>
+
+        <!-- Movement -->
         <td>
             <input class="top" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="{{localize @root.config.placeholder.spaces}}">
             <input class="bottom" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="{{localize @root.config.placeholder.build}}">
         </td>
     </tr>
+
 </table>

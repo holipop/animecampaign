@@ -17,6 +17,7 @@
                 <!-- Settings -->
                 <div class="category-controls" data-contrast-category>
 
+                    <!-- Rename, Color, Flood -->
                     <a class="control" title="{{localize @root.config.app.renameCategory}}">
                         <i class="fas fa-pencil" data-rename-category="{{category}}"></i>
                     </a>
@@ -32,6 +33,7 @@
                 <!-- Tracked Stats -->
                 <div class="tracked-stat-list" data-tracker-list data-contrast-category>
 
+                    <!-- Track -->
                     <a class="control" title="{{localize @root.config.app.trackStat}}">
                         <i class="fas fa-square-plus" data-track="{{category}}"></i>
                     </a>
@@ -40,16 +42,19 @@
                         {{#each this as |tracker index|}}
                             <div class="tracked-stat" data-tracker="{{index}}" data-contrast-category="border-color">
 
+                                <!-- Image -->
                                 {{#with (lookup @root.categories category)}}
                                     <div class="tracker-image" title="{{localize @root.config.app.setStatImage}}">
                                         <img src="{{tracker.img}}" data-tracker="{{index}}" data-image-tracker="{{index}}" data-contrast-image="{{this.color}}">
                                     </div>
                                 {{/with}}
 
+                                <!-- Untrack -->
                                 <a class="control" title="{{localize @root.config.app.untrackStat}}">
                                     <i class="fas fa-xmark" data-untrack="{{index}}"></i>
                                 </a>
 
+                                <!-- Label -->
                                 <span class="label">{{tracker.tag}}</span>
 
                             </div>
@@ -86,7 +91,6 @@
         </li>
 
     {{/each}}
-
 
     <a title="Create Category">
         <i class="fas fa-plus" data-create-category></i>
