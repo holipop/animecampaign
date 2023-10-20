@@ -18,6 +18,9 @@
         > * {
             color: black;
         }
+        &:hover i {
+            opacity: 1;
+        }
     }
     .img {
         #AC.InputSkinning();
@@ -46,7 +49,11 @@
         height: @feature-entry-height * .75;
         justify-content: space-evenly;
 
-        border-left: (1 * @rpx) solid black;
+        border-left: (1 * @rpx) solid rgba(0, 0, 0, 0.25);
+
+        i {
+            opacity: .25;
+        }
     }
     .feature-tracked-stat-list {
         display: flex;

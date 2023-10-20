@@ -2,9 +2,6 @@
 
 @category-header-height: 2rem;
 
-//* KIT */
-//* --- */
-
 .animecampaign.actor.sheet .kit {
     #AC.ListSkinning();
 
@@ -13,11 +10,11 @@
         place-items: center;
         width: 1.25rem;
     }
+
+    button {
+        margin-bottom: 1rem;
+    }
 }
-
-
-//* CATEGORY */
-//* -------- */
 
 .animecampaign.actor.sheet .kit .category {
     header {
@@ -51,6 +48,15 @@
     .collapse {
         flex-shrink: 0;
         width: 1.75rem;
+    }
+
+    .category-controls, .tracked-stat-list, .list-controls {
+        i {
+            opacity: .25;
+        }
+    }
+    &:hover i {
+        opacity: 1;
     }
 
     .category-controls {

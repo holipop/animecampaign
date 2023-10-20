@@ -5,6 +5,12 @@
 
     .scrollable {
         overflow-y: scroll;
+
+        scrollbar-color: @ac-color;
+        
+        ::-webkit-scrollbar {
+            color: @ac-color
+        }
     }
 
     a:hover {

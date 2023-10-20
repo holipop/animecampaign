@@ -915,7 +915,7 @@ export default class CharacterSheet extends ActorSheet {
 
             set.tag = set.tag.toLowerCase();
 
-            blankStats[statChanges[stat].color] = statChanges[stat];
+            blankStats[statChanges[stat].color] = set;
         }
 
         const updatedData = mergeObject(data, { system: { stats: blankStats } });

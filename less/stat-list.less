@@ -103,8 +103,17 @@
             letter-spacing: 2rem;
         }
         .img {
+            #AC.InputSkinning();
+            #AC.Border();
+
             height: @stat-entry-height;
             width: @stat-entry-height;
+            border-color: rgba(0, 0, 0, 0.25);
+            border-top: 0;
+            border-bottom: 0;
+
+            filter: brightness(0) saturate(100%);
+            opacity: .75;
         }
 
         .tag, .content {
@@ -115,7 +124,6 @@
             margin-left: 1 * @rpx;
 
             text-transform: uppercase;
-            font-weight: 600;
         }
         .content {
             display: flex;
