@@ -24,7 +24,7 @@ export default class CharacterSheet extends ActorSheet {
         ];
 
         options.tabs = [
-            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "bio" },
+            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "biography" },
         ];
 
         return options;
@@ -196,9 +196,19 @@ export default class CharacterSheet extends ActorSheet {
         const source = features.get(data.id);
 
         const dropTarget = $(event.target).closest('[data-feature]');
-        const dropCategory = dropTarget.closest('[data-category]');
-        if (dropTarget.length == 0) return;
+        const dropCategory = $(event.target).closest('[data-category]');
 
+        // If the feature was placed on an empty category.
+        if (dropTarget.length == 0) {
+            const updateData = [{
+                _id: source._id,
+                sort: 0,
+                system: { category: dropCategory.data('category') }
+            }];
+            return this.object.updateEmbeddedDocuments('Item', updateData);
+        };
+
+        // Doesn't sort on itself.
         const target = features.get(dropTarget.data('feature'));
         if (source._id == target._id) return;
 
@@ -210,6 +220,7 @@ export default class CharacterSheet extends ActorSheet {
             }
         })
 
+        // Sorts based on its siblings.
         const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
         const updateData = sortUpdates.map(u => {
             const update = u.update;

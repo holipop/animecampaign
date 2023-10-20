@@ -55,17 +55,19 @@ export default class FeatureSheet extends ItemSheet {
      * @returns {string[]}
      */
     categories () {
+        // Owned features only list their parent's categories. 
+        if (this.object.isOwned) {
+            return this.object.parent.system.categories.map(cat => cat.name);
+        }
+
+        // Otherwise, list will contain the default categories and their own.
         const defaultCategories = CONFIG.animecampaign.defaultCategories.map(category => {
             return category.name;
         })
         const currentCategory = this.object.system.category;
-        const categories = new Set([...defaultCategories, currentCategory])
-
-        if (this.isOwned) {
-            
-        }
+        const categorySet = new Set([...defaultCategories, currentCategory])
         
-        return [...categories];
+        return [...categorySet];
     }
 
 
@@ -85,6 +87,7 @@ export default class FeatureSheet extends ItemSheet {
 
         // Summary
         this.resizeName(html);
+        this.selectCategory(html);
 
         // Stats
         this.setStatView(html);
@@ -100,6 +103,24 @@ export default class FeatureSheet extends ItemSheet {
 
         super.activateListeners(html);
     }
+
+    
+    //* Summary
+
+    /** Sets the category via the selection.
+     * @param {*} html 
+     */
+    selectCategory (html) {
+        const select = html.find('[data-select-category="select"]');
+        const target = html.find('[data-select-category="target"]');
+
+        select.on('change', event => {
+            const category = $(event.target).val();
+            target.val(category);
+            this.object.update();
+        });
+    }
+
 
     //* Stats
     
@@ -199,6 +220,9 @@ export default class FeatureSheet extends ItemSheet {
     _updateObject (event, data) {
         data = this.updateStatList(data);
         data = this.updateSectionList(data);
+        data = this.lowercaseCategory(data);
+
+        this.updateParentCategories(data);
 
         super._updateObject(event, data);
     }
@@ -239,6 +263,35 @@ export default class FeatureSheet extends ItemSheet {
         const updatedData = mergeObject(data, { system: { sections: sections } })
 
         return flattenObject(updatedData);
+    }
+
+    /** Sets the category to lowercase.
+     * @param {Object} data 
+     * @returns {Object}
+     */
+    lowercaseCategory (data) {
+        const category = getProperty(expandObject(data), 'system.category');
+
+        const updatedData = mergeObject(data, { system: { category: category.toLowerCase() } });
+
+        return flattenObject(updatedData);
+    }
+
+    /** Creates a new category to the parent's system categories if the entered category name doesn't exist.
+     * @param {*} data 
+     * @returns {null}
+     */
+    updateParentCategories (data) {
+        if (!this.object.isOwned) return;
+
+        const parentCategories = this.object.parent.system.categories
+        const categoryNames = parentCategories.map(category => category.name);
+        const newCategory = getProperty(expandObject(data), 'system.category');
+
+        if (categoryNames.includes(newCategory)) return;
+
+        const update = [ ...parentCategories, { name: newCategory } ];
+        this.object.parent.update({ 'system.categories': update });
     }
 }
 

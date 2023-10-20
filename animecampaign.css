@@ -310,6 +310,19 @@
 .animecampaign.item.sheet .summary .name {
   font-size: 2.5rem;
 }
+.animecampaign.item.sheet .summary .summary-bottom > * {
+  height: 1.5rem;
+}
+.animecampaign.item.sheet .summary .category-select {
+  width: 0.94rem;
+}
+.animecampaign.item.sheet .summary .category-select option {
+  text-transform: capitalize;
+}
+.animecampaign.item.sheet .summary .category-input {
+  text-transform: uppercase;
+  font-weight: 600;
+}
 .animecampaign.actor.sheet .main-stats {
   width: 26rem;
   border: 0;
