@@ -22,6 +22,15 @@ export const SheetMixin = {
             });
         });
     },
+
+    /** Fuck those red dotted lines.
+     * @param {*} html 
+     */
+    disableSpellcheck (html) {
+        html.ready(() => {
+            html.find("input[type='text'], textarea").attr('spellcheck',false);
+        });
+    },
     
     /** Resizes the height of a textarea dynamically as you type more.
      * @param {*} html 
@@ -77,6 +86,9 @@ export const SheetMixin = {
         })
     },
 
+    /** Contrasts the inputed color for an image, using filters.
+     * @param {*} html 
+     */
     contrastImage (html) {
         const WHITE = 'brightness(0) saturate(100%) invert(100%)';
         const BLACK = 'brightness(0) saturate(100%)';

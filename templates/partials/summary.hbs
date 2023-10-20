@@ -56,15 +56,15 @@
 
         {{#if (eq documentName "Item")}}
             <!-- Category -->
-            <select class="category-select" name="! system.category">
-                {{! #select system.category}}
+            <select class="category-select" data-select-category="select">
+                {{#select system.category}}
                     {{#each categories as |category index|}}
-                        <option>{{category}}</option>
+                        <option value="{{category}}">{{category}}</option>
                     {{/each}}
-                {{! /select}}
+                {{/select}}
             </select>
 
-            <input class="category-input" type="text" name="system.category" value="{{system.category}}" placeholder="{{localize config.placeholder.category}}">
+            <input class="category-input" type="text" name="system.category" value="{{system.category}}" placeholder="{{localize config.placeholder.category}}" data-select-category="target">
         {{/if}}
 
     </section -->

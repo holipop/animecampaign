@@ -41,11 +41,21 @@
             "description": "Description",
             "details": "Details"
         },
+        "dialog": {
+            "create": "Create New Category: {name}",
+            "recolor": "Recolor Category [{category}]: {name}",
+            "rename": "Rename Category [{category}]: {name}",
+            "track": "Track Stat [{category}]: {name}",
+            "deleteCategory": "Delete Category [{category}]: {name}",
+            "deleteFeature": "Delete Feature [{id}]: {name}",
+            "resetColor": "Reset Color"
+        },
         "app": {
             "stats": "Stats",
             "name": "Name",
             "colorStats": "Color Stats",
             "collapseStats": "Collapse Stats",
+            "view": "View",
             "addStat": "Add Stat",
             "collapseCategory": "Collapse Category",
             "renameCategory": "Rename Category",

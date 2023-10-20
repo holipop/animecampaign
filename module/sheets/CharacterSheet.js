@@ -24,7 +24,7 @@ export default class CharacterSheet extends ActorSheet {
         ];
 
         options.tabs = [
-            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "bio" },
+            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "biography" },
         ];
 
         return options;
@@ -196,9 +196,19 @@ export default class CharacterSheet extends ActorSheet {
         const source = features.get(data.id);
 
         const dropTarget = $(event.target).closest('[data-feature]');
-        const dropCategory = dropTarget.closest('[data-category]');
-        if (dropTarget.length == 0) return;
+        const dropCategory = $(event.target).closest('[data-category]');
 
+        // If the feature was placed on an empty category.
+        if (dropTarget.length == 0) {
+            const updateData = [{
+                _id: source._id,
+                sort: 0,
+                system: { category: dropCategory.data('category') }
+            }];
+            return this.object.updateEmbeddedDocuments('Item', updateData);
+        };
+
+        // Doesn't sort on itself.
         const target = features.get(dropTarget.data('feature'));
         if (source._id == target._id) return;
 
@@ -210,6 +220,7 @@ export default class CharacterSheet extends ActorSheet {
             }
         })
 
+        // Sorts based on its siblings.
         const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
         const updateData = sortUpdates.map(u => {
             const update = u.update;
@@ -281,6 +292,7 @@ export default class CharacterSheet extends ActorSheet {
     activateListeners (html) {
         // Global
         this.submitOnEnter(html);
+        this.disableSpellcheck(html);
         this.resizeTextArea(html);
         this.matchColor(html);
         this.contrastColor(html);
@@ -292,6 +304,7 @@ export default class CharacterSheet extends ActorSheet {
 
         // Color Stats
         this.disableStatOptions(html);
+        this.matchSelect(html);
         this.setColorStatView(html);
         this.addColorStat(html);
         this.deleteColorStat(html);
@@ -301,7 +314,6 @@ export default class CharacterSheet extends ActorSheet {
 
         // Category
         this.createCategory(html);
-        this.addDefaultCategories(html);
         this.deleteCategory(html);
         this.renameCategory(html);
         this.colorCategory(html);
@@ -330,7 +342,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     disableStatOptions (html) {
         const stats = this.object.system.stats;
-        const colorKeys = CONFIG.animecampaign.colors;
+        const colorKeys = CONFIG.animecampaign.colorKeys;
         const populatedColors = colorKeys.filter(element => stats[element] != null);
 
         populatedColors.forEach(element => {
@@ -342,6 +354,23 @@ export default class CharacterSheet extends ActorSheet {
                 if (!isSelected) $(element).attr('disabled', 'true');
             });
         });
+    }
+
+    matchSelect (html) {
+        const select = html.find('[data-match-select]');
+
+        select.each((index, element) => {
+            const key = $(element).data('match-select');
+            const color = CONFIG.animecampaign.colors[key];
+
+            const styles = {
+                'text-shadow': `${color} .1rem .1rem`,
+                'box-shadow': `inset ${color} 0 0 .1rem`,
+                'background-color': `${color}80`,
+            }
+
+            $(element).css(styles)
+        })
     }
 
     /** Sets the view of the color stat.
@@ -432,12 +461,12 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Create New Category: ${this.object.name}`,
+                title: AC.format('dialog.create', { name: this.object.name }),
                 content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), AC.localize('app.newCategory')),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: "Create New Category",
+                        label: AC.localize('app.createCategory'),
                         callback: callback
                     },
                 },
@@ -447,15 +476,6 @@ export default class CharacterSheet extends ActorSheet {
             dialog.render(true);
         })
     }
-
-    addDefaultCategories (html) {
-        const def = html.find('data-default-category');
-
-        def.on('click', () => {
-            
-        })
-    }
-
 
     /** Deletes a category given its index via a dialog.
      * @param {*} html 
@@ -480,7 +500,10 @@ export default class CharacterSheet extends ActorSheet {
             }
             
             Dialog.confirm({
-                title: `Delete Category [${key.toUpperCase()}]: ${this.object.name}`,
+                title: AC.format('dialog.deleteCategory', {
+                    category: key.toUpperCase(),
+                    name: this.object.name
+                }),
                 content: 
                     `<p>Delete the "${key.toUpperCase()}" category?</p>
                     <p><b>Warning: This will delete all kit features within this category.</b></p>`,
@@ -518,12 +541,15 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Rename Category [${key.toUpperCase()}]: ${this.object.name}`,
+                title: AC.format('dialog.rename', {
+                    category: key.toUpperCase(),
+                    name: this.object.name
+                }),
                 content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), key),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: "Rename Category",
+                        label: AC.localize('app.renameCategory'),
                         callback: callback
                     },
                 },
@@ -559,21 +585,25 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Recolor Category [${key.toUpperCase()}]: ${this.object.name}`,
+                title: AC.format('dialog.recolor', {
+                    category: key.toUpperCase(),
+                    name: this.object.name
+                }),
                 content: CONFIG.animecampaign.colorDialog(initialColor),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: 'Color Category',
+                        label: AC.localize('app.colorCategory'),
                         callback: set
                     },
                     reset: {
                         icon: '<i class="fas fa-arrow-rotate-left"></i>',
-                        label: 'Reset Color',
+                        label: AC.localize('dialog.resetColor'),
                         callback: reset
                     }
                 },
                 default: "confirm",
+                close: set,
             }, { width: 325 });
 
             dialog.render(true);
@@ -694,12 +724,12 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Track Stat [${key}]: ${this.object.name}`,
+                title: AC.format('track', { category: key, name: this.object.name }),
                 content: CONFIG.animecampaign.textDialog(AC.localize('app.statName'), ''),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: "Track Stat",
+                        label: AC.localize('app.trackStat'),
                         callback: callback
                     },
                 },
@@ -812,7 +842,18 @@ export default class CharacterSheet extends ActorSheet {
         del.on('click', event => {
             const id = $(event.target).data('delete-feature');
 
-            this.object.deleteEmbeddedDocuments('Item', [id]);
+            const callback = () => this.object.deleteEmbeddedDocuments('Item', [id]);
+
+            Dialog.confirm({
+                title: AC.format('dialog.deleteFeature', {
+                    id: id,
+                    name: this.object.name
+                }),
+                content: `<p>Delete this feature?</p>`,
+                yes: callback,
+                no: () => {},
+                defaultYes: false,
+            });
         })
     }
 
@@ -867,7 +908,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     updateColorStats (data) {
         const statChanges = getProperty(expandObject(data), 'system.stats');
-        const blankStats = Obj.uniform(CONFIG.animecampaign.colors, null)
+        const blankStats = Obj.uniform(CONFIG.animecampaign.colorKeys, null)
 
         for (const stat in statChanges) {
             const set = statChanges[stat];

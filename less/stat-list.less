@@ -6,6 +6,9 @@
 @stat-header-height: 1.2rem;
 @stat-entry-height: 1.75rem;
 
+.animecampaign.item.sheet .stat-list {
+    margin-top: .5rem;
+}
 .animecampaign.sheet .stat-list {
     #AC.ListSkinning();
 
@@ -19,6 +22,10 @@
     }
     .view {
         width: 4rem;
+    }
+    .line {
+        height: 55%;
+        border-left: (1 * @rpx) solid black;
     }
 
     .stat-header {
@@ -41,15 +48,20 @@
         h2 {
             flex: 1;
 
-            font-size: .8rem;
-            font-weight: bold;
+            font-size: .7rem;
+            font-weight: 800;
             text-transform: uppercase;
         }
         .label {
             text-align: center;
+
+            &.view {
+                border: (1 * @rpx) solid black;
+                border-top: 0;
+                border-bottom: 0;
+            }
         }
-        .label, .add-stat {
-            border-left: (1 * @rpx) solid black;
+        .add-stat {
             margin-right: 1 * @rpx;
         }
     }
@@ -83,9 +95,12 @@
         .color {
             width: @stat-entry-height;
             padding: 0;
+            padding-left: .425rem;
+            border: 0;
 
             appearance: none;
-            border: 0;
+            font: italic bold 1.15rem "Philosopher";
+            letter-spacing: 2rem;
         }
         .img {
             height: @stat-entry-height;
@@ -97,6 +112,7 @@
         }
         .tag {
             height: 80%;
+            margin-left: 1 * @rpx;
 
             text-transform: uppercase;
             font-weight: 600;
@@ -104,6 +120,10 @@
         .content {
             display: flex;
             align-items: center;
+
+            font-family: "Philosopher";
+            font-weight: bold;
+            font-size: 1.1rem;
 
             > input {
                 flex: 1;
@@ -119,10 +139,6 @@
             font-weight: 100;
             font-size: 1.25rem;
             line-height: .5;
-        }
-        .line {
-            height: 55%;
-            border-left: (1 * @rpx) solid black;
         }
         .view {
             display: flex;
