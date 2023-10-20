@@ -312,7 +312,6 @@ export default class CharacterSheet extends ActorSheet {
 
         // Category
         this.createCategory(html);
-        this.addDefaultCategories(html);
         this.deleteCategory(html);
         this.renameCategory(html);
         this.colorCategory(html);
@@ -458,15 +457,6 @@ export default class CharacterSheet extends ActorSheet {
             dialog.render(true);
         })
     }
-
-    addDefaultCategories (html) {
-        const def = html.find('data-default-category');
-
-        def.on('click', () => {
-            
-        })
-    }
-
 
     /** Deletes a category given its index via a dialog.
      * @param {*} html 

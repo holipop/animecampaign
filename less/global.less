@@ -9,7 +9,24 @@
 
     a:hover {
         text-shadow: #AC.Color()[@return] 0 0 (8 * @rpx);
-    }   
+    }
+    button {
+        #AC.InputSkinning();
+        #AC.Border();
+
+        padding: 0;
+        margin: 0;
+
+        font-family: "Libre Franklin";
+        font-weight: 600;
+
+        &:hover {
+            background-color: #AC.Color(.05)[@return];
+        }
+        &:active {
+            background-color: #AC.Color(.2)[@return];
+        }
+    }
     input, select, textarea {
         #AC.InputSkinning();
 

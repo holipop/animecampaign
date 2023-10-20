@@ -92,11 +92,9 @@
 
     {{/each}}
 
-    <a title="Create Category">
-        <i class="fas fa-plus" data-create-category></i>
-    </a>
-    <a title="Add Defaults">
-        <i class="fas fa-bars" data-default-category></i>
-    </a>
+    <button data-create-category>
+        <i class="fas fa-plus"></i>
+        {{localize config.app.createCategory}}
+    </button>
 
 </ol>
