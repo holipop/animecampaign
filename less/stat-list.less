@@ -23,6 +23,10 @@
     .view {
         width: 4rem;
     }
+    .line {
+        height: 55%;
+        border-left: (1 * @rpx) solid black;
+    }
 
     .stat-header {
         #AC.Border();
@@ -50,9 +54,14 @@
         }
         .label {
             text-align: center;
+
+            &.view {
+                border: (1 * @rpx) solid black;
+                border-top: 0;
+                border-bottom: 0;
+            }
         }
-        .label, .add-stat {
-            border-left: (1 * @rpx) solid black;
+        .add-stat {
             margin-right: 1 * @rpx;
         }
     }
@@ -86,9 +95,12 @@
         .color {
             width: @stat-entry-height;
             padding: 0;
+            padding-left: .425rem;
+            border: 0;
 
             appearance: none;
-            border: 0;
+            font: italic bold 1.15rem "Philosopher";
+            letter-spacing: 2rem;
         }
         .img {
             height: @stat-entry-height;
@@ -122,10 +134,6 @@
             font-weight: 100;
             font-size: 1.25rem;
             line-height: .5;
-        }
-        .line {
-            height: 55%;
-            border-left: (1 * @rpx) solid black;
         }
         .view {
             display: flex;

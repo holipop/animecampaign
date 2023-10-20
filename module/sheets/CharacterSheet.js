@@ -303,6 +303,7 @@ export default class CharacterSheet extends ActorSheet {
 
         // Color Stats
         this.disableStatOptions(html);
+        this.matchSelect(html);
         this.setColorStatView(html);
         this.addColorStat(html);
         this.deleteColorStat(html);
@@ -340,7 +341,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     disableStatOptions (html) {
         const stats = this.object.system.stats;
-        const colorKeys = CONFIG.animecampaign.colors;
+        const colorKeys = CONFIG.animecampaign.colorKeys;
         const populatedColors = colorKeys.filter(element => stats[element] != null);
 
         populatedColors.forEach(element => {
@@ -352,6 +353,23 @@ export default class CharacterSheet extends ActorSheet {
                 if (!isSelected) $(element).attr('disabled', 'true');
             });
         });
+    }
+
+    matchSelect (html) {
+        const select = html.find('[data-match-select]');
+
+        select.each((index, element) => {
+            const key = $(element).data('match-select');
+            const color = CONFIG.animecampaign.colors[key];
+
+            const styles = {
+                'text-shadow': `${color} .1rem .1rem`,
+                'box-shadow': `inset ${color} 0 0 .1rem`,
+                'background-color': `${color}80`,
+            }
+
+            $(element).css(styles)
+        })
     }
 
     /** Sets the view of the color stat.
@@ -889,7 +907,7 @@ export default class CharacterSheet extends ActorSheet {
      */
     updateColorStats (data) {
         const statChanges = getProperty(expandObject(data), 'system.stats');
-        const blankStats = Obj.uniform(CONFIG.animecampaign.colors, null)
+        const blankStats = Obj.uniform(CONFIG.animecampaign.colorKeys, null)
 
         for (const stat in statChanges) {
             const set = statChanges[stat];

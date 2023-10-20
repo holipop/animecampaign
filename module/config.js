@@ -4,8 +4,18 @@ import * as Obj from "./Obj.js";
 // An object containing language localization paths and default configurations.
 export const animecampaign = Obj.facade(lang).animecampaign;
 
-animecampaign.colors = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
-animecampaign.defaultColor = "#CCCCCC";
+animecampaign.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
+animecampaign.colors = {
+    red: '#df2d48',
+    blue: '#4d86d1',
+    yellow: '#f1cd00',
+    green: '#3ea35a',
+    orange: '#ee8420',
+    cyan: '#28d5c1',
+    purple: '#9639cf',
+    grey: '#807f84',
+};
+animecampaign.defaultColor = "#cccccc";
 
 animecampaign.defaultCategories = [
     {

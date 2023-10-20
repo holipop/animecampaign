@@ -414,6 +414,10 @@
 .animecampaign.sheet .stat-list .view {
   width: 4rem;
 }
+.animecampaign.sheet .stat-list .line {
+  height: 55%;
+  border-left: 0.0625rem solid black;
+}
 .animecampaign.sheet .stat-list .stat-header {
   border: 0.0625rem solid black;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
@@ -440,9 +444,12 @@
 .animecampaign.sheet .stat-list .stat-header .label {
   text-align: center;
 }
-.animecampaign.sheet .stat-list .stat-header .label,
+.animecampaign.sheet .stat-list .stat-header .label.view {
+  border: 0.0625rem solid black;
+  border-top: 0;
+  border-bottom: 0;
+}
 .animecampaign.sheet .stat-list .stat-header .add-stat {
-  border-left: 0.0625rem solid black;
   margin-right: 0.0625rem;
 }
 .animecampaign.sheet .stat-list .cap {
@@ -474,8 +481,11 @@
 .animecampaign.sheet .stat-list .stat .color {
   width: 1.75rem;
   padding: 0;
-  appearance: none;
+  padding-left: 0.425rem;
   border: 0;
+  appearance: none;
+  font: italic bold 1.15rem "Philosopher";
+  letter-spacing: 2rem;
 }
 .animecampaign.sheet .stat-list .stat .img {
   height: 1.75rem;
@@ -506,10 +516,6 @@
   font-weight: 100;
   font-size: 1.25rem;
   line-height: 0.5;
-}
-.animecampaign.sheet .stat-list .stat .line {
-  height: 55%;
-  border-left: 0.0625rem solid black;
 }
 .animecampaign.sheet .stat-list .stat .view {
   display: flex;

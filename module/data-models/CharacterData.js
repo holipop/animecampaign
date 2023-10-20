@@ -11,7 +11,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
 
         const colorStats = {};
-        for (const element of CONFIG.animecampaign.colors) {
+        for (const element of CONFIG.animecampaign.colorKeys) {
             colorStats[element] = new fields.EmbeddedDataField(Stat, {
                 initial: null,
                 nullable: true

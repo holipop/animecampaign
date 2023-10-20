@@ -33,7 +33,7 @@
             {{#if (eq ../documentName "Actor")}}
 
                 <!-- Color Select -->
-                <select class="color" name="system.stats.{{key}}.color">
+                <select class="color" name="system.stats.{{key}}.color" data-match-select="{{key}}">
                     {{#select stat.color}}
                         {{#each ../config.colorStat as |color key|}}
                             <option value="{{key}}" data-color-stat="{{key}}">{{localize color}}</option>
