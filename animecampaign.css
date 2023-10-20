@@ -351,8 +351,8 @@
   width: 8.66666667rem;
   padding: 0;
   font-family: "Libre Franklin";
-  font-size: 0.75rem;
-  font-weight: bold;
+  font-size: 0.7rem;
+  font-weight: 800;
   text-transform: uppercase;
   line-height: 0.75;
 }
@@ -360,7 +360,7 @@
   height: 3rem;
   padding: 0 1rem;
   border-left: 0.0625rem solid black;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(36, 16, 16, 0.05);
 }
 .animecampaign.actor.sheet .main-stats td:last-child {
   border-right: 0.0625rem solid black;
@@ -437,8 +437,8 @@
 }
 .animecampaign.sheet .stat-list .stat-header h2 {
   flex: 1;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.7rem;
+  font-weight: 800;
   text-transform: uppercase;
 }
 .animecampaign.sheet .stat-list .stat-header .label {
@@ -497,12 +497,16 @@
 }
 .animecampaign.sheet .stat-list .stat .tag {
   height: 80%;
+  margin-left: 0.0625rem;
   text-transform: uppercase;
   font-weight: 600;
 }
 .animecampaign.sheet .stat-list .stat .content {
   display: flex;
   align-items: center;
+  font-family: "Philosopher";
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 .animecampaign.sheet .stat-list .stat .content > input {
   flex: 1;

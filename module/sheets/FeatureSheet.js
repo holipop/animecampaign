@@ -80,6 +80,7 @@ export default class FeatureSheet extends ItemSheet {
     activateListeners (html) {
         // Global
         this.submitOnEnter(html);
+        this.disableSpellcheck(html);
         this.resizeTextArea(html);
         this.matchColor(html);
         this.contrastColor(html);

@@ -292,6 +292,7 @@ export default class CharacterSheet extends ActorSheet {
     activateListeners (html) {
         // Global
         this.submitOnEnter(html);
+        this.disableSpellcheck(html);
         this.resizeTextArea(html);
         this.matchColor(html);
         this.contrastColor(html);
