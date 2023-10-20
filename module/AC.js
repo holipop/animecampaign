@@ -14,12 +14,20 @@ export function error (text) {
     console.error(`%cAnime Campaign | ${text}`, 'color: orange');
 }
 
-/** A shorthand for getting system-specific localizations.
+/** A shorthand for localizing.
  * @param {string} path 
  * @returns {string}
  */
 export function localize (path) {
     return game.i18n.localize(getProperty(CONFIG.animecampaign, path));
+}
+
+/** A shorthand for formatting a localization.
+ * @param {string} path 
+ * @returns {string}
+ */
+export function format (path, data) {
+    return game.i18n.format(getProperty(CONFIG.animecampaign, path), data);
 }
 
 /** Converts a string hexadecimal color into an array of RGB values in base 10.

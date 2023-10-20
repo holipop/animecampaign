@@ -5,21 +5,21 @@
 
         <!-- Collapse -->
         <a class="control collapse" title="{{localize config.app.collapseStats}}">
-            <i class="fas fa-chevron-down" data-collapse="stats" data-contrast></i>
+            <i class="fas fa-chevron-down" data-collapse="stats" ></i>
         </a>
 
         {{#if (eq documentName "Actor")}}
-            <h2 data-contrast>{{localize config.app.colorStats}}</h2>
+            <h2 >{{localize config.app.colorStats}}</h2>
         {{/if}}
 
         {{#if (eq documentName "Item")}}
-            <h2 data-contrast>{{localize config.app.stats}}</h2>
+            <h2 >{{localize config.app.stats}}</h2>
         {{/if}}
 
-        <span class="label view" data-contrast="color border-color">View</span> 
+        <span class="label view">{{localize config.app.view}}</span> 
 
         <!-- Add Stat -->
-        <a class="control add-stat" data-contrast="color border-color" title="{{localize config.app.addStat}}">
+        <a class="control add-stat" title="{{localize config.app.addStat}}">
             <i class="fas fa-plus" data-add-stat></i>
         </a>
 

@@ -378,6 +378,9 @@
   opacity: 0.5;
   transform: skew(-15deg);
 }
+.animecampaign.item.sheet .stat-list {
+  margin-top: 0.5rem;
+}
 .animecampaign.sheet .stat-list {
   list-style-type: none;
   margin: 0;

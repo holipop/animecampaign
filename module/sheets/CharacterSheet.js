@@ -443,12 +443,12 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Create New Category: ${this.object.name}`,
+                title: AC.format('dialog.create', { name: this.object.name }),
                 content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), AC.localize('app.newCategory')),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: "Create New Category",
+                        label: AC.localize('app.createCategory'),
                         callback: callback
                     },
                 },
@@ -491,7 +491,10 @@ export default class CharacterSheet extends ActorSheet {
             }
             
             Dialog.confirm({
-                title: `Delete Category [${key.toUpperCase()}]: ${this.object.name}`,
+                title: AC.format('dialog.deleteCategory', {
+                    category: key.toUpperCase(),
+                    name: this.object.name
+                }),
                 content: 
                     `<p>Delete the "${key.toUpperCase()}" category?</p>
                     <p><b>Warning: This will delete all kit features within this category.</b></p>`,
@@ -529,12 +532,15 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Rename Category [${key.toUpperCase()}]: ${this.object.name}`,
+                title: AC.format('dialog.rename', {
+                    category: key.toUpperCase(),
+                    name: this.object.name
+                }),
                 content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), key),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: "Rename Category",
+                        label: AC.localize('app.renameCategory'),
                         callback: callback
                     },
                 },
@@ -570,21 +576,25 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Recolor Category [${key.toUpperCase()}]: ${this.object.name}`,
+                title: AC.format('dialog.recolor', {
+                    category: key.toUpperCase(),
+                    name: this.object.name
+                }),
                 content: CONFIG.animecampaign.colorDialog(initialColor),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: 'Color Category',
+                        label: AC.localize('app.colorCategory'),
                         callback: set
                     },
                     reset: {
                         icon: '<i class="fas fa-arrow-rotate-left"></i>',
-                        label: 'Reset Color',
+                        label: AC.localize('dialog.resetColor'),
                         callback: reset
                     }
                 },
                 default: "confirm",
+                close: set,
             }, { width: 325 });
 
             dialog.render(true);
@@ -705,12 +715,12 @@ export default class CharacterSheet extends ActorSheet {
             }
 
             const dialog = new Dialog({
-                title: `Track Stat [${key}]: ${this.object.name}`,
+                title: AC.format('track', { category: key, name: this.object.name }),
                 content: CONFIG.animecampaign.textDialog(AC.localize('app.statName'), ''),
                 buttons: {
                     confirm: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: "Track Stat",
+                        label: AC.localize('app.trackStat'),
                         callback: callback
                     },
                 },
@@ -823,7 +833,18 @@ export default class CharacterSheet extends ActorSheet {
         del.on('click', event => {
             const id = $(event.target).data('delete-feature');
 
-            this.object.deleteEmbeddedDocuments('Item', [id]);
+            const callback = () => this.object.deleteEmbeddedDocuments('Item', [id]);
+
+            Dialog.confirm({
+                title: AC.format('dialog.deleteFeature', {
+                    id: id,
+                    name: this.object.name
+                }),
+                content: `<p>Delete this feature?</p>`,
+                yes: callback,
+                no: () => {},
+                defaultYes: false,
+            });
         })
     }
 
