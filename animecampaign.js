@@ -7,6 +7,7 @@ import ACActor from './module/documents/ACActor.js';
 import CharacterData from './module/data-models/CharacterData.js';
 import CharacterSheet from './module/sheets/CharacterSheet.js';
 
+import ACItem from './module/documents/ACItem.js';
 import FeatureData from './module/data-models/FeatureData.js';
 import FeatureSheet from './module/sheets/FeatureSheet.js';
 
@@ -17,6 +18,7 @@ Hooks.once('init', () => {
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
 
+    CONFIG.Item.documentClass = ACItem;
     CONFIG.Item.dataModels["Feature"] = FeatureData;
 
     Actors.unregisterSheet("core", ActorSheet);

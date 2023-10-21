@@ -1,4 +1,4 @@
-// Extending the base Actor class for system-specific logic.
+// Extending the Actor class for system-specific logic.
 export default class ACActor extends Actor {
 
     /** Fired whenever an embedded document is created.

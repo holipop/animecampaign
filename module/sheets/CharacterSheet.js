@@ -327,6 +327,7 @@ export default class CharacterSheet extends ActorSheet {
 
         // Feature
         this.createFeature(html);
+        this.rollFeature(html);
         this.viewFeature(html);
         this.deleteFeature(html);
         this.matchFeature(html);
@@ -816,6 +817,20 @@ export default class CharacterSheet extends ActorSheet {
             }];
 
             this.object.createEmbeddedDocuments('Item', data)
+        })
+    }
+
+    /** Fires an item's roll method.
+     * @param {*} html 
+     */
+    rollFeature (html) {
+        const roll = html.find('[data-roll]');
+
+        roll.on('click', event => {
+            const id = $(event.target).data('roll');
+            const feature = this.object.getEmbeddedDocument('Item', id);
+
+            feature.roll();
         })
     }
 
