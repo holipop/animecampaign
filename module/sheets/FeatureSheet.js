@@ -1,4 +1,5 @@
 import * as AC from "../AC.js"
+import * as Obj from "../Obj.js"
 import { SheetMixin } from "./SheetMixin.js";
 
 // The application for Kit Features.
@@ -101,6 +102,7 @@ export default class FeatureSheet extends ItemSheet {
         // Sections
         this.addSection(html);
         this.deleteSection(html);
+        this.toggleSectionVisibility(html);
 
         super.activateListeners(html);
     }
@@ -186,6 +188,9 @@ export default class FeatureSheet extends ItemSheet {
 
     //* Sections
 
+    /** Adds a blank section to the section list.
+     * @param {*} html 
+     */
     addSection (html) {
         const add = html.find('[data-add-section]');
         const sections = this.sections;
@@ -196,6 +201,9 @@ export default class FeatureSheet extends ItemSheet {
         })
     }
 
+    /** Deletes a section at the desired index.
+     * @param {*} html 
+     */
     deleteSection (html) {
         const del = html.find('[data-delete-section]');
         const sections = this.sections;
@@ -208,7 +216,33 @@ export default class FeatureSheet extends ItemSheet {
         });
     }
 
-    toggleShow (html) { }
+    /** Toggle's a section's visibility for chat messages.
+     * @param {*} html 
+     */
+    toggleSectionVisibility (html) {
+        const toggle = html.find('[data-toggle-section]');
+
+        toggle.each((index, element) => {
+            const section = this.sections[index];
+
+            if (section.visible) { 
+                $(element).css('color', 'blue')
+            } else { 
+                $(element).css('color', 'red')
+            }
+        });
+
+        toggle.on('click', event => {
+            const sections = this.sections;
+            const index = $(event.target).data('toggle-section');
+
+            // Invert boolean
+            sections[index] = Obj.plain(sections[index])
+            sections[index].visible = !sections[index].visible;
+
+            this.object.update({ 'system.sections': sections })
+        });
+    }
 
 
     //* FORM SUBMISSION */

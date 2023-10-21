@@ -133,6 +133,9 @@
 .animecampaign.sheet form .scrollable ::-webkit-scrollbar {
   color: #cd3232;
 }
+.animecampaign.sheet form .selected {
+  background: linear-gradient(to top, rgba(205, 50, 50, 0.5), transparent);
+}
 .animecampaign.sheet form a:hover {
   text-shadow: #cd3232 0 0 0.5rem;
 }
@@ -550,9 +553,6 @@
   text-align: center;
   padding-top: 40%;
 }
-.animecampaign.sheet .stat-list .selected {
-  background: linear-gradient(to top, rgba(205, 50, 50, 0.5), transparent);
-}
 .animecampaign.actor.sheet .kit {
   list-style-type: none;
   margin: 0;
@@ -848,4 +848,22 @@
   top: -0.75rem;
   margin: 0 0.2rem;
   font-size: 1.25rem;
+}
+.animecampaign.item.sheet .section-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.animecampaign.item.sheet .section-list textarea {
+  resize: none;
+  overflow-y: hidden;
+}
+.animecampaign.item.sheet .section-list .section {
+  display: flex;
+}
+.animecampaign.item.sheet .section-list .section-body {
+  flex: 1;
+}
+.animecampaign.item.sheet .section-list .section-body header {
+  display: flex;
 }

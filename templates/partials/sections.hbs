@@ -1,16 +1,44 @@
-<ol class="sections tab" data-tab="description" data-group="item-tabs" data-section-list>
+<ol class="section-list tab" data-tab="description" data-group="item-tabs" data-section-list>
+
     {{#each system.sections as |section index|}}
-        <li data-section="{{index}}">
+    
+        <!-- Section -->
+        <li class="section" data-section="{{index}}">
+
+            <!-- Collapse -->
+            <a class="control collapse" title="{{localize config.app.collapseSection}}">
+                <i class="fas fa-chevron-down" data-collapse="sections.{{index}}"></i>
+            </a>
             
-            <span>
-                <input type="text" name="system.sections.{{index}}.name" placeholder="{{localize @root.config.placeholder.label}}" value="{{section.name}}">
+            <div class="section-body">
 
-                <a data-delete-section="{{index}}">&lbrack; delete &rbrack;</a>
-            </span>
+                <header>
+                    
+                    <!-- Name -->
+                    <input type="text" name="system.sections.{{index}}.name" placeholder="{{localize @root.config.placeholder.label}}" value="{{section.name}}">
 
-            <textarea name="system.sections.{{index}}.text" placeholder="{{localize @root.config.placeholder.text}}">{{~section.text}}</textarea>
+                    <!-- Controls -->
+                    <a title="{{localize @root.config.app.toggleSectionVisibility}}">
+                        <i class="fas fa-eye" data-toggle-section="{{index}}"></i>
+                    </a>
+                    <a title="{{localize @root.config.app.deleteSection}}">
+                        <i class="fas fa-trash" data-delete-section="{{index}}"></i>
+                    </a>
+
+                </header>
+
+                <div data-collapse="target sections.{{index}}">
+                    <textarea name="system.sections.{{index}}.text" placeholder="{{localize @root.config.placeholder.text}}" data-resize>{{~section.text}}</textarea>
+                </div>
+
+            </div>
+
         </li>
+
     {{/each}}
 
-    <a data-add-section>&lbrack; add section &rbrack;</a>
+    <button data-add-section type="button">
+        <i class="fas fa-plus"></i>
+        {{localize config.app.addSection}}
+    </button>
 </ol>

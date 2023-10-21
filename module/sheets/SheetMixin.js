@@ -37,16 +37,19 @@ export const SheetMixin = {
      */
     resizeTextArea (html) {
         const resize = html.find('textarea[data-resize]');
+        const scroll = html.find('[data-scrollable]');
 
-        html.ready(() => {
-            resize.each(function() {
-                this.setAttribute("style", `height:${this.scrollHeight}px;`);
-            });
-        })
+        resize.each(function() {
+            this.setAttribute("style", `height:${this.scrollHeight}px;`);
+        });
 
         resize.on("input", function() {
+            const initScrollY = scroll.scrollTop();
+
             this.style.height = 0;
             this.style.height = this.scrollHeight + "px";
+
+            scroll.scrollTop(initScrollY);
         });
     },
 

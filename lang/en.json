@@ -71,7 +71,10 @@
             "createFeature": "Create Feature",
             "rollFeature": "Roll Feature",
             "viewFeature": "View Feature",
-            "deleteFeature": "Delete Feature"
+            "deleteFeature": "Delete Feature",
+            "addSection": "Add Section",
+            "deleteSection": "Delete Section",
+            "toggleSectionVisibility": "Toggle Section Visibility"
         },
         "placeholder": {
             "value": "Value",
