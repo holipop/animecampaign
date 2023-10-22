@@ -60,7 +60,12 @@ export async function preloadHandlebarsTemplates () {
         'sections': 'systems/animecampaign/templates/feature/sections.hbs',
         'details': 'systems/animecampaign/templates/feature/details.hbs',
 
-        // Rolled Feature
+        // Roll
+        'roll-summary': 'systems/animecampaign/templates/roll/roll-summary.hbs',
+        /* 'roll-dice': 'systems/animecampaign/templates/roll/roll-dice.hbs',
+        'roll-stats': 'systems/animecampaign/templates/roll/roll-stats.hbs',
+        'roll-sections': 'systems/animecampaign/templates/roll/roll-sections.hbs',
+        'roll-banner': 'systems/animecampaign/templates/roll/roll-banner.hbs', */
     }
 
     return loadTemplates(paths);

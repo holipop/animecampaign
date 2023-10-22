@@ -214,6 +214,9 @@
 .animecampaign.item.sheet .scrollable {
   height: calc(100% - 5.125rem);
 }
+.animecampaign.chat.roll {
+  opacity: 1;
+}
 .animecampaign.sheet .summary {
   display: grid;
   grid-template-columns: 1fr 4fr;
