@@ -1,11 +1,71 @@
-<ol class="detail-list tab" data-tab="details" data-group="item-tabs">
+<ul class="detail-list tab" data-tab="details" data-group="item-tabs">
     
-    
-    <!-- Test -->
+    <!-- Forumla -->
     <li class="detail">
-
         <header>
+            <div class="labels">
+                <label>Roll Formula</label>
+            </div>
 
+            <div class="fields">
+                <input type="text" name="system.details.formula" value="{{system.details.formula}}" placeholder="N/A">
+            </div>
+        </header>
+    </li>
+    
+    <!-- Editor -->
+    <li class="detail">
+        <header>
+            <div class="labels">
+                <label>Text Editor</label>
+            </div>
+
+            <div class="fields">
+                <select name="system.details.editor">
+                    {{#select system.details.editor}}
+                        <option value="markdown">Markdown</option>
+                        <option value="prosemirror">ProseMirror</option>
+                    {{/select}}
+                </select>
+            </div>
+        </header>
+
+        <p class="note">Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, &quot;what you see is what you get&quot;.</p>
+    </li>
+
+    <!-- Action -->
+    <li class="detail">
+        <header>
+            <div class="labels">
+                <label>Action</label>
+            </div>
+
+            <div class="fields">
+                <input type="text" name="system.details.action" value="{{system.details.action}}" placeholder="N/A">
+            </div>
+        </header>
+    </li>
+    
+    <!-- Usage -->
+    <li class="detail">
+        <header>
+            <div class="labels">
+                <label>Usage</label>
+            </div>
+
+            <div class="fields">
+                <input type="number" name="system.details.usage.multiple" value="{{system.details.usage.multiple}}">
+                <label>per</label>
+                <input type="text" name="system.details.usage.timeframe" value="{{system.details.usage.timeframe}}">
+            </div>
+        </header>
+
+        <p class="note">i.e. &quot;1 time per Combat&quot;.</p>
+    </li>
+
+    <!-- Test -->
+    {{!-- <li class="detail">
+        <header>
             <div class="labels">
                 <label>Test</label>
                 <span class="unit">&lpar;Units&rpar;</span>
@@ -18,27 +78,9 @@
                 <label>Bar</label>
                 <input type="text">
             </div>
-
         </header>
 
         <p class="note">Testing Testing One Two Three!</p>
+    </li> --}}
 
-    </li>
-
-    <li class="detail">
-
-        <header>
-
-            <div class="labels">
-                <label>Test</label>
-            </div>
-
-            <div class="fields">
-                <input type="text">
-            </div>
-
-        </header>
-
-    </li>
-
-</ol>
+</ul>

@@ -257,6 +257,8 @@ export default class FeatureSheet extends ItemSheet {
         data = this.updateSectionList(data);
         data = this.lowercaseCategory(data);
 
+        console.log(data)
+
         this.updateParentCategories(data);
 
         super._updateObject(event, data);

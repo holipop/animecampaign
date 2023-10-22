@@ -877,7 +877,7 @@
 }
 .animecampaign.item.sheet .detail-list .detail {
   padding: 0.25rem 0.35rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
   border-left: 0.0625rem solid black;
   box-shadow: inset rgba(0, 0, 0, 0.25) 0.0625rem 0;
   font-family: "Libre Franklin";
@@ -886,6 +886,10 @@
 .animecampaign.item.sheet .detail-list header > * {
   display: flex;
   align-items: center;
+}
+.animecampaign.item.sheet .detail-list .labels,
+.animecampaign.item.sheet .detail-list .fields {
+  flex: 1;
 }
 .animecampaign.item.sheet .detail-list .labels > *,
 .animecampaign.item.sheet .detail-list .fields > * {
@@ -897,14 +901,11 @@
   opacity: 0.7;
   font-size: 0.8rem;
 }
-.animecampaign.item.sheet .detail-list .labels {
-  flex: 3;
-}
 .animecampaign.item.sheet .detail-list .labels label {
   font-weight: 800;
 }
 .animecampaign.item.sheet .detail-list .fields {
-  flex: 4;
+  justify-content: flex-end;
 }
 .animecampaign.item.sheet .detail-list .note {
   font-size: 0.6rem;
