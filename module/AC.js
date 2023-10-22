@@ -46,19 +46,21 @@ export function hexToRGB (hexcode) {
 export async function preloadHandlebarsTemplates () {
     const paths = {
         // Global
-        'summary': 'systems/animecampaign/templates/partials/summary.hbs',
-        'stat-list': 'systems/animecampaign/templates/partials/stat-list.hbs',
-        'nav': 'systems/animecampaign/templates/partials/nav.hbs',
+        'summary': 'systems/animecampaign/templates/global/summary.hbs',
+        'stat-list': 'systems/animecampaign/templates/global/stat-list.hbs',
+        'nav': 'systems/animecampaign/templates/global/nav.hbs',
 
-        // Actor
-        'main-stats': 'systems/animecampaign/templates/partials/main-stats.hbs',
-        'biography': 'systems/animecampaign/templates/partials/biography.hbs',
-        'kit': 'systems/animecampaign/templates/partials/kit.hbs',
-        'feature': 'systems/animecampaign/templates/partials/feature.hbs',
+        // Character
+        'main-stats': 'systems/animecampaign/templates/character/main-stats.hbs',
+        'biography': 'systems/animecampaign/templates/character/biography.hbs',
+        'kit': 'systems/animecampaign/templates/character/kit.hbs',
+        'feature': 'systems/animecampaign/templates/character/feature.hbs',
 
-        // Item
-        'sections': 'systems/animecampaign/templates/partials/sections.hbs',
-        'details': 'systems/animecampaign/templates/partials/details.hbs',
+        // Feature
+        'sections': 'systems/animecampaign/templates/feature/sections.hbs',
+        'details': 'systems/animecampaign/templates/feature/details.hbs',
+
+        // Rolled Feature
     }
 
     return loadTemplates(paths);

@@ -13,7 +13,7 @@ export default class CharacterSheet extends ActorSheet {
             width: 650,
             height: 500,
             classes: ["animecampaign", "sheet", "actor"],
-            template: 'systems/animecampaign/templates/sheets/character-sheet.hbs',
+            template: 'systems/animecampaign/templates/character/character-sheet.hbs',
             scrollY: ["section.scrollable"],
         });
 

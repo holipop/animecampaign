@@ -1,7 +1,7 @@
 // Extending the Item class for system-specific logic.
 export default class ACItem extends Item { 
 
-    get messageTemplate () { return 'systems/animecampaign/templates/rolled-feature.hbs' }
+    get rollTemplate () { return 'systems/animecampaign/templates/roll/roll-template.hbs' }
 
     async roll () {
         const data = {
@@ -11,7 +11,7 @@ export default class ACItem extends Item {
         const message = {
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(this.messageTemplate, data),
+            content: await renderTemplate(this.rollTemplate, data),
         }
 
         return ChatMessage.create(message);
