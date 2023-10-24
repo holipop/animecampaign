@@ -1,6 +1,6 @@
 import Stat from "./Stat.js";
 import Section from "./Section.js";
-import * as Obj from "../Obj.js"
+import * as List from "../List.js"
 
 // Data structure for Kit Features.
 export default class FeatureData extends foundry.abstract.DataModel {
@@ -42,7 +42,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
     get trackedStats () {
         if (!this.parent.isOwned) return null;
         const categories = this.parent.parent.system.categories;
-        const trackers = Obj.getEntry(categories, {name: this.category}).trackers;
+        const trackers = List.get(categories, { name: this.category }).trackers;
 
         const trackedStats = trackers.map(tracker => {
             const fallback = {
@@ -50,7 +50,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 value: '',
                 img: 'icons/svg/circle.svg',
             };
-            return Obj.getEntry(this.stats, { tag: tracker.tag }) ?? fallback;
+            return List.get(this.stats, { tag: tracker.tag }) ?? fallback;
         })
 
         return trackedStats;

@@ -1,3 +1,4 @@
+/** @module AC */
 // A utility namespace for system-specific functions.
 
 /** A console.log with styling, intended for debugging clarity.
@@ -69,4 +70,45 @@ export async function preloadHandlebarsTemplates () {
     }
 
     return loadTemplates(paths);
+}
+
+/** Converts a instance of a class into a plain object.
+ * @param {Object} instance 
+ * @returns {Object}
+ */
+export function plainObject (instance) {
+    const copy = { ...instance };
+    for (const [key, value] of Object.entries(copy)) {
+        if (value === null) { }
+        else if (Array.isArray(value)) { }
+        else if (typeof value === 'object') {
+            copy[key] = plain(value);
+        }
+    }
+    return copy;
+}
+
+/** Create an object where all of the properties have identical values.
+ * @param {string[]} keyArr The names of each property.
+ * @param {*} value The value for each property.
+ * @returns {Object}
+ */
+export function uniformObject (keyArr, value) {
+    const obj = {};
+    keyArr.forEach(element => {
+        obj[element] = value;
+    });
+    return obj;
+}
+
+/** Assigns each property a string of its own dot notation.
+ * @param {object} obj
+ * @returns {object}
+ */
+export function facadeObject (obj) {
+    let paths = Object.keys(flattenObject(obj));
+    paths.forEach(element => {
+        setProperty(obj, element, element);
+    });
+    return obj;
 }

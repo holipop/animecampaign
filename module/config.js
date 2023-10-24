@@ -1,8 +1,8 @@
 import lang from "../lang/en.json" assert { type: 'json' };
-import * as Obj from "./Obj.js";
+import * as AC from "./AC.js";
 
 // An object containing language localization paths and default configurations.
-export const animecampaign = Obj.facade(lang).animecampaign;
+export const animecampaign = AC.facadeObject(lang).animecampaign;
 
 animecampaign.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 animecampaign.colors = {

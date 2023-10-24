@@ -1,7 +1,6 @@
 // AC FVTT
 import * as AC from './module/AC.js'
 import * as config from './module/config.js'
-import { hbsHelpers } from './module/hbsHelpers.js';
 
 import ACActor from './module/documents/ACActor.js';
 import CharacterData from './module/data-models/CharacterData.js';
@@ -27,7 +26,6 @@ Hooks.once('init', () => {
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
     AC.preloadHandlebarsTemplates();
-    Handlebars.registerHelper(hbsHelpers);
 })
 
 // Fires once localization translations have been loaded and are ready for use.

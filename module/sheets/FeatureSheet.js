@@ -1,5 +1,4 @@
 import * as AC from "../AC.js"
-import * as Obj from "../Obj.js"
 import { SheetMixin } from "./SheetMixin.js";
 
 // The application for Kit Features.
@@ -237,7 +236,7 @@ export default class FeatureSheet extends ItemSheet {
             const index = $(event.target).data('toggle-section');
 
             // Invert boolean
-            sections[index] = Obj.plain(sections[index])
+            sections[index] = AC.plainObject(sections[index]);
             sections[index].visible = !sections[index].visible;
 
             this.object.update({ 'system.sections': sections })
