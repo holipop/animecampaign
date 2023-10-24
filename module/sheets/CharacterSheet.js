@@ -1,9 +1,9 @@
 import * as AC from "../AC.js";
 import * as List from "../List.js";
-import * as Global from "../Global.js"
+import * as Global from "./Global.js"
 import * as ColorStat from "./ColorStat.js"
 import * as Category from "./Category.js"
-import * as Feature from "../Feature.js"
+import * as Feature from "./Feature.js"
 
 // The application for Characters.
 export default class CharacterSheet extends ActorSheet {
@@ -297,7 +297,7 @@ export default class CharacterSheet extends ActorSheet {
         Global.listeners(html, this);
         ColorStat.listeners(html, this);
         Category.listeners(html, this);
-        Feature.listeners(html, this);
+        Feature.listeners(html, this)
 
         super.activateListeners(html);
     }

@@ -3,7 +3,8 @@
  */
 
 
-import * as AC from "../AC.js"
+import { Section } from "../Data.js"
+import * as List from "../List.js"
 
 /** Event listeners for sections.
  * @param {*} html 
@@ -11,45 +12,53 @@ import * as AC from "../AC.js"
  */
 export function listeners (html, sheet) {
 
+    /** @type {Section[]} */
+    const sections = sheet.object.system.sections;
+
+    /** @type {jQuery} */
+    const list = html.find('[data-section-list]');
+
+    /** @returns {Number} */
+    const index = event => {
+        // + is a unary operator, converts a string into a number.
+        return +$(event.target).closest('[data-section]').data('section');
+    }
+
 
     /** Adds a blank section to the section list.
      * @param {*} html 
      */
-    void function addSection (html) {
-        const add = html.find('[data-add-section]');
-        const sections = sheet.sections;
+    void function add () {
+        const add = list.find('[data-add]');
 
         add.on('click', () => {
-            sections.push({});
-            sheet.object.update({ 'system.sections': sections });
+            const update = List.add(sections);
+            sheet.object.update({ 'system.sections': update });
         })
-    }(html)
+    }()
 
 
     /** Deletes a section at the desired index.
      * @param {*} html 
      */
-    void function deleteSection (html) {
-        const del = html.find('[data-delete-section]');
-        const sections = sheet.sections;
+    void function remove () {
+        const remove = list.find('[data-remove]');
 
-        del.on('click', event => {
-            const index = $(event.target).data('delete-section');
-            sections.splice(index, 1);
-
-            sheet.object.update({ 'system.sections': sections });
+        remove.on('click', event => {
+            const update = List.remove(sections, index(event));
+            sheet.object.update({ 'system.sections': update });
         });
-    }(html)
+    }()
 
 
     /** Toggle's a section's visibility for chat messages.
      * @param {*} html 
      */
-    void function toggleSectionVisibility (html) {
-        const toggle = html.find('[data-toggle-section]');
+    void function toggle () {
+        const toggle = list.find('[data-toggle]');
 
         toggle.each((index, element) => {
-            const section = sheet.sections[index];
+            const section = List.get(sections, index);
 
             if (section.visible) { 
                 $(element).css('color', 'blue')
@@ -59,15 +68,12 @@ export function listeners (html, sheet) {
         });
 
         toggle.on('click', event => {
-            const sections = sheet.sections;
-            const index = $(event.target).data('toggle-section');
+            // Get boolean and inverse it.
+            const visibility = List.get(sections, index(event)).visible;
+            const update = List.set(sections, index(event), { visible: !visibility });
 
-            // Invert boolean
-            sections[index] = AC.plainObject(sections[index]);
-            sections[index].visible = !sections[index].visible;
-
-            sheet.object.update({ 'system.sections': sections })
+            sheet.object.update({ 'system.sections': update })
         });
-    }(html)
+    }()
 
 }
