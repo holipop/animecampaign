@@ -1,4 +1,7 @@
-/** @module List */
+/** A namespace for operations on ArrayFields.
+ * @module List 
+ */
+
 
 import * as AC from './AC.js'
 

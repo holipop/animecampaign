@@ -1,5 +1,7 @@
-/** @module AC */
-// A utility namespace for system-specific functions.
+/** A utility namespace for system-specific functions.
+ * @module AC 
+ */
+
 
 /** A console.log with styling, intended for debugging clarity.
  * @param {string|number|boolean} text 
