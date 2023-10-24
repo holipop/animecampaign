@@ -1,5 +1,6 @@
-import * as AC from "../AC.js"
-import { SheetMixin } from "./SheetMixin.js";
+import * as Global from "./Global.js"
+import * as FeatureStat from "./FeatureStat.js"
+import * as Section from "../Section.js"
 
 // The application for Kit Features.
 export default class FeatureSheet extends ItemSheet {
@@ -78,169 +79,12 @@ export default class FeatureSheet extends ItemSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
-        // Global
-        this.submitOnEnter(html);
-        this.disableSpellcheck(html);
-        this.resizeTextArea(html);
-        this.matchColor(html);
-        this.contrastColor(html);
-        this.collapse(html);
 
-        // Summary
-        this.resizeName(html);
-        this.selectCategory(html);
-
-        // Stats
-        this.setStatView(html);
-        this.addStat(html);
-        this.deleteStat(html);
-
-        // Nav
-        this.setTabName(html);
-
-        // Sections
-        this.addSection(html);
-        this.deleteSection(html);
-        this.toggleSectionVisibility(html);
+        Global.listeners(html, this);
+        FeatureStat.listeners(html, this);
+        Section.listeners(html, this);
 
         super.activateListeners(html);
-    }
-
-    
-    //* Summary
-
-    /** Sets the category via the selection.
-     * @param {*} html 
-     */
-    selectCategory (html) {
-        const select = html.find('[data-select-category="select"]');
-        const target = html.find('[data-select-category="target"]');
-
-        select.on('change', event => {
-            const category = $(event.target).val();
-            target.val(category);
-            this.object.update();
-        });
-    }
-
-
-    //* Stats
-    
-    /** Sets the view of the stat.
-     * @param {*} html 
-     */
-    setStatView (html) {
-        const view = html.find('[data-view-stat]');
-        const stat = html.find('[data-stat]');
-
-        view.removeClass('selected');
-
-        stat.each((index, element) => {
-            const key = $(element).data('stat');
-            const setting = this.stats[key].view;
-            const selected = $(element).find(`[data-view-stat=${setting}]`);
-            
-            selected.addClass('selected');
-        });
-
-        view.on('click', event => {
-            const key = $(event.target).parents('[data-stat]').data('stat');
-            const setting = $(event.target).data('view-stat');
-            const stats = this.stats;
-            const stat = stats[key].toObject();
-
-            stat.view = setting;
-            stats[key] = stat;
-
-            this.object.update({ 'system.stats': stats });
-        });
-    }
-
-    /** Adds a stat to the end of the stats list.
-     * @param {*} html 
-     */
-    addStat (html) {
-        const add = html.find('[data-add-stat]');
-        const stats = this.stats;
-
-        add.on('click', () => {
-            stats.push({});
-            this.object.update({ 'system.stats': stats });
-        })
-    }
-
-    /** Deletes a stat given its index.
-     * @param {*} html 
-     */
-    deleteStat (html) {
-        const del = html.find('[data-delete-stat]');
-        const stats = this.stats;
-
-        del.on('click', event => {
-            const index = $(event.target).data('delete-stat');
-            stats.splice(index, 1);
-
-            this.object.update({ 'system.stats': stats });
-        });
-    }
-
-
-    //* Sections
-
-    /** Adds a blank section to the section list.
-     * @param {*} html 
-     */
-    addSection (html) {
-        const add = html.find('[data-add-section]');
-        const sections = this.sections;
-
-        add.on('click', () => {
-            sections.push({});
-            this.object.update({ 'system.sections': sections });
-        })
-    }
-
-    /** Deletes a section at the desired index.
-     * @param {*} html 
-     */
-    deleteSection (html) {
-        const del = html.find('[data-delete-section]');
-        const sections = this.sections;
-
-        del.on('click', event => {
-            const index = $(event.target).data('delete-section');
-            sections.splice(index, 1);
-
-            this.object.update({ 'system.sections': sections });
-        });
-    }
-
-    /** Toggle's a section's visibility for chat messages.
-     * @param {*} html 
-     */
-    toggleSectionVisibility (html) {
-        const toggle = html.find('[data-toggle-section]');
-
-        toggle.each((index, element) => {
-            const section = this.sections[index];
-
-            if (section.visible) { 
-                $(element).css('color', 'blue')
-            } else { 
-                $(element).css('color', 'red')
-            }
-        });
-
-        toggle.on('click', event => {
-            const sections = this.sections;
-            const index = $(event.target).data('toggle-section');
-
-            // Invert boolean
-            sections[index] = AC.plainObject(sections[index]);
-            sections[index].visible = !sections[index].visible;
-
-            this.object.update({ 'system.sections': sections })
-        });
     }
 
 
@@ -255,8 +99,6 @@ export default class FeatureSheet extends ItemSheet {
         data = this.updateStatList(data);
         data = this.updateSectionList(data);
         data = this.lowercaseCategory(data);
-
-        console.log(data)
 
         this.updateParentCategories(data);
 
@@ -330,6 +172,3 @@ export default class FeatureSheet extends ItemSheet {
         this.object.parent.update({ 'system.categories': update });
     }
 }
-
-// Composites mixins with this class.
-Object.assign(FeatureSheet.prototype, SheetMixin);
