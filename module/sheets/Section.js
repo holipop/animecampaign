@@ -16,7 +16,7 @@ export function listeners (html, sheet) {
     const sections = sheet.object.system.sections;
 
     /** @type {jQuery} */
-    const list = html.find('[data-section-list]');
+    const ol = html.find('[data-section-list]');
 
     /** @returns {Number} */
     const index = event => {
@@ -26,10 +26,9 @@ export function listeners (html, sheet) {
 
 
     /** Adds a blank section to the section list.
-     * @param {*} html 
      */
     void function add () {
-        const add = list.find('[data-add]');
+        const add = ol.find('[data-add]');
 
         add.on('click', () => {
             const update = List.add(sections);
@@ -39,10 +38,9 @@ export function listeners (html, sheet) {
 
 
     /** Deletes a section at the desired index.
-     * @param {*} html 
      */
     void function remove () {
-        const remove = list.find('[data-remove]');
+        const remove = ol.find('[data-remove]');
 
         remove.on('click', event => {
             const update = List.remove(sections, index(event));
@@ -52,10 +50,9 @@ export function listeners (html, sheet) {
 
 
     /** Toggle's a section's visibility for chat messages.
-     * @param {*} html 
      */
     void function toggle () {
-        const toggle = list.find('[data-toggle]');
+        const toggle = ol.find('[data-toggle]');
 
         toggle.each((index, element) => {
             const section = List.get(sections, index);

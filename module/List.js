@@ -8,7 +8,7 @@ import * as AC from './AC.js'
 /** Adds an entry to a list, optionally at a specified index.
  * @param {Object[]} arr 
  * @param {Object?} obj 
- * @param {number?} index 
+ * @param {Number?} index 
  * @returns {Object[]}
  */
 export function add (arr, obj = {}, index = null) {
@@ -19,7 +19,7 @@ export function add (arr, obj = {}, index = null) {
 
 /** Removes an entry from a list given a query.
  * @param {Object[]} arr 
- * @param {(number|Object)} query 
+ * @param {Number|Object} query 
  * @returns {Object[]}
  */
 export function remove (arr, query) {
@@ -36,7 +36,7 @@ export function remove (arr, query) {
 
 /** Gets the first entry that matches a query in a list. Returns as a plain object.
  * @param {Object[]} arr 
- * @param {(number|Object)} query 
+ * @param {Number|Object} query 
  * @returns {Object}
  */
 export function get (arr, query) {
@@ -53,7 +53,7 @@ export function get (arr, query) {
 
 /** Change an entry of a list, returning an updated clone of the array with the changed entry becoming a plain object.
  * @param {Object[]} arr 
- * @param {(number|Object)} query 
+ * @param {Number|Object} query 
  * @param {Object} changes 
  * @returns {Object[]}
  */
@@ -74,7 +74,7 @@ export function set (arr, query, changes) {
 
 /** Check if a list contains an entry that matches the query.
  * @param {Object[]} arr 
- * @param {(number|Object)} query 
+ * @param {Number|Object} query 
  * @returns 
  */
 export function has (arr, query) {

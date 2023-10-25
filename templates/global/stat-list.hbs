@@ -1,4 +1,4 @@
-<ol class="stat-list">
+<ol class="stat-list" data-stat-list>
 
     <!-- Header -->
     <header class="stat-header">
@@ -20,7 +20,7 @@
 
         <!-- Add Stat -->
         <a class="control add-stat" title="{{localize config.app.addStat}}">
-            <i class="fas fa-plus" data-add-stat></i>
+            <i class="fas fa-plus" data-add></i>
         </a>
 
     </header>
@@ -36,7 +36,7 @@
                 <select class="color" name="system.stats.{{key}}.color" data-match-select="{{key}}">
                     {{#select stat.color}}
                         {{#each ../config.colorStat as |color key|}}
-                            <option value="{{key}}" data-color-stat="{{key}}">{{localize color}}</option>
+                            <option value="{{key}}" data-color-option="{{key}}">{{localize color}}</option>
                         {{/each}}
                     {{/select}}
                 </select>
@@ -75,19 +75,19 @@
             <!-- View -->
             <div class="view">
                 <a title="Set View to Value">
-                    <i class="fas fa-hashtag" data-view-stat="value"></i>
+                    <i class="fas fa-hashtag" data-view="value"></i>
                 </a>
                 <a title="Set View to Resource">
-                    <i class="fas fa-percent" data-view-stat="resource"></i>
+                    <i class="fas fa-percent" data-view="resource"></i>
                 </a>
                 <a title="Set View to Label">
-                    <i class="fas fa-font" data-view-stat="label"></i>
+                    <i class="fas fa-font" data-view="label"></i>
                 </a>
             </div>
 
             <!-- Delete -->
             <a class="control" title="Delete Stat">
-                <i class="fas fa-trash" data-delete-stat="{{key}}"></i>
+                <i class="fas fa-trash" data-remove></i>
             </a>
         </li>
 

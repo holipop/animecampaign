@@ -9,17 +9,27 @@
  */
 export function listeners (html, sheet) {
 
+    /** @type {Object} */
+    const stats = sheet.object.system.stats;
+
+    /** @type {jQuery} */
+    const ol = html.find('[data-stat-list]');
+
+    /** @returns {String} */
+    const key = event => {
+        return $(event.target).closest('[data-stat]').data('stat');
+    }
+
 
     /** Disables the options of the color selection that are occupied by other stats.
-     * @param {*} html 
      */
-    void function disableStatOptions (html) {
+    void function disableOptions () {
         const stats = sheet.object.system.stats;
         const colorKeys = CONFIG.animecampaign.colorKeys;
         const populatedColors = colorKeys.filter(element => stats[element] != null);
 
         populatedColors.forEach(element => {
-            const color = html.find(`[data-color-stat=${element}]`);
+            const color = ol.find(`[data-color-option=${element}]`);
 
             color.each((index, element) => {
                 const isSelected = $(element).attr('selected')
@@ -27,14 +37,13 @@ export function listeners (html, sheet) {
                 if (!isSelected) $(element).attr('disabled', 'true');
             });
         });
-    }(html)
+    }()
 
 
     /** Matches the color of the select element with the color stat.
-     * @param {*} html
      */
-    void function matchSelect (html) {
-        const select = html.find('[data-match-select]');
+    void function matchSelect () {
+        const select = ol.find('[data-match-select]');
 
         select.each((index, element) => {
             const key = $(element).data('match-select');
@@ -48,47 +57,40 @@ export function listeners (html, sheet) {
 
             $(element).css(styles)
         })
-    }(html)
+    }()
 
 
     /** Sets the view of the color stat.
-     * @param {*} html 
      */
-    void function setColorStatView (html) {
-        const view = html.find('[data-view-stat]');
-        const stat = html.find('[data-stat]');
+    void function view () {
+        const view = ol.find('[data-view]');
+        const stat = ol.find('[data-stat]');
 
         view.removeClass('selected');
 
         stat.each((index, element) => {
             const key = $(element).data('stat');
-            const setting = sheet.usedStats()[key].view;
-            const selected = $(element).find(`[data-view-stat=${setting}]`);
+            const setting = stats[key].view;
+            const selected = $(element).find(`[data-view=${setting}]`);
             
             selected.addClass('selected');
         });
 
         view.on('click', event => {
-            const setting = $(event.target).data('view-stat');
-            const key = $(event.target).parents('[data-stat]').data('stat');
-            const stat = sheet.object.system.stats[key];
+            const setting = $(event.target).data('view');
 
-            stat.view = setting;
-
-            sheet.object.update({ [`system.stats.${key}`]: stat });
+            sheet.object.update({ [`system.stats.${key(event)}.view`]: setting });
         });
-    }(html)
+    }()
 
 
     /** Occupies a color stat by finding the first null stat. Removes the button if all stats are occupied.
-     * @param {*} html 
      */
-    void function addColorStat (html) {
-        const add = html.find("[data-add-stat]");
-        const stats = sheet.object.system.stats;
-        const areAllStatsPopulated = Object.values(stats).every(element => element != null);
+    void function add () {
+        const add = ol.find("[data-add]");
+        const allStatsPopulated = Object.values(stats).every(element => element != null);
 
-        if (areAllStatsPopulated) add.hide();
+        if (allStatsPopulated) add.hide();
         else add.show();
 
         add.on('click', () => {
@@ -99,19 +101,17 @@ export function listeners (html, sheet) {
                 }
             }
         });
-    }(html)
+    }()
 
 
     /** Sets a color stat to null.
-     * @param {*} html 
      */
-    void function deleteColorStat (html) {
-        const del = html.find('[data-delete-stat]');
+    void function remove () {
+        const remove = ol.find('[data-remove]');
 
-        del.on('click', event => {
-            const key = $(event.target).data('delete-stat');
-            sheet.object.update({ [`system.stats.${key}`]: null });
+        remove.on('click', event => {
+            sheet.object.update({ [`system.stats.${key(event)}`]: null });
         });
-    }(html)
+    }()
 
 }

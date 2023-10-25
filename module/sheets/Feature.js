@@ -4,6 +4,7 @@
 
 
 import * as AC from "../AC.js";
+import * as List from "../List.js";
 
 /** Event listeners for categories.
  * @param {*} html 
@@ -11,82 +12,78 @@ import * as AC from "../AC.js";
  */
 export function listeners (html, sheet) {
 
+    /** @type {jQuery} */
+    const kit = html.find('[data-kit]');
+
+    /** @returns {String} */
+    const id = element => {
+        return $(element).closest('[data-feature]').data('feature');
+    }
+
 
     /** Creates a new feature under a category.
-     * @param {*} html 
      */
-    void function createFeature (html) {
-        const create = html.find('[data-create-feature]');
+    void function create () {
+        const create = kit.find('[data-create-feature]');
+        const categories = sheet.object.system.categories;
 
         create.on('click', event => {
-            const key = $(event.target).data('create-feature');
-            const trackers = sheet.categorizedTrackers()[key];
+            const category = $(event.target).data('create-feature');
+            const stats = sheet.categorizedTrackers()[category];
 
-            const color = sheet.getCategory(key).color ?? sheet.object.system.color;
-
-            const stats = trackers.map(tracker => {
-                return { tag: tracker.tag, img: tracker.img }
-            });
+            const target = List.get(categories, { name: category })
+            const color = target.color ?? sheet.object.system.color;
 
             const data = [{
-                name: 'New Feature',
+                name: `New Feature`,
                 type: 'Feature',
-                system: {
-                    category: key,
-                    stats: stats,
-                    color: color,
-                }
+                system: { category, stats, color }
             }];
 
             sheet.object.createEmbeddedDocuments('Item', data)
         })
-    }(html)
+    }()
 
 
     /** Fires an item's roll method.
-     * @param {*} html 
      */
-    void function rollFeature (html) {
-        const roll = html.find('[data-roll]');
+    void function roll () {
+        const roll = kit.find('[data-roll]');
 
         roll.on('click', event => {
-            const id = $(event.target).data('roll');
-            const feature = sheet.object.getEmbeddedDocument('Item', id);
+            const feature = sheet.object.getEmbeddedDocument('Item', id(event.target));
 
             feature.roll();
         })
-    }(html)
+    }()
 
 
     /** Renders a kit feature's sheet.
-     * @param {*} html 
      */
-    void function viewFeature (html) {
-        const view = html.find('[data-view-feature]');
+    void function view () {
+        const view = kit.find('[data-view-feature]');
 
         view.on('click', event => {
-            const id = $(event.target).data('view-feature');
-            const feature = sheet.object.getEmbeddedDocument('Item', id);
+            const feature = sheet.object.getEmbeddedDocument('Item', id(event.target));
 
             feature.sheet.render(true);
         })
-    }(html)
+    }()
 
 
-    /** Deletes a feature given its id.
-     * @param {*} html 
+    /** Deletes a feature.
      */
-    void function deleteFeature (html) {
-        const del = html.find('[data-delete-feature]');
+    void function del () {
+        const del = kit.find('[data-delete-feature]');
 
         del.on('click', event => {
-            const id = $(event.target).data('delete-feature');
-
-            const callback = () => sheet.object.deleteEmbeddedDocuments('Item', [id]);
+            const callback = () => {
+                sheet.object.deleteEmbeddedDocuments('Item', [id(event.target)]);
+            }
 
             Dialog.confirm({
                 title: AC.format('dialog.deleteFeature', {
-                    id: id,
+                    id: id(event.target),
                     name: sheet.object.name
                 }),
                 content: `<p>Delete this feature?</p>`,
@@ -95,31 +92,28 @@ export function listeners (html, sheet) {
                 defaultYes: false,
             });
         })
-    }(html)
+    }()
 
 
     /** Matches the color of each element with an embedded kit feature.
-     * @param {*} html 
      */
-    void function matchFeature (html) {
-        const match = html.find('[data-match-feature]');
+    void function matchFeature () {
+        const match = kit.find('[data-match-feature]');
 
         match.each((index, element) => {
             const properties = $(element).data('match-feature') || "color";
-            const id = $(element).parents('[data-feature]').data('feature');
-            const feature = sheet.object.getEmbeddedDocument('Item', id);
+            const feature = sheet.object.getEmbeddedDocument('Item', id(element));
             const color = feature.system.color;
 
-            const obj = AC.uniformObject(properties.split(' '), color);
-            $(element).css(obj);
+            const styles = AC.uniformObject(properties.split(' '), color);
+            $(element).css(styles);
         })
-    }(html)
+    }()
 
 
     /** Swaps the fonts of a stat label if it exceeds a certain amount of characters.
-     * @param {*} html 
      */
-    void function swapStatFonts (html) {
+    void function swapStatFonts () {
         const MAX_CHARS = 3;
         const swap = html.find('[data-swap-font]');
 
@@ -128,6 +122,6 @@ export function listeners (html, sheet) {
 
             if (text.length > MAX_CHARS) $(element).addClass('label');
         })
-    }(html)
+    }()
 
 }

@@ -19,13 +19,13 @@
 
                     <!-- Rename, Color, Flood -->
                     <a class="control" title="{{localize @root.config.app.renameCategory}}">
-                        <i class="fas fa-pencil" data-rename-category="{{category}}"></i>
+                        <i class="fas fa-pencil" data-rename></i>
                     </a>
                     <a class="control" title="{{localize @root.config.app.colorCategory}}">
-                        <i class="fas fa-palette" data-color-category="{{category}}"></i>
+                        <i class="fas fa-palette" data-color></i>
                     </a>
                     <a class="control" title="{{localize @root.config.app.floodCategory}}">
-                        <i class="fas fa-fill-drip" data-flood-category="{{category}}"></i>
+                        <i class="fas fa-fill-drip" data-flood></i>
                     </a>
 
                 </div>
@@ -35,7 +35,7 @@
 
                     <!-- Track -->
                     <a class="control" title="{{localize @root.config.app.trackStat}}">
-                        <i class="fas fa-square-plus" data-track="{{category}}"></i>
+                        <i class="fas fa-square-plus" data-track></i>
                     </a>
 
                     {{#with (lookup @root.categorizedTrackers category)}}
@@ -45,7 +45,7 @@
                                 <!-- Image -->
                                 {{#with (lookup @root.categories category)}}
                                     <div class="tracker-image" title="{{localize @root.config.app.setStatImage}}">
-                                        <img src="{{tracker.img}}" data-tracker="{{index}}" data-image-tracker="{{index}}" data-contrast-image="{{this.color}}">
+                                        <img src="{{tracker.img}}" data-tracker="{{index}}" data-tracker-image="{{index}}" data-contrast-image="{{this.color}}">
                                     </div>
                                 {{/with}}
 
@@ -70,7 +70,7 @@
                         <i class="fas fa-plus" data-create-feature="{{category}}"></i>
                     </a>
                     <a class="control" title="{{localize @root.config.app.deleteCategory}}">
-                        <i class="fas fa-sack-xmark" data-delete-category="{{category}}"></i>
+                        <i class="fas fa-sack-xmark" data-delete></i>
                     </a>
 
                 </div>
@@ -92,7 +92,7 @@
 
     {{/each}}
 
-    <button data-create-category type="button">
+    <button data-create type="button">
         <i class="fas fa-plus"></i>
         {{localize config.app.createCategory}}
     </button>

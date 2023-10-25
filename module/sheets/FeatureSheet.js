@@ -1,5 +1,5 @@
 import * as Global from "./Global.js"
-import * as FeatureStat from "./FeatureStat.js"
+import * as Stat from "./Stat.js"
 import * as Section from "./Section.js"
 
 // The application for Kit Features.
@@ -81,7 +81,7 @@ export default class FeatureSheet extends ItemSheet {
     activateListeners (html) {
 
         Global.listeners(html, this);
-        FeatureStat.listeners(html, this);
+        Stat.listeners(html, this);
         Section.listeners(html, this);
         
         super.activateListeners(html);
