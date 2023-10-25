@@ -7,6 +7,58 @@ import * as AC from "../AC.js";
 import * as List from "../List.js"
 import { Category } from "../Data.js"
 
+/** Drop behaviors for categories.
+ * @param {*} event 
+ * @param {*} data 
+ * @param {*} sheet
+ */
+export function onDrop (event, data, sheet) {
+
+    /** @type {Category[]} */
+    const categories = sheet.object.system.categories;
+
+    /** Inserts the dropped category on the index of the target category. 
+    */
+    void function category () {
+        if (data.type != 'Category') return;
+        if (categories.length == 1) return;
+    
+        const dropTarget = $(event.target).closest('[data-category]');
+        if (dropTarget.length == 0) return;
+    
+        const targetIndex = List.index(categories, { name: dropTarget.data('category') });
+        const currentIndex = List.index(categories, { name: data.obj.name });
+    
+        let update = List.remove(categories, currentIndex);
+        update = List.add(update, data.obj, targetIndex);
+    
+        return sheet.object.update({ 'system.categories': update });
+    }()
+
+    /** Inserts the dropped category on the index of the target category.
+     */
+    void function tracker () {
+        if (data.type != 'Tracker') return;
+        if (data.category.trackers.length == 1) return;  
+
+        const dropCategory = $(event.target).closest('[data-category]');
+        if (dropCategory.data('category') != data.category.name) return;
+
+        const dropTarget = $(event.target).closest('[data-tracker]');
+        if (dropTarget.length == 0) return;
+
+        const targetIndex = dropTarget.data('tracker');
+
+        let trackers = List.get(categories, { name: data.category.name }).trackers;
+        trackers = List.remove(trackers, data.index);
+        trackers = List.add(trackers, data.obj, targetIndex);
+
+        const update = List.set(categories, { name: data.category.name }, { trackers })
+        return sheet.object.update({ 'system.categories': update });
+    }()
+}
+
+
 /** Event listeners for categories.
  * @param {*} html 
  * @param {*} sheet 
@@ -71,7 +123,7 @@ export function listeners (html, sheet) {
             const key = name(event.target);
 
             const callback = () => {
-                const features = sheet.categorizedFeatures()[key];
+                const features = sheet.categorizedFeatures[key];
                 const ids = features.map(feature => feature._id);
 
                 const update = List.remove(categories, { name: key })
@@ -104,7 +156,7 @@ export function listeners (html, sheet) {
             const key = name(event.target);
 
             const callback = html => {
-                const features = sheet.categorizedFeatures()[key];
+                const features = sheet.categorizedFeatures[key];
                 const newName = html.find('[name="name"]').val().toLowerCase() || key;
 
                 const isNameTaken = List.has(categories, { name: newName })
@@ -200,7 +252,7 @@ export function listeners (html, sheet) {
 
         flood.on('click', event => {
             const key = name(event.target);
-            const features = sheet.categorizedFeatures()[key];
+            const features = sheet.categorizedFeatures[key];
             const target = List.get(categories, { name: key });
             const color = target.color ?? sheet.object.system.color;
 
@@ -330,7 +382,7 @@ export function listeners (html, sheet) {
         untrack.on('click', event => {
             const index = +$(event.target).data('untrack');
             const category = name(event.target);
-            const trackers = sheet.categorizedTrackers()[category];
+            const trackers = sheet.categorizedTrackers[category];
 
             trackers.splice(index, 1);
 
@@ -348,7 +400,7 @@ export function listeners (html, sheet) {
         edit.on('click', event => {
             const index = +$(event.target).data('tracker-image');
             const category = name(event.target);
-            const trackers = sheet.categorizedTrackers()[category];
+            const trackers = sheet.categorizedTrackers[category];
 
             const callback = path => {
                 trackers[index].img = path;

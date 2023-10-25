@@ -1,3 +1,4 @@
+import * as List from "../List.js"
 import * as Global from "./Global.js"
 import * as Stat from "./Stat.js"
 import * as Section from "./Section.js"
@@ -24,15 +25,8 @@ export default class FeatureSheet extends ItemSheet {
         return options;
     }
 
-    // A shorthand for this feature's stats. 
-    get stats () { return this.object.system.stats }
-
-    // A shorthand for this feature's sections. 
-    get sections () { return this.object.system.sections }
-
 
     //* DATA PREPARATION */
-    //* ---------------- */ 
 
     /** Returns the context object for Handlebars.
      * @returns {Object}
@@ -43,11 +37,11 @@ export default class FeatureSheet extends ItemSheet {
         data.config = CONFIG.animecampaign;
         data.system = this.object.system;
         data.documentName = this.object.documentName;
-        data.statList = this.stats;
-        data.sections = this.sections;
+        data.statList = this.object.system.stats;
+        data.sections = this.object.system.sections;
 
         // Prepared Data
-        data.categories = this.categories();
+        data.categories = this.categories;
 
         return data;
     }
@@ -55,10 +49,10 @@ export default class FeatureSheet extends ItemSheet {
     /** Returns an array of available categories to select, including the default ones.
      * @returns {string[]}
      */
-    categories () {
+    get categories () {
         // Owned features only list their parent's categories. 
         if (this.object.isOwned) {
-            return this.object.parent.system.categories.map(cat => cat.name);
+            return this.object.parent.system.categories.map(category => category.name);
         }
 
         // Otherwise, list will contain the default categories and their own.
@@ -73,7 +67,6 @@ export default class FeatureSheet extends ItemSheet {
 
 
     //* EVENT LISTENERS */
-    //* --------------- */ 
 
     /** This is where we put all of the code for buttons and such in the sheet.
      * @param {*} html The HTML of the form in a jQuery object.
@@ -89,86 +82,32 @@ export default class FeatureSheet extends ItemSheet {
 
 
     //* FORM SUBMISSION */
-    //* --------------- */
 
     /** Called whenever the form is submitted, we can put preliminary updates here.
      * @param {Event} event 
      * @param {Object} data 
      */
     _updateObject (event, data) {
-        data = this.updateStatList(data);
-        data = this.updateSectionList(data);
-        data = this.lowercaseCategory(data);
+        data = Stat.update(data, this);
+        data = Section.update(data, this);
+        
+        // category must always be lowercase
+        data['system.category'] = data['system.category'].toLowerCase();
 
-        this.updateParentCategories(data);
+        // if the category doesn't exist for the owner, create it
+        (() => {
+            if (!this.object.isOwned) return;
+    
+            const categories = this.object.parent.system.categories
+    
+            const categoryExists = List.has(categories, { name: data['system.category'] });
+            if (categoryExists) return;
+    
+            const update = List.add(categories, { name: data['system.category'] })
+            this.object.parent.update({ 'system.categories': update });
+        })();
 
         super._updateObject(event, data);
     }
 
-    /** Ensures no data is lost when the stats array is updated.
-     * @param {Object} data 
-     * @returns {Object}
-     */
-    updateStatList (data) {
-        const statChanges = getProperty(expandObject(data), 'system.stats');
-        const stats = Object.fromEntries(this.stats.entries());
-
-        for (const stat in statChanges) {
-            const set = statChanges[stat];
-
-            set.tag = set.tag.toLowerCase();
-
-            statChanges[stat] = set;
-        }
-
-        mergeObject(stats, statChanges);
-
-        const updatedData = mergeObject(data, { system: { stats: stats } })
-
-        return flattenObject(updatedData);
-    }
-
-    /** Ensures no data is lost when the sections array is updated.
-     * @param {Object} data 
-     * @returns {Object}
-     */
-    updateSectionList (data) {
-        const sectionChanges = getProperty(expandObject(data), 'system.sections');
-        const sections = Object.fromEntries(this.sections.entries());
-
-        mergeObject(sections, sectionChanges);
-
-        const updatedData = mergeObject(data, { system: { sections: sections } })
-
-        return flattenObject(updatedData);
-    }
-
-    /** Sets the category to lowercase.
-     * @param {Object} data 
-     * @returns {Object}
-     */
-    lowercaseCategory (data) {
-        const category = getProperty(expandObject(data), 'system.category');
-
-        const updatedData = mergeObject(data, { system: { category: category.toLowerCase() } });
-
-        return flattenObject(updatedData);
-    }
-
-    /** Creates a new category to the parent's system categories if the entered category name doesn't exist.
-     * @param {*} data 
-     * @returns {null}
-     */
-    updateParentCategories (data) {
-        if (!this.object.isOwned) return;
-
-        const parentCategories = this.object.parent.system.categories
-        const categoryNames = parentCategories.map(category => category.name);
-        const newCategory = getProperty(expandObject(data), 'system.category');
-
-        if (categoryNames.includes(newCategory)) return;
-
-        const update = [ ...parentCategories, { name: newCategory } ];
-        this.object.parent.update({ 'system.categories': update });
-    }
 }

@@ -87,3 +87,15 @@ export function has (arr, query) {
 
     return (arr[index] !== undefined);
 }
+
+/** Returns the index of the first entry that matches the query.
+ * @param {*} arr 
+ * @param {*} query 
+ * @returns 
+ */
+export function index (arr, query) {
+    return arr.findIndex(entry => {
+        const filteredEntry = filterObject(entry, query);
+        return objectsEqual(filteredEntry, query);
+    });
+}

@@ -3,6 +3,8 @@
  */
 
 
+import * as AC from "../AC.js";
+
 /** Event listeners for color stats.
  * @param {*} html 
  * @param {*} sheet 
@@ -114,4 +116,27 @@ export function listeners (html, sheet) {
         });
     }()
 
+}
+
+/** Checks the color property of the stats and ensures they're assigned to its matching key.
+ * @param {Object} data 
+ * @param {*} sheet
+ * @returns {Object}
+ */
+export function update (data, sheet) {
+    const statChanges = getProperty(expandObject(data), 'system.stats');
+    const blankStats = AC.uniformObject(CONFIG.animecampaign.colorKeys, null)
+
+    for (const stat in statChanges) {
+        const set = statChanges[stat];
+
+        set.tag = set.tag.toLowerCase();
+
+        const key = statChanges[stat].color
+        blankStats[key] = set;
+    }
+
+    const updatedData = mergeObject(data, { system: { stats: blankStats } });
+
+    return flattenObject(updatedData);
 }

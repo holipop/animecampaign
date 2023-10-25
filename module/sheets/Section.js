@@ -74,3 +74,18 @@ export function listeners (html, sheet) {
     }()
 
 }
+
+/** Ensures no data is lost when the sections array is updated.
+ * @param {*} data 
+ * @param {*} sheet 
+ */
+export function update (data, sheet) {
+    const sectionChanges = getProperty(expandObject(data), 'system.sections');
+    const sections = Object.fromEntries(sheet.object.system.sections.entries());
+
+    mergeObject(sections, sectionChanges);
+
+    const updatedData = mergeObject(data, { system: { sections: sections } })
+
+    return flattenObject(updatedData);
+}

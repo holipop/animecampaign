@@ -1,5 +1,5 @@
 /** A namespace for Feature Stats.
- * @module FeatureStat
+ * @module Stat
  */
 
 
@@ -72,4 +72,28 @@ export function listeners (html, sheet) {
         });
     }()
 
+}
+
+/** Ensures no data is lost when the stats array is updated.
+ * @param {Object} data 
+ * @param {Object} sheet 
+ * @returns {Object} 
+ */
+export function update (data, sheet) {
+    const statChanges = getProperty(expandObject(data), 'system.stats');
+    const stats = Object.fromEntries(sheet.object.system.stats.entries());
+
+    for (const stat in statChanges) {
+        const set = statChanges[stat];
+
+        set.tag = set.tag.toLowerCase();
+
+        statChanges[stat] = set;
+    }
+
+    mergeObject(stats, statChanges);
+
+    const updatedData = mergeObject(data, { system: { stats: stats } })
+
+    return flattenObject(updatedData);
 }

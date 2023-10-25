@@ -6,6 +6,55 @@
 import * as AC from "../AC.js";
 import * as List from "../List.js";
 
+/** Inserts the dropped feature into the target category and sets its sort.
+ * @param {*} event 
+ * @param {*} data 
+ * @param {*} sheet
+ */
+export function onDrop (event, data, sheet) {
+    if (data.type != 'Feature') return;
+
+    const features = sheet.actor.items;
+    const source = features.get(data.id);
+
+    const dropTarget = $(event.target).closest('[data-feature]');
+    const dropCategory = $(event.target).closest('[data-category]');
+
+    // If the feature was placed on an empty category.
+    if (dropTarget.length == 0) {
+        const updateData = [{
+            _id: source._id,
+            sort: 0,
+            system: { category: dropCategory.data('category') }
+        }];
+        return sheet.object.updateEmbeddedDocuments('Item', updateData);
+    };
+
+    // Doesn't sort on itself.
+    const target = features.get(dropTarget.data('feature'));
+    if (source._id == target._id) return;
+
+    const siblings = [];
+    dropCategory.find('li[data-feature]').each((index, element) => {
+        const siblingId = $(element).data('feature');
+        if (siblingId && (siblingId !== source._id)) {
+            siblings.push(features.get(siblingId))
+        }
+    })
+
+    // Sorts based on its siblings.
+    const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
+    const updateData = sortUpdates.map(u => {
+        const update = u.update;
+        update._id = u.target._id;
+        update.system = { category: dropCategory.data('category') }
+        return update;
+    })
+
+    return sheet.object.updateEmbeddedDocuments('Item', updateData);
+}
+
+
 /** Event listeners for categories.
  * @param {*} html 
  * @param {*} sheet 
@@ -29,7 +78,7 @@ export function listeners (html, sheet) {
 
         create.on('click', event => {
             const category = $(event.target).data('create-feature');
-            const stats = sheet.categorizedTrackers()[category];
+            const stats = sheet.categorizedTrackers[category];
 
             const target = List.get(categories, { name: category })
             const color = target.color ?? sheet.object.system.color;
