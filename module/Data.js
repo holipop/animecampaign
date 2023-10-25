@@ -3,7 +3,7 @@
  */
 
 
-import * as List from "./List.js"
+import * as List from "./helper/List.js"
 
 const DataModel = foundry.abstract.DataModel;
 const fields = foundry.data.fields;

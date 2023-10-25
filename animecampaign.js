@@ -1,13 +1,10 @@
 // AC FVTT
-import * as AC from './module/AC.js'
+import * as AC from './module/helper/AC.js'
 import * as config from './module/config.js'
 
 import * as Data from './module/Data.js'
 import * as Document from "./module/Document.js"
-
-import CharacterSheet from './module/sheets/CharacterSheet.js';
-
-import FeatureSheet from './module/sheets/FeatureSheet.js';
+import * as Sheet from "./module/Sheet.js"
 
 // Fires right before Foundry starts initialization steps.
 Hooks.once('init', () => {
@@ -20,9 +17,9 @@ Hooks.once('init', () => {
     CONFIG.Item.dataModels["Feature"] = Data.Feature;
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
+    Actors.registerSheet("animecampaign", Sheet.CharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
+    Items.registerSheet("animecampaign", Sheet.FeatureSheet, { makeDefault: true });
 
     AC.preloadHandlebarsTemplates();
 })

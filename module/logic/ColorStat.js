@@ -3,7 +3,7 @@
  */
 
 
-import * as AC from "../AC.js";
+import * as AC from "../helper/AC.js";
 
 /** Event listeners for color stats.
  * @param {*} html 

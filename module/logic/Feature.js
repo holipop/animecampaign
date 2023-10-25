@@ -3,8 +3,8 @@
  */
 
 
-import * as AC from "../AC.js";
-import * as List from "../List.js";
+import * as AC from "../helper/AC.js";
+import * as List from "../helper/List.js";
 
 /** Inserts the dropped feature into the target category and sets its sort.
  * @param {*} event 
