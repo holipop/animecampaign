@@ -3,7 +3,6 @@
  */
 
 
-import { Section } from "../Data.js"
 import * as List from "../helper/List.js"
 
 /** Event listeners for sections.

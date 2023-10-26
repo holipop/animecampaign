@@ -130,15 +130,16 @@ export class CharacterSheet extends ActorSheet {
             const feature = this.object.getEmbeddedDocument('Item', dataset.feature);
             dragData = { type: 'Feature', obj: feature, id: dataset.feature };
         }
+
+        const categories = this.object.system.categories;
+        const key = $(event.target).closest('[data-category]').data('category');
+        const category = List.get(categories, { name: key });
         
         if (dataset.category !== undefined) {
-            const category = this.getCategory(dataset.category);
             dragData = { type: 'Category', obj: category };
         } 
         
         if (dataset.tracker !== undefined) {
-            const key = $(event.target).parents('[data-category]').data('category');
-            const category = this.getCategory(key);
             const tracker = category.trackers[dataset.tracker];
             dragData = { type: 'Tracker', obj: tracker, category: category, index: dataset.tracker };
         }

@@ -4,7 +4,6 @@
 
 
 import * as List from "../helper/List.js"
-import { Stat } from "../Data.js";
 
 /** Event listeners for feature stats.
  * @param {*} html 

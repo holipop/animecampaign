@@ -5,7 +5,6 @@
 
 import * as AC from "../helper/AC.js";
 import * as List from "../helper/List.js"
-import { Category } from "../Data.js"
 
 /** Drop behaviors for categories.
  * @param {*} event 
