@@ -8,7 +8,7 @@ import * as Stat from "./logic/Stat.js"
 import * as Section from "./logic/Section.js"
 
 /**
- * The application for Characters.
+ ** The application for Characters.
  */
 export class CharacterSheet extends ActorSheet {
 
@@ -195,7 +195,7 @@ export class CharacterSheet extends ActorSheet {
 
 
 /**
- * The application for Kit Features.
+ ** The application for Kit Features.
  */
 export class FeatureSheet extends ItemSheet {
 
