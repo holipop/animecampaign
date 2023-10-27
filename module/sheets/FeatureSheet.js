@@ -1,10 +1,9 @@
-import * as List from "../helper/List.js"
-import * as Global from "../logic/Global.js"
-import * as Stat from "../logic/Stat.js"
-import * as Section from "../logic/Section.js"
+import * as List from "../List.js"
+import * as AC from "../AC.js"
+import { SheetMixin } from "./SheetMixin.js"
 
 /**
- ** The application for Kit Features.
+ * The application for Kit Features.
  */
 export default class FeatureSheet extends ItemSheet {
 
@@ -75,11 +74,142 @@ export default class FeatureSheet extends ItemSheet {
      */
     activateListeners (html) {
 
-        Global.listeners(html, this);
-        Stat.listeners(html, this);
-        Section.listeners(html, this);
+        this.globalListeners(html, this);
+        this.statListeners(html, this);
+        this.sectionListeners(html, this);
         
         super.activateListeners(html);
+    }
+
+    /** Event listeners for feature stats.
+     * @param {*} html 
+     * @param {*} sheet 
+     */
+    statListeners (html, sheet) {
+
+        /** @type {Stat[]} */
+        const stats = sheet.object.system.stats;
+
+        /** @type {jQuery} */
+        const ol = html.find('[data-stat-list]');
+
+        /** @returns {Number} */
+        const index = event => {
+            // + is a unary operator, converts a string into a number.
+            return +$(event.target).closest('[data-stat]').data('stat');
+        }
+
+        /** Adds a stat to the end of the stats list.
+         */
+        void function add () {
+            const add = ol.find('[data-add]');
+
+            add.on('click', () => {
+                const update = List.add(stats);
+                sheet.object.update({ 'system.stats': update });
+            })
+        }()
+
+        /** Deletes a stat given its index.
+         */
+        void function remove () {
+            const remove = ol.find('[data-remove]');
+
+            remove.on('click', event => {
+                const update = List.remove(stats, index(event));
+                sheet.object.update({ 'system.stats': update });
+            });
+        }()
+
+        /** Sets the view of the stat.
+         */
+        void function view () {
+            const view = ol.find('[data-view]');
+            const stat = ol.find('[data-stat]');
+
+            view.removeClass('selected');
+
+            stat.each((index, element) => {
+                const setting = stats[index].view;
+                const selected = $(element).find(`[data-view=${setting}]`);
+                
+                selected.addClass('selected');
+            });
+
+            view.on('click', event => {
+                const setting = $(event.target).data('view');
+                const update = List.set(stats, index(event), { view: setting })
+
+                sheet.object.update({ 'system.stats': update });
+            });
+        }()
+
+    }
+
+    /** Event listeners for sections.
+     * @param {*} html 
+     * @param {*} sheet 
+     */
+    sectionListeners (html, sheet) {
+
+        /** @type {Section[]} */
+        const sections = sheet.object.system.sections;
+
+        /** @type {jQuery} */
+        const ol = html.find('[data-section-list]');
+
+        /** @returns {Number} */
+        const index = event => {
+            // + is a unary operator, converts a string into a number.
+            return +$(event.target).closest('[data-section]').data('section');
+        }
+
+        /** Adds a blank section to the section list.
+         */
+        void function add () {
+            const add = ol.find('[data-add]');
+
+            add.on('click', () => {
+                const update = List.add(sections);
+                sheet.object.update({ 'system.sections': update });
+            })
+        }()
+
+        /** Deletes a section at the desired index.
+         */
+        void function remove () {
+            const remove = ol.find('[data-remove]');
+
+            remove.on('click', event => {
+                const update = List.remove(sections, index(event));
+                sheet.object.update({ 'system.sections': update });
+            });
+        }()
+
+        /** Toggle's a section's visibility for chat messages.
+         */
+        void function toggle () {
+            const toggle = ol.find('[data-toggle]');
+
+            toggle.each((index, element) => {
+                const section = List.get(sections, index);
+
+                if (section.visible) { 
+                    $(element).css('color', 'blue')
+                } else { 
+                    $(element).css('color', 'red')
+                }
+            });
+
+            toggle.on('click', event => {
+                // Get boolean and inverse it.
+                const visibility = List.get(sections, index(event)).visible;
+                const update = List.set(sections, index(event), { visible: !visibility });
+
+                sheet.object.update({ 'system.sections': update })
+            });
+        }()
+
     }
 
 
@@ -90,8 +220,6 @@ export default class FeatureSheet extends ItemSheet {
      * @param {Object} data 
      */
     _updateObject (event, data) {
-        data = Stat.update(data, this);
-        data = Section.update(data, this);
         
         // category must always be lowercase
         data['system.category'] = data['system.category'].toLowerCase();
@@ -109,6 +237,41 @@ export default class FeatureSheet extends ItemSheet {
             this.object.parent.update({ 'system.categories': update });
         })();
 
+        // Ensures no data is lost when the stats array is updated.
+        (() => {
+            const statChanges = getProperty(expandObject(data), 'system.stats');
+            const stats = Object.fromEntries(this.object.system.stats.entries());
+
+            for (const stat in statChanges) {
+                const set = statChanges[stat];
+
+                set.tag = set.tag.toLowerCase();
+
+                statChanges[stat] = set;
+            }
+
+            mergeObject(stats, statChanges);
+
+            const updatedData = mergeObject(data, { system: { stats: stats } })
+
+            data = flattenObject(updatedData);
+        })();
+
+        // Ensures no data is lost when the sections array is updated.
+        (() => {
+            const sectionChanges = getProperty(expandObject(data), 'system.sections');
+            const sections = Object.fromEntries(this.object.system.sections.entries());
+        
+            mergeObject(sections, sectionChanges);
+        
+            const updatedData = mergeObject(data, { system: { sections: sections } })
+        
+            return flattenObject(updatedData);
+        })()
+
         super._updateObject(event, data);
     }
 }
+
+// Composes mixins for this class.
+Object.assign(FeatureSheet.prototype, SheetMixin);

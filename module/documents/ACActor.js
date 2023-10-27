@@ -1,14 +1,9 @@
-/** Module containing all Documents.
- * @module Document
- */
-
-import * as List from "./helper/List.js";
-
+import * as List from "../List.js";
 
 /**
  * Extending the Actor class for system-specific logic.
  */
-export class ACActor extends Actor {
+export default class ACActor extends Actor {
 
     /** Fired whenever an embedded document is created.
      * @param {Document} parent
@@ -37,30 +32,5 @@ export class ACActor extends Actor {
 
         super._onCreateDescendantDocuments(parent, collection, documents, ...args);
     }
-}
 
-
-/**
- * Extending the Item class for system-specific logic.
- */
-export class ACItem extends Item { 
-
-    /** The file path to the roll template.
-     * @returns {String}
-     */
-    get rollTemplate () { return 'systems/animecampaign/templates/roll/roll-template.hbs' }
-
-    /** Sends a chat message of this feature.
-     */
-    async roll () {
-        const data = { ...this }
-        
-        const message = {
-            user: game.user._id,
-            speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(this.rollTemplate, data),
-        }
-
-        return ChatMessage.create(message);
-    }
 }

@@ -1,4 +1,4 @@
-import * as List from "../helper/List.js"
+import * as List from "../List.js"
 import Stat from "./Stat.js";
 import Section from "./Section.js";
 

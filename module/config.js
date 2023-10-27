@@ -1,5 +1,5 @@
 import lang from "../lang/en.json" assert { type: 'json' };
-import * as AC from "./helper/AC.js";
+import * as AC from "./AC.js";
 
 // An object containing language localization paths and default configurations.
 export const animecampaign = AC.facadeObject(lang).animecampaign;
