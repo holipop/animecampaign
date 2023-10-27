@@ -220,54 +220,37 @@ export default class FeatureSheet extends ItemSheet {
      * @param {Object} data 
      */
     _updateObject (event, data) {
-        
+        data = expandObject(data);
+
+        // Insures a list, making sure all of its values are kept on update.
+        const insure = key => {
+            const list = List.toObject(this.object.system[key]);
+            const update = mergeObject(list, data.system[key]);
+
+            data.system[key] = update;
+        }
+        insure('sections');
+        insure('stats');
+
         // category must always be lowercase
-        data['system.category'] = data['system.category'].toLowerCase();
+        data.system.category = data.system.category.toLowerCase();
+        // stats as well
+        for (const i in data.system.stats) {
+            data.system.stats[i].tag = data.system.stats[i].tag.toLowerCase();
+        }
 
         // if the category doesn't exist for the owner, create it
         (() => {
             if (!this.object.isOwned) return;
-    
+
+            const name = data.system.category;
             const categories = this.object.parent.system.categories
-    
-            const categoryExists = List.has(categories, { name: data['system.category'] });
+            const categoryExists = List.has(categories, { name });
             if (categoryExists) return;
     
-            const update = List.add(categories, { name: data['system.category'] })
+            const update = List.add(categories, { name })
             this.object.parent.update({ 'system.categories': update });
         })();
-
-        // Ensures no data is lost when the stats array is updated.
-        (() => {
-            const statChanges = getProperty(expandObject(data), 'system.stats');
-            const stats = Object.fromEntries(this.object.system.stats.entries());
-
-            for (const stat in statChanges) {
-                const set = statChanges[stat];
-
-                set.tag = set.tag.toLowerCase();
-
-                statChanges[stat] = set;
-            }
-
-            mergeObject(stats, statChanges);
-
-            const updatedData = mergeObject(data, { system: { stats: stats } })
-
-            data = flattenObject(updatedData);
-        })();
-
-        // Ensures no data is lost when the sections array is updated.
-        (() => {
-            const sectionChanges = getProperty(expandObject(data), 'system.sections');
-            const sections = Object.fromEntries(this.object.system.sections.entries());
-        
-            mergeObject(sections, sectionChanges);
-        
-            const updatedData = mergeObject(data, { system: { sections: sections } })
-        
-            return flattenObject(updatedData);
-        })()
 
         super._updateObject(event, data);
     }

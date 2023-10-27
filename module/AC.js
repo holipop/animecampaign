@@ -109,8 +109,8 @@ export function uniformObject (keyArr, value) {
  */
 export function facadeObject (obj) {
     let paths = Object.keys(flattenObject(obj));
-    paths.forEach(element => {
-        setProperty(obj, element, element);
+    paths.forEach(path => {
+        setProperty(obj, path, path);
     });
     return obj;
 }

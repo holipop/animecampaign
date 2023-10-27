@@ -837,21 +837,21 @@ export default class CharacterSheet extends ActorSheet {
      * @param {Object} data 
      */
     _updateObject (event, data) {
+        data = expandObject(data);
 
         // Ensure no data is lost for color stats.
-        // TODO: There's a better way to go about this.
-        const statChanges = getProperty(expandObject(data), 'system.stats');
-        const blankStats = AC.uniformObject(CONFIG.animecampaign.colorKeys, null)
+        const statUpdate = AC.uniformObject(CONFIG.animecampaign.colorKeys, null);
+        const statData = data.system.stats;
 
-        for (const stat in statChanges) {
-            const set = statChanges[stat];
-            set.tag = set.tag.toLowerCase();
-            const key = statChanges[stat].color
-            blankStats[key] = set;
+        for (const stat in statData) {
+            const update = statData[stat];
+            update.tag = update.tag.toLowerCase();
+
+            const key = statData[stat].color;
+            statUpdate[key] = update;
         }
 
-        const updatedData = mergeObject(data, { system: { stats: blankStats } });
-        data = flattenObject(updatedData);
+        data.system.stats = statUpdate;
 
         super._updateObject(event, data);
     }
