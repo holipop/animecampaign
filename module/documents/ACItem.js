@@ -19,8 +19,6 @@ export default class ACItem extends Item {
             ...this,
             _id: this._id,
             
-            roll: await roll.evaluate(),
-            tooltip: await roll.getTooltip(),
             match: this.system.color,
             contrast: (() => {
                 const rgb = AC.hexToRGB(this.system.color);
@@ -30,7 +28,13 @@ export default class ACItem extends Item {
 
                 const luma = rgb.reduce((n, m) => n + m) / 255;
                 return (luma <= .5) ? "white" : "black";
-            })()
+            })(),
+
+            roll: await roll.evaluate(),
+            tooltip: await roll.getTooltip(),
+
+            stats: this.system.stats,
+            sections: this.system.sections,
         }
         
         const message = {

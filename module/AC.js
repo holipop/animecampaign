@@ -66,9 +66,9 @@ export async function preloadHandlebarsTemplates () {
         // Roll
         'roll-summary': 'systems/animecampaign/templates/roll/summary.hbs',
         'roll-dice': 'systems/animecampaign/templates/roll/dice.hbs',
-        // 'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
-        // 'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
-        // 'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
+        'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
+        'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
+        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
     }
 
     return loadTemplates(paths);

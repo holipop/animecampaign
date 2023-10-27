@@ -1,0 +1,19 @@
+<ol class="section-list">
+    {{#each sections as |section index|}}
+        <li class="section">
+
+            <header>
+                <a class="collapse">
+                    <i class="fas chevron-down" data-collapse="{{index}}"></i>
+                </a>
+
+                <span class="name">{{section.name}}</span>
+
+                <div class="line"></div>
+            </header>
+
+            <p class="text" data-collapse="target {{index}}">{{{section.text}}}</p>
+
+        </li>
+    {{/each}}
+</ol>
