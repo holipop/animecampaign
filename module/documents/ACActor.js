@@ -19,11 +19,11 @@ export default class ACActor extends Actor {
             let categories = this.system.categories;
 
             features.forEach(feature => {
-                const query = { name: feature.system.category };
-                const categoryExists = List.has(categories, query)
+                const name = feature.system.category;
+                const categoryExists = List.has(categories, { name })
 
                 if (!categoryExists) {
-                    categories = List.add(categories, query)
+                    categories = List.add(categories, { name })
                 }
             })
             

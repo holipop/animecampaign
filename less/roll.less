@@ -1,5 +1,105 @@
 // main: ./animecampaign.less
 
 .animecampaign.chat.roll {
-    opacity: 1;
+    #AC.Border();
+}
+
+.animecampaign.chat.roll .summary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1rem;
+    
+    .background {
+        box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
+
+        grid-column: 1 / -1;
+        grid-row: 1 / 2;
+    }
+    img {
+        #AC.Border();
+
+        height: 2.25rem;
+        width: 2.25rem;
+        grid-column: 1 / 2;
+        grid-row: 1 / -1;
+        place-self: end;
+        margin: 4 * @rpx;
+        border-radius: 0;
+    }
+    .name {
+        #AC.HeadingSkinning();
+
+        grid-column: 2 / -1;
+        grid-row: 1 / 2;
+        place-self: end start;
+        margin: (4 * @rpx) 0;
+
+        font: 1.25rem "Gloock";
+        line-height: .9;
+    }
+    .category {
+        #AC.Overflow();
+
+        width: 100%;
+        grid-column: 2 / -1;
+        grid-row: 2 / -1;
+        place-self: end start;
+
+        font: bold .7rem "Libre Franklin";
+        text-transform: uppercase;
+        opacity: .75;
+    }
+}
+
+.animecampaign.chat.roll .dice-roll {
+    margin: (4 * @rpx);
+
+    .result {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+
+        .total {
+            #AC.Border();
+            #AC.Overflow();
+
+            height: 1.5rem;
+            min-width: 3rem;
+            max-width: 5rem;
+            border-radius: (2 * @rpx);
+            border-color: rgba(0, 0, 0, 0.5);
+            
+            font: bold 1.25rem "Philosopher";
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .formula {
+            #AC.Overflow();
+
+            flex: 1;
+            margin-left: .25rem;
+            border-bottom: (1 * @rpx) solid black;
+            
+            font: 500 .8rem "Libre Franklin";
+            opacity: .75;
+        }
+    }
+
+    .dice-tooltip {
+        margin-top: .15rem;
+
+        font-family: "Libre Franklin";
+
+        .part-header {
+            align-items: flex-end;
+        }
+        .part-total {
+            font-family: "Philosopher";
+        }
+        .part-formula {
+            font-size: .8rem;
+            opacity: 0.66;
+            line-height: 1;
+        }
+    }
 }

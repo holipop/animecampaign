@@ -215,7 +215,99 @@
   height: calc(100% - 5.125rem);
 }
 .animecampaign.chat.roll {
-  opacity: 1;
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+}
+.animecampaign.chat.roll .summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1rem;
+}
+.animecampaign.chat.roll .summary .background {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+}
+.animecampaign.chat.roll .summary img {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  height: 2.25rem;
+  width: 2.25rem;
+  grid-column: 1 / 2;
+  grid-row: 1 / -1;
+  place-self: end;
+  margin: 0.25rem;
+  border-radius: 0;
+}
+.animecampaign.chat.roll .summary .name {
+  margin: 0;
+  border: 0;
+  grid-column: 2 / -1;
+  grid-row: 1 / 2;
+  place-self: end start;
+  margin: 0.25rem 0;
+  font: 1.25rem "Gloock";
+  line-height: 0.9;
+}
+.animecampaign.chat.roll .summary .category {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  grid-column: 2 / -1;
+  grid-row: 2 / -1;
+  place-self: end start;
+  font: bold 0.7rem "Libre Franklin";
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.animecampaign.chat.roll .dice-roll {
+  margin: 0.25rem;
+}
+.animecampaign.chat.roll .dice-roll .result {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.animecampaign.chat.roll .dice-roll .result .total {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 1.5rem;
+  min-width: 3rem;
+  max-width: 5rem;
+  border-radius: 0.125rem;
+  border-color: rgba(0, 0, 0, 0.5);
+  font: bold 1.25rem "Philosopher";
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.animecampaign.chat.roll .dice-roll .result .formula {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
+  margin-left: 0.25rem;
+  border-bottom: 0.0625rem solid black;
+  font: 500 0.8rem "Libre Franklin";
+  opacity: 0.75;
+}
+.animecampaign.chat.roll .dice-roll .dice-tooltip {
+  margin-top: 0.15rem;
+  font-family: "Libre Franklin";
+}
+.animecampaign.chat.roll .dice-roll .dice-tooltip .part-header {
+  align-items: flex-end;
+}
+.animecampaign.chat.roll .dice-roll .dice-tooltip .part-total {
+  font-family: "Philosopher";
+}
+.animecampaign.chat.roll .dice-roll .dice-tooltip .part-formula {
+  font-size: 0.8rem;
+  opacity: 0.66;
+  line-height: 1;
 }
 .animecampaign.sheet .summary {
   display: grid;

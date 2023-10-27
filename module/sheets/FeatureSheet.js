@@ -15,7 +15,7 @@ export default class FeatureSheet extends ItemSheet {
             width: 550,
             height: 500,
             classes: ["animecampaign", "sheet", "item"],
-            template: 'systems/animecampaign/templates/feature/feature-sheet.hbs',
+            template: 'systems/animecampaign/templates/sheets/feature-sheet.hbs',
             scrollY: ["section.scrollable"],
         });
 

@@ -3,16 +3,16 @@
  */
 
 
+import * as AC from "./AC.js"
+
+/** Event listeners for chat messages.
+ * @param {*} message 
+ * @param {*} html 
+ * @param {*} data 
+ */
 export function listeners (message, html, data) {
 
-    void function test () {
-        const thing = html.find('[data-thing]')
-
-        console.log(thing);
-
-        thing.on('press', event => {
-            console.log({ message, html, data })
-        })
-    }()
+    
+    return;
 
 }

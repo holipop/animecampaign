@@ -14,7 +14,7 @@ export const SheetMixin = {
         /** Submits the form whenever the enter key is pressed.
          * @param {*} html 
          */
-        void function submitOnEnter (html) {
+        void function submitOnEnter () {
             const enter = html.find('[data-enter]');
 
             enter.each((index, element) => {
@@ -25,21 +25,21 @@ export const SheetMixin = {
                     }
                 });
             });
-        }(html)
+        }()
 
         /** Fuck those red dotted lines.
          * @param {*} html 
          */
-        void function disableSpellcheck (html) {
+        void function disableSpellcheck () {
             html.ready(() => {
                 html.find("input[type='text'], textarea").attr('spellcheck',false);
             });
-        }(html)
+        }()
 
         /** Resizes the height of a textarea dynamically as you type more.
          * @param {*} html 
          */
-        void function resizeTextArea (html) {
+        void function resizeTextArea () {
             const resize = html.find('textarea[data-resize]');
             const scroll = html.find('[data-scrollable]');
 
@@ -55,12 +55,12 @@ export const SheetMixin = {
 
                 scroll.scrollTop(initScrollY);
             });
-        }(html)
+        }()
 
         /** Matches the color of each element with the document's color.
          * @param {*} html 
          */
-        void function match (html) {
+        void function match () {
             const match = html.find('[data-match]');
 
             match.each((index, element) => {
@@ -69,12 +69,12 @@ export const SheetMixin = {
                 const obj = AC.uniformObject(properties.split(' '), sheet.object.system.color);
                 $(element).css(obj);
             })
-        }(html)
+        }()
         
         /** Contrasts the color of each element against the document's color luminosity.
          * @param {*} html 
          */
-        void function contrast (html) {
+        void function contrast () {
             const contrast = html.find('[data-contrast]');
 
             contrast.each((index, element) => {
@@ -91,12 +91,12 @@ export const SheetMixin = {
                 const obj = AC.uniformObject(properties.split(' '), color);
                 $(element).css(obj);
             })
-        }(html)
+        }()
 
         /** Contrasts the inputed color for an image, using filters.
          * @param {*} html 
          */
-        void function contrastImage (html) {
+        void function contrastImage () {
             const WHITE = 'brightness(0) saturate(100%) invert(100%)';
             const BLACK = 'brightness(0) saturate(100%)';
 
@@ -115,13 +115,13 @@ export const SheetMixin = {
 
                 $(element).css('filter', filter);
             })
-        }(html)
+        }()
 
         /** Collapse an element given a sender and a target where its data-attr value leads with "target ".
          * Both the sender and target's data-attr value should point to its respective flag.
          * @param {*} html 
          */
-        void function collapse (html) {
+        void function collapse () {
             const collapse = html.find('[data-collapse]').filter((index, element) => {
                 const key = $(element).data('collapse');
                 return (!key.startsWith('target'));
@@ -157,12 +157,12 @@ export const SheetMixin = {
 
                 sheet.object.setFlag('animecampaign', key, { visible: !flag?.visible })
             });
-        }(html)
+        }()
 
         /** Resizes the font of the name such that any length fits cleanly.
          * @param {*} html 
          */
-        void function resizeName (html) {
+        void function resizeName () {
             const SCALE_DELTA = .05;
             const PX_PER_REM = 16;
 
@@ -189,12 +189,12 @@ export const SheetMixin = {
             html.ready(scale);
             name.on('input', scale);
             name.on('blur', () => sheet.submit());
-        }(html)
+        }()
 
         /** Sets a feature's category via the selection.
          * @param {*} html 
          */
-        void function selectCategory (html) {
+        void function selectCategory () {
             const select = html.find('[data-select-category="select"]');
             const target = html.find('[data-select-category="target"]');
 
@@ -203,12 +203,12 @@ export const SheetMixin = {
                 target.val(category);
                 sheet.object.update();
             });
-        }(html)
+        }()
 
         /** Sets the name of the selected tab.
          * @param {*} html 
          */
-        void function setTabName (html) {
+        void function setTabName () {
             const nav = html.find('[data-nav]');
             const name = html.find('[data-tab-name]');
 
@@ -220,7 +220,7 @@ export const SheetMixin = {
 
             set();
             nav.on('click', set);
-        }(html)
+        }()
 
     },
 

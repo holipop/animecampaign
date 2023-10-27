@@ -1,6 +1,7 @@
 // AC FVTT
 import * as AC from './module/AC.js'
 import * as config from './module/config.js'
+import * as Roll from './module/Roll.js'
 
 import ACActor from './module/documents/ACActor.js'
 import CharacterData from './module/data-models/CharacterData.js'
@@ -31,4 +32,9 @@ Hooks.once('init', () => {
 // Fires once localization translations have been loaded and are ready for use.
 Hooks.once('i18nInit', () => {
     CONFIG.animecampaign = config.animecampaign;
+})
+
+// Fires whenever a chat message is rendered on screen.
+Hooks.on('renderChatLog', (message, html, data) => {
+    Roll.listeners(message, html, data);
 })
