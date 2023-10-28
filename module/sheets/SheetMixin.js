@@ -122,6 +122,7 @@ export const SheetMixin = {
          * @param {*} html 
          */
         void function collapse () {
+            // Only gets the elements that don't start with "target".
             const collapse = html.find('[data-collapse]').filter((index, element) => {
                 const key = $(element).data('collapse');
                 return (!key.startsWith('target'));

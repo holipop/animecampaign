@@ -28,11 +28,11 @@ export default class FeatureData extends foundry.abstract.DataModel {
 
             details: new fields.SchemaField({
                 editor: new fields.StringField({ initial: 'markdown' }),
-                formula: new fields.StringField(),
-                action: new fields.StringField(),
+                formula: new fields.StringField({ initial: '1d20' }),
+                action: new fields.StringField({ initial: 'Main' }),
                 usage: new fields.SchemaField({
-                    multiple: new fields.NumberField(),
-                    timeframe: new fields.StringField()
+                    multiple: new fields.NumberField({ initial: 1 }),
+                    timeframe: new fields.StringField({ initial: 'Round' })
                 }),
             })
         };

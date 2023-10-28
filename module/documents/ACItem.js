@@ -13,7 +13,7 @@ export default class ACItem extends Item {
     /** Sends a chat message of this feature.
      */
     async roll () {
-        const roll = new Roll('3d20[Fire Damage] + 10d10 + 20d4');
+        const roll = new Roll(this.system.details.formula);
 
         const data = { 
             ...this,
@@ -35,6 +35,7 @@ export default class ACItem extends Item {
 
             stats: this.system.stats,
             sections: this.system.sections,
+            details: this.system.details,
         }
         
         const message = {

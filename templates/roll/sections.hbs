@@ -1,19 +1,27 @@
-<ol class="section-list">
-    {{#each sections as |section index|}}
-        <li class="section">
+{{#if sections.length}}
+    <ol class="section-list">
 
-            <header>
-                <a class="collapse">
-                    <i class="fas chevron-down" data-collapse="{{index}}"></i>
-                </a>
+        {{#each sections as |section index|}}
+            <li class="section" data-visible="{{section.visible}}">
 
-                <span class="name">{{section.name}}</span>
+                {{log section.visible}}
 
-                <div class="line"></div>
-            </header>
+                <!-- Name -->
+                <header>
+                    <a class="collapse">
+                        <i class="fas fa-chevron-down" data-collapse="{{index}}" data-visible="{{section.visible}}"></i>
+                    </a>
 
-            <p class="text" data-collapse="target {{index}}">{{{section.text}}}</p>
+                    <span class="name">{{section.name}}</span>
 
-        </li>
-    {{/each}}
-</ol>
+                    <div class="line"></div>
+                </header>
+
+                <!-- Text -->
+                <p class="text" data-collapse="target {{index}}">{{{section.text}}}</p>
+
+            </li>
+        {{/each}}
+
+    </ol>
+{{/if}}

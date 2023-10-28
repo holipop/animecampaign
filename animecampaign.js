@@ -35,6 +35,6 @@ Hooks.once('i18nInit', () => {
 })
 
 // Fires whenever a chat message is rendered on screen.
-Hooks.on('renderChatLog', (message, html, data) => {
+Hooks.on('renderChatMessage', (message, html, data) => {
     Roll.listeners(message, html, data);
 })

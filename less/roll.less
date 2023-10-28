@@ -108,7 +108,7 @@
     #AC.ListSkinning();
     #AC.Border();
 
-    margin: .5rem 0;
+    margin-top: .5rem;
     border-color: rgba(0, 0, 0, 0.5);
     border-left: 0;
     border-right: 0;
@@ -173,8 +173,12 @@
     #AC.ListSkinning();
 
     .section {
+        border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.4);
+        box-shadow: rgba(0, 0, 0, 0.15) 0 (1 * @rpx);
+        padding-top: .25rem;
+        
         > * {
-            padding: 0 .25rem;
+            padding: 0 .3rem;
         }
         &:nth-child(even) {
             background-color: rgba(0, 0, 0, 0.1);
@@ -185,20 +189,48 @@
         display: flex;
         align-items: flex-end;
 
-        font: 800 .8rem "Libre Franklin";
-
-        .name {
-            line-height: .9;
+        .collapse {
+            font-size: .66rem;
+            margin-right: .3rem;
         }
-        /* .line {
-            flex: 1;
-            margin-bottom: (2 * @rpx);
-            border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.25);
-        } */
+        .name {
+            height: min-content;
+
+            font: 800 .8rem "Libre Franklin";
+            line-height: 1;
+        }
     }
     .text {
         margin: 0;
+        padding: .3rem;
+        border-top: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
 
         font: 500 .775rem "Libre Franklin";
+    }
+}
+
+.animecampaign.chat.roll .roll-banner {
+    #AC.Overflow();
+
+    display: flex;
+    min-height: .33rem;
+    width: 100%;
+    align-items: center;
+    padding: .1rem .2rem;
+    margin-top: .35rem;
+    border-top: (1 * @rpx) solid rgba(0, 0, 0, 0.2);
+    
+    font: 600 .75rem "Libre Franklin";
+    
+    .usage span {
+        text-transform: capitalize;
+    }
+    .action {
+        flex: 1;
+        text-align: end;
+
+        font-style: italic;
+        font-weight: 700;
+        text-transform: uppercase;
     }
 }
