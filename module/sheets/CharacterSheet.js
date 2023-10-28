@@ -758,9 +758,11 @@ export default class CharacterSheet extends ActorSheet {
         void function roll () {
             const roll = kit.find('[data-roll]');
 
-            roll.on('click', event => {
+            roll.on('mousedown', event => {
                 const feature = sheet.object.getEmbeddedDocument('Item', id(event.target));
-                feature.roll();
+                const post = (event.which === 3) // if right click was used
+
+                feature.roll({ post });
             })
         }()
 

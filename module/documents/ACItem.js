@@ -12,11 +12,12 @@ export default class ACItem extends Item {
 
     /** Sends a chat message of this feature.
      */
-    async roll () {
+    async roll ({ post=false }={}) {
         const roll = new Roll(this.system.details.formula);
 
         const data = { 
             ...this,
+            post,
             _id: this._id,
             
             match: this.system.color,
@@ -44,9 +45,11 @@ export default class ACItem extends Item {
             content: await renderTemplate(this.rollTemplate, data),
         }
 
-        roll.toMessage(message);
+        if (post) {
+            return ChatMessage.create(message);
+        }
 
-        //return ChatMessage.create(message);
+        return roll.toMessage(message);
     }
 
 }
