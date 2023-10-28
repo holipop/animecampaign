@@ -13,6 +13,7 @@ import FeatureSheet from './module/sheets/FeatureSheet.js'
 
 // Fires right before Foundry starts initialization steps.
 Hooks.once('init', () => {
+    AC.log(config.animecampaign.ascii);
     AC.log('Initializing Anime Campaign System!');
 
     CONFIG.Actor.documentClass = ACActor;

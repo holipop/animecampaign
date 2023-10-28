@@ -4,6 +4,15 @@ import * as AC from "./AC.js";
 // An object containing language localization paths and default configurations.
 export const animecampaign = AC.facadeObject(lang).animecampaign;
 
+animecampaign.ascii = `                                                                                    
+      ██       ▄▄█▀▀▀█▄█  ▀██▀▀▀▀█ ▀██▀  ▀█▀ █▀▀██▀▀█ █▀▀██▀▀█ 
+     ▄██▄    ▄██▀     ▀█   ██  ▄    ▀█▄  ▄▀     ██       ██       
+    ▄█▀██▄   ██▀       ▀   ██▀▀█     ██  █      ██       ██    
+   ▄█  ▀██   ██            ██         ███       ██       ██    
+   ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄   
+  █▀      ██ ▀██▄     ▄▀ 
+▄███▄   ▄████▄ ▀▀█████▀    v1.0.0`
+
 animecampaign.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 animecampaign.colors = {
     red: '#df2d48',

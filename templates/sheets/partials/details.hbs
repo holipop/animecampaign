@@ -12,26 +12,6 @@
             </div>
         </header>
     </li>
-    
-    <!-- Editor -->
-    <li class="detail">
-        <header>
-            <div class="labels">
-                <label>Text Editor</label>
-            </div>
-
-            <div class="fields">
-                <select name="system.details.editor">
-                    {{#select system.details.editor}}
-                        <option value="markdown">Markdown</option>
-                        <option value="prosemirror">ProseMirror</option>
-                    {{/select}}
-                </select>
-            </div>
-        </header>
-
-        <p class="note">Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, &quot;what you see is what you get&quot;.</p>
-    </li>
 
     <!-- Action -->
     <li class="detail">
@@ -61,6 +41,26 @@
         </header>
 
         <p class="note">i.e. &quot;1 time per Combat&quot;.</p>
+    </li>
+
+    <!-- Editor -->
+    <li class="detail">
+        <header>
+            <div class="labels">
+                <label>Text Editor</label>
+            </div>
+
+            <div class="fields">
+                <select name="system.details.editor">
+                    {{#select system.details.editor}}
+                        <option value="markdown">Markdown</option>
+                        <option value="prosemirror">ProseMirror</option>
+                    {{/select}}
+                </select>
+            </div>
+        </header>
+
+        <p class="note">Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, &quot;what you see is what you get&quot;.</p>
     </li>
 
     <!-- Test -->
