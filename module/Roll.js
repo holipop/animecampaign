@@ -3,8 +3,6 @@
  */
 
 
-import * as AC from "./AC.js"
-
 /** Event listeners for chat messages.
  * @param {*} message 
  * @param {*} html 
