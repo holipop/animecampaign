@@ -139,7 +139,7 @@
 .animecampaign.sheet form a:hover {
   text-shadow: #cd3232 0 0 0.5rem;
 }
-.animecampaign.sheet form button {
+.animecampaign.sheet form button:not(.prosemirror *) {
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -151,10 +151,10 @@
   font-family: "Libre Franklin";
   font-weight: 600;
 }
-.animecampaign.sheet form button:hover {
+.animecampaign.sheet form button:not(.prosemirror *):hover {
   background-color: rgba(205, 50, 50, 0.05);
 }
-.animecampaign.sheet form button:active {
+.animecampaign.sheet form button:not(.prosemirror *):active {
   background-color: rgba(205, 50, 50, 0.2);
 }
 .animecampaign.sheet form input,
@@ -389,6 +389,8 @@
 }
 .animecampaign.chat.roll .section-list header .collapse {
   font-size: 0.66rem;
+}
+.animecampaign.chat.roll .section-list header .collapse > i {
   margin-right: 0.3rem;
 }
 .animecampaign.chat.roll .section-list header .name {
@@ -1117,4 +1119,25 @@
 }
 .animecampaign.item.sheet .detail-list .note {
   font-size: 0.6rem;
+}
+.animecampaign.actor.sheet .biography {
+  opacity: 1;
+}
+.animecampaign.actor.sheet .biography .control {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-bottom: 0.2rem;
+}
+.animecampaign.actor.sheet .biography .control label {
+  margin: 0 0.15rem;
+  font: 700 0.825rem "Libre Franklin";
+}
+.animecampaign.actor.sheet .biography textarea {
+  resize: none;
+  overflow-y: hidden;
+  min-height: 10rem;
+}
+.animecampaign.actor.sheet .biography .editor.prosemirror {
+  height: 20rem;
 }

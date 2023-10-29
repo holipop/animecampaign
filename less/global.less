@@ -20,7 +20,8 @@
     a:hover {
         text-shadow: #AC.Color()[@return] 0 0 (8 * @rpx);
     }
-    button {
+
+    button:not(.prosemirror *) {
         #AC.InputSkinning();
         #AC.Border();
 
@@ -66,6 +67,7 @@
             inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
             inset #AC.Color(.3)[@return] 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);
     }
+
 }
 .animecampaign.actor.sheet {
     min-width: 650px;

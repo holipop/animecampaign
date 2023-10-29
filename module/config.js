@@ -11,7 +11,7 @@ animecampaign.ascii = `
    ▄█  ▀██   ██            ██         ███       ██       ██    
    ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄   
   █▀      ██ ▀██▄     ▄▀ 
-▄███▄   ▄████▄ ▀▀█████▀    v1.0.0`
+▄███▄   ▄████▄ ▀▀█████▀   v1.0.0`
 
 animecampaign.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 animecampaign.colors = {

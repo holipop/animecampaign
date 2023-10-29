@@ -23,24 +23,26 @@ export function listeners (message, html, data) {
 
         // Sets the default visibility.
         collapse.each((index, element) => {
-            const key = $(element).data('collapse');
-            const visibile = $(element).data('visible');
+            const anchor = $(element).closest('a');
+            const key = anchor.data('collapse');
+            const visibile = anchor.data('visible');
             const target = msg.find(`[data-collapse="target ${key}"]`);
 
             if (visibile) return;
 
             target.toggle();
-            $(element).toggleClass('fa-chevron-down');
-            $(element).toggleClass('fa-chevron-right');
+            anchor.find('i').toggleClass('fa-chevron-down');
+            anchor.find('i').toggleClass('fa-chevron-right');
         })
 
         collapse.on('click', event => {
-            const key = $(event.target).data('collapse');
+            const anchor = $(event.target).closest('a');
+            const key = anchor.data('collapse');
             const target = msg.find(`[data-collapse="target ${key}"]`);
 
             target.toggle();
-            $(event.target).toggleClass('fa-chevron-down');
-            $(event.target).toggleClass('fa-chevron-right');
+            anchor.find('i').toggleClass('fa-chevron-down');
+            anchor.find('i').toggleClass('fa-chevron-right');
         })
     }()
 

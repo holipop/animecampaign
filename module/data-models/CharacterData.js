@@ -33,7 +33,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
 
             biography: new fields.SchemaField({
                 editor: new fields.StringField({ initial: 'markdown' }),
-                text: new fields.HTMLField(),
+                text: new fields.StringField(),
             }),
 
             class: new fields.StringField(),
