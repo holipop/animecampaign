@@ -252,6 +252,23 @@ export default class FeatureSheet extends ItemSheet {
             this.object.parent.update({ 'system.categories': update });
         })();
 
+        // Update text fields for Sections so neither oversteps on the other.
+        const convert = new showdown.Converter();
+        const source = this.object.system.sections;
+
+        if (data.system.details.editor == 'markdown') {
+            for (const [i, section] of Object.entries(data.system.sections)) {
+                console.log(section)
+                section.richtext = convert.makeHtml(section.plaintext || source[i].plaintext);
+            }
+        } else if (data.system.details.editor == 'prosemirror') {
+            for (const [i, section] of Object.entries(data.system.sections)) {
+                section.plaintext = convert.makeMarkdown(section.richtext || source[i].richtext);
+            }
+        }
+
+        console.log(data.system.sections)
+
         super._updateObject(event, data);
     }
 }

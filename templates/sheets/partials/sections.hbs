@@ -28,7 +28,15 @@
                 </header>
 
                 <div data-collapse="target sections.{{index}}">
-                    <textarea name="system.sections.{{index}}.text" placeholder="{{localize @root.config.placeholder.text}}" data-resize>{{~section.text}}</textarea>
+
+                    {{#if (eq @root.system.details.editor 'markdown')}}
+                        <textarea name="system.sections.{{index}}.plaintext" placeholder="{{localize @root.config.placeholder.text}}" data-resize>{{~section.plaintext}}</textarea>
+                    {{/if}}
+
+                    {{#if (eq @root.system.details.editor 'prosemirror')}}
+                        {{editor section.richtext target=(concat "system.sections." index ".richtext") button=true engine="prosemirror" collaborate=true}}
+                    {{/if}}
+
                 </div>
 
             </div>

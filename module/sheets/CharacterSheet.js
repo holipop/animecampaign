@@ -855,6 +855,18 @@ export default class CharacterSheet extends ActorSheet {
 
         data.system.stats = statUpdate;
 
+        // Update the apropriate text depending on the editor. This means that editing in
+        // markdown won't completely destroy the richtext and vice versa.
+        const bio = data.system.biography;
+        const source = this.object.system.biography;
+        const convert = new showdown.Converter();
+
+        if (bio.editor == 'markdown') {
+            bio.richtext = convert.makeHtml(bio.plaintext || source.plaintext);
+        } else if (bio.editor == 'prosemirror') {
+            bio.plaintext = convert.makeMarkdown(bio.richtext || source.richtext);
+        }
+        
         super._updateObject(event, data);
     }
 

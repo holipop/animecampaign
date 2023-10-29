@@ -12,11 +12,11 @@
     </div>
 
     {{#if (eq system.biography.editor "markdown")}}
-        <textarea data-resize name="system.biography.text">{{~system.biography.text}}</textarea>
+        <textarea data-resize name="system.biography.plaintext">{{~system.biography.plaintext}}</textarea>
     {{/if}}
 
     {{#if (eq system.biography.editor "prosemirror")}}
-        {{editor system.biography.text target="system.biography.text" button=true engine="prosemirror" collaborate=true}}
+        {{editor system.biography.richtext target="system.biography.richtext" button=true engine="prosemirror" collaborate=true}}
     {{/if}}
 
 </section>
