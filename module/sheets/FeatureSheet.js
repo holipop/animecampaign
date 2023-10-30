@@ -258,7 +258,6 @@ export default class FeatureSheet extends ItemSheet {
 
         if (data.system.details.editor == 'markdown') {
             for (const [i, section] of Object.entries(data.system.sections)) {
-                console.log(section)
                 section.richtext = convert.makeHtml(section.plaintext || source[i].plaintext);
             }
         } else if (data.system.details.editor == 'prosemirror') {

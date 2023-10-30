@@ -289,6 +289,18 @@
   text-align: center;
   background-color: rgba(255, 255, 255, 0.2);
 }
+.animecampaign.chat.roll .dice-roll .result .total.success {
+  border-color: darkgreen;
+  color: darkgreen;
+  text-shadow: white 0 0.0625rem;
+  background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+}
+.animecampaign.chat.roll .dice-roll .result .total.failure {
+  border-color: darkred;
+  color: darkred;
+  text-shadow: white 0 0.0625rem;
+  background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
+}
 .animecampaign.chat.roll .dice-roll .result .formula {
   overflow: hidden;
   white-space: nowrap;
@@ -690,8 +702,8 @@
   align-items: center;
   height: 1.75rem;
   border-top: 0;
-  border-right-color: transparent;
-  border-left-color: transparent;
+  border-bottom: 0;
+  border-color: transparent;
 }
 .animecampaign.sheet .stat-list .stat > * {
   border-left: 0.0625rem solid black;

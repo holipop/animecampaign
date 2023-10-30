@@ -18,15 +18,26 @@ export default class ACItem extends Item {
         const formula = this.system.details.formula;
         let roll;
         if (Roll.validate(formula)) {
-            roll = new Roll(formula);
+            roll = await new Roll(formula).evaluate();
         } else {
-            roll = new Roll("1");
+            roll = await new Roll("1").evaluate();
             post = true;
         }
 
+        // Get CSS classes for if the roll is the max or min value.
+        let crit;
+        (() => {
+            if (roll.isDeterministic) return;
+
+            if (roll.total == new Roll(formula).evaluate({ maximize: true }).total) {
+                crit = 'success';
+            } else if (roll.total == new Roll(formula).evaluate({ minimize: true }).total) {
+                crit = 'failure';
+            }
+        })();
+
         const data = { 
             ...this,
-            post,
             _id: this._id,
             
             match: this.system.color,
@@ -40,7 +51,9 @@ export default class ACItem extends Item {
                 return (luma <= .5) ? "white" : "black";
             })(),
 
-            roll: await roll.evaluate(),
+            post,
+            roll,
+            crit,
             tooltip: await roll.getTooltip(),
 
             stats: this.system.stats,
