@@ -12,7 +12,7 @@ export default class Section extends foundry.abstract.DataModel {
         return {
             name: new fields.StringField(),
             plaintext: new fields.StringField(),
-            richtext: new fields.HTMLField(),
+            richtext: new fields.HTMLField({ initial: '' }),
             visible: new fields.BooleanField({ initial: true }),
         }
     }

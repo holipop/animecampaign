@@ -252,7 +252,7 @@ export default class FeatureSheet extends ItemSheet {
             this.object.parent.update({ 'system.categories': update });
         })();
 
-        // Update text fields for Sections so neither oversteps on the other.
+        // Update text fields for Sections so neither editor oversteps on the other.
         const convert = new showdown.Converter();
         const source = this.object.system.sections;
 
@@ -266,8 +266,6 @@ export default class FeatureSheet extends ItemSheet {
                 section.plaintext = convert.makeMarkdown(section.richtext || source[i].richtext);
             }
         }
-
-        console.log(data.system.sections)
 
         super._updateObject(event, data);
     }

@@ -7,14 +7,14 @@
  * @param {string|number|boolean} text 
  */
 export function log (text) {
-    console.log(`%cAnime Campaign | ${text}`, 'color: orange');
+    console.log(`%cAnime Campaign | ${text}`, 'color: tomato;');
 }
 
 /** A console.error with styling, intended for debugging clarity.
  * @param {string|number|boolean} text 
  */
 export function error (text) {
-    console.error(`%cAnime Campaign | ${text}`, 'color: orange');
+    console.error(`%cAnime Campaign | ${text}`, 'color: tomato;');
 }
 
 /** A shorthand for localizing.
