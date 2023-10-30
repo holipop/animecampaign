@@ -10,14 +10,52 @@
 
     .section {
         display: flex;
+
+        margin-bottom: .4rem;
     }
-    .section-body 
-    {
+    .section-body {
         flex: 1;
+
+        border-left: (1 * @rpx) solid black;
+        padding: 0 .4rem;
+        margin-left: .4rem;
+
+        box-shadow: inset rgba(0, 0, 0, 0.25) (1 * @rpx) 0;
 
         header {
             display: flex;
+            align-items: stretch;
+            margin: .2rem 0;
+
+            a {
+                display: grid;
+                place-items: center;
+                border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+
+                &:last-child i {
+                    margin: 0 .3rem;
+                }
+                i {
+                    height: 100%;
+                    width: 1.25rem;
+                    margin-left: .4rem;
+                    padding-top: .35rem;
+
+                    text-align: center;
+                }
+            }
+            .toggle-view i {
+                color: rgba(0, 0, 0, 0.1);
+
+                &.selected {
+                    color: black;
+                }
+            }
         }
+    }
+
+    button {
+        margin-bottom: 1rem;
     }
 
     .editor {

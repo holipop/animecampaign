@@ -195,9 +195,10 @@ export default class FeatureSheet extends ItemSheet {
                 const section = List.get(sections, index);
 
                 if (section.visible) { 
-                    $(element).css('color', 'blue')
+                    $(element).addClass('selected');
                 } else { 
-                    $(element).css('color', 'red')
+                    $(element).removeClass('fa-eye');
+                    $(element).addClass('fa-eye-slash');
                 }
             });
 

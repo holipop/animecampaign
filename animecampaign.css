@@ -204,14 +204,6 @@
 .animecampaign.actor.sheet .scrollable {
   height: calc(100% - 6.2rem);
 }
-.animecampaign.actor.sheet .cap {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  height: 0.25rem;
-  width: 100%;
-  margin-bottom: 0.4rem;
-  border-top: 0;
-}
 .animecampaign.item.sheet {
   min-width: 550px;
   min-height: 500px;
@@ -793,6 +785,14 @@
   place-items: center;
   width: 1.25rem;
 }
+.animecampaign.actor.sheet .kit .cap {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  height: 0.25rem;
+  width: 100%;
+  margin-bottom: 0.4rem;
+  border-top: 0;
+}
 .animecampaign.actor.sheet .kit button {
   margin-bottom: 1rem;
 }
@@ -1090,12 +1090,43 @@
 }
 .animecampaign.item.sheet .section-list .section {
   display: flex;
+  margin-bottom: 0.4rem;
 }
 .animecampaign.item.sheet .section-list .section-body {
   flex: 1;
+  border-left: 0.0625rem solid black;
+  padding: 0 0.4rem;
+  margin-left: 0.4rem;
+  box-shadow: inset rgba(0, 0, 0, 0.25) 0.0625rem 0;
 }
 .animecampaign.item.sheet .section-list .section-body header {
   display: flex;
+  align-items: stretch;
+  margin: 0.2rem 0;
+}
+.animecampaign.item.sheet .section-list .section-body header a {
+  display: grid;
+  place-items: center;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.15);
+}
+.animecampaign.item.sheet .section-list .section-body header a:last-child i {
+  margin: 0 0.3rem;
+}
+.animecampaign.item.sheet .section-list .section-body header a i {
+  height: 100%;
+  width: 1.25rem;
+  margin-left: 0.4rem;
+  padding-top: 0.35rem;
+  text-align: center;
+}
+.animecampaign.item.sheet .section-list .section-body header .toggle-view i {
+  color: rgba(0, 0, 0, 0.1);
+}
+.animecampaign.item.sheet .section-list .section-body header .toggle-view i.selected {
+  color: black;
+}
+.animecampaign.item.sheet .section-list button {
+  margin-bottom: 1rem;
 }
 .animecampaign.item.sheet .section-list .editor {
   min-height: 3rem;
