@@ -136,6 +136,13 @@
 .animecampaign.sheet form .selected {
   background: linear-gradient(to top, rgba(205, 50, 50, 0.5), transparent);
 }
+.animecampaign.sheet form img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 .animecampaign.sheet form a:hover {
   text-shadow: #cd3232 0 0 0.5rem;
 }
@@ -413,8 +420,6 @@
   width: 100%;
   align-items: center;
   padding: 0.1rem 0.2rem;
-  margin-top: 0.35rem;
-  border-top: 0.0625rem solid rgba(0, 0, 0, 0.2);
   font: 600 0.75rem "Libre Franklin";
 }
 .animecampaign.chat.roll .roll-banner .usage span {

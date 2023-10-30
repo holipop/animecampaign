@@ -12,8 +12,17 @@ export default class ACItem extends Item {
 
     /** Sends a chat message of this feature.
      */
-    async roll ({ post=false }={}) {
-        const roll = new Roll(this.system.details.formula);
+    async roll ({ post = false } = {}) {
+        
+        // If the formula is invalid, post the message.
+        const formula = this.system.details.formula;
+        let roll;
+        if (Roll.validate(formula)) {
+            roll = new Roll(formula);
+        } else {
+            roll = new Roll("1");
+            post = true;
+        }
 
         const data = { 
             ...this,

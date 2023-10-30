@@ -45,7 +45,7 @@
                                 <!-- Image -->
                                 {{#with (lookup @root.categories category)}}
                                     <div class="tracker-image" title="{{localize @root.config.app.setStatImage}}">
-                                        <img src="{{tracker.img}}" data-tracker="{{index}}" data-tracker-image="{{index}}" data-contrast-image="{{this.color}}">
+                                        <img src="{{tracker.img}}" data-tracker-image="{{index}}" data-contrast-image="{{this.color}}">
                                     </div>
                                 {{/with}}
 
