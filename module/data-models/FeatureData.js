@@ -23,7 +23,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
             stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
             
             sections: new fields.ArrayField(new fields.EmbeddedDataField(Section), {
-                initial: [{ visible: true }],
+                initial: [{ visible: true, collapsed: false, richtext: null }],
             }),
 
             details: new fields.SchemaField({

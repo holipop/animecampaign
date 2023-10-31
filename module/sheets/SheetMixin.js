@@ -1,4 +1,5 @@
 import * as AC from "../AC.js";
+import * as List from "../List.js";
 
 /**
  * A mixin for shared methods between Characters and Feature sheets.
@@ -12,7 +13,6 @@ export const SheetMixin = {
     globalListeners (html, sheet) {
 
         /** Submits the form whenever the enter key is pressed.
-         * @param {*} html 
          */
         void function submitOnEnter () {
             const enter = html.find('[data-enter]');
@@ -28,7 +28,6 @@ export const SheetMixin = {
         }()
 
         /** Fuck those red dotted lines.
-         * @param {*} html 
          */
         void function disableSpellcheck () {
             html.ready(() => {
@@ -37,7 +36,6 @@ export const SheetMixin = {
         }()
 
         /** Resizes the height of a textarea dynamically as you type more.
-         * @param {*} html 
          */
         void function resizeTextArea () {
             const resize = html.find('textarea[data-resize]');
@@ -58,7 +56,6 @@ export const SheetMixin = {
         }()
 
         /** Matches the color of each element with the document's color.
-         * @param {*} html 
          */
         void function match () {
             const match = html.find('[data-match]');
@@ -72,7 +69,6 @@ export const SheetMixin = {
         }()
         
         /** Contrasts the color of each element against the document's color luminosity.
-         * @param {*} html 
          */
         void function contrast () {
             const contrast = html.find('[data-contrast]');
@@ -94,7 +90,6 @@ export const SheetMixin = {
         }()
 
         /** Contrasts the inputed color for an image, using filters.
-         * @param {*} html 
          */
         void function contrastImage () {
             const WHITE = 'brightness(0) saturate(100%) invert(100%)';
@@ -117,9 +112,8 @@ export const SheetMixin = {
             })
         }()
 
-        /** Collapse an element given a sender and a target where its data-attr value leads with "target ".
-         * Both the sender and target's data-attr value should point to its respective flag.
-         * @param {*} html 
+        /** Collapse an element given a sender and target where its data-attr value leads with "target ".
+         *  Both the sender and target's data-attr value should point to a property in the system schema.
          */
         void function collapse () {
             // Only gets the elements that don't start with "target".
@@ -128,9 +122,64 @@ export const SheetMixin = {
                 return (!key.startsWith('target'));
             });
 
-            collapse.each((index, element) => {            
+            collapse.each((index, element) => {
                 const key = $(element).data('collapse');
                 const target = html.find(`[data-collapse="target ${key}"]`);
+                const isCollapsed = getProperty(sheet.object.system, key).collapsed;
+                const isChevron = $(element).hasClass('fas');
+
+                if (!isCollapsed) {
+                    target.show();
+
+                    if (isChevron) {
+                        $(element).addClass('fa-chevron-down');
+                        $(element).removeClass('fa-chevron-right');
+                    }
+                } else {
+                    target.hide(); 
+
+                    if (isChevron) {
+                        $(element).removeClass('fa-chevron-down');
+                        $(element).addClass('fa-chevron-right');
+                    }
+                }
+            });
+
+            collapse.on('click', event => {
+                /** @type {String} */
+                const key = $(event.target).data('collapse');
+
+                // if key ends with a number, it much be pointing to an array entry.
+                const isListEntry = (typeof +key[key.length - 1] == 'number');
+                if (isListEntry) {
+                    const listName = key.slice(0, key.indexOf('.'));
+                    const list = getProperty(sheet.object.system, listName);
+                    const index = +key.slice(key.indexOf('.') + 1);
+                    const entry = List.get(list, index);
+                    const update = List.set(list, index, { collapsed: !entry.collapsed })
+
+                    return sheet.object.update({ [`system.${listName}`]: update });
+                }
+
+                const data = getProperty(sheet.object.system, key).collapsed
+
+                sheet.object.update({ [`system.${key}`]: { collapsed: !data.collapsed } });
+            });
+        }()
+
+        /** Collapse an element given a sender and a target where its data-attr value leads with "target ".
+         *  Both the sender and target's data-attr value should point to its respective flag.
+         */
+        void function collapseFlag () {
+            // Only gets the elements that don't start with "target".
+            const collapse = html.find('[data-collapse-flag]').filter((index, element) => {
+                const key = $(element).data('collapse-flag');
+                return (!key.startsWith('target'));
+            });
+
+            collapse.each((index, element) => {            
+                const key = $(element).data('collapse-flag');
+                const target = html.find(`[data-collapse-flag="target ${key}"]`);
                 const flag = sheet.object.getFlag('animecampaign', key);
                 const isVisible = flag?.visible ?? true;
                 const isChevron = $(element).hasClass('fas');
@@ -153,7 +202,7 @@ export const SheetMixin = {
             });
 
             collapse.on('click', event => {
-                const key = $(event.target).data('collapse');
+                const key = $(event.target).data('collapse-flag');
                 const flag = sheet.object.getFlag('animecampaign', key) ?? { visible: true };
 
                 sheet.object.setFlag('animecampaign', key, { visible: !flag?.visible })
@@ -161,7 +210,6 @@ export const SheetMixin = {
         }()
 
         /** Resizes the font of the name such that any length fits cleanly.
-         * @param {*} html 
          */
         void function resizeName () {
             const SCALE_DELTA = .05;
@@ -193,7 +241,6 @@ export const SheetMixin = {
         }()
 
         /** Sets a feature's category via the selection.
-         * @param {*} html 
          */
         void function selectCategory () {
             const select = html.find('[data-select-category="select"]');

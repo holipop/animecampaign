@@ -10,10 +10,13 @@ export default class Section extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
 
         return {
-            name: new fields.StringField(),
-            plaintext: new fields.StringField(),
-            richtext: new fields.HTMLField({ initial: '' }),
+            name: new fields.StringField({ nullable: true }),
             visible: new fields.BooleanField({ initial: true }),
+            
+            plaintext: new fields.StringField({ nullable: true }),
+            richtext: new fields.HTMLField({ nullable: true }),
+
+            collapsed: new fields.BooleanField({ initial: false }),
         }
     }
 }

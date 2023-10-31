@@ -128,6 +128,7 @@
 }
 .animecampaign.sheet form .scrollable {
   overflow-y: scroll;
+  padding-right: 0.25rem;
   scrollbar-color: #cd3232;
 }
 .animecampaign.sheet form .scrollable ::-webkit-scrollbar {
@@ -1088,9 +1089,15 @@
   resize: none;
   overflow-y: hidden;
 }
+.animecampaign.item.sheet .section-list .collapse i {
+  font-size: 0.8rem;
+}
 .animecampaign.item.sheet .section-list .section {
   display: flex;
-  margin-bottom: 0.4rem;
+  padding: 0.2rem 0;
+}
+.animecampaign.item.sheet .section-list .section:first-child {
+  padding-top: 0;
 }
 .animecampaign.item.sheet .section-list .section-body {
   flex: 1;
@@ -1120,12 +1127,13 @@
   text-align: center;
 }
 .animecampaign.item.sheet .section-list .section-body header .toggle-view i {
-  color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.25);
 }
 .animecampaign.item.sheet .section-list .section-body header .toggle-view i.selected {
   color: black;
 }
 .animecampaign.item.sheet .section-list button {
+  margin-top: 0.2rem;
   margin-bottom: 1rem;
 }
 .animecampaign.item.sheet .section-list .editor {

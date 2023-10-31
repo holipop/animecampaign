@@ -5,7 +5,7 @@
 
         <!-- Collapse -->
         <a class="control collapse" title="{{localize config.app.collapseStats}}">
-            <i class="fas fa-chevron-down" data-collapse="stats" ></i>
+            <i class="fas fa-chevron-down" data-collapse-flag="stat-list" ></i>
         </a>
 
         {{#if (eq documentName "Actor")}}
@@ -28,7 +28,7 @@
     <!-- Stat Entry -->
     {{#each statList as |stat key|}}
 
-        <li class="stat" data-stat="{{key}}" data-collapse="target stats">
+        <li class="stat" data-stat="{{key}}" data-collapse-flag="target stat-list">
 
             {{#if (eq ../documentName "Actor")}}
 

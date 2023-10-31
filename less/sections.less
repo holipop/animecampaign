@@ -8,10 +8,16 @@
         overflow-y: hidden;
     }
 
+    .collapse i {
+        font-size: .8rem;
+    }
     .section {
         display: flex;
+        padding: .2rem 0;
 
-        margin-bottom: .4rem;
+        &:first-child {
+            padding-top: 0;
+        }
     }
     .section-body {
         flex: 1;
@@ -45,7 +51,7 @@
                 }
             }
             .toggle-view i {
-                color: rgba(0, 0, 0, 0.1);
+                color: rgba(0, 0, 0, 0.25);
 
                 &.selected {
                     color: black;
@@ -55,6 +61,7 @@
     }
 
     button {
+        margin-top: .2rem;
         margin-bottom: 1rem;
     }
 

@@ -19,11 +19,57 @@ export default class FeatureSheet extends ItemSheet {
             scrollY: ["section.scrollable"],
         });
 
+        options.dragDrop = [
+            { dragSelector: "[data-section-list] [data-section]", dropSelector: null },
+        ];
+
         options.tabs = [
             { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "description" },
         ];
 
         return options;
+    }
+
+    //** DRAG AND DROP */
+
+    /** Fires when a draggable element is picked up.
+     * @param {*} event 
+     */
+    _onDragStart (event) {
+        const dataset = $(event.target).data();
+        let dragData;
+
+        if (dataset.section !== undefined) {
+            const sections = this.object.system.sections;
+            const section = List.get(sections, dataset.section);
+            dragData = { type: 'Section', obj: section, index: dataset.section };
+        }
+
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+        super._onDragStart(event);
+    }
+
+    /** Fires when a draggable element is dropped.
+     * @param {*} event 
+     */
+    _onDrop (event) {
+        const data = TextEditor.getDragEventData(event);
+        const sheet = this;
+
+        const sections = this.object.system.sections;
+
+        void function section () {
+            if (data.type != 'Section') return;
+            if (sections.length == 1) return;
+        
+            const dropTarget = $(event.target).closest('[data-section]');
+            if (dropTarget.length == 0) return;
+        
+            let update = List.remove(sections, data.index);
+            update = List.add(update, data.obj, dropTarget.data('section'));
+        
+            return sheet.object.update({ 'system.sections': update });
+        }();
     }
 
 
