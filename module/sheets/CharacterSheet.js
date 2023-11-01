@@ -13,7 +13,7 @@ export default class CharacterSheet extends ActorSheet {
     static get defaultOptions () {
         const options = mergeObject(super.defaultOptions, {
             width: 650,
-            height: 500,
+            height: 550,
             classes: ["animecampaign", "sheet", "actor"],
             template: 'systems/animecampaign/templates/sheets/character-sheet.hbs',
             scrollY: ["section.scrollable"],

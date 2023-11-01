@@ -215,6 +215,37 @@ export const SheetMixin = {
             });
         }()
 
+        /** Collapse an element without storing its visibility.
+         */
+        void function collapseShort () {
+            // Only gets the elements that don't start with "target".
+            const collapse = html.find('[data-collapse-short]').filter((index, element) => {
+                const key = $(element).data('collapse-short');
+                return (!key.startsWith('target'));
+            });
+
+            collapse.each((index, element) => {
+                if ('hide' in $(element).data()) {
+                    const key = $(element).closest('[data-collapse-short]').data('collapse-short');
+                    const target = html.find(`[data-collapse-short="target ${key}"]`);
+
+                    target.hide();
+                    $(element).find('i').removeClass('fa-chevron-down');
+                    $(element).find('i').addClass('fa-chevron-right');
+                }
+            });
+
+            collapse.on('click', event => {
+                const key = $(event.target).closest('[data-collapse-short]').data('collapse-short');
+                const chevron =  $(event.target).closest('[data-collapse-short]').find('i')
+                const target = html.find(`[data-collapse-short="target ${key}"]`);
+
+                target.toggle();
+                chevron.toggleClass('fa-chevron-down');
+                chevron.toggleClass('fa-chevron-right');
+            });
+        }()
+
         /** Resizes the font of the name such that any length fits cleanly.
          */
         void function resizeName () {

@@ -125,23 +125,31 @@
     .expanded {
         #AC.ListSkinning();
 
-        max-height: 12rem;
-        overflow-y: scroll;
-        border-top: (1 * @rpx) solid black;
+        padding-bottom: .25rem;
+        border-right: (1 * @rpx) solid rgba(0, 0, 0, 0.25);
+        border-left: .5rem solid aqua;
 
-        > li:nth-child(even) {
-            background-color: rgba(0, 0, 0, 0.1);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0, transparent .25rem);
+        box-shadow: inset rgba(0, 0, 0, 0.75) (1 * @rpx) (1 * @rpx);
+
+        > li {
+            padding-top: .2rem;
+            border-top: (1 * @rpx) solid rgba(0, 0, 0, 0.3);
+
+            &:nth-child(even) {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
         }
 
         .label {
-            padding: .2rem .3rem;
+            padding: 0 .3rem;
+
             font: 800 .8rem "Libre Franklin";
         }
         .text {
             margin: 0;
             padding: .3rem;
             border-top: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
-            border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.3);
             box-shadow: rgba(0, 0, 0, 0.15) 0 (1 * @rpx);
 
             font: 500 .775rem "Libre Franklin";

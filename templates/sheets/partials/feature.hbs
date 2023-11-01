@@ -54,11 +54,14 @@
     </section>
 
     <!-- Expanded View -->
-    <ol class="expanded" data-collapse-flag="target feature.{{_id}}">
+    <ol class="expanded" data-match-feature="border-left-color" data-collapse-flag="target feature.{{_id}}">
         {{#each system.sections as |section index|}}
             <li>
-                <div class="label">{{section.name}}</div>
-                <div class="text">
+                <a class="label" data-collapse-short="feature.{{../_id}}.{{index}}" {{#unless section.visible}}data-hide{{/unless}}>
+                    <i class="fas fa-chevron-down"></i>
+                    <span>{{section.name}}</span>
+                </a>
+                <div class="text" data-collapse-short="target feature.{{../_id}}.{{index}}">
                     {{{section.richtext}}}
                 </div>
             </li>

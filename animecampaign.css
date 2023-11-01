@@ -134,6 +134,20 @@
 .animecampaign.sheet form .scrollable ::-webkit-scrollbar {
   color: #cd3232;
 }
+.animecampaign.sheet form .editor {
+  min-height: 3rem;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.15);
+  border-left-width: 0.1875rem;
+  border-right-width: 0.1875rem;
+  font-family: "Libre Franklin";
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.animecampaign.sheet form .editor .editor-menu {
+  border-radius: 0;
+}
+.animecampaign.sheet form .editor .editor-menu button {
+  margin: 0;
+}
 .animecampaign.sheet form .selected {
   background: linear-gradient(to top, rgba(205, 50, 50, 0.5), transparent);
 }
@@ -178,9 +192,6 @@
   background-color: rgba(0, 0, 0, 0.05);
   font-family: "Libre Franklin";
   font-weight: 500;
-  /* &:hover {
-            text-shadow: #AC.Color(.5)[@return] 0 0 (8 * @rpx);
-        } */
 }
 .animecampaign.sheet form input:focus,
 .animecampaign.sheet form select:focus,
@@ -200,7 +211,7 @@
 }
 .animecampaign.actor.sheet {
   min-width: 650px;
-  min-height: 530px;
+  min-height: 550px;
 }
 .animecampaign.actor.sheet .scrollable {
   height: calc(100% - 6.2rem);
@@ -1056,22 +1067,27 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  max-height: 12rem;
-  overflow-y: scroll;
-  border-top: 0.0625rem solid black;
+  padding-bottom: 0.25rem;
+  border-right: 0.0625rem solid rgba(0, 0, 0, 0.25);
+  border-left: 0.5rem solid aqua;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0, transparent 0.25rem);
+  box-shadow: inset rgba(0, 0, 0, 0.75) 0.0625rem 0.0625rem;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .expanded > li {
+  padding-top: 0.2rem;
+  border-top: 0.0625rem solid rgba(0, 0, 0, 0.3);
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .expanded > li:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.1);
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .expanded .label {
-  padding: 0.2rem 0.3rem;
+  padding: 0 0.3rem;
   font: 800 0.8rem "Libre Franklin";
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .expanded .text {
   margin: 0;
   padding: 0.3rem;
   border-top: 0.0625rem solid rgba(0, 0, 0, 0.15);
-  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.3);
   box-shadow: rgba(0, 0, 0, 0.15) 0 0.0625rem;
   font: 500 0.775rem "Libre Franklin";
 }
@@ -1188,9 +1204,6 @@
 .animecampaign.item.sheet .section-list button {
   margin-top: 0.2rem;
   margin-bottom: 1rem;
-}
-.animecampaign.item.sheet .section-list .editor {
-  min-height: 3rem;
 }
 .animecampaign.item.sheet .section-list .editor.prosemirror {
   height: 20rem;
