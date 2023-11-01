@@ -2,6 +2,7 @@
 import * as AC from './module/AC.js'
 import * as config from './module/config.js'
 import * as Roll from './module/Roll.js'
+import * as Macro from './module/Macro.js'
 
 import ACActor from './module/documents/ACActor.js'
 import CharacterData from './module/data-models/CharacterData.js'
@@ -30,6 +31,15 @@ Hooks.once('init', () => {
     AC.preloadHandlebarsTemplates();
 })
 
+// Fires when Foundry is fully ready.
+Hooks.once('ready', () => {
+    game.animecampaign = {
+        ...game.system,
+        macros: { ...Macro },
+        AC: { ...AC },
+    }
+})
+
 // Fires once localization translations have been loaded and are ready for use.
 Hooks.once('i18nInit', () => {
     CONFIG.animecampaign = config.animecampaign;
@@ -38,4 +48,8 @@ Hooks.once('i18nInit', () => {
 // Fires whenever a chat message is rendered on screen.
 Hooks.on('renderChatMessage', (message, html, data) => {
     Roll.listeners(message, html, data);
+})
+
+Hooks.on('hotbarDrop', (hotbar, data, slot) => {
+    Macro.createMacro(data, slot);
 })
