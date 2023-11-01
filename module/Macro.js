@@ -29,6 +29,9 @@ export async function createMacro (data, slot) {
     return false;
 }
 
+/** Rolls a feature via the hotbar.
+ * @param {String} id 
+ */
 export function roll (id) {
     const speaker = ChatMessage.getSpeaker();
     let actor;

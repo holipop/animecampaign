@@ -7,7 +7,7 @@
         <img class="img" src="{{img}}" title="{{localize @root.config.app.rollFeature}}" data-roll="{{_id}}" data-match-feature="background-color border-left-color">
 
         <!-- Name -->
-        <h4 class="name">{{name}}</h4>
+        <a class="name" data-hide data-collapse-flag="feature.{{_id}}">{{name}}</a>
 
         <!-- Tracked Stats -->
         <div class="feature-tracked-stat-list">
@@ -54,8 +54,15 @@
     </section>
 
     <!-- Expanded View -->
-    <section class="expanded" hidden>
-
-    </section>
+    <ol class="expanded" data-collapse-flag="target feature.{{_id}}">
+        {{#each system.sections as |section index|}}
+            <li>
+                <div class="label">{{section.name}}</div>
+                <div class="text">
+                    {{{section.richtext}}}
+                </div>
+            </li>
+        {{/each}}
+    </ol>
 
 </li>

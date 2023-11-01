@@ -32,7 +32,6 @@
         border-right: (1 * @rpx) solid black;
     }
     .name {
-        #AC.HeadingSkinning();
         #AC.Overflow();
         
         width: min-content;
@@ -120,6 +119,32 @@
                 font-size: 1.75rem;
                 font-style: normal;
             }
+        }
+    }
+
+    .expanded {
+        #AC.ListSkinning();
+
+        max-height: 12rem;
+        overflow-y: scroll;
+        border-top: (1 * @rpx) solid black;
+
+        > li:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .label {
+            padding: .2rem .3rem;
+            font: 800 .8rem "Libre Franklin";
+        }
+        .text {
+            margin: 0;
+            padding: .3rem;
+            border-top: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+            border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.3);
+            box-shadow: rgba(0, 0, 0, 0.15) 0 (1 * @rpx);
+
+            font: 500 .775rem "Libre Franklin";
         }
     }
 }

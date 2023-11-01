@@ -21,6 +21,7 @@ export default class FeatureSheet extends ItemSheet {
 
         options.dragDrop = [
             { dragSelector: "[data-section-list] [data-section]", dropSelector: null },
+            { dragSelector: "[data-stat-list] [data-stat]", dropSelector: null },
         ];
 
         options.tabs = [
@@ -39,10 +40,14 @@ export default class FeatureSheet extends ItemSheet {
         const dataset = $(event.target).data();
         let dragData;
 
-        if (dataset.section !== undefined) {
+        if ('section' in dataset) {
             const sections = this.object.system.sections;
             const section = List.get(sections, dataset.section);
             dragData = { type: 'Section', obj: section, index: dataset.section };
+        } else if ('stat' in dataset) {
+            const stats = this.object.system.stats;
+            const stat = List.get(stats, dataset.stat)
+            dragData = { type: 'Stat', obj: stat, index: dataset.stat };
         }
 
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
@@ -56,7 +61,11 @@ export default class FeatureSheet extends ItemSheet {
         const data = TextEditor.getDragEventData(event);
         const sheet = this;
 
+        //? The code for these two is nearly identical.
+        //? A generalized function for Lists might be due.
+
         const sections = this.object.system.sections;
+        const stats = this.object.system.stats;
 
         void function section () {
             if (data.type != 'Section') return;
@@ -69,6 +78,19 @@ export default class FeatureSheet extends ItemSheet {
             update = List.add(update, data.obj, dropTarget.data('section'));
         
             return sheet.object.update({ 'system.sections': update });
+        }();
+
+        void function stat () {
+            if (data.type != 'Stat') return;
+            if (stats.length == 1) return;
+        
+            const dropTarget = $(event.target).closest('[data-stat]');
+            if (dropTarget.length == 0) return;
+        
+            let update = List.remove(stats, data.index);
+            update = List.add(update, data.obj, dropTarget.data('stat'));
+        
+            return sheet.object.update({ 'system.stats': update });
         }();
     }
 
@@ -119,10 +141,22 @@ export default class FeatureSheet extends ItemSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
-
         this.globalListeners(html, this);
         this.statListeners(html, this);
         this.sectionListeners(html, this);
+
+        const sheet = this;
+
+        /** Rolls the feature to the chat log.
+         */
+        void function roll () {
+            const roll = html.find('[data-roll]');
+
+            roll.on('mousedown', event => {
+                const post = (event.which === 3) // if right click was used
+                sheet.object.roll({ post });
+            })
+        }();
         
         super.activateListeners(html);
     }

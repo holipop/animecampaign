@@ -2,6 +2,7 @@
 import * as AC from './module/AC.js'
 import * as config from './module/config.js'
 import * as Roll from './module/Roll.js'
+import * as List from './module/List.js'
 import * as Macro from './module/Macro.js'
 
 import ACActor from './module/documents/ACActor.js'
@@ -36,6 +37,7 @@ Hooks.once('ready', () => {
     game.animecampaign = {
         ...game.system,
         macros: { ...Macro },
+        list: { ...List },
         AC: { ...AC },
     }
 })

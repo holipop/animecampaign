@@ -115,26 +115,25 @@ export default class CharacterSheet extends ActorSheet {
     //** DRAG AND DROP */
 
     /** Fires when a draggable element is picked up.
-     * @param {*} event 
+     * @param {Event} event 
      */
     _onDragStart (event) {
         const dataset = $(event.target).data();
         let dragData;
 
-        if (dataset.feature !== undefined) {
-            const feature = this.object.getEmbeddedDocument('Item', dataset.feature);
-            dragData = { type: 'Feature', obj: feature, id: dataset.feature };
-        }
-
         const categories = this.object.system.categories;
         const key = $(event.target).closest('[data-category]').data('category');
         const category = List.get(categories, { name: key });
-        
-        if (dataset.category !== undefined) {
+
+        if ('feature' in dataset) {
+            const feature = this.object.getEmbeddedDocument('Item', dataset.feature);
+            dragData = { type: 'Feature', obj: feature, id: dataset.feature };
+
+            const img = $(event.target).find('.img')[0];
+            event.dataTransfer.setDragImage(img, 50, 50);
+        } else if ('category' in dataset) {
             dragData = { type: 'Category', obj: category };
-        } 
-        
-        if (dataset.tracker !== undefined) {
+        } else if ('tracker' in dataset) {
             const tracker = category.trackers[dataset.tracker];
             dragData = { type: 'Tracker', obj: tracker, category: category, index: dataset.tracker };
         }
@@ -144,7 +143,7 @@ export default class CharacterSheet extends ActorSheet {
     }
 
     /** Fires when a draggable element is dropped.
-     * @param {*} event 
+     * @param {Event} event 
      */
     _onDrop (event) {
         const data = TextEditor.getDragEventData(event);

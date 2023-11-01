@@ -1,10 +1,5 @@
 // main: ./animecampaign.less
 
-//* GLOBAL */
-//* ------ */
-
-@max-name-height: 3.75rem; // 60 pixels;
-
 .animecampaign.sheet .summary {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -25,29 +20,51 @@
     }
 
     .profile {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        height: 120%;
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
         grid-column: 1 / 1;
         grid-row: 1 / -1;
         place-self: end end;
     }
+    .color-button, .color {
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+    .color-button {
+        #AC.Border();
+
+        pointer-events: none;
+        display: grid;
+        place-items: center;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+    }
     .color {
         #AC.InputSkinning();
 
-        width: 100%;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        place-self: start;
         margin: 0;
-        z-index: 2;
 
         border: none;
+        opacity: 0;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
     .img {
         #AC.Border();
 
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        place-self: end;
         border-radius: 0;
 
-        z-index: 3;
     }
 
     .summary-top {
@@ -102,10 +119,6 @@
     }
 }
 
-
-//* CHARACTER */
-//* --------- */
-
 .animecampaign.actor.sheet .summary {
     grid-template-rows: 7fr 3fr;
     height: @character-summary-height;
@@ -129,10 +142,6 @@
     }
 }
 
-
-//* FEATURE */
-//* ------- */
-
 .animecampaign.item.sheet .summary {
     grid-template-rows: 2fr 1fr;
     height: @feature-summary-height;
@@ -146,6 +155,16 @@
     }
     .name {
         font-size: 2.5rem;
+    }
+    .roll {
+        #AC.Border;
+        
+        display: grid;
+        place-items: center;
+        height: 1.2rem;
+        width: 1.2rem;
+        grid-column: 2 / -1;
+        place-self: start end;
     }
 
     .summary-bottom > * {

@@ -177,13 +177,19 @@ export const SheetMixin = {
                 return (!key.startsWith('target'));
             });
 
-            collapse.each((index, element) => {            
+            collapse.each((index, element) => {
                 const key = $(element).data('collapse-flag');
                 const target = html.find(`[data-collapse-flag="target ${key}"]`);
                 const flag = sheet.object.getFlag('animecampaign', key);
-                const isVisible = flag?.visible ?? true;
                 const isChevron = $(element).hasClass('fas');
+                let isVisible = flag?.visible ?? true;
 
+                // Sets the initial value of any data-hide divs
+                if ((flag == undefined) && ('hide' in $(element).data())) {
+                    sheet.object.setFlag('animecampaign', key, { visible: false })
+                    isVisible = false;
+                }
+                
                 if (isVisible) {
                     target.show();
 
