@@ -1269,7 +1269,7 @@
 .animecampaign.actor.sheet .biography textarea {
   resize: none;
   overflow-y: hidden;
-  min-height: 10rem;
+  min-height: 3rem;
 }
 .animecampaign.actor.sheet .biography .editor.prosemirror {
   height: 20rem;

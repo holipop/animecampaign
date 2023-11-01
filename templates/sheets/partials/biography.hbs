@@ -1,12 +1,13 @@
 <section class="biography tab" data-tab="biography" data-group="actor-tabs">
 
     <div class="control">
-        <label>Text Editor</label>
+        <label>{{localize config.app.textEditor}}</label>
 
         <select name="system.biography.editor">
             {{#select system.biography.editor}}
-                <option value="markdown">Markdown</option>
-                <option value="prosemirror">ProseMirror</option>
+                {{#each config.editor as |name value|}}
+                    <option value="{{value}}">{{localize name}}</option>
+                {{/each}}
             {{/select}}
         </select>
     </div>

@@ -70,13 +70,16 @@
             "deleteCategory": "Delete Category",
             "createFeature": "Create Feature",
             "rollFeature": "Roll Feature",
+            "expandFeature": "Expand Feature",
             "viewFeature": "View Feature",
             "deleteFeature": "Delete Feature",
             "addSection": "Add Section",
             "deleteSection": "Delete Section",
-            "toggleSectionVisibility": "Toggle Section Visibility"
+            "toggleSectionVisibility": "Toggle Section Visibility",
+            "textEditor": "Text Editor"
         },
         "placeholder": {
+            "na": "N/A",
             "value": "Value",
             "max": "Max",
             "spaces": "Spaces",
@@ -88,6 +91,19 @@
             "class": "Class",
             "name": "Name",
             "category": "Category"
+        },
+        "details": {
+            "textEditor": "Text Editor",
+            "textEditorNote": "Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, \"what you see is what you get\".",
+            "rollFormula": "Roll Formula",
+            "action": "Action",
+            "usage": "Usage",
+            "per": "per",
+            "usageNote": "i.e. \"1 time per Combat\"."
+        },
+        "editor": {
+            "markdown": "Markdown",
+            "prosemirror": "ProseMirror"
         }
     }
 }
