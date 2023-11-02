@@ -123,6 +123,9 @@
   font-style: italic;
   font-weight: 900;
 }
+.animecampaign.sheet .window-content {
+  background: url('../animecampaign/assets/paper.jpg') white;
+}
 .animecampaign.sheet form {
   overflow-y: hidden;
 }
@@ -226,6 +229,7 @@
 .animecampaign.chat.roll {
   border: 0.0625rem solid black;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  background: url('../animecampaign/assets/paper.jpg') white;
 }
 .animecampaign.chat.roll .summary {
   display: grid;
@@ -633,7 +637,6 @@
   height: 3rem;
   padding: 0 1rem;
   border-left: 0.0625rem solid black;
-  background-color: rgba(36, 16, 16, 0.05);
 }
 .animecampaign.actor.sheet .main-stats td:last-child {
   border-right: 0.0625rem solid black;
