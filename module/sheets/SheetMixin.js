@@ -19,7 +19,11 @@ export const SheetMixin = {
 
             enter.each((index, element) => {
                 $(element).on('keypress', event => {
+                    const escape = $(element).data('enter')
+
                     if (event.code == 'Enter') {
+                        if (escape == 'shift' && event.shiftKey) return;
+
                         event.preventDefault();
                         sheet.submit();
                     }

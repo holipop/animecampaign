@@ -1202,8 +1202,19 @@
   resize: none;
   overflow-y: hidden;
 }
+.animecampaign.item.sheet .section-list .panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1rem;
+}
 .animecampaign.item.sheet .section-list .collapse i {
   font-size: 0.8rem;
+}
+.animecampaign.item.sheet .section-list .grip {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  cursor: grab;
 }
 .animecampaign.item.sheet .section-list .section {
   display: flex;

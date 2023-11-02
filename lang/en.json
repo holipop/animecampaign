@@ -93,6 +93,8 @@
             "viewFeature": "View Feature",
             "deleteFeature": "Delete Feature",
             "addSection": "Add Section",
+            "collapseSection": "Collapse Section",
+            "dragSection": "Drag Section",
             "deleteSection": "Delete Section",
             "toggleSectionVisibility": "Toggle Section Visibility",
             "textEditor": "Text Editor"

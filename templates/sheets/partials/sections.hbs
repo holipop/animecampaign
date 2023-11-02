@@ -5,10 +5,19 @@
         <!-- Section -->
         <li class="section" data-section="{{index}}">
 
-            <!-- Collapse -->
-            <a class="control collapse" title="{{localize config.app.collapseSection}}">
-                <i class="fas fa-chevron-down" data-collapse="sections.{{index}}"></i>
-            </a>
+            <!-- Control -->
+            <div class="panel">
+
+                <!-- Collapse -->
+                <a class="control collapse" title="{{localize config.app.collapseSection}}">
+                    <i class="fas fa-chevron-down" data-collapse="sections.{{index}}"></i>
+                </a>
+
+                <!-- Grip -->
+                <i class="control grip fas fa-grip-vertical" data-section-grip="{{index}}"></i>
+
+            </div>
+
             
             <div class="section-body">
 
@@ -30,7 +39,7 @@
                 <div data-collapse="target sections.{{index}}">
 
                     {{#if (eq @root.system.details.editor 'markdown')}}
-                        <textarea name="system.sections.{{index}}.plaintext" placeholder="{{localize @root.config.placeholder.text}}" data-resize>{{~section.plaintext}}</textarea>
+                        <textarea name="system.sections.{{index}}.plaintext" placeholder="{{localize @root.config.placeholder.text}}" data-resize data-enter="shift">{{~section.plaintext}}</textarea>
                     {{/if}}
 
                     {{#if (eq @root.system.details.editor 'prosemirror')}}

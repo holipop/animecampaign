@@ -20,7 +20,7 @@ export default class FeatureSheet extends ItemSheet {
         });
 
         options.dragDrop = [
-            { dragSelector: "[data-section-list] [data-section]", dropSelector: null },
+            { dragSelector: "[data-section-list] [data-section-grip]", dropSelector: null },
             { dragSelector: "[data-stat-list] [data-stat]", dropSelector: null },
         ];
 
@@ -40,10 +40,12 @@ export default class FeatureSheet extends ItemSheet {
         const dataset = $(event.target).data();
         let dragData;
 
-        if ('section' in dataset) {
+        if ('sectionGrip' in dataset) {
             const sections = this.object.system.sections;
-            const section = List.get(sections, dataset.section);
-            dragData = { type: 'Section', obj: section, index: dataset.section };
+            const index = $(event.target).closest('[data-section]').data('section');
+            const section = List.get(sections, index);
+            dragData = { type: 'Section', obj: section, index };
+            event.dataTransfer.setDragImage($(event.target).closest('[data-section]')[0], 0, 0)
         } else if ('stat' in dataset) {
             const stats = this.object.system.stats;
             const stat = List.get(stats, dataset.stat)
