@@ -29,7 +29,15 @@ export default class FeatureData extends foundry.abstract.DataModel {
             details: new fields.SchemaField({
                 editor: new fields.StringField({ initial: 'markdown' }),
                 formula: new fields.StringField({ initial: '1d20' }),
-                action: new fields.StringField({ initial: 'Main' }),
+
+                action: new fields.SchemaField({
+                    name: new fields.StringField({ initial: 'main' }),
+                    img: new fields.FilePathField({
+                        categories: ['IMAGE'],
+                        initial: 'systems/animecampaign/assets/action/main.svg'
+                    }),
+                }),
+
                 usage: new fields.SchemaField({
                     multiple: new fields.NumberField({ initial: 1 }),
                     timeframe: new fields.StringField({ initial: 'Round' })
@@ -50,7 +58,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
             const fallback = {
                 view: 'value',
                 value: '',
-                img: 'icons/svg/circle.svg',
+                img: 'systems/animecampaign/assets/transparent.svg',
             };
             return List.get(this.stats, { tag: tracker.tag }) ?? fallback;
         })

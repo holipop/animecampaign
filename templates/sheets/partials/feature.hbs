@@ -9,6 +9,11 @@
         <!-- Name -->
         <a class="name" title="{{localize @root.config.app.expandFeature}}" data-hide data-collapse-flag="feature.{{_id}}">{{name}}</a>
 
+        <!-- Action -->
+        <img class="action" src="{{system.details.action.img}}" alt="system/animecampaign/assets/transparent.svg">
+
+        <div class="spacing"></div>
+
         <!-- Tracked Stats -->
         <div class="feature-tracked-stat-list">
             {{#each system.trackedStats as |stat index|}}

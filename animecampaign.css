@@ -241,7 +241,7 @@
   grid-column: 1 / -1;
   grid-row: 1 / 2;
 }
-.animecampaign.chat.roll .summary img {
+.animecampaign.chat.roll .summary .img {
   border: 0.0625rem solid black;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
   height: 2.25rem;
@@ -273,6 +273,19 @@
   font: bold 0.7rem "Libre Franklin";
   text-transform: uppercase;
   opacity: 0.75;
+}
+.animecampaign.chat.roll .summary .action {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  height: 1.5rem;
+  width: 1.5rem;
+  grid-column: 2 / -1;
+  grid-row: 1 / 2;
+  margin: 0.15rem 0.25rem;
+  place-self: end;
+  opacity: 0.25;
 }
 .animecampaign.chat.roll .dice-roll {
   margin: 0.25rem;
@@ -588,6 +601,19 @@
 .animecampaign.item.sheet .summary .background {
   height: 3.91666667rem;
 }
+.animecampaign.item.sheet .summary .roll {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  display: grid;
+  place-items: center;
+  position: relative;
+  top: 1.5rem;
+  height: 1.2rem;
+  width: 1.2rem;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  place-self: start;
+}
 .animecampaign.item.sheet .summary .img {
   height: 4.4rem;
   width: 4.4rem;
@@ -595,15 +621,17 @@
 .animecampaign.item.sheet .summary .name {
   font-size: 2.5rem;
 }
-.animecampaign.item.sheet .summary .roll {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  display: grid;
-  place-items: center;
-  height: 1.2rem;
-  width: 1.2rem;
+.animecampaign.item.sheet .summary .action {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  height: 2.75rem;
+  width: 2.75rem;
   grid-column: 2 / -1;
+  grid-row: 1 / 2;
   place-self: start end;
+  opacity: 0.5;
 }
 .animecampaign.item.sheet .summary .summary-bottom > * {
   height: 1.5rem;
@@ -970,6 +998,7 @@
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .entry > * {
   color: black;
+  flex-shrink: 0;
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .entry:hover i {
   opacity: 1;
@@ -989,11 +1018,23 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   width: min-content;
-  flex: 1;
   padding: 0 0.25rem;
+  flex-shrink: 1;
   font-family: "Philosopher";
   font-size: 1.25rem;
   font-weight: bold;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .action {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  height: 1.5rem;
+  width: 1.5rem;
+  opacity: 0.5;
+}
+.animecampaign.actor.sheet .kit .feature-list .feature .spacing {
+  flex: 1;
 }
 .animecampaign.actor.sheet .kit .feature-list .feature .feature-controls {
   display: flex;

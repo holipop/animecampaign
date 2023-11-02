@@ -35,6 +35,23 @@
             "passive": "Passive",
             "ability": "Ability"
         },
+        "action": {
+            "na": "N/A",
+            "standard": {
+                "main": "Main",
+                "move": "Move",
+                "anytime": "Anytime",
+                "bonus": "Bonus",
+                "free": "Free"
+            },
+            "other": {
+                "swift": "Swift"
+            }
+        },
+        "actionType": {
+            "standard": "Standard",
+            "other": "Other"
+        },
         "nav": {
             "biography": "Biography",
             "kit": "Kit",
@@ -51,6 +68,8 @@
             "resetColor": "Reset Color"
         },
         "app": {
+            "editColor": "Edit Color",
+            "roll": "Roll",
             "stats": "Stats",
             "name": "Name",
             "colorStats": "Color Stats",

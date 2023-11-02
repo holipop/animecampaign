@@ -36,20 +36,28 @@ export default class ACItem extends Item {
             }
         })();
 
+        // Getting colors for contrasting.
+        const contrast = (() => {
+            const rgb = AC.hexToRGB(this.system.color);
+            rgb[0] *= 0.2126;
+            rgb[1] *= 0.7152;
+            rgb[2] *= 0.0722;
+
+            const luma = rgb.reduce((n, m) => n + m) / 255;
+            return (luma <= .5) ? "white" : "black";
+        })();
+        const contrastImg = (contrast == 'white') 
+            ? 'brightness(0) saturate(100%) invert(100%)'
+            : 'brightness(0) saturate(100%)';
+
+        // Data preparation
         const data = { 
             ...this,
             _id: this._id,
             
             match: this.system.color,
-            contrast: (() => {
-                const rgb = AC.hexToRGB(this.system.color);
-                rgb[0] *= 0.2126;
-                rgb[1] *= 0.7152;
-                rgb[2] *= 0.0722;
-
-                const luma = rgb.reduce((n, m) => n + m) / 255;
-                return (luma <= .5) ? "white" : "black";
-            })(),
+            contrast,
+            contrastImg,
 
             post,
             roll,

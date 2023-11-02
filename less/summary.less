@@ -149,6 +149,19 @@
     .background {
         height: (@feature-summary-height * (2 / 3)) + .5rem;
     }
+    .roll {
+        #AC.Border;
+        
+        display: grid;
+        place-items: center;
+        position: relative;
+        top: 1.5rem;
+        height: 1.2rem;
+        width: 1.2rem;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        place-self: start;
+    }
     .img {
         height: 4.4rem;
         width: 4.4rem;
@@ -156,15 +169,16 @@
     .name {
         font-size: 2.5rem;
     }
-    .roll {
-        #AC.Border;
-        
-        display: grid;
-        place-items: center;
-        height: 1.2rem;
-        width: 1.2rem;
+    .action {
+        #AC.InputSkinning;
+
+        height: 2.75rem;
+        width: 2.75rem;
         grid-column: 2 / -1;
+        grid-row: 1 / 2;
         place-self: start end;
+
+        opacity: .5;
     }
 
     .summary-bottom > * {

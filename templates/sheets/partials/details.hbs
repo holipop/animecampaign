@@ -21,7 +21,29 @@
             </div>
 
             <div class="fields">
-                <input type="text" name="system.details.action" value="{{system.details.action}}" placeholder="{{localize config.placeholder.na}}">
+
+                <select name="system.details.action.name">
+
+                    <option value="">{{localize config.action.na}}</option>
+
+                    <optgroup label="{{localize config.actionType.standard}}">
+                        {{#select system.details.action.name}}
+                            {{#each config.action.standard as |name key|}}
+                                <option value="{{key}}">{{localize name}}</option>
+                            {{/each}}
+                        {{/select}}
+                    </optgroup>
+                    
+                    <optgroup label="{{localize config.actionType.other}}">
+                        {{#select system.details.action.name}}
+                            {{#each config.action.other as |name key|}}
+                                <option value="{{key}}">{{localize name}}</option>
+                            {{/each}}
+                        {{/select}}
+                    </optgroup>
+
+                </select>
+
             </div>
         </header>
     </li>
@@ -51,6 +73,7 @@
             </div>
 
             <div class="fields">
+
                 <select name="system.details.editor">
                     {{#select system.details.editor}}
                         {{#each config.editor as |name value|}}
@@ -58,6 +81,7 @@
                         {{/each}}
                     {{/select}}
                 </select>
+
             </div>
         </header>
 
