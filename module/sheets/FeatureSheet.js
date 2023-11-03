@@ -349,12 +349,14 @@ export default class FeatureSheet extends ItemSheet {
             }
         }
 
+        /* 
         // Sets the associated image for actions.
-        const action = data.system.details.action;
-        action.img = (!action.name)
-            ? `systems/animecampaign/assets/transparent.svg`
-            : `systems/animecampaign/assets/action/${action.name}.svg`;
-
+        //const action = data.system.details.action;
+        //action.img = (!action.name)
+        //   /? `systems/animecampaign/assets/transparent.svg`
+        //    : `systems/animecampaign/assets/action/${action.name}.svg`;
+        */
+        
         super._updateObject(event, data);
     }
 }

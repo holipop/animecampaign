@@ -428,6 +428,7 @@
   align-items: flex-end;
 }
 .animecampaign.chat.roll .section-list header .collapse {
+  width: 0.66rem;
   font-size: 0.66rem;
 }
 .animecampaign.chat.roll .section-list header .collapse > i {
