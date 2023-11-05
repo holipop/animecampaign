@@ -125,6 +125,15 @@
         "editor": {
             "markdown": "Markdown",
             "prosemirror": "ProseMirror"
+        },
+        "settings": {
+            "defaultTextEditor": "Default Text Editor",
+            "defaultTextEditorHint": "Configure which text editor is set on-creation for your actors and items.",
+            "diagonalMovement": "Diagonal Movement Rule",
+            "diagonalMovementHint": "Configure which diagonal movement rule should be used for games within this system.",
+            "diagonalMovement555": "PHB: Equidistant (5/5/5)",
+            "diagonalMovement5105": "DMG: Alternating (5/10/5)",
+            "diagonalMovementEuclidean": "Euclidean (7.07 ft. Diagonal)"
         }
     }
 }

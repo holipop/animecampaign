@@ -123,34 +123,34 @@ export function settings () {
 
     // Default Text Editor
     game.settings.register(scope, 'defaultTextEditor', {
-        name: 'Default Text Editor',
-        hint: `Configure which text editor is set on-creation for your actors and items.`,
+        name: localize('settings.defaultTextEditor'),
+        hint: localize('settings.defaultTextEditorHint'),
         scope: 'client',
         config: true,
         type: String,
         choices: {
-            "markdown": "Markdown",
-            "prosemirror": "ProseMirror",
+            "markdown": localize('editor.markdown'),
+            "prosemirror": localize('editor.prosemirror'),
         },
         default: "markdown",
         onChange: value => {
-            AC.log(`Default Text Editor set to '${value}'`);
+            log(`Default Text Editor set to '${value}'`);
         },
     });
 
     // Diagonal Movement Rule
     // (Taken directly from DnD5e)
     game.settings.register(scope, "diagonalMovement", {
-        name: "Diagonal Movement Rule",
-        hint: "Configure which diagonal movement rule should be used for games within this system.",
+        name: localize('settings.diagonalMovement'),
+        hint:  localize('settings.diagonalMovementHint'),
         scope: "world",
         config: true,
         default: "5105",
         type: String,
         choices: {
-            "555": "PHB: Equidistant (5/5/5)",
-            "5105": "DMG: Alternating (5/10/5)",
-            "EUCL": "Euclidean (7.07 ft. Diagonal)"
+            "555": localize('settings.diagonalMovement555'),
+            "5105": localize('settings.diagonalMovement5105'),
+            "EUCL": localize('settings.diagonalMovementEuclidean'),
         },
         onChange: value => canvas.grid.diagonalRule = value
     });

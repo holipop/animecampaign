@@ -30,7 +30,6 @@ Hooks.once('init', () => {
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
     AC.preloadHandlebarsTemplates();
-    AC.settings();
 })
 
 // Fires when Foundry is fully ready.
@@ -46,6 +45,7 @@ Hooks.once('ready', () => {
 // Fires once localization translations have been loaded and are ready for use.
 Hooks.once('i18nInit', () => {
     CONFIG.animecampaign = config.animecampaign;
+    AC.settings();
 })
 
 // Fires when the canvas initializes.
