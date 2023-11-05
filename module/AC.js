@@ -158,7 +158,7 @@ export function settings () {
 }
 
 /** Sets the diagonal rule for this system.
- * (Copied from DnD5e)
+ *  (Copied from DnD5e)
  */
 export function measureDistances(segments, options={}) {
     if ( !options.gridSpaces ) return BaseGrid.prototype.measureDistances.call(this, segments, options);
