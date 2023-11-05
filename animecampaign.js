@@ -30,6 +30,7 @@ Hooks.once('init', () => {
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
     AC.preloadHandlebarsTemplates();
+    AC.settings();
 })
 
 // Fires when Foundry is fully ready.
@@ -47,11 +48,19 @@ Hooks.once('i18nInit', () => {
     CONFIG.animecampaign = config.animecampaign;
 })
 
+// Fires when the canvas initializes.
+// (Copied from DnD5e)
+Hooks.on("canvasInit", gameCanvas => {
+    gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
+    SquareGrid.prototype.measureDistances = AC.measureDistances;
+});
+
 // Fires whenever a chat message is rendered on screen.
 Hooks.on('renderChatMessage', (message, html, data) => {
     Roll.listeners(message, html, data);
 })
 
+// Fires whenever a document is dropped on the hotbar.
 Hooks.on('hotbarDrop', (hotbar, data, slot) => {
     Macro.createMacro(data, slot);
 })

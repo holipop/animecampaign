@@ -10,6 +10,18 @@ export default class ACItem extends Item {
      */
     get rollTemplate () { return 'systems/animecampaign/templates/roll/roll-template.hbs' }
 
+    /** Fires before a document is created. For preliminary operations.
+     * @param {*} data 
+     * @param {*} options 
+     * @param {BaseUser} user 
+     */
+    _preCreate(data, options, user) {
+        super._preCreate(data, options, user);
+
+        const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
+        this.updateSource({ 'system.details.editor': defaultTextEditor });
+    }
+
     /** Sends a chat message of this feature.
      */
     async roll ({ post = false } = {}) {

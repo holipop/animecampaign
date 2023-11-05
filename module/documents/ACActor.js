@@ -5,11 +5,23 @@ import * as List from "../List.js";
  */
 export default class ACActor extends Actor {
 
+    /** Fires before a document is created. For preliminary operations.
+     * @param {*} data 
+     * @param {*} options 
+     * @param {BaseUser} user 
+     */
+    _preCreate(data, options, user) {
+        super._preCreate(data, options, user);
+
+        const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
+        this.updateSource({ 'system.biography.editor': defaultTextEditor });
+    }
+
     /** Fired whenever an embedded document is created.
      * @param {Document} parent
      * @param {String} collection
      * @param {Document[]} documents 
-     * @param {...any} args 
+     * @param {...*} args 
      */
     _onCreateDescendantDocuments (parent, collection, documents, ...args) {
         if (collection == 'items') {

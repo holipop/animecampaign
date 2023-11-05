@@ -13,8 +13,14 @@ export default class Section extends foundry.abstract.DataModel {
             name: new fields.StringField({ nullable: true }),
             visible: new fields.BooleanField({ initial: true }),
             
-            plaintext: new fields.StringField({ nullable: true }),
-            richtext: new fields.HTMLField({ nullable: true }),
+            plaintext: new fields.StringField({ 
+                nullable: true,
+                initial: "", 
+            }),
+            richtext: new fields.HTMLField({ 
+                nullable: true,
+                initial: "", 
+            }),
 
             collapsed: new fields.BooleanField({ initial: false }),
         }
