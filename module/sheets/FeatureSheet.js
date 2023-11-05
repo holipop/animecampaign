@@ -44,12 +44,12 @@ export default class FeatureSheet extends ItemSheet {
             const sections = this.object.system.sections;
             const index = $(event.target).closest('[data-section]').data('section');
             const section = List.get(sections, index);
-            dragData = { type: 'Section', obj: section, index };
+            dragData = { type: 'section', obj: section, index: Number(index) };
             event.dataTransfer.setDragImage($(event.target).closest('[data-section]')[0], 0, 0)
         } else if ('stat' in dataset) {
             const stats = this.object.system.stats;
             const stat = List.get(stats, dataset.stat)
-            dragData = { type: 'Stat', obj: stat, index: dataset.stat };
+            dragData = { type: 'stat', obj: stat, index: Number(dataset.stat) };
         }
 
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
@@ -63,37 +63,24 @@ export default class FeatureSheet extends ItemSheet {
         const data = TextEditor.getDragEventData(event);
         const sheet = this;
 
-        //? The code for these two is nearly identical.
-        //? A generalized function for Lists might be due.
+        const onDropList = str => {
+            if (data.type != str) return;
 
-        const sections = this.object.system.sections;
-        const stats = this.object.system.stats;
+            // Given the string, retrieve the list
+            const list = getProperty(sheet.object.system, `${str}s`);
+            if (list.length == 1) return;
 
-        void function section () {
-            if (data.type != 'Section') return;
-            if (sections.length == 1) return;
-        
-            const dropTarget = $(event.target).closest('[data-section]');
+            const dropTarget = $(event.target).closest(`[data-${str}]`);
             if (dropTarget.length == 0) return;
-        
-            let update = List.remove(sections, data.index);
-            update = List.add(update, data.obj, dropTarget.data('section'));
-        
-            return sheet.object.update({ 'system.sections': update });
-        }();
 
-        void function stat () {
-            if (data.type != 'Stat') return;
-            if (stats.length == 1) return;
-        
-            const dropTarget = $(event.target).closest('[data-stat]');
-            if (dropTarget.length == 0) return;
-        
-            let update = List.remove(stats, data.index);
-            update = List.add(update, data.obj, dropTarget.data('stat'));
-        
-            return sheet.object.update({ 'system.stats': update });
-        }();
+            let update = List.remove(list, data.index);
+            update = List.add(update, data.obj, dropTarget.data(str));
+
+            return sheet.object.update({ [`system.${str}s`]: update });
+        }
+
+        onDropList('stat');
+        onDropList('section');
     }
 
 
@@ -348,14 +335,6 @@ export default class FeatureSheet extends ItemSheet {
                 section.plaintext = convert.makeMarkdown(section.richtext || source[i].richtext);
             }
         }
-
-        /* 
-        // Sets the associated image for actions.
-        //const action = data.system.details.action;
-        //action.img = (!action.name)
-        //   /? `systems/animecampaign/assets/transparent.svg`
-        //    : `systems/animecampaign/assets/action/${action.name}.svg`;
-        */
         
         super._updateObject(event, data);
     }
