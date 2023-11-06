@@ -78,17 +78,17 @@
         font-family: "Libre Franklin";
         font-weight: 500;
 
-        &:focus {
+        &:focus:not([readonly]) {
             border-color: #AC.Color(.66)[@return];
         }
     }
     input, select {
         border-top: 0;
-        &:focus {
+        &:focus:not([readonly]) {
             box-shadow: inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx);
         }
     }
-    textarea:focus {
+    textarea:focus:not([readonly]) {
         box-shadow: 
             inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
             inset #AC.Color(.3)[@return] 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);

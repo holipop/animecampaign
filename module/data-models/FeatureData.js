@@ -31,7 +31,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 formula: new fields.StringField({ initial: '1d20' }),
 
                 action: new fields.SchemaField({
-                    name: new fields.StringField({ initial: 'main' }),
+                    name: new fields.StringField({ initial: 'Main' }),
                     img: new fields.FilePathField({
                         categories: ['IMAGE'],
                         initial: 'systems/animecampaign/assets/action/main.svg'

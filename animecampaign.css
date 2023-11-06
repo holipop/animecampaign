@@ -196,20 +196,20 @@
   font-family: "Libre Franklin";
   font-weight: 500;
 }
-.animecampaign.sheet form input:focus,
-.animecampaign.sheet form select:focus,
-.animecampaign.sheet form textarea:focus {
+.animecampaign.sheet form input:focus:not([readonly]),
+.animecampaign.sheet form select:focus:not([readonly]),
+.animecampaign.sheet form textarea:focus:not([readonly]) {
   border-color: rgba(205, 50, 50, 0.66);
 }
 .animecampaign.sheet form input,
 .animecampaign.sheet form select {
   border-top: 0;
 }
-.animecampaign.sheet form input:focus,
-.animecampaign.sheet form select:focus {
+.animecampaign.sheet form input:focus:not([readonly]),
+.animecampaign.sheet form select:focus:not([readonly]) {
   box-shadow: inset rgba(205, 50, 50, 0.3) 0 -0.3125rem 0.3125rem -0.3125rem;
 }
-.animecampaign.sheet form textarea:focus {
+.animecampaign.sheet form textarea:focus:not([readonly]) {
   box-shadow: inset rgba(205, 50, 50, 0.3) 0 -0.3125rem 0.3125rem -0.3125rem, inset rgba(205, 50, 50, 0.3) 0 0.3125rem 0.3125rem -0.3125rem;
 }
 .animecampaign.actor.sheet {

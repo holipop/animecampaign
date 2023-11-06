@@ -13,7 +13,6 @@ import ACItem from './module/documents/ACItem.js'
 import FeatureData from './module/data-models/FeatureData.js'
 import FeatureSheet from './module/sheets/FeatureSheet.js'
 
-// Fires right before Foundry starts initialization steps.
 Hooks.once('init', () => {
     AC.log(config.animecampaign.ascii);
     AC.log('Initializing Anime Campaign System!');
@@ -32,7 +31,6 @@ Hooks.once('init', () => {
     AC.preloadHandlebarsTemplates();
 })
 
-// Fires when Foundry is fully ready.
 Hooks.once('ready', () => {
     game.animecampaign = {
         ...game.system,
@@ -42,25 +40,16 @@ Hooks.once('ready', () => {
     }
 })
 
-// Fires once localization translations have been loaded and are ready for use.
 Hooks.once('i18nInit', () => {
     CONFIG.animecampaign = config.animecampaign;
     AC.settings();
 })
 
-// Fires when the canvas initializes.
 // (Copied from DnD5e)
 Hooks.on("canvasInit", gameCanvas => {
     gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
     SquareGrid.prototype.measureDistances = AC.measureDistances;
 });
 
-// Fires whenever a chat message is rendered on screen.
-Hooks.on('renderChatMessage', (message, html, data) => {
-    Roll.listeners(message, html, data);
-})
-
-// Fires whenever a document is dropped on the hotbar.
-Hooks.on('hotbarDrop', (hotbar, data, slot) => {
-    Macro.createMacro(data, slot);
-})
+Hooks.on('renderChatMessage', (message, html, data) => Roll.listeners(message, html, data))
+Hooks.on('hotbarDrop', (hotbar, data, slot) => Macro.createMacro(data, slot))
