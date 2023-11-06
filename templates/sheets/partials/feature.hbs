@@ -7,7 +7,7 @@
         <img class="img" src="{{img}}" title="{{localize @root.config.app.rollFeature}}" data-roll="{{_id}}" data-match-feature="background-color border-left-color">
 
         <!-- Name -->
-        <a class="name" title="{{localize @root.config.app.expandFeature}}" data-hide data-collapse-flag="feature.{{_id}}">{{name}}</a>
+        <a class="name" title="{{localize @root.config.app.expandFeature}}" data-hide data-collapse-{{#if owner}}flag{{else}}short{{/if}}="feature.{{_id}}">{{name}}</a>
 
         <!-- Action -->
         <!-- img class="action" src="{{system.details.action.img}}" alt="system/animecampaign/assets/transparent.svg" -->
@@ -50,16 +50,19 @@
             <a class="control" title="{{localize @root.config.app.viewFeature}}">
                 <i class="fas fa-feather-pointed" data-view-feature></i>
             </a>
-            <a class="control" title="{{localize @root.config.app.deleteFeature}}">
-                <i class="fas fa-trash" data-delete-feature></i>
-            </a>
+
+            {{#if owner}}
+                <a class="control" title="{{localize @root.config.app.deleteFeature}}">
+                    <i class="fas fa-trash" data-delete-feature></i>
+                </a>
+            {{/if}}
 
         </div>
 
     </section>
 
     <!-- Expanded View -->
-    <ol class="expanded" data-match-feature="border-left-color" data-collapse-flag="target feature.{{_id}}">
+    <ol class="expanded" data-match-feature="border-left-color" data-collapse-{{#if owner}}flag{{else}}short{{/if}}="target feature.{{_id}}">
         {{#each system.sections as |section index|}}
             <li>
                 <a class="label" data-collapse-short="feature.{{../_id}}.{{index}}" {{#unless section.visible}}data-hide{{/unless}}>

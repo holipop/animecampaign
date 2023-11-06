@@ -14,8 +14,10 @@
             <!-- Sections -->
             {{~> "sections"}}
 
-            <!-- Details -->
-            {{~> "details"}}
+            {{#unless limited}}
+                <!-- Details -->
+                {{~> "details"}}
+            {{/unless}}
             
         </div>
     

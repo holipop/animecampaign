@@ -7,36 +7,46 @@
             <!-- Header -->
             <header data-match-category="background-color">
 
-                <!-- Collapse -->
-                <a class="control collapse" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
-                    <i class="fas fa-chevron-down" data-collapse-flag="categories.{{category}}"></i>
-                </a>
+                {{#if owner}}
+                    <!-- Collapse -->
+                    <a class="control collapse" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
+                        <i class="fas fa-chevron-down" data-collapse-flag="categories.{{category}}"></i>
+                    </a>
+                {{else}}
+                    <a class="control collapse" data-collapse-short="categories.{{category}}" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                {{/if}}
                 
                 <h2 data-contrast-category>{{category}}</h2>
 
                 <!-- Settings -->
                 <div class="category-controls" data-contrast-category>
 
-                    <!-- Rename, Color, Flood -->
-                    <a class="control" title="{{localize @root.config.app.renameCategory}}">
-                        <i class="fas fa-pencil" data-rename></i>
-                    </a>
-                    <a class="control" title="{{localize @root.config.app.colorCategory}}">
-                        <i class="fas fa-palette" data-color></i>
-                    </a>
-                    <a class="control" title="{{localize @root.config.app.floodCategory}}">
-                        <i class="fas fa-fill-drip" data-flood></i>
-                    </a>
+                    {{#if owner}}
+                        <!-- Rename, Color, Flood -->
+                        <a class="control" title="{{localize @root.config.app.renameCategory}}">
+                            <i class="fas fa-pencil" data-rename></i>
+                        </a>
+                        <a class="control" title="{{localize @root.config.app.colorCategory}}">
+                            <i class="fas fa-palette" data-color></i>
+                        </a>
+                        <a class="control" title="{{localize @root.config.app.floodCategory}}">
+                            <i class="fas fa-fill-drip" data-flood></i>
+                        </a>
+                    {{/if}}
 
                 </div>
 
                 <!-- Tracked Stats -->
                 <div class="tracked-stat-list" data-tracker-list data-contrast-category>
 
-                    <!-- Track -->
-                    <a class="control" title="{{localize @root.config.app.trackStat}}">
-                        <i class="fas fa-square-plus" data-track></i>
-                    </a>
+                    {{#if owner}}
+                        <!-- Track -->
+                        <a class="control" title="{{localize @root.config.app.trackStat}}">
+                            <i class="fas fa-square-plus" data-track></i>
+                        </a>
+                    {{/if}}
 
                     {{#with (lookup @root.categorizedTrackers category)}}
                         {{#each this as |tracker index|}}
@@ -49,10 +59,12 @@
                                     </div>
                                 {{/with}}
 
-                                <!-- Untrack -->
-                                <a class="control" title="{{localize @root.config.app.untrackStat}}">
-                                    <i class="fas fa-xmark" data-untrack="{{index}}"></i>
-                                </a>
+                                {{#if owner}}
+                                    <!-- Untrack -->
+                                    <a class="control" title="{{localize @root.config.app.untrackStat}}">
+                                        <i class="fas fa-xmark" data-untrack="{{index}}"></i>
+                                    </a>
+                                {{/if}}
 
                                 <!-- Label -->
                                 <span class="label">{{tracker.tag}}</span>
@@ -66,19 +78,21 @@
                 <!-- Controls -->
                 <div class="list-controls" data-contrast-category="color border-color">
 
-                    <a class="control" title="{{localize @root.config.app.createFeature}}">
-                        <i class="fas fa-plus" data-create-feature="{{category}}"></i>
-                    </a>
-                    <a class="control" title="{{localize @root.config.app.deleteCategory}}">
-                        <i class="fas fa-sack-xmark" data-delete></i>
-                    </a>
+                    {{#if owner}}
+                        <a class="control" title="{{localize @root.config.app.createFeature}}">
+                            <i class="fas fa-plus" data-create-feature="{{category}}"></i>
+                        </a>
+                        <a class="control" title="{{localize @root.config.app.deleteCategory}}">
+                            <i class="fas fa-sack-xmark" data-delete></i>
+                        </a>
+                    {{/if}}
 
                 </div>
 
             </header>
             
             <!-- Features -->
-            <ol class="feature-list" data-collapse-flag="target categories.{{category}}">
+            <ol class="feature-list" data-collapse-{{#if owner}}flag{{else}}short{{/if}}="target categories.{{category}}">
                 {{#each features as |feature index|}}
 
                     {{> "feature" feature}}
@@ -92,9 +106,11 @@
 
     {{/each}}
 
-    <button data-create type="button">
-        <i class="fas fa-plus"></i>
-        {{localize config.app.createCategory}}
-    </button>
+    {{#if owner}}
+        <button data-create type="button">
+            <i class="fas fa-plus"></i>
+            {{localize config.app.createCategory}}
+        </button>
+    {{/if}}
 
 </ol>

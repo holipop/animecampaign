@@ -17,10 +17,14 @@
             <!-- Biography -->
             {{~> "biography"}}
             
-            <!-- Kit -->
-            {{> "kit"}}
+            {{#unless limited}}
+                <!-- Kit -->
+                {{> "kit"}}
+            {{/unless}}
 
         </div>
+
+        {{log this}}
 
     </section>
 

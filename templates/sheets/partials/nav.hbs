@@ -9,10 +9,12 @@
                 <i class="fas fa-user"></i>
             </a>
 
-            <!-- Kit -->
-            <a class="nav-tab" title="{{localize config.nav.kit}}" data-tab="kit" data-group="actor-tabs">
-                <i class="fas fa-diamond"></i>
-            </a>
+            {{#unless limited}}
+                <!-- Kit -->
+                <a class="nav-tab" title="{{localize config.nav.kit}}" data-tab="kit" data-group="actor-tabs">
+                    <i class="fas fa-diamond"></i>
+                </a>
+            {{/unless}}
 
         </nav>
     {{/if}}
@@ -26,10 +28,12 @@
                 <i class="fas fa-section"></i>
             </a>
 
-            <!-- Details -->
-            <a class="nav-tab" title="{{localize config.nav.details}}" data-tab="details" data-group="item-tabs">
-                <i class="fas fa-circle-info"></i>
-            </a>
+            {{#unless limited}}
+                <!-- Details -->
+                <a class="nav-tab" title="{{localize config.nav.details}}" data-tab="details" data-group="item-tabs">
+                    <i class="fas fa-circle-info"></i>
+                </a>
+            {{/unless}}
 
         </nav>
     {{/if}}

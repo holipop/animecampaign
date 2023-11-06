@@ -3,10 +3,16 @@
     <!-- Header -->
     <header class="stat-header">
 
-        <!-- Collapse -->
-        <a class="control collapse" title="{{localize config.app.collapseStats}}">
-            <i class="fas fa-chevron-down" data-collapse-flag="stat-list" ></i>
-        </a>
+        {{#if owner}}
+            <!-- Collapse -->
+            <a class="control collapse" title="{{localize config.app.collapseStats}}">
+                <i class="fas fa-chevron-down" data-collapse-flag="stat-list" ></i>
+            </a>
+        {{else}}
+            <a class="control collapse" data-collapse-short="stat-list" title="{{localize config.app.collapseStats}}">
+                <i class="fas fa-chevron-down" ></i>
+            </a>
+        {{/if}}
 
         {{#if (eq documentName "Actor")}}
             <h2 >{{localize config.app.colorStats}}</h2>
@@ -16,19 +22,21 @@
             <h2 >{{localize config.app.stats}}</h2>
         {{/if}}
 
-        <span class="label view">{{localize config.app.view}}</span> 
+        {{#if owner}}
+            <span class="label view">{{localize config.app.view}}</span> 
 
-        <!-- Add Stat -->
-        <a class="control add-stat" title="{{localize config.app.addStat}}">
-            <i class="fas fa-plus" data-add></i>
-        </a>
+            <!-- Add Stat -->
+            <a class="control add-stat" title="{{localize config.app.addStat}}">
+                <i class="fas fa-plus" data-add></i>
+            </a>
+        {{/if}}
 
     </header>
 
     <!-- Stat Entry -->
     {{#each statList as |stat key|}}
 
-        <li class="stat" data-stat="{{key}}" data-collapse-flag="target stat-list">
+        <li class="stat" data-stat="{{key}}" data-collapse-{{#if owner}}flag{{else}}short{{/if}}="target stat-list">
 
             {{#if (eq ../documentName "Actor")}}
 
@@ -70,25 +78,28 @@
                 {{/if}}
             </div>
 
-            <div class="line"></div>
-            
-            <!-- View -->
-            <div class="view">
-                <a title="Set View to Value">
-                    <i class="fas fa-hashtag" data-view="value"></i>
-                </a>
-                <a title="Set View to Resource">
-                    <i class="fas fa-percent" data-view="resource"></i>
-                </a>
-                <a title="Set View to Label">
-                    <i class="fas fa-font" data-view="label"></i>
-                </a>
-            </div>
+            {{#if owner}}
+                <div class="line"></div>
+                
+                <!-- View -->
+                <div class="view">
+                    <a title="Set View to Value">
+                        <i class="fas fa-hashtag" data-view="value"></i>
+                    </a>
+                    <a title="Set View to Resource">
+                        <i class="fas fa-percent" data-view="resource"></i>
+                    </a>
+                    <a title="Set View to Label">
+                        <i class="fas fa-font" data-view="label"></i>
+                    </a>
+                </div>
 
-            <!-- Delete -->
-            <a class="control" title="Delete Stat">
-                <i class="fas fa-trash" data-remove></i>
-            </a>
+                <!-- Delete -->
+                <a class="control" title="Delete Stat">
+                    <i class="fas fa-trash" data-remove></i>
+                </a>
+            {{/if}}
+
         </li>
 
     {{/each}}
