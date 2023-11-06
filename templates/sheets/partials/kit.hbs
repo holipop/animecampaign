@@ -7,7 +7,7 @@
             <!-- Header -->
             <header data-match-category="background-color">
 
-                {{#if owner}}
+                {{#if @root.owner}}
                     <!-- Collapse -->
                     <a class="control collapse" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
                         <i class="fas fa-chevron-down" data-collapse-flag="categories.{{category}}"></i>
@@ -23,7 +23,7 @@
                 <!-- Settings -->
                 <div class="category-controls" data-contrast-category>
 
-                    {{#if owner}}
+                    {{#if @root.owner}}
                         <!-- Rename, Color, Flood -->
                         <a class="control" title="{{localize @root.config.app.renameCategory}}">
                             <i class="fas fa-pencil" data-rename></i>
@@ -41,7 +41,7 @@
                 <!-- Tracked Stats -->
                 <div class="tracked-stat-list" data-tracker-list data-contrast-category>
 
-                    {{#if owner}}
+                    {{#if @root.owner}}
                         <!-- Track -->
                         <a class="control" title="{{localize @root.config.app.trackStat}}">
                             <i class="fas fa-square-plus" data-track></i>
@@ -59,7 +59,7 @@
                                     </div>
                                 {{/with}}
 
-                                {{#if owner}}
+                                {{#if @root.owner}}
                                     <!-- Untrack -->
                                     <a class="control" title="{{localize @root.config.app.untrackStat}}">
                                         <i class="fas fa-xmark" data-untrack="{{index}}"></i>
@@ -78,7 +78,7 @@
                 <!-- Controls -->
                 <div class="list-controls" data-contrast-category="color border-color">
 
-                    {{#if owner}}
+                    {{#if @root.owner}}
                         <a class="control" title="{{localize @root.config.app.createFeature}}">
                             <i class="fas fa-plus" data-create-feature="{{category}}"></i>
                         </a>
