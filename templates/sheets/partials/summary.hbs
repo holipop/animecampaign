@@ -5,22 +5,26 @@
 
     <section class="profile">
 
-        {{#if owner}}
-            <!-- Color -->
-            <input class="color" type="color" name="system.color" data-edit="system.color" title="{{localize config.app.editColor}}" value="{{system.color}}">
-            <a class="color-button" data-contrast="color border-color">
-                <i class="fas fa-palette"></i>
-            </a>
-        {{/if}}
+        <div class="buttons">
 
-        {{#if (eq documentName "Item")}}
-            {{#unless limited}}
-                <!-- Roll -->
-                <a class="roll" title="{{localize config.app.roll}}" data-contrast="color border-color">
-                    <i class="fas fa-dice-d20" data-roll></i>
+            {{#if owner}}
+                <!-- Color -->
+                <input class="color" type="color" name="system.color" data-edit="system.color" title="{{localize config.app.editColor}}" value="{{system.color}}">
+                <a class="color-button" data-contrast="color border-color">
+                    <i class="fas fa-palette"></i>
                 </a>
-            {{/unless}} 
-        {{/if}}
+            {{/if}}
+
+            {{#if (eq documentName "Item")}}
+                {{#unless limited}}
+                    <!-- Roll -->
+                    <a class="roll" title="{{localize config.app.roll}}" data-contrast="color border-color">
+                        <i class="fas fa-dice-d20" data-roll></i>
+                    </a>
+                {{/unless}} 
+            {{/if}}
+
+        </div>
 
         <!-- Image -->
         <img class="img" src="{{document.img}}" data-edit="img" data-match="background-color">

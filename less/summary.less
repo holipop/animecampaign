@@ -28,26 +28,33 @@
         grid-column: 1 / 1;
         grid-row: 1 / -1;
         place-self: end end;
-    }
-    .color-button, .color {
-        height: 1.2rem;
-        width: 1.2rem;
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: .2rem;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            place-self: start;
+            margin: 0;
+
+            > * {
+                #AC.Border;
+
+                height: 1.2rem;
+                width: 1.2rem;
+                display: grid;
+                place-items: center;
+            }
+        }
     }
     .color-button {
-        #AC.Border();
-
         pointer-events: none;
-        display: grid;
-        place-items: center;
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
     }
     .color {
         #AC.InputSkinning();
 
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-        place-self: start;
+        position: absolute;
         margin: 0;
 
         border: none;
@@ -148,19 +155,6 @@
 
     .background {
         height: (@feature-summary-height * (2 / 3)) + .5rem;
-    }
-    .roll {
-        #AC.Border;
-        
-        display: grid;
-        place-items: center;
-        position: relative;
-        top: 1.5rem;
-        height: 1.2rem;
-        width: 1.2rem;
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-        place-self: start;
     }
     .img {
         height: 4.4rem;

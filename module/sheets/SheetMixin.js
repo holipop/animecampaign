@@ -118,9 +118,9 @@ export const SheetMixin = {
 
         /** Collapse a div.
          * @param {String} key The key of the data-collapse-target.
-         * @param {Boolean?} short Should the visibility of this div be saved? Non-owners default to this.
-         * @param {Boolean?} hide Should the div be hidden by default?
-         * @param {Boolean?} data Should the visibility of this div be saved in a DataModel?
+         * @param {Boolean?} short -s Should the visibility of this div be saved? Non-owners default to this.
+         * @param {Boolean?} hide -h Should the div be hidden by default?
+         * @param {Boolean?} data -a Should the visibility of this div be saved in a DataModel?
          */
         void function collapse () {
             const collapse = html.find('a[data-collapse]');

@@ -131,11 +131,13 @@
 }
 .animecampaign.sheet form .scrollable {
   overflow-y: scroll;
-  padding-right: 0.25rem;
-  scrollbar-color: #cd3232;
+  padding: 0 1rem;
+  scrollbar-color: #cd3232 rgba(0, 0, 0, 0.25);
+  scrollbar-width: thin;
 }
-.animecampaign.sheet form .scrollable ::-webkit-scrollbar {
-  color: #cd3232;
+.animecampaign.sheet form ::-webkit-scrollbar-thumb {
+  background-color: #cd3232;
+  border-color: rgba(205, 50, 50, 0.5);
 }
 .animecampaign.sheet form .editor {
   min-height: 3rem;
@@ -491,27 +493,31 @@
   grid-row: 1 / -1;
   place-self: end end;
 }
-.animecampaign.sheet .summary .color-button,
-.animecampaign.sheet .summary .color {
-  height: 1.2rem;
-  width: 1.2rem;
-}
-.animecampaign.sheet .summary .color-button {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  pointer-events: none;
-  display: grid;
-  place-items: center;
+.animecampaign.sheet .summary .profile .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+  place-self: start;
+  margin: 0;
+}
+.animecampaign.sheet .summary .profile .buttons > * {
+  border: 0.0625rem solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
+  height: 1.2rem;
+  width: 1.2rem;
+  display: grid;
+  place-items: center;
+}
+.animecampaign.sheet .summary .color-button {
+  pointer-events: none;
 }
 .animecampaign.sheet .summary .color {
   border-radius: 0;
   box-shadow: none;
   background: transparent;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  place-self: start;
+  position: absolute;
   margin: 0;
   border: none;
   opacity: 0;
@@ -600,19 +606,6 @@
 }
 .animecampaign.item.sheet .summary .background {
   height: 3.91666667rem;
-}
-.animecampaign.item.sheet .summary .roll {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  display: grid;
-  place-items: center;
-  position: relative;
-  top: 1.5rem;
-  height: 1.2rem;
-  width: 1.2rem;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  place-self: start;
 }
 .animecampaign.item.sheet .summary .img {
   height: 4.4rem;
@@ -889,13 +882,13 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding-right: 0.25rem;
+  margin-right: 0.25rem;
   font-family: "Gloock";
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   text-transform: uppercase;
-}
-.animecampaign.actor.sheet .kit .category header h2::first-letter {
-  font-size: 1.5rem;
+  /* &::first-letter {
+                font-size: 1.5rem;
+            } */
 }
 .animecampaign.actor.sheet .kit .category .collapse {
   flex-shrink: 0;
