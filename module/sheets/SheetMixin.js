@@ -125,8 +125,6 @@ export const SheetMixin = {
         void function collapse () {
             const collapse = html.find('a[data-collapse]');
 
-            console.log( sheet.object.flags.animecampaign )
-
             const args = str => {
                 const arr = str.split(' -');
                 return {
