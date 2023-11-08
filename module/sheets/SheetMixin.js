@@ -116,138 +116,92 @@ export const SheetMixin = {
             })
         }()
 
-        /** Collapse an element given a sender and target where its data-attr value leads with "target ".
-         *  Both the sender and target's data-attr value should point to a property in the system schema.
+        /** Collapse a div.
+         * @param {String} key The key of the data-collapse-target.
+         * @param {Boolean?} short Should the visibility of this div be saved? Non-owners default to this.
+         * @param {Boolean?} hide Should the div be hidden by default?
+         * @param {Boolean?} data Should the visibility of this div be saved in a DataModel?
          */
         void function collapse () {
-            // Only gets the elements that don't start with "target".
-            const collapse = html.find('[data-collapse]').filter((index, element) => {
-                const key = $(element).data('collapse');
-                return (!key.startsWith('target'));
-            });
+            const collapse = html.find('a[data-collapse]');
 
+            console.log( sheet.object.flags.animecampaign )
+
+            const args = str => {
+                const arr = str.split(' -');
+                return {
+                    key: arr[0],
+                    // If the user isn't an owner, fallback to short.
+                    short: arr.includes('s') || !sheet.isEditable,
+                    hide: arr.includes('h'),
+                    data: arr.includes('d'),
+                }
+            }
+
+            // Setting values whenever the sheet updates.
             collapse.each((index, element) => {
-                const key = $(element).data('collapse');
-                const target = html.find(`[data-collapse="target ${key}"]`);
-                const isCollapsed = getProperty(sheet.object.system, key).collapsed;
-                const isChevron = $(element).hasClass('fas');
+                const { key, short, hide, data } = args($(element).data('collapse'))
+                const target = html.find(`[data-collapse-target="${key}"]`);
+                const chevron = $(element).find('i.fas');
 
-                if (!isCollapsed) {
-                    target.show();
-
-                    if (isChevron) {
-                        $(element).addClass('fa-chevron-down');
-                        $(element).removeClass('fa-chevron-right');
-                    }
-                } else {
-                    target.hide(); 
-
-                    if (isChevron) {
-                        $(element).removeClass('fa-chevron-down');
-                        $(element).addClass('fa-chevron-right');
-                    }
-                }
-            });
-
-            collapse.on('click', event => {
-                /** @type {String} */
-                const key = $(event.target).data('collapse');
-
-                // if key ends with a number, it much be pointing to an array entry.
-                const isListEntry = (typeof +key[key.length - 1] == 'number');
-                if (isListEntry) {
-                    const listName = key.slice(0, key.indexOf('.'));
-                    const list = getProperty(sheet.object.system, listName);
-                    const index = +key.slice(key.indexOf('.') + 1);
-                    const entry = List.get(list, index);
-                    const update = List.set(list, index, { collapsed: !entry.collapsed })
-
-                    return sheet.object.update({ [`system.${listName}`]: update });
-                }
-
-                const data = getProperty(sheet.object.system, key).collapsed
-
-                sheet.object.update({ [`system.${key}`]: { collapsed: !data.collapsed } });
-            });
-        }()
-
-        /** Collapse an element given a sender and a target where its data-attr value leads with "target ".
-         *  Both the sender and target's data-attr value should point to its respective flag.
-         */
-        void function collapseFlag () {
-            // Only gets the elements that don't start with "target".
-            const collapse = html.find('[data-collapse-flag]').filter((index, element) => {
-                const key = $(element).data('collapse-flag');
-                return (!key.startsWith('target'));
-            });
-
-            collapse.each((index, element) => {
-                const key = $(element).data('collapse-flag');
-                const target = html.find(`[data-collapse-flag="target ${key}"]`);
-                const flag = sheet.object.getFlag('animecampaign', key);
-                const isChevron = $(element).hasClass('fas');
-                let isVisible = flag?.visible ?? true;
-
-                // Sets the initial value of any data-hide divs
-                if ((flag == undefined) && ('hide' in $(element).data())) {
-                    sheet.object.setFlag('animecampaign', key, { visible: false })
-                    isVisible = false;
-                }
-                
-                if (isVisible) {
-                    target.show();
-
-                    if (isChevron) {
-                        $(element).addClass('fa-chevron-down');
-                        $(element).removeClass('fa-chevron-right');
-                    }
-                } else {
-                    target.hide(); 
-
-                    if (isChevron) {
-                        $(element).removeClass('fa-chevron-down');
-                        $(element).addClass('fa-chevron-right');
-                    }
-                }
-            });
-
-            collapse.on('click', event => {
-                const key = $(event.target).data('collapse-flag');
-                const flag = sheet.object.getFlag('animecampaign', key) ?? { visible: true };
-
-                sheet.object.setFlag('animecampaign', key, { visible: !flag?.visible })
-            });
-        }()
-
-        /** Collapse an element without storing its visibility.
-         */
-        void function collapseShort () {
-            // Only gets the elements that don't start with "target".
-            const collapse = html.find('[data-collapse-short]').filter((index, element) => {
-                const key = $(element).data('collapse-short');
-                return (!key.startsWith('target'));
-            });
-
-            collapse.each((index, element) => {
-                if ('hide' in $(element).data()) {
-                    const key = $(element).closest('[data-collapse-short]').data('collapse-short');
-                    const target = html.find(`[data-collapse-short="target ${key}"]`);
-
+                // If it's short, we only need to worry about if its hidden by default.
+                if (short && hide) {
                     target.hide();
-                    $(element).find('i').removeClass('fa-chevron-down');
-                    $(element).find('i').addClass('fa-chevron-right');
+                    chevron.removeClass('fa-chevron-down');
+                    chevron.addClass('fa-chevron-right');
+                    return;
+                } 
+                
+                const { collapsed } = ((data)
+                    ? getProperty(sheet.object.system, key)
+                    : sheet.object.getFlag('animecampaign', key)) 
+                    ?? { collapsed: hide }
+
+                if (!collapsed) {
+                    target.show();
+                    chevron.addClass('fa-chevron-down');
+                    chevron.removeClass('fa-chevron-right');
+                } else {
+                    target.hide(); 
+                    chevron.removeClass('fa-chevron-down');
+                    chevron.addClass('fa-chevron-right');
                 }
-            });
+            })
 
             collapse.on('click', event => {
-                const key = $(event.target).closest('[data-collapse-short]').data('collapse-short');
-                const chevron =  $(event.target).closest('[data-collapse-short]').find('i')
-                const target = html.find(`[data-collapse-short="target ${key}"]`);
+                const anchor = $(event.target).closest('[data-collapse]');
+                const { key, short, hide, data } = args(anchor.data('collapse'))
+                const target = html.find(`[data-collapse-target="${key}"]`);
+                const chevron = anchor.find('i.fas')
 
-                target.toggle();
-                chevron.toggleClass('fa-chevron-down');
-                chevron.toggleClass('fa-chevron-right');
-            });
+                if (short) {
+                    target.toggle();
+                    chevron.toggleClass('fa-chevron-down');
+                    chevron.toggleClass('fa-chevron-right');
+                    return;
+                }
+
+                const { collapsed } = ((data)
+                    ? getProperty(sheet.object.system, key)
+                    : sheet.object.getFlag('animecampaign', key)) 
+                    ?? { collapsed: hide }
+                let update = { collapsed: !collapsed };
+
+                if (data) {
+                    const isListEntry = (typeof key.at(-1) == 'number');
+                    if (isListEntry) {
+                        const dot = key.indexOf('.');
+                        const listName = key.slice(0, dot);
+                        const list = getProperty(sheet.object.system, listName);
+                        const index = Number(key.slice(dot + 1));
+                        update = List.set(list, index, update);
+
+                        return sheet.object.update({ [`system.${listName}`]: update });
+                    }
+                    return sheet.object.update({ [`system.${key}`]: update });
+                }
+                return sheet.object.setFlag('animecampaign', key, update)
+            })
         }()
 
         /** Resizes the font of the name such that any length fits cleanly.
@@ -295,7 +249,6 @@ export const SheetMixin = {
         }()
 
         /** Sets the name of the selected tab.
-         * @param {*} html 
          */
         void function setTabName () {
             const nav = html.find('[data-nav]');
@@ -314,3 +267,141 @@ export const SheetMixin = {
     },
 
 }
+
+// !!! DEPRECATED LISTENERS
+
+/** Collapse an element given a sender and target where its data-attr value leads with "target ".
+ *  Both the sender and target's data-attr value should point to a property in the system schema.
+ */
+void function collapseData () {
+    // Only gets the elements that don't start with "target".
+    const collapse = html.find('[data-collapse]').filter((index, element) => {
+        const key = $(element).data('collapse');
+        return (!key.startsWith('target'));
+    });
+
+    collapse.each((index, element) => {
+        const key = $(element).data('collapse');
+        const target = html.find(`[data-collapse="target ${key}"]`);
+        const isCollapsed = getProperty(sheet.object.system, key).collapsed;
+        const isChevron = $(element).hasClass('fas');
+
+        console.log(getProperty(sheet.object.system, key))
+
+        if (!isCollapsed) {
+            target.show();
+
+            if (isChevron) {
+                $(element).addClass('fa-chevron-down');
+                $(element).removeClass('fa-chevron-right');
+            }
+        } else {
+            target.hide(); 
+
+            if (isChevron) {
+                $(element).removeClass('fa-chevron-down');
+                $(element).addClass('fa-chevron-right');
+            }
+        }
+    });
+
+    collapse.on('click', event => {
+        /** @type {String} */
+        const key = $(event.target).data('collapse');
+
+        // if key ends with a number, it much be pointing to an array entry.
+        const isListEntry = (typeof +key[key.length - 1] == 'number');
+        if (isListEntry) {
+            const listName = key.slice(0, key.indexOf('.'));
+            const list = getProperty(sheet.object.system, listName);
+            const index = +key.slice(key.indexOf('.') + 1);
+            const entry = List.get(list, index);
+            const update = List.set(list, index, { collapsed: !entry.collapsed })
+
+            return sheet.object.update({ [`system.${listName}`]: update });
+        }
+
+        const data = getProperty(sheet.object.system, key).collapsed
+
+        sheet.object.update({ [`system.${key}`]: { collapsed: !data.collapsed } });
+    });
+} //! ()
+
+/** Collapse an element given a sender and a target where its data-attr value leads with "target ".
+ *  Both the sender and target's data-attr value should point to its respective flag.
+ */
+void function collapseFlag () {
+    // Only gets the elements that don't start with "target".
+    const collapse = html.find('[data-collapse-flag]').filter((index, element) => {
+        const key = $(element).data('collapse-flag');
+        return (!key.startsWith('target'));
+    });
+
+    collapse.each((index, element) => {
+        const key = $(element).data('collapse-flag');
+        const target = html.find(`[data-collapse-flag="target ${key}"]`);
+        const flag = sheet.object.getFlag('animecampaign', key);
+        const isChevron = $(element).hasClass('fas');
+        let isVisible = flag?.visible ?? true;
+
+        // Sets the initial value of any data-hide divs
+        if ((flag == undefined) && ('hide' in $(element).data())) {
+            sheet.object.setFlag('animecampaign', key, { visible: false })
+            isVisible = false;
+        }
+        
+        if (isVisible) {
+            target.show();
+
+            if (isChevron) {
+                $(element).addClass('fa-chevron-down');
+                $(element).removeClass('fa-chevron-right');
+            }
+        } else {
+            target.hide(); 
+
+            if (isChevron) {
+                $(element).removeClass('fa-chevron-down');
+                $(element).addClass('fa-chevron-right');
+            }
+        }
+    });
+
+    collapse.on('click', event => {
+        const key = $(event.target).data('collapse-flag');
+        const flag = sheet.object.getFlag('animecampaign', key) ?? { visible: true };
+
+        sheet.object.setFlag('animecampaign', key, { visible: !flag?.visible })
+    });
+} //! ()
+
+/** Collapse an element without storing its visibility.
+ */
+void function collapseShort () {
+    // Only gets the elements that don't start with "target".
+    const collapse = html.find('[data-collapse-short]').filter((index, element) => {
+        const key = $(element).data('collapse-short');
+        return (!key.startsWith('target'));
+    });
+
+    collapse.each((index, element) => {
+        if ('hide' in $(element).data()) {
+            const key = $(element).closest('[data-collapse-short]').data('collapse-short');
+            const target = html.find(`[data-collapse-short="target ${key}"]`);
+
+            target.hide();
+            $(element).find('i').removeClass('fa-chevron-down');
+            $(element).find('i').addClass('fa-chevron-right');
+        }
+    });
+
+    collapse.on('click', event => {
+        const key = $(event.target).closest('[data-collapse-short]').data('collapse-short');
+        const chevron =  $(event.target).closest('[data-collapse-short]').find('i')
+        const target = html.find(`[data-collapse-short="target ${key}"]`);
+
+        target.toggle();
+        chevron.toggleClass('fa-chevron-down');
+        chevron.toggleClass('fa-chevron-right');
+    });
+} //! ()

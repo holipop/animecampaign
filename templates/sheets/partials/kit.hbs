@@ -7,16 +7,10 @@
             <!-- Header -->
             <header data-match-category="background-color">
 
-                {{#if @root.owner}}
-                    <!-- Collapse -->
-                    <a class="control collapse" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
-                        <i class="fas fa-chevron-down" data-collapse-flag="categories.{{category}}"></i>
-                    </a>
-                {{else}}
-                    <a class="control collapse" data-collapse-short="categories.{{category}}" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                {{/if}}
+                <!-- Collapse -->
+                <a class="control collapse" data-collapse="categories.{{category}}" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
                 
                 <h2 data-contrast-category>{{category}}</h2>
 
@@ -92,7 +86,7 @@
             </header>
             
             <!-- Features -->
-            <ol class="feature-list" data-collapse-{{#if owner}}flag{{else}}short{{/if}}="target categories.{{category}}">
+            <ol class="feature-list" data-collapse-target="categories.{{category}}">
                 {{#each features as |feature index|}}
 
                     {{> "feature" feature}}

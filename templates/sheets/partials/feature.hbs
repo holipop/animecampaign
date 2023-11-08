@@ -7,7 +7,7 @@
         <img class="img" src="{{img}}" title="{{localize @root.config.app.rollFeature}}" data-roll="{{_id}}" data-match-feature="background-color border-left-color">
 
         <!-- Name -->
-        <a class="name" title="{{localize @root.config.app.expandFeature}}" data-hide data-collapse-{{#if owner}}flag{{else}}short{{/if}}="feature.{{_id}}">{{name}}</a>
+        <a class="name" title="{{localize @root.config.app.expandFeature}}" data-collapse="feature.{{_id}} -h">{{name}}</a>
 
         <!-- Action -->
         <!-- img class="action" src="{{system.details.action.img}}" alt="system/animecampaign/assets/transparent.svg" -->
@@ -62,14 +62,14 @@
     </section>
 
     <!-- Expanded View -->
-    <ol class="expanded" data-match-feature="border-left-color" data-collapse-{{#if owner}}flag{{else}}short{{/if}}="target feature.{{_id}}">
+    <ol class="expanded" data-match-feature="border-left-color" data-collapse-target="feature.{{_id}}">
         {{#each system.sections as |section index|}}
             <li>
-                <a class="label" data-collapse-short="feature.{{../_id}}.{{index}}" {{#unless section.visible}}data-hide{{/unless}}>
+                <a class="label" data-collapse="feature.{{../_id}}.{{index}} -s{{#unless section.visible}} -h{{/unless}}">
                     <i class="fas fa-chevron-down"></i>
                     <span>{{section.name}}</span>
                 </a>
-                <div class="text" data-collapse-short="target feature.{{../_id}}.{{index}}">
+                <div class="text" data-collapse-target="feature.{{../_id}}.{{index}}">
                     {{{section.richtext}}}
                 </div>
             </li>

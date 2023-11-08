@@ -3,16 +3,10 @@
     <!-- Header -->
     <header class="stat-header">
 
-        {{#if owner}}
-            <!-- Collapse -->
-            <a class="control collapse" title="{{localize config.app.collapseStats}}">
-                <i class="fas fa-chevron-down" data-collapse-flag="stat-list" ></i>
-            </a>
-        {{else}}
-            <a class="control collapse" data-collapse-short="stat-list" title="{{localize config.app.collapseStats}}">
-                <i class="fas fa-chevron-down" ></i>
-            </a>
-        {{/if}}
+        <!-- Collapse -->
+        <a class="control collapse" data-collapse="stat-list" title="{{localize config.app.collapseStats}}">
+            <i class="fas fa-chevron-down"></i>
+        </a>
 
         {{#if (eq documentName "Actor")}}
             <h2 >{{localize config.app.colorStats}}</h2>
@@ -36,7 +30,7 @@
     <!-- Stat Entry -->
     {{#each statList as |stat key|}}
 
-        <li class="stat" data-stat="{{key}}" data-collapse-{{#if owner}}flag{{else}}short{{/if}}="target stat-list">
+        <li class="stat" data-stat="{{key}}" data-collapse-target="stat-list">
 
             {{#if (eq ../documentName "Actor")}}
 
