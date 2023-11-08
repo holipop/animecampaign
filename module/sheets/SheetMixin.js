@@ -233,6 +233,39 @@ export const SheetMixin = {
             name.on('blur', () => sheet.submit());
         }()
 
+        /** A bandaid for pasting in plaintext into a content-editable div.
+         */
+        void function plaintextName () {
+            const plain = html.find('[data-plaintext]');
+
+            // Taken from: https://stackoverflow.com/questions/21205785/how-to-make-html5-contenteditable-div-allowing-only-text-in-firefox
+            function insertTextAtSelection (div, txt) {
+                //get selection area so we can position insert
+                let sel = window.getSelection();
+                let text = div.textContent;
+                let before = Math.min(sel.focusOffset, sel.anchorOffset);
+                let after = Math.max(sel.focusOffset, sel.anchorOffset);
+                //ensure string ends with \n so it displays properly
+                let afterStr = text.substring(after);
+                if (afterStr == "") afterStr = "\n";
+                //insert content
+                div.textContent = text.substring(0, before) + txt + afterStr;
+                //restore cursor at correct position
+                sel.removeAllRanges();
+                let range = document.createRange();
+                //childNodes[0] should be all the text
+                range.setStart(div.childNodes[0], before + txt.length);
+                range.setEnd(div.childNodes[0], before + txt.length);
+                sel.addRange(range);
+            }
+
+            plain.on('paste', event => {
+                event.preventDefault();
+                const text = (event.originalEvent || event).clipboardData.getData('text/plain');
+                insertTextAtSelection(plain[0], text);
+            })
+        }()
+
         /** Sets a feature's category via the selection.
          */
         void function selectCategory () {

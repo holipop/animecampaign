@@ -882,6 +882,10 @@ export default class CharacterSheet extends ActorSheet {
         } else if (bio.editor == 'prosemirror') {
             bio.plaintext = convert.makeMarkdown(bio.richtext || source.richtext);
         }
+
+        // Update the name to skin any HTML.
+        data.name = convert.makeMarkdown(data.name);
+        data.name = data.name.replace(/<br>/g, "")
         
         super._updateObject(event, data);
     }

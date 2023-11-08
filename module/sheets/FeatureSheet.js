@@ -343,6 +343,10 @@ export default class FeatureSheet extends ItemSheet {
                 );
             }
         }
+
+        // Update the name to skin any HTML.
+        data.name = convert.makeMarkdown(data.name);
+        data.name = data.name.replace(/<br>/g, "")
         
         super._updateObject(event, data);
     }

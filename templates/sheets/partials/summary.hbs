@@ -32,7 +32,7 @@
 
     <section class="summary-top">
         <!-- Name -->
-        <div class="name" data-edit="name" spellcheck='false' {{#if owner}}contenteditable="plaintext-only"{{/if}} data-name data-enter data-contrast>{{~document.name}}</div>
+        <div class="name" data-edit="name" spellcheck='false' {{#if owner}}contenteditable{{/if}} data-name data-enter data-contrast data-plaintext>{{~document.name}}</div>
 
         {{#if (eq documentName "Actor")}}
             <!-- Class -->
