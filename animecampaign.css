@@ -884,11 +884,15 @@
   text-overflow: ellipsis;
   margin-right: 0.25rem;
   font-family: "Gloock";
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   /* &::first-letter {
                 font-size: 1.5rem;
             } */
+}
+.animecampaign.actor.sheet .kit .category header h2 .initial {
+  font-size: 1.5rem;
+  letter-spacing: -0.25rem;
 }
 .animecampaign.actor.sheet .kit .category .collapse {
   flex-shrink: 0;

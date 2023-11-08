@@ -379,8 +379,25 @@ export default class CharacterSheet extends ActorSheet {
 
         /** @returns {String} */
         const name = element => {
-            return $(element).closest('[data-category]').data('category');
+            // the + "" is to ensure the data-attr gets converted into a string.
+            return $(element).closest('[data-category]').data('category') + "";
         }
+
+        /** Sets the first letter of category names to be a little bigger.
+         */
+        void function firstLetter () {
+            const first = html.find('[data-first-letter]');
+
+            first.each((index, element) => {
+                const initial = $(element).text().at(0);
+                const text = $(element).text().slice(1);
+                
+                $(element).text(text)
+                $(element).prepend(`
+                    <span class="initial">${initial}</span>
+                `)
+            })
+        }()
 
         /** Creates a new category given a name via a dialog.
          */
@@ -641,14 +658,14 @@ export default class CharacterSheet extends ActorSheet {
                 const callback = html => {
                     const name = html.find('[name="name"]').val()
 
-                    const isNameTaken = List.has(trackers, { tag: name });
+                    const isNameTaken = List.has(trackers, { tag: name.toLowerCase() });
                     if (isNameTaken) {
                         ui.notifications.warn(`"${name.toUpperCase()}" is already taken by another stat tracker.`)
                         return;
                     }
                     if (name == '') return ui.notifications.warn(`Name field can't be blank.`);
 
-                    trackers.unshift({ tag: name })
+                    trackers.unshift({ tag: name.toLowerCase() })
                     const update = List.set(categories, { name: key }, { trackers })
                     sheet.object.update({ 'system.categories': update });
                 }

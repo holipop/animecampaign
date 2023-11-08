@@ -60,7 +60,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 value: '',
                 img: 'systems/animecampaign/assets/transparent.svg',
             };
-            return List.get(this.stats, { tag: tracker.tag }) ?? fallback;
+            return List.get(this.stats, { tag: tracker.tag.toLowerCase() }) ?? fallback;
         })
     }
 }
