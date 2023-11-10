@@ -9,7 +9,7 @@
 
             {{#if owner}}
                 <!-- Color -->
-                <input class="color" type="color" name="system.color" data-edit="system.color" title="{{localize config.app.editColor}}" value="{{system.color}}">
+                <input class="color" type="color" name="system.color" data-edit="system.color" data-tooltip="AC.TOOLTIP.Color" value="{{system.color}}">
                 <a class="color-button" data-contrast="color border-color">
                     <i class="fas fa-palette"></i>
                 </a>
@@ -18,7 +18,7 @@
             {{#if (eq documentName "Item")}}
                 {{#unless limited}}
                     <!-- Roll -->
-                    <a class="roll" title="{{localize config.app.roll}}" data-contrast="color border-color">
+                    <a class="roll" data-tooltip="AC.TOOLTIP.Roll" data-contrast="color border-color">
                         <i class="fas fa-dice-d20" data-roll></i>
                     </a>
                 {{/unless}} 
@@ -36,7 +36,7 @@
 
         {{#if (eq documentName "Actor")}}
             <!-- Class -->
-            <textarea class="class" name="system.class" placeholder="{{localize config.placeholder.class}}" data-resize data-enter data-contrast>{{~system.class}}</textarea>
+            <textarea class="class" name="system.class" placeholder="{{localize "AC.LABEL.Class"}}" data-resize data-enter data-contrast>{{~system.class}}</textarea>
         {{/if}}
 
         {{#if (eq documentName "Item")}}
@@ -54,26 +54,19 @@
             <!-- Type of mundie or epithet user -->
             <select class="type" name="system.type">
 
-                <optgroup label="{{localize config.powerset.inscribed}}">
-                    {{#select system.type}}
-                        {{#each config.type.inscribed as |name key|}}
-                            <option value="{{key}}">{{localize name}}</option>
-                        {{/each}}
-                    {{/select}}
+                <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
+                    <option value="epithet">{{localize "AC.TYPE.Epithet"}}</option>
                 </optgroup>
                 
-                <optgroup label="{{localize config.powerset.mundie}}">
-                    {{#select system.type}}
-                        {{#each config.type.mundie as |name key|}}
-                            <option value="{{key}}">{{localize name}}</option>
-                        {{/each}}
-                    {{/select}}
+                <optgroup label="{{localize "AC.TYPE.Mundie"}}">
+                    <option value="expert">{{localize "AC.TYPE.Expert"}}</option>
+                    <option value="powerhouse">{{localize "AC.TYPE.Powerhouse"}}</option>
                 </optgroup>
 
             </select>
 
             <!-- Core Word or Epithet -->
-            <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="{{localize config.placeholder.word}}">
+            <input class="word" type="text" name="system.word" value="{{system.word}}" placeholder="{{localize "AC.LABEL.Word"}}">
         {{/if}}
 
         {{#if (eq documentName "Item")}}
@@ -86,7 +79,7 @@
                 {{/select}}
             </select>
 
-            <input class="category-input" type="text" name="system.category" value="{{system.category}}" placeholder="{{localize config.placeholder.category}}" data-select-category="target">
+            <input class="category-input" type="text" name="system.category" value="{{system.category}}" placeholder="{{localize "AC.LABEL.Category"}}" data-select-category="target">
         {{/if}}
 
     </section -->

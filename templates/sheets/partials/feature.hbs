@@ -4,10 +4,10 @@
     <section class="entry" data-match-feature>
 
         <!-- Image -->
-        <img class="img" src="{{img}}" title="{{localize @root.config.app.rollFeature}}" data-roll="{{_id}}" data-match-feature="background-color border-left-color">
+        <img class="img" src="{{img}}" data-tooltip="AC.TOOLTIP.Roll" data-roll="{{_id}}" data-match-feature="background-color border-left-color">
 
         <!-- Name -->
-        <a class="name" title="{{localize @root.config.app.expandFeature}}" data-collapse="feature.{{_id}} -h">{{name}}</a>
+        <a class="name" data-tooltip="AC.TOOLTIP.Feature.Expand" data-collapse="feature.{{_id}} -h">{{name}}</a>
 
         <!-- Action -->
         <!-- img class="action" src="{{system.details.action.img}}" alt="system/animecampaign/assets/transparent.svg" -->
@@ -47,12 +47,12 @@
         <!-- Controls -->
         <div class="feature-controls">
 
-            <a class="control" title="{{localize @root.config.app.viewFeature}}">
+            <a class="control" data-tooltip="AC.TOOLTIP.Feature.View">
                 <i class="fas fa-feather-pointed" data-view-feature></i>
             </a>
 
             {{#if @root.owner}}
-                <a class="control" title="{{localize @root.config.app.deleteFeature}}">
+                <a class="control" data-tooltip="AC.TOOLTIP.Feature.Delete">
                     <i class="fas fa-trash" data-delete-feature></i>
                 </a>
             {{/if}}

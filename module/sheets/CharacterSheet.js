@@ -419,12 +419,15 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: Utils.format('dialog.create', { name: sheet.object.name }),
-                    content: CONFIG.animecampaign.textDialog(Utils.localize('app.name'), Utils.localize('app.newCategory')),
+                    title: game.i18n.format('AC.DIALOG.CreateCategory.Title', { name: sheet.object.name }),
+                    content: CONFIG.animecampaign.textDialog(
+                        game.i18n.localize('AC.DIALOG.Name'), 
+                        game.i18n.localize('AC.DIALOG.CreateCategory.Placeholder')
+                    ),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: Utils.localize('app.createCategory'),
+                            label: game.i18n.localize('AC.DIALOG.Confirm'),
                             callback: callback
                         },
                     },
@@ -453,7 +456,7 @@ export default class CharacterSheet extends ActorSheet {
                 }
                 
                 Dialog.confirm({
-                    title: Utils.format('dialog.deleteCategory', {
+                    title: game.i18n.format('AC.DIALOG.DeleteCategory.Title', {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
@@ -498,15 +501,18 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: Utils.format('dialog.rename', {
+                    title: game.i18n.format('AC.DIALOG.RenameCategory.Title', {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
-                    content: CONFIG.animecampaign.textDialog(Utils.localize('app.name'), key),
+                    content: CONFIG.animecampaign.textDialog(
+                        game.i18n.localize('AC.DIALOG.Name'), 
+                        key
+                    ),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: Utils.localize('app.renameCategory'),
+                            label: game.i18n.localize('AC.DIALOG.Confirm'),
                             callback: callback
                         },
                     },
@@ -539,7 +545,7 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: Utils.format('dialog.recolor', {
+                    title: game.i18n.format("AC.DIALOG.ColorCategory.Title", {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
@@ -547,12 +553,12 @@ export default class CharacterSheet extends ActorSheet {
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: Utils.localize('app.colorCategory'),
+                            label: game.i18n.localize("AC.DIALOG.ColorCategory.Set"),
                             callback: set
                         },
                         reset: {
                             icon: '<i class="fas fa-arrow-rotate-left"></i>',
-                            label: Utils.localize('dialog.resetColor'),
+                            label: game.i18n.localize("AC.DIALOG.ColorCategory.Reset"),
                             callback: reset
                         }
                     },
@@ -671,12 +677,12 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: Utils.format('dialog.track', { category: key, name: sheet.object.name }),
-                    content: CONFIG.animecampaign.textDialog(Utils.localize('app.statName'), ''),
+                    title: game.i18n.format('AC.DIALOG.TrackStat.Title', { category: key, name: sheet.object.name }),
+                    content: CONFIG.animecampaign.textDialog(game.i18n.localize('AC.DIALOG.Tag'), ''),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: Utils.localize('app.trackStat'),
+                            label: game.i18n.localize('AC.DIALOG.Confirm'),
                             callback: callback
                         },
                     },
@@ -805,7 +811,7 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 Dialog.confirm({
-                    title: Utils.format('dialog.deleteFeature', {
+                    title: game.i18n.format('AC.DIALOG.DeleteFeature.Title', {
                         id: id(event.target),
                         name: sheet.object.name
                     }),

@@ -4,11 +4,11 @@
     <li class="detail">
         <header>
             <div class="labels">
-                <label>{{localize config.details.rollFormula}}</label>
+                <label>{{localize "AC.DETAILS.RollFormula.Name"}}</label>
             </div>
 
             <div class="fields">
-                <input type="text" name="system.details.formula" value="{{system.details.formula}}" placeholder="{{localize config.placeholder.na}}">
+                <input type="text" name="system.details.formula" value="{{system.details.formula}}" placeholder="{{localize "AC.DETAILS.RollFormula.Hint"}}">
             </div>
         </header>
     </li>
@@ -17,35 +17,11 @@
     <li class="detail">
         <header>
             <div class="labels">
-                <label>{{localize config.details.action}}</label>
+                <label>{{localize "AC.DETAILS.Action.Name"}}</label>
             </div>
 
             <div class="fields">
-
-                <!-- select name="system.details.action.name">
-
-                    <option value="">{{localize config.action.na}}</option>
-
-                    <optgroup label="{{localize config.actionType.standard}}">
-                        {{#select system.details.action.name}}
-                            {{#each config.action.standard as |name key|}}
-                                <option value="{{key}}">{{localize name}}</option>
-                            {{/each}}
-                        {{/select}}
-                    </optgroup>
-                    
-                    <optgroup label="{{localize config.actionType.other}}">
-                        {{#select system.details.action.name}}
-                            {{#each config.action.other as |name key|}}
-                                <option value="{{key}}">{{localize name}}</option>
-                            {{/each}}
-                        {{/select}}
-                    </optgroup>
-
-                </select -->
-
-                <input type="text" name="system.details.action.name" value="{{system.details.action.name}}">
-
+                <input type="text" name="system.details.action.name" value="{{system.details.action.name}}" placeholder="{{localize "AC.N_A"}}">
             </div>
         </header>
     </li>
@@ -54,40 +30,37 @@
     <li class="detail">
         <header>
             <div class="labels">
-                <label>{{localize config.details.usage}}</label>
+                <label>{{localize "AC.DETAILS.Usage.Name"}}</label>
             </div>
 
             <div class="fields">
-                <input type="number" name="system.details.usage.multiple" value="{{system.details.usage.multiple}}">
-                <label>{{localize config.details.per}}</label>
+                <input type="text" name="system.details.usage.multiple" value="{{system.details.usage.multiple}}">
+                <label>{{localize "AC.DETAILS.Usage.Per"}}</label>
                 <input type="text" name="system.details.usage.timeframe" value="{{system.details.usage.timeframe}}">
             </div>  
         </header>
 
-        <p class="note">{{localize config.details.usageNote}}</p>
+        <p class="note">{{localize "AC.DETAILS.Usage.Hint"}}</p>
     </li>
 
     <!-- Editor -->
     <li class="detail">
         <header>
             <div class="labels">
-                <label>{{localize config.details.textEditor}}</label>
+                <label>{{localize "AC.DETAILS.TextEditor.Name"}}</label>
             </div>
 
             <div class="fields">
 
                 <select name="system.details.editor">
-                    {{#select system.details.editor}}
-                        {{#each config.editor as |name value|}}
-                            <option value="{{value}}">{{localize name}}</option>
-                        {{/each}}
-                    {{/select}}
+                    <option value="markdown">{{localize "AC.LABEL.Markdown"}}</option>
+                    <option value="prosemirror">{{localize "AC.LABEL.ProseMirror"}}</option>
                 </select>
 
             </div>
         </header>
 
-        <p class="note">{{localize config.details.textEditorNote}}</p>
+        <p class="note">{{localize "AC.DETAILS.TextEditor.Hint"}}</p>
     </li>
 
     <!-- Test -->

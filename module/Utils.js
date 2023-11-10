@@ -17,22 +17,6 @@ export function error (text) {
     console.error(`%cAnime Campaign | ${text}`, 'color: tomato;');
 }
 
-/** A shorthand for localizing.
- * @param {String} path 
- * @returns {String}
- */
-export function localize (path) {
-    return game.i18n.localize(getProperty(CONFIG.animecampaign, path));
-}
-
-/** A shorthand for formatting a localization.
- * @param {String} path 
- * @returns {String}
- */
-export function format (path, data) {
-    return game.i18n.format(getProperty(CONFIG.animecampaign, path), data);
-}
-
 /** Converts a string hexadecimal color into an array of RGB values in base 10.
  * @param {String} hexcode 
  * @returns {String[]}

@@ -5,13 +5,13 @@
         <nav data-nav data-group="actor-tabs">
 
             <!-- Biography -->
-            <a class="nav-tab" title="{{localize config.nav.biography}}" data-tab="biography" data-group="actor-tabs">
+            <a class="nav-tab" data-tooltip="AC.NAV.Biography" data-tab="biography" data-group="actor-tabs">
                 <i class="fas fa-user"></i>
             </a>
 
             {{#unless limited}}
                 <!-- Kit -->
-                <a class="nav-tab" title="{{localize config.nav.kit}}" data-tab="kit" data-group="actor-tabs">
+                <a class="nav-tab" data-tooltip="AC.NAV.Kit" data-tab="kit" data-group="actor-tabs">
                     <i class="fas fa-diamond"></i>
                 </a>
             {{/unless}}
@@ -24,13 +24,13 @@
         <nav data-nav data-group="item-tabs">
 
             <!-- Description -->
-            <a class="nav-tab" title="{{localize config.nav.description}}" data-tab="description" data-group="item-tabs">
+            <a class="nav-tab" data-tooltip="AC.NAV.Description" data-tab="description" data-group="item-tabs">
                 <i class="fas fa-section"></i>
             </a>
 
             {{#unless limited}}
                 <!-- Details -->
-                <a class="nav-tab" title="{{localize config.nav.details}}" data-tab="details" data-group="item-tabs">
+                <a class="nav-tab" data-tooltip="AC.NAV.Details" data-tab="details" data-group="item-tabs">
                     <i class="fas fa-circle-info"></i>
                 </a>
             {{/unless}}

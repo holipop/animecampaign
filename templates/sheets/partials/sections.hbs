@@ -9,7 +9,7 @@
             <div class="panel">
 
                 <!-- Collapse -->
-                <a class="control collapse" data-collapse="sections.{{index}}" title="{{localize config.app.collapseSection}}">
+                <a class="control collapse" data-collapse="sections.{{index}}" data-tooltip="AC.TOOLTIP.Section.Collapse">
                     <i class="fas fa-chevron-down"></i>
                 </a>
 
@@ -17,21 +17,20 @@
                 <i class="control grip fas fa-grip-vertical" data-section-grip="{{index}}"></i>
 
             </div>
-
             
             <div class="section-body">
 
                 <header>
                     
                     <!-- Name -->
-                    <input class="name" type="text" name="system.sections.{{index}}.name" placeholder="{{localize @root.config.placeholder.label}}" value="{{section.name}}">
+                    <input class="name" type="text" name="system.sections.{{index}}.name" placeholder="{{localize "AC.LABEL.Text"}}" value="{{section.name}}">
 
                     {{#if @root.owner}}
                         <!-- Controls -->
-                        <a class="toggle-view" title="{{localize @root.config.app.toggleSectionVisibility}}">
+                        <a class="toggle-view" data-tooltip="AC.TOOLTIP.Section.ToggleVisibility">
                             <i class="fas fa-eye" data-toggle></i>
                         </a>
-                        <a title="{{localize @root.config.app.deleteSection}}">
+                        <a data-tooltip="AC.TOOLTIP.Section.Remove">
                             <i class="fas fa-trash" data-remove></i>
                         </a>
                     {{/if}}
@@ -41,7 +40,7 @@
                 <div data-collapse-target="sections.{{index}}">
 
                     {{#if (eq @root.system.details.editor 'markdown')}}
-                        <textarea name="system.sections.{{index}}.plaintext" placeholder="{{localize @root.config.placeholder.text}}" data-resize data-enter="shift">{{~section.plaintext}}</textarea>
+                        <textarea name="system.sections.{{index}}.plaintext" placeholder="{{localize "AC.LABEL.Text"}}" data-resize data-enter="shift">{{~section.plaintext}}</textarea>
                     {{/if}}
 
                     {{#if (eq @root.system.details.editor 'prosemirror')}}
@@ -59,7 +58,7 @@
     {{#if owner}}
         <button data-add type="button">
             <i class="fas fa-plus"></i>
-            {{localize config.app.addSection}}
+            {{localize "AC.TOOLTIP.Section.Create"}}
         </button>
     {{/if}}
 

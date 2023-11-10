@@ -2,9 +2,9 @@
 
     <!-- Headers -->
     <tr>
-        <th>{{localize config.mainStat.stamina}}</th>
-        <th>{{localize config.mainStat.proficiency}}</th>
-        <th>{{localize config.mainStat.movement}}</th>
+        <th>{{localize "AC.STAT.Stamina"}}</th>
+        <th>{{localize "AC.STAT.Proficiency"}}</th>
+        <th>{{localize "AC.STAT.Movement"}}</th>
     </tr>
 
     <!-- Inputs -->
@@ -12,8 +12,8 @@
 
         <!-- Stamina -->
         <td>
-            <input class="top" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="{{localize @root.config.placeholder.value}}">
-            <input class="bottom" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="{{localize @root.config.placeholder.max}}">
+            <input class="top" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="{{localize "AC.LABEL.Value"}}">
+            <input class="bottom" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="{{localize "AC.LABEL.Max"}}">
         </td>
 
         <!-- Proficiency -->
@@ -26,8 +26,8 @@
 
         <!-- Movement -->
         <td>
-            <input class="top" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="{{localize @root.config.placeholder.spaces}}">
-            <input class="bottom" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="{{localize @root.config.placeholder.build}}">
+            <input class="top" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="{{localize "AC.LABEL.Spaces"}}">
+            <input class="bottom" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="{{localize "AC.LABEL.Build"}}">
         </td>
     </tr>
 

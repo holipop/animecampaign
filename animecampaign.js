@@ -1,9 +1,12 @@
-// AC FVTT
-import * as Utils from './module/Utils.js'
+// Anime Campaign for Foundry VTT
+// by Holipop
+
 import * as config from './module/config.js'
+import * as Utils from './module/Utils.js'
 import * as Roll from './module/Roll.js'
 import * as List from './module/List.js'
 import * as Macro from './module/Macro.js'
+import * as Settings from './module/Settings.js'
 
 import ACActor from './module/documents/ACActor.js'
 import CharacterData from './module/data-models/CharacterData.js'
@@ -14,7 +17,7 @@ import FeatureData from './module/data-models/FeatureData.js'
 import FeatureSheet from './module/sheets/FeatureSheet.js'
 
 Hooks.once('init', () => {
-    Utils.log(config.animecampaign.ascii);
+    Utils.log(config.AC.ascii);
     Utils.log('Initializing Anime Campaign System!');
 
     CONFIG.Actor.documentClass = ACActor;
@@ -29,6 +32,7 @@ Hooks.once('init', () => {
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
     Utils.preloadHandlebarsTemplates();
+    Settings.register();
 })
 
 Hooks.once('ready', () => {
@@ -41,8 +45,7 @@ Hooks.once('ready', () => {
 })
 
 Hooks.once('i18nInit', () => {
-    CONFIG.animecampaign = config.animecampaign;
-    Utils.settings();
+    CONFIG.animecampaign = config.AC;
 })
 
 // (Copied from DnD5e)

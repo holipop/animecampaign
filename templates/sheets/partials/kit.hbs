@@ -8,7 +8,7 @@
             <header data-match-category="background-color">
 
                 <!-- Collapse -->
-                <a class="control collapse" data-collapse="categories.{{category}}" title="{{localize @root.config.app.collapseCategory}}" data-contrast-category>
+                <a class="control collapse" data-collapse="categories.{{category}}" data-tooltip="AC.TOOLTIP.Category.Collapse" data-contrast-category>
                     <i class="fas fa-chevron-down"></i>
                 </a>
                 
@@ -19,13 +19,13 @@
 
                     {{#if @root.owner}}
                         <!-- Rename, Color, Flood -->
-                        <a class="control" title="{{localize @root.config.app.renameCategory}}">
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Rename">
                             <i class="fas fa-pencil" data-rename></i>
                         </a>
-                        <a class="control" title="{{localize @root.config.app.colorCategory}}">
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Color">
                             <i class="fas fa-palette" data-color></i>
                         </a>
-                        <a class="control" title="{{localize @root.config.app.floodCategory}}">
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Flood">
                             <i class="fas fa-fill-drip" data-flood></i>
                         </a>
                     {{/if}}
@@ -37,7 +37,7 @@
 
                     {{#if @root.owner}}
                         <!-- Track -->
-                        <a class="control" title="{{localize @root.config.app.trackStat}}">
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Track">
                             <i class="fas fa-square-plus" data-track></i>
                         </a>
                     {{/if}}
@@ -48,14 +48,14 @@
 
                                 <!-- Image -->
                                 {{#with (lookup @root.categories category)}}
-                                    <div class="tracker-image" title="{{localize @root.config.app.setStatImage}}">
+                                    <div class="tracker-image" data-tooltip="AC.TOOLTIP.Category.EditTrackerImage">
                                         <img src="{{tracker.img}}" data-tracker-image="{{index}}" data-contrast-image="{{this.color}}">
                                     </div>
                                 {{/with}}
 
                                 {{#if @root.owner}}
                                     <!-- Untrack -->
-                                    <a class="control" title="{{localize @root.config.app.untrackStat}}">
+                                    <a class="control untrack" data-tooltip="AC.TOOLTIP.Category.Untrack">
                                         <i class="fas fa-xmark" data-untrack="{{index}}"></i>
                                     </a>
                                 {{/if}}
@@ -73,10 +73,10 @@
                 <div class="list-controls" data-contrast-category="color border-color">
 
                     {{#if @root.owner}}
-                        <a class="control" title="{{localize @root.config.app.createFeature}}">
+                        <a class="control" data-tooltip="AC.TOOLTIP.Feature.Create">
                             <i class="fas fa-plus" data-create-feature="{{category}}"></i>
                         </a>
-                        <a class="control" title="{{localize @root.config.app.deleteCategory}}">
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Delete">
                             <i class="fas fa-sack-xmark" data-delete></i>
                         </a>
                     {{/if}}
@@ -103,7 +103,7 @@
     {{#if owner}}
         <button data-create type="button">
             <i class="fas fa-plus"></i>
-            {{localize config.app.createCategory}}
+            {{localize "AC.TOOLTIP.Category.Create"}}
         </button>
     {{/if}}
 

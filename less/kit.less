@@ -88,9 +88,7 @@
 
     .tracked-stat-list {
         .tracked-stat {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display: grid;
             height: @category-header-height * .75;
             width: @stat-tracker-width;
             padding: 0 (4 * @rpx);
@@ -98,46 +96,42 @@
             border-left: (1 * @rpx) solid black;
 
             > * {
-                z-index: 2;
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
             }
+        }
+        .tracker-image {
+            position: relative;
+            top: -6 * @rpx;
+            height: @category-header-height * .75;
 
-            .tracker-image {
-                position: relative;
-                height: 0;
-                top: -6 * @rpx;
-
-                img {
-                    #AC.InputSkinning();
-
-                    position: absolute;
-                    height: @feature-entry-height;
-                    width: @feature-entry-height;
-                    z-index: 1;
-                    cursor: pointer;
-
-                    clip-path: inset(8% 0 8% 0);
-                    opacity: 25%;
-                }
-            }
-
-            .control {
-                position: relative;
-                height: min-content;
-                width: min-content;
-                top: 4 * @rpx;
-                left: -4 * @rpx;
-
-                align-self: flex-end;
-            }
-            i {
+            > img {
+                #AC.InputSkinning();
+    
                 position: absolute;
-
-                font-size: .75rem;
+                height: @feature-entry-height;
+                width: @feature-entry-height;
+                place-self: center start;
+                cursor: pointer;
+    
+                clip-path: inset(8% 0 8% 0);
+                opacity: 25%;
             }
+        }
+        .control.untrack {
+            place-self: start end;
+            position: relative;
+            top: -2 * @rpx;
+            left: 2 * @rpx;
+            height: min-content;
+            width: min-content;
+            
+            font-size: .75rem;
         }
         .label {
             #AC.Overflow();
 
+            place-self: end;
             padding-top: 6 * @rpx;
             pointer-events: none;
 

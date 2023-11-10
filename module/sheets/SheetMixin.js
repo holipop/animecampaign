@@ -286,9 +286,10 @@ export const SheetMixin = {
             const name = html.find('[data-tab-name]');
 
             const set = () => {
-                const active = nav.find('.active').data('tab');
+                const data = nav.find('.active').data('tab');
+                const active = data.at(0).toUpperCase() + data.slice(1);
 
-                name.text(Utils.localize(`nav.${active}`));
+                name.text(game.i18n.localize(`AC.NAV.${active}`));
             }
 
             set();
