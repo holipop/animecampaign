@@ -67,6 +67,7 @@
         "Class": "Class",
         "Name": "Name",
         "Category": "Category",
+        "EmptyCategory": "Empty Category",
         "TextEditor": "Text Editor",
         "Markdown": "Markdown",
         "ProseMirror": "ProseMirror"

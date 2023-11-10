@@ -976,6 +976,12 @@
   margin: 0;
   padding: 0;
 }
+.animecampaign.actor.sheet .kit .category .feature-list .empty {
+  padding: 0.25rem;
+  text-align: center;
+  font: 600 0.75rem "Libre Franklin";
+  opacity: 0.5;
+}
 .animecampaign.actor.sheet .kit .feature-list .feature {
   border: 0.0625rem solid black;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;

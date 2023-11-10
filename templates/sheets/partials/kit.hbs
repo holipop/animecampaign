@@ -92,6 +92,10 @@
                     {{> "feature" feature}}
 
                 {{/each}}
+
+                {{#if (eq features.length 0)}}
+                    <div class="empty">&middot; &middot; &middot; {{localize "AC.LABEL.EmptyCategory"}} &middot; &middot; &middot;</div>
+                {{/if}}
             </ol>
 
             <div class="cap" data-match-category="background-color"></div>
