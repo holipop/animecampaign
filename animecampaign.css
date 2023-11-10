@@ -263,6 +263,7 @@
   margin: 0.25rem 0;
   font: 1.25rem "Gloock";
   line-height: 0.9;
+  letter-spacing: 0.0625rem;
 }
 .animecampaign.chat.roll .summary .category {
   overflow: hidden;
@@ -457,9 +458,6 @@
   padding: 0.1rem 0.2rem;
   font: 600 0.75rem "Libre Franklin";
 }
-.animecampaign.chat.roll .roll-banner .usage span {
-  text-transform: capitalize;
-}
 .animecampaign.chat.roll .roll-banner .action {
   flex: 1;
   text-align: end;
@@ -556,6 +554,7 @@
   z-index: 1;
   font-family: "Gloock";
   line-height: 0.85;
+  letter-spacing: 0.0625rem;
 }
 .animecampaign.sheet .summary .class {
   text-align: end;
@@ -842,6 +841,10 @@
 .animecampaign.sheet .stat-list .stat .view i {
   text-align: center;
   padding-top: 40%;
+  opacity: 0.33;
+}
+.animecampaign.sheet .stat-list .stat .view .selected {
+  opacity: 1;
 }
 .animecampaign.actor.sheet .kit {
   list-style-type: none;
@@ -886,9 +889,7 @@
   font-family: "Gloock";
   font-size: 1.2rem;
   text-transform: uppercase;
-  /* &::first-letter {
-                font-size: 1.5rem;
-            } */
+  letter-spacing: 0.0625rem;
 }
 .animecampaign.actor.sheet .kit .category header h2 .initial {
   font-size: 1.5rem;
@@ -977,8 +978,10 @@
   padding: 0;
 }
 .animecampaign.actor.sheet .kit .category .feature-list .empty {
-  padding: 0.25rem;
+  padding: 0.15rem;
   text-align: center;
+  border-bottom: 0.0625rem solid black;
+  box-shadow: inset rgba(0, 0, 0, 0.5) 0.0625rem 0, inset rgba(0, 0, 0, 0.5) -0.0625rem 0;
   font: 600 0.75rem "Libre Franklin";
   opacity: 0.5;
 }
@@ -1149,9 +1152,11 @@
   height: 100%;
   width: 1.5rem;
   font-size: 1.1rem;
+  opacity: 0.33;
 }
 .animecampaign.sheet .navigation nav > .active {
   background: linear-gradient(to top, rgba(205, 50, 50, 0.5), transparent);
+  opacity: 1;
 }
 .animecampaign.sheet .navigation .line {
   height: 1.6rem;
@@ -1166,6 +1171,7 @@
   font: 1.5rem "Gloock";
   text-transform: uppercase;
   line-height: 1;
+  letter-spacing: 0.0625rem;
 }
 .animecampaign.sheet .navigation h1::first-letter {
   font-size: 1.9rem;

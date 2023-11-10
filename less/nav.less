@@ -15,10 +15,13 @@
             width: 1.5rem;
 
             font-size: 1.1rem;
+            opacity: .33;
         }
         
         > .active {
             #AC.Active();
+
+            opacity: 1;
         }
     }
 
@@ -37,6 +40,7 @@
         font: 1.5rem "Gloock";
         text-transform: uppercase;
         line-height: 1;
+        letter-spacing: (1 * @rpx);
 
         &::first-letter {
             font-size: 1.9rem;

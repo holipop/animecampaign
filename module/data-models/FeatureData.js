@@ -39,7 +39,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 }),
 
                 usage: new fields.SchemaField({
-                    multiple: new fields.NumberField({ initial: 1 }),
+                    multiple: new fields.StringField({ initial: "1" }),
                     timeframe: new fields.StringField({ initial: 'Round' })
                 }),
             })

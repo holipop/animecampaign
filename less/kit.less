@@ -46,13 +46,10 @@
             margin-right: 4 * @rpx;
 
             font-family: "Gloock";
-            //font-size: 1.2rem;
             font-size: 1.2rem;
             text-transform: uppercase;
+            letter-spacing: (1 * @rpx);
 
-            /* &::first-letter {
-                font-size: 1.5rem;
-            } */
             .initial {
                 font-size: 1.5rem;
                 letter-spacing: -.25rem;
@@ -152,12 +149,15 @@
         #AC.ListSkinning();
 
         .empty {
-            padding: .25rem;
+            padding: .15rem;
             text-align: center;
+            border-bottom: (1 * @rpx) solid black;
+            box-shadow: 
+                inset rgba(0, 0, 0, 0.5) ( 1 * @rpx) 0,
+                inset rgba(0, 0, 0, 0.5) (-1 * @rpx) 0;
 
             font: 600 .75rem "Libre Franklin";
             opacity: .5;
         }
     }
-    
 }
