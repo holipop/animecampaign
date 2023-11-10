@@ -1,5 +1,5 @@
 {
-    "animecampaign": {
+    "AC": {
         "test": "Testing Testing One Two Three!",
         "type": {
             "inscribed": {
@@ -134,6 +134,167 @@
             "diagonalMovement555": "PHB: Equidistant (5/5/5)",
             "diagonalMovement5105": "DMG: Alternating (5/10/5)",
             "diagonalMovementEuclidean": "Euclidean (7.07 ft. Diagonal)"
+        },
+        
+        
+    
+    "Title": "Anime Campaign",
+    "Character": "Character",
+    "Feature": "Feature",
+    "Test": "Testing Testing One Two Three!",
+
+    "CATEGORY": {
+        "Weapon": "Weapon",
+        "Talent": "Talent",
+        "Passive": "Passive",
+        "Ability": "Ability"
+    },
+    "TYPE": {
+        "Inscribed": "Inscribed",
+        "Mundie": "Mundie",
+        "Epithet": "Epithet",
+        "Expert": "Expert",
+        "Powerhouse": "Powerhouse"
+    },
+    "STAT": {
+        "Stamina": "Stamina",
+        "Proficiency": "Proficiency",
+        "Movement": "Movement",
+        "Damage": "Damage",
+        "Range": "Range",
+        "Cost": "Cost",
+        "Bonus": "Bonus",
+        "RedStat": "Red Stat",
+        "BlueStat": "Blue Stat",
+        "YellowStat": "Yellow Stat",
+        "GreenStat": "Green Stat",
+        "OrangeStat": "Orange Stat",
+        "CyanStat": "Cyan Stat",
+        "PurpleStat": "Purple Stat",
+        "GreyStat": "Grey Stat"
+    },
+    "COLOR": {
+        "Red": "Red",
+        "Blue": "Blue",
+        "Yellow": "Yellow",
+        "Green": "Green",
+        "Orange": "Orange",
+        "Cyan": "Cyan",
+        "Purple": "Purple",
+        "Grey": "Grey"
+    },
+    "NAV": {
+        "Biography": "Biography",
+        "Kit": "Kit",
+        "Description": "Description",
+        "Details": "Details"
+    },
+    "LABEL": {
+        "N_A": "N/A",
+        "ColorStats": "ColorStats",
+        "Stats": "Stats",
+        "Value": "Value",
+        "Max": "Max",
+        "Spaces": "Spaces",
+        "Build": "Build",
+        "Label": "Label",
+        "Text": "Text",
+        "Tag": "Tag",
+        "Word": "Epithet/Core Word",
+        "Class": "Class",
+        "Name": "Name",
+        "Category": "Category",
+        "TextEditor": "Text Editor",
+        "Markdown": "Markdown",
+        "ProseMirror": "ProseMirror"
+    },
+    "BUTTON": {
+        "Color": "Color",
+        "Roll": "Roll",
+        "Stat": {
+            "Collapse": "Collapse Stats",
+            "Add": "Add Stat",
+            "Remove": "Remove Stat",
+            "Value": "Set View to Value",
+            "Resource": "Set View to Resource",
+            "Label": "Set View to Label"
+        },
+        "Category": {
+            "Collapse": "Collapse Category",
+            "Create": "Create Category",
+            "Delete": "Delete Category",
+            "Rename": "Rename Category",
+            "Color": "Color Category",
+            "Flood": "Flood Category",
+            "Track": "Track Stat",
+            "Untrack": "Untrack Stat",
+            "EditTrackerImage": "Edit Tracker Image"
+        },
+        "Feature": {
+            "Roll": "Roll Feature",
+            "Expand": "Expand Feature",
+            "Create": "Create Feature",
+            "View": "View Feature",
+            "Delete": "Delete Feature"
+        },
+        "Section:": {
+            "Collapse": "Collapse Section",
+            "Add": "Add Section",
+            "Delete": "Delete Section",
+            "ToggleVisibility": "Toggle Section Visibility"
+        }
+    },
+    "DIALOG": {
+        "Confirm": "Confirm",
+        "CreateCategory": {
+            "Title": "Create New Category: {name}",
+            "Placeholder": "New Category"
+        },
+        "ColorCategory": {
+            "Title": "Recolor Category [{category}]: {name}"
+        },
+        "RenameCategory": {
+            "Title": "Rename Category [{category}]: {name}"
+        },
+        "trackStat": {
+            "Title": "Track Stat [{category}]: {name}"
+        },
+        "DeleteCategory": {
+            "Title": "Delete Category [{category}]: {name}"
+        },
+        "DeleteFeature": {
+            "Title": "Delete Feature [{id}]: {name}"
+        }
+    },
+    "DETAILS": {
+        "TextEditor": {
+            "Name": "Text Editor",
+            "Hint": "Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, \"what you see is what you get\"."
+        },
+        "RollFormula": {
+            "Name": "Roll Formula"
+        },
+        "Action": {
+            "Name": "Action"
+        },
+        "Usage": {
+            "Name": "Usage",
+            "Hint": "i.e. \"Once per Combat\".",
+            "Per": "per"
+        }
+    },
+    "SETTINGS": {
+        "DefaultTextEditor": {
+            "Name": "Default Text Editor",
+            "Hint": "Configure which text editor is set on-creation for your actors and items."
+        },
+        "DiagonalMovement": {
+            "Name": "Diagonal Movement Rule",
+            "Hint": "Configure which diagonal movement rule should be used for games within this system.",
+            "555": "PHB: Equidistant (5/5/5)",
+            "5105": "DMG: Alternating (5/10/5)",
+            "EUCL": "Euclidean (7.07 ft. Diagonal)"
         }
     }
+}
 }

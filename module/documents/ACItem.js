@@ -1,4 +1,4 @@
-import * as AC from "../AC.js"
+import * as Utils from "../Utils.js"
 
 /**
  * Extending the Item class for system-specific logic.
@@ -50,7 +50,7 @@ export default class ACItem extends Item {
 
         // Getting colors for contrasting.
         const contrast = (() => {
-            const rgb = AC.hexToRGB(this.system.color);
+            const rgb = Utils.hexToRGB(this.system.color);
             rgb[0] *= 0.2126;
             rgb[1] *= 0.7152;
             rgb[2] *= 0.0722;

@@ -1,4 +1,4 @@
-import * as AC from "../AC.js";
+import * as Utils from "../Utils.js";
 import * as List from "../List.js";
 
 /**
@@ -67,7 +67,7 @@ export const SheetMixin = {
             match.each((index, element) => {
                 const properties = $(element).data('match') || "color";
 
-                const obj = AC.uniformObject(properties.split(' '), sheet.object.system.color);
+                const obj = Utils.uniformObject(properties.split(' '), sheet.object.system.color);
                 $(element).css(obj);
             })
         }()
@@ -80,7 +80,7 @@ export const SheetMixin = {
             contrast.each((index, element) => {
                 const properties = $(element).data('contrast') || "color";
 
-                const rgb = AC.hexToRGB(sheet.object.system.color);
+                const rgb = Utils.hexToRGB(sheet.object.system.color);
                 rgb[0] *= 0.2126;
                 rgb[1] *= 0.7152;
                 rgb[2] *= 0.0722;
@@ -88,7 +88,7 @@ export const SheetMixin = {
                 const luma = rgb.reduce((n, m) => n + m) / 255;
                 const color = (luma <= .5) ? "white" : "black";
 
-                const obj = AC.uniformObject(properties.split(' '), color);
+                const obj = Utils.uniformObject(properties.split(' '), color);
                 $(element).css(obj);
             })
         }()
@@ -104,7 +104,7 @@ export const SheetMixin = {
             contrast.each((index, element) => {
                 const hexcode = $(element).data('contrast-image') || "#CCCCCC";
 
-                const rgb = AC.hexToRGB(hexcode);
+                const rgb = Utils.hexToRGB(hexcode);
                 rgb[0] *= 0.2126;
                 rgb[1] *= 0.7152;
                 rgb[2] *= 0.0722;
@@ -288,7 +288,7 @@ export const SheetMixin = {
             const set = () => {
                 const active = nav.find('.active').data('tab');
 
-                name.text(AC.localize(`nav.${active}`));
+                name.text(Utils.localize(`nav.${active}`));
             }
 
             set();

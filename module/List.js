@@ -3,7 +3,7 @@
  */
 
 
-import * as AC from './AC.js'
+import * as Utils from './Utils.js'
 
 /** Adds an entry to a list, optionally at a specified index.
  * @param {*[]} arr 
@@ -48,7 +48,7 @@ export function get (arr, query) {
         });
 
     if (obj === undefined) return;
-    return AC.plainObject(obj);
+    return Utils.plainObject(obj);
 }
 
 /** Change an entry of a list, returning an updated clone of the array with the changed entry becoming a plain object.
@@ -68,7 +68,7 @@ export function set (arr, query, changes) {
     if (arr[index] === undefined) return arr;
 
     const update = [...arr]
-    update[index] = AC.plainObject(mergeObject(update[index], changes));
+    update[index] = Utils.plainObject(mergeObject(update[index], changes));
     return update;
 }
 
@@ -105,6 +105,6 @@ export function index (arr, query) {
  * @returns {*}
  */
 export function toObject (arr) {
-    const list = arr.map(entry => AC.plainObject(entry));
+    const list = arr.map(entry => Utils.plainObject(entry));
     return Object.fromEntries(list.entries()); 
 }

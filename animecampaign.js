@@ -1,5 +1,5 @@
 // AC FVTT
-import * as AC from './module/AC.js'
+import * as Utils from './module/Utils.js'
 import * as config from './module/config.js'
 import * as Roll from './module/Roll.js'
 import * as List from './module/List.js'
@@ -14,8 +14,8 @@ import FeatureData from './module/data-models/FeatureData.js'
 import FeatureSheet from './module/sheets/FeatureSheet.js'
 
 Hooks.once('init', () => {
-    AC.log(config.animecampaign.ascii);
-    AC.log('Initializing Anime Campaign System!');
+    Utils.log(config.animecampaign.ascii);
+    Utils.log('Initializing Anime Campaign System!');
 
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
@@ -28,7 +28,7 @@ Hooks.once('init', () => {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
-    AC.preloadHandlebarsTemplates();
+    Utils.preloadHandlebarsTemplates();
 })
 
 Hooks.once('ready', () => {
@@ -36,19 +36,19 @@ Hooks.once('ready', () => {
         ...game.system,
         macros: { ...Macro },
         list: { ...List },
-        AC: { ...AC },
+        AC: { ...Utils },
     }
 })
 
 Hooks.once('i18nInit', () => {
     CONFIG.animecampaign = config.animecampaign;
-    AC.settings();
+    Utils.settings();
 })
 
 // (Copied from DnD5e)
 Hooks.on("canvasInit", gameCanvas => {
     gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = AC.measureDistances;
+    SquareGrid.prototype.measureDistances = Utils.measureDistances;
 });
 
 Hooks.on('renderChatMessage', (message, html, data) => Roll.listeners(message, html, data))

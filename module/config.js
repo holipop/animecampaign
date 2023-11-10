@@ -1,19 +1,15 @@
-// !!! Firefox doesn't support 'assert'.
-// !!! Remove the facadeObject.
-//import lang from "../lang/en.json" assert { type: 'json' };
-
-import * as AC from "./AC.js";
+import * as Utils from "./Utils.js";
 
 // An object containing language localization paths and default configurations.
-export const animecampaign = langBandaid().animecampaign;
+export const animecampaign = langBandaid().AC;
 
-animecampaign.ascii = `                                                                                    
-      ██       ▄▄█▀▀▀█▄█  ▀██▀▀▀▀█ ▀██▀  ▀█▀ █▀▀██▀▀█ █▀▀██▀▀█ 
-     ▄██▄    ▄██▀     ▀█   ██  ▄    ▀█▄  ▄▀     ██       ██       
-    ▄█▀██▄   ██▀       ▀   ██▀▀█     ██  █      ██       ██    
-   ▄█  ▀██   ██            ██         ███       ██       ██    
-   ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄   
-  █▀      ██ ▀██▄     ▄▀ 
+animecampaign.ascii = `
+      ██       ▄▄█▀▀▀█▄█  ▀██▀▀▀▀█ ▀██▀  ▀█▀ █▀▀██▀▀█ █▀▀██▀▀█
+     ▄██▄    ▄██▀     ▀█   ██  ▄    ▀█▄  ▄▀     ██       ██
+    ▄█▀██▄   ██▀       ▀   ██▀▀█     ██  █      ██       ██
+   ▄█  ▀██   ██            ██         ███       ██       ██
+   ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄
+  █▀      ██ ▀██▄     ▄▀
 ▄███▄   ▄████▄ ▀▀█████▀   v1.0.0`
 
 animecampaign.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
@@ -81,7 +77,7 @@ animecampaign.colorDialog = hexcode => `
  */
 function langBandaid () {
     const json = {
-        "animecampaign": {
+        "AC": {
             "test": "Testing Testing One Two Three!",
             "type": {
                 "inscribed": {
@@ -220,5 +216,5 @@ function langBandaid () {
         }
     }
 
-    return AC.facadeObject(json);
+    return Utils.facadeObject(json);
 }

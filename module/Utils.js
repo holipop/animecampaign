@@ -1,41 +1,41 @@
 /** A utility namespace for system-specific functions.
- * @module AC 
+ * @module Utils 
  */
 
 
 /** A console.log with styling, intended for debugging clarity.
- * @param {string|number|boolean} text 
+ * @param {String|Number|Boolean} text 
  */
 export function log (text) {
     console.log(`%cAnime Campaign | ${text}`, 'color: tomato;');
 }
 
 /** A console.error with styling, intended for debugging clarity.
- * @param {string|number|boolean} text 
+ * @param {String|Number|Boolean} text 
  */
 export function error (text) {
     console.error(`%cAnime Campaign | ${text}`, 'color: tomato;');
 }
 
 /** A shorthand for localizing.
- * @param {string} path 
- * @returns {string}
+ * @param {String} path 
+ * @returns {String}
  */
 export function localize (path) {
     return game.i18n.localize(getProperty(CONFIG.animecampaign, path));
 }
 
 /** A shorthand for formatting a localization.
- * @param {string} path 
- * @returns {string}
+ * @param {String} path 
+ * @returns {String}
  */
 export function format (path, data) {
     return game.i18n.format(getProperty(CONFIG.animecampaign, path), data);
 }
 
 /** Converts a string hexadecimal color into an array of RGB values in base 10.
- * @param {string} hexcode 
- * @returns {number[]}
+ * @param {String} hexcode 
+ * @returns {String[]}
  */
 export function hexToRGB (hexcode) {
     const channels = [hexcode.slice(1, 3), hexcode.slice(3, 5), hexcode.slice(5)];
@@ -44,8 +44,8 @@ export function hexToRGB (hexcode) {
 }
 
 /** Converts a instance of a class into a plain object.
- * @param {Object} instance 
- * @returns {Object}
+ * @param {*} instance 
+ * @returns {*}
  */
 export function plainObject (instance) {
     const copy = { ...instance };
@@ -60,9 +60,9 @@ export function plainObject (instance) {
 }
 
 /** Create an object where all of the properties have identical values.
- * @param {string[]} keyArr The names of each property.
+ * @param {String[]} keyArr The names of each property.
  * @param {*} value The value for each property.
- * @returns {Object}
+ * @returns {*}
  */
 export function uniformObject (keyArr, value) {
     const obj = {};
@@ -73,8 +73,8 @@ export function uniformObject (keyArr, value) {
 }
 
 /** Assigns each property a string of its own dot notation.
- * @param {object} obj
- * @returns {object}
+ * @param {*} obj
+ * @returns {*}
  */
 export function facadeObject (obj) {
     let paths = Object.keys(flattenObject(obj));
@@ -141,7 +141,7 @@ export function settings () {
     // Diagonal Movement Rule
     // (Taken directly from DnD5e)
     game.settings.register(scope, "diagonalMovement", {
-        name: localize('settings.diagonalMovement'),
+        name: 'AC.settings.diagonalMovement',
         hint:  localize('settings.diagonalMovementHint'),
         scope: "world",
         config: true,

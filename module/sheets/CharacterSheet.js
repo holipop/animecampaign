@@ -1,4 +1,4 @@
-import * as AC from "../AC.js";
+import * as Utils from "../Utils.js";
 import * as List from "../List.js"
 import { SheetMixin } from "./SheetMixin.js"
 
@@ -419,12 +419,12 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: AC.format('dialog.create', { name: sheet.object.name }),
-                    content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), AC.localize('app.newCategory')),
+                    title: Utils.format('dialog.create', { name: sheet.object.name }),
+                    content: CONFIG.animecampaign.textDialog(Utils.localize('app.name'), Utils.localize('app.newCategory')),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: AC.localize('app.createCategory'),
+                            label: Utils.localize('app.createCategory'),
                             callback: callback
                         },
                     },
@@ -453,7 +453,7 @@ export default class CharacterSheet extends ActorSheet {
                 }
                 
                 Dialog.confirm({
-                    title: AC.format('dialog.deleteCategory', {
+                    title: Utils.format('dialog.deleteCategory', {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
@@ -498,15 +498,15 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: AC.format('dialog.rename', {
+                    title: Utils.format('dialog.rename', {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
-                    content: CONFIG.animecampaign.textDialog(AC.localize('app.name'), key),
+                    content: CONFIG.animecampaign.textDialog(Utils.localize('app.name'), key),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: AC.localize('app.renameCategory'),
+                            label: Utils.localize('app.renameCategory'),
                             callback: callback
                         },
                     },
@@ -539,7 +539,7 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: AC.format('dialog.recolor', {
+                    title: Utils.format('dialog.recolor', {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
@@ -547,12 +547,12 @@ export default class CharacterSheet extends ActorSheet {
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: AC.localize('app.colorCategory'),
+                            label: Utils.localize('app.colorCategory'),
                             callback: set
                         },
                         reset: {
                             icon: '<i class="fas fa-arrow-rotate-left"></i>',
-                            label: AC.localize('dialog.resetColor'),
+                            label: Utils.localize('dialog.resetColor'),
                             callback: reset
                         }
                     },
@@ -606,7 +606,7 @@ export default class CharacterSheet extends ActorSheet {
                 const target = List.get(categories, { name: name(element) })
                 const color = target.color ?? sheet.object.system.color;
 
-                const styles = AC.uniformObject(properties.split(' '), color);
+                const styles = Utils.uniformObject(properties.split(' '), color);
                 $(element).css(styles);
             })
         }()
@@ -620,7 +620,7 @@ export default class CharacterSheet extends ActorSheet {
                 const properties = $(element).data('contrast-category') || "color";
                 const target = List.get(categories, { name: name(element) });
 
-                const rgb = AC.hexToRGB(target.color ?? sheet.object.system.color);
+                const rgb = Utils.hexToRGB(target.color ?? sheet.object.system.color);
                 rgb[0] *= 0.2126;
                 rgb[1] *= 0.7152;
                 rgb[2] *= 0.0722;
@@ -628,7 +628,7 @@ export default class CharacterSheet extends ActorSheet {
                 const luma = rgb.reduce((n, m) => n + m) / 255;
                 const color = (luma <= .5) ? "white" : "black";
 
-                const obj = AC.uniformObject(properties.split(' '), color);
+                const obj = Utils.uniformObject(properties.split(' '), color);
                 $(element).css(obj);
             })
         }()
@@ -671,12 +671,12 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 const dialog = new Dialog({
-                    title: AC.format('dialog.track', { category: key, name: sheet.object.name }),
-                    content: CONFIG.animecampaign.textDialog(AC.localize('app.statName'), ''),
+                    title: Utils.format('dialog.track', { category: key, name: sheet.object.name }),
+                    content: CONFIG.animecampaign.textDialog(Utils.localize('app.statName'), ''),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
-                            label: AC.localize('app.trackStat'),
+                            label: Utils.localize('app.trackStat'),
                             callback: callback
                         },
                     },
@@ -805,7 +805,7 @@ export default class CharacterSheet extends ActorSheet {
                 }
 
                 Dialog.confirm({
-                    title: AC.format('dialog.deleteFeature', {
+                    title: Utils.format('dialog.deleteFeature', {
                         id: id(event.target),
                         name: sheet.object.name
                     }),
@@ -827,7 +827,7 @@ export default class CharacterSheet extends ActorSheet {
                 const feature = sheet.object.getEmbeddedDocument('Item', id(element));
                 const color = feature.system.color;
 
-                const styles = AC.uniformObject(properties.split(' '), color);
+                const styles = Utils.uniformObject(properties.split(' '), color);
                 $(element).css(styles);
             })
         }()
@@ -858,7 +858,7 @@ export default class CharacterSheet extends ActorSheet {
         data = expandObject(data);
 
         // Ensure no data is lost for color stats.
-        const statUpdate = AC.uniformObject(CONFIG.animecampaign.colorKeys, null);
+        const statUpdate = Utils.uniformObject(CONFIG.animecampaign.colorKeys, null);
         const statData = data.system.stats;
 
         for (const stat in statData) {
