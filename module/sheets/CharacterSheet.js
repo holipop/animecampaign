@@ -128,9 +128,6 @@ export default class CharacterSheet extends ActorSheet {
         if ('feature' in dataset) {
             const feature = this.object.getEmbeddedDocument('Item', dataset.feature);
             dragData = { type: 'Feature', obj: feature, id: dataset.feature };
-
-            const img = $(event.target).find('.img')[0];
-            event.dataTransfer.setDragImage(img, 50, 50);
         } else if ('category' in dataset) {
             dragData = { type: 'Category', obj: category };
         } else if ('tracker' in dataset) {

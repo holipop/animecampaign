@@ -102,7 +102,7 @@
         },
         "Section": {
             "Collapse": "Collapse Section",
-            "Add": "Add Section",
+            "Create": "Create Section",
             "Remove": "Remove Section",
             "ToggleVisibility": "Toggle Section Visibility"
         }
