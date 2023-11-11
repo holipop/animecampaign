@@ -56,18 +56,6 @@ export function uniformObject (keyArr, value) {
     return obj;
 }
 
-/** Assigns each property a string of its own dot notation.
- * @param {*} obj
- * @returns {*}
- */
-export function facadeObject (obj) {
-    let paths = Object.keys(flattenObject(obj));
-    paths.forEach(path => {
-        setProperty(obj, path, path);
-    });
-    return obj;
-}
-
 /** Preloads the filepaths for the Handlebars partials.
  * @returns {Promise<Function[]>}
  */

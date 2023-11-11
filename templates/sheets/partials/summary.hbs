@@ -32,7 +32,8 @@
 
     <section class="summary-top">
         <!-- Name -->
-        <div class="name" data-edit="name" spellcheck='false' {{#if owner}}contenteditable{{/if}} data-name data-enter data-contrast data-plaintext>{{~document.name}}</div>
+        <textarea class="name" name="name" data-name data-enter data-contrast>{{document.name}}</textarea>
+        <div class="name facade" data-facade data-name data-contrast>{{document.name}}</div>
 
         {{#if (eq documentName "Actor")}}
             <!-- Class -->

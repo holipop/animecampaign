@@ -42,7 +42,7 @@ export default class CharacterSheet extends ActorSheet {
 
         return {
             ...super.getData(),
-            config: CONFIG.animecampaign,
+            config: CONFIG.AC,
             system: this.object.system,
             documentName: this.object.documentName,
 
@@ -276,7 +276,7 @@ export default class CharacterSheet extends ActorSheet {
          */
         void function disableOptions () {
             const stats = sheet.object.system.stats;
-            const colorKeys = CONFIG.animecampaign.colorKeys;
+            const colorKeys = CONFIG.AC.colorKeys;
             const populatedColors = colorKeys.filter(element => stats[element] != null);
 
             populatedColors.forEach(element => {
@@ -297,7 +297,7 @@ export default class CharacterSheet extends ActorSheet {
 
             select.each((index, element) => {
                 const key = $(element).data('match-select');
-                const color = CONFIG.animecampaign.colors[key];
+                const color = CONFIG.AC.colors[key];
 
                 const styles = {
                     'text-shadow': `${color} .1rem .1rem`,
@@ -418,7 +418,7 @@ export default class CharacterSheet extends ActorSheet {
 
                 const dialog = new Dialog({
                     title: game.i18n.format('AC.DIALOG.CreateCategory.Title', { name: sheet.object.name }),
-                    content: CONFIG.animecampaign.textDialog(
+                    content: CONFIG.AC.textDialog(
                         game.i18n.localize('AC.DIALOG.Name'), 
                         game.i18n.localize('AC.DIALOG.CreateCategory.Placeholder')
                     ),
@@ -503,7 +503,7 @@ export default class CharacterSheet extends ActorSheet {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
-                    content: CONFIG.animecampaign.textDialog(
+                    content: CONFIG.AC.textDialog(
                         game.i18n.localize('AC.DIALOG.Name'), 
                         key
                     ),
@@ -547,7 +547,7 @@ export default class CharacterSheet extends ActorSheet {
                         category: key.toUpperCase(),
                         name: sheet.object.name
                     }),
-                    content: CONFIG.animecampaign.colorDialog(initColor),
+                    content: CONFIG.AC.colorDialog(initColor),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
@@ -676,7 +676,7 @@ export default class CharacterSheet extends ActorSheet {
 
                 const dialog = new Dialog({
                     title: game.i18n.format('AC.DIALOG.TrackStat.Title', { category: key, name: sheet.object.name }),
-                    content: CONFIG.animecampaign.textDialog(game.i18n.localize('AC.DIALOG.Tag'), ''),
+                    content: CONFIG.AC.textDialog(game.i18n.localize('AC.DIALOG.Tag'), ''),
                     buttons: {
                         confirm: {
                             icon: '<i class="fas fa-check"></i>',
@@ -862,7 +862,7 @@ export default class CharacterSheet extends ActorSheet {
         data = expandObject(data);
 
         // Ensure no data is lost for color stats.
-        const statUpdate = Utils.uniformObject(CONFIG.animecampaign.colorKeys, null);
+        const statUpdate = Utils.uniformObject(CONFIG.AC.colorKeys, null);
         const statData = data.system.stats;
 
         for (const stat in statData) {
@@ -887,10 +887,6 @@ export default class CharacterSheet extends ActorSheet {
             bio.plaintext = convert.makeMarkdown(bio.richtext || source.richtext);
         }
 
-        // Update the name to skin any HTML.
-        data.name = convert.makeMarkdown(data.name);
-        data.name = data.name.replace(/<br>/g, "")
-        
         super._updateObject(event, data);
     }
 

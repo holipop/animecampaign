@@ -41,7 +41,7 @@ export default class FeatureSheet extends ItemSheet {
 
         return {
             ...super.getData(),
-            config: CONFIG.animecampaign,
+            config: CONFIG.AC,
             system: this.object.system,
             documentName: this.object.documentName,
             statList: this.object.system.stats,
@@ -63,7 +63,7 @@ export default class FeatureSheet extends ItemSheet {
         }
 
         // Otherwise, list will contain the default categories and their own.
-        const defaultCategories = CONFIG.animecampaign.defaultCategories.map(category => {
+        const defaultCategories = CONFIG.AC.defaultCategories.map(category => {
             return category.name;
         })
         const currentCategory = this.object.system.category;
@@ -380,12 +380,6 @@ export default class FeatureSheet extends ItemSheet {
             }
         }
 
-        // Update the name to skin any HTML.
-        data.name = convert.makeMarkdown(data.name);
-        data.name = data.name.replace(/<br>/g, "")
-
-        console.log(data);
-        
         super._updateObject(event, data);
     }
 }

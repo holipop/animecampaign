@@ -550,11 +550,17 @@
   margin: 0;
   padding: 0.4375rem;
   overflow-wrap: break-word;
+  overflow: none;
   vertical-align: bottom;
   z-index: 1;
   font-family: "Gloock";
   line-height: 0.85;
   letter-spacing: 0.0625rem;
+  opacity: 0;
+}
+.animecampaign.sheet .summary .name.facade {
+  pointer-events: none;
+  opacity: 1;
 }
 .animecampaign.sheet .summary .class {
   text-align: end;

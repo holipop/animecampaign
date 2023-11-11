@@ -13,7 +13,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
 
         const colorStats = {};
-        for (const element of CONFIG.animecampaign.colorKeys) {
+        for (const element of CONFIG.AC.colorKeys) {
             colorStats[element] = new fields.EmbeddedDataField(Stat, {
                 initial: null,
                 nullable: true
@@ -28,7 +28,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             stats: new fields.SchemaField(colorStats),
 
             categories: new fields.ArrayField(new fields.EmbeddedDataField(Category), {
-                initial: CONFIG.animecampaign.defaultCategories
+                initial: CONFIG.AC.defaultCategories
             }),
 
             biography: new fields.SchemaField({
@@ -42,7 +42,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             type: new fields.StringField(),
             color: new fields.StringField({
                 required: true,
-                initial: CONFIG.animecampaign.defaultColor
+                initial: CONFIG.AC.defaultColor
             }),
         };
     }

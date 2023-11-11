@@ -93,12 +93,19 @@
         margin: 0;
         padding: 7 * @rpx;
         overflow-wrap: break-word;
+        overflow: none;
         vertical-align: bottom;
         z-index: 1;
 
         font-family: "Gloock";
         line-height: 0.85;
         letter-spacing: (1 * @rpx);
+        opacity: 0;
+
+        &.facade {
+            pointer-events: none;
+            opacity: 1;
+        }
     }
     .class {
         text-align: end;

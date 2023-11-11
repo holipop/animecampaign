@@ -20,6 +20,15 @@ Hooks.once('init', () => {
     Utils.log(config.AC.ascii);
     Utils.log('Initializing Anime Campaign System!');
 
+    CONFIG.AC = config.AC;
+
+    game.AC = {
+        ...game.system,
+        Macro: { ...Macro },
+        List: { ...List },
+        Utils: { ...Utils },
+    }
+
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
 
@@ -33,19 +42,6 @@ Hooks.once('init', () => {
 
     Utils.preloadHandlebarsTemplates();
     Settings.register();
-})
-
-Hooks.once('ready', () => {
-    game.animecampaign = {
-        ...game.system,
-        macros: { ...Macro },
-        list: { ...List },
-        AC: { ...Utils },
-    }
-})
-
-Hooks.once('i18nInit', () => {
-    CONFIG.animecampaign = config.AC;
 })
 
 // (Copied from DnD5e)
