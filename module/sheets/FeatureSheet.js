@@ -33,6 +33,20 @@ export default class FeatureSheet extends ItemSheet {
 
     //** DRAG AND DROP */
 
+    /** Defines whether a user can drag elements.
+     * @returns {Boolean}
+     */
+    _canDragStart () {
+        return this.isEditable;
+    }
+
+    /** Defines whether a user can drop elements.
+     * @returns {Boolean}
+     */
+    _canDragDrop () {
+        return this.isEditable;
+    }
+
     /** Fires when a draggable element is picked up.
      * @param {*} event 
      */
@@ -45,6 +59,8 @@ export default class FeatureSheet extends ItemSheet {
             const index = $(event.target).closest('[data-section]').data('section');
             const section = List.get(sections, index);
             dragData = { type: 'section', obj: section, index: Number(index) };
+
+            event.dataTransfer.setDragImage($(event.target).closest('[data-section]')[0], 0, 0)
         } else if ('stat' in dataset) {
             const stats = this.object.system.stats;
             const stat = List.get(stats, dataset.stat)

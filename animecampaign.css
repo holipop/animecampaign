@@ -1016,6 +1016,9 @@
   border-left: 0.5rem solid black;
   border-right: 0.0625rem solid black;
 }
+.animecampaign.actor.sheet .kit .feature-list .feature .img:hover {
+  cursor: pointer;
+}
 .animecampaign.actor.sheet .kit .feature-list .feature .name {
   overflow: hidden;
   white-space: nowrap;
