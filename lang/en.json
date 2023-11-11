@@ -67,6 +67,7 @@
         "Class": "Class",
         "Name": "Name",
         "Category": "Category",
+        "EmptyStats": "Empty Stats",
         "EmptyCategory": "Empty Category",
         "TextEditor": "Text Editor",
         "Markdown": "Markdown",

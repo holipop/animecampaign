@@ -98,6 +98,10 @@
 
     {{/each}}
 
+    {{#if emptyStats}}
+        <div class="empty">&middot; &middot; &middot; {{localize "AC.LABEL.EmptyStats"}} &middot; &middot; &middot;</div>
+    {{/if}}
+
     <div class="cap"></div>
 
 </ol>

@@ -48,6 +48,7 @@ export default class CharacterSheet extends ActorSheet {
 
             // Prepared Data
             statList: this.usedStats,
+            emptyStats: isEmpty(this.usedStats),
             categories: this.categoriesObject,
             categorizedFeatures: this.categorizedFeatures,
             categorizedTrackers: this.categorizedTrackers,

@@ -846,6 +846,13 @@
 .animecampaign.sheet .stat-list .stat .view .selected {
   opacity: 1;
 }
+.animecampaign.sheet .stat-list .empty {
+  padding: 0.1rem;
+  text-align: center;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.5);
+  font: 600 0.75rem "Libre Franklin";
+  opacity: 0.5;
+}
 .animecampaign.actor.sheet .kit {
   list-style-type: none;
   margin: 0;

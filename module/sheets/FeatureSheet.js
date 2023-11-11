@@ -31,6 +31,48 @@ export default class FeatureSheet extends ItemSheet {
         return options;
     }
 
+
+    //* DATA PREPARATION */
+
+    /** Returns the context object for Handlebars.
+     * @returns {Object}
+     */
+    async getData () {
+
+        return {
+            ...super.getData(),
+            config: CONFIG.animecampaign,
+            system: this.object.system,
+            documentName: this.object.documentName,
+            statList: this.object.system.stats,
+            sections: this.object.system.sections,
+
+            // Prepared Data
+            emptyStats: (this.object.system.stats.length === 0),
+            categories: this.categories,
+        }
+    }
+
+    /** Returns an array of available categories to select, including the default ones.
+     * @returns {string[]}
+     */
+    get categories () {
+        // Owned features only list their parent's categories. 
+        if (this.object.isOwned) {
+            return this.object.parent.system.categories.map(category => category.name);
+        }
+
+        // Otherwise, list will contain the default categories and their own.
+        const defaultCategories = CONFIG.animecampaign.defaultCategories.map(category => {
+            return category.name;
+        })
+        const currentCategory = this.object.system.category;
+        const categorySet = new Set([...defaultCategories, currentCategory])
+        
+        return [...categorySet];
+    }
+
+
     //** DRAG AND DROP */
 
     /** Defines whether a user can drag elements.
@@ -99,46 +141,6 @@ export default class FeatureSheet extends ItemSheet {
     }
 
 
-    //* DATA PREPARATION */
-
-    /** Returns the context object for Handlebars.
-     * @returns {Object}
-     */
-    async getData () {
-
-        return {
-            ...super.getData(),
-            config: CONFIG.animecampaign,
-            system: this.object.system,
-            documentName: this.object.documentName,
-            statList: this.object.system.stats,
-            sections: this.object.system.sections,
-
-            // Prepared Data
-            categories: this.categories,
-        }
-    }
-
-    /** Returns an array of available categories to select, including the default ones.
-     * @returns {string[]}
-     */
-    get categories () {
-        // Owned features only list their parent's categories. 
-        if (this.object.isOwned) {
-            return this.object.parent.system.categories.map(category => category.name);
-        }
-
-        // Otherwise, list will contain the default categories and their own.
-        const defaultCategories = CONFIG.animecampaign.defaultCategories.map(category => {
-            return category.name;
-        })
-        const currentCategory = this.object.system.category;
-        const categorySet = new Set([...defaultCategories, currentCategory])
-        
-        return [...categorySet];
-    }
-
-
     //* EVENT LISTENERS */
 
     /** This is where we put all of the code for buttons and such in the sheet.
@@ -178,7 +180,7 @@ export default class FeatureSheet extends ItemSheet {
         const ol = html.find('[data-stat-list]');
 
         /** @returns {Number} */
-        const index = event => {
+        const getIndex = event => {
             // + is a unary operator, converts a string into a number.
             return +$(event.target).closest('[data-stat]').data('stat');
         }
@@ -189,8 +191,13 @@ export default class FeatureSheet extends ItemSheet {
             const add = ol.find('[data-add]');
 
             add.on('click', () => {
-                const update = List.add(stats);
-                sheet.object.update({ 'system.stats': update });
+                const index = stats.length;
+                const updateData = {
+                    [`system.stats.${index}`]: {
+                        tag: ""
+                    }
+                }
+                sheet.submit({ updateData });
             })
         }()
 
@@ -200,7 +207,7 @@ export default class FeatureSheet extends ItemSheet {
             const remove = ol.find('[data-remove]');
 
             remove.on('click', event => {
-                const update = List.remove(stats, index(event));
+                const update = List.remove(stats, getIndex(event));
                 sheet.object.update({ 'system.stats': update });
             });
         }()
@@ -222,9 +229,12 @@ export default class FeatureSheet extends ItemSheet {
 
             view.on('click', event => {
                 const setting = $(event.target).data('view');
-                const update = List.set(stats, index(event), { view: setting })
+                const index = getIndex(event)
+                const updateData = {
+                    [`system.stats.${index}.view`]: setting
+                }
 
-                sheet.object.update({ 'system.stats': update });
+                sheet.submit({ updateData })
             });
         }()
 
@@ -243,7 +253,7 @@ export default class FeatureSheet extends ItemSheet {
         const ol = html.find('[data-section-list]');
 
         /** @returns {Number} */
-        const index = event => {
+        const getIndex = event => {
             // + is a unary operator, converts a string into a number.
             return +$(event.target).closest('[data-section]').data('section');
         }
@@ -254,8 +264,17 @@ export default class FeatureSheet extends ItemSheet {
             const add = ol.find('[data-add]');
 
             add.on('click', () => {
-                const update = List.add(sections);
-                sheet.object.update({ 'system.sections': update });
+                const index = sections.length;
+                const updateData = {
+                    [`system.sections.${index}`]: {
+                        name: "",
+                        plaintext: "",
+                        richtext: "",
+                        visible: true,
+                        collapsed: false
+                    }
+                }
+                sheet.submit({ updateData });
             })
         }()
 
@@ -265,7 +284,7 @@ export default class FeatureSheet extends ItemSheet {
             const remove = ol.find('[data-remove]');
 
             remove.on('click', event => {
-                const update = List.remove(sections, index(event));
+                const update = List.remove(sections, getIndex(event));
                 sheet.object.update({ 'system.sections': update });
             });
         }()
@@ -287,11 +306,14 @@ export default class FeatureSheet extends ItemSheet {
             });
 
             toggle.on('click', event => {
-                // Get boolean and inverse it.
-                const visibility = List.get(sections, index(event)).visible;
-                const update = List.set(sections, index(event), { visible: !visibility });
+                // Get boolean and invert it.
+                const index = getIndex(event);
+                const visibility = List.get(sections, index).visible;
+                const updateData = {
+                    [`system.sections.${index}.visible`]: !visibility
+                }
 
-                sheet.object.update({ 'system.sections': update })
+                sheet.submit({ updateData });
             });
         }()
 
@@ -341,16 +363,15 @@ export default class FeatureSheet extends ItemSheet {
         const convert = new showdown.Converter();
         const source = this.object.system.sections;
 
-        if (data.system.details.editor == 'markdown') {
-            for (const [i, section] of Object.entries(data.system.sections)) {
+        for (const [i, section] of Object.entries(data.system.sections)) {
+            if (section === null) { }
+            else if (data.system.details.editor == 'markdown') {
                 section.richtext = convert.makeHtml(
                     section.plaintext ?? 
                     source[i].plaintext ??
                     ""
                 );
-            }
-        } else if (data.system.details.editor == 'prosemirror') {
-            for (const [i, section] of Object.entries(data.system.sections)) {
+            } else if (data.system.details.editor == 'prosemirror') {
                 section.plaintext = convert.makeMarkdown(
                     section.richtext ?? 
                     source[i].richtext ??
@@ -362,6 +383,8 @@ export default class FeatureSheet extends ItemSheet {
         // Update the name to skin any HTML.
         data.name = convert.makeMarkdown(data.name);
         data.name = data.name.replace(/<br>/g, "")
+
+        console.log(data);
         
         super._updateObject(event, data);
     }
