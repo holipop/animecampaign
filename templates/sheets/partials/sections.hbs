@@ -9,12 +9,14 @@
             <div class="panel">
 
                 <!-- Collapse -->
-                <a class="control collapse" data-collapse="sections.{{index}}" data-tooltip="AC.TOOLTIP.Section.Collapse">
+                <a class="control collapse" data-collapse="sections.{{index}} -d" data-tooltip="AC.TOOLTIP.Section.Collapse">
                     <i class="fas fa-chevron-down"></i>
                 </a>
 
-                <!-- Grip -->
-                <i class="control grip fas fa-grip-vertical" data-section-grip="{{index}}"></i>
+                {{#if @root.owner}}
+                    <!-- Grip -->
+                    <i class="control grip fas fa-grip-vertical" data-section-grip="{{index}}"></i>
+                {{/if}}
 
             </div>
             

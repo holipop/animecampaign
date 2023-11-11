@@ -186,7 +186,7 @@ export const SheetMixin = {
                 let update = { collapsed: !collapsed };
 
                 if (data) {
-                    const isListEntry = (typeof key.at(-1) == 'number');
+                    const isListEntry = (typeof Number(key.at(-1)) == 'number');
                     if (isListEntry) {
                         const dot = key.indexOf('.');
                         const listName = key.slice(0, dot);

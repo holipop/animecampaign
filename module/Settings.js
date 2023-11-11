@@ -19,9 +19,7 @@ export function register () {
             "prosemirror": "AC.LABEL.ProseMirror",
         },
         default: "markdown",
-        onChange: value => {
-            log(`Default Text Editor set to '${value}'`);
-        },
+        onChange: () => {},
     });
 
     // Diagonal Movement Rule
