@@ -1,0 +1,66 @@
+import * as List from "../List.js"
+import Stat from "./Stat.js";
+import Section from "./Section.js";
+
+/** 
+ * Data structure for Kit Features. 
+ */
+export default class FeatureData extends foundry.abstract.DataModel {
+
+    /** Defining the data structure of this data model. This cannot be changed post-init.
+     * @returns {Object}
+     */
+    static defineSchema () {
+        const fields = foundry.data.fields;
+
+        return {
+            color: new fields.StringField({
+                required: true,
+                initial: CONFIG.AC.defaultColor
+            }),
+            category: new fields.StringField({ initial: 'weapon' }),
+
+            stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
+            
+            sections: new fields.ArrayField(new fields.EmbeddedDataField(Section), {
+                initial: [{ visible: true, collapsed: false, richtext: null }],
+            }),
+
+            details: new fields.SchemaField({
+                editor: new fields.StringField({ initial: 'markdown' }),
+                formula: new fields.StringField({ initial: '1d20' }),
+
+                action: new fields.SchemaField({
+                    name: new fields.StringField({ initial: 'Main' }),
+                    img: new fields.FilePathField({
+                        categories: ['IMAGE'],
+                        initial: 'systems/animecampaign/assets/action/main.svg'
+                    }),
+                }),
+
+                usage: new fields.SchemaField({
+                    multiple: new fields.StringField({ initial: "1" }),
+                    timeframe: new fields.StringField({ initial: 'Round' })
+                }),
+            })
+        };
+    }
+
+    /** If this Feature is owned, returns the stats that are being tracked in its category.
+     * @returns {Object[]}
+     */
+    get trackedStats () {
+        if (!this.parent.isOwned) return null;
+        const categories = this.parent.parent.system.categories;
+        const trackers = List.get(categories, { name: this.category }).trackers;
+
+        return trackers.map(tracker => {
+            const fallback = {
+                view: 'value',
+                value: '',
+                img: 'systems/animecampaign/assets/transparent.svg',
+            };
+            return List.get(this.stats, { tag: tracker.tag.toLowerCase() }) ?? fallback;
+        })
+    }
+}

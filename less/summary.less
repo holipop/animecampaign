@@ -1,0 +1,201 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet .summary {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding-bottom: 2 * @rpx;
+
+    .background {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+
+        border-bottom: 1px solid black;
+    }
+
+    section {
+        z-index: 2;
+    }
+
+    .profile {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-column: 1 / 1;
+        grid-row: 1 / -1;
+        place-self: end end;
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: .2rem;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            place-self: start;
+            margin: 0;
+
+            > * {
+                #AC.Border;
+
+                height: 1.2rem;
+                width: 1.2rem;
+                display: grid;
+                place-items: center;
+            }
+        }
+    }
+    .color-button {
+        pointer-events: none;
+    }
+    .color {
+        #AC.InputSkinning();
+
+        position: absolute;
+        margin: 0;
+
+        border: none;
+        opacity: 0;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .img {
+        #AC.Border();
+
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        place-self: end;
+        border-radius: 0;
+
+    }
+
+    .summary-top {
+        display: grid;
+        grid-column: 2 / -1;
+        grid-row: 1 / 2;
+        grid-template-columns: 2fr .8fr;
+        align-items: end;
+        padding-left: 4 * @rpx;
+    }
+    textarea {
+        resize: none;
+        overflow-y: hidden;
+    }
+    .name {
+        position: absolute;
+        max-height: @max-name-height;
+        width: calc((100% * (4 / 5) * (2 / 2.8)) - 1rem);
+        margin: 0;
+        padding: 7 * @rpx;
+        overflow-wrap: break-word;
+        overflow: none;
+        vertical-align: bottom;
+        z-index: 1;
+
+        font-family: "Gloock";
+        line-height: 0.85;
+        letter-spacing: (1 * @rpx);
+        opacity: 0;
+
+        &.facade {
+            pointer-events: none;
+            opacity: 1;
+        }
+    }
+    .class {
+        text-align: end;
+        grid-column: 2 / -1;
+        max-height: 4rem;
+        max-width: 9rem;
+        place-self: end end;
+    }
+    
+    .summary-bottom {
+        display: flex;
+        grid-row: 2 / -1;
+        align-items: flex-end;
+        padding-left: 4 * @rpx;
+        gap: 2 * @rpx;
+
+        > * {
+            height: 1.6rem;
+        }
+    }
+    .word {
+        font-family: "Philosopher";
+        font-size: 1.25rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+}
+
+.animecampaign.actor.sheet .summary {
+    grid-template-rows: 7fr 3fr;
+    height: @character-summary-height;
+
+    .background {
+        height: (@character-summary-height * .7) + .5rem;
+    }
+    .img {
+        height: 5.4rem;
+        width: 5.4rem;
+    }
+    .name {
+        font-size: 3rem;
+    }
+    .class {
+        min-height: 0;
+        height: 1rem;
+        
+        font-weight: 800;
+        line-height: .9;
+    }
+}
+
+.animecampaign.item.sheet .summary {
+    grid-template-rows: 2fr 1fr;
+    height: @feature-summary-height;
+
+    .background {
+        height: (@feature-summary-height * (2 / 3)) + .5rem;
+    }
+    .img {
+        height: 4.4rem;
+        width: 4.4rem;
+    }
+    .name {
+        font-size: 2.5rem;
+    }
+    .action {
+        #AC.InputSkinning;
+
+        height: 2.75rem;
+        width: 2.75rem;
+        grid-column: 2 / -1;
+        grid-row: 1 / 2;
+        place-self: start end;
+
+        opacity: .5;
+    }
+
+    .summary-bottom > * {
+        height: 1.5rem;
+    }
+
+    .category-select {
+        width: .94rem;
+
+        option {
+            text-transform: capitalize;
+        }
+    }
+    .category-input {
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+}

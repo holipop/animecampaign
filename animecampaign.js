@@ -1,66 +1,54 @@
-import { animecampaign } from "./module/config.js";
-import AC from "./module/AC.js";
+// Anime Campaign for Foundry VTT
+// by Holipop
 
-import ACActor from "./module/documents/ACActor.js";
-import CharacterSheet from "./module/sheets/CharacterSheet.js";
-import { CharacterData } from "./module/data-models/CharacterData.js";
+import * as config from './module/config.js'
+import * as Utils from './module/Utils.js'
+import * as Roll from './module/Roll.js'
+import * as List from './module/List.js'
+import * as Macro from './module/Macro.js'
+import * as Settings from './module/Settings.js'
 
-import ACItem from "./module/documents/ACItem.js";
-import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
-import { KitPieceData } from "./module/data-models/KitPieceData.js";
+import ACActor from './module/documents/ACActor.js'
+import CharacterData from './module/data-models/CharacterData.js'
+import CharacterSheet from './module/sheets/CharacterSheet.js'
 
-import { RolledItem } from "./module/RolledItem.js";
+import ACItem from './module/documents/ACItem.js'
+import FeatureData from './module/data-models/FeatureData.js'
+import FeatureSheet from './module/sheets/FeatureSheet.js'
 
-//  Preloads the filepaths for the Handlebars partials.
-//*     () : Promise<Function[]>
-async function preloadHandlebarsTemplates() {
-    const templatePaths = [
-        "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
-        "systems/animecampaign/templates/sheets/partials/stats.hbs",
-        "systems/animecampaign/templates/sheets/partials/sections.hbs",
-        "systems/animecampaign/templates/sheets/partials/kit.hbs",
-        "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
-        "systems/animecampaign/templates/sheets/partials/biography.hbs",
-    ];
+Hooks.once('init', () => {
+    Utils.log(config.AC.ascii);
+    Utils.log('Initializing Anime Campaign System!');
 
-    return loadTemplates(templatePaths);
-}
+    CONFIG.AC = config.AC;
 
-//  All of our code that runs on initialization.
-Hooks.once("init", () => {
-    AC.log("Initializing Anime Campaign System");
-    
-    //  Adding our localization object to Foundry's CONFIG object.
-    CONFIG.animecampaign = animecampaign;
+    game.AC = {
+        ...game.system,
+        Macro: { ...Macro },
+        List: { ...List },
+        Utils: { ...Utils },
+    }
 
-    //  Assigning diagonal rule.
-    SquareGrid.prototype.measureDistances = AC.measureDistances;
-
-    //  Assigning Fonts
-    CONFIG.fontDefinitions = { ...CONFIG.fontDefinitions, ...AC.fonts };
-    CONFIG.defaultFontFamily = 'Arial';
-
-    //  Redefining the default document classes.
     CONFIG.Actor.documentClass = ACActor;
-    CONFIG.Item.documentClass = ACItem;
-
-    //  Assigning Character and Kit Piece schema.
     CONFIG.Actor.dataModels["Character"] = CharacterData;
-    CONFIG.Item.dataModels["Kit Piece"] = KitPieceData;
 
-    //  Unregistering the default document sheets & registering our own.
+    CONFIG.Item.documentClass = ACItem;
+    CONFIG.Item.dataModels["Feature"] = FeatureData;
+
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", KitPieceSheet, { makeDefault: true });
+    Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
-    preloadHandlebarsTemplates();
-
-    //  Adding our custom Handlebars helpers.
-    Handlebars.registerHelper(AC.hbsHelpers);
+    Utils.preloadHandlebarsTemplates();
+    Settings.register();
 })
 
-//  All of the code that runs for chat messages.
-Hooks.on('renderChatMessage', (_app, _html, _data) => {
-    RolledItem.addChatListeners(_html);
-})
+// (Copied from DnD5e)
+Hooks.on("canvasInit", gameCanvas => {
+    gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
+    SquareGrid.prototype.measureDistances = Utils.measureDistances;
+});
+
+Hooks.on('renderChatMessage', (message, html, data) => Roll.listeners(message, html, data))
+Hooks.on('hotbarDrop', (hotbar, data, slot) => Macro.createMacro(data, slot))

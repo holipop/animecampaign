@@ -1,46 +1,97 @@
-import AC from "../AC.js";
+import * as Utils from "../Utils.js"
 
-//  A custom document class to override certain Item methods.
-export default class ACItem extends Item {
-    chatTemplates = {
-        'Kit Piece': 'systems/animecampaign/templates/kit-piece-roll.hbs'
-    };
+/**
+ * Extending the Item class for system-specific logic.
+ */
+export default class ACItem extends Item { 
 
-    async _onUpdate(changed, options, userId) {
-        this.customTypeToLowercase(changed);
+    /** The file path to the roll template.
+     * @returns {String}
+     */
+    get rollTemplate () { return 'systems/animecampaign/templates/roll/roll-template.hbs' }
 
-        super._onUpdate(changed, options, userId);
+    /** Fires before a document is created. For preliminary operations.
+     * @param {*} data 
+     * @param {*} options 
+     * @param {BaseUser} user 
+     */
+    _preCreate(data, options, user) {
+        super._preCreate(data, options, user);
+
+        const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
+        this.updateSource({ 'system.details.editor': defaultTextEditor });
     }
 
-    customTypeToLowercase(changed) {
-        if (Object.hasOwn(changed, 'system') && Object.hasOwn(changed.system, 'customType')) {
-            this.update({ 'system.customType': changed.system.customType.toLowerCase() });
+    /** Sends a chat message of this feature.
+     */
+    async roll ({ post = false } = {}) {
+        
+        // If the formula is invalid, post the message.
+        const formula = this.system.details.formula;
+        let roll;
+        if (Roll.validate(formula)) {
+            roll = await new Roll(formula).evaluate();
+        } else {
+            roll = await new Roll("1").evaluate();
+            post = true;
         }
-    }
 
-    //  Posts the Kit Piece to the chat, optionally with a Roll.
-    //*     (_options?: Object) : Promise<ChatMessage>
-    async roll(_options = {}) {
-        let { post = false } = _options;
+        // Get CSS classes for if the roll is the max or min value.
+        let crit;
+        (() => {
+            if (roll.isDeterministic) return;
 
-        const chatData = {
-            user: game.user._id,
-            speaker: ChatMessage.getSpeaker()
-        };
+            if (roll.total == new Roll(formula).evaluate({ maximize: true }).total) {
+                crit = 'success';
+            } else if (roll.total == new Roll(formula).evaluate({ minimize: true }).total) {
+                crit = 'failure';
+            }
+        })();
 
-        const templateData = {
+        // Getting colors for contrasting.
+        const contrast = (() => {
+            const rgb = Utils.hexToRGB(this.system.color);
+            rgb[0] *= 0.2126;
+            rgb[1] *= 0.7152;
+            rgb[2] *= 0.0722;
+
+            const luma = rgb.reduce((n, m) => n + m) / 255;
+            return (luma <= .5) ? "white" : "black";
+        })();
+        const contrastImg = (contrast == 'white') 
+            ? 'brightness(0) saturate(100%) invert(100%)'
+            : 'brightness(0) saturate(100%)';
+
+        // Data preparation
+        const data = { 
             ...this,
-            color: this.system.color
+            _id: this._id,
+            
+            match: this.system.color,
+            contrast,
+            contrastImg,
+
+            post,
+            roll,
+            crit,
+            tooltip: await roll.getTooltip(),
+
+            stats: this.system.stats,
+            sections: this.system.sections,
+            details: this.system.details,
+        }
+        
+        const message = {
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker(),
+            content: await renderTemplate(this.rollTemplate, data),
         }
 
-        if (!post && this.system.formula) {
-            templateData.roll = await new Roll(this.system.formula).roll({ async: false });
-            templateData.roll.color = AC.critColor(templateData.roll);
-            templateData.roll.totalInt = Math.round(templateData.roll.total);
+        if (post) {
+            return ChatMessage.create(message);
         }
 
-        chatData.content = await renderTemplate(this.chatTemplates[this.type], templateData);
-
-        return ChatMessage.create(chatData);
+        return roll.toMessage(message);
     }
+
 }

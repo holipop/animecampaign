@@ -1,74 +1,114 @@
-<section class="kit-block">
-    {{#each kitPieces as |array key|}}
+<ol class="kit tab" data-tab="kit" data-group="actor-tabs" data-kit>
 
-        <div class="kit-type" data-type="{{key}}" {{match ../this.system.color alpha="0.7"}}>
-            <a class="kit-type-collapse" data-collapse {{contrast ../this.system.color}}>
-                <i class="fas fa-chevron-down"></i>
-                <span>{{key}}</span>
-            </a>
+    {{#each categorizedFeatures as |features category|}}
 
-            {{#if (eq ../this.ownership 3)}}
-                <a class="kit-piece-create" data-type="{{key}}" {{contrast ../this.system.color}} title="{{localize config.kitText.addkitpiece}}">
-                    <i class="fas fa-plus"></i>
+        <li class="category" data-category="{{category}}">
+
+            <!-- Header -->
+            <header data-match-category="background-color">
+
+                <!-- Collapse -->
+                <a class="control collapse" data-collapse="categories.{{category}}" data-tooltip="AC.TOOLTIP.Category.Collapse" data-contrast-category>
+                    <i class="fas fa-chevron-down"></i>
                 </a>
-                <a class="kit-type-flood" data-flood data-type="{{key}}" {{contrast ../this.system.color}}>
-                    <i class="fas fa-fill-drip"></i>
-                </a>
-                <a class="kit-type-color" data-typeColor data-type="{{key}}" {{contrast ../this.system.color}}>
-                    <i class="fas fa-palette"></i>
-                </a>
-            {{/if}}
+                
+                <h2 data-contrast-category data-first-letter>{{category}}</h2>
 
-        </div>
+                <!-- Settings -->
+                <div class="category-controls" data-contrast-category>
 
-        <div class="kit-type-group">
-            {{#each array as |item id|}}
-            
-                <div class="kit-piece-card flexrow" {{match item.system.color alpha="0.5"}}>
-                    <img class="kit-piece-img flex0" {{match item.system.color}} src="{{item.img}}" data-id="{{item._id}}">
-                    <span class="kit-piece-name">{{item.name}}</span>
-
-                    {{#each item.system.stats as |stat index|}}
-                        <div class="kit-piece-stat flex0" {{match item.system.color style="background-color"}}>
-                            {{#if stat.img}}
-                                <img class="kit-piece-stat-img" {{contrast item.system.color img='true'}} src="{{stat.img}}" data-edit="img">
-                            {{/if}}
-                            <span class="kit-piece-stat-value" {{contrast item.system.color}}>
-                                {{stat.value}}
-                            </span>
-                        </div>
-                    {{/each}}
-                    
-                    <a class="kit-piece-edit flex0" title="{{localize config.kitText.editkitpiece}}" data-id={{_id}}>
-                        <i class="fas fa-feather-pointed"></i>
-                    </a>
-
-                    {{#if (eq ../../this.ownership 3)}}
-                        <a class="kit-piece-delete flex0" title="{{localize config.kitText.addkitpiece}}" data-id={{_id}}>
-                            <i class="fas fa-trash-can-xmark"></i>
+                    {{#if @root.owner}}
+                        <!-- Rename, Color, Flood -->
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Rename">
+                            <i class="fas fa-pencil" data-rename></i>
+                        </a>
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Color">
+                            <i class="fas fa-palette" data-color></i>
+                        </a>
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Flood">
+                            <i class="fas fa-fill-drip" data-flood></i>
                         </a>
                     {{/if}}
+
                 </div>
 
-                <div class="kit-piece-stat-divider" {{match item.system.color style="border-color"}}></div>
+                <!-- Tracked Stats -->
+                <div class="tracked-stat-list" data-tracker-list data-contrast-category>
 
-            {{/each}}
-        </div>
+                    {{#if @root.owner}}
+                        <!-- Track -->
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Track">
+                            <i class="fas fa-square-plus" data-track></i>
+                        </a>
+                    {{/if}}
+
+                    {{#with (lookup @root.categorizedTrackers category)}}
+                        {{#each this as |tracker index|}}
+                            <div class="tracked-stat" data-tracker="{{index}}" data-contrast-category="border-color">
+
+                                <!-- Image -->
+                                {{#with (lookup @root.categories category)}}
+                                    <div class="tracker-image" data-tooltip="AC.TOOLTIP.Category.EditTrackerImage">
+                                        <img src="{{tracker.img}}" data-tracker-image="{{index}}" data-contrast-image="{{this.color}}">
+                                    </div>
+                                {{/with}}
+
+                                {{#if @root.owner}}
+                                    <!-- Untrack -->
+                                    <a class="control untrack" data-tooltip="AC.TOOLTIP.Category.Untrack">
+                                        <i class="fas fa-xmark" data-untrack="{{index}}"></i>
+                                    </a>
+                                {{/if}}
+
+                                <!-- Label -->
+                                <span class="label">{{tracker.tag}}</span>
+
+                            </div>
+                        {{/each}}
+                    {{/with}}
+
+                </div>
+
+                <!-- Controls -->
+                <div class="list-controls" data-contrast-category="color border-color">
+
+                    {{#if @root.owner}}
+                        <a class="control" data-tooltip="AC.TOOLTIP.Feature.Create">
+                            <i class="fas fa-plus" data-create-feature="{{category}}"></i>
+                        </a>
+                        <a class="control" data-tooltip="AC.TOOLTIP.Category.Delete">
+                            <i class="fas fa-sack-xmark" data-delete></i>
+                        </a>
+                    {{/if}}
+
+                </div>
+
+            </header>
+            
+            <!-- Features -->
+            <ol class="feature-list" data-collapse-target="categories.{{category}}">
+                {{#each features as |feature index|}}
+
+                    {{> "feature" feature}}
+
+                {{/each}}
+
+                {{#if (eq features.length 0)}}
+                    <div class="empty">&middot; &middot; &middot; {{localize "AC.LABEL.EmptyCategory"}} &middot; &middot; &middot;</div>
+                {{/if}}
+            </ol>
+
+            <div class="cap" data-match-category="background-color"></div>
+
+        </li>
 
     {{/each}}
 
-    {{#if (eq ownership 3)}}
-        {{#if (eq items.size 0)}}
-            <div class="empty-kit flexrow">
-                <a class="add-default">
-                    <p>Add Default Kit</p>
-                    <i class="fas fa-clone"></i>
-                </a>
-                <a class="kit-piece-create" data-type="ability">
-                    <p>Create Kit Piece</p>
-                    <i class="fas fa-square-plus"></i>
-                </a>
-            </div>
-        {{/if}}
+    {{#if owner}}
+        <button data-create type="button">
+            <i class="fas fa-plus"></i>
+            {{localize "AC.TOOLTIP.Category.Create"}}
+        </button>
     {{/if}}
-</section>
+
+</ol>

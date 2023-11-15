@@ -1,81 +1,81 @@
-//  A config object, currently for containing all our localization paths.
-export const animecampaign = {};
 
-animecampaign.title = "animecampaign.title"
+// An object containing language localization paths and default configurations.
+export const AC = {};
 
-animecampaign.test = "animecampaign.test"
-animecampaign.build = {
-    svelte: "animecampaign.build.svelte",
-    average: "animecampaign.build.average",
-    heavyset: "animecampaign.build.heavyset",
+AC.ascii = `
+      ██       ▄▄█▀▀▀█▄█  ▀██▀▀▀▀█ ▀██▀  ▀█▀ █▀▀██▀▀█ █▀▀██▀▀█
+     ▄██▄    ▄██▀     ▀█   ██  ▄    ▀█▄  ▄▀     ██       ██
+    ▄█▀██▄   ██▀       ▀   ██▀▀█     ██  █      ██       ██
+   ▄█  ▀██   ██            ██         ███       ██       ██
+   ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄
+  █▀      ██ ▀██▄     ▄▀
+▄███▄   ▄████▄ ▀▀█████▀   v1.0.0`
+
+AC.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
+AC.colorStat = {
+    red: 'AC.COLOR.Red',
+    blue: 'AC.COLOR.Blue',
+    yellow: 'AC.COLOR.Yellow',
+    green: 'AC.COLOR.Green',
+    orange: 'AC.COLOR.Orange',
+    cyan: 'AC.COLOR.Cyan',
+    purple: 'AC.COLOR.Purple',
+    grey: 'AC.COLOR.Grey',
 }
-animecampaign.type = {
-    inscribed: {
-        epithet: "animecampaign.type.inscribed.epithet"
+AC.colors = {
+    red: '#df2d48',
+    blue: '#4d86d1',
+    yellow: '#f1cd00',
+    green: '#3ea35a',
+    orange: '#ee8420',
+    cyan: '#28d5c1',
+    purple: '#9639cf',
+    grey: '#807f84',
+};
+AC.defaultColor = "#cccccc";
+
+AC.defaultCategories = [
+    {
+        name: 'weapon',
+        trackers: [
+            { tag: 'damage', img: "icons/svg/sword.svg" },
+            { tag: 'range' , img: "icons/svg/thrust.svg" },
+        ],
     },
-    mundie: {
-        expert: "animecampaign.type.mundie.expert",
-        powerhouse: "animecampaign.type.mundie.powerhouse"
+    {
+        name: 'talent',
+        trackers: [
+            { tag: 'bonus', img: "icons/svg/heal.svg" },
+        ],
+    },
+    {
+        name: 'passive',
+        trackers: [],
+    },
+    {
+        name: 'ability',
+        trackers: [
+            { tag: 'cost', img: "icons/svg/degen.svg" },
+        ],
     }
-}
-animecampaign.kitTypes = {
-    weapon: "animecampaign.kitTypes.weapon",
-    talent: "animecampaign.kitTypes.talent",
-    passive: "animecampaign.kitTypes.passive",
-    ability: "animecampaign.kitTypes.ability",
-    custom: "animecampaign.kitTypes.custom"
-}
-animecampaign.kitTypesPlural = {
-    weapons: "animecampaign.kitTypesPlural.weapons",
-    talents: "animecampaign.kitTypesPlural.talents",
-    passives: "animecampaign.kitTypesPlural.passives",
-    abilities: "animecampaign.kitTypesPlural.abilities"
-}
-animecampaign.powerset = {
-    inscribed: "animecampaign.powerset.inscribed",
-    mundie: "animecampaign.powerset.mundie"
-}
-animecampaign.statLabels = {
-    stamina: "animecampaign.statLabels.stamina",
-    proficiency: "animecampaign.statLabels.proficiency",
-    movement: "animecampaign.statLabels.movement",
-    damage: "animecampaign.statLabels.damage",
-    range: "animecampaign.statLabels.range",
-    cost: "animecampaign.statLabels.cost",
-    bonus: "animecampaign.statLabels.bonus",
-}
-animecampaign.statButtons = {
-    addDefault: "animecampaign.statButtons.addDefault",
-    addLeft: "animecampaign.statButtons.addLeft",
-    addRight: "animecampaign.statButtons.addRight",
-    createBlank: "animecampaign.statButtons.createBlank",
-    configure: "animecampaign.statButtons.configure",
-    delete: "animecampaign.statButtons.delete"
-}
-animecampaign.navigationLabels = {
-    kit: "animecampaign.navigationLabels.kit",
-    upgrades: "animecampaign.navigationLabels.upgrades",
-    biography: "animecampaign.navigationLabels.biography",
-}
-animecampaign.kitText = {
-    addKitPiece: "animecampaign.kitText.addKitPiece",
-    newKitPiece: "animecampaign.kitText.newKitPiece",
-    deleteKitPiece: "animecampaign.kitText.deleteKitPiece",
-    editKitPiece: "animecampaign.kitText.editKitPiece"
-}
-animecampaign.statDisplay = {
-    single: "animecampaign.statDisplay.single",
-    double: "animecampaign.statDisplay.double",
-}
-animecampaign.statConfigLabels = {
-    image: "animecampaign.statConfigLabels.image",
-    display: "animecampaign.statConfigLabels.display"
-}
-animecampaign.actions = {
-    blank: "animecampaign.actions.blank",
-    main: "animecampaign.actions.main",
-    move: "animecampaign.actions.move",
-    anytime: "animecampaign.actions.anytime",
-    bonus: "animecampaign.actions.bonus",
-    free: "animecampaign.actions.free",
-}
+];
+
+AC.textDialog = (name, placeholder) => `
+    <form autocomplete="off">
+        <div class="form-group">
+            <label>${name}</label>
+            <div class="form-fields">
+                <input type="text" name="name" placeholder="${placeholder}" autofocus>
+            </div>
+        </div>
+    </form>`;
+
+AC.colorDialog = hexcode => `
+    <form autocomplete="off">
+        <div class="form-group">
+            <label>Color</label>
+            <div class="form-fields">
+                <input type="color" name="color" value="${hexcode}">
+            </div>
+        </div>
+    </form>`;
