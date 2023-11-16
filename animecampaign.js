@@ -7,6 +7,7 @@ import * as Roll from './module/Roll.js'
 import * as List from './module/List.js'
 import * as Macro from './module/Macro.js'
 import * as Settings from './module/Settings.js'
+import * as Migration from './module/Migration.js'
 
 import ACActor from './module/documents/ACActor.js'
 import CharacterData from './module/data-models/CharacterData.js'
@@ -16,6 +17,10 @@ import ACItem from './module/documents/ACItem.js'
 import FeatureData from './module/data-models/FeatureData.js'
 import FeatureSheet from './module/sheets/FeatureSheet.js'
 
+import Stat from './module/data-models/Stat.js'
+import Section from './module/data-models/Section.js'
+import Category from './module/data-models/Category.js'
+
 Hooks.once('init', () => {
     Utils.log(config.AC.ascii);
     Utils.log('Initializing Anime Campaign System!');
@@ -24,6 +29,9 @@ Hooks.once('init', () => {
 
     game.AC = {
         ...game.system,
+        documents: { ACActor, ACItem },
+        data: { CharacterData, FeatureData, Stat, Section, Category },
+        apps: { CharacterSheet, FeatureSheet },
         Macro: { ...Macro },
         List: { ...List },
         Utils: { ...Utils },
@@ -42,6 +50,12 @@ Hooks.once('init', () => {
 
     Utils.preloadHandlebarsTemplates();
     Settings.register();
+})
+
+Hooks.on('ready', () => {
+    // !!!! remove post v1.0
+    game.settings.set('animecampaign', 'systemMigrationVersion', 'v1.0');
+    const NEEDS_MIGRATION_VERSION = "v0.1.3";
 })
 
 // (Copied from DnD5e)

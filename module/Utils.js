@@ -37,7 +37,7 @@ export function plainObject (instance) {
         if (value === null) { }
         else if (Array.isArray(value)) { }
         else if (typeof value === 'object') {
-            copy[key] = plain(value);
+            copy[key] = plainObject(value);
         }
     }
     return copy;

@@ -7,6 +7,15 @@
  */
 export function register () {
 
+    // Internal System Migration Version
+    game.settings.register('animecampaign', 'systemMigrationVersion', {
+        name: "System Migration Version",
+        scope: 'global',
+        config: false,
+        type: String,
+        default: ""
+    })
+
     // Default Text Editor
     game.settings.register('animecampaign', 'defaultTextEditor', {
         name: "AC.SETTINGS.DefaultTextEditor.Name",
