@@ -9,7 +9,7 @@ AC.ascii = `
    ▄█  ▀██   ██            ██         ███       ██       ██
    ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄
   █▀      ██ ▀██▄     ▄▀
-▄███▄   ▄████▄ ▀▀█████▀   v1.0.0`
+▄███▄   ▄████▄ ▀▀█████▀   v1.0`
 
 AC.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 AC.colorStat = {

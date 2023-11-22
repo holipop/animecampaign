@@ -166,7 +166,7 @@
     },
     "MIGRATION": {
         "WarnForGM": "Please have a GM log in to begin migration to v1.0.",
-        "V1MigrationBegin": "<b>Beginning v1.0 Migration.</b> Please wait a moment and do not close your came or shut down your server.",
+        "V1MigrationBegin": "<b>Beginning v1.0 Migration.</b> Please wait a moment and do not close your game or shut down your server.",
         "V1MigrationComplete": "<b>v1.0 Migration Complete!</b> Please reload your world.",
         "Migrating": "Migrating {document} document \"{name}\" [{id}]",
         "MigratingPack": "Migrated all {document} documents from Compendium \"{pack}\"",
