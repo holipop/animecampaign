@@ -63,7 +63,7 @@ Hooks.on('ready', () => {
 
     if (currentVersion == "") {
         if (!game.user.isGM) {
-            ui.notifications.warn('Please have a GM log in to begin migration to v1.0.');
+            ui.notifications.warn(game.i18n.localize("AC.MIGRATION.WarnForGM"));
             return;
         }
         Migrate.toV1();

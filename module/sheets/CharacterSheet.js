@@ -410,7 +410,10 @@ export default class CharacterSheet extends ActorSheet {
                     const isNameTaken = List.has(categories, { name })
 
                     if (isNameTaken) {
-                        ui.notifications.warn(`"${name.toUpperCase()}" is already taken by another category.`)
+                        ui.notifications.warn(game.i18n.format(
+                            "AC.NOTIFY.Character.CategoryNameTaken",
+                            { name: name.toUpperCase() }
+                        ));
                         return;
                     };
 
@@ -484,7 +487,10 @@ export default class CharacterSheet extends ActorSheet {
 
                     const isNameTaken = List.has(categories, { name: newName })
                     if (isNameTaken) {
-                        ui.notifications.warn(`"${newName.toUpperCase()}" is already taken by another category.`)
+                        ui.notifications.warn(game.i18n.format(
+                            "AC.NOTIFY.Character.CategoryNameTaken",
+                            { name: newName.toUpperCase() }
+                        ));
                         return;
                     };
 
@@ -666,10 +672,16 @@ export default class CharacterSheet extends ActorSheet {
 
                     const isNameTaken = List.has(trackers, { tag: name.toLowerCase() });
                     if (isNameTaken) {
-                        ui.notifications.warn(`"${name.toUpperCase()}" is already taken by another stat tracker.`)
+                        ui.notifications.warn(game.i18n.format(
+                            "AC.NOTIFY.Character.TrackerNameTaken",
+                            { name: name.toUpperCase() }
+                        ));
                         return;
                     }
-                    if (name == '') return ui.notifications.warn(`Name field can't be blank.`);
+                    if (name == '') {
+                        ui.notifications.warn(game.i18n.localize("AC.NOTIFY.Character.BlankName"));
+                        return;
+                    }
 
                     trackers.unshift({ tag: name.toLowerCase() })
                     const update = List.set(categories, { name: key }, { trackers })

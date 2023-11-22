@@ -163,6 +163,26 @@
             "5105": "DMG: Alternating (5/10/5)",
             "EUCL": "Euclidean (7.07 ft. Diagonal)"
         }
+    },
+    "MIGRATION": {
+        "WarnForGM": "Please have a GM log in to begin migration to v1.0.",
+        "V1MigrationBegin": "<b>Beginning v1.0 Migration.</b> Please wait a moment and do not close your came or shut down your server.",
+        "V1MigrationComplete": "<b>v1.0 Migration Complete!</b> Please reload your world.",
+        "Migrating": "Migrating {document} document \"{name}\" [{id}]",
+        "MigratingPack": "Migrated all {document} documents from Compendium \"{pack}\"",
+        "FailedMigration": "Failed AC FVTT system migration for {document} document \"{name}\" [{id}]: {error}",
+        "FailedPackMigration": "Failed AC FVTT system migration for {document} document (\"{name}\" [{id}]) in Compendium {pack}: {error}"
+    },
+    "NOTIFY": {
+        "Macro": {
+            "ControlActorWarning": "You must control an Actor to roll from the hotbar.",
+            "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]."
+        },
+        "Character": {
+            "CategoryNameTaken": "\"{name}\" is already taken by another category.",
+            "TrackerNameTaken": "\"{name}\" is already taken by another stat tracker.",
+            "BlankName": "Name field can't be blank."
+        }
     }
 }
 }

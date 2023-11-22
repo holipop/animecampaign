@@ -39,13 +39,16 @@ export function roll (id) {
     actor ??= game.actors.get(speaker.actor)
 
     if (!actor) {
-        ui.notifications.warn('You must control an Actor to roll from the hotbar.');
+        ui.notifications.warn(game.i18n.localize("AC.NOTIFY.Macro.ControlActorWarning"));
         return
     }
 
+    console.log(id)
+
     const item = actor.getEmbeddedDocument('Item', id);
     if (!item) {
-        ui.notifications.warn(`Your controlled Actor doesn't have an item with id [${id}].`);
+        ui.notifications.warn(game.i18n.format("AC.NOTIFY.Macro.MissingItemWarning", { id }));
+        return;
     }
 
     item.roll();

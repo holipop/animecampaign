@@ -3,6 +3,7 @@
  */
 
 import * as Utils from './Utils.js'
+import * as List from './List.js'
 
 const convert = new showdown.Converter();
 
@@ -11,7 +12,7 @@ const convert = new showdown.Converter();
  */
 export async function toV1 () {
     ui.notifications.warn(
-        "<b>Beginning v1.0 Migration.</b> Please wait a moment and do not close your came or shut down your server.",
+        game.i18n.localize("AC.MIGRATION.V1MigrationBegin"),
         { permanent: true }
     );
 
@@ -28,10 +29,19 @@ export async function toV1 () {
                 ? actor.toObject()
                 : game.data.actors.find(a => a._id == actor._id);
             const data = migrateActor(source);
-            Utils.log(`Migrating Actor document "${actor.name}" [${actor._id}].`)
+            Utils.log(game.i18n.format("AC.MIGRATION.Migrating", {
+                document: 'Actor',
+                name: actor.name,
+                id: actor._id,
+            }))
             await actor.update(data);
         } catch (err) {
-            err.message = `Failed AC FVTT system migration for Actor ${actor.name}: ${err.message}`;
+            err.message = game.i18n.format("AC.MIGRATION.FailedMigration", {
+                document: 'Actor',
+                name: actor.name,
+                id: actor._id,
+                error: err.message
+            })
             console.error(err);
         }
     }
@@ -49,23 +59,40 @@ export async function toV1 () {
                 ? item.toObject()
                 : game.data.items.find(i => i._id == item._id);
             const data = migrateItem(source);
-            Utils.log(`Migrating Item document "${item.name}" [${item._id}].`)
+            Utils.log(game.i18n.format("AC.MIGRATION.Migrating", {
+                document: 'Item',
+                name: item.name,
+                id: item._id,
+            }))
             await item.update(data);
         } catch (err) {
-            err.message = `Failed AC FVTT system migration for Item ${item.name}: ${err.message}`;
+            err.message = game.i18n.format("AC.MIGRATION.FailedMigration", {
+                document: 'Item',
+                name: item.name,
+                id: item._id,
+                error: err.message
+            })
             console.error(err);
         }
     }
-
 
     // Migrate Scenes
     for (const scene of game.scenes) {
         try {
             const data = migrateScene(scene);
-            Utils.log(`Migrating Scene document "${scene.name}" [${scene._id}].`)
+            Utils.log(game.i18n.format("AC.MIGRATION.Migrating", {
+                document: 'Scene',
+                name: scene.name,
+                id: scene._id,
+            }))
             await scene.update(data);
         } catch (err) {
-            err.message = `Failed AC FVTT system migration for Scene ${scene.name}: ${err.message}`;
+            err.message = game.i18n.format("AC.MIGRATION.FailedMigration", {
+                document: 'Scene',
+                name: scene.name,
+                id: scene._id,
+                error: err.message
+            })
             console.error(err);
         }
     }
@@ -102,22 +129,31 @@ export async function toV1 () {
                 }
                 await doc.update(data);
             } catch (err) {
-                err.message = `Failed AC FVTT system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
+                err.message = game.i18n.format("AC.MIGRATION.FailedPackMigration", {
+                    document: pack.documentName,
+                    name: doc.name,
+                    id: doc._id,
+                    error: err.message,
+                    pack: pack.collection
+                })
                 console.error(err);
             }
         }
 
         await pack.configure({locked: wasLocked});
-        Utils.log(`Migrated all ${pack.documentName} documents from Compendium ${pack.collection}`);
+        Utils.log(game.i18n.format("AC.MIGRATION.MigratingPack", {
+            document: pack.documentName,
+            pack: pack.collection
+        }));
     }
     
     // After 5 seconds, prompt to reload.
     game.settings.set('animecampaign', 'systemMigrationVersion', 'v1.0')
     ui.notifications.info(
-        "<b>v1.0 Migration Complete!</b> Please reload your world.",
+        game.i18n.localize("AC.MIGRATION.V1MigrationComplete"),
         { permanent: true }
-        );
-    }
+    );
+}
 
 
 /** Migrates pre-v1.0 actors.
@@ -178,16 +214,17 @@ function migrateActor (source) {
     source.items = (source.items || []).map(item => migrateItem(item));
 
     // Migrate Categories
-    const categories = new Set(
-        source.system.categories.map(category => category.name)
-    );
+    const categories = (source.system.categories) 
+        ? new Set(source.system.categories.map(category => category.name))
+        : new Set()
+    
     for (const item of source.items) {
         categories.add(item.system.category)
     }
     source.system.categories = [...categories].map(category => {
-        return {
-            name: category?.toLowerCase(),
-        }
+        const name = category?.toLowerCase();
+        const trackers = List.get(CONFIG.AC.defaultCategories, { name })?.trackers ?? []
+        return { name, trackers }
     });
 
     //console.log(source);
