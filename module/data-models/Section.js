@@ -23,6 +23,11 @@ export default class Section extends foundry.abstract.DataModel {
             }),
 
             collapsed: new fields.BooleanField({ initial: false }),
+
+            // ! Pre-v1.0
+            label: new fields.StringField(),
+            hidden: new fields.StringField(),
+            text: new fields.StringField(),
         }
     }
 }

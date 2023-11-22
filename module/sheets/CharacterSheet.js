@@ -59,7 +59,7 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     get usedStats () {
-        const stats = this.object.system.stats;
+        const stats = this.object.system._stats; //! v1.0 bandage
         const usedStats = {};
         for (const stat in stats) {
             if (stats[stat] != null) usedStats[stat] = stats[stat];
@@ -262,7 +262,7 @@ export default class CharacterSheet extends ActorSheet {
     colorStatListeners (html, sheet) {
 
         /** @type {Object} */
-        const stats = sheet.object.system.stats;
+        const stats = sheet.object.system._stats; //! v1.0 bandage
 
         /** @type {jQuery} */
         const ol = html.find('[data-stat-list]');
@@ -275,7 +275,6 @@ export default class CharacterSheet extends ActorSheet {
         /** Disables the options of the color selection that are occupied by other stats.
          */
         void function disableOptions () {
-            const stats = sheet.object.system.stats;
             const colorKeys = CONFIG.AC.colorKeys;
             const populatedColors = colorKeys.filter(element => stats[element] != null);
 
@@ -328,7 +327,8 @@ export default class CharacterSheet extends ActorSheet {
             view.on('click', event => {
                 const setting = $(event.target).data('view');
 
-                sheet.object.update({ [`system.stats.${key(event)}.view`]: setting });
+                //! v1.0 bandage
+                sheet.object.update({ [`system._stats.${key(event)}.view`]: setting });
             });
         }()
 
@@ -344,7 +344,8 @@ export default class CharacterSheet extends ActorSheet {
             add.on('click', () => {
                 for (const stat in stats) {
                     if (stats[stat] == null) {
-                        sheet.object.update({ [`system.stats.${stat}`]: { color: stat } })
+                        //! v1.0 bandage
+                        sheet.object.update({ [`system._stats.${stat}`]: { color: stat } })
                         return;
                     }
                 }
@@ -357,7 +358,8 @@ export default class CharacterSheet extends ActorSheet {
             const remove = ol.find('[data-remove]');
 
             remove.on('click', event => {
-                sheet.object.update({ [`system.stats.${key(event)}`]: null });
+                //! v1.0 bandage
+                sheet.object.update({ [`system._stats.${key(event)}`]: null });
             });
         }()
 
@@ -873,7 +875,7 @@ export default class CharacterSheet extends ActorSheet {
             statUpdate[key] = update;
         }
 
-        data.system.stats = statUpdate;
+        data.system._stats = statUpdate; //! v1.0 bandage
 
         // Update the apropriate text depending on the editor. This means that editing in
         // markdown won't completely destroy the richtext and vice versa.

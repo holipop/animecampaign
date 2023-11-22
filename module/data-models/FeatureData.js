@@ -42,7 +42,14 @@ export default class FeatureData extends foundry.abstract.DataModel {
                     multiple: new fields.StringField({ initial: "1" }),
                     timeframe: new fields.StringField({ initial: 'Round' })
                 }),
-            })
+            }),
+
+            // ! Pre-v1.0
+            type: new fields.StringField(),
+            customType: new fields.StringField(),
+            formula: new fields.StringField(),
+            usage: new fields.StringField(),
+            action: new fields.StringField(),
         };
     }
 

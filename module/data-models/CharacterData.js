@@ -25,7 +25,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             proficiency: new fields.EmbeddedDataField(Stat),
             movement: new fields.EmbeddedDataField(Stat),
 
-            stats: new fields.SchemaField(colorStats),
+            _stats: new fields.SchemaField(colorStats), // remove underscores post v1.0
 
             categories: new fields.ArrayField(new fields.EmbeddedDataField(Category), {
                 initial: CONFIG.AC.defaultCategories
@@ -44,6 +44,10 @@ export default class CharacterData extends foundry.abstract.DataModel {
                 required: true,
                 initial: CONFIG.AC.defaultColor
             }),
+
+            // ! Pre-v1.0
+            description: new fields.HTMLField(),
+            stats: new fields.ArrayField(new fields.ObjectField()),
         };
     }
 
