@@ -1,2 +1,0 @@
-The Epithet/Anime Campaign System currently contains a single SVG file that contains nothing and is transparent (as of v1.0).
-You can ignore the /action/ folder-- they aren't being used for anything currently, though I (Holipop) made those icons myself.
