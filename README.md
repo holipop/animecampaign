@@ -4,7 +4,7 @@ This is an unofficial, fan-made implementation of the JelloApocolypse's Epithet/
 
 Designed to be a port of the same system for Roll20, this system should feel familiar to any veteran player. Quality of life additions like custom character sheet categories, custom stats, and collapsible message text will streamline your game and allow you to make any kind character you want, simple or complex.
 
-If you have any feedback, suggestions, or issues, please message me on Discord! **@holipop**  
+If you have any feedback, suggestions, or issues, please message me on Discord! **@holipop**   
 If you'd like to support me, you can tip at my [Ko-fi](https://ko-fi.com/holipop) or become a supporter on my [Patreon](https://www.patreon.com/holipop).
 
 ## Licenses
