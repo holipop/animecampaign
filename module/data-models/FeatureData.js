@@ -34,7 +34,8 @@ export default class FeatureData extends foundry.abstract.DataModel {
                     name: new fields.StringField({ initial: 'Main' }),
                     img: new fields.FilePathField({
                         categories: ['IMAGE'],
-                        initial: 'systems/animecampaign/assets/action/main.svg'
+                        blank: true,
+                        //initial: 'systems/animecampaign/assets/action/main.svg'
                     }),
                 }),
 
@@ -69,5 +70,13 @@ export default class FeatureData extends foundry.abstract.DataModel {
             };
             return List.get(this.stats, { tag: tracker.tag.toLowerCase() }) ?? fallback;
         })
+    }
+
+    /** Like trimming the fat but for data? 
+     * @param {*} source 
+     */
+    static shimData (source) {
+        source.details.action.img = "";
+        return super.shimData(source);
     }
 }

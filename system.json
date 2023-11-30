@@ -1,6 +1,6 @@
 {
     "id": "animecampaign",
-    "title": "Anime Campaign",
+    "title": "Epithet/Anime Campaign TTRPG",
     "description": "An unofficial fanmade system based on JelloApocalypse's Epithet/Anime Campaign system.",
     "authors": [
         {
@@ -25,6 +25,22 @@
             "lang": "en",
             "name": "English",
             "path": "lang/en.json"
+        }
+    ],
+    "packs": [
+        {
+            "name": "wild-magic",
+            "label": "Wild Magic",
+            "system": "animecampaign",
+            "path": "packs/wild-magic",
+            "type": "RollTable"
+        },
+        {
+            "name": "rulebooks",
+            "label": "Rulebooks",
+            "system": "animecampaign",
+            "path": "packs/rulebooks",
+            "type": "JournalEntry"
         }
     ],
     "gridDistance": 5,

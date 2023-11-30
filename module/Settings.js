@@ -10,7 +10,7 @@ export function register () {
     // Internal System Migration Version
     game.settings.register('animecampaign', 'systemMigrationVersion', {
         name: "System Migration Version",
-        scope: 'global',
+        scope: 'world',
         config: false,
         type: String,
         default: ""
