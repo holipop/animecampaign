@@ -1,0 +1,113 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet .window-content {
+    #AC.Background();
+}
+
+.animecampaign.sheet form {
+    overflow-y: hidden;
+
+    .scrollable {
+        overflow-y: scroll;
+        padding: 0 1rem;
+
+        scrollbar-color: #AC.Color()[@return] rgba(0, 0, 0, 0.25);
+        scrollbar-width: thin;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #AC.Color()[@return];
+        border-color: #AC.Color(.5)[@return];
+    }
+
+    .editor {
+        min-height: 3rem;
+        border: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+        border-left-width: (3 * @rpx);
+        border-right-width: (3 * @rpx);
+
+        font-family: "Libre Franklin";
+        background-color: rgba(0, 0, 0, 0.05);
+
+        .editor-menu {
+            border-radius: 0;
+
+            button {
+                margin: 0;
+            }
+        }
+    }
+
+    .selected {
+        #AC.Active();
+    }
+
+    img {
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    a:hover {
+        text-shadow: #AC.Color()[@return] 0 0 (8 * @rpx);
+    }
+    button:not(.prosemirror *) {
+        #AC.InputSkinning();
+        #AC.Border();
+
+        padding: 0;
+        margin: 0;
+
+        font-family: "Libre Franklin";
+        font-weight: 600;
+
+        &:hover {
+            background-color: #AC.Color(.05)[@return];
+        }
+        &:active {
+            background-color: #AC.Color(.2)[@return];
+        }
+    }
+    input, select, textarea {
+        #AC.InputSkinning();
+
+        border: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+        border-left: 0;
+        border-right: 0;
+        background-color: rgba(0, 0, 0, 0.05);
+
+        font-family: "Libre Franklin";
+        font-weight: 500;
+
+        &:focus:not([readonly]) {
+            border-color: #AC.Color(.66)[@return];
+        }
+    }
+    input, select {
+        border-top: 0;
+        &:focus:not([readonly]) {
+            box-shadow: inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx);
+        }
+    }
+    textarea:focus:not([readonly]) {
+        box-shadow: 
+            inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
+            inset #AC.Color(.3)[@return] 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);
+    }
+}
+.animecampaign.actor.sheet {
+    min-width: 650px;
+    min-height: 550px;
+
+    .scrollable {
+        height: calc(100% - @character-summary-height);
+    }
+}
+.animecampaign.item.sheet {
+    min-width: 550px;
+    min-height: 500px;
+
+    .scrollable {
+        height: calc(100% - @feature-summary-height);
+    }
+}

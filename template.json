@@ -3,6 +3,6 @@
         "types": ["Character"]
     },
     "Item": {
-        "types": ["Kit Piece"]
+        "types": ["Feature"]
     }
 }

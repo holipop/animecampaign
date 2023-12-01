@@ -1,76 +1,188 @@
 {
-    "animecampaign": {
-        "title": "Anime Campaign",
-        "test": "Testing Testing One Two Three!",
-        "build": {
-            "svelte": "Svelte",
-            "average": "Average",
-            "heavyset": "Heavyset"
+"AC": {
+    "Title": "Anime Campaign",
+    "Character": "Character",
+    "Feature": "Feature",
+    "Test": "Testing Testing One Two Three!",
+    "NotApplicable": "N/A",
+
+    "CATEGORY": {
+        "Weapon": "Weapon",
+        "Talent": "Talent",
+        "Passive": "Passive",
+        "Ability": "Ability"
+    },
+    "TYPE": {
+        "Inscribed": "Inscribed",
+        "Mundie": "Mundie",
+        "Epithet": "Epithet",
+        "Expert": "Expert",
+        "Powerhouse": "Powerhouse"
+    },
+    "STAT": {
+        "Stamina": "Stamina",
+        "Proficiency": "Proficiency",
+        "Movement": "Movement",
+        "Damage": "Damage",
+        "Range": "Range",
+        "Cost": "Cost",
+        "Bonus": "Bonus",
+        "RedStat": "Red Stat",
+        "BlueStat": "Blue Stat",
+        "YellowStat": "Yellow Stat",
+        "GreenStat": "Green Stat",
+        "OrangeStat": "Orange Stat",
+        "CyanStat": "Cyan Stat",
+        "PurpleStat": "Purple Stat",
+        "GreyStat": "Grey Stat"
+    },
+    "COLOR": {
+        "Red": "Red",
+        "Blue": "Blue",
+        "Yellow": "Yellow",
+        "Green": "Green",
+        "Orange": "Orange",
+        "Cyan": "Cyan",
+        "Purple": "Purple",
+        "Grey": "Grey"
+    },
+    "NAV": {
+        "Biography": "Biography",
+        "Kit": "Kit",
+        "Description": "Description",
+        "Details": "Details"
+    },
+    "LABEL": {
+        "ColorStats": "Color Stats",
+        "Stats": "Stats",
+        "View": "View",
+        "Value": "Value",
+        "Max": "Max",
+        "Spaces": "Spaces",
+        "Build": "Build",
+        "Label": "Label",
+        "Text": "Text",
+        "Tag": "Tag",
+        "Word": "Epithet/Core Word",
+        "Class": "Class",
+        "Name": "Name",
+        "Category": "Category",
+        "EmptyStats": "Empty Stats",
+        "EmptyCategory": "Empty Category",
+        "TextEditor": "Text Editor",
+        "Markdown": "Markdown",
+        "ProseMirror": "ProseMirror"
+    },
+    "TOOLTIP": {
+        "Color": "Edit Color",
+        "Roll": "Roll",
+        "Stat": {
+            "Collapse": "Collapse Stats",
+            "Add": "Add Stat",
+            "Remove": "Remove Stat",
+            "Value": "Set View to Value",
+            "Resource": "Set View to Resource",
+            "Label": "Set View to Label"
         },
-        "type": {
-            "inscribed": {
-                "epithet": "Epithet"
-            },
-            "mundie": {
-                "expert": "Expert",
-                "powerhouse": "Powerhouse"
-            }
+        "Category": {
+            "Collapse": "Collapse Category",
+            "Create": "Create Category",
+            "Delete": "Delete Category",
+            "Rename": "Rename Category",
+            "Color": "Color Category",
+            "Flood": "Flood Category",
+            "Track": "Track Stat",
+            "Untrack": "Untrack Stat",
+            "EditTrackerImage": "Edit Tracker Image"
         },
-        "kitTypes": {
-            "weapon": "Weapon",
-            "talent": "Talent",
-            "passive": "Passive",
-            "ability": "Ability",
-            "custom": "Custom"
+        "Feature": {
+            "Expand": "Expand Feature",
+            "Create": "Create Feature",
+            "View": "View Feature",
+            "Delete": "Delete Feature"
         },
-        "kitTypesPlural": {
-            "weapons": "Weapons",
-            "talents": "Talents",
-            "passives": "Passives",
-            "abilities": "Abilities"
+        "Section": {
+            "Collapse": "Collapse Section",
+            "Create": "Create Section",
+            "Remove": "Remove Section",
+            "ToggleVisibility": "Toggle Section Visibility"
+        }
+    },
+    "DIALOG": {
+        "Confirm": "Confirm",
+        "Name": "Name",
+        "Tag": "Tag",
+        "CreateCategory": {
+            "Title": "Create New Category: {name}",
+            "Placeholder": "New Category"
         },
-        "powerset": {
-            "inscribed": "Inscribed",
-            "mundie": "Mundie"
+        "ColorCategory": {
+            "Title": "Color Category [{category}]: {name}",
+            "Set": "Set Color",
+            "Reset": "Reset Color"
         },
-        "statLabels": {
-            "stamina": "Stamina",
-            "proficiency": "Proficiency",
-            "movement": "Movement",
-            "damage": "Damage",
-            "range": "Range",
-            "cost": "Cost",
-            "bonus": "Bonus"
+        "RenameCategory": {
+            "Title": "Rename Category [{category}]: {name}"
         },
-        "statButtons": {
-            "addDefault": "Add Default Stats",
-            "addLeft": "Add Stat Left",
-            "addRight": "Add Stat Right",
-            "createBlank": "Create Blank Stat",
-            "configure": "Configure",
-            "delete": "Delete"
+        "TrackStat": {
+            "Title": "Track Stat [{category}]: {name}"
         },
-        "navigationLabels": {
-            "kit": "Kit",
-            "upgrades": "Upgrades",
-            "biography": "Biography"
+        "DeleteCategory": {
+            "Title": "Delete Category [{category}]: {name}"
         },
-        "kitText": {
-            "addKitPiece": "Create New Kit Piece",
-            "newKitPiece": "New Kit Piece",
-            "deleteKitPiece": "Delete Kit Piece",
-            "editKitPiece": "Edit Kit Piece"
+        "DeleteFeature": {
+            "Title": "Delete Feature [{id}]: {name}"
+        }
+    },
+    "DETAILS": {
+        "TextEditor": {
+            "Name": "Text Editor",
+            "Hint": "Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, \"what you see is what you get\"."
         },
-        "statDisplay": {
-            "single": "Single",
-            "double": "Double",
-            "phase": "Phase",
-            "state": "State",
-            "advancement": "Advancement"
+        "RollFormula": {
+            "Name": "Roll Formula"
         },
-        "statConfigLabels": {
-            "image": "Image",
-            "display": "Display"
+        "Action": {
+            "Name": "Action"
+        },
+        "Usage": {
+            "Name": "Usage",
+            "Hint": "i.e. \"Once per Combat\".",
+            "Per": "per"
+        }
+    },
+    "SETTINGS": {
+        "DefaultTextEditor": {
+            "Name": "Default Text Editor",
+            "Hint": "Configure which text editor is set on-creation for your actors and items."
+        },
+        "DiagonalMovement": {
+            "Name": "Diagonal Movement Rule",
+            "Hint": "Configure which diagonal movement rule should be used for games within this system.",
+            "555": "PHB: Equidistant (5/5/5)",
+            "5105": "DMG: Alternating (5/10/5)",
+            "EUCL": "Euclidean (7.07 ft. Diagonal)"
+        }
+    },
+    "MIGRATION": {
+        "WarnForGM": "Please have a GM log in to begin migration to v1.0.",
+        "V1MigrationBegin": "<b>Beginning v1.0 Migration.</b> Please wait a moment and do not close your game or shut down your server.",
+        "V1MigrationComplete": "<b>v1.0 Migration Complete!</b> Please reload your world.",
+        "Migrating": "Migrating {document} document \"{name}\" [{id}]",
+        "MigratingPack": "Migrated all {document} documents from Compendium \"{pack}\"",
+        "FailedMigration": "Failed AC FVTT system migration for {document} document \"{name}\" [{id}]: {error}",
+        "FailedPackMigration": "Failed AC FVTT system migration for {document} document (\"{name}\" [{id}]) in Compendium {pack}: {error}"
+    },
+    "NOTIFY": {
+        "Macro": {
+            "ControlActorWarning": "You must control an Actor to roll from the hotbar.",
+            "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]."
+        },
+        "Character": {
+            "CategoryNameTaken": "\"{name}\" is already taken by another category.",
+            "TrackerNameTaken": "\"{name}\" is already taken by another stat tracker.",
+            "BlankName": "Name field can't be blank."
         }
     }
+}
 }

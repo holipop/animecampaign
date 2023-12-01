@@ -1,0 +1,20 @@
+<section class="roll-banner" style="color: {{contrast}}; background-color: {{match}};">
+
+    <!-- Usage -->
+    <div class="usage">
+
+        {{#if details.usage.multiple}}
+            <i class="fas fa-arrow-rotate-right"></i>
+            <span>{{details.usage.multiple}}</span>
+        {{/if}}
+
+        {{#if details.usage.timeframe}}
+            <span> &bull;  {{details.usage.timeframe}}</span>
+        {{/if}}
+        
+    </div>
+
+    <!-- Action -->
+    <span class="action">{{details.action.name}}</span>
+
+</section>

@@ -1,0 +1,79 @@
+<li class="feature" data-feature="{{_id}}">
+
+    <!-- Entry -->
+    <section class="entry" data-match-feature>
+
+        <!-- Image -->
+        <img class="img" src="{{img}}" data-tooltip="AC.TOOLTIP.Roll" data-roll="{{_id}}" data-match-feature="background-color border-left-color">
+
+        <!-- Name -->
+        <a class="name" data-tooltip="AC.TOOLTIP.Feature.Expand" data-collapse="feature.{{_id}} -h">{{name}}</a>
+
+        <!-- Action -->
+        <!-- img class="action" src="{{system.details.action.img}}" alt="system/animecampaign/assets/transparent.svg" -->
+
+        <div class="spacing"></div>
+
+        <!-- Tracked Stats -->
+        <div class="feature-tracked-stat-list">
+            {{#each system.trackedStats as |stat index|}}
+
+                <div class="stat">
+                    <div class="stat-img">
+                        <img src="{{stat.img}}">
+                    </div>
+                    
+                    <div class="stat-numbers">
+
+                        {{#if (eq stat.view 'value')}}
+                            <span class="value">{{stat.value}}</span>
+                        {{/if}}
+
+                        {{#if (eq stat.view 'resource')}}
+                            <span class="resource-value">{{stat.value}}</span>
+                            <span class="resource-max">/&thinsp;{{stat.max}}</span>
+                        {{/if}}
+
+                        {{#if (eq stat.view 'label')}}
+                            <span data-swap-font>{{stat.label}}</span>
+                        {{/if}}
+                        
+                    </div>
+                </div>
+
+            {{/each}}
+        </div>
+
+        <!-- Controls -->
+        <div class="feature-controls">
+
+            <a class="control" data-tooltip="AC.TOOLTIP.Feature.View">
+                <i class="fas fa-feather-pointed" data-view-feature></i>
+            </a>
+
+            {{#if @root.owner}}
+                <a class="control" data-tooltip="AC.TOOLTIP.Feature.Delete">
+                    <i class="fas fa-trash" data-delete-feature></i>
+                </a>
+            {{/if}}
+
+        </div>
+
+    </section>
+
+    <!-- Expanded View -->
+    <ol class="expanded" data-match-feature="border-left-color" data-collapse-target="feature.{{_id}}">
+        {{#each system.sections as |section index|}}
+            <li>
+                <a class="label" data-collapse="feature.{{../_id}}.{{index}} -s{{#unless section.visible}} -h{{/unless}}">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>{{section.name}}</span>
+                </a>
+                <div class="text" data-collapse-target="feature.{{../_id}}.{{index}}">
+                    {{{section.richtext}}}
+                </div>
+            </li>
+        {{/each}}
+    </ol>
+
+</li>

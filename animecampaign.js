@@ -1,63 +1,82 @@
-import { animecampaign } from "./module/config.js";
-import AC from "./module/AC.js";
+// Anime Campaign for Foundry VTT
+// by Holipop
 
-import ACActor from "./module/documents/ACActor.js";
-import CharacterSheet from "./module/sheets/CharacterSheet.js";
-import { CharacterData } from "./module/data-models/CharacterData.js";
+import * as config from './module/config.js'
+import * as Utils from './module/Utils.js'
+import * as Roll from './module/Roll.js'
+import * as List from './module/List.js'
+import * as Macro from './module/Macro.js'
+import * as Settings from './module/Settings.js'
+import * as Migrate from './module/Migrate.js'
 
-import ACItem from "./module/documents/ACItem.js";
-import KitPieceSheet from "./module/sheets/KitPieceSheet.js";
-import { KitPieceData } from "./module/data-models/KitPieceData.js";
+import ACActor from './module/documents/ACActor.js'
+import CharacterData from './module/data-models/CharacterData.js'
+import CharacterSheet from './module/sheets/CharacterSheet.js'
 
-import { RolledItem } from "./module/RolledItem.js";
+import ACItem from './module/documents/ACItem.js'
+import FeatureData from './module/data-models/FeatureData.js'
+import FeatureSheet from './module/sheets/FeatureSheet.js'
 
-//  Preloads the filepaths for the Handlebars partials.
-//*     () : Promise<Function[]>
-async function preloadHandlebarsTemplates() {
-    const templatePaths = [
-        "systems/animecampaign/templates/sheets/partials/character-summary.hbs",
-        "systems/animecampaign/templates/sheets/partials/stats.hbs",
-        "systems/animecampaign/templates/sheets/partials/sections.hbs",
-        "systems/animecampaign/templates/sheets/partials/kit.hbs",
-        "systems/animecampaign/templates/sheets/partials/upgrades.hbs",
-        "systems/animecampaign/templates/sheets/partials/biography.hbs",
-    ];
+import Stat from './module/data-models/Stat.js'
+import Section from './module/data-models/Section.js'
+import Category from './module/data-models/Category.js'
 
-    return loadTemplates(templatePaths);
-}
+Hooks.once('init', () => {
+    Utils.log(config.AC.ascii);
+    Utils.log('Initializing Anime Campaign System!');
 
-//  All of our code that runs on initialization.
-Hooks.once("init", () => {
-    AC.log("Initializing Anime Campaign System");
-    
-    //  Adding our localization object to Foundry's CONFIG object.
-    CONFIG.animecampaign = animecampaign;
+    CONFIG.AC = config.AC;
 
-    //  Assigning Fonts
-    CONFIG.fontDefinitions = { ...CONFIG.fontDefinitions, ...AC.fonts };
-    CONFIG.defaultFontFamily = 'Arial';
+    game.AC = {
+        documents: { ACActor, ACItem },
+        data: { CharacterData, FeatureData, Stat, Section, Category },
+        apps: { CharacterSheet, FeatureSheet },
+        Macro: { ...Macro },
+        List: { ...List },
+        Utils: { ...Utils },
+    }
 
-    //  Redefining the default document classes.
     CONFIG.Actor.documentClass = ACActor;
-    CONFIG.Item.documentClass = ACItem;
-
-    //  Assigning Character and Kit Piece schema.
     CONFIG.Actor.dataModels["Character"] = CharacterData;
-    CONFIG.Item.dataModels["Kit Piece"] = KitPieceData;
 
-    //  Unregistering the default document sheets & registering our own.
+    CONFIG.Item.documentClass = ACItem;
+    CONFIG.Item.dataModels["Feature"] = FeatureData;
+
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", KitPieceSheet, { makeDefault: true });
+    Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
-    preloadHandlebarsTemplates();
-
-    //  Adding our custom Handlebars helpers.
-    Handlebars.registerHelper(AC.hbsHelpers);
+    Utils.preloadHandlebarsTemplates();
+    Settings.register();
 })
 
-//  All of the code that runs for chat messages.
-Hooks.on('renderChatMessage', (_app, _html, _data) => {
-    RolledItem.addChatListeners(_html);
+Hooks.on('ready', () => {
+    // !!! Remove post v1.0
+    const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion');
+
+    // If this is a brand new world, skip migration.
+    const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
+    if ( !currentVersion && totalDocuments === 0 ) { 
+        return game.settings.set("animecampaign", "systemMigrationVersion", game.system.version);
+    }
+
+    if (currentVersion == "") {
+        if (!game.user.isGM) {
+            ui.notifications.warn(game.i18n.localize("AC.MIGRATION.WarnForGM"));
+            return;
+        }
+        Migrate.toV1();
+    }
+
+    const NEEDS_MIGRATION_VERSION = "v0.1";
 })
+
+// (Copied from DnD5e)
+Hooks.on("canvasInit", gameCanvas => {
+    gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
+    SquareGrid.prototype.measureDistances = Utils.measureDistances;
+});
+
+Hooks.on('renderChatMessage', (message, html, data) => Roll.listeners(message, html, data))
+Hooks.on('hotbarDrop', (hotbar, data, slot) => Macro.createMacro(data, slot))

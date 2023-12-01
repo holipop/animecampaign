@@ -1,32 +1,29 @@
 <form class="{{cssClass}}" autocomplete="off">
-    {{> "systems/animecampaign/templates/sheets/partials/character-summary.hbs"}}
+    <!-- Summary -->
+    {{~> "summary"}}
 
-    {{#unless (eq ownership 1)}}
-        <section class="scrollable">
-            {{> "systems/animecampaign/templates/sheets/partials/stats.hbs"}}
+    <section class="scrollable" data-scrollable>
+        <!-- Main Stats -->
+        {{> "main-stats"}}
+
+        <!-- Color Stats -->
+        {{> "stat-list"}}
+
+        <!-- Navigation -->
+        {{> "nav"}}
+
+        <div data-content>
+
+            <!-- Biography -->
+            {{~> "biography"}}
             
-            <nav class="flexrow tabs" data-group="primary-tabs">
-                <a class="item" data-group="primary-tabs" data-tab="kit">{{ localize config.navigationLabels.kit }}</a>
-                <a class="item" data-group="primary-tabs" data-tab="upgrades">{{ localize config.navigationLabels.upgrades }}</a>
-                <a class="item" data-group="primary-tabs" data-tab="biography">{{ localize config.navigationLabels.biography }}</a>
-            </nav>
+            {{#unless limited}}
+                <!-- Kit -->
+                {{> "kit"}}
+            {{/unless}}
 
-            <div class="divider"></div>
+        </div>
 
-            <section class="content">
-                <div class="tab" data-group="primary-tabs" data-tab="kit">
-                    {{> "systems/animecampaign/templates/sheets/partials/kit.hbs"}}
-                </div>
-                <div class="tab" data-group="primary-tabs" data-tab="upgrades">
-                    {{> "systems/animecampaign/templates/sheets/partials/upgrades.hbs"}}
-                </div>
-                <div class="tab" data-group="primary-tabs" data-tab="biography">
-                    {{> "systems/animecampaign/templates/sheets/partials/biography.hbs"}}
-                </div>
-            </section>
+    </section>
 
-        </section>
-    {{else}}
-        {{> "systems/animecampaign/templates/sheets/partials/biography.hbs"}}
-    {{/unless}}
 </form>

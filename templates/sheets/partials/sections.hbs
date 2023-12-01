@@ -1,43 +1,67 @@
-<section class="sections">
-    
+<ol class="section-list tab" data-tab="description" data-group="item-tabs" data-section-list>
+
     {{#each system.sections as |section index|}}
-        {{#if (eq ../this.ownership 3)}}
-            <fieldset class="section" data-index="{{index}}">
-                <div class="section-wrapper">
-                    <span class="section-options">
-                        <input class="section-label" type="text" name="system.sections.{{index}}.label" value="{{section.label}}" placeholder="Label">
+    
+        <!-- Section -->
+        <li class="section" data-section="{{index}}">
 
-                        <a class="section-move-up">
-                            <i class="fas fa-arrow-up"></i>
-                        </a>
-                        <a class="section-move-down">
-                            <i class="fas fa-arrow-down"></i>
-                        </a>
-                        <a class="section-delete">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </span>
+            <!-- Control -->
+            <div class="panel">
 
-                    {{editor section.text engine='prosemirror' target=(concat "system.sections." index ".text") button='true'}}
+                <!-- Collapse -->
+                <a class="control collapse" data-collapse="sections.{{index}} -d" data-tooltip="AC.TOOLTIP.Section.Collapse">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+
+                {{#if @root.owner}}
+                    <!-- Grip -->
+                    <i class="control grip fas fa-grip-vertical" data-section-grip="{{index}}"></i>
+                {{/if}}
+
+            </div>
+            
+            <div class="section-body">
+
+                <header>
+                    
+                    <!-- Name -->
+                    <input class="name" type="text" name="system.sections.{{index}}.name" placeholder="{{localize "AC.LABEL.Name"}}" value="{{section.name}}">
+
+                    {{#if @root.owner}}
+                        <!-- Controls -->
+                        <a class="toggle-view" data-tooltip="AC.TOOLTIP.Section.ToggleVisibility">
+                            <i class="fas fa-eye" data-toggle></i>
+                        </a>
+                        <a data-tooltip="AC.TOOLTIP.Section.Remove">
+                            <i class="fas fa-trash" data-remove></i>
+                        </a>
+                    {{/if}}
+
+                </header>
+
+                <div data-collapse-target="sections.{{index}}">
+
+                    {{#if (eq @root.system.details.editor 'markdown')}}
+                        <textarea name="system.sections.{{index}}.plaintext" placeholder="{{localize "AC.LABEL.Text"}}" data-resize data-enter="shift">{{~section.plaintext}}</textarea>
+                    {{/if}}
+
+                    {{#if (eq @root.system.details.editor 'prosemirror')}}
+                        {{editor section.richtext target=(concat "system.sections." index ".richtext") button=true engine="prosemirror" collaborate=true}}
+                    {{/if}}
+
                 </div>
 
-                <div class="hidden section-schema">
-                    <input type="text" name="system.sections.{{index}}.text" value="{{section.text}}">
-                </div>
-            </fieldset>
-        {{else}}
-            <fieldset class="viewer-section">
-                <legend class="viewer-label">{{section.label}}</legend>
-                {{{section.text}}}
-            </fieldset>
-        {{/if}}
+            </div>
+
+        </li>
+
     {{/each}}
 
-    {{#if (eq ownership 3)}}
-        <div class="add-wrapper">
-            <a class="add-section">
-                <i class="fas fa-plus"> Add Section</i>
-            </a>
-        </div>
+    {{#if owner}}
+        <button data-add type="button">
+            <i class="fas fa-plus"></i>
+            {{localize "AC.TOOLTIP.Section.Create"}}
+        </button>
     {{/if}}
-</section>
+
+</ol>

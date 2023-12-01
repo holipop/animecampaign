@@ -1,78 +1,34 @@
-import AC from "../AC.js";
+/** 
+ * Data structure for stats.
+ */ 
+export default class Stat extends foundry.abstract.DataModel {
 
-//  Defining the schema for Stat objects
-export class Stat extends foundry.abstract.DataModel {
-
-    //*     () : Object
-    static defineSchema() {
+    /** Defining the data structure of this data model. This cannot be changed post-init.
+     * @returns {Object}
+     */
+    static defineSchema () {
         const fields = foundry.data.fields;
 
-        const defaultSettings = {
-            required: false,
-            nullable: true
-        }
-
-        const imgSettings = {
-            categories: ["IMAGE"],
-        }
-
         return {
-            name: new fields.StringField({ initial: "" }),
+            tag: new fields.StringField(),
+            
             img: new fields.FilePathField({
-                ...imgSettings,
-                ...defaultSettings
+                categories: ['IMAGE'],
+                initial: 'icons/svg/circle.svg'
             }),
+            color: new fields.StringField(),
 
-            value: new fields.StringField(defaultSettings),
-            min: new fields.StringField(defaultSettings),
-            max: new fields.StringField(defaultSettings),
+            view: new fields.StringField({ initial: 'value' }),
 
-            states: new fields.ArrayField( new fields.ObjectField(), defaultSettings ),
-            advancement: new fields.ArrayField( new fields.ObjectField(), defaultSettings ),
+            value: new fields.NumberField(),
+            max: new fields.NumberField(),
+            label: new fields.StringField(),
 
+            // ! Pre-v1.0
+            name: new fields.StringField(),
             settings: new fields.SchemaField({
-                display: new fields.StringField({
-                    initial: "single", 
-                    ...defaultSettings
-                }, ['single', 'double', 'phase', 'state', 'advancement']),
-                
-                resource: new fields.StringField({ 
-                    initial: 'None',
-                    ...defaultSettings
-                })
-            })
+                display: new fields.StringField(),
+            }),
         }
-    }
-
-    //*     () : number
-    get percent() {
-        const value = Number(this.value)
-        const max = Number(this.max)
-        if (isNaN(value) || isNaN(max)) {
-            return NaN;
-        }
-        return value / max;
-    }
-
-    //*     () : string
-    get label() {
-        return this.name.toLowerCase();
-    }
-
-    //*     () : string
-    get documentName() {
-        return this.parent.parent.documentName;
-    }
-
-    //  Returns the valid displays of a stat. Kit Pieces cannot have advancements as they cannot contain
-    //  other Items.
-    //*     () : Object
-    get validDisplays() {
-        let displays = { ...CONFIG.animecampaign.statDisplay };
-        const type = this.parent.parent.type;
-
-        if (type == 'Kit Piece') delete displays.advancement;
-
-        return displays;
     }
 }
