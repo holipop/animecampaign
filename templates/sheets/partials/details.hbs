@@ -53,8 +53,10 @@
             <div class="fields">
 
                 <select name="system.details.editor">
-                    <option value="markdown">{{localize "AC.LABEL.Markdown"}}</option>
-                    <option value="prosemirror">{{localize "AC.LABEL.ProseMirror"}}</option>
+                    {{#select system.details.editor}}
+                        <option value="markdown">{{localize "AC.LABEL.Markdown"}}</option>
+                        <option value="prosemirror">{{localize "AC.LABEL.ProseMirror"}}</option>
+                    {{/select}}
                 </select>
 
             </div>

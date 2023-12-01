@@ -54,16 +54,16 @@
         {{#if (eq documentName "Actor")}}
             <!-- Type of mundie or epithet user -->
             <select class="type" name="system.type">
-
-                <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
-                    <option value="epithet">{{localize "AC.TYPE.Epithet"}}</option>
-                </optgroup>
-                
-                <optgroup label="{{localize "AC.TYPE.Mundie"}}">
-                    <option value="expert">{{localize "AC.TYPE.Expert"}}</option>
-                    <option value="powerhouse">{{localize "AC.TYPE.Powerhouse"}}</option>
-                </optgroup>
-
+                {{#select system.type}}
+                    <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
+                        <option value="epithet">{{localize "AC.TYPE.Epithet"}}</option>
+                    </optgroup>
+                    
+                    <optgroup label="{{localize "AC.TYPE.Mundie"}}">
+                        <option value="expert">{{localize "AC.TYPE.Expert"}}</option>
+                        <option value="powerhouse">{{localize "AC.TYPE.Powerhouse"}}</option>
+                    </optgroup>
+                {{/select}}
             </select>
 
             <!-- Core Word or Epithet -->

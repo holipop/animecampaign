@@ -4,8 +4,10 @@
         <label>{{localize "AC.LABEL.TextEditor"}}</label>
 
         <select name="system.biography.editor">
-            <option value="markdown">{{localize "AC.LABEL.Markdown"}}</option>
-            <option value="prosemirror">{{localize "AC.LABEL.ProseMirror"}}</option>
+            {{#select system.biography.editor}}
+                <option value="markdown">{{localize "AC.LABEL.Markdown"}}</option>
+                <option value="prosemirror">{{localize "AC.LABEL.ProseMirror"}}</option>
+            {{/select}}
         </select>
     </div>
 
