@@ -4,4 +4,3 @@ node_modules/
 app/
 __MACOSX/
 .DS_Store
-packs/
