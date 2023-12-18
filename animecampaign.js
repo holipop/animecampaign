@@ -21,20 +21,28 @@ import Stat from './module/data-models/Stat.js'
 import Section from './module/data-models/Section.js'
 import Category from './module/data-models/Category.js'
 
+globalThis.AC = {
+    Actor: ACActor,
+    Item: ACItem,
+    CharacterData,
+    CharacterSheet,
+    FeatureData,
+    FeatureSheet,
+    Stat,
+    Section,
+    Category,
+    Macro: { ...Macro },
+    List: { ...List },
+    Utils: { ...Utils },
+}
+
 Hooks.once('init', () => {
     Utils.log(config.AC.ascii);
     Utils.log('Initializing Anime Campaign System!');
 
     CONFIG.AC = config.AC;
 
-    game.AC = {
-        documents: { ACActor, ACItem },
-        data: { CharacterData, FeatureData, Stat, Section, Category },
-        apps: { CharacterSheet, FeatureSheet },
-        Macro: { ...Macro },
-        List: { ...List },
-        Utils: { ...Utils },
-    }
+    game.AC = AC
 
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;

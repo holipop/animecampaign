@@ -14,7 +14,7 @@ export async function createMacro (data, slot) {
     const item = data.obj;
 
     // Macro creation.
-    const command = `game.AC.Macro.roll('${data.id}')`;
+    const command = `AC.Macro.roll('${data.id}')`;
     let macro = game.macros.find(m => (m.name === item.name) && (m.command == command));
     if (!macro) {
         macro = await Macro.create({
