@@ -1,6 +1,8 @@
 // Anime Campaign for Foundry VTT
 // by Holipop
 
+import { compilePack, extractPack } from "@foundryvtt/foundryvtt-cli"
+
 import * as config from './module/config.js'
 import * as Utils from './module/Utils.js'
 import * as Roll from './module/Roll.js'
@@ -41,8 +43,9 @@ Hooks.once('init', () => {
     Utils.log('Initializing Anime Campaign System!');
 
     CONFIG.AC = config.AC;
-
     game.AC = AC
+
+
 
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
