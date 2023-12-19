@@ -1,7 +1,6 @@
 // Anime Campaign for Foundry VTT
 // by Holipop
 
-import { compilePack, extractPack } from "@foundryvtt/foundryvtt-cli"
 
 import * as config from './module/config.js'
 import * as Utils from './module/Utils.js'
@@ -44,8 +43,6 @@ Hooks.once('init', () => {
 
     CONFIG.AC = config.AC;
     game.AC = AC
-
-
 
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
