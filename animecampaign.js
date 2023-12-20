@@ -86,5 +86,5 @@ Hooks.on("canvasInit", gameCanvas => {
     SquareGrid.prototype.measureDistances = Utils.measureDistances;
 });
 
-Hooks.on('renderChatMessage', (message, html, data) => Roll.listeners(message, html, data))
-Hooks.on('hotbarDrop', (hotbar, data, slot) => Macro.createMacro(data, slot))
+Hooks.on('renderChatMessage', Roll.listeners)
+Hooks.on('hotbarDrop', Macro.createMacro)

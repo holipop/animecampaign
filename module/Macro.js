@@ -6,7 +6,7 @@
  * @param {*} data
  * @param {Number} slot
  */
-export async function createMacro (data, slot) {
+export async function createMacro (_, data, slot) {
     if (data.type !== 'Feature') return;
     if (!('obj' in data)) {
         return ui.notification.warn('You can only create macro buttons for owned Items');
