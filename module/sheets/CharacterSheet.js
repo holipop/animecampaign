@@ -1,11 +1,11 @@
 import * as Utils from "../Utils.js";
 import * as List from "../List.js"
-import { SheetMixin } from "./SheetMixin.js"
+import SheetMixin from "./SheetMixin.js"
 
 /**
  * The application for Characters.
  */
-export default class CharacterSheet extends ActorSheet {
+export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
     /** Sets the default options for this application.
      * @returns {Object}
@@ -246,13 +246,12 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
+        super.activateListeners(html);
 
-        this.globalListeners(html, this);
+        //this.globalListeners(html, this);
         this.colorStatListeners(html, this);
         this.categoryListeners(html, this);
         this.featureListeners(html, this);
-
-        super.activateListeners(html);
     }
 
     /** Event listeners for color stats.
@@ -631,14 +630,7 @@ export default class CharacterSheet extends ActorSheet {
             contrast.each((index, element) => {
                 const properties = $(element).data('contrast-category') || "color";
                 const target = List.get(categories, { name: name(element) });
-
-                const rgb = Utils.hexToRGB(target.color ?? sheet.object.system.color);
-                rgb[0] *= 0.2126;
-                rgb[1] *= 0.7152;
-                rgb[2] *= 0.0722;
-
-                const luma = rgb.reduce((n, m) => n + m) / 255;
-                const color = (luma <= .5) ? "white" : "black";
+                const color = Utils.contrastHexLuma(target.color ?? sheet.object.system.color)
 
                 const obj = Utils.uniformObject(properties.split(' '), color);
                 $(element).css(obj);
@@ -907,4 +899,4 @@ export default class CharacterSheet extends ActorSheet {
 }
 
 // Composes mixins for this class.
-Object.assign(CharacterSheet.prototype, SheetMixin);
+//Object.assign(CharacterSheet.prototype, SheetMixin);

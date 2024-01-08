@@ -31,8 +31,9 @@ export async function createMacro (_, data, slot) {
 
 /** Rolls a feature via the hotbar.
  * @param {String} id 
+ * @param {*} options
  */
-export function roll (id) {
+export function roll (id, options = {}) {
     const speaker = ChatMessage.getSpeaker();
     let actor;
     if (speaker.token) actor = game.actors.tokens[speaker.token];
@@ -43,13 +44,11 @@ export function roll (id) {
         return
     }
 
-    console.log(id)
-
     const item = actor.getEmbeddedDocument('Item', id);
     if (!item) {
         ui.notifications.warn(game.i18n.format("AC.NOTIFY.Macro.MissingItemWarning", { id }));
         return;
     }
 
-    item.roll();
+    item.roll(options);
 }

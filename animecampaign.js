@@ -4,7 +4,7 @@
 
 import * as config from './module/config.js'
 import * as Utils from './module/Utils.js'
-import * as Roll from './module/Roll.js'
+import * as ChatMessage from './module/ChatMessage.js'
 import * as List from './module/List.js'
 import * as Macro from './module/Macro.js'
 import * as Settings from './module/Settings.js'
@@ -55,8 +55,32 @@ Hooks.once('init', () => {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
-    Utils.preloadHandlebarsTemplates();
     Settings.register();
+
+    const partials = {
+        // Global
+        'summary': 'systems/animecampaign/templates/sheets/partials/summary.hbs',
+        'stat-list': 'systems/animecampaign/templates/sheets/partials/stat-list.hbs',
+        'nav': 'systems/animecampaign/templates/sheets/partials/nav.hbs',
+
+        // Character
+        'main-stats': 'systems/animecampaign/templates/sheets/partials/main-stats.hbs',
+        'biography': 'systems/animecampaign/templates/sheets/partials/biography.hbs',
+        'kit': 'systems/animecampaign/templates/sheets/partials/kit.hbs',
+        'feature': 'systems/animecampaign/templates/sheets/partials/feature.hbs',
+
+        // Feature
+        'sections': 'systems/animecampaign/templates/sheets/partials/sections.hbs',
+        'details': 'systems/animecampaign/templates/sheets/partials/details.hbs',
+
+        // Roll
+        'roll-summary': 'systems/animecampaign/templates/roll/summary.hbs',
+        'roll-dice': 'systems/animecampaign/templates/roll/dice.hbs',
+        'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
+        'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
+        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
+    }
+    loadTemplates(partials);
 })
 
 Hooks.on('ready', () => {
@@ -86,5 +110,5 @@ Hooks.on("canvasInit", gameCanvas => {
     SquareGrid.prototype.measureDistances = Utils.measureDistances;
 });
 
-Hooks.on('renderChatMessage', Roll.listeners)
+Hooks.on('renderChatMessage', ChatMessage.listeners)
 Hooks.on('hotbarDrop', Macro.createMacro)

@@ -10,6 +10,10 @@ export default class ACItem extends Item {
      */
     get rollTemplate () { return 'systems/animecampaign/templates/roll/roll-template.hbs' }
 
+    async getRollContent () {
+        return renderTemplate(this.rollTemplate, data)
+    }
+
     /** Fires before a document is created. For preliminary operations.
      * @param {*} data 
      * @param {*} options 
@@ -23,11 +27,13 @@ export default class ACItem extends Item {
     }
 
     /** Sends a chat message of this feature.
+     * @param {Boolean} options.post
+     * @param {String?} options.customFormula
      */
-    async roll ({ post = false } = {}) {
+    async roll ({ post = false, customFormula = null } = {}) {
         
         // If the formula is invalid, post the message.
-        const formula = this.system.details.formula;
+        const formula = customFormula || this.system.details.formula;
         let roll;
         if (Roll.validate(formula)) {
             roll = await new Roll(formula).evaluate();
@@ -49,15 +55,7 @@ export default class ACItem extends Item {
         })();
 
         // Getting colors for contrasting.
-        const contrast = (() => {
-            const rgb = Utils.hexToRGB(this.system.color);
-            rgb[0] *= 0.2126;
-            rgb[1] *= 0.7152;
-            rgb[2] *= 0.0722;
-
-            const luma = rgb.reduce((n, m) => n + m) / 255;
-            return (luma <= .5) ? "white" : "black";
-        })();
+        const contrast = Utils.contrastHexLuma(this.system.color)
         const contrastImg = (contrast == 'white') 
             ? 'brightness(0) saturate(100%) invert(100%)'
             : 'brightness(0) saturate(100%)';
