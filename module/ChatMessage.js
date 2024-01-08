@@ -8,7 +8,7 @@
  * @param {*} html 
  * @param {*} data 
  */
-export function listeners (message, html, data) {
+export function activateListeners (message, html, data) {
 
     const msg = html.find('[data-id]');
 

@@ -110,5 +110,5 @@ Hooks.on("canvasInit", gameCanvas => {
     SquareGrid.prototype.measureDistances = Utils.measureDistances;
 });
 
-Hooks.on('renderChatMessage', ChatMessage.listeners)
+Hooks.on('renderChatMessage', ChatMessage.activateListeners)
 Hooks.on('hotbarDrop', Macro.createMacro)
