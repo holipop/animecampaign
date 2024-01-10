@@ -1,6 +1,7 @@
 import * as Utils from "../Utils.js";
 import * as List from "../List.js"
 import SheetMixin from "./SheetMixin.js"
+import CategoryConfig from "./CategoryConfig.js";
 
 /**
  * The application for Characters.
@@ -39,7 +40,6 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @returns {Object}
      */
     async getData () {
-
         return {
             ...super.getData(),
             config: CONFIG.AC,
@@ -129,9 +129,11 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         if ('feature' in dataset) {
             const feature = this.object.getEmbeddedDocument('Item', dataset.feature);
             dragData = { type: 'Feature', obj: feature, id: dataset.feature };
-        } else if ('category' in dataset) {
+        } 
+        else if ('category' in dataset) {
             dragData = { type: 'Category', obj: category };
-        } else if ('tracker' in dataset) {
+        } 
+        else if ('tracker' in dataset) {
             const tracker = category.trackers[dataset.tracker];
             dragData = { type: 'Tracker', obj: tracker, category: category, index: dataset.tracker };
         }
@@ -151,7 +153,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
         /** Inserts the dropped feature into the target category and sets its sort.
          */
-        void function feature () {
+        void function onDropFeature () {
             if (data.type != 'Feature') return;
         
             const features = sheet.actor.items;
@@ -198,7 +200,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
         /** Inserts the dropped category on the index of the target category. 
         */
-        void function category () {
+        void function onDropCategory () {
             if (data.type != 'Category') return;
             if (categories.length == 1) return;
         
@@ -216,7 +218,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
         /** Inserts the dropped category on the index of the target category.
          */
-        void function tracker () {
+        void function onDropTracker () {
             if (data.type != 'Tracker') return;
             if (data.category.trackers.length == 1) return;  
 
@@ -252,6 +254,26 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         this.colorStatListeners(html, this);
         this.categoryListeners(html, this);
         this.featureListeners(html, this);
+
+
+        /** @type {Category[]} */
+        const categories = this.object.system.categories
+
+        /** @returns {String} */
+        const getNameOfCategory = element => {
+            // the + "" is to ensure the data-attr gets converted into a string.
+            return $(element).closest('[data-category]').data('category') + ""
+        }
+
+        // Prompt the Edit Category dialog.
+        html.find('[data-category-edit]').on('click', async event => {
+            const name = getNameOfCategory(event.target);
+
+            const config = new CategoryConfig({ name, actor: this.object });
+            console.log(config)
+
+            config.render(true)
+        })
     }
 
     /** Event listeners for color stats.

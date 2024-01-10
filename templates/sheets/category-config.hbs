@@ -1,0 +1,42 @@
+<form class="flexcol {{cssClass}}" autocomplete="off">
+
+    <!-- Tabs -->
+    <nav class="sheet-tabs tabs" data-nav data-group="main">
+        <a class="item" data-tab="basic"><i class="fas fa-cubes"></i> {{localize "AC.NAV.Basic"}}</a>
+        <a class="item" data-tab="stats"><i class="fas fa-chart-simple"></i> {{localize "AC.NAV.Stats"}}</a>
+        <a class="item" data-tab="details"><i class="fas fa-circle-info"></i> {{localize "AC.NAV.Details"}}</a>
+    </nav>
+
+    <section data-content>
+
+        <!-- Basic -->
+        <div class="tab" data-group="main" data-tab="basic">
+            <div class="form-group">
+                <label>{{localize "Name"}}</label>
+                <input style="text-transform:uppercase;" type="text" name="name" placeholder="{{name}}" value="{{name}}"/>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="tab" data-group="main" data-tab="stats">
+            hello
+        </div>
+
+        <!-- Details -->
+        <div class="tab" data-group="main" data-tab="details">
+            hewwo :3
+        </div>
+
+    </section>
+
+    <footer class="sheet-footer flexrow">
+        <button type="button" data-cancel>
+            <i class="fas fa-times"></i> {{localize "Cancel"}}
+        </button>
+
+        <button type="button" data-commit>
+            <i class="far fa-save"></i> {{localize "Commit Changes"}}
+        </button>
+    </footer>
+    
+</form>

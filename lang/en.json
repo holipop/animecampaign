@@ -50,7 +50,9 @@
         "Biography": "Biography",
         "Kit": "Kit",
         "Description": "Description",
-        "Details": "Details"
+        "Details": "Details",
+        "Basic": "Basic",
+        "Stats": "Stats"
     },
     "LABEL": {
         "ColorStats": "Color Stats",
