@@ -24,7 +24,8 @@ export default class CategoryConfig extends FormApplication {
     static get defaultOptions () {
         const options = mergeObject(super.defaultOptions, {
             width: 450,
-            classes: ["sheet", "token-sheet"],
+            height: "auto",
+            classes: ["sheet", "category-config"],
             template: 'systems/animecampaign/templates/sheets/category-config.hbs',
         });
 
@@ -67,10 +68,19 @@ export default class CategoryConfig extends FormApplication {
      * @returns {*}
      */
     getData () {
+        const trackers = [{}, {}, {}, {}]
+        for (let i = 0; i < this.category.trackers.length; i++) {
+            trackers[i] = this.category.trackers[i]
+        }
+
+        console.log(trackers)
+
         return {
             name: this.name,
             actor: this.actor,
-            category: this.category
+            category: this.category,
+            color: this.category.color || this.actor.system.color,
+            trackers,
         }
     }
 
@@ -78,8 +88,35 @@ export default class CategoryConfig extends FormApplication {
      * @param {jQuery} html 
      */
     activateListeners (html) {
-        html.find('[data-cancel]').on('click', () => this.close())
-        html.find('[data-commit]').on('click', this._onSubmit.bind(this))
+        html.find('[data-cancel]').on('click', this.close.bind(this))
+        html.find('[data-submit]').on('click', this.submit.bind(this))
+
+        const colorInputs = html.find('[name="color"]').add('input[type="color"]')
+
+        // Update color pickers to synchronize.
+        colorInputs.on('change', event => {
+            const update = $(event.target).val()
+            colorInputs.val(update)
+        })
+
+        // Reset category color to the actor's default color.
+        html.find('[data-reset]').on('click', () => {
+            colorInputs.val(this.actor.system.color)
+        })
+
+        // Generate a file picker.
+        html.find('[data-file-button]').on('click', event => {
+            const index = Number($(event.target).closest('button').data('file-button'))
+
+            const filePicker = new FilePicker({
+                current: this.category.trackers[index].img,
+                callback: path => {
+                    html.find(`[data-file-text="${index}"]`).val(path)
+                }
+            });
+
+            filePicker.render(true);
+        })
     }
 
     /** Update the category.
@@ -87,8 +124,7 @@ export default class CategoryConfig extends FormApplication {
      * @param {*} data 
      */
     _updateObject (event, data) {
-
-        const changes = {}
+        const changes = { system: {} }
 
         if (this.category.name !== data.name) {
             changes.name = "test"
@@ -96,7 +132,7 @@ export default class CategoryConfig extends FormApplication {
             //this.actor.updateEmbeddedDocuments("Item", updates)
         }
 
-        console.log(this.actor)
+        console.log(data)
         
         this.actor.update(changes)
         this.close()

@@ -56,6 +56,7 @@
     },
     "LABEL": {
         "ColorStats": "Color Stats",
+        "Stat": "Stat",
         "Stats": "Stats",
         "View": "View",
         "Value": "Value",
@@ -71,6 +72,7 @@
         "Category": "Category",
         "EmptyStats": "Empty Stats",
         "EmptyCategory": "Empty Category",
+        "UpdateCategory": "Update Category",
         "TextEditor": "Text Editor",
         "Markdown": "Markdown",
         "ProseMirror": "ProseMirror"
@@ -90,9 +92,11 @@
             "Collapse": "Collapse Category",
             "Create": "Create Category",
             "Delete": "Delete Category",
+            "Edit": "Edit Category",
             "Rename": "Rename Category",
             "Color": "Color Category",
             "Flood": "Flood Category",
+            "Reset": "Reset Category Color",
             "Track": "Track Stat",
             "Untrack": "Untrack Stat",
             "EditTrackerImage": "Edit Tracker Image"
