@@ -158,6 +158,10 @@
         }
     },
     "SETTINGS": {
+        "TokenBarClamp": {
+            "Name": "Token Bar Clamp",
+            "Hint": "Disabling this allows you to modify token bars to go into negative numbers and past their maximum value."
+        },
         "DefaultTextEditor": {
             "Name": "Default Text Editor",
             "Hint": "Configure which text editor is set on-creation for your actors and items."
@@ -168,6 +172,10 @@
             "555": "PHB: Equidistant (5/5/5)",
             "5105": "DMG: Alternating (5/10/5)",
             "EUCL": "Euclidean (7.07 ft. Diagonal)"
+        },
+        "DefaultFeatureImage": {
+            "Name": "Default Feature Image",
+            "Hint": "Enabling this sets the default image of created features to the image of the character that owns it."
         }
     },
     "MIGRATION": {

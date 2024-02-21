@@ -7,6 +7,8 @@
  */
 export function register () {
 
+    //* WORLD */
+
     // Internal System Migration Version
     game.settings.register('animecampaign', 'systemMigrationVersion', {
         name: "System Migration Version",
@@ -15,21 +17,6 @@ export function register () {
         type: String,
         default: ""
     })
-
-    // Default Text Editor
-    game.settings.register('animecampaign', 'defaultTextEditor', {
-        name: "AC.SETTINGS.DefaultTextEditor.Name",
-        hint: "AC.SETTINGS.DefaultTextEditor.Hint",
-        scope: 'client',
-        config: true,
-        type: String,
-        choices: {
-            "markdown": "AC.LABEL.Markdown",
-            "prosemirror": "AC.LABEL.ProseMirror",
-        },
-        default: "markdown",
-        onChange: () => {},
-    });
 
     // Diagonal Movement Rule
     // (Taken directly from DnD5e)
@@ -47,5 +34,44 @@ export function register () {
         },
         onChange: value => canvas.grid.diagonalRule = value
     });
+
+    // Token Bar Clamp
+    game.settings.register('animecampaign', 'tokenBarClamp', {
+        name: "AC.SETTINGS.TokenBarClamp.Name",
+        hint: "AC.SETTINGS.TokenBarClamp.Hint",
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true,
+        onChange: () => {},
+    })
+
+    //* CLIENT */
+
+    // Default Text Editor
+    game.settings.register('animecampaign', 'defaultTextEditor', {
+        name: "AC.SETTINGS.DefaultTextEditor.Name",
+        hint: "AC.SETTINGS.DefaultTextEditor.Hint",
+        scope: 'client',
+        config: true,
+        type: String,
+        choices: {
+            "markdown": "AC.LABEL.Markdown",
+            "prosemirror": "AC.LABEL.ProseMirror",
+        },
+        default: "markdown",
+        onChange: () => {},
+    });
+
+    // Default Feature Image
+    game.settings.register('animecampaign', 'defaultFeatureImage', {
+        name: "AC.SETTINGS.DefaultFeatureImage.Name",
+        hint: "AC.SETTINGS.DefaultFeatureImage.Hint",
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: false,
+        onChange: () => {},
+    })
 
 }

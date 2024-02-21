@@ -35,7 +35,17 @@ export default class ACItem extends Item {
         super._preCreate(data, options, user);
 
         const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
-        this.updateSource({ 'system.details.editor': defaultTextEditor });
+        const isDefaultImageOwner = game.settings.get('animecampaign', 'defaultFeatureImage')
+
+        const updates = {
+            'system.details.editor': defaultTextEditor,
+        }
+
+        if (this.isOwned && isDefaultImageOwner) {
+            updates.img = this.actor.img
+        }
+
+        this.updateSource(updates);
     }
 
     /** Render the summary partial of a chat message.
