@@ -4,17 +4,17 @@
     {{#if (eq documentName "Actor")}}
         <nav data-nav data-group="actor-tabs">
 
-            <!-- Biography -->
-            <a class="nav-tab" data-tooltip="AC.NAV.Biography" data-tab="biography" data-group="actor-tabs">
-                <i class="fas fa-user"></i>
-            </a>
-
             {{#unless limited}}
                 <!-- Kit -->
                 <a class="nav-tab" data-tooltip="AC.NAV.Kit" data-tab="kit" data-group="actor-tabs">
                     <i class="fas fa-diamond"></i>
                 </a>
             {{/unless}}
+
+            <!-- Biography -->
+            <a class="nav-tab" data-tooltip="AC.NAV.Biography" data-tab="biography" data-group="actor-tabs">
+                <i class="fas fa-user"></i>
+            </a>
 
         </nav>
     {{/if}}

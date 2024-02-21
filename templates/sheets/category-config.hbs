@@ -1,0 +1,74 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    <!-- Tabs -->
+    <nav class="sheet-tabs tabs" data-nav data-group="main">
+        <a class="item" data-tab="basic"><i class="fas fa-cubes"></i> {{localize "AC.NAV.Basic"}}</a>
+        <a class="item" data-tab="stats"><i class="fas fa-chart-simple"></i> {{localize "AC.NAV.Stats"}}</a>
+        <a class="item" data-tab="details"><i class="fas fa-circle-info"></i> {{localize "AC.NAV.Details"}}</a>
+    </nav>
+
+    <section data-content>
+
+        <!-- Basic -->
+        <div class="tab" data-group="main" data-tab="basic">
+            <div class="form-group">
+                <label>{{localize "Name"}}</label>
+                <div class="form-fields">
+                    <input class="name" type="text" name="name" placeholder="{{name}}" value="{{name}}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{localize "Color"}}</label>
+                <div class="form-fields">
+                    {{colorPicker name="color" value=color}}
+                    <button type="button" data-reset data-tooltip="AC.TOOLTIP.Category.Reset">
+                        <i class="fas fa-arrow-rotate-left"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="tab" data-group="main" data-tab="stats">
+            
+            {{#each trackers as |tracker index|}}
+                <div class="form-group">
+                    <label>{{localize "AC.LABEL.Stat"}} {{index}} {{localize "AC.LABEL.Tag"}}</label>
+                    <div class="form-fields">
+                        <input class="tracker" type="text" name="trackers.{{index}}.tag" placeholder="{{localize "AC.LABEL.Tag"}}" value="{{tracker.tag}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>{{localize "AC.LABEL.Stat"}} {{index}} {{localize "Image"}}</label>
+                    <div class="form-fields">
+                        <input type="text" data-file-text="{{index}}" name="trackers.{{index}}.img" placeholder="path/image.png" value="{{tracker.img}}">
+                        <button type="button" data-file-button="{{index}}">
+                            <i class="fas fa-file-import"></i>
+                        </button>
+                        <!-- doesn't work {{filePicker type="image" target="trackers.0.img"}} -->
+                    </div>
+                </div>
+            {{/each}}
+
+        </div>
+
+        <!-- Details -->
+        <div class="tab" data-group="main" data-tab="details">
+            hewwo :3
+        </div>
+
+    </section>
+
+    <footer class="sheet-footer flexrow">
+        <button type="button" data-cancel>
+            <i class="fas fa-times"></i> {{localize "Cancel"}}
+        </button>
+
+        <button type="button" data-submit>
+            <i class="far fa-save"></i> {{localize "AC.LABEL.UpdateCategory"}}
+        </button>
+    </footer>
+    
+</form>

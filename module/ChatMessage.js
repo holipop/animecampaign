@@ -1,5 +1,5 @@
 /** A namespace for chat messages.
- * @module Roll
+ * @module ChatMessage
  */
 
 
@@ -8,18 +8,14 @@
  * @param {*} html 
  * @param {*} data 
  */
-export function listeners (message, html, data) {
+export function activateListeners (message, html, data) {
 
     const msg = html.find('[data-id]');
 
-    /** Collapses an element given a button and target.
-     */
-    void function collapse () {
-        // Only gets the elements that don't start with "target".
-        const collapse = msg.find('[data-collapse]');
-
-        // Sets the default visibility.
-        collapse.each((index, element) => {
+    // Collapses an element given a button and target.
+    msg.find('[data-collapse]')
+        .each((index, element) => { 
+            // Set the initial state of visibility
             const anchor = $(element).closest('a');
             const key = anchor.data('collapse');
             const visibile = anchor.data('visible');
@@ -31,8 +27,7 @@ export function listeners (message, html, data) {
             anchor.find('i').toggleClass('fa-chevron-down');
             anchor.find('i').toggleClass('fa-chevron-right');
         })
-
-        collapse.on('click', event => {
+        .on('click', event => {
             const anchor = $(event.target).closest('a');
             const key = anchor.data('collapse');
             const target = msg.find(`[data-collapse-target="${key}"]`);
@@ -41,6 +36,4 @@ export function listeners (message, html, data) {
             anchor.find('i').toggleClass('fa-chevron-down');
             anchor.find('i').toggleClass('fa-chevron-right');
         })
-    }()
-
 }

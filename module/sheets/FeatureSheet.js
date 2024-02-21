@@ -1,11 +1,11 @@
 import * as List from "../List.js"
 import * as Utils from "../Utils.js"
-import { SheetMixin } from "./SheetMixin.js"
+import SheetMixin from "./SheetMixin.js"
 
 /**
  * The application for Kit Features.
  */
-export default class FeatureSheet extends ItemSheet {
+export default class FeatureSheet extends SheetMixin(ItemSheet) {
 
     /** Sets the default options for this application.
      * @returns {Object}
@@ -147,24 +147,31 @@ export default class FeatureSheet extends ItemSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
-        this.globalListeners(html, this);
+        super.activateListeners(html);
+
         this.statListeners(html, this);
         this.sectionListeners(html, this);
 
         const sheet = this;
 
-        /** Rolls the feature to the chat log.
-         */
-        void function roll () {
-            const roll = html.find('[data-roll]');
+        // Rolls the feature to the chat log.
+        html.find('[data-roll]').on('mousedown', event => {
+            const post = (event.which === 3) // if right click was used
 
-            roll.on('mousedown', event => {
-                const post = (event.which === 3) // if right click was used
-                sheet.object.roll({ post });
-            })
-        }();
+            sheet.object.roll({ post });
+        })
+
+
+        // Sets a feature's category via the selection.
+        const select = html.find('[data-select-category="select"]');
+        const target = html.find('[data-select-category="target"]');
+
+        select.on('change', event => {
+            const category = $(event.target).val();
+            target.val(category);
+            sheet.object.update();
+        });
         
-        super.activateListeners(html);
     }
 
     /** Event listeners for feature stats.
@@ -385,4 +392,4 @@ export default class FeatureSheet extends ItemSheet {
 }
 
 // Composes mixins for this class.
-Object.assign(FeatureSheet.prototype, SheetMixin);
+//Object.assign(FeatureSheet.prototype, SheetMixin);
