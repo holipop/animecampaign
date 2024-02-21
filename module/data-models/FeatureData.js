@@ -31,7 +31,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 formula: new fields.StringField({ initial: '1d20' }),
 
                 action: new fields.SchemaField({
-                    name: new fields.StringField({ initial: 'Main' }),
+                    name: new fields.StringField({ initial: '' }),
                     img: new fields.FilePathField({
                         categories: ['IMAGE'],
                         blank: true,
@@ -40,8 +40,8 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 }),
 
                 usage: new fields.SchemaField({
-                    multiple: new fields.StringField({ initial: "1" }),
-                    timeframe: new fields.StringField({ initial: 'Round' })
+                    multiple: new fields.StringField({ initial: '' }),
+                    timeframe: new fields.StringField({ initial: '' })
                 }),
             }),
 

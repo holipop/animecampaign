@@ -27,7 +27,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         ];
 
         options.tabs = [
-            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "biography" },
+            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "" },
         ];
 
         return options;
@@ -147,98 +147,111 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      */
     _onDrop (event) {
         const data = TextEditor.getDragEventData(event);
-        const sheet = this;
 
         if (!this.object.isOwner) return false;
 
-        /** Inserts the dropped feature into the target category and sets its sort.
-         */
-        void function onDropFeature () {
-            if (data.type != 'Feature') return;
-        
-            const features = sheet.actor.items;
-            const source = features.get(data.id);
-        
-            const dropTarget = $(event.target).closest('[data-feature]');
-            const dropCategory = $(event.target).closest('[data-category]');
-        
-            // If the feature was placed on an empty category.
-            if (dropTarget.length == 0) {
-                const updateData = [{
-                    _id: source._id,
-                    sort: 0,
-                    system: { category: dropCategory.data('category') }
-                }];
-                return sheet.object.updateEmbeddedDocuments('Item', updateData);
-            };
-        
-            // Doesn't sort on itself.
-            const target = features.get(dropTarget.data('feature'));
-            if (source._id == target._id) return;
-        
-            const siblings = [];
-            dropCategory.find('li[data-feature]').each((index, element) => {
-                const siblingId = $(element).data('feature');
-                if (siblingId && (siblingId !== source._id)) {
-                    siblings.push(features.get(siblingId))
-                }
-            })
-        
-            // Sorts based on its siblings.
-            const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
-            const updateData = sortUpdates.map(u => {
-                const update = u.update;
-                update._id = u.target._id;
-                update.system = { category: dropCategory.data('category') }
-                return update;
-            })
-        
-            return sheet.object.updateEmbeddedDocuments('Item', updateData);
-        }()
-        
-        const categories = sheet.object.system.categories;
-
-        /** Inserts the dropped category on the index of the target category. 
-        */
-        void function onDropCategory () {
-            if (data.type != 'Category') return;
-            if (categories.length == 1) return;
-        
-            const dropTarget = $(event.target).closest('[data-category]');
-            if (dropTarget.length == 0) return;
-        
-            const targetIndex = List.index(categories, { name: dropTarget.data('category') });
-            const currentIndex = List.index(categories, { name: data.obj.name });
-        
-            let update = List.remove(categories, currentIndex);
-            update = List.add(update, data.obj, targetIndex);
-        
-            return sheet.object.update({ 'system.categories': update });
-        }()
-
-        /** Inserts the dropped category on the index of the target category.
-         */
-        void function onDropTracker () {
-            if (data.type != 'Tracker') return;
-            if (data.category.trackers.length == 1) return;  
-
-            const dropCategory = $(event.target).closest('[data-category]');
-            if (dropCategory.data('category') != data.category.name) return;
-
-            const dropTarget = $(event.target).closest('[data-tracker]');
-            if (dropTarget.length == 0) return;
-
-            const targetIndex = dropTarget.data('tracker');
-
-            let trackers = List.get(categories, { name: data.category.name }).trackers;
-            trackers = List.remove(trackers, data.index);
-            trackers = List.add(trackers, data.obj, targetIndex);
-
-            const update = List.set(categories, { name: data.category.name }, { trackers })
-            return sheet.object.update({ 'system.categories': update });
-        }()
+        switch (data.type) {
+            case "Feature":
+                this.onDropFeature(event, data)
+                break
+            case "Category":
+                this.onDropCategory(event, data)
+                break
+            case "Tracker":
+                this.onDropTracker(event, data)
+                break
+        }
 
         super._onDrop(event);
+    }
+
+    /** Inserts the dropped feature into the target category and sets its sort.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropFeature (event, data) {
+        const features = this.actor.items;
+        const source = features.get(data.id);
+    
+        const dropTarget = $(event.target).closest('[data-feature]');
+        const dropCategory = $(event.target).closest('[data-category]');
+    
+        // If the feature was placed on an empty category.
+        if (dropTarget.length == 0) {
+            const updateData = [{
+                _id: source._id,
+                sort: 0,
+                system: { category: dropCategory.data('category') }
+            }];
+            return this.object.updateEmbeddedDocuments('Item', updateData);
+        };
+    
+        // Doesn't sort on itself.
+        const target = features.get(dropTarget.data('feature'));
+        if (source._id == target._id) return;
+    
+        const siblings = [];
+        dropCategory.find('li[data-feature]').each((index, element) => {
+            const siblingId = $(element).data('feature');
+            if (siblingId && (siblingId !== source._id)) {
+                siblings.push(features.get(siblingId))
+            }
+        })
+    
+        // Sorts based on its siblings.
+        const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
+        const updateData = sortUpdates.map(u => {
+            const update = u.update;
+            update._id = u.target._id;
+            update.system = { category: dropCategory.data('category') }
+            return update;
+        })
+    
+        return this.object.updateEmbeddedDocuments('Item', updateData);
+    }
+
+    /** Inserts the dropped category on the index of the target category.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropCategory (event, data) {
+        const categories = this.object.system.categories;
+        if (categories.length == 1) return;
+    
+        const dropTarget = $(event.target).closest('[data-category]');
+        if (dropTarget.length == 0) return;
+    
+        const targetIndex = List.index(categories, { name: dropTarget.data('category') });
+        const currentIndex = List.index(categories, { name: data.obj.name });
+    
+        let update = List.remove(categories, currentIndex);
+        update = List.add(update, data.obj, targetIndex);
+    
+        return this.object.update({ 'system.categories': update });
+    }
+
+    /** Inserts the dropped tracker on the index of the target trackers.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropTracker (event, data) {
+        const categories = this.object.system.categories;
+        if (data.category.trackers.length == 1) return;  
+
+        const dropCategory = $(event.target).closest('[data-category]');
+        if (dropCategory.data('category') != data.category.name) return;
+
+        const dropTarget = $(event.target).closest('[data-tracker]');
+        if (dropTarget.length == 0) return;
+
+        const targetIndex = dropTarget.data('tracker');
+
+        let trackers = List.get(categories, { name: data.category.name }).trackers;
+        trackers = List.remove(trackers, data.index);
+        trackers = List.add(trackers, data.obj, targetIndex);
+
+        const update = List.set(categories, { name: data.category.name }, { trackers })
+        return this.object.update({ 'system.categories': update });
     }
  
 
