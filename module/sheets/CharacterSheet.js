@@ -1,11 +1,12 @@
 import * as Utils from "../Utils.js";
 import * as List from "../List.js"
-import { SheetMixin } from "./SheetMixin.js"
+import SheetMixin from "./SheetMixin.js"
+import CategoryConfig from "./CategoryConfig.js";
 
 /**
  * The application for Characters.
  */
-export default class CharacterSheet extends ActorSheet {
+export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
     /** Sets the default options for this application.
      * @returns {Object}
@@ -26,7 +27,7 @@ export default class CharacterSheet extends ActorSheet {
         ];
 
         options.tabs = [
-            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "biography" },
+            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "" },
         ];
 
         return options;
@@ -39,7 +40,6 @@ export default class CharacterSheet extends ActorSheet {
      * @returns {Object}
      */
     async getData () {
-
         return {
             ...super.getData(),
             config: CONFIG.AC,
@@ -129,9 +129,11 @@ export default class CharacterSheet extends ActorSheet {
         if ('feature' in dataset) {
             const feature = this.object.getEmbeddedDocument('Item', dataset.feature);
             dragData = { type: 'Feature', obj: feature, id: dataset.feature };
-        } else if ('category' in dataset) {
+        } 
+        else if ('category' in dataset) {
             dragData = { type: 'Category', obj: category };
-        } else if ('tracker' in dataset) {
+        } 
+        else if ('tracker' in dataset) {
             const tracker = category.trackers[dataset.tracker];
             dragData = { type: 'Tracker', obj: tracker, category: category, index: dataset.tracker };
         }
@@ -145,98 +147,111 @@ export default class CharacterSheet extends ActorSheet {
      */
     _onDrop (event) {
         const data = TextEditor.getDragEventData(event);
-        const sheet = this;
 
         if (!this.object.isOwner) return false;
 
-        /** Inserts the dropped feature into the target category and sets its sort.
-         */
-        void function feature () {
-            if (data.type != 'Feature') return;
-        
-            const features = sheet.actor.items;
-            const source = features.get(data.id);
-        
-            const dropTarget = $(event.target).closest('[data-feature]');
-            const dropCategory = $(event.target).closest('[data-category]');
-        
-            // If the feature was placed on an empty category.
-            if (dropTarget.length == 0) {
-                const updateData = [{
-                    _id: source._id,
-                    sort: 0,
-                    system: { category: dropCategory.data('category') }
-                }];
-                return sheet.object.updateEmbeddedDocuments('Item', updateData);
-            };
-        
-            // Doesn't sort on itself.
-            const target = features.get(dropTarget.data('feature'));
-            if (source._id == target._id) return;
-        
-            const siblings = [];
-            dropCategory.find('li[data-feature]').each((index, element) => {
-                const siblingId = $(element).data('feature');
-                if (siblingId && (siblingId !== source._id)) {
-                    siblings.push(features.get(siblingId))
-                }
-            })
-        
-            // Sorts based on its siblings.
-            const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
-            const updateData = sortUpdates.map(u => {
-                const update = u.update;
-                update._id = u.target._id;
-                update.system = { category: dropCategory.data('category') }
-                return update;
-            })
-        
-            return sheet.object.updateEmbeddedDocuments('Item', updateData);
-        }()
-        
-        const categories = sheet.object.system.categories;
-
-        /** Inserts the dropped category on the index of the target category. 
-        */
-        void function category () {
-            if (data.type != 'Category') return;
-            if (categories.length == 1) return;
-        
-            const dropTarget = $(event.target).closest('[data-category]');
-            if (dropTarget.length == 0) return;
-        
-            const targetIndex = List.index(categories, { name: dropTarget.data('category') });
-            const currentIndex = List.index(categories, { name: data.obj.name });
-        
-            let update = List.remove(categories, currentIndex);
-            update = List.add(update, data.obj, targetIndex);
-        
-            return sheet.object.update({ 'system.categories': update });
-        }()
-
-        /** Inserts the dropped category on the index of the target category.
-         */
-        void function tracker () {
-            if (data.type != 'Tracker') return;
-            if (data.category.trackers.length == 1) return;  
-
-            const dropCategory = $(event.target).closest('[data-category]');
-            if (dropCategory.data('category') != data.category.name) return;
-
-            const dropTarget = $(event.target).closest('[data-tracker]');
-            if (dropTarget.length == 0) return;
-
-            const targetIndex = dropTarget.data('tracker');
-
-            let trackers = List.get(categories, { name: data.category.name }).trackers;
-            trackers = List.remove(trackers, data.index);
-            trackers = List.add(trackers, data.obj, targetIndex);
-
-            const update = List.set(categories, { name: data.category.name }, { trackers })
-            return sheet.object.update({ 'system.categories': update });
-        }()
+        switch (data.type) {
+            case "Feature":
+                this.onDropFeature(event, data)
+                break
+            case "Category":
+                this.onDropCategory(event, data)
+                break
+            case "Tracker":
+                this.onDropTracker(event, data)
+                break
+        }
 
         super._onDrop(event);
+    }
+
+    /** Inserts the dropped feature into the target category and sets its sort.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropFeature (event, data) {
+        const features = this.actor.items;
+        const source = features.get(data.id);
+    
+        const dropTarget = $(event.target).closest('[data-feature]');
+        const dropCategory = $(event.target).closest('[data-category]');
+    
+        // If the feature was placed on an empty category.
+        if (dropTarget.length == 0) {
+            const updateData = [{
+                _id: source._id,
+                sort: 0,
+                system: { category: dropCategory.data('category') }
+            }];
+            return this.object.updateEmbeddedDocuments('Item', updateData);
+        };
+    
+        // Doesn't sort on itself.
+        const target = features.get(dropTarget.data('feature'));
+        if (source._id == target._id) return;
+    
+        const siblings = [];
+        dropCategory.find('li[data-feature]').each((index, element) => {
+            const siblingId = $(element).data('feature');
+            if (siblingId && (siblingId !== source._id)) {
+                siblings.push(features.get(siblingId))
+            }
+        })
+    
+        // Sorts based on its siblings.
+        const sortUpdates = SortingHelpers.performIntegerSort(source, {target, siblings});
+        const updateData = sortUpdates.map(u => {
+            const update = u.update;
+            update._id = u.target._id;
+            update.system = { category: dropCategory.data('category') }
+            return update;
+        })
+    
+        return this.object.updateEmbeddedDocuments('Item', updateData);
+    }
+
+    /** Inserts the dropped category on the index of the target category.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropCategory (event, data) {
+        const categories = this.object.system.categories;
+        if (categories.length == 1) return;
+    
+        const dropTarget = $(event.target).closest('[data-category]');
+        if (dropTarget.length == 0) return;
+    
+        const targetIndex = List.index(categories, { name: dropTarget.data('category') });
+        const currentIndex = List.index(categories, { name: data.obj.name });
+    
+        let update = List.remove(categories, currentIndex);
+        update = List.add(update, data.obj, targetIndex);
+    
+        return this.object.update({ 'system.categories': update });
+    }
+
+    /** Inserts the dropped tracker on the index of the target trackers.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropTracker (event, data) {
+        const categories = this.object.system.categories;
+        if (data.category.trackers.length == 1) return;  
+
+        const dropCategory = $(event.target).closest('[data-category]');
+        if (dropCategory.data('category') != data.category.name) return;
+
+        const dropTarget = $(event.target).closest('[data-tracker]');
+        if (dropTarget.length == 0) return;
+
+        const targetIndex = dropTarget.data('tracker');
+
+        let trackers = List.get(categories, { name: data.category.name }).trackers;
+        trackers = List.remove(trackers, data.index);
+        trackers = List.add(trackers, data.obj, targetIndex);
+
+        const update = List.set(categories, { name: data.category.name }, { trackers })
+        return this.object.update({ 'system.categories': update });
     }
  
 
@@ -246,13 +261,32 @@ export default class CharacterSheet extends ActorSheet {
      * @param {*} html The HTML of the form in a jQuery object.
      */
     activateListeners (html) {
+        super.activateListeners(html);
 
-        this.globalListeners(html, this);
+        //this.globalListeners(html, this);
         this.colorStatListeners(html, this);
         this.categoryListeners(html, this);
         this.featureListeners(html, this);
 
-        super.activateListeners(html);
+
+        /** @type {Category[]} */
+        const categories = this.object.system.categories
+
+        /** @returns {String} */
+        const getNameOfCategory = element => {
+            // the + "" is to ensure the data-attr gets converted into a string.
+            return $(element).closest('[data-category]').data('category') + ""
+        }
+
+        // Prompt the Edit Category dialog.
+        html.find('[data-category-edit]').on('click', async event => {
+            const name = getNameOfCategory(event.target);
+
+            const config = new CategoryConfig({ name, actor: this.object });
+            console.log(config)
+
+            config.render(true)
+        })
     }
 
     /** Event listeners for color stats.
@@ -631,14 +665,7 @@ export default class CharacterSheet extends ActorSheet {
             contrast.each((index, element) => {
                 const properties = $(element).data('contrast-category') || "color";
                 const target = List.get(categories, { name: name(element) });
-
-                const rgb = Utils.hexToRGB(target.color ?? sheet.object.system.color);
-                rgb[0] *= 0.2126;
-                rgb[1] *= 0.7152;
-                rgb[2] *= 0.0722;
-
-                const luma = rgb.reduce((n, m) => n + m) / 255;
-                const color = (luma <= .5) ? "white" : "black";
+                const color = Utils.contrastHexLuma(target.color ?? sheet.object.system.color)
 
                 const obj = Utils.uniformObject(properties.split(' '), color);
                 $(element).css(obj);
@@ -907,4 +934,4 @@ export default class CharacterSheet extends ActorSheet {
 }
 
 // Composes mixins for this class.
-Object.assign(CharacterSheet.prototype, SheetMixin);
+//Object.assign(CharacterSheet.prototype, SheetMixin);

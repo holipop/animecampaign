@@ -45,4 +45,33 @@ export default class ACActor extends Actor {
         super._onCreateDescendantDocuments(parent, collection, documents, ...args);
     }
 
+    /** Fires whenever an attribute is modified via a token.
+     * @param {String} attribute 
+     * @param {Number} value 
+     * @param {Boolean?} isDelta 
+     * @param {Boolean?} isBar 
+     * @returns {ACActor}
+     * @override
+     */
+    async modifyTokenAttribute(attribute, value, isDelta=false, isBar=true) {
+        const current = foundry.utils.getProperty(this.system, attribute);
+        const isClamp = game.settings.get('animecampaign', 'tokenBarClamp')
+    
+        // Determine the updates to make to the actor data
+        let updates;
+        if ( isBar ) {
+            if (isDelta) {
+                value = (isClamp) 
+                    ? Math.clamped(0, Number(current.value) + value, current.max)
+                    : Number(current.value) + value
+            }
+            updates = {[`system.${attribute}.value`]: value};
+        } else {
+            if ( isDelta ) value = Number(current) + value;
+            updates = {[`system.${attribute}`]: value};
+        }
+        const allowed = Hooks.call("modifyTokenAttribute", {attribute, value, isDelta, isBar}, updates);
+        return allowed !== false ? this.update(updates) : this;
+      }
+
 }

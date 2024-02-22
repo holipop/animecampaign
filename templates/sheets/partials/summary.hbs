@@ -56,12 +56,11 @@
             <select class="type" name="system.type">
                 {{#select system.type}}
                     <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
-                        <option value="epithet">{{localize "AC.TYPE.Epithet"}}</option>
+                        {{selectOptions config.inscribed localize=true}}
                     </optgroup>
                     
                     <optgroup label="{{localize "AC.TYPE.Mundie"}}">
-                        <option value="expert">{{localize "AC.TYPE.Expert"}}</option>
-                        <option value="powerhouse">{{localize "AC.TYPE.Powerhouse"}}</option>
+                        {{selectOptions config.mundie localize=true}}
                     </optgroup>
                 {{/select}}
             </select>

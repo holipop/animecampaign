@@ -19,12 +19,25 @@ export function error (text) {
 
 /** Converts a string hexadecimal color into an array of RGB values in base 10.
  * @param {String} hexcode 
- * @returns {String[]}
+ * @returns {Number[]}
  */
 export function hexToRGB (hexcode) {
     const channels = [hexcode.slice(1, 3), hexcode.slice(3, 5), hexcode.slice(5)];
-
     return channels.map(value => parseInt(value, 16));
+}
+
+/** Returns either "white" or "black" based on the luma of the given hexcode for the best contrast.
+ * @param {String} hexcode 
+ * @returns {String}
+ */
+export function contrastHexLuma (hexcode) {
+    let [red, green, blue] = hexToRGB(hexcode)
+    red *= 0.2126;
+    green *= 0.7152;
+    blue *= 0.0722;
+
+    const luma = (red + green + blue) / 255;
+    return (luma <= .5) ? "white" : "black";
 }
 
 /** Converts a instance of a class into a plain object.
@@ -56,83 +69,10 @@ export function uniformObject (keyArr, value) {
     return obj;
 }
 
-/** Preloads the filepaths for the Handlebars partials.
- * @returns {Promise<Function[]>}
- */
-export async function preloadHandlebarsTemplates () {
-    const paths = {
-        // Global
-        'summary': 'systems/animecampaign/templates/sheets/partials/summary.hbs',
-        'stat-list': 'systems/animecampaign/templates/sheets/partials/stat-list.hbs',
-        'nav': 'systems/animecampaign/templates/sheets/partials/nav.hbs',
-
-        // Character
-        'main-stats': 'systems/animecampaign/templates/sheets/partials/main-stats.hbs',
-        'biography': 'systems/animecampaign/templates/sheets/partials/biography.hbs',
-        'kit': 'systems/animecampaign/templates/sheets/partials/kit.hbs',
-        'feature': 'systems/animecampaign/templates/sheets/partials/feature.hbs',
-
-        // Feature
-        'sections': 'systems/animecampaign/templates/sheets/partials/sections.hbs',
-        'details': 'systems/animecampaign/templates/sheets/partials/details.hbs',
-
-        // Roll
-        'roll-summary': 'systems/animecampaign/templates/roll/summary.hbs',
-        'roll-dice': 'systems/animecampaign/templates/roll/dice.hbs',
-        'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
-        'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
-        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
-    }
-
-    return loadTemplates(paths);
-}
-
-/** Loads the system-specific settings.
- */
-export function settings () {
-
-    const scope = 'animecampaign';
-
-    // Default Text Editor
-    game.settings.register(scope, 'defaultTextEditor', {
-        name: localize('settings.defaultTextEditor'),
-        hint: localize('settings.defaultTextEditorHint'),
-        scope: 'client',
-        config: true,
-        type: String,
-        choices: {
-            "markdown": localize('editor.markdown'),
-            "prosemirror": localize('editor.prosemirror'),
-        },
-        default: "markdown",
-        onChange: value => {
-            log(`Default Text Editor set to '${value}'`);
-        },
-    });
-
-    // Diagonal Movement Rule
-    // (Taken directly from DnD5e)
-    game.settings.register(scope, "diagonalMovement", {
-        name: 'AC.settings.diagonalMovement',
-        hint:  localize('settings.diagonalMovementHint'),
-        scope: "world",
-        config: true,
-        default: "5105",
-        type: String,
-        choices: {
-            "555": localize('settings.diagonalMovement555'),
-            "5105": localize('settings.diagonalMovement5105'),
-            "EUCL": localize('settings.diagonalMovementEuclidean'),
-        },
-        onChange: value => canvas.grid.diagonalRule = value
-    });
-
-}
-
 /** Sets the diagonal rule for this system.
  *  (Copied from DnD5e)
  */
-export function measureDistances(segments, options={}) {
+export function measureDistances (segments, options={}) {
     if ( !options.gridSpaces ) return BaseGrid.prototype.measureDistances.call(this, segments, options);
 
     // Track the total number of diagonals

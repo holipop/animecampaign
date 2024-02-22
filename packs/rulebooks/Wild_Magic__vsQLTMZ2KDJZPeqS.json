@@ -1,0 +1,59 @@
+{
+  "name": "Wild Magic!",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Guidelines",
+      "type": "text",
+      "_id": "SBdGxU9u7uzwgXVJ",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>How to cast wild magic:</p><p></p><ol><li><p>Each of these spells is written in terms of “Caster” and “Target”. The “<strong>Caster</strong>” is the person casting the wild magic spell. The “<strong>Target</strong>” is the person they are aiming the spell at. Please only select one singular Target for your spell.</p></li><li><p>Wild magic always hits. You do not need to roll the usual d20</p></li><li><p>To select your spell, roll a d1000. The GM or Caster may do this.</p></li><li><p>The GM is the one to look through the spell list and see which spell the caster has rolled. Some of the spells require secrecy and can only be read by the GM. If a player reads it first, the spell will be useless.</p></li><li><p>If the spell does not specify to keep it a secret, the GM should read the spell out loud for all players. The spell immediately takes effect.</p></li></ol><p></p><p>Unlike most of the <em>Epithet TTRPG Rulebook</em> which encourages experimentation and GM fiat, this Wild Magic table is—ironically—designed to be played under a very specific set of rules. Our goal was to make the world's first fun Wild Magic table. No spells that randomly kill you, no spells that completely ruin the majority of encounters they play into, just silly minigames and temporary obstacles.</p><p></p><p>Think of “Wild Magic” like a button that adds a random extra rule to the current encounter. Sometimes these rules are simple, sometimes they are very complex.</p><p></p><p><span style=\"text-decoration:underline\"><span style=\"text-decoration:underline\">For best usage, please keep the following rules in mind:</span></span></p><ol><li><p><strong>These spells are designed for combat.</strong> If you cast them outside of combat, you may find that the vast majority of them are no longer applicable.</p></li><li><p><strong>Spells are designed to be targeted at sentient creatures.</strong> You CAN cast them at inanimate objects, but more than half of the spells will have no effect. The GM may choose to adjust the spells to fit the occasion. (EX: If you end up casting a “poison” spell at a stage hazard, the GM could flavor the “poison” as a rusting effect and still apply the damage.)</p></li><li><p><strong>No side of any battle may cast more than one wild magic spell per encounter.</strong> Every ability that can cast a wild magic spell should be (Once-Per-Combat) and no character should have more than one of them. </p></li><li><p><strong>The GM is allowed to veto literally anything on this table from happening.</strong> Every encounter in the Epithet system is different. Many of these wild magic spells can have funny and interesting interactions with existing combats, but they can also completely ruin them or instantly change the course of a story. If the wild magic destroys an important character's motivation or messes with the story at large, I would consider vetoing it and asking the player if it's ok to reroll. If the wild magic messes with the ongoing combat in an interesting way by adding or subtracting rules, I would urge the GM to allow it.</p></li><li><p><strong>Enemies really shouldn't have Wild Magic.</strong> You can't design an encounter around Wild Magic unless you're faking what spells they're casting and doing it preemptively. …Which actually sounds fun. Go for it.</p></li></ol><p></p><p>And, the most important rule…</p><ol start=\"6\"><li><p><strong style=\"color:darkred\">Do </strong><span style=\"text-decoration:underline\"><strong style=\"color:darkred\"><span style=\"text-decoration:underline\">NOT</span></strong></span><strong style=\"color:darkred\"> give more than one player in the Party access to Wild Magic.</strong></p></li></ol><p></p><p>I cannot stress enough how much you will regret this decision. Every encounter will be impossible to balance. </p><p></p><p>Literally the only circumstance where I can imagine even 2+ party members having wild magic working out is a combat-heavy one-shot where the goal is to see how much chaos you can cause before your entire party explodes.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "ownership": {
+        "default": -1,
+        "JjUq9xXOfMO8J9JE": 3
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "animecampaign",
+        "systemVersion": "v1.0",
+        "coreVersion": "11.315",
+        "createdTime": 1700723690153,
+        "modifiedTime": 1700723963297,
+        "lastModifiedBy": "JjUq9xXOfMO8J9JE"
+      },
+      "_key": "!journal.pages!vsQLTMZ2KDJZPeqS.SBdGxU9u7uzwgXVJ"
+    }
+  ],
+  "folder": null,
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "animecampaign",
+    "systemVersion": "v1.0",
+    "coreVersion": "11.315",
+    "createdTime": 1700723680247,
+    "modifiedTime": 1702971240233,
+    "lastModifiedBy": "JjUq9xXOfMO8J9JE"
+  },
+  "ownership": {
+    "default": 0,
+    "JjUq9xXOfMO8J9JE": 3
+  },
+  "_id": "vsQLTMZ2KDJZPeqS",
+  "sort": 0,
+  "_key": "!journal!vsQLTMZ2KDJZPeqS"
+}

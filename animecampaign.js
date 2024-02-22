@@ -1,9 +1,10 @@
 // Anime Campaign for Foundry VTT
 // by Holipop
 
+
 import * as config from './module/config.js'
 import * as Utils from './module/Utils.js'
-import * as Roll from './module/Roll.js'
+import * as ChatMessage from './module/ChatMessage.js'
 import * as List from './module/List.js'
 import * as Macro from './module/Macro.js'
 import * as Settings from './module/Settings.js'
@@ -21,20 +22,27 @@ import Stat from './module/data-models/Stat.js'
 import Section from './module/data-models/Section.js'
 import Category from './module/data-models/Category.js'
 
+globalThis.AC = {
+    Actor: ACActor,
+    Item: ACItem,
+    CharacterData,
+    CharacterSheet,
+    FeatureData,
+    FeatureSheet,
+    Stat,
+    Section,
+    Category,
+    Macro: { ...Macro },
+    List: { ...List },
+    Utils: { ...Utils },
+}
+
 Hooks.once('init', () => {
     Utils.log(config.AC.ascii);
     Utils.log('Initializing Anime Campaign System!');
 
     CONFIG.AC = config.AC;
-
-    game.AC = {
-        documents: { ACActor, ACItem },
-        data: { CharacterData, FeatureData, Stat, Section, Category },
-        apps: { CharacterSheet, FeatureSheet },
-        Macro: { ...Macro },
-        List: { ...List },
-        Utils: { ...Utils },
-    }
+    game.AC = AC
 
     CONFIG.Actor.documentClass = ACActor;
     CONFIG.Actor.dataModels["Character"] = CharacterData;
@@ -47,8 +55,32 @@ Hooks.once('init', () => {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
 
-    Utils.preloadHandlebarsTemplates();
     Settings.register();
+
+    const partials = {
+        // Global
+        'summary': 'systems/animecampaign/templates/sheets/partials/summary.hbs',
+        'stat-list': 'systems/animecampaign/templates/sheets/partials/stat-list.hbs',
+        'nav': 'systems/animecampaign/templates/sheets/partials/nav.hbs',
+
+        // Character
+        'main-stats': 'systems/animecampaign/templates/sheets/partials/main-stats.hbs',
+        'biography': 'systems/animecampaign/templates/sheets/partials/biography.hbs',
+        'kit': 'systems/animecampaign/templates/sheets/partials/kit.hbs',
+        'feature': 'systems/animecampaign/templates/sheets/partials/feature.hbs',
+
+        // Feature
+        'sections': 'systems/animecampaign/templates/sheets/partials/sections.hbs',
+        'details': 'systems/animecampaign/templates/sheets/partials/details.hbs',
+
+        // Roll
+        'roll-summary': 'systems/animecampaign/templates/roll/summary.hbs',
+        'roll-dice': 'systems/animecampaign/templates/roll/dice.hbs',
+        'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
+        'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
+        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
+    }
+    loadTemplates(partials);
 })
 
 Hooks.on('ready', () => {
@@ -78,5 +110,5 @@ Hooks.on("canvasInit", gameCanvas => {
     SquareGrid.prototype.measureDistances = Utils.measureDistances;
 });
 
-Hooks.on('renderChatMessage', (message, html, data) => Roll.listeners(message, html, data))
-Hooks.on('hotbarDrop', (hotbar, data, slot) => Macro.createMacro(data, slot))
+Hooks.on('renderChatMessage', ChatMessage.activateListeners)
+Hooks.on('hotbarDrop', Macro.createMacro)

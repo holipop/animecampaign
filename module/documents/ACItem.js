@@ -5,29 +5,121 @@ import * as Utils from "../Utils.js"
  */
 export default class ACItem extends Item { 
 
-    /** The file path to the roll template.
+    /** The file path to the chat message template.
      * @returns {String}
      */
-    get rollTemplate () { return 'systems/animecampaign/templates/roll/roll-template.hbs' }
+    get chatMessageTemplate () { 
+        return 'systems/animecampaign/templates/roll/roll-template.hbs' 
+    }
+
+    /** The file paths for the templates of chat message partials.
+     * @returns {*}
+     * @enum
+     */
+    get chatMessagePartial () {
+        return {
+            summary: 'systems/animecampaign/templates/roll/summary.hbs',
+            dice: 'systems/animecampaign/templates/roll/dice.hbs',
+            stats: 'systems/animecampaign/templates/roll/stats.hbs',
+            sections: 'systems/animecampaign/templates/roll/sections.hbs',
+            banner: 'systems/animecampaign/templates/roll/banner.hbs',
+        }
+    } 
 
     /** Fires before a document is created. For preliminary operations.
      * @param {*} data 
      * @param {*} options 
      * @param {BaseUser} user 
      */
-    _preCreate(data, options, user) {
+    _preCreate (data, options, user) {
         super._preCreate(data, options, user);
 
         const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
-        this.updateSource({ 'system.details.editor': defaultTextEditor });
+        const isDefaultImageOwner = game.settings.get('animecampaign', 'defaultFeatureImage')
+
+        const updates = {
+            'system.details.editor': defaultTextEditor,
+        }
+
+        if (this.isOwned && isDefaultImageOwner) {
+            updates.img = this.actor.img
+        }
+
+        this.updateSource(updates);
+    }
+
+    /** Render the summary partial of a chat message.
+     * @returns {Promise<String>}
+     */
+    async getSummaryContent () {
+        const data = {
+            ...this,
+            match: this.system.color,
+            contrast: Utils.contrastHexLuma(this.system.color),
+        }
+        return renderTemplate(this.chatMessagePartial.summary, data)
+    }
+
+    /** Render the dice partial of a chat message.
+     * @returns {Promise<String>}
+     */
+    async getDiceContent (roll, post = false) {
+        const formula = roll._formula
+
+        // Get CSS classes for if the roll is the max or min value.
+        let crit;
+        if (roll.isDeterministic) { }
+        else if (roll.total == new Roll(formula).evaluate({ maximize: true }).total) {
+            crit = 'success';
+        } else if (roll.total == new Roll(formula).evaluate({ minimize: true }).total) {
+            crit = 'failure';
+        }
+
+        const data = {
+            post,
+            roll,
+            crit,
+            tooltip: await roll.getTooltip(),
+        }
+        return renderTemplate(this.chatMessagePartial.dice, data)
+    }
+
+    /** Render the stats partial of a chat message.
+     * @returns {Promise<String>}
+     */
+    async getStatsContent () {
+        const data = { stats: this.system.stats }
+        return renderTemplate(this.chatMessagePartial.stats, data)
+    }
+
+    /** Render the sections partial of a chat message.
+     * @returns {Promise<String>}
+     */
+    async getSectionsContent () {
+        const data = { sections: this.system.sections }
+        return renderTemplate(this.chatMessagePartial.sections, data)
+    }
+
+    /** Render the banner partial of a chat message.
+     * @returns {Promise<String>}
+     */
+    async getBannerContent () {
+        const data = {
+            match: this.system.color,
+            contrast: Utils.contrastHexLuma(this.system.color),
+            details: this.system.details,
+        }
+        return renderTemplate(this.chatMessagePartial.banner, data)
     }
 
     /** Sends a chat message of this feature.
+     * @param {Boolean} options.post
+     * @param {String?} options.customFormula
      */
-    async roll ({ post = false } = {}) {
+    async roll ({ post = false, formula = null, template = null } = {}) {
         
         // If the formula is invalid, post the message.
-        const formula = this.system.details.formula;
+        formula ??= this.system.details.formula;
         let roll;
         if (Roll.validate(formula)) {
             roll = await new Roll(formula).evaluate();
@@ -36,62 +128,39 @@ export default class ACItem extends Item {
             post = true;
         }
 
-        // Get CSS classes for if the roll is the max or min value.
-        let crit;
-        (() => {
-            if (roll.isDeterministic) return;
-
-            if (roll.total == new Roll(formula).evaluate({ maximize: true }).total) {
-                crit = 'success';
-            } else if (roll.total == new Roll(formula).evaluate({ minimize: true }).total) {
-                crit = 'failure';
-            }
-        })();
-
-        // Getting colors for contrasting.
-        const contrast = (() => {
-            const rgb = Utils.hexToRGB(this.system.color);
-            rgb[0] *= 0.2126;
-            rgb[1] *= 0.7152;
-            rgb[2] *= 0.0722;
-
-            const luma = rgb.reduce((n, m) => n + m) / 255;
-            return (luma <= .5) ? "white" : "black";
-        })();
-        const contrastImg = (contrast == 'white') 
-            ? 'brightness(0) saturate(100%) invert(100%)'
-            : 'brightness(0) saturate(100%)';
-
-        // Data preparation
-        const data = { 
+        const data = {
             ...this,
             _id: this._id,
-            
-            match: this.system.color,
-            contrast,
-            contrastImg,
-
-            post,
+            system: this.system,
             roll,
-            crit,
-            tooltip: await roll.getTooltip(),
 
-            stats: this.system.stats,
-            sections: this.system.sections,
-            details: this.system.details,
+            summary: await this.getSummaryContent(),
+            dice: await this.getDiceContent(roll, post),
+            stats: await this.getStatsContent(),
+            sections: await this.getSectionsContent(),
+            banner: await this.getBannerContent(),
         }
+
+        const customTemplate = `
+            <div class="animecampaign chat roll" data-id="{{_id}}">
+                ${template}
+            </div>`
+
+        const content = (template)
+            ? Handlebars.compile(customTemplate)(data)
+            : await renderTemplate(this.chatMessageTemplate, data);
         
         const message = {
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(this.rollTemplate, data),
+            content,
         }
 
         if (post) {
-            return ChatMessage.create(message);
+            ChatMessage.create(message);
+        } else {
+            roll.toMessage(message);
         }
-
-        return roll.toMessage(message);
     }
 
 }

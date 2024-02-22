@@ -11,6 +11,14 @@ AC.ascii = `
   █▀      ██ ▀██▄     ▄▀
 ▄███▄   ▄████▄ ▀▀█████▀   v1.0`
 
+AC.inscribed = {
+    epithet: "AC.TYPE.Epithet"
+}
+AC.mundie = {
+    expert: "AC.TYPE.Expert",
+    powerhouse: "AC.TYPE.Powerhouse"
+}
+
 AC.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 AC.colorStat = {
     red: 'AC.COLOR.Red',

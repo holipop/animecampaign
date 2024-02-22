@@ -6,7 +6,7 @@
  * @param {*} data
  * @param {Number} slot
  */
-export async function createMacro (data, slot) {
+export async function createMacro (_, data, slot) {
     if (data.type !== 'Feature') return;
     if (!('obj' in data)) {
         return ui.notification.warn('You can only create macro buttons for owned Items');
@@ -14,7 +14,7 @@ export async function createMacro (data, slot) {
     const item = data.obj;
 
     // Macro creation.
-    const command = `game.AC.Macro.roll('${data.id}')`;
+    const command = `AC.Macro.roll('${data.id}')`;
     let macro = game.macros.find(m => (m.name === item.name) && (m.command == command));
     if (!macro) {
         macro = await Macro.create({
@@ -31,8 +31,9 @@ export async function createMacro (data, slot) {
 
 /** Rolls a feature via the hotbar.
  * @param {String} id 
+ * @param {*} options
  */
-export function roll (id) {
+export function roll (id, options = {}) {
     const speaker = ChatMessage.getSpeaker();
     let actor;
     if (speaker.token) actor = game.actors.tokens[speaker.token];
@@ -43,13 +44,11 @@ export function roll (id) {
         return
     }
 
-    console.log(id)
-
     const item = actor.getEmbeddedDocument('Item', id);
     if (!item) {
         ui.notifications.warn(game.i18n.format("AC.NOTIFY.Macro.MissingItemWarning", { id }));
         return;
     }
 
-    item.roll();
+    item.roll(options);
 }

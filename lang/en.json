@@ -50,10 +50,13 @@
         "Biography": "Biography",
         "Kit": "Kit",
         "Description": "Description",
-        "Details": "Details"
+        "Details": "Details",
+        "Basic": "Basic",
+        "Stats": "Stats"
     },
     "LABEL": {
         "ColorStats": "Color Stats",
+        "Stat": "Stat",
         "Stats": "Stats",
         "View": "View",
         "Value": "Value",
@@ -69,6 +72,7 @@
         "Category": "Category",
         "EmptyStats": "Empty Stats",
         "EmptyCategory": "Empty Category",
+        "UpdateCategory": "Update Category",
         "TextEditor": "Text Editor",
         "Markdown": "Markdown",
         "ProseMirror": "ProseMirror"
@@ -88,9 +92,11 @@
             "Collapse": "Collapse Category",
             "Create": "Create Category",
             "Delete": "Delete Category",
+            "Edit": "Edit Category",
             "Rename": "Rename Category",
             "Color": "Color Category",
             "Flood": "Flood Category",
+            "Reset": "Reset Category Color",
             "Track": "Track Stat",
             "Untrack": "Untrack Stat",
             "EditTrackerImage": "Edit Tracker Image"
@@ -152,6 +158,10 @@
         }
     },
     "SETTINGS": {
+        "TokenBarClamp": {
+            "Name": "Token Bar Clamp",
+            "Hint": "Disabling this allows you to modify token bars to go into negative numbers and past their maximum value."
+        },
         "DefaultTextEditor": {
             "Name": "Default Text Editor",
             "Hint": "Configure which text editor is set on-creation for your actors and items."
@@ -162,6 +172,10 @@
             "555": "PHB: Equidistant (5/5/5)",
             "5105": "DMG: Alternating (5/10/5)",
             "EUCL": "Euclidean (7.07 ft. Diagonal)"
+        },
+        "DefaultFeatureImage": {
+            "Name": "Default Feature Image",
+            "Hint": "Enabling this sets the default image of created features to the image of the character that owns it."
         }
     },
     "MIGRATION": {

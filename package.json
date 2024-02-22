@@ -1,11 +1,27 @@
 {
-    "devDependencies": {
-        "jsdoc": "^4.0.2",
-        "less": "^4.1.3",
-        "vitest": "^0.32.0"
-    },
-    "dependencies": {
-        "npm": "^9.6.0",
-        "vite": "^4.3.9"
-    }
+  "devDependencies": {
+    "jsdoc": "^4.0.2",
+    "less": "^4.1.3"
+  },
+  "dependencies": {
+    "npm": "^9.6.0",
+    "vite": "^4.3.9"
+  },
+  "name": "animecampaign",
+  "description": "This is an unofficial, fan-made implementation of the JelloApocolypse's Epithet/Anime Campaign System for Foundry Virtual Tabletop, developed by Sunny Holiday (Holipop).",
+  "version": "1.0.0",
+  "scripts": {
+    "pushLDBtoYML": "node ./tools/pushLDBtoYML.mjs",
+    "pullYMLtoLDB": "node ./tools/pullYMLtoLDB.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holipop/animecampaign.git"
+  },
+  "author": "Holipop",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/holipop/animecampaign/issues"
+  },
+  "homepage": "https://github.com/holipop/animecampaign#readme"
 }

@@ -1354,3 +1354,12 @@
 .animecampaign.actor.sheet .biography .editor.prosemirror {
   height: 20rem;
 }
+.sheet.category-config .name {
+  text-transform: uppercase;
+}
+.sheet.category-config .tracker {
+  text-transform: capitalize;
+}
+.sheet.category-config button > .fas {
+  margin: auto;
+}
