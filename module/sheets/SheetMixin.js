@@ -17,6 +17,8 @@ export default function SheetMixin (Base) {
          */
         activateListeners (html) {
 
+            super.activateListeners(html);
+
             const sheet = this;
 
             // Disables spellcheck for inputs.
