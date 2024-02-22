@@ -123,6 +123,18 @@
   font-style: italic;
   font-weight: 900;
 }
+.animecampaign-v2.sheet .window-content {
+  background: white;
+}
+.animecampaign-v2.actor.sheet .background img {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.animecampaign-v2.actor.sheet .background svg.flair > text {
+  font-family: "Gloock";
+}
 .animecampaign.sheet .window-content {
   background: #e8e5db;
 }

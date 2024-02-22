@@ -1,7 +1,7 @@
 import * as Utils from "../Utils.js";
 import * as List from "../List.js"
 import SheetMixin from "./SheetMixin.js"
-import CategoryConfig from "./CategoryConfig.js";
+//import CategoryConfig from "./CategoryConfig.js";
 
 /**
  * The application for Characters.

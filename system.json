@@ -46,8 +46,8 @@
     "gridDistance": 5,
     "gridUnits": "ft",
     "initiative": "1d20",
-    "manifest": "https://github.com/holipop/animecampaign/releases/download/1.0/system.json",
-    "download": "https://github.com/holipop/animecampaign/releases/download/1.0/animecampaign.zip",
+    "manifest": "https://github.com/holipop/animecampaign/releases/download/1.1/system.json",
+    "download": "https://github.com/holipop/animecampaign/releases/download/1.1/animecampaign.zip",
     "primaryTokenAttribute": "stamina",
     "secondaryTokenAttribute": "proficiency"
 }

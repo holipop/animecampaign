@@ -12,7 +12,7 @@ import * as Migrate from './module/Migrate.js'
 
 import ACActor from './module/documents/ACActor.js'
 import CharacterData from './module/data-models/CharacterData.js'
-import CharacterSheet from './module/sheets/CharacterSheet.js'
+import CharacterSheet from './module/sheets-v2/CharacterSheet.js'
 
 import ACItem from './module/documents/ACItem.js'
 import FeatureData from './module/data-models/FeatureData.js'
