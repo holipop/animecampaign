@@ -1,0 +1,43 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet .window-content {
+    background-image: none;
+    background: @bg-color;
+    padding: 0;
+
+    overflow-y: hidden;
+}
+
+.animecampaign.sheet.actor {
+    min-width: @character-sheet-width;
+    max-width: @character-sheet-width;
+    min-height: @character-sheet-height;
+}
+
+.animecampaign.sheet .summary {
+    display: grid;
+    
+    > * {
+        grid-area: 1 / 1 / 1 / 1;
+    }
+
+    .svg-bg {
+        width: 100%;
+    }
+    .svg-text {
+        width: 100%;
+
+        font: italic 12px "Gloock";
+        text-anchor: start;
+        text-transform: uppercase;
+
+        .stroke {
+            stroke-width: .5px;
+            stroke-linejoin: round;
+        }
+        .fill {
+            fill: @bg-color;
+        }
+    }
+
+}

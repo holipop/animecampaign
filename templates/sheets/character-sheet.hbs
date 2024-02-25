@@ -1,29 +1,17 @@
 <form class="{{cssClass}}" autocomplete="off">
+
     <!-- Summary -->
-    {{~> "summary"}}
+    <section class="summary">
 
-    <section class="scrollable" data-scrollable>
-        <!-- Main Stats -->
-        {{> "main-stats"}}
+        <svg class="svg-text" viewBox="0 0 100 100">
+            <text class="stroke" stroke="{{color}}" x="29" y="8">{{svg.text}}</text>
+            <text class="fill" fill="{{color}}" x="29" y="8">{{svg.text}}</text>
+        </svg>
 
-        <!-- Color Stats -->
-        {{> "stat-list"}}
-
-        <!-- Navigation -->
-        {{> "nav"}}
-
-        <div data-content>
-
-            <!-- Biography -->
-            {{~> "biography"}}
-            
-            {{#unless limited}}
-                <!-- Kit -->
-                {{> "kit"}}
-            {{/unless}}
-
-        </div>
+        <svg class="svg-bg" viewBox="0 0 800 600">
+            <use href="{{svg.bg}}" fill="{{color}}" />
+        </svg>
 
     </section>
-
+    
 </form>
