@@ -39,7 +39,11 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
     async getData () {
         return {
             ...super.getData(),
-            color: "#a9d0d3",
+            ...this.object,
+            config: CONFIG.AC,
+
+            color: this.object.system.color,
+
             svg: {
                 bg: this.svgBackground,
                 text: this.svgText,

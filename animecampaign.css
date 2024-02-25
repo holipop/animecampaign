@@ -134,27 +134,42 @@
   max-width: 650px;
   min-height: 550px;
 }
-.animecampaign.sheet .summary {
-  display: grid;
+.animecampaign.sheet .background-wrapper {
+  position: relative;
 }
-.animecampaign.sheet .summary > * {
+.animecampaign.sheet .background {
+  position: absolute;
+  display: grid;
+  width: 100%;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.animecampaign.sheet .background > * {
   grid-area: 1 / 1 / 1 / 1;
 }
-.animecampaign.sheet .summary .svg-bg {
+.animecampaign.sheet .background .svg-bg {
   width: 100%;
 }
-.animecampaign.sheet .summary .svg-text {
+.animecampaign.sheet .background .svg-text {
   width: 100%;
   font: italic 12px "Gloock";
   text-anchor: start;
   text-transform: uppercase;
 }
-.animecampaign.sheet .summary .svg-text .stroke {
+.animecampaign.sheet .background .svg-text .stroke {
   stroke-width: 0.5px;
   stroke-linejoin: round;
 }
-.animecampaign.sheet .summary .svg-text .fill {
+.animecampaign.sheet .background .svg-text .fill {
   fill: #e0e0e0;
+}
+.animecampaign.sheet .summary {
+  position: relative;
+  z-index: 5;
+}
+.animecampaign.sheet .summary .img {
+  width: 4rem;
+  height: 4rem;
 }
 /* @import "./v1/global.less";
 @import "./v1/roll.less";

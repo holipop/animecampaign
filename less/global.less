@@ -14,8 +14,16 @@
     min-height: @character-sheet-height;
 }
 
-.animecampaign.sheet .summary {
+.animecampaign.sheet .background-wrapper {
+    position: relative;
+}
+.animecampaign.sheet .background {
+    position: absolute;
     display: grid;
+    width: 100%;
+    pointer-events: none;
+
+    opacity: .5;
     
     > * {
         grid-area: 1 / 1 / 1 / 1;
@@ -39,5 +47,14 @@
             fill: @bg-color;
         }
     }
+}
 
+.animecampaign.sheet .summary {
+    position: relative;
+    z-index: 5;
+    
+    .img {
+        width: 4rem;
+        height: 4rem;
+    }
 }
