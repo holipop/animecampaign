@@ -57,29 +57,7 @@ Hooks.once('init', () => {
 
     Settings.register();
 
-    const partials = {
-        // Global
-        'summary': 'systems/animecampaign/templates/sheets/partials/summary.hbs',
-        'stat-list': 'systems/animecampaign/templates/sheets/partials/stat-list.hbs',
-        'nav': 'systems/animecampaign/templates/sheets/partials/nav.hbs',
-
-        // Character
-        'main-stats': 'systems/animecampaign/templates/sheets/partials/main-stats.hbs',
-        'biography': 'systems/animecampaign/templates/sheets/partials/biography.hbs',
-        'kit': 'systems/animecampaign/templates/sheets/partials/kit.hbs',
-        'feature': 'systems/animecampaign/templates/sheets/partials/feature.hbs',
-
-        // Feature
-        'sections': 'systems/animecampaign/templates/sheets/partials/sections.hbs',
-        'details': 'systems/animecampaign/templates/sheets/partials/details.hbs',
-
-        // Roll
-        'roll-summary': 'systems/animecampaign/templates/roll/summary.hbs',
-        'roll-dice': 'systems/animecampaign/templates/roll/dice.hbs',
-        'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
-        'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
-        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
-    }
+    const partials = {}
     loadTemplates(partials);
 })
 

@@ -1,7 +1,4 @@
-import * as Utils from "../Utils.js";
-import * as List from "../List.js"
-import SheetMixin from "./SheetMixin.js"
-//import CategoryConfig from "./CategoryConfig.js";
+import SheetMixin from "./SheetMixin.js";
 
 /**
  * The application for Characters.
@@ -17,31 +14,32 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             height: 550,
             classes: ["animecampaign", "sheet", "actor"],
             template: 'systems/animecampaign/templates/sheets/character-sheet.hbs',
-            scrollY: ["section.scrollable"],
         });
-
-        options.dragDrop = [
-            { dragSelector: "[data-kit] [data-feature]", dropSelector: null },
-            { dragSelector: "[data-kit] [data-category]", dropSelector: null },
-            { dragSelector: "[data-tracker-list] [data-tracker]", dropSelector: null },
-        ];
-
-        options.tabs = [
-            { navSelector: "[data-nav]", contentSelector: "[data-content]", initial: "" },
-        ];
 
         return options;
     }
 
+    /** The path to the background .svg file.
+     * @returns {String}
+     */
+    get svgBackground () {
+        return "systems/animecampaign/assets/space/MoonDraft.svg#moon-draft"
+    }
 
-    //** DATA PREPERATION */
+    /** The text displayed in the background.
+     * @returns {String}
+     */
+    get svgText () {
+        return "character"
+    }
 
-    /** Returns the context object for Handlebars.
-     * @returns {Object}
+    /** Fetches the context for this application's template.
+     * @returns {*}
      */
     async getData () {
         return {
             ...super.getData(),
+            ...this.object,
             config: CONFIG.AC,
 
             color: this.object.system.color,

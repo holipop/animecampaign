@@ -1,0 +1,40 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    <!-- Background -->
+    <div class="background-wrapper">
+        <section class="background">
+
+            <svg class="svg-text" viewBox="0 0 100 10">
+                <text class="stroke" stroke="{{color}}" x="29" y="8">{{svg.text}}</text>
+                <text class="fill" fill="{{color}}" x="29" y="8">{{svg.text}}</text>
+            </svg>
+
+            <svg class="svg-bg" viewBox="0 0 800 400">
+                <use href="{{svg.bg}}" fill="{{color}}" />
+            </svg>
+
+        </section>
+    </div>
+
+    <!-- Summary -->
+    <section class="summary">
+        <img class="img" src="{{img}}" data-edit="img">
+        <textarea name="name" spellcheck="false">{{name}}</textarea>
+        <textarea name="system.class" spellcheck="false">{{system.class}}</textarea>
+        
+        <select class="type" name="system.type">
+            {{#select system.type}}
+                <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
+                    {{selectOptions config.inscribed localize=true}}
+                </optgroup>
+                
+                <optgroup label="{{localize "AC.TYPE.Mundie"}}">
+                    {{selectOptions config.mundie localize=true}}
+                </optgroup>
+            {{/select}}
+        </select>
+        <textarea name="system.word">{{system.word}}</textarea>
+
+    </section>
+    
+</form>
