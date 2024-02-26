@@ -51,5 +51,4 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         }
     }
 
-
 }

@@ -4,12 +4,12 @@
     <div class="background-wrapper">
         <section class="background">
 
-            <svg class="svg-text" viewBox="0 0 100 100">
+            <svg class="svg-text" viewBox="0 0 100 10">
                 <text class="stroke" stroke="{{color}}" x="29" y="8">{{svg.text}}</text>
                 <text class="fill" fill="{{color}}" x="29" y="8">{{svg.text}}</text>
             </svg>
 
-            <svg class="svg-bg" viewBox="0 0 800 600">
+            <svg class="svg-bg" viewBox="0 0 800 400">
                 <use href="{{svg.bg}}" fill="{{color}}" />
             </svg>
 
@@ -19,8 +19,8 @@
     <!-- Summary -->
     <section class="summary">
         <img class="img" src="{{img}}" data-edit="img">
-        <textarea name="name">{{name}}</textarea>
-        <textarea name="system.class">{{system.class}}</textarea>
+        <textarea name="name" spellcheck="false">{{name}}</textarea>
+        <textarea name="system.class" spellcheck="false">{{system.class}}</textarea>
         
         <select class="type" name="system.type">
             {{#select system.type}}

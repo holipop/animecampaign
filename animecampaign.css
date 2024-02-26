@@ -168,8 +168,16 @@
   z-index: 5;
 }
 .animecampaign.sheet .summary .img {
-  width: 4rem;
-  height: 4rem;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  width: 6rem;
+  height: 6rem;
+  color: green;
+  background-color: currentColor;
+  border: 0.0625rem solid currentColor;
+  box-shadow: 0.125rem 0.25rem currentColor;
 }
 /* @import "./v1/global.less";
 @import "./v1/roll.less";
