@@ -58,7 +58,6 @@ Hooks.once('init', () => {
     Settings.register();
 
     const partials = {
-        /* 
         // Global
         'summary': 'systems/animecampaign/templates/sheets/partials/summary.hbs',
         'stat-list': 'systems/animecampaign/templates/sheets/partials/stat-list.hbs',
@@ -79,7 +78,7 @@ Hooks.once('init', () => {
         'roll-dice': 'systems/animecampaign/templates/roll/dice.hbs',
         'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
         'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
-        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs', */
+        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
     }
     loadTemplates(partials);
 })

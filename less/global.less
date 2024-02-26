@@ -1,67 +1,113 @@
 // main: ./animecampaign.less
 
 .animecampaign.sheet .window-content {
-    background-image: none;
-    background: @bg-color;
-    padding: 0;
+    #AC.Background();
+}
 
+.animecampaign.sheet form {
     overflow-y: hidden;
-}
 
-.animecampaign.sheet.actor {
-    min-width: @character-sheet-width;
-    max-width: @character-sheet-width;
-    min-height: @character-sheet-height;
-}
+    .scrollable {
+        overflow-y: scroll;
+        padding: 0 1rem;
 
-.animecampaign.sheet .background-wrapper {
-    position: relative;
-}
-.animecampaign.sheet .background {
-    position: absolute;
-    display: grid;
-    width: 100%;
-    pointer-events: none;
-
-    opacity: .5;
-    
-    > * {
-        grid-area: 1 / 1 / 1 / 1;
+        scrollbar-color: #AC.Color()[@return] rgba(0, 0, 0, 0.25);
+        scrollbar-width: thin;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #AC.Color()[@return];
+        border-color: #AC.Color(.5)[@return];
     }
 
-    .svg-bg {
-        width: 100%;
-    }
-    .svg-text {
-        width: 100%;
+    .editor {
+        min-height: 3rem;
+        border: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+        border-left-width: (3 * @rpx);
+        border-right-width: (3 * @rpx);
 
-        font: italic 12px "Gloock";
-        text-anchor: start;
-        text-transform: uppercase;
+        font-family: "Libre Franklin";
+        background-color: rgba(0, 0, 0, 0.05);
 
-        .stroke {
-            stroke-width: .5px;
-            stroke-linejoin: round;
-        }
-        .fill {
-            fill: @bg-color;
+        .editor-menu {
+            border-radius: 0;
+
+            button {
+                margin: 0;
+            }
         }
     }
-}
 
-.animecampaign.sheet .summary {
-    position: relative;
-    z-index: 5;
-    
-    .img {
+    .selected {
+        #AC.Active();
+    }
+
+    img {
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    a:hover {
+        text-shadow: #AC.Color()[@return] 0 0 (8 * @rpx);
+    }
+    button:not(.prosemirror *) {
         #AC.InputSkinning();
-        
-        width: 6rem;
-        height: 6rem;
+        #AC.Border();
 
-        color: green;
-        background-color: currentColor;
-        border: 1 * @rpx solid currentColor;
-        box-shadow: (2 * @rpx) (4 * @rpx) currentColor;
+        padding: 0;
+        margin: 0;
+
+        font-family: "Libre Franklin";
+        font-weight: 600;
+
+        &:hover {
+            background-color: #AC.Color(.05)[@return];
+        }
+        &:active {
+            background-color: #AC.Color(.2)[@return];
+        }
+    }
+    input, select, textarea {
+        #AC.InputSkinning();
+
+        border: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+        border-left: 0;
+        border-right: 0;
+        background-color: rgba(0, 0, 0, 0.05);
+
+        font-family: "Libre Franklin";
+        font-weight: 500;
+
+        &:focus:not([readonly]) {
+            border-color: #AC.Color(.66)[@return];
+        }
+    }
+    input, select {
+        border-top: 0;
+        &:focus:not([readonly]) {
+            box-shadow: inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx);
+        }
+    }
+    textarea:focus:not([readonly]) {
+        box-shadow: 
+            inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
+            inset #AC.Color(.3)[@return] 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);
+    }
+}
+.animecampaign.actor.sheet {
+    min-width: 650px;
+    min-height: 550px;
+
+    .scrollable {
+        height: calc(100% - @character-summary-height);
+    }
+}
+.animecampaign.item.sheet {
+    min-width: 550px;
+    min-height: 500px;
+
+    .scrollable {
+        height: calc(100% - @feature-summary-height);
     }
 }
