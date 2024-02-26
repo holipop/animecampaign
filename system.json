@@ -9,7 +9,7 @@
             "flags": {}
         }
     ],
-    "version": "v1.0",
+    "version": "v1.1",
     "compatibility": {
         "minimum": "11.302",
         "verified": "11.315"
