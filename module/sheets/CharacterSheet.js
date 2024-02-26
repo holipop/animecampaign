@@ -13,7 +13,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             width: 650,
             height: 550,
             classes: ["animecampaign", "sheet", "actor"],
-            template: 'systems/animecampaign/templates/sheets/character-sheet.hbs',
+            template: 'systems/animecampaign/templates/character-sheet.hbs',
         });
 
         return options;
