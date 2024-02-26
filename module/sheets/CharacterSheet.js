@@ -48,6 +48,8 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
                 bg: this.svgBackground,
                 text: this.svgText,
             },
+
+            // ASSASAAAAA
         }
     }
 
