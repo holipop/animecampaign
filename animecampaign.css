@@ -125,7 +125,7 @@
 }
 .animecampaign.sheet .window-content {
   background-image: none;
-  background: #e0e0e0;
+  background: #f4f3ed;
   padding: 0;
   overflow-y: hidden;
 }
@@ -161,7 +161,7 @@
   stroke-linejoin: round;
 }
 .animecampaign.sheet .background .svg-text .fill {
-  fill: #e0e0e0;
+  fill: #f4f3ed;
 }
 .animecampaign.sheet .summary {
   position: relative;

@@ -17,6 +17,21 @@ export default function SheetMixin (Base) {
          */
         activateListeners (html) {
             super.activateListeners(html)
+
+            // Set the color of elements with [data-color].
+            html.find('[data-color]').each(this.setColor.bind(this))
+        }
+
+        /**
+         * @param {Number} index 
+         * @param {Element} element 
+         */
+        setColor (index, element) {
+            const properties = {
+                "color": $(element).data("color")
+            }
+            $(element).css(properties)
+            //console.log($(element).data("color"))
         }
     }
     

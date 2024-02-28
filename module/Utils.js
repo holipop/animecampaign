@@ -17,15 +17,6 @@ export function error (text) {
     console.error(`%cAnime Campaign | ${text}`, 'color: tomato;');
 }
 
-/** Converts a string hexadecimal color into an array of RGB values in base 10.
- * @param {String} hexcode 
- * @returns {Number[]}
- */
-export function hexToRGB (hexcode) {
-    const channels = [hexcode.slice(1, 3), hexcode.slice(3, 5), hexcode.slice(5)];
-    return channels.map(value => parseInt(value, 16));
-}
-
 /** Returns either "white" or "black" based on the luma of the given hexcode for the best contrast.
  * @param {String} hexcode 
  * @returns {String}
@@ -38,6 +29,90 @@ export function contrastHexLuma (hexcode) {
 
     const luma = (red + green + blue) / 255;
     return (luma <= .5) ? "white" : "black";
+}
+
+/** Converts a string hexadecimal color into an array of RGB values.
+ * @param {String} hexcode 
+ * @returns {Number[]}
+ */
+export function hexToRGB (hexcode) {
+    const channels = [hexcode.slice(1, 3), hexcode.slice(3, 5), hexcode.slice(5)];
+    return channels.map(value => parseInt(value, 16));
+}
+
+/** Converts a string hexadecimal color into an array of HSL values.
+ * @param {String} hexcode 
+ * @returns {Number[]}
+ */
+export function hexToHSL (hexcode) {
+    return RGBToHSL(...hexToRGB(hexcode))
+}
+
+/** Converts RGB values to a hexadecimal value.
+ * @param {Number} r 
+ * @param {Number} g 
+ * @param {Number} b 
+ * @returns {String}
+ */
+export function RGBToHex (r, g, b) {
+    const channels = [r.toString(16), g.toString(16), b.toString(16)]
+    return `#${channels.join('')}`
+}
+
+/** Converts HSL values to a hexadecimal value.
+ * @param {Number} h 
+ * @param {Number} s 
+ * @param {Number} l 
+ * @returns {String}
+ */
+export function HSLToHex (h, s, l) {
+    return RGBToHex(...HSLToRGB(h, s, l))
+}
+
+/** Converts RGB values to HSL values.
+ * https://www.30secondsofcode.org/js/s/rgb-to-hsl/
+ * @param {Number} r 
+ * @param {Number} g 
+ * @param {Number} b 
+ * @returns {Number[]}
+ */
+export function RGBToHSL (r, g, b) {
+    r /= 255
+    g /= 255
+    b /= 255
+    const l = Math.max(r, g, b)
+    const s = l - Math.min(r, g, b)
+    const h = s
+        ? l === r
+            ? (g - b) / s
+            : l === g
+            ? 2 + (b - r) / s
+            : 4 + (r - g) / s
+        : 0
+    const channels = [
+        60 * h < 0 ? 60 * h + 360 : 60 * h,
+        100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
+        (100 * (2 * l - s)) / 2,
+    ]
+    return channels.map(v => Math.round(v))
+}
+
+/** Converts HSL values to RGB values.
+ * https://www.30secondsofcode.org/js/s/hsl-to-rgb/
+ * @param {Number} h 
+ * @param {Number} s 
+ * @param {Number} l 
+ * @returns {Number[]}
+ */
+export function HSLToRGB (h, s, l) {
+    s /= 100
+    l /= 100
+    const k = n => (n + h / 30) % 12
+    const a = s * Math.min(l, 1 - l)
+    const f = n =>
+        l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
+    const channels = [255 * f(0), 255 * f(8), 255 * f(4)]
+    return channels.map(v => Math.round(v))
 }
 
 /** Converts a instance of a class into a plain object.
