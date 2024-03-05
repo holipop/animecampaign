@@ -152,7 +152,7 @@
 }
 .animecampaign.sheet .background .svg-text {
   width: 100%;
-  font: italic 12px "Gloock";
+  font: italic 13px "Gloock";
   text-anchor: start;
   text-transform: uppercase;
 }
@@ -165,6 +165,11 @@
 }
 .animecampaign.sheet .summary {
   position: relative;
+  display: grid;
+  height: 8rem;
+  width: 100%;
+  grid-template-columns: 4fr 10fr 2fr;
+  grid-template-rows: 1fr;
   z-index: 5;
 }
 .animecampaign.sheet .summary .img {
@@ -172,10 +177,28 @@
   border-radius: 0;
   box-shadow: none;
   background: transparent;
-  width: 6rem;
-  height: 6rem;
-  color: green;
+  width: 5.75rem;
+  height: 5.75rem;
+  place-self: end end;
+  margin: 0.5rem;
   background-color: currentColor;
   border: 0.0625rem solid currentColor;
   box-shadow: 0.125rem 0.25rem currentColor;
+}
+.animecampaign.sheet .summary .summary-info {
+  align-self: end;
+}
+.animecampaign.sheet .summary .summary-info > * {
+  flex: 0;
+}
+.animecampaign.sheet .summary .summary-info .name {
+  min-height: 0px;
+  resize: none;
+  overflow-y: hidden;
+  font: 2rem "Gloock";
+  line-height: 0.9;
+  padding: 0.5rem 0;
+}
+.animecampaign.sheet .summary .summary-info .word {
+  display: flex;
 }

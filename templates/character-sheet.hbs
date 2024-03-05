@@ -5,38 +5,60 @@
         <section class="background">
 
             <svg class="svg-text" viewBox="0 0 100 10">
-                <text class="stroke" stroke="{{palette.secondary}}" x="29" y="8">{{svg.text}}</text>
-                <text class="fill" fill="{{palette.secondary}}" x="29" y="8">{{svg.text}}</text>
+                <text class="stroke" stroke="{{palette.secondary}}" x="26" y="9">{{svg.text}}</text>
+                <text class="fill" fill="{{palette.secondary}}" x="26" y="9">{{svg.text}}</text>
             </svg>
 
-            <svg class="svg-bg" viewBox="0 0 800 400">
-                <use href="{{svg.bg}}" fill="{{palette.secondary}}" />
+            <svg class="svg-bg" viewBox="0 0 850 400">
+                <use x="10" y="-15" href="{{svg.bg}}" fill="{{palette.secondary}}" />
             </svg>
 
         </section>
     </div>
 
+    {{!-- <div class="test-image" hidden style="
+        position: absolute; 
+        width: 106%;
+        left: -12px;
+        top: 18px;
+        opacity: .5;
+    ">
+        <img src="systems/animecampaign/assets/test.png">
+    </div> --}}
+
     <!-- Summary -->
     <section class="summary">
-        <img class="img" src="{{img}}" data-edit="img" data-color="{{palette.primary}}">
-        <textarea name="name" spellcheck="false">{{name}}</textarea>
-        <textarea name="system.class" spellcheck="false">{{system.class}}</textarea>
         
-        <select class="type" name="system.type">
-            {{#select system.type}}
-                <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
-                    {{selectOptions config.inscribed localize=true}}
-                </optgroup>
+        <img class="img" src="{{img}}" data-edit="img" data-color="{{palette.primary}}">
+
+        <section class="summary-info">
+
+            <textarea class="name" name="name" spellcheck="false" data-enter data-resize>{{name}}</textarea>
+            <input class="class" type="text" name="system.class" value="{{system.class}}" spellcheck="false">
+            
+            <div class="word">
+                <select class="type" class="type" name="system.type">
+                    {{#select system.type}}
+                        <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
+                            {{selectOptions config.inscribed localize=true}}
+                        </optgroup>
+                        
+                        <optgroup label="{{localize "AC.TYPE.Mundie"}}">
+                            {{selectOptions config.mundie localize=true}}
+                        </optgroup>
+                    {{/select}}
+                </select>
                 
-                <optgroup label="{{localize "AC.TYPE.Mundie"}}">
-                    {{selectOptions config.mundie localize=true}}
-                </optgroup>
-            {{/select}}
-        </select>
-        <textarea name="system.word">{{system.word}}</textarea>
+                <input class="word" type="text" name="system.word" value="{{system.word}}" spellcheck="false">
+            </div>
+            
+        </section>
+
+        <section class="summary-controls">
+            <input type="color" name="system.color" value="{{system.color}}">
+        </section>
 
     </section>
 
-    <input type="color" name="system.color" value="{{system.color}}">
     
 </form>

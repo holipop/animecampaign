@@ -1,0 +1,48 @@
+// main: ../animecampaign.less
+
+.animecampaign.sheet .summary {
+    position: relative;
+    display: grid;
+    height: 8rem;
+    width: 100%;
+    grid-template-columns: 4fr 10fr 2fr;
+    grid-template-rows: 1fr;
+    z-index: 5;
+    
+    .img {
+        #AC.InputSkinning();
+        
+        width: 5.75rem;
+        height: 5.75rem;
+        place-self: end end;
+        margin: .5rem;
+
+        background-color: currentColor;
+        border: 1 * @rpx solid currentColor;
+        box-shadow: (2 * @rpx) (4 * @rpx) currentColor;
+    }
+}
+
+.animecampaign.sheet .summary .summary-info {
+    align-self: end;
+
+    > * {
+        flex: 0;
+    }
+
+    // TODO: summary-info styling
+
+    .name {
+        min-height: 0px;
+        resize: none;
+        overflow-y: hidden;
+        
+        font: 2rem "Gloock";
+        line-height: .9;
+        padding: .5rem 0;
+    }
+
+    .word {
+        display: flex;
+    }
+}

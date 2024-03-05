@@ -19,7 +19,44 @@ export default function SheetMixin (Base) {
             super.activateListeners(html)
 
             // Set the color of elements with [data-color].
-            html.find('[data-color]').each(this.setColor.bind(this))
+            html.find('[data-color]').each((_, element) => {
+                // TODO: include data-color-props as a property override
+                const properties = {
+                    "color": $(element).data("color")
+                }
+                $(element).css(properties)
+                //console.log($(element).data("color"))
+            })
+
+            // Resizes the height of a textarea dynamically as you type more.
+            html.find('textarea[data-resize]')
+            .each(function () {
+                    this.setAttribute("style", `height:0px;`) // ! don't know why, it only works with this + overriding min-height in css.
+                    this.setAttribute("style", `height:${this.scrollHeight}px;`)
+                })
+                .on("input", function () {
+                    const parentDiv = html.find('[data-scrollable]')
+                    const initScrollY = parentDiv.scrollTop()
+
+                    this.style.height = 0
+                    this.style.height = this.scrollHeight + "px"
+
+                    parentDiv.scrollTop(initScrollY)
+                })
+
+            // Submits the form whenever the enter key is pressed.
+            html.find('[data-enter]').each((_, element) => {
+                $(element).on('keypress', event => {
+                    const escape = $(element).data('enter')
+
+                    if (event.code == 'Enter') {
+                        if (escape == 'shift' && event.shiftKey) return
+
+                        event.preventDefault()
+                        this.submit()
+                    }
+                })
+            })
         }
 
         /**
