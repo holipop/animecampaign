@@ -1,4 +1,4 @@
-//import * as Utils from "../Utils.js";
+import * as Utils from "../Utils.js";
 //import * as List from "../List.js";
 
 /**
@@ -11,6 +11,29 @@ export default function SheetMixin (Base) {
      */
     return class ACSheet extends Base {
 
+        /** The set of colors derived from this document's color.
+         * @returns {*}
+         */
+        get palette () {
+            const primary = this.object.system.color
+            const [h, s, l] = Utils.hexToHSL(primary)
+
+            const white = CONFIG.AC.contrastColors.white
+            const black = CONFIG.AC.contrastColors.black
+
+            const contrast = (Utils.contrastHexLuma(primary) == "white")
+                ? white
+                : black
+
+            return { 
+                primary, 
+                secondary: Utils.HSLToHex(h, s * .66, 66),
+                contrast,
+                black,
+                white,
+            }
+        }
+
         /** Hook up event listeners between for Actors and Items.
          * @param {*} html 
          * @override
@@ -20,12 +43,13 @@ export default function SheetMixin (Base) {
 
             // Set the color of elements with [data-color].
             html.find('[data-color]').each((_, element) => {
-                // TODO: include data-color-props as a property override
-                const properties = {
-                    "color": $(element).data("color")
-                }
+                // colorProps is the list of properties to optionally use in-place of just "color".
+                const { color, colorProps } = $(element).data()
+                const properties = (colorProps === undefined)
+                    ? { color }
+                    : Object.fromEntries(colorProps.split(" ").map(p => [p, color]))
+
                 $(element).css(properties)
-                //console.log($(element).data("color"))
             })
 
             // Resizes the height of a textarea dynamically as you type more.

@@ -30,6 +30,10 @@ AC.colorStat = {
     purple: 'AC.COLOR.Purple',
     grey: 'AC.COLOR.Grey',
 }
+AC.contrastColors = {
+    white: "#f4f3ed", 
+    black: "#1f1e1e",
+}
 AC.colors = {
     red: '#df2d48',
     blue: '#4d86d1',

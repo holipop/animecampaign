@@ -24,25 +24,79 @@
 }
 
 .animecampaign.sheet .summary .summary-info {
+    display: grid;
     align-self: end;
 
-    > * {
-        flex: 0;
-    }
-
-    // TODO: summary-info styling
-
     .name {
+        #AC.InputSkinning();
+
         min-height: 0px;
+        max-height: 70 * @rpx;
         resize: none;
         overflow-y: hidden;
+        padding: .4rem 0;
+        border-bottom: 1 * @rpx solid @txt-color;
         
         font: 2rem "Gloock";
         line-height: .9;
-        padding: .5rem 0;
+        color: @txt-color;
+    }
+    .class {
+        #AC.InputSkinning();
+
+        height: 1.2rem;
+        padding: 0;
+        padding-left: 1.25rem;
+        margin-bottom: .25rem;
+
+        font: italic bold .8rem "Libre Franklin";
+        color: @txt-color;
+    }
+    .name:hover, .class:hover {
+        text-shadow: (1 * @rpx) (2 * @rpx) @ac-color-50a;
     }
 
-    .word {
+    .label-list {
+        position: relative;
+        width: 3rem;
+        justify-self: end;
+        z-index: 4;
+
+        > * {
+            position: absolute;
+            width: 100%;
+            text-align: end;
+            pointer-events: none;
+
+            font: .5rem "Rubik Mono One";
+        }
+        > .label-name {
+            top: -.66rem;
+        }
+    }
+    .summary-info-footer {
         display: flex;
+        align-items: center;
+        margin-bottom: .5rem;
+        border-radius: 2 * @rpx;
+
+        > * {
+            #AC.InputSkinning();
+            height: 1.33rem;
+        }
+        .type {
+            font: 600 .8rem "Libre Franklin";
+            padding: 0;
+            padding-left: .2rem;
+        }
+        .word {
+            font: bold 1rem "Philosopher";
+            border: 1 * @rpx solid transparent;
+            border-radius: 2 * @rpx;
+            padding: 0 .25rem;
+
+            background-color: @bg-color;
+            color: @txt-color;
+        }
     }
 }

@@ -34,19 +34,6 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         return "character"
     }
 
-    /** The set of colors derived from this actor's color.
-     * @returns {*}
-     */
-    get palette () {
-        const primary = this.object.system.color
-        const [h, s, l] = Utils.hexToHSL(primary)
-        const secondary = Utils.HSLToHex(h, s * .66, 66)
-
-        console.log({ primary, secondary })
-
-        return { primary, secondary }
-    }
-
     /** Fetches the context for this application's template.
      * @returns {*}
      */

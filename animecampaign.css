@@ -27,6 +27,10 @@
   src: url("fonts/Fungka City/fungka-city.regular.ttf");
 }
 @font-face {
+  font-family: "Rubik Mono One";
+  src: url("fonts/Rubik_Mono_One/RubikMonoOne-Regular.ttf");
+}
+@font-face {
   font-family: "Libre Franklin";
   src: url("fonts/Libre_Franklin/static/LibreFranklin-Regular.ttf");
 }
@@ -186,19 +190,79 @@
   box-shadow: 0.125rem 0.25rem currentColor;
 }
 .animecampaign.sheet .summary .summary-info {
+  display: grid;
   align-self: end;
 }
-.animecampaign.sheet .summary .summary-info > * {
-  flex: 0;
-}
 .animecampaign.sheet .summary .summary-info .name {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
   min-height: 0px;
+  max-height: 4.375rem;
   resize: none;
   overflow-y: hidden;
+  padding: 0.4rem 0;
+  border-bottom: 0.0625rem solid #1f1e1e;
   font: 2rem "Gloock";
   line-height: 0.9;
-  padding: 0.5rem 0;
+  color: #1f1e1e;
 }
-.animecampaign.sheet .summary .summary-info .word {
+.animecampaign.sheet .summary .summary-info .class {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  height: 1.2rem;
+  padding: 0;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  font: italic bold 0.8rem "Libre Franklin";
+  color: #1f1e1e;
+}
+.animecampaign.sheet .summary .summary-info .name:hover,
+.animecampaign.sheet .summary .summary-info .class:hover {
+  text-shadow: 0.0625rem 0.125rem #cd323280;
+}
+.animecampaign.sheet .summary .summary-info .label-list {
+  position: relative;
+  width: 3rem;
+  justify-self: end;
+  z-index: 4;
+}
+.animecampaign.sheet .summary .summary-info .label-list > * {
+  position: absolute;
+  width: 100%;
+  text-align: end;
+  pointer-events: none;
+  font: 0.5rem "Rubik Mono One";
+}
+.animecampaign.sheet .summary .summary-info .label-list > .label-name {
+  top: -0.66rem;
+}
+.animecampaign.sheet .summary .summary-info .summary-info-footer {
   display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-radius: 0.125rem;
+}
+.animecampaign.sheet .summary .summary-info .summary-info-footer > * {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  height: 1.33rem;
+}
+.animecampaign.sheet .summary .summary-info .summary-info-footer .type {
+  font: 600 0.8rem "Libre Franklin";
+  padding: 0;
+  padding-left: 0.2rem;
+}
+.animecampaign.sheet .summary .summary-info .summary-info-footer .word {
+  font: bold 1rem "Philosopher";
+  border: 0.0625rem solid transparent;
+  border-radius: 0.125rem;
+  padding: 0 0.25rem;
+  background-color: #f4f3ed;
+  color: #1f1e1e;
 }
