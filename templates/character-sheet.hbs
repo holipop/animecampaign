@@ -52,7 +52,17 @@
         </section>
 
         <section class="summary-controls">
-            <input type="color" name="system.color" value="{{system.color}}">
+            <span class="control-label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Control"}}</span>
+
+            <div class="button-list" data-color="{{palette.secondary}}">
+
+                <input class="hidden-color" type="color" name="system.color" value="{{system.color}}" data-color-button="target">
+                <button class="button" type="button" data-color-button="sender" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color">
+                    <span class="material-symbols-outlined">palette</span>
+                </button>
+
+                <!-- button class="button" type="button" data-color-button="sender" data-color="{{palette.primary}}"></button -->
+            </div>
         </section>
 
     </section>

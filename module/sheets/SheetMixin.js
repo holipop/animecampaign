@@ -18,19 +18,14 @@ export default function SheetMixin (Base) {
             const primary = this.object.system.color
             const [h, s, l] = Utils.hexToHSL(primary)
 
-            const white = CONFIG.AC.contrastColors.white
-            const black = CONFIG.AC.contrastColors.black
-
             const contrast = (Utils.contrastHexLuma(primary) == "white")
-                ? white
-                : black
+                ? CONFIG.AC.contrastColors.white
+                : CONFIG.AC.contrastColors.black
 
             return { 
                 primary, 
                 secondary: Utils.HSLToHex(h, s * .66, 66),
                 contrast,
-                black,
-                white,
             }
         }
 
@@ -54,7 +49,7 @@ export default function SheetMixin (Base) {
 
             // Resizes the height of a textarea dynamically as you type more.
             html.find('textarea[data-resize]')
-            .each(function () {
+                .each(function () {
                     this.setAttribute("style", `height:0px;`) // ! don't know why, it only works with this + overriding min-height in css.
                     this.setAttribute("style", `height:${this.scrollHeight}px;`)
                 })
@@ -81,19 +76,13 @@ export default function SheetMixin (Base) {
                     }
                 })
             })
+
+            // Manually invoke the color picker.
+            html.find('[data-color-button="sender"]').on('click', () => {
+                html.find('[data-color-button="target"]').click()
+            })
         }
 
-        /**
-         * @param {Number} index 
-         * @param {Element} element 
-         */
-        setColor (index, element) {
-            const properties = {
-                "color": $(element).data("color")
-            }
-            $(element).css(properties)
-            //console.log($(element).data("color"))
-        }
     }
     
 }

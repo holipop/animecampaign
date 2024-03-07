@@ -69,6 +69,7 @@
         "Word": "Epithet/Core Word",
         "Class": "Class",
         "Name": "Name",
+        "Control": "Control",
         "Category": "Category",
         "EmptyStats": "Empty Stats",
         "EmptyCategory": "Empty Category",

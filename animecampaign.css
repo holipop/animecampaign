@@ -1,4 +1,9 @@
 @font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  src: url("fonts/Material Symbols/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf");
+}
+@font-face {
   font-family: "Gloock";
   src: url("fonts/Gloock/Gloock-Regular.ttf");
 }
@@ -127,6 +132,21 @@
   font-style: italic;
   font-weight: 900;
 }
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5rem;
+  /* 24px Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: 'opsz' 48, 'GRAD' -25, 'wght' 350;
+}
 .animecampaign.sheet .window-content {
   background-image: none;
   background: #f4f3ed;
@@ -190,14 +210,6 @@
   box-shadow: 0.125rem 0.25rem currentColor;
 }
 @keyframes shadow-out {
-  from {
-    text-shadow: none;
-  }
-  to {
-    text-shadow: 0.125rem 0.125rem #cd323280;
-  }
-}
-@keyframes shadow-in {
   from {
     text-shadow: none;
   }
@@ -282,4 +294,52 @@
   padding: 0 0.25rem;
   background-color: #f4f3ed;
   color: #1f1e1e;
+}
+.animecampaign.sheet .summary .summary-controls {
+  position: relative;
+  width: 3.25rem;
+  padding-left: 0.25rem;
+}
+.animecampaign.sheet .summary .summary-controls .control-label {
+  font: 0.5rem "Rubik Mono One";
+  text-align: end;
+}
+.animecampaign.sheet .summary .summary-controls .button-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 0.25rem;
+  padding: 0.25rem;
+  border: 0.0625rem solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+}
+.animecampaign.sheet .summary .summary-controls .hidden-color {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.animecampaign.sheet .summary .summary-controls .button {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 0.0625rem solid currentColor;
+  padding: 0;
+  background-color: #f4f3ed;
+  transition: 0.075s;
+}
+.animecampaign.sheet .summary .summary-controls .button > span {
+  font-size: 1.25rem;
+}
+.animecampaign.sheet .summary .summary-controls .button:hover {
+  width: 1.83rem;
+  border-right-width: 0.33rem;
+}
+.animecampaign.sheet .summary .summary-controls .button:active {
+  background-color: currentColor;
 }
