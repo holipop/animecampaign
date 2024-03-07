@@ -44,7 +44,7 @@ AC.colors = {
     purple: '#9639cf',
     grey: '#807f84',
 };
-AC.defaultColor = "#cccccc";
+AC.defaultColor = "#cd3232";
 
 AC.defaultCategories = [
     {

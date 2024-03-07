@@ -23,6 +23,15 @@
     }
 }
 
+@keyframes shadow-out {
+    from {text-shadow: none;}
+    to {text-shadow: (2 * @rpx) (2 * @rpx) @ac-color-50a;}
+}
+@keyframes shadow-in {
+    from {text-shadow: none;}
+    to {text-shadow: (2 * @rpx) (2 * @rpx) @ac-color-50a;}
+}
+
 .animecampaign.sheet .summary .summary-info {
     display: grid;
     align-self: end;
@@ -53,7 +62,8 @@
         color: @txt-color;
     }
     .name:hover, .class:hover {
-        text-shadow: (1 * @rpx) (2 * @rpx) @ac-color-50a;
+        animation: shadow-out .3s;
+        animation-fill-mode: both;
     }
 
     .label-list {

@@ -189,6 +189,22 @@
   border: 0.0625rem solid currentColor;
   box-shadow: 0.125rem 0.25rem currentColor;
 }
+@keyframes shadow-out {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0.125rem 0.125rem #cd323280;
+  }
+}
+@keyframes shadow-in {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0.125rem 0.125rem #cd323280;
+  }
+}
 .animecampaign.sheet .summary .summary-info {
   display: grid;
   align-self: end;
@@ -222,7 +238,8 @@
 }
 .animecampaign.sheet .summary .summary-info .name:hover,
 .animecampaign.sheet .summary .summary-info .class:hover {
-  text-shadow: 0.0625rem 0.125rem #cd323280;
+  animation: shadow-out 0.3s;
+  animation-fill-mode: both;
 }
 .animecampaign.sheet .summary .summary-info .label-list {
   position: relative;
