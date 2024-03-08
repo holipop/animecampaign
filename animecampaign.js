@@ -57,7 +57,10 @@ Hooks.once('init', () => {
 
     Settings.register();
 
-    const partials = {}
+    const partials = {
+        // character
+        "main-stats": "systems/animecampaign/templates/character/main-stats.hbs"
+    }
     loadTemplates(partials);
 })
 

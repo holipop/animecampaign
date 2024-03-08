@@ -64,3 +64,15 @@
         }
     }
 }
+
+.animecampaign.sheet {
+    input[type="text"]:hover, input[type="number"]:hover, textarea:hover {
+        animation: shadow-out .2s;
+        animation-fill-mode: both;
+    }
+}
+
+@keyframes shadow-out {
+    from {text-shadow: none;}
+    to {text-shadow: (1.5 * @rpx) (1.5 * @rpx) @ac-color-50a;}
+}

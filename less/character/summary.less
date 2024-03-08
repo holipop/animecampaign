@@ -1,6 +1,6 @@
 // main: ../animecampaign.less
 
-.animecampaign.sheet .summary {
+.animecampaign.sheet.actor .summary {
     position: relative;
     display: grid;
     height: 8rem;
@@ -23,12 +23,7 @@
     }
 }
 
-@keyframes shadow-out {
-    from {text-shadow: none;}
-    to {text-shadow: (2 * @rpx) (2 * @rpx) @ac-color-50a;}
-}
-
-.animecampaign.sheet .summary .summary-info {
+.animecampaign.sheet.actor .summary .summary-info {
     display: grid;
     align-self: end;
 
@@ -56,10 +51,6 @@
 
         font: italic bold .8rem "Libre Franklin";
         color: @txt-color;
-    }
-    .name:hover, .class:hover {
-        animation: shadow-out .3s;
-        animation-fill-mode: both;
     }
 
     .label-list {
@@ -94,6 +85,8 @@
             font: 600 .8rem "Libre Franklin";
             padding: 0;
             padding-left: .2rem;
+            cursor: pointer;
+            transition: .25s;
         }
         .word {
             font: bold 1rem "Philosopher";
@@ -107,7 +100,7 @@
     }
 }
 
-.animecampaign.sheet .summary .summary-controls {
+.animecampaign.sheet.actor .summary .summary-controls {
     position: relative;
     width: 3.25rem;
     padding-left: .25rem;
