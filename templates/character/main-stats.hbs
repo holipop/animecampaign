@@ -1,5 +1,57 @@
 <section class="main-stats">
 
+    <div class="main-stats__stam">
+        <div class="stat-card">
+
+            <div class="stat-card__header">
+                <img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Stamina.svg">
+                <span class="stat-card__tag">{{localize "AC.STAT.Stamina"}}</span>
+            </div>
+
+            <div class="stat-card__footer">
+
+                <div class="stat-card__extra-info"></div>
+                <div class="stat-card__input-list">
+                    <input type="number" class="stat-card__input--numerator" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="0">
+                    <input type="number" class="stat-card__input--denominator" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="0">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="main-stats__prof" data-color="{{palette.secondary}}">
+        <div class="stat-card">
+
+            <div class="stat-card__header">
+                <img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Proficiency.svg">
+                <span class="stat-card__tag">{{localize "AC.STAT.Proficiency"}}</span>
+            </div>
+
+            <div class="stat-card__footer">
+
+                <div class="stat-card__extra-info"></div>
+                <div class="stat-card__input-list">
+
+                    <input type="number" class="stat-card__input--value" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
+                    <!-- input type="text" class="stat-card__input--label" -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="main-stats__move">
+        <div class="stat-card">
+
+        </div>
+    </div>
+    
+
+    
+
+{{!-- 
     <div class="stat-card stam">
 
         <div class="stat-card-header">
@@ -9,14 +61,14 @@
         <div class="stat-card-footer">
             <div class="extra-info"></div>
             <div class="inputs resource">
-                <input type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="0">
-                <input type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="0">
+                <input type="number" name="system.stamina.value" value="{{/system.stamina.value" placeholder="0">
+                <input type="number" name="system.stamina.max" value="{{system.stamina.max" placeholder="0">
             </div>
         </div>
 
     </div>
 
-    <div class="vertical-line" data-color="{{palette.secondary}}" data-color-props="border-color"></div>
+    <div class="vertical-line" data-color="{{palette.secondary" data-color-props="border-color"></div>
 
     <div class="stat-card prof">
 
@@ -27,13 +79,13 @@
         <div class="stat-card-footer">
             <div class="extra-info"></div>
             <div class="inputs value">
-                <input type="number" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
+                <input type="number" name="system.proficiency.value" value="{{system.proficiency.value" placeholder="0">
             </div>
         </div>
 
     </div>
 
-    <div class="vertical-line" data-color="{{palette.secondary}}" data-color-props="border-color"></div>
+    <div class="vertical-line" data-color="{{palette.secondary" data-color-props="border-color"></div>
 
     <div class="stat-card move">
 
@@ -44,10 +96,10 @@
         <div class="stat-card-footer">
             <div class="extra-info"></div>
             <div class="inputs value">
-                <input type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="0">
+                <input type="number" name="system.movement.value" value="{{system.movement.value" placeholder="0">
             </div>
         </div>
 
-    </div>
+    </div> --}}
 
 </section>

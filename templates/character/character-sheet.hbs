@@ -1,40 +1,41 @@
 <form class="{{cssClass}}" autocomplete="off">
 
     <!-- Background -->
-    <div class="background-wrapper">
-        <section class="background">
+    <section class="background">
+        <div class="background__lining">
 
             <svg class="svg-text" viewBox="0 0 100 10">
-                <text class="stroke" stroke="{{palette.secondary}}" x="26" y="9">{{svg.text}}</text>
-                <text class="fill" fill="{{palette.secondary}}" x="26" y="9">{{svg.text}}</text>
+                <text class="svg-text__stroke" stroke="{{palette.secondary}}" x="26" y="9">{{svg.text}}</text>
+                <text class="svg-text__fill" fill="{{palette.secondary}}" x="26" y="9">{{svg.text}}</text>
             </svg>
 
             <svg class="svg-bg" viewBox="0 0 850 400">
-                <use x="10" y="-15" href="{{svg.bg}}" fill="{{palette.secondary}}" />
+                <use class="svg-bg__graphic" x="10" y="-15" href="{{svg.bg}}" fill="{{palette.secondary}}" />
             </svg>
 
-        </section>
-    </div>
+        </div>
+    </section>
 
     <!-- Summary -->
     <section class="summary">
         
-        <img class="img" src="{{img}}" data-edit="img" data-color="{{palette.primary}}">
+        <img class="summary__img" src="{{img}}" data-edit="img" data-color="{{palette.primary}}">
 
-        <section class="summary-info">
+        <section class="summary__info">
 
-            <textarea class="name" name="name" spellcheck="false" placeholder="{{localize "AC.LABEL.Name"}}" data-enter data-resize>{{name}}</textarea>
+            <textarea class="summary__name input--shadow-out" name="name" spellcheck="false" placeholder="{{localize "AC.LABEL.Name"}}" data-enter data-resize>{{name}}</textarea>
 
             <div class="label-list" data-color="{{palette.secondary}}">
-                <label class="label-name" for="name">{{localize "AC.LABEL.Name"}}</label>
-                <label class="label-class" for="class">{{localize "AC.LABEL.Class"}}</label>
+                <label class="label-list__name" for="name">{{localize "AC.LABEL.Name"}}</label>
+                <label class="label-list__class" for="class">{{localize "AC.LABEL.Class"}}</label>
             </div>
 
-            <input class="class" type="text" name="system.class" spellcheck="false" placeholder="{{localize "AC.LABEL.Class"}}" value="{{system.class}}">
+            <input class="summary__class input--shadow-out" type="text" name="system.class" spellcheck="false" placeholder="{{localize "AC.LABEL.Class"}}" value="{{system.class}}">
             
 
-            <div class="summary-info-footer" data-color="{{palette.primary}}" data-color-props="background-color"> 
-                <select class="type" class="type" name="system.type" data-color="{{palette.contrast}}">
+            <div class="summary__info-footer" data-color="{{palette.primary}}" data-color-props="background-color"> 
+
+                <select class="summary__type" class="type" name="system.type" data-color="{{palette.contrast}}">
                     {{#select system.type}}
                         <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
                             {{selectOptions config.inscribed localize=true}}
@@ -46,18 +47,19 @@
                     {{/select}}
                 </select>
                 
-                <input class="word" type="text" name="system.word" value="{{system.word}}" spellcheck="false" placeholder="{{localize "AC.LABEL.Word"}}" data-color="{{palette.primary}}" data-color-props="border-color">
+                <input class="summary__word input--shadow-out" type="text" name="system.word" value="{{system.word}}" spellcheck="false" placeholder="{{localize "AC.LABEL.Word"}}" data-color="{{palette.primary}}" data-color-props="border-color">
             </div>
             
         </section>
 
-        <section class="summary-controls">
-            <span class="control-label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Control"}}</span>
+        <section class="summary-control">
+            
+            <span class="summary-control__label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Control"}}</span>
 
-            <div class="button-list" data-color="{{palette.secondary}}">
+            <div class="summary-control__button-list" data-color="{{palette.secondary}}">
 
-                <input class="hidden-color" type="color" name="system.color" value="{{system.color}}" data-color-button="target">
-                <button class="button" type="button" data-color-button="sender" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color">
+                <input class="summary-control__hidden-color" type="color" name="system.color" value="{{system.color}}" data-color-button="target">
+                <button class="summary-control__button" type="button" data-color-button="sender" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color">
                     <span class="material-symbols-outlined">palette</span>
                 </button>
 
@@ -67,5 +69,5 @@
     </section>
 
     {{> "main-stats"}}
-    
+
 </form>

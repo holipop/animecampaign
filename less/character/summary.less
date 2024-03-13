@@ -9,7 +9,7 @@
     grid-template-rows: 1fr;
     z-index: 5;
     
-    .img {
+    &__img {
         #AC.InputSkinning();
         
         width: 5.75rem;
@@ -21,13 +21,11 @@
         border: 1 * @rpx solid currentColor;
         box-shadow: (2 * @rpx) (4 * @rpx) currentColor;
     }
-}
-
-.animecampaign.sheet.actor .summary .summary-info {
-    display: grid;
-    align-self: end;
-
-    .name {
+    &__info {
+        display: grid;
+        align-self: end;
+    }
+    &__name {
         #AC.InputSkinning();
 
         min-height: 0px;
@@ -41,7 +39,7 @@
         line-height: .9;
         color: @txt-color;
     }
-    .class {
+    &__class {
         #AC.InputSkinning();
 
         height: 1.2rem;
@@ -52,26 +50,7 @@
         font: italic bold .8rem "Libre Franklin";
         color: @txt-color;
     }
-
-    .label-list {
-        position: relative;
-        width: 3rem;
-        justify-self: end;
-        z-index: 4;
-
-        > * {
-            position: absolute;
-            width: 100%;
-            text-align: end;
-            pointer-events: none;
-
-            font: .5rem "Rubik Mono One";
-        }
-        > .label-name {
-            top: -.66rem;
-        }
-    }
-    .summary-info-footer {
+    &__info-footer {
         display: flex;
         align-items: center;
         margin-bottom: .5rem;
@@ -81,35 +60,54 @@
             #AC.InputSkinning();
             height: 1.33rem;
         }
-        .type {
-            font: 600 .8rem "Libre Franklin";
-            padding: 0;
-            padding-left: .2rem;
-            cursor: pointer;
-            transition: .25s;
-        }
-        .word {
-            font: bold 1rem "Philosopher";
-            border: 1 * @rpx solid transparent;
-            border-radius: 2 * @rpx;
-            padding: 0 .25rem;
+    }
+    &__type {
+        font: 600 .8rem "Libre Franklin";
+        padding: 0;
+        padding-left: .2rem;
+        cursor: pointer;
+        transition: .25s;
+    }
+    &__word {
+        font: bold 1rem "Philosopher";
+        border: 1 * @rpx solid transparent;
+        border-radius: 2 * @rpx;
+        padding: 0 .25rem;
 
-            background-color: @bg-color;
-            color: @txt-color;
-        }
+        background-color: @bg-color;
+        color: @txt-color;
     }
 }
 
-.animecampaign.sheet.actor .summary .summary-controls {
+.animecampaign.sheet.actor .summary .summary__info .label-list {
+    position: relative;
+    width: 3rem;
+    justify-self: end;
+    z-index: 4;
+
+    > * {
+        position: absolute;
+        width: 100%;
+        text-align: end;
+        pointer-events: none;
+
+        font: .5rem "Rubik Mono One";
+    }
+    &__name {
+        top: -.66rem;
+    }
+}
+
+.animecampaign.sheet.actor .summary .summary-control {
     position: relative;
     width: 3.25rem;
     padding-left: .25rem;
     
-    .control-label {
+    &__label {
         font: .5rem "Rubik Mono One";
         text-align: end;
     }
-    .button-list {
+    &__button-list {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
@@ -119,12 +117,12 @@
         border-left: 0; 
         border-bottom: 0; 
     }
-    .hidden-color {
+    &__hidden-color {
         position: absolute;
         opacity: 0;
         pointer-events: none;
     }
-    .button {
+    &__button {
         #AC.InputSkinning();
         
         display: grid;
@@ -137,15 +135,15 @@
         background-color: @bg-color;
         transition: .075s;
 
-        > span {
+        > .material-symbols-outlined {
             font-size: 1.25rem;
         }
-    }
-    .button:hover {
-        width: 1.5rem + .33rem;
-        border-right-width: .33rem;
-    }
-    .button:active {
-        background-color: currentColor;
+        &:hover {
+            width: 1.5rem + .33rem;
+            border-right-width: .33rem;
+        }
+        &:active {
+            background-color: currentColor;
+        }
     }
 }

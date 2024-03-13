@@ -30,49 +30,49 @@
     min-height: @character-sheet-height;
 }
 
-.animecampaign.sheet .background-wrapper {
-    position: relative;
-}
 .animecampaign.sheet .background {
-    position: absolute;
-    display: grid;
-    width: 100%;
-    pointer-events: none;
+    position: relative;
 
-    opacity: .5;
+    &__lining {
+        position: absolute;
+        display: grid;
+        width: 100%;
+        pointer-events: none;
     
-    > * {
-        grid-area: 1 / 1 / 1 / 1;
-    }
-
-    .svg-bg {
-        width: 100%;
-    }
-    .svg-text {
-        width: 100%;
-
-        font: italic 13px "Gloock";
-        text-anchor: start;
-        text-transform: uppercase;
-
-        .stroke {
-            stroke-width: .5px;
-            stroke-linejoin: round;
-        }
-        .fill {
-            fill: @bg-color;
+        opacity: .5;
+        
+        > * {
+            grid-area: 1 / 1 / 1 / 1;
         }
     }
 }
 
-.animecampaign.sheet {
-    input[type="text"]:hover, input[type="number"]:hover, textarea:hover {
-        animation: shadow-out .2s;
-        animation-fill-mode: both;
+.animecampaign.sheet .background .svg-bg {
+    width: 100%;
+}
+.animecampaign.sheet .background .svg-text {
+    width: 100%;
+
+    font: italic 13px "Gloock";
+    text-anchor: start;
+    text-transform: uppercase;
+
+    &__stroke {
+        stroke-width: .5px;
+        stroke-linejoin: round;
+    }
+    &__fill {
+        fill: @bg-color;
     }
 }
 
-@keyframes shadow-out {
-    from {text-shadow: none;}
-    to {text-shadow: (1.5 * @rpx) (1.5 * @rpx) @ac-color-50a;}
+
+.animecampaign.sheet .input--shadow-out:hover {
+    animation: shadow-out .2s;
+    animation-fill-mode: both;
+    
+    @keyframes shadow-out {
+        from { text-shadow: none; }
+        to { text-shadow: (1.5 * @rpx) (1.5 * @rpx) fade(@ac-color, 50%); }
+    }
 }

@@ -1,0 +1,88 @@
+// main: ./animecampaign.less
+
+@main-stat-selectors: "stam", "prof", "move";
+
+.animecampaign.sheet.actor .main-stats {
+    display: flex;
+    padding-top: .5rem;
+    justify-content: center;
+
+    &__stam, &__prof, &__move {
+        display: grid;
+        place-items: center;
+        border-radius: 3 * @rpx;
+        
+        > .stat-card {
+            border: none;
+            margin: 1 * @rpx;
+        }
+    }
+    &__stam {
+        background: linear-gradient(@stam-color-primary, @stam-color-secondary);
+
+        &, .stat-card {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        > .stat-card { 
+            margin-right: 0; 
+
+            color: @stam-color-txt;
+        }
+    }
+    &__prof { 
+        background: linear-gradient(@prof-color-primary, @prof-color-secondary);
+
+        &, .stat-card {
+            border-radius: 0;
+        }
+        > .stat-card { 
+            margin: (1 * @rpx) 0; 
+            border-left: (1 * @rpx) solid currentColor;
+            border-right: (1 * @rpx) solid currentColor;
+
+            color: @prof-color-txt;
+        }
+    }
+    &__move {
+        background: linear-gradient(@move-color-primary, @move-color-secondary);
+
+        &, .stat-card {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        > .stat-card { 
+            margin-left: 0; 
+
+            color: @move-color-txt;
+        }
+    }
+}
+
+.animecampaign.sheet .stat-card {
+    height: @stat-card-height;
+    width: @stat-card-width;
+    border-radius: 2 * @rpx;
+    border: (1 * @rpx) solid fade(@txt-color, 50%);
+
+    background-color: @bg-color;
+    color: @txt-color;
+
+    &__header, &__footer {
+        display: flex;
+    }
+    &__header {
+        height: .8rem;
+        align-items: center;
+    }
+    &__img {
+        #AC.InputSkinning();
+
+        height: .8rem;
+        width: .8rem;
+    }
+    &__tag {
+        font: 300 .75rem "Libre Franklin";
+        text-transform: uppercase;
+    }
+}

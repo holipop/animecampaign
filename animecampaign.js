@@ -58,8 +58,10 @@ Hooks.once('init', () => {
     Settings.register();
 
     const partials = {
+        "stat-list": "systems/animecampaign/templates/stat-list.hbs",
+
         // character
-        "main-stats": "systems/animecampaign/templates/character/main-stats.hbs"
+        "main-stats": "systems/animecampaign/templates/character/main-stats.hbs",
     }
     loadTemplates(partials);
 })
