@@ -13,6 +13,8 @@
 
 @stat-card-width: 9.25rem;
 @stat-card-height: 3.5rem;
+@stat-card-header-height: 0.8rem;
+@stat-card-footer-height: @stat-card-height - @stat-card-header-height;
 
 @txt-color: #1f1e1e;
 @bg-color: #f4f3ed;
@@ -44,11 +46,8 @@
 //* ------ */
 
 #AC {
-    .Background() {
-        background: @bg-color;
-    }
-    .Color(@alpha: 1) {
-        @return: rgba(205, 50, 50, @alpha);
+    .TinyFont() {
+        font: .5rem "Rubik Mono One";
     }
     .Border() {
         border: (1 * @rpx) solid black;

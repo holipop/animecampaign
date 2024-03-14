@@ -86,12 +86,12 @@
     z-index: 4;
 
     > * {
+        #AC.TinyFont();
+
         position: absolute;
         width: 100%;
         text-align: end;
         pointer-events: none;
-
-        font: .5rem "Rubik Mono One";
     }
     &__name {
         top: -.66rem;
@@ -104,7 +104,8 @@
     padding-left: .25rem;
     
     &__label {
-        font: .5rem "Rubik Mono One";
+        #AC.TinyFont();
+        
         text-align: end;
     }
     &__button-list {

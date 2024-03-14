@@ -62,4 +62,12 @@ export default class CharacterData extends foundry.abstract.DataModel {
         else if (prof >= 0) return "I";
         return "";
     }
+
+    /** Returns stamina represented as a ratio.
+     * @returns {number} 
+     */
+    get staminaRatio () {
+        const percent = this.stamina.value / this.stamina.max
+        return percent
+    }
 }

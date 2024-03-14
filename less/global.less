@@ -66,13 +66,10 @@
     }
 }
 
+.animecampaign.sheet .input--shadow-out {
+    transition: text-shadow .2s;
 
-.animecampaign.sheet .input--shadow-out:hover {
-    animation: shadow-out .2s;
-    animation-fill-mode: both;
-    
-    @keyframes shadow-out {
-        from { text-shadow: none; }
-        to { text-shadow: (1.5 * @rpx) (1.5 * @rpx) fade(@ac-color, 50%); }
+    &:hover {
+        text-shadow: (1.5 * @rpx) (1.5 * @rpx) fade(@ac-color, 50%);
     }
 }

@@ -51,4 +51,22 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         }
     }
 
+    /** Hook up event listeners between for Characters.
+     * @param {*} html 
+     * @override
+     */
+    activateListeners (html) {
+        super.activateListeners(html)
+
+        // Dynamically change the little stamina bar.
+        let staminaRatio = this.object.system.staminaRatio
+        if (staminaRatio >= 1) {
+            staminaRatio = 1
+        } else if (staminaRatio <= 0) {
+            staminaRatio = 0
+        }
+        staminaRatio *= 100
+        html.find('[data-stam-bar]').height(`${staminaRatio}%`);
+    }
+
 }

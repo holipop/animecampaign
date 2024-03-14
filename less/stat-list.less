@@ -1,64 +1,5 @@
 // main: ./animecampaign.less
 
-@main-stat-selectors: "stam", "prof", "move";
-
-.animecampaign.sheet.actor .main-stats {
-    display: flex;
-    padding-top: .5rem;
-    justify-content: center;
-
-    &__stam, &__prof, &__move {
-        display: grid;
-        place-items: center;
-        border-radius: 3 * @rpx;
-        
-        > .stat-card {
-            border: none;
-            margin: 1 * @rpx;
-        }
-    }
-    &__stam {
-        background: linear-gradient(@stam-color-primary, @stam-color-secondary);
-
-        &, .stat-card {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        > .stat-card { 
-            margin-right: 0; 
-
-            color: @stam-color-txt;
-        }
-    }
-    &__prof { 
-        background: linear-gradient(@prof-color-primary, @prof-color-secondary);
-
-        &, .stat-card {
-            border-radius: 0;
-        }
-        > .stat-card { 
-            margin: (1 * @rpx) 0; 
-            border-left: (1 * @rpx) solid currentColor;
-            border-right: (1 * @rpx) solid currentColor;
-
-            color: @prof-color-txt;
-        }
-    }
-    &__move {
-        background: linear-gradient(@move-color-primary, @move-color-secondary);
-
-        &, .stat-card {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        > .stat-card { 
-            margin-left: 0; 
-
-            color: @move-color-txt;
-        }
-    }
-}
-
 .animecampaign.sheet .stat-card {
     height: @stat-card-height;
     width: @stat-card-width;
@@ -72,17 +13,170 @@
         display: flex;
     }
     &__header {
-        height: .8rem;
+        height: @stat-card-header-height;
         align-items: center;
     }
     &__img {
         #AC.InputSkinning();
 
-        height: .8rem;
-        width: .8rem;
+        height: @stat-card-header-height;
+        width: @stat-card-header-height;
     }
     &__tag {
         font: 300 .75rem "Libre Franklin";
         text-transform: uppercase;
+    }
+
+    &__extra-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin: .2rem;
+
+        &:empty {
+            margin: 0;
+        }
+    }
+    &__extra-field-input {
+        #AC.InputSkinning();
+
+        padding: 0;
+        width: @stat-card-width * .5;
+        height: 1.25rem;
+        border-bottom: (1 * @rpx) solid fade(@txt-color, 25%);
+        
+        font: bold .85rem "Philosopher";
+        color: @txt-color;
+    }
+    &__extra-field-label {
+        #AC.TinyFont();
+    }
+}
+.animecampaign.sheet .stat-card__input {
+    #AC.InputSkinning();
+
+    font-family: "Philosopher";
+    font-weight: bold;
+    text-align: end;
+
+    color: @txt-color;
+
+    &--value {
+        height: @stat-card-footer-height;
+
+        font-size: 3rem;
+    }
+    &--numerator, &--denominator {
+        width: 95%;
+        padding: 0 (3 * @rpx);
+        padding-right: .25rem;
+        margin-left: .25rem;
+    }
+    &--numerator {
+        height: @stat-card-footer-height * (5 / 9);
+        border-bottom: (1 * @rpx) solid fade(@txt-color, 25%);
+
+        font-size: 1.75rem;
+    }
+    &--denominator {
+        height: @stat-card-footer-height * (4 / 9) - .1rem;
+
+        font-size: 1.15rem;
+        font-weight: normal;
+    }
+}
+
+@main-stat-selectors: stam, prof, move;
+@colors-primary: {
+    @stam: @stam-color-primary;
+    @prof: @prof-color-primary;
+    @move: @move-color-primary;
+}
+@colors-secondary: {
+    @stam: @stam-color-secondary;
+    @prof: @prof-color-secondary;
+    @move: @move-color-secondary;
+}
+@colors-txt: {
+    @stam: @stam-color-txt;
+    @prof: @prof-color-txt;
+    @move: @move-color-txt;
+}
+
+.animecampaign.sheet.actor .main-stats {
+    display: flex;
+    padding-top: .5rem;
+    justify-content: center;
+
+    each(@main-stat-selectors, {
+        &__@{value} {
+            display: grid;
+            place-items: center;
+            border-radius: 3 * @rpx;
+
+            background: linear-gradient(@colors-primary[@@value], @colors-secondary[@@value]);
+
+            > .stat-card {
+                border: none;
+                margin: 1 * @rpx;
+
+                color: @colors-txt[@@value]
+            }
+            .stat-card__input {
+                color: @colors-txt[@@value]
+            }
+            .input--shadow-out:hover {
+                text-shadow: (1.5 * @rpx) (1.5 * @rpx) fade(@colors-secondary[@@value], 50%);
+            }
+        }
+    });
+
+    &__stam {
+        &, .stat-card {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        > .stat-card { 
+            margin-right: 0; 
+        }
+        &-bar-bg {
+            display: grid;
+            place-items: end;
+            height: 100%;
+            width: .35rem;
+            border-left: (1 * @rpx) solid @stam-color-secondary;
+        }
+        &-bar-gauge {
+            height: 50%;
+            width: .2rem;
+
+            background-color: @stam-color-primary;
+        }
+    }
+    &__prof { 
+        &, .stat-card {
+            border-radius: 0;
+        }
+        > .stat-card { 
+            margin: (1 * @rpx) 0; 
+            border-left: (1 * @rpx) solid fade(@txt-color, 25%);
+            border-right: (1 * @rpx) solid fade(@txt-color, 25%);
+        }
+    }
+    &__move {
+        &, .stat-card {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .stat-card { 
+            margin-left: 0; 
+
+            &__extra-field-input { 
+                color: @move-color-txt;
+            }
+            &__extra-field-label { 
+                color: fade(@move-color-txt, 50%);
+            }
+        }
     }
 }

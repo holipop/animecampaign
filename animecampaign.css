@@ -187,72 +187,11 @@
 .animecampaign.sheet .background .svg-text__fill {
   fill: #f4f3ed;
 }
+.animecampaign.sheet .input--shadow-out {
+  transition: text-shadow 0.2s;
+}
 .animecampaign.sheet .input--shadow-out:hover {
-  animation: shadow-out 0.2s;
-  animation-fill-mode: both;
-}
-@keyframes shadow-out {
-  from {
-    text-shadow: none;
-  }
-  to {
-    text-shadow: 0.09375rem 0.09375rem rgba(205, 50, 50, 0.5);
-  }
-}
-.animecampaign.sheet.actor .main-stats {
-  display: flex;
-  padding-top: 0.5rem;
-  justify-content: center;
-}
-.animecampaign.sheet.actor .main-stats__stam,
-.animecampaign.sheet.actor .main-stats__prof,
-.animecampaign.sheet.actor .main-stats__move {
-  display: grid;
-  place-items: center;
-  border-radius: 0.1875rem;
-}
-.animecampaign.sheet.actor .main-stats__stam > .stat-card,
-.animecampaign.sheet.actor .main-stats__prof > .stat-card,
-.animecampaign.sheet.actor .main-stats__move > .stat-card {
-  border: none;
-  margin: 0.0625rem;
-}
-.animecampaign.sheet.actor .main-stats__stam {
-  background: linear-gradient(#7bd554, #4cc1b9);
-}
-.animecampaign.sheet.actor .main-stats__stam,
-.animecampaign.sheet.actor .main-stats__stam .stat-card {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.animecampaign.sheet.actor .main-stats__stam > .stat-card {
-  margin-right: 0;
-  color: #396641;
-}
-.animecampaign.sheet.actor .main-stats__prof {
-  background: linear-gradient(#6d9eeb, #5f69d4);
-}
-.animecampaign.sheet.actor .main-stats__prof,
-.animecampaign.sheet.actor .main-stats__prof .stat-card {
-  border-radius: 0;
-}
-.animecampaign.sheet.actor .main-stats__prof > .stat-card {
-  margin: 0.0625rem 0;
-  border-left: 0.0625rem solid currentColor;
-  border-right: 0.0625rem solid currentColor;
-  color: #335287;
-}
-.animecampaign.sheet.actor .main-stats__move {
-  background: linear-gradient(#bf6190, #95509e);
-}
-.animecampaign.sheet.actor .main-stats__move,
-.animecampaign.sheet.actor .main-stats__move .stat-card {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.animecampaign.sheet.actor .main-stats__move > .stat-card {
-  margin-left: 0;
-  color: #632e4c;
+  text-shadow: 0.09375rem 0.09375rem rgba(205, 50, 50, 0.5);
 }
 .animecampaign.sheet .stat-card {
   height: 3.5rem;
@@ -281,6 +220,160 @@
 .animecampaign.sheet .stat-card__tag {
   font: 300 0.75rem "Libre Franklin";
   text-transform: uppercase;
+}
+.animecampaign.sheet .stat-card__extra-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0.2rem;
+}
+.animecampaign.sheet .stat-card__extra-info:empty {
+  margin: 0;
+}
+.animecampaign.sheet .stat-card__extra-field-input {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  width: 4.625rem;
+  height: 1.25rem;
+  border-bottom: 0.0625rem solid rgba(31, 30, 30, 0.25);
+  font: bold 0.85rem "Philosopher";
+  color: #1f1e1e;
+}
+.animecampaign.sheet .stat-card__extra-field-label {
+  font: 0.5rem "Rubik Mono One";
+}
+.animecampaign.sheet .stat-card__input {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  font-family: "Philosopher";
+  font-weight: bold;
+  text-align: end;
+  color: #1f1e1e;
+}
+.animecampaign.sheet .stat-card__input--value {
+  height: 2.7rem;
+  font-size: 3rem;
+}
+.animecampaign.sheet .stat-card__input--numerator,
+.animecampaign.sheet .stat-card__input--denominator {
+  width: 95%;
+  padding: 0 0.1875rem;
+  padding-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+.animecampaign.sheet .stat-card__input--numerator {
+  height: 1.5rem;
+  border-bottom: 0.0625rem solid rgba(31, 30, 30, 0.25);
+  font-size: 1.75rem;
+}
+.animecampaign.sheet .stat-card__input--denominator {
+  height: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: normal;
+}
+.animecampaign.sheet.actor .main-stats {
+  display: flex;
+  padding-top: 0.5rem;
+  justify-content: center;
+}
+.animecampaign.sheet.actor .main-stats__stam {
+  display: grid;
+  place-items: center;
+  border-radius: 0.1875rem;
+  background: linear-gradient(#7bd554, #4cc1b9);
+}
+.animecampaign.sheet.actor .main-stats__stam > .stat-card {
+  border: none;
+  margin: 0.0625rem;
+  color: #396641;
+}
+.animecampaign.sheet.actor .main-stats__stam .stat-card__input {
+  color: #396641;
+}
+.animecampaign.sheet.actor .main-stats__stam .input--shadow-out:hover {
+  text-shadow: 0.09375rem 0.09375rem rgba(76, 193, 185, 0.5);
+}
+.animecampaign.sheet.actor .main-stats__prof {
+  display: grid;
+  place-items: center;
+  border-radius: 0.1875rem;
+  background: linear-gradient(#6d9eeb, #5f69d4);
+}
+.animecampaign.sheet.actor .main-stats__prof > .stat-card {
+  border: none;
+  margin: 0.0625rem;
+  color: #335287;
+}
+.animecampaign.sheet.actor .main-stats__prof .stat-card__input {
+  color: #335287;
+}
+.animecampaign.sheet.actor .main-stats__prof .input--shadow-out:hover {
+  text-shadow: 0.09375rem 0.09375rem rgba(95, 105, 212, 0.5);
+}
+.animecampaign.sheet.actor .main-stats__move {
+  display: grid;
+  place-items: center;
+  border-radius: 0.1875rem;
+  background: linear-gradient(#bf6190, #95509e);
+}
+.animecampaign.sheet.actor .main-stats__move > .stat-card {
+  border: none;
+  margin: 0.0625rem;
+  color: #632e4c;
+}
+.animecampaign.sheet.actor .main-stats__move .stat-card__input {
+  color: #632e4c;
+}
+.animecampaign.sheet.actor .main-stats__move .input--shadow-out:hover {
+  text-shadow: 0.09375rem 0.09375rem rgba(149, 80, 158, 0.5);
+}
+.animecampaign.sheet.actor .main-stats__stam,
+.animecampaign.sheet.actor .main-stats__stam .stat-card {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.animecampaign.sheet.actor .main-stats__stam > .stat-card {
+  margin-right: 0;
+}
+.animecampaign.sheet.actor .main-stats__stam-bar-bg {
+  display: grid;
+  place-items: end;
+  height: 100%;
+  width: 0.35rem;
+  border-left: 0.0625rem solid #4cc1b9;
+}
+.animecampaign.sheet.actor .main-stats__stam-bar-gauge {
+  height: 50%;
+  width: 0.2rem;
+  background-color: #7bd554;
+}
+.animecampaign.sheet.actor .main-stats__prof,
+.animecampaign.sheet.actor .main-stats__prof .stat-card {
+  border-radius: 0;
+}
+.animecampaign.sheet.actor .main-stats__prof > .stat-card {
+  margin: 0.0625rem 0;
+  border-left: 0.0625rem solid rgba(31, 30, 30, 0.25);
+  border-right: 0.0625rem solid rgba(31, 30, 30, 0.25);
+}
+.animecampaign.sheet.actor .main-stats__move,
+.animecampaign.sheet.actor .main-stats__move .stat-card {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.animecampaign.sheet.actor .main-stats__move .stat-card {
+  margin-left: 0;
+}
+.animecampaign.sheet.actor .main-stats__move .stat-card__extra-field-input {
+  color: #632e4c;
+}
+.animecampaign.sheet.actor .main-stats__move .stat-card__extra-field-label {
+  color: rgba(99, 46, 76, 0.5);
 }
 .animecampaign.sheet.actor .summary {
   position: relative;
@@ -370,11 +463,11 @@
   z-index: 4;
 }
 .animecampaign.sheet.actor .summary .summary__info .label-list > * {
+  font: 0.5rem "Rubik Mono One";
   position: absolute;
   width: 100%;
   text-align: end;
   pointer-events: none;
-  font: 0.5rem "Rubik Mono One";
 }
 .animecampaign.sheet.actor .summary .summary__info .label-list__name {
   top: -0.66rem;
