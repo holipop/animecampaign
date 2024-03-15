@@ -17,7 +17,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             colorStats[element] = new fields.EmbeddedDataField(Stat, {
                 initial: null,
                 nullable: true
-            });
+            })
         }
 
         return {
@@ -48,26 +48,25 @@ export default class CharacterData extends foundry.abstract.DataModel {
             // ! Pre-v1.0
             description: new fields.HTMLField(),
             stats: new fields.ArrayField(new fields.ObjectField()),
-        };
+        }
     }
 
     /** Returns the class level as a roman numeral.
-     * @returns {number} 
+     * @returns {Number} 
      */
     get classLevel () {
-        const prof = this.proficiency.value;
+        const prof = this.proficiency.value
 
-        if (prof >= 100) return "III";
-        else if (prof >= 60) return "II";
-        else if (prof >= 0) return "I";
-        return "";
+        if (prof >= 100) return "III"
+        else if (prof >= 60) return "II"
+        else if (prof >= 0) return "I"
+        return ""
     }
 
     /** Returns stamina represented as a ratio.
-     * @returns {number} 
+     * @returns {Number} 
      */
     get staminaRatio () {
-        const percent = this.stamina.value / this.stamina.max
-        return percent
+        return this.stamina.value / this.stamina.max
     }
 }

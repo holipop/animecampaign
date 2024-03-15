@@ -1,3 +1,39 @@
 <section class="stat-list">
     
+    {{#each stats as |stat index|}}
+
+        <div class="stat-card">
+            <div class="stat-card__header">
+                <!-- img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Drag.svg" -->
+                <span class="stat-card__tag">{{stat.tag}}</span>
+
+                <div class="stat-card__controls">
+                    <a class="stat-card__edit">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </a>
+                    <a class="stat-card__delete" data-stat-delete="{{index}}">
+                        <span class="material-symbols-outlined">
+                            close
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="stat-card__footer">
+                <div class="stat-card__extra-info">
+                    {{#if (eq @root.type "Character")}}
+                        <span class="stat-card__extra-field-label stat-card__color--{{stat.color}}">{{stat.color}}</span>
+                    {{/if}}
+                </div>
+                <div class="stat-card__input-list">
+
+                    <input type="number" class="stat-card__input stat-card__input--value input--shadow-out" placeholder="0">
+
+                </div>
+            </div>
+        </div>
+    {{/each}}
+
 </section>

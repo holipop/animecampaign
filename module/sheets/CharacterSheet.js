@@ -34,6 +34,13 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         return "character"
     }
 
+    /** The list of color stats of this character.
+     * @returns {Stat[]}
+     */
+    get colorStats () {
+        return Object.values(this.object.system._stats).filter(el => el !== null)
+    }
+
     /** Fetches the context for this application's template.
      * @returns {*}
      */
@@ -43,6 +50,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             ...this.object,
             config: CONFIG.AC,
             palette: this.palette,
+            stats: this.colorStats, //! bandaid from v1
 
             svg: {
                 bg: this.svgBackground,
@@ -58,6 +66,8 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
     activateListeners (html) {
         super.activateListeners(html)
 
+        // TODO: Clean these up, they look fucking gross.
+
         // Dynamically change the little stamina bar.
         let staminaRatio = this.object.system.staminaRatio
         if (staminaRatio >= 1) {
@@ -67,6 +77,24 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         }
         staminaRatio *= 100
         html.find('[data-stam-bar]').height(`${staminaRatio}%`);
+
+        // Only show the class level badge only if number is valid AND an epithet user.
+        if (this.object.system.classLevel === "" || this.object.system.type !== "epithet") {
+            html.find('[data-prof-class]').hide()
+        }
+
+        html.find('[data-stat-delete]').on('click', this.onStatDelete.bind(this))
+    }
+
+    /** Delete a color stat from the stat list.
+     * @param {Event} event 
+     */
+    onStatDelete (event) {
+        const index = $(event.target).closest('[data-stat-delete]').data("stat-delete")
+        const color = this.colorStats[index].color
+
+        console.log(color)
+        this.object.update({ [`system._stats.${color}`]: null })
     }
 
 }

@@ -1,8 +1,18 @@
 // main: ./animecampaign.less
 
+.animecampaign.sheet .stat-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    gap: .5rem .25rem;
+    margin-top: .5rem;
+}
+
 .animecampaign.sheet .stat-card {
     height: @stat-card-height;
     width: @stat-card-width;
+    overflow: hidden;
     border-radius: 2 * @rpx;
     border: (1 * @rpx) solid fade(@txt-color, 50%);
 
@@ -23,8 +33,47 @@
         width: @stat-card-header-height;
     }
     &__tag {
+        flex: 1;
+
         font: 300 .75rem "Libre Franklin";
         text-transform: uppercase;
+    }
+
+    &__controls {
+        position: relative;
+        display: flex;
+        left: 2rem;
+        transition: left .2s;
+        border: (1 * @rpx) solid fade(@txt-color, 50%);
+        border-right: none;
+        border-top-color: transparent;
+        border-bottom-left-radius: 2 * @rpx;
+
+        > * {
+            #AC.InputSkinning();
+            
+            display: grid;
+            place-items: center;
+            height: @stat-card-header-height;
+            width: @stat-card-header-height;
+            padding: 0;
+            
+            text-shadow: none;
+        }
+        .material-symbols-outlined {
+            font-size: .8rem;
+        }
+    }
+    &:hover .stat-card__controls {
+        left: 0rem;
+    }
+    &__edit {
+        color: @txt-color;
+        background-color: @bg-color;
+    }
+    &__delete {
+        color: @bg-color;
+        background-color: @ac-color;
     }
 
     &__extra-info {
@@ -41,7 +90,7 @@
         #AC.InputSkinning();
 
         padding: 0;
-        width: @stat-card-width * .5;
+        width: @stat-card-width * .45;
         height: 1.25rem;
         border-bottom: (1 * @rpx) solid fade(@txt-color, 25%);
         
@@ -50,6 +99,16 @@
     }
     &__extra-field-label {
         #AC.TinyFont();
+    }
+    &__color {
+        &--red      { color: @red-stat; }
+        &--blue     { color: @blue-stat; }
+        &--yellow   { color: @yellow-stat; }
+        &--green    { color: @green-stat; }
+        &--cyan     { color: @cyan-stat; }
+        &--orange   { color: @orange-stat; }
+        &--purple   { color: @red-stat; }
+        &--grey     { color: @grey-stat; }
     }
 }
 .animecampaign.sheet .stat-card__input {
@@ -144,7 +203,8 @@
             place-items: end;
             height: 100%;
             width: .35rem;
-            border-left: (1 * @rpx) solid @stam-color-secondary;
+            border: (1 * @rpx) solid @stam-color-secondary;
+            border-right: none;
         }
         &-bar-gauge {
             height: 50%;
@@ -161,6 +221,30 @@
             margin: (1 * @rpx) 0; 
             border-left: (1 * @rpx) solid fade(@txt-color, 25%);
             border-right: (1 * @rpx) solid fade(@txt-color, 25%);
+        }
+        &-class {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 2rem;
+
+            > * {
+                text-align: center;
+            }
+        }
+        &-class-label {
+            #AC.TinyFont();
+
+            color: fade(@prof-color-secondary, 50%);
+        }
+        &-class-level {
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 3 * @rpx;
+
+            font: 1.25rem "Gloock";
+            color: @bg-color;
+            background-color: fade(@prof-color-secondary, 50%);
         }
     }
     &__move {

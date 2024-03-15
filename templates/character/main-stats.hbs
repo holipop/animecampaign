@@ -36,7 +36,12 @@
             </div>
 
             <div class="stat-card__footer">
-                <div class="stat-card__extra-info"></div>
+                <div class="stat-card__extra-info">
+                    <div class="main-stats__prof-class" data-prof-class>
+                        <div class="main-stats__prof-class-label">{{localize "AC.LABEL.Class"}}</div>
+                        <div class="main-stats__prof-class-level">{{system.classLevel}}</div>
+                    </div>
+                </div>
                 <div class="stat-card__input-list">
 
                     <input type="number" class="stat-card__input stat-card__input--value input--shadow-out" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
