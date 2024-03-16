@@ -193,6 +193,75 @@
 .animecampaign.sheet .input--shadow-out:hover {
   text-shadow: 0.09375rem 0.09375rem rgba(205, 50, 50, 0.5);
 }
+.animecampaign.dialog .window-content {
+  background: #f4f3ed;
+  overflow: hidden;
+}
+.animecampaign.dialog .dialog__bg {
+  opacity: 1;
+}
+.animecampaign.dialog .dialog__content {
+  margin: 1.25rem 0;
+  font-family: "Libre Franklin";
+  color: #1f1e1e;
+  text-align: center;
+}
+.animecampaign.dialog .dialog__button-list {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 0.25rem;
+}
+.animecampaign.dialog .dialog__button {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.1rem;
+  height: 2rem;
+  border: 0.0625rem solid #8a8986;
+  margin-top: 0.33rem;
+  transition: 0.075s;
+  z-index: 5;
+  font-family: "Libre Franklin";
+  font-weight: bold;
+  color: #1f1e1e;
+  background: transparent;
+}
+.animecampaign.dialog .dialog__button .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+.animecampaign.dialog .dialog__button:hover {
+  height: 2.33rem;
+  border-bottom-width: 0.33rem;
+  margin-top: 0;
+}
+.animecampaign.dialog .dialog__button:active {
+  background-color: #8a8986;
+}
+.animecampaign.dialog .dialog__button-svg {
+  position: absolute;
+  height: 8rem;
+  width: 8rem;
+  z-index: 1;
+}
+.animecampaign.dialog .dialog__button-svg--wrapper {
+  position: relative;
+  top: -2.5rem;
+  right: 7rem;
+  pointer-events: none;
+}
+.animecampaign.dialog .dialog__button-icon {
+  transition: fill 0.2s;
+  font-family: "Material Symbols Outlined";
+  stroke: #d4d3ce;
+  fill: transparent;
+  font-size: 100px;
+}
+.animecampaign.dialog .dialog__button:hover + .dialog__button-svg--wrapper .dialog__button-icon {
+  fill: #d4d3ce;
+}
 .animecampaign.sheet .stat-list {
   display: flex;
   flex-wrap: wrap;

@@ -2,18 +2,19 @@
     
     {{#each stats as |stat index|}}
 
-        <div class="stat-card">
+        <div class="stat-card" data-stat="{{index}}">
+            
             <div class="stat-card__header">
                 <!-- img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Drag.svg" -->
                 <span class="stat-card__tag">{{stat.tag}}</span>
 
                 <div class="stat-card__controls">
-                    <a class="stat-card__edit">
+                    <a class="stat-card__edit" data-stat-edit>
                         <span class="material-symbols-outlined">
                             edit
                         </span>
                     </a>
-                    <a class="stat-card__delete" data-stat-delete="{{index}}">
+                    <a class="stat-card__delete" data-stat-delete>
                         <span class="material-symbols-outlined">
                             close
                         </span>
@@ -31,9 +32,15 @@
 
                     <input type="number" class="stat-card__input stat-card__input--value input--shadow-out" placeholder="0">
 
+                    <!-- input type="number" class="stat-card__input stat-card__input--numerator input--shadow-out" placeholder="0">
+                    <input type="number" class="stat-card__input stat-card__input--denominator input--shadow-out" placeholder="0">
+                    <input type="text" class="stat-card__input stat-card__input--label input--shadow-out" placeholder="0" -->
+
                 </div>
             </div>
+
         </div>
+
     {{/each}}
 
 </section>

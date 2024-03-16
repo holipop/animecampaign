@@ -1,4 +1,5 @@
 import * as Utils from "../Utils.js";
+import ACDialog from "./ACDialog.js";
 import SheetMixin from "./SheetMixin.js";
 
 /**
@@ -38,6 +39,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @returns {Stat[]}
      */
     get colorStats () {
+        //! bandaid from v1
         return Object.values(this.object.system._stats).filter(el => el !== null)
     }
 
@@ -50,7 +52,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             ...this.object,
             config: CONFIG.AC,
             palette: this.palette,
-            stats: this.colorStats, //! bandaid from v1
+            stats: this.colorStats, 
 
             svg: {
                 bg: this.svgBackground,
@@ -59,8 +61,8 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         }
     }
 
-    /** Hook up event listeners between for Characters.
-     * @param {*} html 
+    /** Hook up event listeners for Characters.
+     * @param {jQuery} html 
      * @override
      */
     activateListeners (html) {
@@ -84,17 +86,39 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         }
 
         html.find('[data-stat-delete]').on('click', this.onStatDelete.bind(this))
+        html.find('[data-stat-edit]').on('click', this.onStatEdit.bind(this))
     }
 
     /** Delete a color stat from the stat list.
      * @param {Event} event 
      */
     onStatDelete (event) {
-        const index = $(event.target).closest('[data-stat-delete]').data("stat-delete")
+        const index = $(event.target).closest('[data-stat]').data("stat")
         const color = this.colorStats[index].color
 
-        console.log(color)
-        this.object.update({ [`system._stats.${color}`]: null })
+        ACDialog.confirm({
+            title: `Delete Stat [${color.toUpperCase()}]: ${this.object.name}`,
+            content: `<p>Delete the <b>${color.toUpperCase()}</b> stat?</p>`,
+            yes: () => this.object.update({ [`system._stats.${color}`]: null }),
+            no: () => { },
+            defaultYes: false
+        });
+    }
+
+    /** Invoke the Stat Configuration dialog.
+     * @param {Event} event 
+     */
+    onStatEdit (event) {
+        const index = $(event.target).closest('[data-stat]').data("stat")
+
+        // TODO: remove lmao
+        let d = ACDialog.prompt({
+            title: "A prompt",
+            content: "<p>Hello!</p>",
+            label: "Hi!",
+            callback: () => {},
+        });
+           
     }
 
 }
