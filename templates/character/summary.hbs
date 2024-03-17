@@ -1,0 +1,52 @@
+<section class="summary">
+        
+    <img class="summary__img" src="{{img}}" data-edit="img" data-color="{{palette.primary}}">
+
+    <section class="summary__info">
+
+        <textarea class="summary__name input--shadow-out" name="name" spellcheck="false" placeholder="{{localize "AC.LABEL.Name"}}" data-enter data-resize>{{name}}</textarea>
+
+        <div class="label-list" data-color="{{palette.secondary}}">
+            <label class="label-list__name" for="name">{{localize "AC.LABEL.Name"}}</label>
+            <label class="label-list__class" for="class">{{localize "AC.LABEL.Class"}}</label>
+        </div>
+
+        <input class="summary__class input--shadow-out" type="text" name="system.class" spellcheck="false" placeholder="{{localize "AC.LABEL.Class"}}" value="{{system.class}}">
+        
+
+        <div class="summary__info-footer" data-color="{{palette.primary}}" data-color-props="background-color"> 
+
+            <select class="summary__type" class="type" name="system.type" data-color="{{palette.contrast}}">
+                {{#select system.type}}
+                    <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
+                        {{selectOptions config.inscribed localize=true}}
+                    </optgroup>
+                    
+                    <optgroup label="{{localize "AC.TYPE.Mundie"}}">
+                        {{selectOptions config.mundie localize=true}}
+                    </optgroup>
+                {{/select}}
+            </select>
+            
+            <input class="summary__word input--shadow-out" type="text" name="system.word" value="{{system.word}}" spellcheck="false" placeholder="{{localize "AC.LABEL.Word"}}" data-color="{{palette.primary}}" data-color-props="border-color">
+        </div>
+        
+    </section>
+
+    <section class="summary-control">
+        
+        <span class="summary-control__label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Control"}}</span>
+
+        <div class="summary-control__button-list" data-color="{{palette.secondary}}">
+
+            <input class="summary-control__hidden-color" type="color" name="system.color" value="{{system.color}}" data-color-button="target">
+            <button class="summary-control__button" type="button" data-color-button="sender" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color">
+                <span class="material-symbols-outlined">palette</span>
+            </button>
+
+            <!-- button class="button" type="button" data-color-button="sender" data-color="{{palette.primary}}"></button -->
+        </div>
+        
+    </section>
+
+</section>

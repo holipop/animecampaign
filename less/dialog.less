@@ -21,36 +21,6 @@
         flex-wrap: nowrap;
         column-gap: .25rem;
     }
-    &__button {
-        #AC.InputSkinning();
-        
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        column-gap: .1rem;
-        height: 2rem;
-        border: (1 * @rpx) solid mix(@bg-color, @txt-color, 50%);
-        margin-top: .33rem;
-        transition: .075s;
-        z-index: 5;
-    
-        font-family: "Libre Franklin";
-        font-weight: bold;
-        color: @txt-color;
-        background: transparent;
-
-        .material-symbols-outlined {
-            font-size: 1.25rem;
-        }
-        &:hover {
-            height: 2rem + .33rem;
-            border-bottom-width: .33rem;
-            margin-top: 0;
-        }
-        &:active {
-            background-color: mix(@bg-color, @txt-color, 50%);
-        }
-    }
     &__button-svg {
         position: absolute;
         height: @dialog-icon-size;

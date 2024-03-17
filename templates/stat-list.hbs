@@ -1,8 +1,22 @@
-<section class="stat-list">
-    
+<section class="stat-list__header">
+
+    <div class="stat-list__label" data-color="{{palette.primary}}">
+        <span data-color="{{palette.secondary}}">{{localize "AC.LABEL.Stats"}}</span>
+    </div>
+
+    <button type="button" class="button stat-list__add-button" data-stat-add data-color="{{palette.primary}}" data-tooltip="{{localize "AC.TOOLTIP.Stat.Add"}}">
+        <span class="material-symbols-outlined">add</span>
+    </button>
+
+</section>
+
+<ul class="stat-list">
+
+    <span class="stat-list__empty">&mdash; {{localize "AC.LABEL.EmptyStats"}} &mdash;</span>
+
     {{#each stats as |stat index|}}
 
-        <div class="stat-card" data-stat="{{index}}">
+        <li class="stat-card" data-stat="{{index}}" data-color="{{@root.palette.secondary}}" data-color-props="border-color">
             
             <div class="stat-card__header">
                 <!-- img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Drag.svg" -->
@@ -24,9 +38,11 @@
 
             <div class="stat-card__footer">
                 <div class="stat-card__extra-info">
+
                     {{#if (eq @root.type "Character")}}
-                        <span class="stat-card__extra-field-label stat-card__color--{{stat.color}}">{{stat.color}}</span>
+                        <span class="stat-card__extra-field-label stat-card__color stat-card__color--{{stat.color}}">{{stat.color}}</span>
                     {{/if}}
+
                 </div>
                 <div class="stat-card__input-list">
 
@@ -39,8 +55,8 @@
                 </div>
             </div>
 
-        </div>
+        </li>
 
     {{/each}}
 
-</section>
+</ul>

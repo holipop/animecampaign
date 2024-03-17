@@ -31,12 +31,12 @@ export default class ACDialog extends Dialog {
             },
             buttons: {
                 yes: {
-                    icon: 'Check',
+                    icon: 'check',
                     label: game.i18n.localize("Yes"),
                     callback: html => yes ? yes(html) : true
                 },
                 no: {
-                    icon: 'Close',
+                    icon: 'close',
                     label: game.i18n.localize("No"),
                     callback: html => no ? no(html) : false
                 }
@@ -58,7 +58,7 @@ export default class ACDialog extends Dialog {
                 return null;
             },
             buttons: {
-                ok: { icon: 'Check', label, callback }
+                ok: { icon: 'check', label, callback }
             }
         }, options);
     }

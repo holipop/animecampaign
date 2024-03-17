@@ -87,6 +87,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
         html.find('[data-stat-delete]').on('click', this.onStatDelete.bind(this))
         html.find('[data-stat-edit]').on('click', this.onStatEdit.bind(this))
+        html.find('[data-stat-add]').on('click', this.onStatAdd.bind(this))
     }
 
     /** Delete a color stat from the stat list.
@@ -94,14 +95,14 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      */
     onStatDelete (event) {
         const index = $(event.target).closest('[data-stat]').data("stat")
-        const color = this.colorStats[index].color
+        const { tag, color } = this.colorStats[index]
 
         ACDialog.confirm({
-            title: `Delete Stat [${color.toUpperCase()}]: ${this.object.name}`,
-            content: `<p>Delete the <b>${color.toUpperCase()}</b> stat?</p>`,
+            title: `Delete Stat [${tag.toUpperCase()}]: ${this.object.name}`,
+            content: `<p>Delete the "<b>${tag.toUpperCase()}</b>" <em>(${color.toUpperCase()})</em> stat?</p>`,
             yes: () => this.object.update({ [`system._stats.${color}`]: null }),
             no: () => { },
-            defaultYes: false
+            defaultYes: true
         });
     }
 
@@ -118,7 +119,16 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             label: "Hi!",
             callback: () => {},
         });
-           
+    }
+
+    /** Add the first available color stat to the list.
+     */
+    onStatAdd () {
+        const [color, _] = Object
+            .entries(this.object.system._stats)
+            .find(el => el[1] === null) // If the value is null, get the key
+
+        this.object.update({ [`system._stats.${color}`]: { tag: "new stat", color } })
     }
 
 }

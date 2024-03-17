@@ -1,15 +1,54 @@
 // main: ./animecampaign.less
 
 .animecampaign.sheet .stat-list {
+    #AC.ListSkinning();
+
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
     gap: .5rem .25rem;
-    margin-top: .5rem;
+    margin-top: .25rem;
+
+    &__header {
+        display: flex;
+        align-items: flex-end;
+        gap: .25rem;
+        min-height: 1.25rem;
+        width: @stat-card-width * 4;
+        margin: 0 auto;
+    }
+    &__label {
+        #AC.TinyFont();
+
+        flex: 1;
+        border-bottom: (1 * @rpx) solid currentColor;
+
+        vertical-align: bottom;
+    }
+    &__add-button {
+        height: 1.25rem;
+        width: 1.25rem;
+        border-color: currentColor;
+    }
+    &__add-button:hover {
+        height: 1.25rem + .33rem;
+    }
+    &:has(.stat-card) .stat-list__empty {
+        display: none;
+    }
+    &__empty {
+        margin: .25rem 0;
+
+        font: 300 .75rem "Libre Franklin";
+        color: fade(@txt-color, 25%);
+        text-transform: uppercase;
+    }
 }
 
 .animecampaign.sheet .stat-card {
+    display: flex;
+    flex-direction: column;
     height: @stat-card-height;
     width: @stat-card-width;
     overflow: hidden;
@@ -26,6 +65,10 @@
         height: @stat-card-header-height;
         align-items: center;
     }
+    &__footer {
+        flex: 1
+    }
+
     &__img {
         #AC.InputSkinning();
 
@@ -33,17 +76,25 @@
         width: @stat-card-header-height;
     }
     &__tag {
+        #AC.Overflow();
+
         flex: 1;
+        margin-left: .1rem;
 
         font: 300 .75rem "Libre Franklin";
         text-transform: uppercase;
+
+    }
+    &:has(.stat-card__img) .stat-card__tag {
+        margin: 0;
     }
 
     &__controls {
         position: relative;
         display: flex;
         left: 2rem;
-        transition: left .2s;
+        width: 0;
+        transition: .2s;
         border: (1 * @rpx) solid fade(@txt-color, 50%);
         border-right: none;
         border-top-color: transparent;
@@ -66,6 +117,7 @@
     }
     &:hover .stat-card__controls {
         left: 0rem;
+        width: (@stat-card-header-height * 2) + (1 * @rpx);
     }
     &__edit {
         color: @txt-color;
@@ -101,13 +153,15 @@
         #AC.TinyFont();
     }
     &__color {
+        position: absolute;
+
         &--red      { color: @red-stat; }
         &--blue     { color: @blue-stat; }
         &--yellow   { color: @yellow-stat; }
         &--green    { color: @green-stat; }
         &--cyan     { color: @cyan-stat; }
         &--orange   { color: @orange-stat; }
-        &--purple   { color: @red-stat; }
+        &--purple   { color: @purple-stat; }
         &--grey     { color: @grey-stat; }
     }
 }
@@ -132,13 +186,13 @@
         margin-left: .25rem;
     }
     &--numerator {
-        height: @stat-card-footer-height * (5 / 9);
-        border-bottom: (1 * @rpx) solid fade(@txt-color, 25%);
+        height: @stat-card-footer-height * (5 / 9) - .1rem;
 
         font-size: 1.75rem;
     }
     &--denominator {
         height: @stat-card-footer-height * (4 / 9) - .1rem;
+        border-top: (1 * @rpx) solid fade(@txt-color, 25%);
 
         font-size: 1.15rem;
         font-weight: normal;
@@ -176,6 +230,7 @@
             background: linear-gradient(@colors-primary[@@value], @colors-secondary[@@value]);
 
             > .stat-card {
+                width: @main-stat-card-width;
                 border: none;
                 margin: 1 * @rpx;
 
@@ -184,7 +239,7 @@
             .stat-card__input {
                 color: @colors-txt[@@value]
             }
-            .input--shadow-out:hover {
+            .input--shadow-out:hover, .input--shadow-out:focus {
                 text-shadow: (1.5 * @rpx) (1.5 * @rpx) fade(@colors-secondary[@@value], 50%);
             }
         }

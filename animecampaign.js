@@ -60,8 +60,8 @@ Hooks.once('init', () => {
     const partials = {
         "stat-list": "systems/animecampaign/templates/stat-list.hbs",
 
-        // character
-        "main-stats": "systems/animecampaign/templates/character/main-stats.hbs",
+        "character.summary": "systems/animecampaign/templates/character/summary.hbs",
+        "character.main-stats": "systems/animecampaign/templates/character/main-stats.hbs",
     }
     loadTemplates(partials);
 })
