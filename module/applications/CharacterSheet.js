@@ -130,7 +130,6 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             })
         })
         config.render(true)
-        
     }
 
     /** Add the first available color stat to the list.
@@ -147,8 +146,29 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             title: game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.object.name })
         })
         config.render(true)
+    }
 
-        //this.object.update({ [`system._stats.${color}`]: { tag: "new stat", color } })
+    /** Handle how Characters update.
+     * @param {SubmitEvent} event 
+     * @param {*} data 
+     */
+    async _updateObject (event, data) {
+        const updates = expandObject(data)
+
+        // intercept stat handling
+        if ("stats" in updates.system) {
+            const statData = Object
+                .entries(updates.system.stats)
+                .map(([index, statChanges]) => {
+                    const stat = this.colorStats[index]
+                    return [stat.color, { ...stat, ...statChanges }]
+                })
+
+            updates.system.stats = null // v1.0 bandaid
+            updates.system._stats = Object.fromEntries(statData)
+        }
+
+        super._updateObject(event, updates)
     }
 
 }

@@ -17,7 +17,12 @@
             <select class="config__input" name="view">
                 {{selectOptions config.displays selected=object.view localize=true}}
             </select>
+            <p class="config__notes">
+                <b>Value</b> and <b>Resource</b> are numeric, <b>Label</b> can be any text.
+            </p>
         </div>
+
+        <!-- TODO: LOCALIZE THESE -->
 
         {{#if (eq object.parent.documentName "Actor")}}
             <hr class="config__hr">
@@ -27,6 +32,9 @@
                 <select class="config__input" name="color">
                     {{selectOptions colors selected=object.color localize=true}}
                 </select>
+                <p class="config__notes">
+                    Configure the stat for token attribute bars.
+                </p>
             </div>
         {{/if}}
 

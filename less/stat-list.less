@@ -134,7 +134,7 @@
         justify-content: flex-end;
         margin: .2rem;
 
-        &:empty {
+        &:empty, &:has(.stat-card__color) {
             margin: 0;
         }
     }
@@ -154,6 +154,7 @@
     }
     &__color {
         position: absolute;
+        padding: .1rem .2rem;
 
         &--red      { color: @red-stat; }
         &--blue     { color: @blue-stat; }
@@ -163,6 +164,10 @@
         &--orange   { color: @orange-stat; }
         &--purple   { color: @purple-stat; }
         &--grey     { color: @grey-stat; }
+    }
+    &__input-list {
+        display: flex;
+        flex-direction: column;
     }
 }
 .animecampaign.sheet .stat-card__input {
@@ -186,16 +191,23 @@
         margin-left: .25rem;
     }
     &--numerator {
-        height: @stat-card-footer-height * (5 / 9) - .1rem;
+        height: @stat-card-footer-height * (5 / 9);
 
         font-size: 1.75rem;
     }
     &--denominator {
-        height: @stat-card-footer-height * (4 / 9) - .1rem;
+        height: @stat-card-footer-height * (4 / 9);
         border-top: (1 * @rpx) solid fade(@txt-color, 25%);
 
         font-size: 1.15rem;
         font-weight: normal;
+    }
+    &--label {
+        font-size: 1.25rem;
+        font-weight: normal;
+        margin-top: .15rem;
+        width: 100%;
+        border-bottom: (1 * @rpx) solid fade(@txt-color, 25%);
     }
 }
 

@@ -291,7 +291,7 @@
 }
 .animecampaign.dialog .config__notes {
   width: 100%;
-  margin: 0.2rem 0;
+  margin: 0.25rem 0;
   font-size: 0.7rem;
   color: #4a4947;
 }
@@ -443,7 +443,8 @@
   justify-content: flex-end;
   margin: 0.2rem;
 }
-.animecampaign.sheet .stat-card__extra-info:empty {
+.animecampaign.sheet .stat-card__extra-info:empty,
+.animecampaign.sheet .stat-card__extra-info:has(.stat-card__color) {
   margin: 0;
 }
 .animecampaign.sheet .stat-card__extra-field-input {
@@ -463,6 +464,7 @@
 }
 .animecampaign.sheet .stat-card__color {
   position: absolute;
+  padding: 0.1rem 0.2rem;
 }
 .animecampaign.sheet .stat-card__color--red {
   color: #df2d48;
@@ -488,6 +490,10 @@
 .animecampaign.sheet .stat-card__color--grey {
   color: #807f84;
 }
+.animecampaign.sheet .stat-card__input-list {
+  display: flex;
+  flex-direction: column;
+}
 .animecampaign.sheet .stat-card__input {
   border: none;
   border-radius: 0;
@@ -510,14 +516,21 @@
   margin-left: 0.25rem;
 }
 .animecampaign.sheet .stat-card__input--numerator {
-  height: 1.31666667rem;
+  height: 1.41666667rem;
   font-size: 1.75rem;
 }
 .animecampaign.sheet .stat-card__input--denominator {
-  height: 1.03333333rem;
+  height: 1.13333333rem;
   border-top: 0.0625rem solid rgba(31, 30, 30, 0.25);
   font-size: 1.15rem;
   font-weight: normal;
+}
+.animecampaign.sheet .stat-card__input--label {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin-top: 0.15rem;
+  width: 100%;
+  border-bottom: 0.0625rem solid rgba(31, 30, 30, 0.25);
 }
 .animecampaign.sheet.actor .main-stats {
   display: flex;
@@ -651,7 +664,7 @@
   display: grid;
   height: 8rem;
   width: 100%;
-  grid-template-columns: 4fr 10fr 2fr;
+  grid-template-columns: 4fr 10fr 1.66fr;
   grid-template-rows: 1fr;
   z-index: 5;
 }
