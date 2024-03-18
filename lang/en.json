@@ -59,10 +59,11 @@
         "Stat": "Stat",
         "Stats": "Stats",
         "View": "View",
-        "Value": "Value",
-        "Max": "Max",
         "Spaces": "Spaces",
         "Build": "Build",
+        "Value": "Value",
+        "Max": "Max",
+        "Resource": "Resource",
         "Label": "Label",
         "Text": "Text",
         "Tag": "Tag",
@@ -119,6 +120,21 @@
         "Confirm": "Confirm",
         "Name": "Name",
         "Tag": "Tag",
+        "AddStat": {
+            "Title": "Add Stat: {name}",
+            "Placeholder": "New Stat"
+        },
+        "EditStat": {
+            "Title": "Edit Stat [{tag}]: {name}"
+        },
+        "DeleteColorStat": {
+            "Title": "Delete Stat [{tag}]: {name}",
+            "Content": "<p>Delete the \"<b>{tag}</b>\" (<em>{color}</em>) stat?</p>"
+        },
+        "DeleteStat": {
+            "Title": "Delete Stat [{tag}]: {name}",
+            "Content": "<p>Delete the \"<b>{tag}</b>\" stat?</p>"
+        },
         "CreateCategory": {
             "Title": "Create New Category: {name}",
             "Placeholder": "New Category"
@@ -189,6 +205,7 @@
         "FailedPackMigration": "Failed AC FVTT system migration for {document} document (\"{name}\" [{id}]) in Compendium {pack}: {error}"
     },
     "NOTIFY": {
+        "StatTagTaken": "\"{tag}\" is already taken by another stat.",
         "Macro": {
             "ControlActorWarning": "You must control an Actor to roll from the hotbar.",
             "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]."

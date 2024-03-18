@@ -45,6 +45,11 @@ AC.colors = {
     grey: '#807f84',
 };
 AC.defaultColor = "#cd3232";
+AC.displays = {
+    value: "AC.LABEL.Value",
+    resource: "AC.LABEL.Resource",
+    label: "AC.LABEL.Label",
+}
 
 AC.defaultCategories = [
     {

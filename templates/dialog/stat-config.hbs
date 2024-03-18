@@ -1,0 +1,78 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    <!-- div class="dialog__bg">
+        <svg>
+        </svg>
+    </div -->
+
+    <div class="dialog__content config">
+
+        <div class="config__group">
+            <label class="config__label">Tag</label>
+            <input class="config__input config__input--caps" type="text" name="tag" value="{{object.tag}}" placeholder="{{localize "AC.DIALOG.AddStat.Placeholder"}}">
+        </div>
+
+        <div class="config__group">
+            <label class="config__label">Display</label>
+            <select class="config__input" name="view">
+                {{selectOptions config.displays selected=object.view localize=true}}
+            </select>
+        </div>
+
+        {{#if (eq object.parent.documentName "Actor")}}
+            <hr class="config__hr">
+
+            <div class="config__group">
+                <label class="config__label">Color</label>
+                <select class="config__input" name="color">
+                    {{selectOptions colors selected=object.color localize=true}}
+                </select>
+            </div>
+        {{/if}}
+
+        <!-- div class="config__group">
+            <label class="config__label">Test</label>
+            <input class="config__input" type="text">
+        </div>
+
+        <div class="config__group">
+            <label class="config__label">Test</label>
+            <input class="config__input" type="text">
+            <p class="config__notes">These are some notes</p>
+        </div>
+
+        <hr class="config__hr">
+
+        <div class="config__group">
+            <label class="config__label">Another Field</label>
+            <input class="config__input" type="text">
+        </div -->
+
+    </div>
+
+    <div class="dialog__button-list">
+
+        <!-- Update Stat -->
+        <button type="submit" class="button dialog__button dialog-button">
+            <span class="material-symbols-outlined">
+                save
+            </span>
+            <span class="button__text">
+                {{#if isNew}}
+                    Add Stat
+                {{else}}
+                    Update Stat
+                {{/if}}
+            </span>
+        </button>
+        <div class="dialog__button-svg--wrapper">
+            <svg class="dialog__button-svg" viewBox="0 0 100 100">
+                <text class="dialog__button-icon" x="0" y="100">
+                    save
+                </text>
+            </svg>
+        </div>
+
+    </div>
+
+</form>

@@ -1,5 +1,6 @@
 import * as Utils from "../Utils.js";
 import ACDialog from "./ACDialog.js";
+import StatConfig from "./StatConfig.js";
 import SheetMixin from "./SheetMixin.js";
 
 /**
@@ -98,8 +99,14 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         const { tag, color } = this.colorStats[index]
 
         ACDialog.confirm({
-            title: `Delete Stat [${tag.toUpperCase()}]: ${this.object.name}`,
-            content: `<p>Delete the "<b>${tag.toUpperCase()}</b>" <em>(${color.toUpperCase()})</em> stat?</p>`,
+            title: game.i18n.format("AC.DIALOG.DeleteColorStat.Title", { 
+                tag: tag.toUpperCase(), 
+                name: this.object.name
+            }),
+            content: game.i18n.format("AC.DIALOG.DeleteColorStat.Content", {
+                tag: tag.toUpperCase(), 
+                color: color.toUpperCase()
+            }),
             yes: () => this.object.update({ [`system._stats.${color}`]: null }),
             no: () => { },
             defaultYes: true
@@ -111,24 +118,37 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      */
     onStatEdit (event) {
         const index = $(event.target).closest('[data-stat]').data("stat")
+        const stat = this.colorStats[index];
 
-        // TODO: remove lmao
-        let d = ACDialog.prompt({
-            title: "A prompt",
-            content: "<p>Hello!</p>",
-            label: "Hi!",
-            callback: () => {},
-        });
+        const config = new StatConfig({ 
+            ...stat,
+            parent: this.object
+        }, {
+            title: game.i18n.format("AC.DIALOG.EditStat.Title", { 
+                tag: stat.tag.toUpperCase(),
+                name: this.object.name
+            })
+        })
+        config.render(true)
+        
     }
 
     /** Add the first available color stat to the list.
      */
     onStatAdd () {
-        const [color, _] = Object
+        const [color] = Object
             .entries(this.object.system._stats)
-            .find(el => el[1] === null) // If the value is null, get the key
+            .find(([_, stat]) => stat === null) // If the value is null, get the key
 
-        this.object.update({ [`system._stats.${color}`]: { tag: "new stat", color } })
+        const config = new StatConfig({ 
+            color,
+            parent: this.object
+        }, {
+            title: game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.object.name })
+        })
+        config.render(true)
+
+        //this.object.update({ [`system._stats.${color}`]: { tag: "new stat", color } })
     }
 
 }

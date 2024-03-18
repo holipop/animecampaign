@@ -243,6 +243,7 @@
   display: flex;
   flex-wrap: nowrap;
   column-gap: 0.25rem;
+  margin-left: 0.25rem;
 }
 .animecampaign.dialog .dialog__button-svg {
   position: absolute;
@@ -265,6 +266,54 @@
 }
 .animecampaign.dialog .dialog__button:hover + .dialog__button-svg--wrapper .dialog__button-icon {
   fill: #d4d3ce;
+}
+.animecampaign.dialog .config {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
+  text-align: unset;
+  z-index: 6;
+  font: 0.85rem "Libre Franklin";
+}
+.animecampaign.dialog .config__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.animecampaign.dialog .config__label {
+  flex: 2;
+  font-weight: bold;
+}
+.animecampaign.dialog .config__input,
+.animecampaign.dialog .config__fields {
+  flex: 3;
+}
+.animecampaign.dialog .config__notes {
+  width: 100%;
+  margin: 0.2rem 0;
+  font-size: 0.7rem;
+  color: #4a4947;
+}
+.animecampaign.dialog .config__hr {
+  width: 100%;
+  border: none;
+  border-top: 0.0625rem solid rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog .config .config__input {
+  border-radius: 0;
+  background: rgba(31, 30, 30, 0.05);
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.dialog .config .config__input::placeholder {
+  opacity: 0.66;
+}
+.animecampaign.dialog .config .config__input:focus {
+  box-shadow: none;
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.animecampaign.dialog .config .config__input--caps {
+  text-transform: uppercase;
 }
 .animecampaign.sheet .stat-list {
   list-style-type: none;

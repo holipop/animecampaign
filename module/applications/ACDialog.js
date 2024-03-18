@@ -9,7 +9,7 @@ export default class ACDialog extends Dialog {
     static get defaultOptions () {
         const options = mergeObject(super.defaultOptions, {
             classes: ["animecampaign", "dialog"],
-            template: "systems/animecampaign/templates/ac-dialog.hbs"
+            template: "systems/animecampaign/templates/dialog/ac-dialog.hbs"
         });
 
         return options;
