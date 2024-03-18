@@ -315,6 +315,154 @@
 .animecampaign.dialog .config .config__input--caps {
   text-transform: uppercase;
 }
+.animecampaign.sheet .summary {
+  position: relative;
+  display: grid;
+  height: 8rem;
+  width: 100%;
+  grid-template-columns: 4fr 10fr 1.66fr;
+  grid-template-rows: 1fr;
+  z-index: 5;
+}
+.animecampaign.sheet .summary__img {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  width: 5.75rem;
+  height: 5.75rem;
+  place-self: end end;
+  margin: 0.5rem;
+  background-color: currentColor;
+  border: 0.0625rem solid currentColor;
+  box-shadow: 0.125rem 0.25rem currentColor;
+}
+.animecampaign.sheet .summary__info {
+  display: grid;
+  align-self: end;
+}
+.animecampaign.sheet .summary__name {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  min-height: 0px;
+  max-height: 4.375rem;
+  resize: none;
+  overflow-y: hidden;
+  padding: 0.4rem 0;
+  border-bottom: 0.0625rem solid #1f1e1e;
+  font: 2rem "Gloock";
+  line-height: 0.9;
+  color: #1f1e1e;
+}
+.animecampaign.sheet .summary__class {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  height: 1.2rem;
+  padding: 0;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  font: italic bold 0.8rem "Libre Franklin";
+  color: #1f1e1e;
+}
+.animecampaign.sheet .summary__info-footer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-radius: 0.125rem;
+}
+.animecampaign.sheet .summary__info-footer > * {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  height: 1.33rem;
+}
+.animecampaign.sheet .summary__type {
+  font: 600 0.8rem "Libre Franklin";
+  padding: 0;
+  padding-left: 0.2rem;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.animecampaign.sheet .summary__word {
+  font: bold 1rem "Philosopher";
+  border: 0.0625rem solid transparent;
+  border-radius: 0.125rem;
+  padding: 0 0.25rem;
+  background-color: #f4f3ed;
+  color: #1f1e1e;
+}
+.animecampaign.sheet .summary .summary__info .label-list {
+  position: relative;
+  width: 3rem;
+  justify-self: end;
+  z-index: 4;
+}
+.animecampaign.sheet .summary .summary__info .label-list > * {
+  font: 0.5rem "Rubik Mono One";
+  position: absolute;
+  width: 100%;
+  text-align: end;
+  pointer-events: none;
+}
+.animecampaign.sheet .summary .summary__info .label-list__name {
+  top: -0.66rem;
+}
+.animecampaign.sheet .summary .summary-control {
+  position: relative;
+  width: 3.25rem;
+  padding-left: 0.25rem;
+}
+.animecampaign.sheet .summary .summary-control__label {
+  font: 0.5rem "Rubik Mono One";
+  text-align: end;
+}
+.animecampaign.sheet .summary .summary-control__button-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 0.25rem;
+  padding: 0.25rem;
+  border: 0.0625rem solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+}
+.animecampaign.sheet .summary .summary-control__hidden-color {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.animecampaign.sheet .summary .summary-control__button {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 0.0625rem solid currentColor;
+  padding: 0;
+  background-color: #f4f3ed;
+  transition: 0.075s;
+}
+.animecampaign.sheet .summary .summary-control__button > .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+.animecampaign.sheet .summary .summary-control__button:hover {
+  width: 1.83rem;
+  border-right-width: 0.33rem;
+}
+.animecampaign.sheet .summary .summary-control__button:active {
+  background-color: currentColor;
+}
+.animecampaign.sheet .summary .summary-control__button:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
 .animecampaign.sheet .stat-list {
   list-style-type: none;
   margin: 0;
@@ -658,152 +806,4 @@
 }
 .animecampaign.sheet.actor .main-stats__move .stat-card__extra-field-label {
   color: rgba(99, 46, 76, 0.5);
-}
-.animecampaign.sheet.actor .summary {
-  position: relative;
-  display: grid;
-  height: 8rem;
-  width: 100%;
-  grid-template-columns: 4fr 10fr 1.66fr;
-  grid-template-rows: 1fr;
-  z-index: 5;
-}
-.animecampaign.sheet.actor .summary__img {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  width: 5.75rem;
-  height: 5.75rem;
-  place-self: end end;
-  margin: 0.5rem;
-  background-color: currentColor;
-  border: 0.0625rem solid currentColor;
-  box-shadow: 0.125rem 0.25rem currentColor;
-}
-.animecampaign.sheet.actor .summary__info {
-  display: grid;
-  align-self: end;
-}
-.animecampaign.sheet.actor .summary__name {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  min-height: 0px;
-  max-height: 4.375rem;
-  resize: none;
-  overflow-y: hidden;
-  padding: 0.4rem 0;
-  border-bottom: 0.0625rem solid #1f1e1e;
-  font: 2rem "Gloock";
-  line-height: 0.9;
-  color: #1f1e1e;
-}
-.animecampaign.sheet.actor .summary__class {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  height: 1.2rem;
-  padding: 0;
-  padding-left: 1.25rem;
-  margin-bottom: 0.25rem;
-  font: italic bold 0.8rem "Libre Franklin";
-  color: #1f1e1e;
-}
-.animecampaign.sheet.actor .summary__info-footer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  border-radius: 0.125rem;
-}
-.animecampaign.sheet.actor .summary__info-footer > * {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  height: 1.33rem;
-}
-.animecampaign.sheet.actor .summary__type {
-  font: 600 0.8rem "Libre Franklin";
-  padding: 0;
-  padding-left: 0.2rem;
-  cursor: pointer;
-  transition: 0.25s;
-}
-.animecampaign.sheet.actor .summary__word {
-  font: bold 1rem "Philosopher";
-  border: 0.0625rem solid transparent;
-  border-radius: 0.125rem;
-  padding: 0 0.25rem;
-  background-color: #f4f3ed;
-  color: #1f1e1e;
-}
-.animecampaign.sheet.actor .summary .summary__info .label-list {
-  position: relative;
-  width: 3rem;
-  justify-self: end;
-  z-index: 4;
-}
-.animecampaign.sheet.actor .summary .summary__info .label-list > * {
-  font: 0.5rem "Rubik Mono One";
-  position: absolute;
-  width: 100%;
-  text-align: end;
-  pointer-events: none;
-}
-.animecampaign.sheet.actor .summary .summary__info .label-list__name {
-  top: -0.66rem;
-}
-.animecampaign.sheet.actor .summary .summary-control {
-  position: relative;
-  width: 3.25rem;
-  padding-left: 0.25rem;
-}
-.animecampaign.sheet.actor .summary .summary-control__label {
-  font: 0.5rem "Rubik Mono One";
-  text-align: end;
-}
-.animecampaign.sheet.actor .summary .summary-control__button-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  row-gap: 0.25rem;
-  padding: 0.25rem;
-  border: 0.0625rem solid currentColor;
-  border-left: 0;
-  border-bottom: 0;
-}
-.animecampaign.sheet.actor .summary .summary-control__hidden-color {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-.animecampaign.sheet.actor .summary .summary-control__button {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  display: grid;
-  place-items: center;
-  height: 1.5rem;
-  width: 1.5rem;
-  border: 0.0625rem solid currentColor;
-  padding: 0;
-  background-color: #f4f3ed;
-  transition: 0.075s;
-}
-.animecampaign.sheet.actor .summary .summary-control__button > .material-symbols-outlined {
-  font-size: 1.25rem;
-}
-.animecampaign.sheet.actor .summary .summary-control__button:hover {
-  width: 1.83rem;
-  border-right-width: 0.33rem;
-}
-.animecampaign.sheet.actor .summary .summary-control__button:active {
-  background-color: currentColor;
-}
-.animecampaign.sheet.actor .summary .summary-control__button:focus {
-  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
 }
