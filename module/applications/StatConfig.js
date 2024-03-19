@@ -93,7 +93,7 @@ export default class StatConfig extends FormApplication {
             }
 
             // always place new stats at the end
-            if (this.isNew) {
+            if (this.isNew && stats.length > 0) {
                 const lastStat = stats
                     .sort((a, b) => a.sort - b.sort)
                     .at(-1)
