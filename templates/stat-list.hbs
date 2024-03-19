@@ -10,13 +10,13 @@
 
 </section>
 
-<ul class="stat-list">
+<ul class="stat-list" data-drop="stat">
 
     <span class="stat-list__empty">&mdash; {{localize "AC.LABEL.EmptyStats"}} &mdash;</span>
 
     {{#each stats as |stat index|}}
 
-        <li class="stat-card" data-stat="{{index}}" data-color="{{@root.palette.secondary}}" data-color-props="border-color">
+        <li class="stat-card" data-stat="{{index}}" data-drag="stat" data-color="{{@root.palette.secondary}}" data-color-props="border-color">
             
             <div class="stat-card__header">
                 <!-- img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Drag.svg" -->

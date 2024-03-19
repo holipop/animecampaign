@@ -17,6 +17,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             height: 550,
             classes: ["animecampaign", "sheet", "actor"],
             template: 'systems/animecampaign/templates/character/character-sheet.hbs',
+            dragDrop: [{ dragSelector: "[data-drag]", dropSelector: '[data-drop]' }]
         });
 
         return options;
@@ -40,8 +41,10 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @returns {Stat[]}
      */
     get colorStats () {
-        //! bandaid from v1
-        return Object.values(this.object.system._stats).filter(el => el !== null)
+        return Object
+            .values(this.object.system._stats)
+            .filter(stat => stat !== null)
+            .sort((a, b) => a.sort - b.sort)
     }
 
     /** Fetches the context for this application's template.
@@ -62,15 +65,77 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         }
     }
 
+    /** Fires when a draggable element is picked up.
+     * @param {Event} event 
+     */
+    _onDragStart (event) {
+        const dataset = $(event.target).data()
+        const type = dataset.drag
+        const data = { type, index: null, object: null }
+
+        switch (type) {
+            case 'stat':
+                const index = Number(dataset.stat)
+                data.index = index
+                data.object = this.colorStats[index]
+                break
+
+            // case 'feature': break
+            // case 'category': break
+        }
+
+        event.dataTransfer.setData("text/plain", JSON.stringify(data))
+    }
+
+    /** Fires when a draggable element is dropped.
+     * @param {Event} event 
+     */
+    _onDrop (event) {
+        const data = TextEditor.getDragEventData(event)
+        
+        switch (data.type) {
+            case 'stat':
+                this.onDropStat(event, data)
+                break
+
+            /* case 'feature': 
+                this.onDropFeature(event, data)
+                break
+            case 'category': 
+                this.onDropCategory(event, data)
+                break */
+        }
+    }
+
+    /** Handles the drop event for stats, setting their 'sort' key.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropStat (event, data) {
+        const stats = this.colorStats
+        if (stats.length === 1) return  // can't sort single entry
+
+        const target = $(event.target).closest('[data-drag="stat"]')
+        if (target.length === 0) return  // no target found
+        if (target.data('stat') === data.index) return  // don't sort on self 
+
+        const sort = SortingHelpers.performIntegerSort(data.object, {
+            target: stats[target.data('stat')],
+            siblings: stats.toSpliced(data.index, 1)
+        })
+        const updates = sort.map(({ target, update }) => [target.color, update])
+
+        this.object.update({ 'system._stats': Object.fromEntries(updates) })
+    }
+
     /** Hook up event listeners for Characters.
      * @param {jQuery} html 
      * @override
      */
     activateListeners (html) {
         super.activateListeners(html)
-
-        // TODO: Clean these up, they look fucking gross.
-
+        
+        // TODO: Clean this up, it looks fucking gross.
         // Dynamically change the little stamina bar.
         let staminaRatio = this.object.system.staminaRatio
         if (staminaRatio >= 1) {

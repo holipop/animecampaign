@@ -45,11 +45,10 @@ export default class StatConfig extends FormApplication {
         const options = Object
             .entries(CONFIG.AC.colorStat)
             .filter(([color]) => {
-                if (this.isNew) {
-                    return (stats[color] === null)
-                } else {
-                    return (stats[color] === null || color === this.object.color)
-                }
+                // if editing an existing stat, its own color should be a valid selection
+                return (this.isNew) 
+                    ? (stats[color] === null)
+                    : (stats[color] === null || color === this.object.color)
             })
 
         return Object.fromEntries(options)
@@ -78,20 +77,31 @@ export default class StatConfig extends FormApplication {
         data.tag = data.tag.toLowerCase()
 
         if (this.parent.documentName === "Actor") {
-
-            const tagTaken = Object
+            const stats = Object
                 .values(this.parent.system._stats)
                 .filter(stat => stat !== null)
+
+            // tags must be unique
+            const tagTaken = stats
                 .filter(stat => stat.color !== this.object.color)
                 .map(stat => stat.tag)
                 .includes(data.tag)
-            
             if (tagTaken) {
                 throw ui.notifications.error(
                     game.i18n.format("AC.NOTIFY.StatTagTaken", { tag: data.tag.toUpperCase() })
                 );
             }
-                
+
+            // always place new stats at the end
+            if (this.isNew) {
+                const lastStat = stats
+                    .sort((a, b) => a.sort - b.sort)
+                    .at(-1)
+
+                // for some reason, foundry sorts by the hundred thousands
+                data.sort = lastStat.sort + 100000
+            }
+            
             const updates = {
                 [`system._stats.${data.color}`]: data
             }
@@ -102,7 +112,6 @@ export default class StatConfig extends FormApplication {
             }
 
             this.parent.update(updates)
-
         } else {
 
             // item
