@@ -38,16 +38,6 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         return "character"
     }
 
-    /** The list of color stats of this character.
-     * @returns {Stat[]}
-     */
-    get colorStats () {
-        return Object
-            .values(this.object.system._stats)
-            .filter(stat => stat !== null)
-            .sort((a, b) => a.sort - b.sort)
-    }
-
     /** Fetches the context for this application's template.
      * @returns {*}
      */
@@ -57,7 +47,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             ...this.object,
             config: CONFIG.AC,
             palette: this.palette,
-            stats: this.colorStats, 
+            stats: this.object.system.colorStats, 
 
             svg: {
                 bg: this.svgBackground,
@@ -78,7 +68,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             case 'stat':
                 const index = Number(dataset.stat)
                 data.index = index
-                data.object = this.colorStats[index]
+                data.object = this.object.system.colorStats[index]
                 break
 
             // case 'feature': break
@@ -113,7 +103,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @param {*} data 
      */
     onDropStat (event, data) {
-        const stats = this.colorStats
+        const stats = this.object.system.colorStats
         if (stats.length === 1) return  // can't sort single entry
 
         const target = $(event.target).closest('[data-drag="stat"]')
@@ -162,7 +152,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      */
     onStatDelete (event) {
         const index = $(event.target).closest('[data-stat]').data("stat")
-        const { tag, color } = this.colorStats[index]
+        const { tag, color } = this.object.system.colorStats[index]
 
         ACDialog.confirm({
             title: game.i18n.format("AC.DIALOG.DeleteColorStat.Title", { 
@@ -184,7 +174,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      */
     onStatEdit (event) {
         const index = $(event.target).closest('[data-stat]').data("stat")
-        const stat = this.colorStats[index];
+        const stat = this.object.system.colorStats[index];
 
         const config = new StatConfig({ 
             ...stat,
@@ -226,7 +216,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             const statData = Object
                 .entries(updates.system.stats)
                 .map(([index, statChanges]) => {
-                    const stat = this.colorStats[index]
+                    const stat = this.object.system.colorStats[index]
                     return [stat.color, { ...stat, ...statChanges }]
                 })
 

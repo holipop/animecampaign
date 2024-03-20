@@ -69,4 +69,14 @@ export default class CharacterData extends foundry.abstract.DataModel {
     get staminaRatio () {
         return this.stamina.value / this.stamina.max
     }
+
+    /** The list of color stats without null colors, sorted.
+     * @returns {Stat[]}
+     */
+    get colorStats () {
+        return Object
+            .values(this._stats)
+            .filter(stat => stat !== null)
+            .sort((a, b) => a.sort - b.sort)
+    }
 }

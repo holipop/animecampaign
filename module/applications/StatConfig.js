@@ -76,10 +76,10 @@ export default class StatConfig extends FormApplication {
         data.tag ||= "new stat"
         data.tag = data.tag.toLowerCase()
 
+        data.sort = this.object.sort
+
         if (this.parent.documentName === "Actor") {
-            const stats = Object
-                .values(this.parent.system._stats)
-                .filter(stat => stat !== null)
+            const stats = this.parent.system.colorStats
 
             // tags must be unique
             const tagTaken = stats
@@ -94,9 +94,7 @@ export default class StatConfig extends FormApplication {
 
             // always place new stats at the end
             if (this.isNew && stats.length > 0) {
-                const lastStat = stats
-                    .sort((a, b) => a.sort - b.sort)
-                    .at(-1)
+                const lastStat = stats.at(-1)
 
                 // for some reason, foundry sorts by the hundred thousands
                 data.sort = lastStat.sort + 100000
