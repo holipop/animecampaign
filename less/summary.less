@@ -20,6 +20,38 @@
         background-color: currentColor;
         border: 1 * @rpx solid currentColor;
         box-shadow: (2 * @rpx) (4 * @rpx) currentColor;
+
+        &--wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+        &--edit {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            grid-area: 1 / 1 / -1 / -1;
+            place-self: end end;
+            pointer-events: none;
+            
+            > * {
+                position: relative;
+                font-size: .8rem;
+                right: .75rem;
+                bottom: .75rem;
+                padding: .1rem;
+                border: (1 * @rpx) solid @txt-color;
+                border-radius: 2 * @rpx;
+                transition: opacity .075s;
+
+                background-color: @bg-color;
+                color: @txt-color;
+                opacity: 0;
+            }
+        }
+        &:hover + .summary__img--edit > * {
+            opacity: .75;
+        }
     }
     &__info {
         display: grid;

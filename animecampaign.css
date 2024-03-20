@@ -337,6 +337,35 @@
   border: 0.0625rem solid currentColor;
   box-shadow: 0.125rem 0.25rem currentColor;
 }
+.animecampaign.sheet .summary__img--wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+.animecampaign.sheet .summary__img--edit {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  grid-area: 1 / 1 / -1 / -1;
+  place-self: end end;
+  pointer-events: none;
+}
+.animecampaign.sheet .summary__img--edit > * {
+  position: relative;
+  font-size: 0.8rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.1rem;
+  border: 0.0625rem solid #1f1e1e;
+  border-radius: 0.125rem;
+  transition: opacity 0.075s;
+  background-color: #f4f3ed;
+  color: #1f1e1e;
+  opacity: 0;
+}
+.animecampaign.sheet .summary__img:hover + .summary__img--edit > * {
+  opacity: 0.75;
+}
 .animecampaign.sheet .summary__info {
   display: grid;
   align-self: end;
@@ -485,7 +514,7 @@
 .animecampaign.sheet .stat-list__label {
   font: 0.5rem "Rubik Mono One";
   flex: 1;
-  border-bottom: 0.0625rem solid currentColor;
+  border-bottom: 0.0625rem solid #1f1e1e;
   vertical-align: bottom;
 }
 .animecampaign.sheet .stat-list__add-button {
@@ -814,7 +843,7 @@
   width: 90%;
   margin: 0.2rem auto;
   padding-bottom: 0.25rem;
-  border-bottom: 0.0625rem solid rgba(31, 30, 30, 0.5);
+  border-bottom: 0.0625rem solid #1f1e1e;
 }
 .animecampaign.sheet .nav__button {
   width: 2rem;
@@ -846,7 +875,7 @@
   height: 2rem;
   flex: 1;
   margin: 0.33rem 0.25rem 0;
-  padding: 0 0.25rem;
+  padding: 0 0.33rem;
   border-left: 0.0625rem solid rgba(31, 30, 30, 0.5);
   font: 1.5rem "Gloock";
   text-transform: uppercase;
