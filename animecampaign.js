@@ -62,6 +62,7 @@ Hooks.once('init', () => {
 
         "character.summary": "systems/animecampaign/templates/character/summary.hbs",
         "character.main-stats": "systems/animecampaign/templates/character/main-stats.hbs",
+        "character.nav": "systems/animecampaign/templates/character/nav.hbs",
     }
     loadTemplates(partials);
 })

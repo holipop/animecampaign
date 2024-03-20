@@ -29,12 +29,38 @@ export default function SheetMixin (Base) {
             }
         }
 
+        /** Handle extra operations when the tab changes
+         * @param {MouseEvent|null} event
+         * @param {Tabs} tabs
+         * @param {String} active
+         * @override
+         */
+        _onChangeTab (event, tabs, active) {
+            this.setTabName(active)
+
+            super._onChangeTab(event, tabs, active)
+        }
+
+        /** Set the HTML for the localized tab name.
+         * @param {String} active 
+         */
+        setTabName (active) {
+            const capitalized = active.at(0).toUpperCase() + active.slice(1)
+            const name = game.i18n.localize(`AC.NAV.${capitalized}`)
+
+            this._element.find('form [data-tab-name]').html(
+                `<span class="nav__current-tab--initial">${name.at(0)}</span>${name.slice(1)}`
+            )
+        }
+
         /** Hook up event listeners between for Actors and Items.
          * @param {*} html 
          * @override
          */
         activateListeners (html) {
             super.activateListeners(html)
+
+            this.setTabName(html.find('[data-nav] .active').data('tab'))
 
             // Set the color of elements with [data-color].
             html.find('[data-color]').each((_, element) => {

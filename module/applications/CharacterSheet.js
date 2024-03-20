@@ -17,7 +17,8 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             height: 550,
             classes: ["animecampaign", "sheet", "actor"],
             template: 'systems/animecampaign/templates/character/character-sheet.hbs',
-            dragDrop: [{ dragSelector: "[data-drag]", dropSelector: '[data-drop]' }]
+            dragDrop: [{ dragSelector: "[data-drag]", dropSelector: '[data-drop]' }],
+            tabs: [{ navSelector: "[data-nav]", contentSelector: "[data-content]" }],
         });
 
         return options;

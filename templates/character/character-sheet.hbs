@@ -18,8 +18,24 @@
 
     {{> "character.summary"}}
 
-    {{> "character.main-stats"}}
+    <div class="scrollable">
+        {{> "character.main-stats"}}
 
-    {{> "stat-list"}}
+        {{> "stat-list"}}
+
+        {{> "character.nav"}}
+
+        <section data-content>
+            
+            <div class="tab" data-tab="kit" data-group="character">
+                THIs IS THE KIT
+            </div>
+
+            <div class="tab" data-tab="biography" data-group="character">
+                THIS IS THE FUCKING BIOGRAPHY !!!
+            </div>
+
+        </section>
+    </div>
 
 </form>

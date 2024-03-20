@@ -472,7 +472,7 @@
   justify-content: center;
   align-content: flex-start;
   gap: 0.5rem 0.25rem;
-  margin-top: 0.25rem;
+  margin: 0.25rem 0 0.5rem;
 }
 .animecampaign.sheet .stat-list__header {
   display: flex;
@@ -806,4 +806,52 @@
 }
 .animecampaign.sheet.actor .main-stats__move .stat-card__extra-field-label {
   color: rgba(99, 46, 76, 0.5);
+}
+.animecampaign.sheet .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 90%;
+  margin: 0.2rem auto;
+  padding-bottom: 0.25rem;
+  border-bottom: 0.0625rem solid rgba(31, 30, 30, 0.5);
+}
+.animecampaign.sheet .nav__button {
+  width: 2rem;
+  border-color: currentColor;
+}
+.animecampaign.sheet .nav__button .material-symbols-outlined {
+  font-size: 1.66rem;
+  font-variation-settings: 'opsz' 48, 'wght' 300;
+}
+.animecampaign.sheet .nav__button .material-symbols-outlined--active {
+  display: none;
+  color: #f4f3ed;
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: 'FILL' 1, 'opsz' 48, 'wght' 300;
+}
+.animecampaign.sheet .nav__button.active {
+  background-color: currentColor;
+}
+.animecampaign.sheet .nav__button.active .material-symbols-outlined {
+  display: none;
+}
+.animecampaign.sheet .nav__button.active .material-symbols-outlined--active {
+  display: block;
+}
+.animecampaign.sheet .nav__button:active {
+  background-color: transparent;
+}
+.animecampaign.sheet .nav__current-tab {
+  height: 2rem;
+  flex: 1;
+  margin: 0.33rem 0.25rem 0;
+  padding: 0 0.25rem;
+  border-left: 0.0625rem solid rgba(31, 30, 30, 0.5);
+  font: 1.5rem "Gloock";
+  text-transform: uppercase;
+  color: #1f1e1e;
+}
+.animecampaign.sheet .nav__current-tab--initial {
+  font-size: 1.85rem;
 }
