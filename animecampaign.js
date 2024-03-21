@@ -51,9 +51,16 @@ Hooks.once('init', () => {
     CONFIG.Item.dataModels["Feature"] = FeatureData;
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
+    Actors.registerSheet("animecampaign", CharacterSheet, { 
+        types: ["Character"],
+        makeDefault: true 
+    });
+
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
+    Items.registerSheet("animecampaign", FeatureSheet, { 
+        types: ["Feature"],
+        makeDefault: true 
+    });
 
     Settings.register();
 
@@ -77,13 +84,15 @@ Hooks.on('ready', () => {
         return game.settings.set("animecampaign", "systemMigrationVersion", game.system.version);
     }
 
-    if (currentVersion == "") {
+    /* if (currentVersion == "") {
         if (!game.user.isGM) {
             ui.notifications.warn(game.i18n.localize("AC.MIGRATION.WarnForGM"));
             return;
         }
         Migrate.toV1();
-    }
+    } */
+
+    game.settings.set("animecampaign", "systemMigrationVersion", game.system.version);
 
     const NEEDS_MIGRATION_VERSION = "v0.1";
 })
