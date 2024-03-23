@@ -508,7 +508,7 @@
   align-items: flex-end;
   gap: 0.25rem;
   min-height: 1.25rem;
-  width: 32rem;
+  width: 80%;
   margin: 0 auto;
 }
 .animecampaign.sheet .stat-list__label {
@@ -850,14 +850,14 @@
   border-color: currentColor;
 }
 .animecampaign.sheet .nav__button .material-symbols-outlined {
-  font-size: 1.66rem;
-  font-variation-settings: 'opsz' 48, 'wght' 300;
+  font-size: 1.75rem;
+  font-variation-settings: 'opsz' 48, 'wght' 150;
 }
 .animecampaign.sheet .nav__button .material-symbols-outlined--active {
   display: none;
   color: #f4f3ed;
   font-family: "Material Symbols Outlined";
-  font-variation-settings: 'FILL' 1, 'opsz' 48, 'wght' 300;
+  font-variation-settings: 'FILL' 1, 'opsz' 48, 'wght' 150;
 }
 .animecampaign.sheet .nav__button.active {
   background-color: currentColor;
@@ -883,4 +883,42 @@
 }
 .animecampaign.sheet .nav__current-tab--initial {
   font-size: 1.85rem;
+}
+.animecampaign.sheet.actor .kit {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 90%;
+  margin: 0 auto;
+}
+.animecampaign.sheet.actor .kit .category {
+  opacity: 1;
+  margin: 0.2rem 0;
+}
+.animecampaign.sheet.actor .kit .category__header {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  height: 1.75rem;
+}
+.animecampaign.sheet.actor .kit .category__name {
+  font: 1.2rem 'Gloock';
+  text-transform: uppercase;
+}
+.animecampaign.sheet.actor .kit .category__name--initial {
+  font-size: 1.5rem;
+}
+.animecampaign.sheet.actor .kit .category__padding {
+  flex: 1;
+}
+.animecampaign.sheet.actor .kit .category__button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  font-variation-settings: 'wght' 400;
+}
+.animecampaign.sheet.actor .kit .category__button > * {
+  font-size: 1.15rem;
 }

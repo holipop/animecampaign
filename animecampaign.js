@@ -11,27 +11,32 @@ import * as Settings from './module/Settings.js'
 import * as Migrate from './module/Migrate.js'
 
 import ACActor from './module/documents/ACActor.js'
-import CharacterData from './module/data-models/CharacterData.js'
-import CharacterSheet from './module/applications/CharacterSheet.js'
-
 import ACItem from './module/documents/ACItem.js'
-import FeatureData from './module/data-models/FeatureData.js'
-import FeatureSheet from './module/applications/FeatureSheet.js'
 
+import CharacterData from './module/data-models/CharacterData.js'
+import FeatureData from './module/data-models/FeatureData.js'
 import Stat from './module/data-models/Stat.js'
 import Section from './module/data-models/Section.js'
 import Category from './module/data-models/Category.js'
+
+import CharacterSheet from './module/applications/CharacterSheet.js'
+import FeatureSheet from './module/applications/FeatureSheet.js'
+import ACDialog from './module/applications/ACDialog.js'
+import StatConfig from './module/applications/StatConfig.js'
+
 
 globalThis.AC = {
     Actor: ACActor,
     Item: ACItem,
     CharacterData,
-    CharacterSheet,
     FeatureData,
-    FeatureSheet,
     Stat,
     Section,
     Category,
+    CharacterSheet,
+    FeatureSheet,
+    Dialog: ACDialog,
+    StatConfig,
     Macro: { ...Macro },
     List: { ...List },
     Utils: { ...Utils },
@@ -70,6 +75,7 @@ Hooks.once('init', () => {
         "character.summary": "systems/animecampaign/templates/character/summary.hbs",
         "character.main-stats": "systems/animecampaign/templates/character/main-stats.hbs",
         "character.nav": "systems/animecampaign/templates/character/nav.hbs",
+        "character.kit": "systems/animecampaign/templates/character/kit.hbs",
     }
     loadTemplates(partials);
 })
