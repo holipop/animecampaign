@@ -289,6 +289,9 @@
 .animecampaign.dialog .config__fields {
   flex: 3;
 }
+.animecampaign.dialog .config__fields {
+  display: flex;
+}
 .animecampaign.dialog .config__notes {
   width: 100%;
   margin: 0.25rem 0;

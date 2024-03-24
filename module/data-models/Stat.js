@@ -3,7 +3,7 @@
  */ 
 export default class Stat extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model. This cannot be changed post-init.
+    /** Defining the data structure of this data model.
      * @returns {Object}
      */
     static defineSchema () {

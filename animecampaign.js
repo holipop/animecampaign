@@ -61,11 +61,11 @@ Hooks.once('init', () => {
         makeDefault: true 
     });
 
-    Items.unregisterSheet("core", ItemSheet);
+    /* Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", FeatureSheet, { 
         types: ["Feature"],
         makeDefault: true 
-    });
+    }); */
 
     Settings.register();
 

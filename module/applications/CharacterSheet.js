@@ -2,6 +2,7 @@ import * as Utils from "../Utils.js";
 import ACDialog from "./ACDialog.js";
 import StatConfig from "./StatConfig.js";
 import SheetMixin from "./SheetMixin.js";
+import CategoryConfig from "./CategoryConfig.js";
 
 /**
  * The application for Characters.
@@ -145,6 +146,8 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         html.find('[data-stat-delete]').on('click', this.onStatDelete.bind(this))
         html.find('[data-stat-edit]').on('click', this.onStatEdit.bind(this))
         html.find('[data-stat-add]').on('click', this.onStatAdd.bind(this))
+
+        html.find('[data-category-edit]').on('click', this.onCategoryEdit.bind(this))
     }
 
     /** Delete a color stat from the stat list.
@@ -200,6 +203,22 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             parent: this.object
         }, {
             title: game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.object.name })
+        })
+        config.render(true)
+    }
+
+    /** Invoke the Category Configuration dialog.
+     * @param {Event} event 
+     */
+    onCategoryEdit (event) {
+        const index = $(event.target).closest('[data-category]').data("category")
+        const category = this.object.system.categories[index];
+
+        const config = new CategoryConfig({
+            ...category,
+            parent: this.object
+        }, {
+            title: "Edit Category"
         })
         config.render(true)
     }

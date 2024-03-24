@@ -1,13 +1,14 @@
 import * as List from "../List.js"
 import Stat from "./Stat.js";
 import Section from "./Section.js";
+import Details from "./Details.js";
 
 /** 
  * Data structure for Kit Features. 
  */
 export default class FeatureData extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model. This cannot be changed post-init.
+    /** Defining the data structure of this data model.
      * @returns {Object}
      */
     static defineSchema () {
@@ -26,24 +27,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 initial: [{ visible: true, collapsed: false, richtext: null }],
             }),
 
-            details: new fields.SchemaField({
-                editor: new fields.StringField({ initial: 'markdown' }),
-                formula: new fields.StringField({ initial: '1d20' }),
-
-                action: new fields.SchemaField({
-                    name: new fields.StringField({ initial: '' }),
-                    img: new fields.FilePathField({
-                        categories: ['IMAGE'],
-                        blank: true,
-                        //initial: 'systems/animecampaign/assets/action/main.svg'
-                    }),
-                }),
-
-                usage: new fields.SchemaField({
-                    multiple: new fields.StringField({ initial: '' }),
-                    timeframe: new fields.StringField({ initial: '' })
-                }),
-            }),
+            details: new fields.EmbeddedDataField(Details),
 
             // ! Pre-v1.0
             type: new fields.StringField(),
@@ -76,7 +60,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
      * @param {*} source 
      */
     static shimData (source) {
-        source.details.action.img = "";
+        source.details.action = source.details.action.name;
         return super.shimData(source);
     }
 }
