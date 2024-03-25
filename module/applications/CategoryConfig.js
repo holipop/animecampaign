@@ -19,6 +19,7 @@ export default class CategoryConfig extends FormApplication {
         const options = mergeObject(super.defaultOptions, {
             classes: ["animecampaign", "dialog", "config"],
             template: "systems/animecampaign/templates/dialog/category-config.hbs",
+            tabs: [{ navSelector: "[data-nav]", contentSelector: "[data-content]" }],
             focus: true,
             width: 400,
             height: "auto",

@@ -48,6 +48,43 @@
     }
 }
 
+.animecampaign.dialog .dialog__nav {
+    display: flex;
+    margin-top: .75rem;
+    align-items: center;
+
+    &--padding {
+        height: @dialog-nav-height;
+        width: 1rem;
+        border-bottom: (1 * @rpx) solid mix(@bg-color, @txt-color, 75%);
+    }
+    &-button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: .2rem;
+        height: @dialog-nav-height;
+        border: (1 * @rpx) solid transparent;
+        border-bottom-color: mix(@bg-color, @txt-color, 75%);
+        transition: text-shadow .075s;
+        text-shadow: 0 0 0 fade(@txt-color, 75%);
+
+        font: bold .85rem "Libre Franklin";
+    }
+    &-button:hover {
+        text-shadow: (2 * @rpx) (2 * @rpx) 0 fade(@ac-color, 25%);
+    }
+    &-button.active {
+        border-color: mix(@bg-color, @txt-color, 75%);
+        border-bottom-color: transparent;
+    }
+
+    .material-symbols-outlined {
+        font-size: 1rem;
+    }
+}
+
 .animecampaign.dialog .config {
     position: relative;
     display: flex;

@@ -267,6 +267,39 @@
 .animecampaign.dialog .dialog__button:hover + .dialog__button-svg--wrapper .dialog__button-icon {
   fill: #d4d3ce;
 }
+.animecampaign.dialog .dialog__nav {
+  display: flex;
+  margin-top: 0.75rem;
+  align-items: center;
+}
+.animecampaign.dialog .dialog__nav--padding {
+  height: 1.75rem;
+  width: 1rem;
+  border-bottom: 0.0625rem solid #bfbeb9;
+}
+.animecampaign.dialog .dialog__nav-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.2rem;
+  height: 1.75rem;
+  border: 0.0625rem solid transparent;
+  border-bottom-color: #bfbeb9;
+  transition: text-shadow 0.075s;
+  text-shadow: 0 0 0 rgba(31, 30, 30, 0.75);
+  font: bold 0.85rem "Libre Franklin";
+}
+.animecampaign.dialog .dialog__nav-button:hover {
+  text-shadow: 0.125rem 0.125rem 0 rgba(205, 50, 50, 0.25);
+}
+.animecampaign.dialog .dialog__nav-button.active {
+  border-color: #bfbeb9;
+  border-bottom-color: transparent;
+}
+.animecampaign.dialog .dialog__nav .material-symbols-outlined {
+  font-size: 1rem;
+}
 .animecampaign.dialog .config {
   position: relative;
   display: flex;
