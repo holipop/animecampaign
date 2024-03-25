@@ -15,7 +15,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
 
         return {
-            color: new fields.StringField({
+            color: new fields.ColorField({
                 required: true,
                 initial: CONFIG.AC.defaultColor
             }),

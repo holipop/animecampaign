@@ -6,10 +6,15 @@ export default class StatConfig extends FormApplication {
     constructor(object, options) {
         super(object, options);
     
-        /**
-         * A reference to the parent for this stat.
+        /** A reference to the parent for this stat.
+         * @type {ACActor}
          */
         this.parent = this.object.parent;
+        
+        /** The index of this object for its list.
+         * @type {Number}
+         */
+        this.index = this.object.index;
     }
 
     /** Sets the default options for this application.

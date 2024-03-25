@@ -38,7 +38,11 @@
                 <div class="stat-card__extra-info">
 
                     {{#if (eq @root.document.documentName "Actor")}}
-                        <span class="stat-card__extra-field-label stat-card__color stat-card__color--{{stat.color}}">{{stat.color}}</span>
+                        <span class="stat-card__extra-field-label stat-card__color stat-card__color--{{stat.color}}">
+                            <span class="stat-card__color--lining">
+                                {{stat.color}}
+                            </span>
+                        </span>
                     {{/if}}
 
                 </div>

@@ -7,48 +7,50 @@
 
     {{log this}}
 
-    <div class="dialog__nav" data-nav data-group="config">
+    <div class="dialog__nav" data-nav data-group="category-config">
         <div class="dialog__nav--padding"></div>
 
-        <a class="dialog__nav-button" data-tab="basic" data-group="config">
+        <a class="dialog__nav-button" data-tab="basic" data-group="category-config">
             <span class="material-symbols-outlined">deployed_code</span> Basic
         </a>
-        <a class="dialog__nav-button" data-tab="stats" data-group="config">
+        <a class="dialog__nav-button" data-tab="stats" data-group="category-config">
             <span class="material-symbols-outlined">favorite</span> Stats
         </a>
-        <a class="dialog__nav-button" data-tab="details" data-group="config">
+        <a class="dialog__nav-button" data-tab="details" data-group="category-config">
             <span class="material-symbols-outlined">info</span> Details
         </a>
 
         <div class="dialog__nav--padding"></div>
     </div>
 
-    <section data-content class="dialog__content config">
+    <section data-content>
 
         <!-- basic -->
-        <div class="tab" data-tab="basic" data-group="config">
+        <div class="dialog__content config tab" data-tab="basic" data-group="category-config">
 
             <div class="config__group">
                 <label class="config__label">Name</label>
-                <input class="config__input config__input--caps" type="text" name="name" value="{{object.name}}">
+                <input class="config__input config__input--caps" type="text" name="name" value="{{object.name}}" placeholder="{{namePlaceholder}}">
             </div>
 
             <div class="config__group">
                 <label class="config__label">Color</label>
                 <div class="config__fields">
-                    {{colorPicker name="color" value=(object.color)}}
+                    <input class="config__input" data-color-picker type="text" name="color" value="{{object.color}}" placeholder="{{object.parent.system.color}}">
+                    <input class="config__input" data-color-picker type="color" value="{{displayColor}}">
+                    <button type="button" class="config__inner-button material-symbols-outlined" data-color-reset data-tooltip="Reset Color">refresh</button>
                 </div>
             </div>
 
         </div>
 
         <!-- stats -->
-        <div class="tab" data-tab="stats" data-group="config">
+        <div class="dialog__content config tab" data-tab="stats" data-group="category-config">
             Stats
         </div>
 
         <!-- details -->
-        <div class="tab" data-tab="details" data-group="config">
+        <div class="dialog__content config tab" data-tab="details" data-group="category-config">
             Details
         </div>
     </section>

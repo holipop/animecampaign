@@ -13,15 +13,25 @@
     white-space: nowrap;
     direction: ltr;
 
-    font-variation-settings: 'opsz' 48, 'GRAD' -25, 'wght' 350;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
 }
 
 .animecampaign.sheet .window-content {
     background-image: none;
     background: @bg-color;
     padding: 0;
+}
 
+.animecampaign.sheet .form {
     overflow-y: hidden;
+}
+.animecampaign.sheet .scrollable {
+    overflow-y: scroll;
+    height: calc(100% - 8rem);
 }
 
 .animecampaign.sheet.actor {
@@ -94,6 +104,12 @@
 
     .material-symbols-outlined {
         font-size: 1.25rem;
+
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 24;
     }
     &:hover {
         height: 2rem + .33rem;

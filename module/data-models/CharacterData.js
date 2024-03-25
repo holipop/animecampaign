@@ -40,7 +40,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             class: new fields.StringField(),
             word: new fields.StringField(),
             type: new fields.StringField(),
-            color: new fields.StringField({
+            color: new fields.ColorField({
                 required: true,
                 initial: CONFIG.AC.defaultColor
             }),

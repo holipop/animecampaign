@@ -67,13 +67,13 @@
         height: @dialog-nav-height;
         border: (1 * @rpx) solid transparent;
         border-bottom-color: mix(@bg-color, @txt-color, 75%);
-        transition: text-shadow .075s;
-        text-shadow: 0 0 0 fade(@txt-color, 75%);
+        transition: text-shadow .2s;
+        text-shadow: 0 0 0 0;
 
         font: bold .85rem "Libre Franklin";
     }
     &-button:hover {
-        text-shadow: (2 * @rpx) (2 * @rpx) 0 fade(@ac-color, 25%);
+        text-shadow: (2 * @rpx) (2 * @rpx) 0 fade(@ac-color, 33%);
     }
     &-button.active {
         border-color: mix(@bg-color, @txt-color, 75%);
@@ -95,6 +95,13 @@
 
     font: .85rem "Libre Franklin";
 
+    &.tab {
+        display: none;
+    }
+    &.tab.active {
+        display: flex;
+    }
+
     &__group {
         display: flex;
         flex-wrap: wrap;
@@ -105,11 +112,16 @@
 
         font-weight: bold;
     }
-    &__input, &__fields {
-        flex: 3;
-    }
     &__fields {
+        flex: 3.1;
         display: flex;
+        align-items: stretch;
+        column-gap: .15rem;
+
+        & > .config__input {
+            flex: 1;
+            width: 100%;
+        }
     }
     &__notes {
         width: 100%;
@@ -123,12 +135,45 @@
         border: none;
         border-top: (1 * @rpx) solid fade(@txt-color, 25%);
     }
+    &__inner-button.material-symbols-outlined {
+        margin: 0;
+        border-radius: 0;
+        border-width: 1 * @rpx;
+        border-color: fade(@txt-color, 50%);
+        border-style: solid;
+        width: min-content;
+        text-shadow: none;
+        box-shadow: none;
+        transition: background .2s;
+        
+        font-size: 1.33rem;
+        background: transparent;
+
+        &:disabled {
+            pointer-events: none;
+            border: (1 * @rpx) solid fade(@txt-color, 15%);
+
+            &:hover {
+                background: transparent;
+            }
+        }
+        &:hover {
+            background: fade(@txt-color, 10%);
+        }
+        &:focus {
+            box-shadow: none;
+            outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+        }
+    }
 }
 
 .animecampaign.dialog .config .config__input {
+    flex: 3;
     border-radius: 0;
     background: fade(@txt-color, 5%);
     border-color: fade(@txt-color, 50%);
+
+    font-size: .85rem;
 
     &::placeholder {
         opacity: .66;
@@ -136,6 +181,9 @@
     &:focus {
         box-shadow: none;
         outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+    }
+    &:disabled {
+        border: (1 * @rpx) solid fade(@txt-color, 15%);
     }
 
     &--caps {

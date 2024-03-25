@@ -216,6 +216,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
         const config = new CategoryConfig({
             ...category,
+            index,
             parent: this.object
         }, {
             title: "Edit Category"

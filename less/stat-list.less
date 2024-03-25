@@ -153,7 +153,8 @@
         #AC.TinyFont();
     }
     &__color {
-        position: absolute;
+        position: relative;
+        height: .75rem;
         padding: .1rem .2rem;
 
         &--red      { color: @red-stat; }
@@ -164,6 +165,10 @@
         &--orange   { color: @orange-stat; }
         &--purple   { color: @purple-stat; }
         &--grey     { color: @grey-stat; }
+
+        &--lining {
+            position: absolute;
+        }
     }
     &__input-list {
         display: flex;
