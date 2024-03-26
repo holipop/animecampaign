@@ -115,7 +115,7 @@
     &__fields {
         flex: 3.1;
         display: flex;
-        align-items: stretch;
+        align-items: center;
         column-gap: .15rem;
 
         & > .config__input {
@@ -134,6 +134,12 @@
         width: 100%;
         border: none;
         border-top: (1 * @rpx) solid fade(@txt-color, 25%);
+    }
+    &__inner-label {
+        margin: .2rem;
+
+        font-size: .7rem;
+        color: mix(@bg-color, @txt-color, 20%);
     }
     &__inner-button.material-symbols-outlined {
         margin: 0;
@@ -159,6 +165,9 @@
         }
         &:hover {
             background: fade(@txt-color, 10%);
+        }
+        &:hover {
+            background: fade(@txt-color, 50%);
         }
         &:focus {
             box-shadow: none;

@@ -50,6 +50,10 @@ AC.displays = {
     resource: "AC.LABEL.Resource",
     label: "AC.LABEL.Label",
 }
+AC.textEditors = {
+    markdown: "AC.LABEL.Markdown",
+    prosemirror: "AC.LABEL.ProseMirror",
+}
 
 AC.defaultCategories = [
     {

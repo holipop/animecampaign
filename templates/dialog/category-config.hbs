@@ -46,12 +46,22 @@
 
         <!-- stats -->
         <div class="dialog__content config tab" data-tab="stats" data-group="category-config">
-            Stats
+
+            <p class="config__notes">
+                Stats set here will be assigned to features created within this category, as well as being visible on the character sheet.
+            </p>
+
         </div>
 
         <!-- details -->
         <div class="dialog__content config tab" data-tab="details" data-group="category-config">
-            Details
+
+            <p class="config__notes">
+                Details set here will be assigned to features created within this category.
+            </p>
+            
+            {{> "feature.details"}}
+
         </div>
     </section>
 

@@ -20,6 +20,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             template: 'systems/animecampaign/templates/character/character-sheet.hbs',
             dragDrop: [{ dragSelector: "[data-drag]", dropSelector: '[data-drop]' }],
             tabs: [{ navSelector: "[data-nav]", contentSelector: "[data-content]" }],
+            scrollY: [".scrollable"],
         });
 
         return options;
@@ -214,11 +215,12 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
         const index = $(event.target).closest('[data-category]').data("category")
         const category = this.object.system.categories[index];
 
-        const config = new CategoryConfig({
+        const config = new CategoryConfig(Object.assign({
             ...category,
             index,
+            features: category.features,
             parent: this.object
-        }, {
+        }), {
             title: "Edit Category"
         })
         config.render(true)

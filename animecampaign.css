@@ -334,7 +334,7 @@
 .animecampaign.dialog .config__fields {
   flex: 3.1;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   column-gap: 0.15rem;
 }
 .animecampaign.dialog .config__fields > .config__input {
@@ -351,6 +351,11 @@
   width: 100%;
   border: none;
   border-top: 0.0625rem solid rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog .config__inner-label {
+  margin: 0.2rem;
+  font-size: 0.7rem;
+  color: #4a4947;
 }
 .animecampaign.dialog .config__inner-button.material-symbols-outlined {
   margin: 0;
@@ -374,6 +379,9 @@
 }
 .animecampaign.dialog .config__inner-button.material-symbols-outlined:hover {
   background: rgba(31, 30, 30, 0.1);
+}
+.animecampaign.dialog .config__inner-button.material-symbols-outlined:hover {
+  background: rgba(31, 30, 30, 0.5);
 }
 .animecampaign.dialog .config__inner-button.material-symbols-outlined:focus {
   box-shadow: none;

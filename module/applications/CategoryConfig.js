@@ -107,9 +107,7 @@ export default class CategoryConfig extends FormApplication {
 
         const categories = this.parent.system.categories
 
-        if (data.name === "") {
-            throw ui.notifications.error(game.i18n.localize("AC.NOTIFY.Character.BlankName"))
-        }
+        data.name = data.name.toLowerCase();
 
         const nameTaken = categories
             .filter(cat => cat.name !== this.object.name)
@@ -120,10 +118,18 @@ export default class CategoryConfig extends FormApplication {
                 game.i18n.format("AC.NOTIFY.CategoryNameTaken", { name: data.name.toUpperCase() })
             );
         }
+        if (data.name === "") {
+            throw ui.notifications.error(game.i18n.localize("AC.NOTIFY.Character.BlankName"))
+        }
 
-        data.name = data.name.toLowerCase();
+        // if name changed, update the category of the items under it
+        if (data.name !== this.object.name) {
+            const updates = this.object.features.map(item => { 
+                return { _id: item._id, 'system.category': data.name }
+            })
+            this.parent.updateEmbeddedDocuments("Item", updates)
+        }
 
-        console.log(List.set(categories, this.index, data))
         this.parent.update({ 'system.categories': List.set(categories, this.index, data) })
     }
 }
