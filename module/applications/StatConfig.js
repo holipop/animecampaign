@@ -21,7 +21,7 @@ export default class StatConfig extends FormApplication {
      * @returns {Object}
      */
     static get defaultOptions () {
-        const options = mergeObject(super.defaultOptions, {
+        const options = foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["animecampaign", "dialog", "config"],
             template: "systems/animecampaign/templates/dialog/stat-config.hbs",
             focus: true,

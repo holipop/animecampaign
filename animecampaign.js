@@ -108,7 +108,7 @@ Hooks.on('ready', () => {
 // (Copied from DnD5e)
 Hooks.on("canvasInit", gameCanvas => {
     gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
-    SquareGrid.prototype.measureDistances = Utils.measureDistances;
+    foundry.grid.SquareGrid.prototype.measureDistances = Utils.measureDistances;
 });
 
 Hooks.on('renderChatMessage', ChatMessage.activateListeners)

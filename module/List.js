@@ -68,7 +68,7 @@ export function set (arr, query, changes) {
     if (arr[index] === undefined) return arr;
 
     const update = [...arr]
-    update[index] = Utils.plainObject(mergeObject(update[index], changes));
+    update[index] = Utils.plainObject(foundry.utils.mergeObject(update[index], changes));
     return update;
 }
 

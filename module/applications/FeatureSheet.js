@@ -9,7 +9,7 @@ export default class FeatureSheet extends SheetMixin(ActorSheet) {
      * @returns {Object}
      */
     static get defaultOptions () {
-        const options = mergeObject(super.defaultOptions, {
+        const options = foundry.utils.mergeObject(super.defaultOptions, {
             width: 550,
             height: 500,
             classes: ["animecampaign", "sheet", "item"],

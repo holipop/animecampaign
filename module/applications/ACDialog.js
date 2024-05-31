@@ -7,7 +7,7 @@ export default class ACDialog extends Dialog {
      * @returns {Object}
      */
     static get defaultOptions () {
-        const options = mergeObject(super.defaultOptions, {
+        const options = foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["animecampaign", "dialog"],
             template: "systems/animecampaign/templates/dialog/ac-dialog.hbs"
         });

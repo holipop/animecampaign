@@ -15,16 +15,22 @@ export default function SheetMixin (Base) {
          * @returns {*}
          */
         get palette () {
-            const primary = this.object.system.color
-            const [h, s, l] = Utils.hexToHSL(primary)
+            const color = this.object.system.color
+            const [h, s, l] = color.hsl
 
-            const contrast = (Utils.contrastHexLuma(primary) == "white")
+            let [red, green, blue] = color.rgb
+            red *= 0.2126;
+            green *= 0.7152;
+            blue *= 0.0722;
+        
+            const luma = (red + green + blue) / 1;
+            const contrast = (luma <= .5) 
                 ? CONFIG.AC.contrastColors.white
-                : CONFIG.AC.contrastColors.black
+                : CONFIG.AC.contrastColors.black;
 
-            return { 
-                primary, 
-                secondary: Utils.HSLToHex(h, s * .66, 66),
+            return {
+                primary: color.css,
+                secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
                 contrast,
             }
         }
