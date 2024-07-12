@@ -22,7 +22,7 @@ export default class CategoryConfig extends FormApplication {
      * @returns {Object}
      */
     static get defaultOptions () {
-        const options = mergeObject(super.defaultOptions, {
+        const options = foundry.utils.mergeObject(super.defaultOptions, {
             width: 450,
             height: "auto",
             classes: ["sheet", "category-config"],

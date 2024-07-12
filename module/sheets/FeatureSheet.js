@@ -11,7 +11,7 @@ export default class FeatureSheet extends SheetMixin(ItemSheet) {
      * @returns {Object}
      */
     static get defaultOptions () {
-        const options = mergeObject(super.defaultOptions, {
+        const options = foundry.utils.mergeObject(super.defaultOptions, {
             width: 550,
             height: 500,
             classes: ["animecampaign", "sheet", "item"],
@@ -124,7 +124,7 @@ export default class FeatureSheet extends SheetMixin(ItemSheet) {
             if (data.type != str) return;
 
             // Given the string, retrieve the list
-            const list = getProperty(sheet.object.system, `${str}s`);
+            const list = foundry.utils.getProperty(sheet.object.system, `${str}s`);
             if (list.length == 1) return;
 
             const dropTarget = $(event.target).closest(`[data-${str}]`);
@@ -339,7 +339,7 @@ export default class FeatureSheet extends SheetMixin(ItemSheet) {
         // Insures a list, making sure all of its values are kept on update.
         const insure = key => {
             const list = List.toObject(this.object.system[key]);
-            const update = mergeObject(list, data.system[key]);
+            const update = foundry.utils.mergeObject(list, data.system[key]);
 
             data.system[key] = update;
         }

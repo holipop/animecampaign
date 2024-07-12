@@ -20,7 +20,8 @@ export function register () {
 
     // Diagonal Movement Rule
     // (Taken directly from DnD5e)
-    game.settings.register('animecampaign', "diagonalMovement", {
+    // ! Is now a core setting in v12
+    /* game.settings.register('animecampaign', "diagonalMovement", {
         name: "AC.SETTINGS.DiagonalMovement.Name",
         hint:  "AC.SETTINGS.DiagonalMovement.Hint",
         scope: "world",
@@ -33,7 +34,7 @@ export function register () {
             "EUCL": "AC.SETTINGS.DiagonalMovement.EUCL",
         },
         onChange: value => canvas.grid.diagonalRule = value
-    });
+    }); */
 
     // Token Bar Clamp
     game.settings.register('animecampaign', 'tokenBarClamp', {

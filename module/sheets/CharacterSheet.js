@@ -12,7 +12,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @returns {Object}
      */
     static get defaultOptions () {
-        const options = mergeObject(super.defaultOptions, {
+        const options = foundry.utils.mergeObject(super.defaultOptions, {
             width: 650,
             height: 550,
             classes: ["animecampaign", "sheet", "actor"],
@@ -48,7 +48,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
             // Prepared Data
             statList: this.usedStats,
-            emptyStats: isEmpty(this.usedStats),
+            emptyStats: foundry.utils.isEmpty(this.usedStats),
             categories: this.categoriesObject,
             categorizedFeatures: this.categorizedFeatures,
             categorizedTrackers: this.categorizedTrackers,
