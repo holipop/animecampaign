@@ -334,7 +334,7 @@ export default class FeatureSheet extends SheetMixin(ItemSheet) {
      * @param {Object} data 
      */
     _updateObject (event, data) {
-        data = expandObject(data);
+        data = foundry.utils.expandObject(data);
 
         // Insures a list, making sure all of its values are kept on update.
         const insure = key => {

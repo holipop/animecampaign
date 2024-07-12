@@ -930,7 +930,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @param {Object} data 
      */
     _updateObject (event, data) {
-        data = expandObject(data);
+        data = foundry.utils.expandObject(data);
 
         // Ensure no data is lost for color stats.
         const statUpdate = Utils.uniformObject(CONFIG.AC.colorKeys, null);
