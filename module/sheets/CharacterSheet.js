@@ -417,6 +417,36 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             return $(element).closest('[data-category]').data('category') + "";
         }
 
+        // Collapses a category.
+        kit.find('[data-category-collapse]')
+            .each((index, element) => {
+                const key = $(element).data("category-collapse")
+                const target = html.find(`[data-category-collapse-target="${key}"]`)
+                const chevron = $(element).find('i.fas')
+                const collapsedCategories = sheet.object.getFlag('animecampaign', "collapsedCategories")
+                    ?? []
+
+                if (collapsedCategories.includes(key)) {
+                    target.hide()
+                    chevron.removeClass('fa-chevron-down');
+                    chevron.addClass('fa-chevron-right');
+                }
+            })
+            .on("click", event => {
+                const anchor = $(event.target).closest('[data-category-collapse]')
+                const key = anchor.data("category-collapse")
+                let collapsedCategories = sheet.object.getFlag('animecampaign', "collapsedCategories")
+                    ?? []
+
+                if (collapsedCategories.includes(key)) {
+                    collapsedCategories = collapsedCategories.filter(e => e != key)
+                } else {
+                    collapsedCategories.push(key)
+                }
+
+                sheet.object.setFlag('animecampaign', "collapsedCategories", collapsedCategories)
+            })
+
         /** Sets the first letter of category names to be a little bigger.
          */
         void function firstLetter () {
