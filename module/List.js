@@ -26,8 +26,8 @@ export function remove (arr, query) {
     const index = (typeof query === 'number')
         ? query
         : arr.findIndex(entry => {
-            const filteredEntry = filterObject(entry, query);
-            return objectsEqual(filteredEntry, query);
+            const filteredEntry = foundry.utils.filterObject(entry, query);
+            return foundry.utils.objectsEqual(filteredEntry, query);
         });
 
     if (arr[index] === undefined) return arr;
@@ -43,8 +43,8 @@ export function get (arr, query) {
     const obj = (typeof query === 'number')
         ? arr[query]
         : arr.find(entry => {
-            const filteredEntry = filterObject(entry, query);
-            return objectsEqual(filteredEntry, query);
+            const filteredEntry = foundry.utils.filterObject(entry, query);
+            return foundry.utils.objectsEqual(filteredEntry, query);
         });
 
     if (obj === undefined) return;
@@ -61,14 +61,14 @@ export function set (arr, query, changes) {
     const index = (typeof query === 'number')
         ? query
         : arr.findIndex(entry => {
-            const filteredEntry = filterObject(entry, query);
-            return objectsEqual(filteredEntry, query);
+            const filteredEntry = foundry.utils.filterObject(entry, query);
+            return foundry.utils.objectsEqual(filteredEntry, query);
         });
 
     if (arr[index] === undefined) return arr;
 
     const update = [...arr]
-    update[index] = Utils.plainObject(mergeObject(update[index], changes));
+    update[index] = Utils.plainObject(foundry.utils.mergeObject(update[index], changes));
     return update;
 }
 
@@ -81,8 +81,8 @@ export function has (arr, query) {
     const index = (typeof query === 'number')
         ? query
         : arr.findIndex(entry => {
-            const filteredEntry = filterObject(entry, query);
-            return objectsEqual(filteredEntry, query);
+            const filteredEntry = foundry.utils.filterObject(entry, query);
+            return foundry.utils.objectsEqual(filteredEntry, query);
         });
 
     return (arr[index] !== undefined);
@@ -95,8 +95,8 @@ export function has (arr, query) {
  */
 export function index (arr, query) {
     return arr.findIndex(entry => {
-        const filteredEntry = filterObject(entry, query);
-        return objectsEqual(filteredEntry, query);
+        const filteredEntry = foundry.utils.filterObject(entry, query);
+        return foundry.utils.objectsEqual(filteredEntry, query);
     });
 }
 

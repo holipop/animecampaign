@@ -12,7 +12,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @returns {Object}
      */
     static get defaultOptions () {
-        const options = mergeObject(super.defaultOptions, {
+        const options = foundry.utils.mergeObject(super.defaultOptions, {
             width: 650,
             height: 550,
             classes: ["animecampaign", "sheet", "actor"],
@@ -48,7 +48,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
 
             // Prepared Data
             statList: this.usedStats,
-            emptyStats: isEmpty(this.usedStats),
+            emptyStats: foundry.utils.isEmpty(this.usedStats),
             categories: this.categoriesObject,
             categorizedFeatures: this.categorizedFeatures,
             categorizedTrackers: this.categorizedTrackers,
@@ -416,6 +416,36 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
             // the + "" is to ensure the data-attr gets converted into a string.
             return $(element).closest('[data-category]').data('category') + "";
         }
+
+        // Collapses a category.
+        kit.find('[data-category-collapse]')
+            .each((index, element) => {
+                const key = $(element).data("category-collapse")
+                const target = html.find(`[data-category-collapse-target="${key}"]`)
+                const chevron = $(element).find('i.fas')
+                const collapsedCategories = sheet.object.getFlag('animecampaign', "collapsedCategories")
+                    ?? []
+
+                if (collapsedCategories.includes(key)) {
+                    target.hide()
+                    chevron.removeClass('fa-chevron-down');
+                    chevron.addClass('fa-chevron-right');
+                }
+            })
+            .on("click", event => {
+                const anchor = $(event.target).closest('[data-category-collapse]')
+                const key = anchor.data("category-collapse")
+                let collapsedCategories = sheet.object.getFlag('animecampaign', "collapsedCategories")
+                    ?? []
+
+                if (collapsedCategories.includes(key)) {
+                    collapsedCategories = collapsedCategories.filter(e => e != key)
+                } else {
+                    collapsedCategories.push(key)
+                }
+
+                sheet.object.setFlag('animecampaign', "collapsedCategories", collapsedCategories)
+            })
 
         /** Sets the first letter of category names to be a little bigger.
          */
@@ -900,7 +930,7 @@ export default class CharacterSheet extends SheetMixin(ActorSheet) {
      * @param {Object} data 
      */
     _updateObject (event, data) {
-        data = expandObject(data);
+        data = foundry.utils.expandObject(data);
 
         // Ensure no data is lost for color stats.
         const statUpdate = Utils.uniformObject(CONFIG.AC.colorKeys, null);

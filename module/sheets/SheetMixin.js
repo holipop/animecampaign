@@ -126,7 +126,7 @@ export default function SheetMixin (Base) {
                     } 
                     
                     const { collapsed } = ((data)
-                        ? getProperty(sheet.object.system, key)
+                        ? foundry.utils.getProperty(sheet.object.system, key)
                         : sheet.object.getFlag('animecampaign', key)) 
                         ?? { collapsed: hide }
 
@@ -154,7 +154,7 @@ export default function SheetMixin (Base) {
                     }
 
                     const { collapsed } = ((data)
-                        ? getProperty(sheet.object.system, key)
+                        ? foundry.utils.getProperty(sheet.object.system, key)
                         : sheet.object.getFlag('animecampaign', key)) 
                         ?? { collapsed: hide }
                     let update = { collapsed: !collapsed };
@@ -164,7 +164,7 @@ export default function SheetMixin (Base) {
                         if (isListEntry) {
                             const dot = key.indexOf('.');
                             const listName = key.slice(0, dot);
-                            const list = getProperty(sheet.object.system, listName);
+                            const list = foundry.utils.getProperty(sheet.object.system, listName);
                             const index = Number(key.slice(dot + 1));
                             update = List.set(list, index, update);
 
