@@ -112,3 +112,5 @@ Hooks.on('ready', () => {
 
 Hooks.on('renderChatMessage', ChatMessage.activateListeners)
 Hooks.on('hotbarDrop', Macro.createMacro)
+
+// test?
