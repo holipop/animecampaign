@@ -105,10 +105,14 @@ Hooks.on('ready', () => {
 })
 
 // (Copied from DnD5e)
-/* Hooks.on("canvasInit", gameCanvas => {
-    gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
-    foundyr.grid.SquareGrid.prototype.measureDistances = Utils.measureDistances;
-}); */
+Hooks.on("canvasInit", gameCanvas => {
+    if (!foundry.utils.isNewerVersion(game.version, 12)) {
+        gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
+        foundyr.grid.SquareGrid.prototype.measureDistances = Utils.measureDistances;
+    }
+});
 
 Hooks.on('renderChatMessage', ChatMessage.activateListeners)
 Hooks.on('hotbarDrop', Macro.createMacro)
+
+// test?
