@@ -8,7 +8,7 @@
             <header data-match-category="background-color">
 
                 <!-- Collapse -->
-                <a class="control collapse" data-collapse="categories.{{category}}" data-tooltip="AC.TOOLTIP.Category.Collapse" data-contrast-category>
+                <a class="control collapse" data-category-collapse="{{category}}" data-tooltip="AC.TOOLTIP.Category.Collapse" data-contrast-category>
                     <i class="fas fa-chevron-down"></i>
                 </a>
                 
@@ -91,7 +91,7 @@
             </header>
             
             <!-- Features -->
-            <ol class="feature-list" data-collapse-target="categories.{{category}}">
+            <ol class="feature-list" data-category-collapse-target="{{category}}">
                 {{#each features as |feature index|}}
 
                     {{> "feature" feature}}
