@@ -9,10 +9,10 @@
             "flags": {}
         }
     ],
-    "version": "v1.1",
+    "version": "v2.0",
     "compatibility": {
-        "minimum": "11.302",
-        "verified": "11.315"
+        "minimum": "11.315",
+        "verified": "12.324"
     },
     "esmodules": [
         "animecampaign.js"
@@ -48,16 +48,16 @@
         "units": "ft"
     },
     "initiative": "1d20",
-    "manifest": "https://github.com/holipop/animecampaign/releases/download/1.1/system.json",
-    "download": "https://github.com/holipop/animecampaign/releases/download/1.1/animecampaign.zip",
+    "manifest": "https://github.com/holipop/animecampaign/releases/download/2.0/system.json",
+    "download": "https://github.com/holipop/animecampaign/releases/download/2.0/animecampaign.zip",
     "primaryTokenAttribute": "stamina",
     "secondaryTokenAttribute": "proficiency",
     "documentTypes": {
         "Actor": {
-            "character": {}
+            "Character": {}
         },
         "Item": {
-            "feature": {}
+            "Feature": {}
         }
     }
 }

@@ -24,6 +24,10 @@ import FeatureSheet from './module/applications/FeatureSheet.js'
 import ACDialog from './module/applications/ACDialog.js'
 import StatConfig from './module/applications/StatConfig.js'
 
+import CharacterSheetV2 from './module/applications/CharacterSheetV2.js'
+
+import ButtonComponent from './module/components/ButtonComponent.js'
+import TextSelectComponent from './module/components/TextSelectComponent.js'
 
 globalThis.AC = {
     Actor: ACActor,
@@ -56,7 +60,7 @@ Hooks.once('init', () => {
     CONFIG.Item.dataModels["Feature"] = FeatureData;
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("animecampaign", CharacterSheet, { 
+    Actors.registerSheet("animecampaign", CharacterSheetV2, { 
         types: ["Character"],
         makeDefault: true 
     });
@@ -80,6 +84,9 @@ Hooks.once('init', () => {
         "feature.details": "systems/animecampaign/templates/feature/details.hbs",
     }
     loadTemplates(partials);
+
+    customElements.define("ac-button", ButtonComponent)
+    customElements.define("ac-text-select", TextSelectComponent)
 })
 
 Hooks.on('ready', () => {
