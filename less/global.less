@@ -34,9 +34,8 @@
     height: calc(100% - 8rem);
 }
 
-.animecampaign.sheet.actor {
+.animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
     min-width: @character-sheet-width;
-    max-width: @character-sheet-width;
     min-height: @character-sheet-height;
 }
 
@@ -82,6 +81,11 @@
     &:hover, &:focus {
         text-shadow: (1.5 * @rpx) (1.5 * @rpx) fade(@ac-color, 50%);
     }
+}
+
+.animecampaign.sheet input:focus {
+    outline: 2px solid fade(@ac-color, 50%);
+    transition: .05s
 }
 
 .animecampaign .button {

@@ -64,6 +64,9 @@ Hooks.once('init', () => {
         types: ["Character"],
         makeDefault: true 
     });
+    Actors.registerSheet("animecampaign", CharacterSheet, { 
+        types: ["Character"]
+    });
 
     /* Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", FeatureSheet, { 

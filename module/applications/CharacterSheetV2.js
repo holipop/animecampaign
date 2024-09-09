@@ -1,33 +1,40 @@
+import SheetMixinV2 from "./SheetMixinV2.js"
+
 const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
 
 /**
  * The application for Characters.
  */
-export default class CharacterSheetV2 extends HandlebarsApplicationMixin(ActorSheetV2) {
+export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMixinV2(ActorSheetV2)) {
 
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "actor", "sheet"],
         position: {
-            width: 660,
-            height: 550
+            width: 650,
+            height: 550,
         },
         window: {
-            title: "Test"
+            resizable: true,
         },
         actions: {
-            myAction: CharacterSheetV2.myAction,
+            //myAction: CharacterSheetV2.myAction,
+            invokeColorPicker: super.invokeColorPicker
+        },
+        form: {
+            submitOnChange: true,
         }
     }
 
     static PARTS = {
-        summary: {
-            template: "systems/animecampaign/templates/character/character-sheet-v2.hbs"
-        }
+        summary:    { template: "systems/animecampaign/templates/character-v2/summary.hbs" },
+        /* stats:      { template: "systems/animecampaign/templates/character-v2/stats.hbs" },
+        resources:  { template: "systems/animecampaign/templates/character-v2/resources.hbs" },
+        nav:        { template: "systems/animecampaign/templates/character-v2/nav.hbs" }, */
     }
 
     get title () {
-        return `${game.i18n.localize("AC.Character")}: ${this.document.name}`
+        return `${this.document.name}`
     }
 
     async _prepareContext () {
@@ -35,7 +42,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(ActorSh
             ...super._prepareContext(),
             ...this.document,
             config: CONFIG.AC,
-            //palette: this.palette,
+            palette: this.palette,
             stats: this.document.system.colorStats, 
 
             /* svg: {
@@ -43,14 +50,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(ActorSh
                 text: this.svgText,
             }, */
         }
-    }
-
-    /** 
-     * @param {PointerEvent} event 
-     * @param {HTMLElement} target 
-     */
-    static myAction (event, target) {
-        // h
     }
 
 }

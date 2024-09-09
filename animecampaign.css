@@ -159,9 +159,8 @@
   overflow-y: scroll;
   height: calc(100% - 8rem);
 }
-.animecampaign.sheet.actor {
+.animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
   min-width: 650px;
-  max-width: 650px;
   min-height: 550px;
 }
 .animecampaign.sheet .background {
@@ -199,6 +198,10 @@
 .animecampaign.sheet .input--shadow-out:hover,
 .animecampaign.sheet .input--shadow-out:focus {
   text-shadow: 0.09375rem 0.09375rem rgba(205, 50, 50, 0.5);
+}
+.animecampaign.sheet input:focus {
+  outline: 2px solid rgba(205, 50, 50, 0.5);
+  transition: 0.05s;
 }
 .animecampaign .button {
   border: none;
@@ -409,12 +412,10 @@
 }
 .animecampaign.sheet .summary {
   position: relative;
-  display: grid;
+  display: flex;
   height: 8rem;
-  width: 100%;
-  grid-template-columns: 4fr 10fr 1.66fr;
-  grid-template-rows: 1fr;
-  z-index: 5;
+  width: 85%;
+  margin: 0 auto;
 }
 .animecampaign.sheet .summary__img {
   border: none;
@@ -459,6 +460,7 @@
   opacity: 0.75;
 }
 .animecampaign.sheet .summary__info {
+  flex: 1;
   display: grid;
   align-self: end;
 }
@@ -503,17 +505,17 @@
   height: 1.33rem;
 }
 .animecampaign.sheet .summary__type {
+  width: unset;
   font: 600 0.8rem "Libre Franklin";
   padding: 0;
   padding-left: 0.2rem;
   cursor: pointer;
-  transition: 0.25s;
 }
 .animecampaign.sheet .summary__word {
-  font: bold 1rem "Philosopher";
   border: 0.0625rem solid transparent;
   border-radius: 0.125rem;
   padding: 0 0.25rem;
+  font: bold 1rem "Philosopher";
   background-color: #f4f3ed;
   color: #1f1e1e;
 }
@@ -521,7 +523,6 @@
   position: relative;
   width: 3rem;
   justify-self: end;
-  z-index: 4;
 }
 .animecampaign.sheet .summary .summary__info .label-list > * {
   font: 0.5rem "Rubik Mono One";
@@ -534,23 +535,27 @@
   top: -0.66rem;
 }
 .animecampaign.sheet .summary .summary-control {
-  position: relative;
-  width: 3.25rem;
-  padding-left: 0.25rem;
-}
-.animecampaign.sheet .summary .summary-control__label {
-  font: 0.5rem "Rubik Mono One";
-  text-align: end;
-}
-.animecampaign.sheet .summary .summary-control__button-list {
+  /* position: relative;
+    width: 3.25rem; */
+  padding: 1rem 0.25rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   row-gap: 0.25rem;
-  padding: 0.25rem;
-  border: 0.0625rem solid currentColor;
-  border-left: 0;
-  border-bottom: 0;
+  /* &__label {
+        #AC.TinyFont();
+        
+        text-align: end;
+    }
+    &__button-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        row-gap: .25rem;
+        padding: .25rem;
+        border: (1 * @rpx) solid currentColor;
+        border-left: 0; 
+        border-bottom: 0; 
+    } */
 }
 .animecampaign.sheet .summary .summary-control__hidden-color {
   position: absolute;
@@ -567,6 +572,7 @@
   height: 1.5rem;
   width: 1.5rem;
   border: 0.0625rem solid currentColor;
+  border-radius: 100%;
   padding: 0;
   background-color: #f4f3ed;
   transition: 0.075s;
@@ -576,8 +582,7 @@
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
 .animecampaign.sheet .summary .summary-control__button:hover {
-  width: 1.83rem;
-  border-right-width: 0.33rem;
+  box-shadow: 0 0 0 0.0625rem currentColor;
 }
 .animecampaign.sheet .summary .summary-control__button:active {
   background-color: currentColor;

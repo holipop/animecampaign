@@ -2,13 +2,11 @@
 
 .animecampaign.sheet .summary {
     position: relative;
-    display: grid;
+    display: flex;
     height: 8rem;
-    width: 100%;
-    grid-template-columns: 4fr 10fr 1.66fr;
-    grid-template-rows: 1fr;
-    z-index: 5;
-    
+    width: 85%;
+    margin: 0 auto;
+
     &__img {
         #AC.InputSkinning();
         
@@ -54,6 +52,7 @@
         }
     }
     &__info {
+        flex: 1;
         display: grid;
         align-self: end;
     }
@@ -94,18 +93,19 @@
         }
     }
     &__type {
+        width: unset;
+
         font: 600 .8rem "Libre Franklin";
         padding: 0;
         padding-left: .2rem;
         cursor: pointer;
-        transition: .25s;
     }
     &__word {
-        font: bold 1rem "Philosopher";
         border: 1 * @rpx solid transparent;
         border-radius: 2 * @rpx;
         padding: 0 .25rem;
-
+        
+        font: bold 1rem "Philosopher";
         background-color: @bg-color;
         color: @txt-color;
     }
@@ -115,7 +115,6 @@
     position: relative;
     width: 3rem;
     justify-self: end;
-    z-index: 4;
 
     > * {
         #AC.TinyFont();
@@ -131,11 +130,14 @@
 }
 
 .animecampaign.sheet .summary .summary-control {
-    position: relative;
-    width: 3.25rem;
-    padding-left: .25rem;
+    /* position: relative;
+    width: 3.25rem; */
+    padding: 1rem .25rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: .25rem;
     
-    &__label {
+    /* &__label {
         #AC.TinyFont();
         
         text-align: end;
@@ -149,7 +151,7 @@
         border: (1 * @rpx) solid currentColor;
         border-left: 0; 
         border-bottom: 0; 
-    }
+    } */
     &__hidden-color {
         position: absolute;
         opacity: 0;
@@ -163,6 +165,7 @@
         height: 1.5rem;
         width: 1.5rem;
         border: (1 * @rpx) solid currentColor;
+        border-radius: 100%;
         padding: 0;
         
         background-color: @bg-color;
@@ -178,8 +181,7 @@
                 'opsz' 24;
         }
         &:hover {
-            width: 1.5rem + .33rem;
-            border-right-width: .33rem;
+            box-shadow: 0 0 0 (1 * @rpx) currentColor;
         }
         &:active {
             background-color: currentColor;
