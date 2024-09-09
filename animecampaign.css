@@ -199,9 +199,38 @@
 .animecampaign.sheet .input--shadow-out:focus {
   text-shadow: 0.09375rem 0.09375rem rgba(205, 50, 50, 0.5);
 }
-.animecampaign.sheet input:focus {
+.animecampaign.sheet input:focus,
+.animecampaign.sheet select:focus {
   outline: 2px solid rgba(205, 50, 50, 0.5);
   transition: 0.05s;
+}
+.animecampaign .ac-button {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 0.0625rem solid currentColor;
+  border-radius: 100%;
+  padding: 0;
+  background-color: #f4f3ed;
+  transition: 0.075s;
+}
+.animecampaign .ac-button > .material-symbols-outlined {
+  font-size: 1.25rem;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+.animecampaign .ac-button:hover {
+  box-shadow: 0 0 0 0.0625rem currentColor;
+}
+.animecampaign .ac-button:active {
+  background-color: currentColor;
+}
+.animecampaign .ac-button:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
 }
 .animecampaign .button {
   border: none;
@@ -488,6 +517,7 @@
   padding: 0;
   padding-left: 1.25rem;
   margin-bottom: 0.25rem;
+  border-radius: 0.125rem;
   font: italic bold 0.8rem "Libre Franklin";
   color: #1f1e1e;
 }
@@ -506,6 +536,7 @@
 }
 .animecampaign.sheet .summary__type {
   width: unset;
+  border-radius: 0.125rem;
   font: 600 0.8rem "Libre Franklin";
   padding: 0;
   padding-left: 0.2rem;
@@ -537,7 +568,8 @@
 .animecampaign.sheet .summary .summary-control {
   /* position: relative;
     width: 3.25rem; */
-  padding: 1rem 0.25rem;
+  padding-left: 0.25rem;
+  padding-top: 1.25rem;
   display: flex;
   flex-direction: column;
   row-gap: 0.25rem;

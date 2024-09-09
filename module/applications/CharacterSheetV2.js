@@ -19,7 +19,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         },
         actions: {
             //myAction: CharacterSheetV2.myAction,
-            invokeColorPicker: super.invokeColorPicker
+            invokeColorPicker: super.invokeColorPicker,
+            editImage: super.editImage,
         },
         form: {
             submitOnChange: true,

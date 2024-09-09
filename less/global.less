@@ -83,9 +83,43 @@
     }
 }
 
-.animecampaign.sheet input:focus {
+.animecampaign.sheet input:focus, .animecampaign.sheet select:focus {
     outline: 2px solid fade(@ac-color, 50%);
     transition: .05s
+}
+
+.animecampaign .ac-button {
+    #AC.InputSkinning();
+    
+    display: grid;
+    place-items: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 100%;
+    padding: 0;
+    
+    background-color: @bg-color;
+    transition: .075s;
+
+    > .material-symbols-outlined {
+        font-size: 1.25rem;
+
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 24;
+    }
+    &:hover {
+        box-shadow: 0 0 0 (1 * @rpx) currentColor;
+    }
+    &:active {
+        background-color: currentColor;
+    }
+    &:focus {
+        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+    }
 }
 
 .animecampaign .button {

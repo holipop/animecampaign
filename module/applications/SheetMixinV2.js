@@ -12,8 +12,18 @@ export default function SheetMixinV2 (Base) {
          * Manually invokes the color picker.
          */
         static invokeColorPicker (event, target) {
-            console.log("click!")
             this.element.querySelector('[data-color-button="target"]').click()
+        }
+
+        static editImage (event, target) {
+            const fp = new FilePicker({
+                current: this.document.img,
+                type: "image",
+                callback: (src) => {
+                    this.document.update({ "img": src })
+                }
+            })
+            fp.browse()
         }
 
         /** The set of colors derived from this document's color.
