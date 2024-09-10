@@ -3,7 +3,7 @@
     {{log this}}
 
     <div class="summary__img--wrapper">
-        <img class="summary__img" src="{{img}}" data-action="editImage" data-edit="img" data-color="{{palette.primary}}">
+        <img class="summary__img" src="{{img}}" data-action="onEditImage" data-edit="img" data-color="{{palette.primary}}">
         <div class="summary__img--edit">
             <span class="material-symbols-outlined">edit_square</span>
         </div>
@@ -46,7 +46,7 @@
         </div -->
 
         <input class="summary-control__hidden-color" type="color" name="system.color" value="{{system.color}}" data-color-button="target">
-        <button class="summary-control__button" type="button" data-action="invokeColorPicker" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color">
+        <button class="round-button" type="button" data-action="onInvokeColorPicker" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color">
             <span class="material-symbols-outlined">palette</span>
         </button>
 

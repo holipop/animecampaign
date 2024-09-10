@@ -10,12 +10,19 @@ export default function SheetMixinV2 (Base) {
 
         /**
          * Manually invokes the color picker.
+         * @param {PointerEvent} event
+         * @param {HTMLElement} target
          */
-        static invokeColorPicker (event, target) {
+        static onInvokeColorPicker (event, target) {
             this.element.querySelector('[data-color-button="target"]').click()
         }
 
-        static editImage (event, target) {
+        /**
+         * Invokes the file picker for editing images.
+         * @param {PointerEvent} event
+         * @param {HTMLElement} target
+         */
+        static onEditImage (event, target) {
             const fp = new FilePicker({
                 current: this.document.img,
                 type: "image",
@@ -24,6 +31,28 @@ export default function SheetMixinV2 (Base) {
                 }
             })
             fp.browse()
+        }
+
+        static onStatAdd (event, target) {
+            const [color] = Object
+            .entries(this.object.system._stats)
+            .find(([_, stat]) => stat === null) // If the value is null, get the key
+
+            const config = new StatConfig({ 
+                color,
+                parent: this.object
+            }, {
+                title: game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.object.name })
+            })
+            config.render(true)
+        }
+
+        static onStatEdit (event, target) {
+
+        }
+
+        static onStatDelete (event, target) {
+
         }
 
         /** The set of colors derived from this document's color.
@@ -70,26 +99,27 @@ export default function SheetMixinV2 (Base) {
             }
 
             // Resizes the height of a textarea dynamically as you type more.
-            const html = $(this.element)
-            html.find('textarea[data-resize]')
-                .each(function () {
-                    this.setAttribute("style", `height:0px;`) // ! don't know why, it only works with this + overriding min-height in css.
-                    this.setAttribute("style", `height:${this.scrollHeight}px;`)
-                })
-                .on("input", function () {
-                    const parentDiv = html.find('[data-scrollable]')
-                    const initScrollY = parentDiv.scrollTop()
+            const resizeableTextAreas = this.element.querySelectorAll("textarea[data-resize]")
+            for (const element of resizeableTextAreas) {
+                element.style.height = 0
+                element.style.height = element.scrollHeight + "px"
 
-                    this.style.height = 0
-                    this.style.height = this.scrollHeight + "px"
+                element.addEventListener("input", () => {
+                    // const parentDiv = html.find('[data-scrollable]')
+                    // const initScrollY = parentDiv.scrollTop()
 
-                    parentDiv.scrollTop(initScrollY)
+                    element.style.height = 0
+                    element.style.height = element.scrollHeight + "px"
+
+                    // parentDiv.scrollTop(initScrollY)
                 })
+            }
 
             // Submits the form whenever the enter key is pressed.
-            html.find('[data-enter]').each((_, element) => {
-                $(element).on('keypress', event => {
-                    const escape = $(element).data('enter')
+            const enterableElements = this.element.querySelectorAll("[data-enter]")
+            for (const element of enterableElements) {
+                element.addEventListener("keypress", event => {
+                    const escape = element.dataset.enter
 
                     if (event.code == 'Enter') {
                         if (escape == 'shift' && event.shiftKey) return
@@ -98,8 +128,7 @@ export default function SheetMixinV2 (Base) {
                         this.submit()
                     }
                 })
-            })
-
+            }
         }
     }
 

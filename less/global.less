@@ -83,12 +83,19 @@
     }
 }
 
-.animecampaign.sheet input:focus, .animecampaign.sheet select:focus {
+.animecampaign.sheet input,
+.animecampaign.sheet select,
+.animecampaign.sheet textarea {
+    border-radius: 2 * @rpx;
+}
+
+.animecampaign.sheet input:focus,
+.animecampaign.sheet select:focus {
     outline: 2px solid fade(@ac-color, 50%);
     transition: .05s
 }
 
-.animecampaign .ac-button {
+.animecampaign .round-button {
     #AC.InputSkinning();
     
     display: grid;
@@ -100,7 +107,7 @@
     padding: 0;
     
     background-color: @bg-color;
-    transition: .075s;
+    transition: .05s;
 
     > .material-symbols-outlined {
         font-size: 1.25rem;
@@ -113,12 +120,17 @@
     }
     &:hover {
         box-shadow: 0 0 0 (1 * @rpx) currentColor;
+        border-color: currentColor;
+        background: @bg-color;
+        transition: .05s;
     }
     &:active {
-        background-color: currentColor;
+        background: currentColor;
+        transition: .05s;
     }
     &:focus {
         outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+        transition: .05s;
     }
 }
 

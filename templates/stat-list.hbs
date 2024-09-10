@@ -1,71 +1,73 @@
-<section class="stat-list__header">
+<div>
+    <section class="stat-list__header">
 
-    <div class="stat-list__label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Stats"}}</div>
+        <div class="stat-list__label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Stats"}}</div>
 
-    <button type="button" class="button stat-list__add-button" data-stat-add data-color="{{palette.primary}}" data-tooltip="{{localize "AC.TOOLTIP.Stat.Add"}}">
-        <span class="material-symbols-outlined">add</span>
-    </button>
+        <button type="round-button" class="button stat-list__add-button" data-stat-add data-action="onStatAdd" data-color="{{palette.primary}}" data-tooltip="{{localize "AC.TOOLTIP.Stat.Add"}}">
+            <span class="material-symbols-outlined">add</span>
+        </button>
 
-</section>
+    </section>
 
-<ul class="stat-list" data-drop="stat">
+    <ul class="stat-list" data-drop="stat">
 
-    <span class="stat-list__empty">&mdash; {{localize "AC.LABEL.EmptyStats"}} &mdash;</span>
+        <span class="stat-list__empty">&mdash; {{localize "AC.LABEL.EmptyStats"}} &mdash;</span>
 
-    {{#each stats as |stat index|}}
+        {{#each stats as |stat index|}}
 
-        <li class="stat-card" data-stat="{{index}}" data-drag="stat" data-color="{{@root.palette.secondary}}" data-color-props="border-color">
-            
-            <div class="stat-card__header">
-                <!-- img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Drag.svg" -->
-                <span class="stat-card__tag">{{stat.tag}}</span>
+            <li class="stat-card" data-stat="{{index}}" data-drag="stat" data-color="{{@root.palette.secondary}}" data-color-props="border-color">
+                
+                <div class="stat-card__header">
+                    <!-- img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Drag.svg" -->
+                    <span class="stat-card__tag">{{stat.tag}}</span>
 
-                <div class="stat-card__controls">
-                    <a class="stat-card__edit" data-stat-edit>
-                        <span class="material-symbols-outlined">
-                            edit
-                        </span>
-                    </a>
-                    <a class="stat-card__delete" data-stat-delete>
-                        <span class="material-symbols-outlined">
-                            close
-                        </span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="stat-card__footer">
-                <div class="stat-card__extra-info">
-
-                    {{#if (eq @root.document.documentName "Actor")}}
-                        <span class="stat-card__extra-field-label stat-card__color stat-card__color--{{stat.color}}">
-                            <span class="stat-card__color--lining">
-                                {{stat.color}}
+                    <div class="stat-card__controls">
+                        <a class="stat-card__edit" data-stat-edit data-action="onStatEdit">
+                            <span class="material-symbols-outlined">
+                                edit
                             </span>
-                        </span>
-                    {{/if}}
-
+                        </a>
+                        <a class="stat-card__delete" data-stat-delete data-action="onStatDelete">
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        </a>
+                    </div>
                 </div>
-                <div class="stat-card__input-list">
 
-                    {{#if (eq stat.view "value")}}
-                        <input type="number" class="stat-card__input stat-card__input--value input--shadow-out" placeholder="0" name="system.stats.{{index}}.value" value="{{stat.value}}">
-                    {{/if}}
+                <div class="stat-card__footer">
+                    <div class="stat-card__extra-info">
 
-                    {{#if (eq stat.view "resource")}}
-                        <input type="number" class="stat-card__input stat-card__input--numerator input--shadow-out" placeholder="0" name="system.stats.{{index}}.value" value="{{stat.value}}">
-                        <input type="number" class="stat-card__input stat-card__input--denominator input--shadow-out" placeholder="0" name="system.stats.{{index}}.max" value="{{stat.max}}">
-                    {{/if}}
+                        {{#if (eq @root.document.documentName "Actor")}}
+                            <span class="stat-card__extra-field-label stat-card__color stat-card__color--{{stat.color}}">
+                                <span class="stat-card__color--lining">
+                                    {{stat.color}}
+                                </span>
+                            </span>
+                        {{/if}}
 
-                    {{#if (eq stat.view "label")}}
-                        <input type="text" class="stat-card__input stat-card__input--label input--shadow-out" name="system.stats.{{index}}.label" value="{{stat.label}}">
-                    {{/if}}
+                    </div>
+                    <div class="stat-card__input-list">
 
+                        {{#if (eq stat.view "value")}}
+                            <input type="number" class="stat-card__input stat-card__input--value" placeholder="0" name="system.stats.{{index}}.value" value="{{stat.value}}">
+                        {{/if}}
+
+                        {{#if (eq stat.view "resource")}}
+                            <input type="number" class="stat-card__input stat-card__input--numerator" placeholder="0" name="system.stats.{{index}}.value" value="{{stat.value}}">
+                            <input type="number" class="stat-card__input stat-card__input--denominator" placeholder="0" name="system.stats.{{index}}.max" value="{{stat.max}}">
+                        {{/if}}
+
+                        {{#if (eq stat.view "label")}}
+                            <input type="text" class="stat-card__input stat-card__input--label" name="system.stats.{{index}}.label" value="{{stat.label}}">
+                        {{/if}}
+
+                    </div>
                 </div>
-            </div>
 
-        </li>
+            </li>
 
-    {{/each}}
+        {{/each}}
 
-</ul>
+    </ul>
+</div>

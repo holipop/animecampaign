@@ -160,8 +160,8 @@
   height: calc(100% - 8rem);
 }
 .animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
-  min-width: 650px;
-  min-height: 550px;
+  min-width: 600px;
+  min-height: 500px;
 }
 .animecampaign.sheet .background {
   position: relative;
@@ -199,12 +199,17 @@
 .animecampaign.sheet .input--shadow-out:focus {
   text-shadow: 0.09375rem 0.09375rem rgba(205, 50, 50, 0.5);
 }
+.animecampaign.sheet input,
+.animecampaign.sheet select,
+.animecampaign.sheet textarea {
+  border-radius: 0.125rem;
+}
 .animecampaign.sheet input:focus,
 .animecampaign.sheet select:focus {
   outline: 2px solid rgba(205, 50, 50, 0.5);
   transition: 0.05s;
 }
-.animecampaign .ac-button {
+.animecampaign .round-button {
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -217,20 +222,25 @@
   border-radius: 100%;
   padding: 0;
   background-color: #f4f3ed;
-  transition: 0.075s;
+  transition: 0.05s;
 }
-.animecampaign .ac-button > .material-symbols-outlined {
+.animecampaign .round-button > .material-symbols-outlined {
   font-size: 1.25rem;
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
-.animecampaign .ac-button:hover {
+.animecampaign .round-button:hover {
   box-shadow: 0 0 0 0.0625rem currentColor;
+  border-color: currentColor;
+  background: #f4f3ed;
+  transition: 0.05s;
 }
-.animecampaign .ac-button:active {
-  background-color: currentColor;
+.animecampaign .round-button:active {
+  background: currentColor;
+  transition: 0.05s;
 }
-.animecampaign .ac-button:focus {
+.animecampaign .round-button:focus {
   outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+  transition: 0.05s;
 }
 .animecampaign .button {
   border: none;
@@ -813,6 +823,7 @@
   font-family: "Philosopher";
   font-weight: bold;
   text-align: end;
+  border-radius: 0.125rem;
   color: #1f1e1e;
 }
 .animecampaign.sheet .stat-card__input--value {

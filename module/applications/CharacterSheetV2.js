@@ -18,9 +18,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             resizable: true,
         },
         actions: {
-            //myAction: CharacterSheetV2.myAction,
-            invokeColorPicker: super.invokeColorPicker,
-            editImage: super.editImage,
+            onInvokeColorPicker: super.onInvokeColorPicker,
+            onEditImage: super.onEditImage,
         },
         form: {
             submitOnChange: true,
@@ -29,9 +28,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     static PARTS = {
         summary:    { template: "systems/animecampaign/templates/character-v2/summary.hbs" },
-        /* stats:      { template: "systems/animecampaign/templates/character-v2/stats.hbs" },
-        resources:  { template: "systems/animecampaign/templates/character-v2/resources.hbs" },
-        nav:        { template: "systems/animecampaign/templates/character-v2/nav.hbs" }, */
+        mainStats:  { template: "systems/animecampaign/templates/character-v2/main-stats.hbs" },
+        statList:   { template: "systems/animecampaign/templates/stat-list.hbs" },
+        //nav:        { template: "systems/animecampaign/templates/character-v2/nav.hbs" },
     }
 
     get title () {
