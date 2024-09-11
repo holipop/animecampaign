@@ -3,19 +3,20 @@
 
         <div class="stat-list__label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Stats"}}</div>
 
-        <button type="round-button" class="button stat-list__add-button" data-stat-add data-action="onStatAdd" data-color="{{palette.primary}}" data-tooltip="{{localize "AC.TOOLTIP.Stat.Add"}}">
+        <button type="button" class="tab-button" data-stat-add data-action="onStatAdd" data-color="{{palette.primary}}" data-tooltip="{{localize "AC.TOOLTIP.Stat.Add"}}">
             <span class="material-symbols-outlined">add</span>
+            <span class="tab-button__label">{{localize "AC.TOOLTIP.Stat.Add"}}</span>
         </button>
 
     </section>
 
-    <ul class="stat-list" data-drop="stat">
+    <ul class="stat-list" data-drop="stat" data-color="{{palette.secondary}}">
 
         <span class="stat-list__empty">&mdash; {{localize "AC.LABEL.EmptyStats"}} &mdash;</span>
 
         {{#each stats as |stat index|}}
 
-            <li class="stat-card" data-stat="{{index}}" data-drag="stat" data-color="{{@root.palette.secondary}}" data-color-props="border-color">
+            <li class="stat-card" data-stat="{{index}}" data-drag="stat">
                 
                 <div class="stat-card__header">
                     <!-- img class="stat-card__img" src="./systems/animecampaign/assets/Material Symbols/Drag.svg" -->

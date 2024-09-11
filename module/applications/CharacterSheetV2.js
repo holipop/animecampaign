@@ -20,6 +20,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         actions: {
             onInvokeColorPicker: super.onInvokeColorPicker,
             onEditImage: super.onEditImage,
+            onStatAdd: super.onStatAdd,
+            onStatEdit: super.onStatEdit,
+            onStatDelete: super.onStatDelete,
         },
         form: {
             submitOnChange: true,
@@ -42,8 +45,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             ...super._prepareContext(),
             ...this.document,
             config: CONFIG.AC,
+            document: this.document,
             palette: this.palette,
-            stats: this.document.system.colorStats, 
+            stats: this.document.system.colorStats,
 
             /* svg: {
                 bg: this.svgBackground,
