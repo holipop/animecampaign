@@ -41,7 +41,7 @@ export default function SheetMixinV2 (Base) {
                 window: { title: "A Modal Dialog" },
                 content: "Are you sure?",
                 rejectClose: false,
-                modal: true,
+                //modal: true,
             });
             if ( proceed ) console.log("Proceed.");
             else console.log("Do not proceed.");

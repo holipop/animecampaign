@@ -56,4 +56,26 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
+    /**
+     * Actions performed after any render of the Application.
+     * Post-render steps are not awaited by the render process.
+     * @param {ApplicationRenderContext} context      Prepared context data
+     * @param {RenderOptions} options                 Provided render options
+     * @protected
+     */
+    _onRender(context, options) {
+        super._onRender(context, options)
+
+        // Make the little stamina bar change amount :3
+        let staminaRatio = this.document.system.staminaRatio
+        if (staminaRatio >= 1) {
+            staminaRatio = 1
+        } else if (staminaRatio <= 0) {
+            staminaRatio = 0
+        }
+        staminaRatio *= 100
+        this.element.querySelector('[data-stam-bar]').style.height = `${staminaRatio}%`
+
+    }
+
 }
