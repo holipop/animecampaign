@@ -24,7 +24,7 @@ import FeatureSheet from './module/applications/FeatureSheet.js'
 import ACDialog from './module/applications/ACDialog.js'
 import StatConfig from './module/applications/StatConfig.js'
 
-import CharacterSheetV2 from './module/applications/CharacterSheetV2.js'
+import CharacterSheetV2 from './module/applications-v2/CharacterSheetV2.js'
 
 import ButtonComponent from './module/components/ButtonComponent.js'
 import TextSelectComponent from './module/components/TextSelectComponent.js'

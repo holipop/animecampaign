@@ -1,3 +1,5 @@
+import ACDialogV2 from "./ACDialogV2.js"
+
 /**
  * A mixin for shared methods between Characters and Feature sheets.
  */
@@ -33,18 +35,17 @@ export default function SheetMixinV2 (Base) {
             fp.browse()
         }
 
-        static onStatAdd (event, target) {
-            const [color] = Object
-            .entries(this.object.system._stats)
-            .find(([_, stat]) => stat === null) // If the value is null, get the key
-
-            const config = new StatConfig({ 
-                color,
-                parent: this.object
-            }, {
-                title: game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.object.name })
-            })
-            config.render(true)
+        static async onStatAdd (event, target) {
+            
+            const proceed = await ACDialogV2.confirm({
+                window: { title: "A Modal Dialog" },
+                content: "Are you sure?",
+                rejectClose: false,
+                modal: true,
+            });
+            if ( proceed ) console.log("Proceed.");
+            else console.log("Do not proceed.");
+              
         }
 
         static onStatEdit (event, target) {

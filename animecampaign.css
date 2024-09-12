@@ -259,10 +259,11 @@
 }
 .animecampaign .tab-button > .material-symbols-outlined {
   font-size: 0.75rem;
-  font-variation-settings: 'FILL' 0, 'wght' 650, 'GRAD' 0, 'opsz' 48;
+  font-variation-settings: 'FILL' 0, 'wght' 800, 'GRAD' 0, 'opsz' 48;
 }
 .animecampaign .tab-button__label {
   font: 0.5rem "Rubik Mono One";
+  margin-left: 0.25rem;
   white-space: nowrap;
 }
 .animecampaign .tab-button:hover {
@@ -304,12 +305,23 @@
 .animecampaign .button:hover {
   height: 2.33rem;
   border-bottom-width: 0.33rem;
+  border-color: #8a8986;
   margin-top: 0;
+  transition: 0.05s;
+  color: #1f1e1e;
+  background: none;
 }
 .animecampaign .button:focus {
+  border-color: #8a8986;
   outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+  transition: 0.05s;
+  color: #1f1e1e;
+  background: none;
 }
 .animecampaign .button:active {
+  border-color: #8a8986;
+  transition: 0.05s;
+  color: #1f1e1e;
   background-color: #8a8986;
 }
 .animecampaign.dialog .window-content {

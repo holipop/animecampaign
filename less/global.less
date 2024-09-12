@@ -153,12 +153,14 @@
 
         font-variation-settings:
             'FILL' 0,
-            'wght' 650,
+            'wght' 800,
             'GRAD' 0,
             'opsz' 48;
     }
     &__label {
         #AC.TinyFont();
+
+        margin-left: .25rem;
         white-space: nowrap;
     }
     &:hover {
@@ -207,12 +209,26 @@
     &:hover {
         height: 2rem + .33rem;
         border-bottom-width: .33rem;
+        border-color: mix(@bg-color, @txt-color, 50%);
         margin-top: 0;
+        transition: @button-transition;
+
+        color: @txt-color;
+        background: none;
     }
     &:focus {
+        border-color: mix(@bg-color, @txt-color, 50%);
         outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+        transition: @button-transition;
+    
+        color: @txt-color;
+        background: none;
     }
     &:active {
+        border-color: mix(@bg-color, @txt-color, 50%);
+        transition: @button-transition;
+        
+        color: @txt-color;
         background-color: mix(@bg-color, @txt-color, 50%);
     }
 }
