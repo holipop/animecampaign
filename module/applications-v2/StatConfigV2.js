@@ -27,10 +27,6 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         return this.options.document
     }
 
-    get title () {
-        return game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.parent.name })
-    }
-
     /** Is this configuring a new stat?
      * @returns {Boolean}
      */

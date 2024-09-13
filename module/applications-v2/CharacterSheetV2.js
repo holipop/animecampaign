@@ -75,7 +75,26 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
         staminaRatio *= 100
         this.element.querySelector('[data-stam-bar]').style.height = `${staminaRatio}%`
+    }
 
+    async _processSubmitData(event, form, submitData) {
+
+        const updates = submitData
+
+        // intercept stat handling
+        if ("stats" in updates.system) {
+            const statData = Object
+                .entries(updates.system.stats)
+                .map(([index, statChanges]) => {
+                    const stat = this.document.system.colorStats[index]
+                    return [stat.color, { ...stat, ...statChanges }]
+                })
+
+            updates.system.stats = null // v1.0 bandaid
+            updates.system._stats = Object.fromEntries(statData)
+        }
+
+        super._processSubmitData(event, form, updates)
     }
 
 }
