@@ -197,7 +197,7 @@
 }
 .animecampaign.sheet .input--shadow-out:hover,
 .animecampaign.sheet .input--shadow-out:focus {
-  text-shadow: 0.09375rem 0.09375rem rgba(205, 50, 50, 0.5);
+  text-shadow: 0.09375rem 0.15625rem rgba(205, 50, 50, 0.5);
 }
 .animecampaign.sheet input,
 .animecampaign.sheet select,
@@ -324,6 +324,9 @@
   color: #1f1e1e;
   background-color: #8a8986;
 }
+.animecampaign.dialog.application:not([open]) {
+  display: block;
+}
 .animecampaign.dialog .window-content {
   background: #f4f3ed;
   overflow: hidden;
@@ -442,6 +445,10 @@
   width: 100%;
   border: none;
   border-top: 0.0625rem solid rgba(31, 30, 30, 0.25);
+  margin: 0.25rem 0;
+  height: unset;
+  color: unset;
+  background-image: unset;
 }
 .animecampaign.dialog .config__inner-label {
   margin: 0.2rem;
@@ -480,9 +487,12 @@
 }
 .animecampaign.dialog .config .config__input {
   flex: 3;
-  border-radius: 0;
+  border-radius: 0.125rem;
+  height: 1.75rem;
   background: rgba(31, 30, 30, 0.05);
   border-color: rgba(31, 30, 30, 0.5);
+  transition: 0.05s;
+  padding: 0 0.1875rem;
   font-size: 0.85rem;
 }
 .animecampaign.dialog .config .config__input::placeholder {

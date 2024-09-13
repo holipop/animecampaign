@@ -1,9 +1,11 @@
-<form class="{{cssClass}}" autocomplete="off">
+<div>
 
     <!-- div class="dialog__bg">
         <svg>
         </svg>
     </div -->
+
+    {{log this}}
 
     <div class="dialog__content config">
 
@@ -24,7 +26,7 @@
 
         <!-- TODO: LOCALIZE THESE -->
 
-        {{#if (eq object.parent.documentName "Actor")}}
+        {{#if (eq parent.documentName "Actor")}}
             <hr class="config__hr">
 
             <div class="config__group">
@@ -66,4 +68,4 @@
 
     </div>
 
-</form>
+</div>

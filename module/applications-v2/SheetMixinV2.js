@@ -1,4 +1,5 @@
 import ACDialogV2 from "./ACDialogV2.js"
+import StatConfigV2 from "./StatConfigV2.js"
 
 /**
  * A mixin for shared methods between Characters and Feature sheets.
@@ -35,25 +36,60 @@ export default function SheetMixinV2 (Base) {
             fp.browse()
         }
 
-        static async onStatAdd (event, target) {
-            
-            const proceed = await ACDialogV2.confirm({
-                window: { title: "A Modal Dialog" },
-                content: "Are you sure?",
-                rejectClose: false,
-                //modal: true,
-            });
-            if ( proceed ) console.log("Proceed.");
-            else console.log("Do not proceed.");
-              
+        static onStatAdd (event, target) {
+            const [color] = Object
+                .entries(this.document.system._stats)
+                .find(([_, stat]) => stat === null) // If the value is null, get the key
+
+            new StatConfigV2({
+                window: { 
+                    title: game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.document.name }) 
+                },
+                document: this.document,
+                stat: {
+                    color, 
+                    tag: "",
+                }
+            }).render(true)
         }
 
         static onStatEdit (event, target) {
+            const index = $(event.target).closest('[data-stat]').data("stat")
+            const stat = this.document.system.colorStats[index];
 
+            new StatConfigV2({ 
+                window: {
+                    title: game.i18n.format("AC.DIALOG.EditStat.Title", { 
+                        tag: stat.tag.toUpperCase(),
+                        name: this.document.name
+                    })
+                },
+                document: this.document,
+                stat,
+            }).render(true)
         }
 
-        static onStatDelete (event, target) {
+        static async onStatDelete (event, target) {
+            const index = $(event.target).closest('[data-stat]').data("stat")
+            const { tag, color } = this.document.system.colorStats[index]
 
+            const confirm = await ACDialogV2.confirm({
+                window: {
+                    title: game.i18n.format("AC.DIALOG.DeleteColorStat.Title", { 
+                        tag: tag.toUpperCase(), 
+                        name: this.document.name
+                    }),
+                },
+                content: game.i18n.format("AC.DIALOG.DeleteColorStat.Content", {
+                    tag: tag.toUpperCase(), 
+                    color: color.toUpperCase()
+                }),
+                modal: true
+            });
+            
+            if (confirm) {
+                this.document.update({ [`system._stats.${color}`]: null })
+            }
         }
 
         /** The set of colors derived from this document's color.

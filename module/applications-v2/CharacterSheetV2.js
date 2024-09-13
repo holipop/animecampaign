@@ -1,6 +1,6 @@
 import SheetMixinV2 from "./SheetMixinV2.js"
 
-const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
+const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
 
 /**

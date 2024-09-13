@@ -1,5 +1,10 @@
 // main: ./animecampaign.less
 
+// dawg i dont fucking know dude
+.animecampaign.dialog.application:not([open]) {
+    display: block;
+}
+
 .animecampaign.dialog .window-content {
     background: @bg-color;
     overflow: hidden;
@@ -134,6 +139,11 @@
         width: 100%;
         border: none;
         border-top: (1 * @rpx) solid fade(@txt-color, 25%);
+        margin: .25rem 0;
+
+        height: unset;
+        color: unset;
+        background-image: unset;
     }
     &__inner-label {
         margin: .2rem;
@@ -178,9 +188,12 @@
 
 .animecampaign.dialog .config .config__input {
     flex: 3;
-    border-radius: 0;
+    border-radius: 2 * @rpx;
+    height: 1.75rem;
     background: fade(@txt-color, 5%);
     border-color: fade(@txt-color, 50%);
+    transition: @button-transition;
+    padding: 0 (3 * @rpx);
 
     font-size: .85rem;
 
