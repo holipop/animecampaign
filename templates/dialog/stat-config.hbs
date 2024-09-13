@@ -11,13 +11,13 @@
 
         <div class="config__group">
             <label class="config__label">Tag</label>
-            <input class="config__input config__input--caps" type="text" name="tag" value="{{object.tag}}" placeholder="{{localize "AC.DIALOG.AddStat.Placeholder"}}" autofocus>
+            <input class="config__input config__input--caps" type="text" name="tag" value="{{stat.tag}}" placeholder="{{localize "AC.DIALOG.AddStat.Placeholder"}}" autofocus>
         </div>
 
         <div class="config__group">
             <label class="config__label">Display</label>
             <select class="config__input" name="view">
-                {{selectOptions config.displays selected=object.view localize=true}}
+                {{selectOptions config.displays selected=stat.view localize=true}}
             </select>
             <p class="config__notes">
                 <b>Value</b> and <b>Resource</b> are numeric, <b>Label</b> can be any text.
@@ -27,19 +27,19 @@
         <div class="config__group">
             <label class="config__label">Size</label>
             <select class="config__input" name="size">
-                {{selectOptions config.statSizes selected=object.size localize=true}}
+                {{selectOptions config.statSizes selected=stat.size localize=true}}
             </select>
         </div>
 
         <!-- TODO: LOCALIZE THESE -->
 
-        {{#if (eq parent.documentName "Actor")}}
+        {{#if (eq document.documentName "Actor")}}
             <hr class="config__hr">
 
             <div class="config__group">
                 <label class="config__label">Color</label>
                 <select class="config__input" name="color">
-                    {{selectOptions colors selected=object.color localize=true}}
+                    {{selectOptions colors selected=stat.color localize=true}}
                 </select>
                 <p class="config__notes">
                     Configure the stat for token attribute bars.

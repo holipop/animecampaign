@@ -1,7 +1,11 @@
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
+/**
+ * The configuration window for Stats.
+ */
 export default class StatConfigV2 extends HandlebarsApplicationMixin(ApplicationV2) {
 
+    /** The default configuration options which are assigned to every instance of this Application class. */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "dialog", "config"],
         tag: "form",
@@ -19,11 +23,18 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         }
     }
 
-    get object () {
+    /** The Handlebars templates for this application. These are rendered in order. */
+    static PARTS = {
+        hbs: { template: "systems/animecampaign/templates/dialog/stat-config.hbs" }
+    }
+
+    /** The Stat being configured. */
+    get stat () {
         return this.options.stat
     }
 
-    get parent () {
+    /** The document which has the Stat being configured. */
+    get document () {
         return this.options.document
     }
 
@@ -31,45 +42,44 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
      * @returns {Boolean}
      */
     get isNew () {
-        return (this.object.tag === "")
+        return (this.stat.tag === "")
     }
 
     /** The stats that aren't occupied.
      * @returns {*}
      */
     get availableColors () {
-        if (this.parent.documentName === "Item") return {};
+        if (this.document.documentName === "Item") return {};
 
-        const stats = this.parent.system._stats;
+        const stats = this.document.system._stats;
         const options = Object
             .entries(CONFIG.AC.colorStat)
             .filter(([color]) => {
                 // if editing an existing stat, its own color should be a valid selection
                 return (this.isNew) 
                     ? (stats[color] === null)
-                    : (stats[color] === null || color === this.object.color)
+                    : (stats[color] === null || color === this.stat.color)
             })
 
         return Object.fromEntries(options)
     }
 
-    static PARTS = {
-        hbs: { template: "systems/animecampaign/templates/dialog/stat-config.hbs" }
-    }
-
+    /** The context passed to each Handlebars template.
+     * @returns {*}
+     */
     async _prepareContext () {
         return {
             app: this,
             config: CONFIG.AC,
-            object: this.object,
-            parent: this.parent,
+            stat: this.stat,
+            document: this.document,
 
             isNew: this.isNew,
             colors: this.availableColors,
         }
     }
 
-    /**
+    /** Update the stats list for the Stat's document. 
      * @param {SubmitEvent} event 
      * @param {HTMLFormElement} form 
      * @param {*} data 
@@ -82,14 +92,14 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         data.tag ||= "new stat"
         data.tag = data.tag.toLowerCase()
 
-        data.sort = this.object.sort
+        data.sort = this.stat.sort
 
-        if (this.parent.documentName === "Actor") {
-            const stats = this.parent.system.colorStats
+        if (this.document.documentName === "Actor") {
+            const stats = this.document.system.colorStats
 
             // tags must be unique
             const tagTaken = stats
-                .filter(stat => stat.color !== this.object.color)
+                .filter(stat => stat.color !== this.stat.color)
                 .map(stat => stat.tag)
                 .includes(data.tag)
             if (tagTaken) {
@@ -109,11 +119,11 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
             }
 
             // if the color of an existing stat is changed, set the old color to null
-            if (!this.isNew && data.color !== this.object.color) {
-                updates[`system._stats.${this.object.color}`] = null
+            if (!this.isNew && data.color !== this.stat.color) {
+                updates[`system._stats.${this.stat.color}`] = null
             }
 
-            this.parent.update(updates)
+            this.document.update(updates)
         } else {
 
             // item

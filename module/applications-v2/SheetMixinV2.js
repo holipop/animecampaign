@@ -11,21 +11,13 @@ export default function SheetMixinV2 (Base) {
      */
     return class ACSheetV2 extends Base {
 
-        /**
-         * Manually invokes the color picker.
-         * @param {PointerEvent} event
-         * @param {HTMLElement} target
-         */
-        static onInvokeColorPicker (event, target) {
+        /** Manually invokes the color picker. */
+        static onInvokeColorPicker () {
             this.element.querySelector('[data-color-button="target"]').click()
         }
 
-        /**
-         * Invokes the file picker for editing images.
-         * @param {PointerEvent} event
-         * @param {HTMLElement} target
-         */
-        static onEditImage (event, target) {
+        /** Invokes the file picker for editing images. */
+        static onEditImage () {
             const fp = new FilePicker({
                 current: this.document.img,
                 type: "image",
@@ -36,7 +28,8 @@ export default function SheetMixinV2 (Base) {
             fp.browse()
         }
 
-        static onStatAdd (event, target) {
+        /** Invokes the Stat configuration window for creating a stat. */
+        static onStatAdd () {
             const [color] = Object
                 .entries(this.document.system._stats)
                 .find(([_, stat]) => stat === null) // If the value is null, get the key
@@ -53,8 +46,12 @@ export default function SheetMixinV2 (Base) {
             }).render(true)
         }
 
+        /** Invokes the Stat configuration window for editing the targetted stat. 
+         * @param {PointerEvent} event
+         * @param {HTMLElement} target
+         */
         static onStatEdit (event, target) {
-            const index = $(event.target).closest('[data-stat]').data("stat")
+            const index = target.closest('[data-stat]').dataset.stat
             const stat = this.document.system.colorStats[index];
 
             new StatConfigV2({ 
@@ -69,8 +66,12 @@ export default function SheetMixinV2 (Base) {
             }).render(true)
         }
 
-        static async onStatDelete (event, target) {
-            const index = $(event.target).closest('[data-stat]').data("stat")
+        /** Deletes the targetted stat.
+         * @param {PointerEvent} event
+         * @param {HTMLElement} target
+         */
+        static async onStatDelete (event, target) {            
+            const index = target.closest('[data-stat]').dataset.stat
             const { tag, color } = this.document.system.colorStats[index]
 
             const confirm = await ACDialogV2.confirm({

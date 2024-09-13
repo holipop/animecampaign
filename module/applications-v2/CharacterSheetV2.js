@@ -8,6 +8,7 @@ const { ActorSheetV2 } = foundry.applications.sheets
  */
 export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMixinV2(ActorSheetV2)) {
 
+    /** The default configuration options which are assigned to every instance of this Application class. */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "actor", "sheet"],
         position: {
@@ -29,6 +30,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
+    /** The Handlebars templates for this application. These are rendered in order. */
     static PARTS = {
         summary:    { template: "systems/animecampaign/templates/character-v2/summary.hbs" },
         mainStats:  { template: "systems/animecampaign/templates/character-v2/main-stats.hbs" },
@@ -36,10 +38,16 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         //nav:        { template: "systems/animecampaign/templates/character-v2/nav.hbs" },
     }
 
+    /** The title of this application's window.
+     * @returns {String}
+     */
     get title () {
         return `${this.document.name}`
     }
 
+    /** The context passed to each Handlebars template.
+     * @returns {*}
+     */
     async _prepareContext () {
         return {
             ...super._prepareContext(),
@@ -62,6 +70,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @param {ApplicationRenderContext} context      Prepared context data
      * @param {RenderOptions} options                 Provided render options
      * @protected
+     * @override
      */
     _onRender(context, options) {
         super._onRender(context, options)
@@ -83,8 +92,16 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     }
 
+    /**
+     * Submit a document update based on the processed form data.
+     * @param {SubmitEvent} event                   The originating form submission event
+     * @param {HTMLFormElement} form                The form element that was submitted
+     * @param {object} submitData                   Processed and validated form data to be used for a document update
+     * @returns {Promise<void>}
+     * @protected
+     * @override
+     */
     async _processSubmitData(event, form, submitData) {
-
         const updates = submitData
 
         // intercept stat handling

@@ -5,6 +5,7 @@ const { DialogV2 } = foundry.applications.api
  */
 export default class ACDialogV2 extends DialogV2 {
 
+    /** The default configuration options which are assigned to every instance of this Application class. */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "dialog"],
         position: {
@@ -13,8 +14,13 @@ export default class ACDialogV2 extends DialogV2 {
         }
     }
 
-    /** @override */
-    async _renderHTML (_context, _options) {
+    /** The HTMLElement this application renders.
+     * @param {*} context
+     * @param {*} options
+     * @returns {Promise<HTMLFormElement>}
+     * @override
+     */
+    async _renderHTML (context, options) {
         const form = document.createElement("form")
         //form.className = "dialog-form standard-form"
         form.autocomplete = "off"
@@ -26,7 +32,10 @@ export default class ACDialogV2 extends DialogV2 {
         return form
     }
 
-    /** @override */
+    /** The string template of Dialog buttons.
+     * @returns {String}
+     * @override
+     */
     _renderButtons () {
         return Object.values(this.options.buttons).map(button => {
             const { action, label, icon, default: isDefault, class: cls = "" } = button
