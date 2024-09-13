@@ -24,6 +24,13 @@
             </p>
         </div>
 
+        <div class="config__group">
+            <label class="config__label">Size</label>
+            <select class="config__input" name="size">
+                {{selectOptions config.statSizes selected=object.size localize=true}}
+            </select>
+        </div>
+
         <!-- TODO: LOCALIZE THESE -->
 
         {{#if (eq parent.documentName "Actor")}}

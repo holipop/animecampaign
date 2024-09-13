@@ -75,6 +75,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
         staminaRatio *= 100
         this.element.querySelector('[data-stam-bar]').style.height = `${staminaRatio}%`
+
+        // Disable the Add Stat button when the stats list is full.
+        if (this.document.system.colorStats.length >= 8) {
+            this.element.querySelector(`[data-action="onStatAdd"]`).style.display = 'none'
+        }
+
     }
 
     async _processSubmitData(event, form, submitData) {

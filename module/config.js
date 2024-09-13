@@ -54,6 +54,10 @@ AC.textEditors = {
     markdown: "AC.LABEL.Markdown",
     prosemirror: "AC.LABEL.ProseMirror",
 }
+AC.statSizes = {
+    small: "AC.LABEL.Small",
+    big: "AC.LABEL.Big"
+}
 
 AC.defaultCategories = [
     {

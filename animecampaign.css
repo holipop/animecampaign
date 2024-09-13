@@ -729,6 +729,9 @@
   color: rgba(31, 30, 30, 0.25);
   text-transform: uppercase;
 }
+.animecampaign.sheet .stat-card.stat-card--big {
+  width: 16.25rem;
+}
 .animecampaign.sheet .stat-card {
   display: flex;
   flex-direction: column;
@@ -870,6 +873,7 @@
 .animecampaign.sheet .stat-card__input-list {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .animecampaign.sheet .stat-card__input {
   border: none;

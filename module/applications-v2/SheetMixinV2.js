@@ -166,6 +166,18 @@ export default function SheetMixinV2 (Base) {
                     }
                 })
             }
+
+            // Apply the sizes of stats.
+            const statElements = this.element.querySelectorAll("[data-stat]")
+            for (const element of statElements) {
+                const index = element.dataset.stat
+                const stat = this.document.system.colorStats[index]
+
+                if (stat.size == "big") {
+                    element.classList.add("stat-card--big")
+                }
+            }
+
         }
     }
 

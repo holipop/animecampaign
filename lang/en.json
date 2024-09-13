@@ -78,7 +78,9 @@
         "UpdateCategory": "Update Category",
         "TextEditor": "Text Editor",
         "Markdown": "Markdown",
-        "ProseMirror": "ProseMirror"
+        "ProseMirror": "ProseMirror",
+        "Small": "Small",
+        "Big": "Big"
     },
     "TOOLTIP": {
         "Color": "Edit Color",
