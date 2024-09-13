@@ -27,7 +27,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         },
         form: {
             submitOnChange: true,
-        }
+        },
+        dragDrop: [{ dragSelector: '[data-drag]', dropSelector: '[data-drop]' }],
     }
 
     /** The Handlebars templates for this application. These are rendered in order. */
@@ -45,23 +46,71 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         return `${this.document.name}`
     }
 
-    /** The context passed to each Handlebars template.
-     * @returns {*}
+    /** Callback actions which occur at the beginning of a drag start workflow.
+     * @param {DragEvent} event
+     * @protected
+     * @override
      */
-    async _prepareContext () {
-        return {
-            ...super._prepareContext(),
-            ...this.document,
-            config: CONFIG.AC,
-            document: this.document,
-            palette: this.palette,
-            stats: this.document.system.colorStats,
+    _onDragStart (event) {
+        const dataset = event.target.dataset
+        const type = dataset.drag
+        const data = { type, index: null, object: null }
 
-            /* svg: {
-                bg: this.svgBackground,
-                text: this.svgText,
-            }, */
+        switch (type) {
+            case 'stat':
+                const index = Number(dataset.stat)
+                data.index = index
+                data.object = this.document.system.colorStats[index]
+                break
+
+            // case 'feature': break
+            // case 'category': break
         }
+
+        event.dataTransfer.setData("text/plain", JSON.stringify(data))
+    }
+
+    /** Callback actions which occur when a dragged element is dropped on a target.
+     * @param {DragEvent} event
+     * @protected
+     * @override
+     */
+    _onDrop (event) {
+        const data = TextEditor.getDragEventData(event)
+        
+        switch (data.type) {
+            case 'stat':
+                this.onDropStat(event, data)
+                break
+
+            /* case 'feature': 
+                this.onDropFeature(event, data)
+                break
+            case 'category': 
+                this.onDropCategory(event, data)
+                break */
+        }
+    }
+
+    /** Handles the drop event for stats, setting their 'sort' key.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropStat (event, data) {
+        const stats = this.document.system.colorStats
+        if (stats.length === 1) return  // can't sort single entry
+
+        const target = $(event.target).closest('[data-drag="stat"]')
+        if (target.length === 0) return  // no target found
+        if (target.data('stat') === data.index) return  // don't sort on self 
+
+        const sort = SortingHelpers.performIntegerSort(data.object, {
+            target: stats[target.data('stat')],
+            siblings: stats.toSpliced(data.index, 1)
+        })
+        const updates = sort.map(({ target, update }) => [target.color, update])
+
+        this.document.update({ 'system._stats': Object.fromEntries(updates) })
     }
 
     /**
@@ -89,7 +138,25 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         if (this.document.system.colorStats.length >= 8) {
             this.element.querySelector(`[data-action="onStatAdd"]`).style.display = 'none'
         }
+    }
 
+    /** The context passed to each Handlebars template.
+     * @returns {*}
+     */
+    async _prepareContext () {
+        return {
+            ...super._prepareContext(),
+            ...this.document,
+            config: CONFIG.AC,
+            document: this.document,
+            palette: this.palette,
+            stats: this.document.system.colorStats,
+
+            /* svg: {
+                bg: this.svgBackground,
+                text: this.svgText,
+            }, */
+        }
     }
 
     /**

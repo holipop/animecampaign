@@ -11,6 +11,65 @@ export default function SheetMixinV2 (Base) {
      */
     return class ACSheetV2 extends Base {
 
+        constructor (options = {}) {
+            super(options)
+            this.#dragDrop = this.#createDragDropHandlers()
+        }
+
+        /** @type {DragDrop[]} */
+        #dragDrop
+
+        /**
+         * Returns an array of DragDrop instances
+         * @type {DragDrop[]}
+         */
+        get dragDrop() {
+            return this.#dragDrop;
+        }
+
+        /** The set of colors derived from this document's color.
+         * @returns {*}
+         */
+        get palette () {
+            const color = this.document.system.color
+            const [h, s, l] = color.hsl
+
+            let [red, green, blue] = color.rgb
+            red *= 0.2126;
+            green *= 0.7152;
+            blue *= 0.0722;
+        
+            const luma = (red + green + blue) / 1;
+            const contrast = (luma <= .5) 
+                ? CONFIG.AC.contrastColors.white
+                : CONFIG.AC.contrastColors.black;
+
+            return {
+                primary: color.css,
+                secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
+                contrast,
+            }
+        }
+
+        /** Create drag-and-drop workflow handlers for this Application
+         * @returns {DragDrop[]}     An array of DragDrop handlers
+         * @private
+         */
+        #createDragDropHandlers () {
+            return this.options.dragDrop.map((d) => {
+                d.permissions = {
+                    dragstart: this._canDragStart.bind(this),
+                    drop: this._canDragDrop.bind(this),
+                }
+                d.callbacks = {
+                    dragstart: this._onDragStart.bind(this),
+                    dragover: this._onDragOver.bind(this),
+                    drop: this._onDrop.bind(this),
+                }
+                return new DragDrop(d)
+            });
+        }
+
         /** Manually invokes the color picker. */
         static onInvokeColorPicker () {
             this.element.querySelector('[data-color-button="target"]').click()
@@ -93,29 +152,41 @@ export default function SheetMixinV2 (Base) {
             }
         }
 
-        /** The set of colors derived from this document's color.
-         * @returns {*}
+        /** Define whether a user is able to begin a dragstart workflow for a given drag selector
+         * @param {string} selector       The candidate HTML selector for dragging
+         * @returns {boolean}             Can the current user drag this selector?
+         * @protected
          */
-        get palette () {
-            const color = this.document.system.color
-            const [h, s, l] = color.hsl
-
-            let [red, green, blue] = color.rgb
-            red *= 0.2126;
-            green *= 0.7152;
-            blue *= 0.0722;
-        
-            const luma = (red + green + blue) / 1;
-            const contrast = (luma <= .5) 
-                ? CONFIG.AC.contrastColors.white
-                : CONFIG.AC.contrastColors.black;
-
-            return {
-                primary: color.css,
-                secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
-                contrast,
-            }
+        _canDragStart (selector) {
+            return this.isEditable;
         }
+
+        /** Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
+         * @param {string} selector       The candidate HTML selector for the drop target
+         * @returns {boolean}             Can the current user drop on this selector?
+         * @protected
+         */
+        _canDragDrop (selector) {
+            return this.isEditable;
+        }
+
+        /** Callback actions which occur at the beginning of a drag start workflow.
+         * @param {DragEvent} event
+         * @protected
+         */
+        _onDragStart (event) { }
+
+        /** Callback actions which occur when a dragged element is over a drop target.
+         * @param {DragEvent} event
+         * @protected
+         */
+        _onDragOver (event) { }
+
+        /** Callback actions which occur when a dragged element is dropped on a target.
+         * @param {DragEvent} event
+         * @protected
+         */
+        _onDrop (event) { }
 
         /**
          * Actions performed after any render of the Application.
@@ -124,7 +195,10 @@ export default function SheetMixinV2 (Base) {
          * @param {RenderOptions} options                 Provided render options
          * @protected
          */
-        _onRender(context, options) {
+        _onRender (context, options) {
+
+            // bind DragDrop events
+            this.#dragDrop.forEach(d => d.bind(this.element))
 
             // Apply color palette
             const coloredElements = this.element.querySelectorAll("[data-color]")
