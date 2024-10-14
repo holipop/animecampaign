@@ -13,4 +13,6 @@ This work includes material from the official rulebook by JelloApocalypse, used 
 
 All artwork under the `assets` directory (except for the `Material Symbols` directory) is created by Sunny Holiday and marked with [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1).
 
+All type declarations under the `types` directory were taken from the [foundry-vtt-types](https://github.com/League-of-Foundry-Developers/foundry-vtt-types?tab=readme-ov-file) repository under the MIT License. 
+
 The software of this system is distributed under the MIT License.
