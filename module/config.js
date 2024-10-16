@@ -1,5 +1,6 @@
-
-// An object containing language localization paths and default configurations.
+/** 
+ * An object containing language localization paths and default configurations.
+ */
 export const AC = {};
 
 AC.ascii = `

@@ -12,7 +12,7 @@
     "version": "v2.0",
     "compatibility": {
         "minimum": "11.315",
-        "verified": "12.324"
+        "verified": "12.331"
     },
     "esmodules": [
         "animecampaign.js"
