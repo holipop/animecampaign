@@ -5,10 +5,14 @@ import Details from "./Details.js"
 import Section from "./Section.js"
 import Stat from "./Stat.js"
 
+import ACActor from '../documents/ACActor.js';
+import ACItem from '../documents/ACItem.js';
+
 type ColorKeys = 'red' | 'blue' | 'yellow' | 'green' | 'orange' | 'cyan' | 'purple' | 'grey'
 
 declare module "./CharacterData.js" {
     export default interface CharacterData {
+        parent: ACActor
         stamina: Stat
         proficiency: Stat
         movement: Stat
@@ -28,6 +32,7 @@ declare module "./CharacterData.js" {
 
 declare module "./FeatureData.js" {
     export default interface FeatureData {
+        parent: ACItem
         color: string
         category: string
         stats: Stat[]
@@ -38,6 +43,7 @@ declare module "./FeatureData.js" {
 
 declare module "./Category.js" {
     export default interface Category {
+        parent: ACActor
         name: string
         color: string
         collapsed: boolean
@@ -48,6 +54,7 @@ declare module "./Category.js" {
 
 declare module "./Details.js" {
     export default interface Details {
+        parent: ACItem
         editor: "markdown" | "prosemirror"
         formula: string
         action: string
@@ -60,6 +67,7 @@ declare module "./Details.js" {
 
 declare module "./Stat.js" {
     export default interface Stat {
+        parent: ACActor | ACItem
         tag: string
         img: string
         color: ColorKeys
@@ -74,6 +82,7 @@ declare module "./Stat.js" {
 
 declare module "./Section.js" {
     export default interface Section {
+        parent: ACItem
         name: string
         visible: boolean
         plaintext: string

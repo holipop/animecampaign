@@ -1,3 +1,6 @@
+import ACActor from "../documents/ACActor.js"
+import ACItem from "../documents/ACItem.js"
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 /**
@@ -28,12 +31,18 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         hbs: { template: "systems/animecampaign/templates/dialog/stat-config.hbs" }
     }
 
-    /** The Stat being configured. */
+    /** 
+     * The Stat being configured. 
+     * @returns {Stat}
+     **/
     get stat () {
         return this.options.stat
     }
 
-    /** The document which has the Stat being configured. */
+    /**
+     * The document which has the Stat being configured. 
+     * @returns {ACActor|ACItem}
+     **/
     get document () {
         return this.options.document
     }
