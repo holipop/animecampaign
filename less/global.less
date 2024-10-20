@@ -1,6 +1,60 @@
 // main: ./animecampaign.less
 
-.material-symbols-outlined {
+// ---- Mixins ----
+
+#DebugOutline(@color: red) {
+    outline: 1px solid @color;
+}
+
+#Part() {
+    width: 85%;
+    margin: 0 auto;
+}
+
+#TextAreaSkinning() {
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    border: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+#InputSkinning() {
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    background: none;
+    transition: none;
+    color: @txt-color;
+    border-color: @txt-color;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    &:hover {
+        transition: none;
+        box-shadow: none;
+    }
+}
+
+#ButtonSkinning() {
+    #InputSkinning();
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+    padding: 0;
+}
+
+// ---- Global Rules ----
+
+.MSO {
     font-family: 'Material Symbols Outlined';
     font-weight: normal;
     font-style: normal;
@@ -17,7 +71,7 @@
         'FILL' 0,
         'wght' 400,
         'GRAD' 0,
-        'opsz' 24
+        'opsz' 24;
 }
 
 .animecampaign.sheet .window-content {
@@ -26,209 +80,43 @@
     padding: 0;
 }
 
-.animecampaign.sheet .form {
-    overflow-y: hidden;
-}
-.animecampaign.sheet .scrollable {
-    overflow-y: scroll;
-    height: calc(100% - 8rem);
-}
-
 .animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
     min-width: @character-sheet-width;
     min-height: @character-sheet-height;
 }
 
-.animecampaign.sheet .background {
-    position: relative;
+.animecampaign button.ACButton {
+    #ButtonSkinning();
 
-    &__lining {
-        position: absolute;
-        display: grid;
-        width: 100%;
-        pointer-events: none;
-    
-        opacity: .5;
-        
-        > * {
-            grid-area: 1 / 1 / 1 / 1;
-        }
-    }
-}
-
-.animecampaign.sheet .background .svg-bg {
-    width: 100%;
-}
-.animecampaign.sheet .background .svg-text {
-    width: 100%;
-
-    font: italic 13px "Gloock";
-    text-anchor: start;
-    text-transform: uppercase;
-
-    &__stroke {
-        stroke-width: .5px;
-        stroke-linejoin: round;
-    }
-    &__fill {
-        fill: @bg-color;
-    }
-}
-
-.animecampaign.sheet .input--shadow-out {
-    transition: text-shadow .2s;
-
-    &:hover, &:focus {
-        text-shadow: (1.5 * @rpx) (2.5 * @rpx) fade(@ac-color, 50%);
-    }
-}
-
-.animecampaign.sheet input,
-.animecampaign.sheet select,
-.animecampaign.sheet textarea {
-    border-radius: 2 * @rpx;
-}
-
-.animecampaign.sheet input:focus,
-.animecampaign.sheet select:focus {
-    outline: 2px solid fade(@ac-color, 50%);
-    transition: @button-transition
-}
-
-.animecampaign .round-button {
-    #AC.InputSkinning();
-    
     display: grid;
     place-items: center;
     height: 1.5rem;
     width: 1.5rem;
-    border: (1 * @rpx) solid currentColor;
-    border-radius: 100%;
-    padding: 0;
-    
-    background-color: @bg-color;
-    transition: @button-transition;
+    transition: .25s;
 
-    > .material-symbols-outlined {
+    &:hover {
+        box-shadow: 0 0 0 (1 * @rpx) currentColor;
+    }
+    &:active {
+        background-color: currentColor;
+    }
+    &:focus {
+        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+
+    }
+
+    .ACButton__Icon {
         font-size: 1.25rem;
-
+    
         font-variation-settings:
             'FILL' 0,
             'wght' 300,
             'GRAD' 0,
             'opsz' 24;
     }
-    &:hover {
-        box-shadow: 0 0 0 (1 * @rpx) currentColor;
-        border-color: currentColor;
-        background: @bg-color;
-        transition: @button-transition;
-    }
-    &:active {
-        background: currentColor;
-        transition: @button-transition;
-    }
-    &:focus {
-        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
-        transition: @button-transition;
-    }
 }
-
-.animecampaign .tab-button {
-    #AC.InputSkinning();
-    
-    display: flex;
-    flex: 0;
-    max-height: 1rem;
-    align-items: center;
+.animecampaign button.ACButton--Rounded {
     border: (1 * @rpx) solid currentColor;
-    border-radius: (2 * @rpx) (2 * @rpx) 0 0;
-    border-bottom: none;
-    
-    background-color: @bg-color;
-    transition: @button-transition;
-
-    > .material-symbols-outlined {
-        font-size: .75rem;
-
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 800,
-            'GRAD' 0,
-            'opsz' 48;
-    }
-    &__label {
-        #AC.TinyFont();
-
-        margin-left: .25rem;
-        white-space: nowrap;
-    }
-    &:hover {
-        box-shadow: 0 0 0 (1 * @rpx) currentColor;
-        border-color: currentColor;
-        background: @bg-color;
-        transition: @button-transition;
-    }
-    &:active {
-        background: currentColor;
-        transition: @button-transition;
-    }
-    &:focus {
-        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
-        transition: @button-transition;
-    }
+    border-radius: 25%;
 }
 
-.animecampaign .button {
-    #AC.InputSkinning();
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: .1rem;
-    height: 2rem;
-    border: (1 * @rpx) solid mix(@bg-color, @txt-color, 50%);
-    margin-top: .33rem;
-    transition: .075s;
-    z-index: 5;
-
-    font-family: "Libre Franklin";
-    font-weight: bold;
-    color: @txt-color;
-    background: transparent;
-
-    .material-symbols-outlined {
-        font-size: 1.25rem;
-
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 300,
-            'GRAD' 0,
-            'opsz' 24;
-    }
-    &:hover {
-        height: 2rem + .33rem;
-        border-bottom-width: .33rem;
-        border-color: mix(@bg-color, @txt-color, 50%);
-        margin-top: 0;
-        transition: @button-transition;
-
-        color: @txt-color;
-        background: none;
-    }
-    &:focus {
-        border-color: mix(@bg-color, @txt-color, 50%);
-        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
-        transition: @button-transition;
-    
-        color: @txt-color;
-        background: none;
-    }
-    &:active {
-        border-color: mix(@bg-color, @txt-color, 50%);
-        transition: @button-transition;
-        
-        color: @txt-color;
-        background-color: mix(@bg-color, @txt-color, 50%);
-    }
-}

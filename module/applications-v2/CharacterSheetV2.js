@@ -34,9 +34,10 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     /** The Handlebars templates for this application. These are rendered in order. */
     static PARTS = {
         summary:    { template: "systems/animecampaign/templates/character-v2/summary.hbs" },
+        /* 
         mainStats:  { template: "systems/animecampaign/templates/character-v2/main-stats.hbs" },
         statList:   { template: "systems/animecampaign/templates/stat-list.hbs" },
-        //nav:        { template: "systems/animecampaign/templates/character-v2/nav.hbs" },
+        nav:        { template: "systems/animecampaign/templates/character-v2/nav.hbs" }, */
     }
 
     /** The title of this application's window.
@@ -132,7 +133,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             staminaRatio = 0
         }
         staminaRatio *= 100
-        this.element.querySelector('[data-stam-bar]').style.height = `${staminaRatio}%`
+        //!!! this.element.querySelector('[data-stam-bar]').style.height = `${staminaRatio}%`
 
         // Disable the Add Stat button when the stats list is full.
         if (this.document.system.colorStats.length >= 8) {
@@ -146,9 +147,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     async _prepareContext () {
         return {
             ...super._prepareContext(),
-            ...this.document,
             config: CONFIG.AC,
             document: this.document,
+            system: this.document.system,
             palette: this.palette,
             stats: this.document.system.colorStats,
 
@@ -170,6 +171,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     async _processSubmitData(event, form, submitData) {
         const updates = submitData
+
+        console.log(updates);
 
         // intercept stat handling
         if ("stats" in updates.system) {

@@ -28,7 +28,7 @@ export default function SheetMixinV2 (Base) {
         }
 
         /** The set of colors derived from this document's color.
-         * @returns {*}
+         * @returns {{ primary: string, secondary: string, contrast: string }}
          */
         get palette () {
             const color = this.document.system.color
@@ -72,7 +72,7 @@ export default function SheetMixinV2 (Base) {
 
         /** Manually invokes the color picker. */
         static onInvokeColorPicker () {
-            this.element.querySelector('[data-color-button="target"]').click()
+            this.element.querySelector('.JS-InvokeColorPicker').click()
         }
 
         /** Invokes the file picker for editing images. */
@@ -201,17 +201,17 @@ export default function SheetMixinV2 (Base) {
             this.#dragDrop.forEach(d => d.bind(this.element))
 
             // Apply color palette
-            const coloredElements = this.element.querySelectorAll("[data-color]")
+            const coloredElements = this.element.querySelectorAll(".JS-Color")
             for (const element of coloredElements) {
-                const { color, colorProps } = element.dataset
-                const properties = (colorProps === undefined)
-                    ? `color: ${color};`
-                    : colorProps.split(" ").map(p => `${p}: ${color};`).join("")
-                element.style.cssText += properties
+                const { color, properties } = element.dataset
+                const css = (properties)
+                    ? properties.split(" ").map(p => `${p}: ${color};`).join("")
+                    : `color: ${color};`
+                element.style.cssText += css
             }
 
             // Resizes the height of a textarea dynamically as you type more.
-            const resizeableTextAreas = this.element.querySelectorAll("textarea[data-resize]")
+            const resizeableTextAreas = this.element.querySelectorAll("textarea.JS-Resize")
             for (const element of resizeableTextAreas) {
                 element.style.height = 0
                 element.style.height = element.scrollHeight + "px"
@@ -228,7 +228,7 @@ export default function SheetMixinV2 (Base) {
             }
 
             // Submits the form whenever the enter key is pressed.
-            const enterableElements = this.element.querySelectorAll("[data-enter]")
+            const enterableElements = this.element.querySelectorAll(".JS-Enter")
             for (const element of enterableElements) {
                 element.addEventListener("keypress", event => {
                     const escape = element.dataset.enter

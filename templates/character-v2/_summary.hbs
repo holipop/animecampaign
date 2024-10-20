@@ -1,0 +1,55 @@
+<section class="summary">
+
+    <div class="summary__img--wrapper">
+        <img class="summary__img" src="{{img}}" data-action="onEditImage" data-edit="img" data-color="{{palette.primary}}">
+        <div class="summary__img--edit">
+            <span class="material-symbols-outlined">edit_square</span>
+        </div>
+    </div>
+
+    <section class="summary__info">
+        <textarea class="summary__name input--shadow-out" name="name" spellcheck="false" placeholder="{{localize "AC.LABEL.Name"}}" data-enter data-resize>{{name}}</textarea>
+
+        <div class="label-list" data-color="{{palette.secondary}}">
+            <label class="label-list__name" for="name">{{localize "AC.LABEL.Name"}}</label>
+            <label class="label-list__class" for="class">{{localize "AC.LABEL.Class"}}</label>
+        </div>
+        <input class="summary__class" type="text" name="system.class" spellcheck="false" placeholder="{{localize "AC.LABEL.Class"}}" value="{{system.class}}">
+
+        <div class="summary__info-footer" data-color="{{palette.primary}}" data-color-props="background-color"> 
+            <select class="summary__type" name="system.type" data-color="{{palette.contrast}}">
+                <optgroup label="{{localize "AC.TYPE.Inscribed"}}">
+                    {{selectOptions config.inscribed localize=true selected=system.type}}
+                </optgroup>
+                
+                <optgroup label="{{localize "AC.TYPE.Mundie"}}">
+                    {{selectOptions config.mundie localize=true selected=system.type}}
+                </optgroup>
+            </select>
+            
+            <input class="summary__word" type="text" name="system.word" value="{{system.word}}" spellcheck="false" placeholder="{{localize "AC.LABEL.Word"}}" data-color="{{palette.primary}}" data-color-props="border-color">
+        </div>
+    </section>
+
+    <section class="summary-control">
+
+        <!-- ac-button icon="palette" action="invokeColor" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color"></ac-button -->
+
+        <!-- span class="summary-control__label" data-color="{{palette.secondary}}">{{localize "AC.LABEL.Control"}}</span>
+
+        <div class="summary-control__button-list" data-color="{{palette.secondary}}">
+
+            
+
+        </div -->
+
+        <input class="summary-control__hidden-color" type="color" name="system.color" value="{{system.color}}" data-color-button="target">
+        <button class="round-button" type="button" data-action="onInvokeColorPicker" data-color="{{palette.primary}}" data-tooltip="AC.TOOLTIP.Color">
+            <span class="material-symbols-outlined">palette</span>
+        </button>
+
+        <!-- ac-button icon="palette" action="invokeColorPicker" color="{{palette.primary}}"></ac-button -->
+
+    </section>
+
+</section>

@@ -1,0 +1,196 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet .summary {
+    position: relative;
+    display: flex;
+    height: 8rem;
+    width: 85%;
+    margin: 0 auto;
+
+    &__img {
+        #AC.InputSkinning();
+        
+        width: 5.75rem;
+        height: 5.75rem;
+        place-self: end end;
+        margin: .5rem;
+
+        background-color: currentColor;
+        border: 1 * @rpx solid currentColor;
+        box-shadow: (2 * @rpx) (4 * @rpx) currentColor;
+
+        &--wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+        &--edit {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            grid-area: 1 / 1 / -1 / -1;
+            place-self: end end;
+            pointer-events: none;
+            
+            > * {
+                position: relative;
+                font-size: .8rem;
+                right: .75rem;
+                bottom: .75rem;
+                padding: .1rem;
+                border: (1 * @rpx) solid @txt-color;
+                border-radius: 2 * @rpx;
+                transition: opacity .075s;
+
+                background-color: @bg-color;
+                color: @txt-color;
+                opacity: 0;
+            }
+        }
+        &:hover + .summary__img--edit > * {
+            opacity: .75;
+        }
+    }
+    &__info {
+        flex: 1;
+        display: grid;
+        align-self: end;
+    }
+    &__name {
+        #AC.InputSkinning();
+
+        min-height: 0px;
+        max-height: 70 * @rpx;
+        resize: none;
+        overflow-y: hidden;
+        padding: .4rem 0;
+        border-bottom: 1 * @rpx solid @txt-color;
+        
+        font: 2rem "Gloock";
+        line-height: .9;
+        color: @txt-color;
+    }
+    &__class {
+        #AC.InputSkinning();
+
+        height: 1.2rem;
+        padding: 0;
+        padding-left: 1.25rem;
+        margin-bottom: .25rem;
+        border-radius: 2 * @rpx;
+
+        font: italic bold .8rem "Libre Franklin";
+        color: @txt-color;
+    }
+    &__info-footer {
+        display: flex;
+        align-items: center;
+        margin-bottom: .5rem;
+        border-radius: 2 * @rpx;
+
+        > * {
+            #AC.InputSkinning();
+            height: 1.33rem;
+        }
+    }
+    &__type {
+        width: unset;
+        border-radius: 2 * @rpx;
+
+        font: 600 .8rem "Libre Franklin";
+        padding: 0;
+        padding-left: .2rem;
+        cursor: pointer;
+    }
+    &__word {
+        border: 1 * @rpx solid transparent;
+        border-radius: 2 * @rpx;
+        padding: 0 .25rem;
+        
+        font: bold 1rem "Philosopher";
+        background-color: @bg-color;
+        color: @txt-color;
+    }
+}
+
+.animecampaign.sheet .summary .summary__info .label-list {
+    position: relative;
+    width: 3rem;
+    justify-self: end;
+
+    > * {
+        #AC.TinyFont();
+
+        position: absolute;
+        width: 100%;
+        text-align: end;
+        pointer-events: none;
+    }
+    &__name {
+        top: -.66rem;
+    }
+}
+
+.animecampaign.sheet .summary .summary-control {
+    /* position: relative;
+    width: 3.25rem; */
+    padding-left: .25rem;
+    padding-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: .25rem;
+    
+    /* &__label {
+        #AC.TinyFont();
+        
+        text-align: end;
+    }
+    &__button-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        row-gap: .25rem;
+        padding: .25rem;
+        border: (1 * @rpx) solid currentColor;
+        border-left: 0; 
+        border-bottom: 0; 
+    } */
+    &__hidden-color {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+    &__button {
+        #AC.InputSkinning();
+        
+        display: grid;
+        place-items: center;
+        height: 1.5rem;
+        width: 1.5rem;
+        border: (1 * @rpx) solid currentColor;
+        border-radius: 100%;
+        padding: 0;
+        
+        background-color: @bg-color;
+        transition: .075s;
+
+        > .material-symbols-outlined {
+            font-size: 1.25rem;
+
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 300,
+                'GRAD' 0,
+                'opsz' 24;
+        }
+        &:hover {
+            box-shadow: 0 0 0 (1 * @rpx) currentColor;
+        }
+        &:active {
+            background-color: currentColor;
+        }
+        &:focus {
+            outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+        }
+    }
+}
