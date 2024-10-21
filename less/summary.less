@@ -30,15 +30,19 @@
         cursor: pointer;
     }
     .Summary__ImageEditIcon {
+        #ColorScheme({
+            border-color: "txt";
+            color: "txt";
+            background-color: "bg";
+        });
+
         font-size: .8rem;
         padding: .1rem;
         margin: .25rem;
-        border: (1 * @rpx) solid @txt-color;
+        border: (1 * @rpx) solid;
         border-radius: 2 * @rpx;
         transition: opacity .075s;
 
-        background-color: @bg-color;
-        color: @txt-color;
         opacity: 0;
     }
     .Summary__ImageEdit:hover > .Summary__ImageEditIcon {
@@ -55,13 +59,17 @@
 
     .Summary__Name {
         #TextAreaSkinning();
+        #ColorScheme({
+            border-color: "txt";
+            color: "txt";
+        });
 
         min-height: 0px;
         max-height: 70 * @rpx;
         resize: none;
         overflow-y: hidden;
         padding: .4rem 0;
-        border-bottom: 1 * @rpx solid @txt-color;
+        border-bottom: 1 * @rpx solid;
         
         font: 2rem "Gloock";
         line-height: .9;
@@ -69,6 +77,9 @@
     }
     .Summary__Class { 
         #InputSkinning();
+        #ColorScheme({
+            color: "txt";
+        });
 
         height: 1.2rem;
         padding: 0;
@@ -77,7 +88,6 @@
         border-radius: 2 * @rpx;
 
         font: italic bold .8rem "Libre Franklin";
-        color: @txt-color;
     }
     .Summary__Name::placeholder,
     .Summary__Class::placeholder {
@@ -110,6 +120,10 @@
     }
     .Summary__Word {
         #InputSkinning();
+        #ColorScheme({
+            background-color: "bg";
+            color: "txt";
+        });
 
         flex: 1;
         height: 1.33rem;
@@ -118,8 +132,6 @@
         padding: 0 .25rem;
         
         font: bold 1rem "Philosopher";
-        background-color: @bg-color;
-        color: @txt-color;
 
         // overrides
         border-color: @ac-color;

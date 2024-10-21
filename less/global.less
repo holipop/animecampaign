@@ -2,16 +2,29 @@
 
 // ---- Mixins ----
 
-#DebugOutline(@color: red) {
+#DebugOutline (@color: red) {
     outline: 1px solid @color;
 }
 
-#Part() {
+#Part () {
     width: 85%;
     margin: 0 auto;
 }
 
-#TextAreaSkinning() {
+#ColorScheme (@rules) {
+    .theme-dark & {
+        each(@rules, { 
+            @{key}: if(@value = "txt", @dark-txt-color, @dark-bg-color); 
+        });
+    }
+    .theme-light & {
+        each(@rules, { 
+            @{key}: if(@value = "txt", @light-txt-color, @light-bg-color); 
+        })
+    }
+}
+
+#TextAreaSkinning () {
     min-height: 0;
     padding: 0;
     border-radius: 0;
@@ -24,15 +37,18 @@
     }
 }
 
-#InputSkinning() {
+#InputSkinning () {
+    #ColorScheme({
+        color: "txt";
+        border-color: "bg";
+    });
+    
     min-height: 0;
     padding: 0;
     border-radius: 0;
     border: none;
     background: none;
     transition: none;
-    color: @txt-color;
-    border-color: @txt-color;
 
     &:focus {
         outline: none;
@@ -44,8 +60,9 @@
     }
 }
 
-#ButtonSkinning() {
+#ButtonSkinning () {
     #InputSkinning();
+
     display: block;
     align-items: unset;
     justify-content: unset;
@@ -74,10 +91,17 @@
         'opsz' 24;
 }
 
+.theme-dark .animecampaign.application {
+    background: fade(@dark-bg-color, 95%);
+}
+.theme-light .animecampaign.application {
+    background: fade(@light-bg-color, 95%);
+}
+
 .animecampaign.sheet .window-content {
-    background-image: none;
-    background: @bg-color;
     padding: 0;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 .animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
@@ -87,6 +111,9 @@
 
 .animecampaign button.ACButton {
     #ButtonSkinning();
+    #ColorScheme({
+        background-color: "bg";
+    });
 
     display: grid;
     place-items: center;
@@ -102,7 +129,6 @@
     }
     &:focus {
         outline: (2 * @rpx) fade(@ac-color, 50%) solid;
-
     }
 
     .ACButton__Icon {

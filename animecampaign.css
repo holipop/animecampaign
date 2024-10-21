@@ -147,10 +147,16 @@
   direction: ltr;
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
+.theme-dark .animecampaign.application {
+  background: rgba(63, 62, 62, 0.95);
+}
+.theme-light .animecampaign.application {
+  background: rgba(244, 243, 237, 0.95);
+}
 .animecampaign.sheet .window-content {
-  background-image: none;
-  background: #f4f3ed;
   padding: 0;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 .animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
   min-width: 600px;
@@ -162,8 +168,6 @@
   border: none;
   background: none;
   transition: none;
-  color: #1f1e1e;
-  border-color: #1f1e1e;
   display: block;
   align-items: unset;
   justify-content: unset;
@@ -174,6 +178,14 @@
   width: 1.5rem;
   transition: 0.25s;
 }
+.theme-dark .animecampaign button.ACButton {
+  color: #ebedf2;
+  border-color: #3f3e3e;
+}
+.theme-light .animecampaign button.ACButton {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
 .animecampaign button.ACButton:focus {
   outline: none;
   box-shadow: none;
@@ -181,6 +193,12 @@
 .animecampaign button.ACButton:hover {
   transition: none;
   box-shadow: none;
+}
+.theme-dark .animecampaign button.ACButton {
+  background-color: #3f3e3e;
+}
+.theme-light .animecampaign button.ACButton {
+  background-color: #f4f3ed;
 }
 .animecampaign button.ACButton:hover {
   box-shadow: 0 0 0 0.0625rem currentColor;
@@ -229,12 +247,20 @@
   font-size: 0.8rem;
   padding: 0.1rem;
   margin: 0.25rem;
-  border: 0.0625rem solid #1f1e1e;
+  border: 0.0625rem solid;
   border-radius: 0.125rem;
   transition: opacity 0.075s;
-  background-color: #f4f3ed;
-  color: #1f1e1e;
   opacity: 0;
+}
+.theme-dark .animecampaign.sheet .Summary__ImageEditIcon {
+  border-color: #ebedf2;
+  color: #ebedf2;
+  background-color: #3f3e3e;
+}
+.theme-light .animecampaign.sheet .Summary__ImageEditIcon {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+  background-color: #f4f3ed;
 }
 .animecampaign.sheet .Summary__ImageEdit:hover > .Summary__ImageEditIcon {
   opacity: 0.75;
@@ -257,7 +283,7 @@
   resize: none;
   overflow-y: hidden;
   padding: 0.4rem 0;
-  border-bottom: 0.0625rem solid #1f1e1e;
+  border-bottom: 0.0625rem solid;
   font: 2rem "Gloock";
   line-height: 0.9;
   color: #1f1e1e;
@@ -266,20 +292,34 @@
   outline: none;
   box-shadow: none;
 }
+.theme-dark .animecampaign.sheet .Summary__Name {
+  border-color: #ebedf2;
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .Summary__Name {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+}
 .animecampaign.sheet .Summary__Class {
   min-height: 0;
   border-radius: 0;
   border: none;
   background: none;
   transition: none;
-  border-color: #1f1e1e;
   height: 1.2rem;
   padding: 0;
   padding-left: 1.25rem;
   margin-bottom: 0.25rem;
   border-radius: 0.125rem;
   font: italic bold 0.8rem "Libre Franklin";
+}
+.theme-dark .animecampaign.sheet .Summary__Class {
+  color: #ebedf2;
+  border-color: #3f3e3e;
+}
+.theme-light .animecampaign.sheet .Summary__Class {
   color: #1f1e1e;
+  border-color: #f4f3ed;
 }
 .animecampaign.sheet .Summary__Class:focus {
   outline: none;
@@ -288,6 +328,12 @@
 .animecampaign.sheet .Summary__Class:hover {
   transition: none;
   box-shadow: none;
+}
+.theme-dark .animecampaign.sheet .Summary__Class {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .Summary__Class {
+  color: #1f1e1e;
 }
 .animecampaign.sheet .Summary__Name::placeholder,
 .animecampaign.sheet .Summary__Class::placeholder {
@@ -306,8 +352,6 @@
   border: none;
   background: none;
   transition: none;
-  color: #1f1e1e;
-  border-color: #1f1e1e;
   height: 1.33rem;
   width: min-content;
   border-radius: 0.125rem;
@@ -316,6 +360,14 @@
   padding-left: 0.2rem;
   cursor: pointer;
   color: #f4f3ed;
+}
+.theme-dark .animecampaign.sheet .Summary__Type {
+  color: #ebedf2;
+  border-color: #3f3e3e;
+}
+.theme-light .animecampaign.sheet .Summary__Type {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
 }
 .animecampaign.sheet .Summary__Type:focus {
   outline: none;
@@ -332,16 +384,21 @@
   border: none;
   background: none;
   transition: none;
-  border-color: #1f1e1e;
   flex: 1;
   height: 1.33rem;
   border: 0.0625rem solid #cd3232;
   border-radius: 0.125rem;
   padding: 0 0.25rem;
   font: bold 1rem "Philosopher";
-  background-color: #f4f3ed;
-  color: #1f1e1e;
   border-color: #cd3232;
+}
+.theme-dark .animecampaign.sheet .Summary__Word {
+  color: #ebedf2;
+  border-color: #3f3e3e;
+}
+.theme-light .animecampaign.sheet .Summary__Word {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
 }
 .animecampaign.sheet .Summary__Word:focus {
   outline: none;
@@ -350,6 +407,14 @@
 .animecampaign.sheet .Summary__Word:hover {
   transition: none;
   box-shadow: none;
+}
+.theme-dark .animecampaign.sheet .Summary__Word {
+  background-color: #3f3e3e;
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .Summary__Word {
+  background-color: #f4f3ed;
+  color: #1f1e1e;
 }
 .animecampaign.sheet .Summary__Buttons {
   padding-top: 1.25rem;

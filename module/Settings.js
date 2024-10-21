@@ -3,11 +3,12 @@
  */
 
 
-/** Loads the system-specific settings.
+/** 
+ * Loads the system-specific settings.
  */
 export function register () {
 
-    //* WORLD */
+    // ---- World ----
 
     // Internal System Migration Version
     game.settings.register('animecampaign', 'systemMigrationVersion', {
@@ -46,7 +47,7 @@ export function register () {
         onChange: () => {},
     })
 
-    //* CLIENT */
+    // ---- Client ----
 
     // Default Text Editor
     game.settings.register('animecampaign', 'defaultTextEditor', {
