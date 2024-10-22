@@ -1,0 +1,64 @@
+<section class="Stats">
+
+    <div class="Stats__MainStats">
+
+        <div class="Stats__MainStatsPadding"></div>
+
+        <div class="StatCard StatCard--Stamina">
+            
+            <div class="StatCard__Content">
+                <div class="StatCard__Header">
+                    <span class="StatCard__Icon MSO">favorite</span>
+                    <span class="StatCard__Name">{{localize "AC.STAT.Stamina"}}</span>
+                </div>
+                <div class="StatCard__Footer">
+                    <input class="StatCard__Input StatCard__Input--StaminaValue" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="0">
+                    <span class="StatCard__Label StatCard__Label--Divider">&verbar;</span>
+                    <input class="StatCard__Input StatCard__Input--StaminaMax" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="0">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="StatCard StatCard--Proficiency">
+            
+            <div class="StatCard__Content">
+                <div class="StatCard__Header">
+                    <span class="StatCard__Icon MSO">star</span>
+                    <span class="StatCard__Name">{{localize "AC.STAT.Proficiency"}}</span>
+                </div>
+                <div class="StatCard__Footer">
+                    <span class="StatCard__Label StatCard__Label--ClassLevel">{{system.classLevel}}</span>
+                    <input class="StatCard__Input StatCard__Input--ProficiencyValue" type="number" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="StatCard StatCard--Movement">
+            
+            <div class="StatCard__Content">
+                <div class="StatCard__Header">
+                    <span class="StatCard__Icon MSO">arrow_forward</span>
+                    <span class="StatCard__Name">{{localize "AC.STAT.Movement"}}</span>
+                </div>
+                <div class="StatCard__Footer">
+                    <input class="StatCard__Input StatCard__Input--Build" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="{{localize "AC.LABEL.Build"}}">
+                    <span class="StatCard__Label StatCard__Label--Divider">&verbar;</span>
+                    <input class="StatCard__Input StatCard__Input--MovementValue" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="0">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="Stats__MainStatsPadding">
+            <button class="ACButton ACButton--Rounded JS-Color" type="button" data-color="{{palette.secondary}}" data-properties="border-color color">
+                <div class="ACButton__Icon MSO">add</div>
+            </button>
+        </div>
+
+    </div>
+
+
+
+</section>

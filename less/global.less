@@ -24,6 +24,13 @@
     }
 }
 
+#FocusOutline () {
+    transition+: outline .25s;
+    &:focus {
+        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+    }
+}
+
 #TextAreaSkinning () {
     min-height: 0;
     padding: 0;
@@ -92,10 +99,10 @@
 }
 
 .theme-dark .animecampaign.application {
-    background: fade(@dark-bg-color, 95%);
+    background: fade(@dark-bg-color, 90%);
 }
 .theme-light .animecampaign.application {
-    background: fade(@light-bg-color, 95%);
+    background: fade(@light-bg-color, 90%);
 }
 
 .animecampaign.sheet .window-content {
@@ -111,6 +118,7 @@
 
 .animecampaign button.ACButton {
     #ButtonSkinning();
+    #FocusOutline();
     #ColorScheme({
         background-color: "bg";
     });
@@ -119,16 +127,13 @@
     place-items: center;
     height: 1.5rem;
     width: 1.5rem;
-    transition: .25s;
+    transition: box-shadow .25s, background-color .25s;
 
     &:hover {
         box-shadow: 0 0 0 (1 * @rpx) currentColor;
     }
     &:active {
         background-color: currentColor;
-    }
-    &:focus {
-        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
     }
 
     .ACButton__Icon {

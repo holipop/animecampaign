@@ -34,6 +34,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     /** The Handlebars templates for this application. These are rendered in order. */
     static PARTS = {
         summary:    { template: "systems/animecampaign/templates/character-v2/summary.hbs" },
+        stats:      { template: "systems/animecampaign/templates/character-v2/stats.hbs" },
         /* 
         mainStats:  { template: "systems/animecampaign/templates/character-v2/main-stats.hbs" },
         statList:   { template: "systems/animecampaign/templates/stat-list.hbs" },
@@ -172,7 +173,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     async _processSubmitData(event, form, submitData) {
         const updates = submitData
 
-        console.log(updates);
+        console.log(updates)
 
         // intercept stat handling
         if ("stats" in updates.system) {

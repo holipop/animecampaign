@@ -1,0 +1,144 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet {
+
+    .Stats {
+        #Part()
+    }
+
+    .Stats__MainStats {
+        display: flex;
+    }
+    .Stats__MainStatsPadding {
+        flex: 1;
+        display: grid;
+        place-items: end;
+    }
+    
+    .StatCard {
+        margin: 0 0.2rem;
+        padding: 1 * @rpx;
+        border-radius: 3 * @rpx;
+
+        background: @override;
+    }
+    .StatCard--Stamina {
+        background: linear-gradient(@stam-color-primary, @stam-color-secondary);
+    }
+    .StatCard--Proficiency {
+        background: linear-gradient(@prof-color-primary, @prof-color-secondary);
+    }
+    .StatCard--Movement {
+        background: linear-gradient(@move-color-primary, @move-color-secondary);
+    }
+
+    .StatCard__Content {
+        #ColorScheme({
+            background-color: "bg";
+        });
+
+        display: flex;
+        flex-direction: column;
+        width: 9rem;
+        height: 4.125rem;
+        border-radius: 2 * @rpx;
+    }
+
+    .StatCard__Header {
+        display: flex;
+        align-items: center;
+        margin: .1rem .15rem 0;
+        border-bottom: (1 * @rpx) solid;
+    }
+    .StatCard__Icon.MSO {
+        font-size: 0.8rem;
+        margin: 0 0.1rem;
+
+        font-variation-settings:
+            'FILL' 1,
+            'wght' 500,
+            'GRAD' 0,
+            'opsz' 24;
+    }
+    .StatCard__Name {
+        #ColorScheme({
+            color: "txt";
+            border-color: "txt";
+        });
+
+        font: 0.75rem "Libre Franklin";
+        text-transform: uppercase;
+    }
+
+    .StatCard__Footer {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: .4rem;
+    }
+    .StatCard__Input {
+        #InputSkinning();
+        #FocusOutline();
+        #ColorScheme({
+            color: "txt";
+        });
+        
+        font: bold 2.25rem "Philosopher";
+        border-radius: 2 * @rpx;
+        text-overflow: clip;
+    }
+    .StatCard__Input::placeholder {
+        opacity: .5;
+    }
+    .StatCard__Label {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        font: 1rem "Libre Franklin";
+        opacity: .5;
+    }
+    .StatCard__Label--Divider {
+        margin: 0 .2rem;
+    }
+
+    .StatCard__Input--StaminaValue {
+        flex: 2;
+
+        text-align: end;
+    }
+    .StatCard__Input--StaminaMax {
+        flex: 1;
+
+        font-size: 1.25rem;
+        font-weight: normal;
+    }
+
+    .StatCard__Input--ProficiencyValue {
+        text-align: end;
+        padding: 0 .3rem;
+
+        font-size: 2.66rem;
+    }
+    .StatCard__Label--ClassLevel {
+        width: 1.75rem;
+
+        font: italic 1.5rem "Gloock";
+        align-self: flex-end;
+    }
+
+    .StatCard__Input--Build {
+        flex: 2;
+
+        font-size: 1rem;
+        font-weight: normal;
+    }
+    .StatCard__Input--MovementValue {
+        flex: 1.5;
+        text-align: end;
+        padding: 0 .3rem;
+
+        font-size: 2.66rem;
+    }
+
+}

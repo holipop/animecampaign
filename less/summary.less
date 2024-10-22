@@ -59,6 +59,7 @@
 
     .Summary__Name {
         #TextAreaSkinning();
+        #FocusOutline();
         #ColorScheme({
             border-color: "txt";
             color: "txt";
@@ -70,13 +71,14 @@
         overflow-y: hidden;
         padding: .4rem 0;
         border-bottom: 1 * @rpx solid;
+        border-radius: 2 * @rpx;
         
         font: 2rem "Gloock";
         line-height: .9;
-        color: @txt-color;
     }
     .Summary__Class { 
         #InputSkinning();
+        #FocusOutline();
         #ColorScheme({
             color: "txt";
         });
@@ -100,26 +102,25 @@
         margin-bottom: .5rem;
         border-radius: 2 * @rpx;
 
-        // overrides
-        background-color: @ac-color;
+        background-color: @override;
     }
     .Summary__Type {
         #InputSkinning();
+        #FocusOutline();
 
         height: 1.33rem;
         width: min-content;
-        border-radius: 2 * @rpx;
-
-        font: 600 .8rem "Libre Franklin";
         padding: 0;
         padding-left: .2rem;
+        border-radius: 2 * @rpx;
         cursor: pointer;
 
-        // overrides
-        color: @bg-color;
+        font: 600 .8rem "Libre Franklin";
+        color: @override;
     }
     .Summary__Word {
         #InputSkinning();
+        #FocusOutline();
         #ColorScheme({
             background-color: "bg";
             color: "txt";
@@ -127,14 +128,11 @@
 
         flex: 1;
         height: 1.33rem;
-        border: 1 * @rpx solid @ac-color;
+        border: 1 * @rpx solid @override;
         border-radius: 2 * @rpx;
         padding: 0 .25rem;
         
         font: bold 1rem "Philosopher";
-
-        // overrides
-        border-color: @ac-color;
     }
 
     .Summary__Buttons {
