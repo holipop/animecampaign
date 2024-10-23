@@ -13,7 +13,7 @@
                 </div>
                 <div class="StatCard__Footer">
                     <input class="StatCard__Input StatCard__Input--StaminaValue" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="0">
-                    <span class="StatCard__Label StatCard__Label--Divider">&verbar;</span>
+                    <span class="StatCard__Label StatCard__Label--Divider">&sol;</span>
                     <input class="StatCard__Input StatCard__Input--StaminaMax" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="0">
                 </div>
             </div>
@@ -44,7 +44,6 @@
                 </div>
                 <div class="StatCard__Footer">
                     <input class="StatCard__Input StatCard__Input--Build" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="{{localize "AC.LABEL.Build"}}">
-                    <span class="StatCard__Label StatCard__Label--Divider">&verbar;</span>
                     <input class="StatCard__Input StatCard__Input--MovementValue" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="0">
                 </div>
             </div>
@@ -52,13 +51,69 @@
         </div>
 
         <div class="Stats__MainStatsPadding">
-            <button class="ACButton ACButton--Rounded JS-Color" type="button" data-color="{{palette.secondary}}" data-properties="border-color color">
+
+            <button class="ACButton ACButton--Rounded JS-Color" type="button" data-action="onStatAdd" data-color="{{palette.secondary}}" data-properties="border-color color">
                 <div class="ACButton__Icon MSO">add</div>
             </button>
+
         </div>
 
     </div>
 
+    {{#if stats.length}}
+        <ul class="Stats__List">
 
+            {{#each stats as |stat index|}}
+
+                <li class="StatEntry JS-Stat" data-stat="{{index}}">
+
+                    <div class="StatEntry__Info">
+                        <div class="StatEntry__ColorWrapper">
+                            <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
+                        </div>
+
+                        <div class="StatEntry__ImageWrapper">
+                            <img class="StatEntry__Image" src="{{stat.img}}">
+                        </div>
+                        
+                        <span class="StatEntry__Tag">{{stat.tag}}</span>
+                        <div class="StatEntry__Divider">&VerticalBar;</div>
+                    </div>
+                    
+                    <div class="StatEntry__Inputs">
+
+                        {{#if (eq stat.view "value")}}
+                            <input class="StatEntry__Input StatEntry__Input--Value" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                        {{/if}}
+
+                        {{#if (eq stat.view "resource")}}
+                            <input class="StatEntry__Input StatEntry__Input--Numerator JS-ResizeInput" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                            <span class="StatCard__Label StatCard__Label--Divider">&sol;</span>
+                            <input class="StatEntry__Input StatEntry__Input--Denominator" type="number" name="system.stats.{{index}}.max" value="{{stat.max}}" placeholder="0">
+                        {{/if}}
+
+                        {{#if (eq stat.view "label")}}
+                            <input class="StatEntry__Input StatEntry__Input--Label" type="text" name="system.stats.{{index}}.label" value="{{stat.label}}" placeholder="...">
+                        {{/if}}
+
+                    </div>
+                    
+                    <div class="StatEntry__Buttons">
+
+                        <button class="ACButton ACButton--Circle JS-Color" type="button" data-action="onStatEdit" data-color="{{@root.palette.secondary}}" data-properties="border-color color">
+                            <div class="ACButton__Icon MSO">edit</div>
+                        </button>
+
+                        <button class="ACButton ACButton--Circle ACButton--Delete" type="button" data-action="onStatDelete">
+                            <div class="ACButton__Icon MSO">close</div>
+                        </button>
+
+                    </div>
+                </li>
+
+            {{/each}}
+
+        </ul>
+    {{/if}}
 
 </section>

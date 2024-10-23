@@ -110,7 +110,7 @@ export default function SheetMixinV2 (Base) {
          * @param {HTMLElement} target
          */
         static onStatEdit (event, target) {
-            const index = target.closest('[data-stat]').dataset.stat
+            const index = target.closest('.JS-Stat').dataset.stat
             const stat = this.document.system.colorStats[index];
 
             new StatConfigV2({ 
@@ -130,7 +130,7 @@ export default function SheetMixinV2 (Base) {
          * @param {HTMLElement} target
          */
         static async onStatDelete (event, target) {            
-            const index = target.closest('[data-stat]').dataset.stat
+            const index = target.closest('.JS-Stat').dataset.stat
             const { tag, color } = this.document.system.colorStats[index]
 
             const confirm = await ACDialogV2.confirm({
@@ -211,7 +211,7 @@ export default function SheetMixinV2 (Base) {
             }
 
             // Resizes the height of a textarea dynamically as you type more.
-            const resizeableTextAreas = this.element.querySelectorAll("textarea.JS-Resize")
+            const resizeableTextAreas = this.element.querySelectorAll("textarea.JS-ResizeTextArea")
             for (const element of resizeableTextAreas) {
                 element.style.height = 0
                 element.style.height = element.scrollHeight + "px"
@@ -224,6 +224,19 @@ export default function SheetMixinV2 (Base) {
                     element.style.height = element.scrollHeight + "px"
 
                     // parentDiv.scrollTop(initScrollY)
+                })
+            }
+
+            // Resizes the width of an input as you type more.
+            /** @type {HTMLElement[]} */
+            const resizeableInputs = this.element.querySelectorAll("input.JS-ResizeInput")
+            for (const element of resizeableInputs) {
+                element.style.width = 0
+                element.style.width = element.scrollWidth + "px"
+
+                element.addEventListener("input", () => {
+                    element.style.width = 0
+                    element.style.width = element.scrollWidth + "px"
                 })
             }
 

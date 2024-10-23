@@ -11,16 +11,31 @@
     margin: 0 auto;
 }
 
-#ColorScheme (@rules) {
+#ColorScheme (@rules, @opacity: 100%) {
     .theme-dark & {
         each(@rules, { 
-            @{key}: if(@value = "txt", @dark-txt-color, @dark-bg-color); 
+            @{key}: fade(
+                if(@value = "txt", @dark-txt-color, @dark-bg-color),
+                @opacity
+            ); 
         });
     }
     .theme-light & {
         each(@rules, { 
-            @{key}: if(@value = "txt", @light-txt-color, @light-bg-color); 
+            @{key}: fade(
+                if(@value = "txt", @light-txt-color, @light-bg-color),
+                @opacity
+            ); 
         })
+    }
+}
+
+#ContrastImageFilter () {
+    .theme-dark & {
+        filter: brightness(0) saturate(100%) invert(100%);
+    }
+    .theme-light & {
+        filter: brightness(0) saturate(100%);
     }
 }
 
@@ -76,6 +91,12 @@
     padding: 0;
 }
 
+#ListSkinning () {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 // ---- Global Rules ----
 
 .MSO {
@@ -98,11 +119,10 @@
         'opsz' 24;
 }
 
-.theme-dark .animecampaign.application {
-    background: fade(@dark-bg-color, 90%);
-}
-.theme-light .animecampaign.application {
-    background: fade(@light-bg-color, 90%);
+.animecampaign.application {
+    #ColorScheme(@opacity: 90%, {
+        background: "bg";
+    })
 }
 
 .animecampaign.sheet .window-content {
@@ -148,6 +168,30 @@
 }
 .animecampaign button.ACButton--Rounded {
     border: (1 * @rpx) solid currentColor;
-    border-radius: 25%;
+    border-radius: 12.5%;
+}
+.animecampaign button.ACButton--Circle {
+    height: 1.25rem;
+    width: 1.25rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 50%;
+
+    .ACButton__Icon {
+        font-size: .85rem;
+
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 250,
+            'GRAD' 0,
+            'opsz' 24;
+    }
+}
+.animecampaign button.ACButton.ACButton--Delete {
+    #ColorScheme({
+        color: "txt"
+    });
+
+    background-color: @delete-color;
+    border-color: @delete-color;
 }
 
