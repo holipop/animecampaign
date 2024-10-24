@@ -136,6 +136,11 @@
     min-height: @character-sheet-height;
 }
 
+.animecampaign .Wrapper {
+    position: absolute;
+    z-index: 1;
+}
+
 .animecampaign button.ACButton {
     #ButtonSkinning();
     #FocusOutline();
@@ -154,6 +159,9 @@
     }
     &:active {
         background-color: currentColor;
+    }
+    &:disabled {
+        opacity: .25;
     }
 
     .ACButton__Icon {
@@ -194,4 +202,3 @@
     background-color: @delete-color;
     border-color: @delete-color;
 }
-

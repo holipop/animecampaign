@@ -180,28 +180,45 @@
     .StatEntry__Info {
         width: 30%;
         display: flex;
+
+        &:hover {
+            cursor: grab;
+        }
     }
 
-    .StatEntry__ColorWrapper {
-        position: absolute;
-        z-index: 1;
+    .StatEntry__DragIndicator {
+        font-size: 1rem;
+        line-height: 1.2;
+        transition: opacity .1s;
+        z-index: 2;
+
+        opacity: 0;
+
+        .theme-dark & {
+            text-shadow: 
+                0 0 .5rem @dark-bg-color,
+                0 0 .5rem @dark-bg-color;
+        }
+        .theme-light & {
+            text-shadow: 
+                0 0 .5rem @light-bg-color,
+                0 0 .5rem @light-bg-color;
+        }
     }
+    .StatEntry:hover .StatEntry__DragIndicator {
+        opacity: .75;
+    }
+
     .StatEntry__Color {
         position: relative;
-        top: .35rem;
         right: .2rem;
 
         font: italic 1.5rem "Gloock";
         text-transform: uppercase;
+        line-height: 0;
+        color: @override;
         opacity: .5;
-        clip-path: inset(0 -20% 32% 0);
-
-        .dark-theme & {
-            text-shadow: 0 0 .25rem @dark-bg-color;
-        }
-        .light-theme & {
-            text-shadow: 0 0 .25rem @light-bg-color;
-        }
+        // clip-path: inset(0 -20% 32% 0);
     }
     .StatEntry__Color--red      { color: @red-stat }
     .StatEntry__Color--blue     { color: @blue-stat }
@@ -212,19 +229,17 @@
     .StatEntry__Color--purple   { color: @purple-stat }
     .StatEntry__Color--grey     { color: @grey-stat }
 
-    .StatEntry__ImageWrapper {
-        position: absolute;
-        z-index: 1;
-    }
     .StatEntry__Image {
         position: relative;
-        height: 2.5rem;
+        height: 2rem;
         width: 2.5rem;
         bottom: .4rem;
+        left: 1rem;
         border: none;
+        background-position: center;
+        object-fit: cover;
         
         opacity: .25;
-        clip-path: inset(0 0 20% 0);
     }
     .StatEntry__Image--CustomImage {
         #ContrastImageFilter();
@@ -246,11 +261,15 @@
         text-align: end;
         text-overflow: ellipsis;
 
-        .dark-theme & {
-            text-shadow: 0 0 .25rem @dark-bg-color;
+        .theme-dark & {
+            text-shadow: 
+                0 0 .25rem @dark-bg-color,
+                0 0 .25rem @dark-bg-color;
         }
-        .light-theme & {
-            text-shadow: 0 0 .25rem @light-bg-color;
+        .theme-light & {
+            text-shadow: 
+                0 0 .25rem @light-bg-color,
+                0 0 .25rem @light-bg-color;
         }
     }
     .StatEntry__Divider {

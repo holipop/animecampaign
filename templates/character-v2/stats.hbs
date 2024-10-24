@@ -52,7 +52,7 @@
 
         <div class="Stats__MainStatsPadding">
 
-            <button class="ACButton ACButton--Rounded JS-Color" type="button" data-action="onStatAdd" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <button class="ACButton ACButton--Rounded JS-DisableStatAdd JS-Color" type="button" data-action="onStatAdd" data-color="{{palette.secondary}}" data-properties="border-color color">
                 <div class="ACButton__Icon MSO">add</div>
             </button>
 
@@ -61,18 +61,20 @@
     </div>
 
     {{#if stats.length}}
-        <ul class="Stats__List">
+        <ul class="Stats__List JS-Drop">
 
             {{#each stats as |stat index|}}
 
-                <li class="StatEntry JS-Stat" data-stat="{{index}}">
+                <li class="StatEntry JS-Stat JS-Drag" data-stat="{{index}}" data-drag="stat">
 
                     <div class="StatEntry__Info">
-                        <div class="StatEntry__ColorWrapper">
-                            <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
-                        </div>
+                        <span class="StatEntry__DragIndicator MSO">drag_indicator</span>
 
-                        <div class="StatEntry__ImageWrapper">
+                        <!-- div class="Wrapper">
+                            <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
+                        </div -->
+
+                        <div class="Wrapper">
                             <img class="StatEntry__Image" src="{{stat.img}}">
                         </div>
                         

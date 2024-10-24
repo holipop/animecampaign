@@ -1,0 +1,66 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 90%;
+    margin: .2rem auto;
+    padding-bottom: .25rem;
+    border-bottom: (1 * @rpx) solid @txt-color;
+
+    &__button {
+        width: 2rem;
+        border-color: currentColor;
+
+        .material-symbols-outlined {
+            font-size: 1.75rem;
+
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 200,
+                'GRAD' 0,
+                'opsz' 24;
+            
+            &--active {
+                display: none;
+                
+                color: @bg-color;
+                font-family: "Material Symbols Outlined";
+                font-variation-settings:
+                    'FILL' 1,
+                    'wght' 200,
+                    'GRAD' 0,
+                    'opsz' 24;
+            }
+        }
+        &.active {
+            background-color: currentColor;
+
+            .material-symbols-outlined { 
+                display: none; 
+            }
+            .material-symbols-outlined--active {
+                display: block;
+            }
+        }
+        &:active {
+            background-color: transparent;
+        }
+    }
+    &__current-tab {
+        height: 2rem;
+        flex: 1;
+        margin: .33rem .25rem 0;
+        padding: 0 .33rem;
+        border-left: (1 * @rpx) solid fade(@txt-color, 50%);
+
+        font: 1.5rem "Gloock";
+        text-transform: uppercase;
+        color: @txt-color;
+
+        &--initial {
+            font-size: 1.85rem;
+        }
+    }
+}

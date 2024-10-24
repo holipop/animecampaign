@@ -1,66 +1,51 @@
 // main: ./animecampaign.less
 
-.animecampaign.sheet .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    width: 90%;
-    margin: .2rem auto;
-    padding-bottom: .25rem;
-    border-bottom: (1 * @rpx) solid @txt-color;
+.animecampaign.sheet {
 
-    &__button {
-        width: 2rem;
-        border-color: currentColor;
+    .Navigation {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
 
-        .material-symbols-outlined {
-            font-size: 1.75rem;
-
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 200,
-                'GRAD' 0,
-                'opsz' 24;
-            
-            &--active {
-                display: none;
-                
-                color: @bg-color;
-                font-family: "Material Symbols Outlined";
-                font-variation-settings:
-                    'FILL' 1,
-                    'wght' 200,
-                    'GRAD' 0,
-                    'opsz' 24;
-            }
-        }
-        &.active {
-            background-color: currentColor;
-
-            .material-symbols-outlined { 
-                display: none; 
-            }
-            .material-symbols-outlined--active {
-                display: block;
-            }
-        }
-        &:active {
-            background-color: transparent;
-        }
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: .25rem 7.5%;
+        margin: .33rem 0;
+        border-bottom: (1 * @rpx) solid;
     }
-    &__current-tab {
+
+    .Navigation__Tabs {
+        display: flex;
+        gap: .2rem;
+    }
+    button.ACButton--Tab {
+        position: relative;
         height: 2rem;
-        flex: 1;
-        margin: .33rem .25rem 0;
-        padding: 0 .33rem;
-        border-left: (1 * @rpx) solid fade(@txt-color, 50%);
+        width: 2rem;
+        bottom: 0;
+        margin-top: .25rem;
+        border: (1 * @rpx) solid currentColor;
+        border-radius: 6.25%;
+        transition: 
+            box-shadow .1s,
+            bottom .1s;
 
-        font: 1.5rem "Gloock";
-        text-transform: uppercase;
-        color: @txt-color;
-
-        &--initial {
-            font-size: 1.85rem;
-        }
+        box-shadow: 0 0 0 currentColor;
     }
+    button.ACButton--Tab.active {
+        bottom: .25rem;
+        box-shadow: 0 .25rem 0 currentColor;
+        text-shadow: none; // FUCK OFFFF
+        outline: none;
+    }
+
+    .Navigation__TabName {
+        flex: 1;
+        padding: 0 .75rem;
+        margin-top: .25rem;
+
+        font: 1.25rem "Gloock";
+    }
+
 }

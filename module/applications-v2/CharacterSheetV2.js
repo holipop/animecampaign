@@ -4,6 +4,16 @@ const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
 
 /**
+ * @typedef ApplicationTab
+ * @property {string} id         The ID of the tab. Unique per group.
+ * @property {string} group      The group this tab belongs to.
+ * @property {string} icon       An icon to prepend to the tab
+ * @property {string} label      Display text, will be run through `game.i18n.localize`
+ * @property {boolean} active    If this is the active tab, set with `this.tabGroups[group] === id`
+ * @property {string} css        "active" or "" based on the above boolean
+ */
+
+/**
  * The application for Characters.
  */
 export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMixinV2(ActorSheetV2)) {
@@ -28,17 +38,20 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         form: {
             submitOnChange: true,
         },
-        dragDrop: [{ dragSelector: '[data-drag]', dropSelector: '[data-drop]' }],
+        dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
     /** The Handlebars templates for this application. These are rendered in order. */
     static PARTS = {
-        summary:    { template: "systems/animecampaign/templates/character-v2/summary.hbs" },
-        stats:      { template: "systems/animecampaign/templates/character-v2/stats.hbs" },
-        /* 
-        mainStats:  { template: "systems/animecampaign/templates/character-v2/main-stats.hbs" },
-        statList:   { template: "systems/animecampaign/templates/stat-list.hbs" },
-        nav:        { template: "systems/animecampaign/templates/character-v2/nav.hbs" }, */
+        summary: {
+            template: "systems/animecampaign/templates/character-v2/summary.hbs" 
+        },
+        stats: { 
+            template: "systems/animecampaign/templates/character-v2/stats.hbs",
+        },
+        nav: {
+            template: "systems/animecampaign/templates/character-v2/nav.hbs",
+        },
     }
 
     /** The title of this application's window.
@@ -46,6 +59,11 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     get title () {
         return `${this.document.name}`
+    }
+
+    /** @override */
+    tabGroups = {
+        character: "kit"
     }
 
     /** Callback actions which occur at the beginning of a drag start workflow.
@@ -126,6 +144,11 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     _onRender(context, options) {
         super._onRender(context, options)
 
+        // Set the name of the initial tab. Foundry code is so damn ugly.
+        const tabs = this.getTabs();
+        const label = tabs[this.tabGroups.character].label
+        this.element.querySelector(".JS-TabName").textContent = game.i18n.localize(label)
+
         // Make the little stamina bar change amount :3
         let staminaRatio = this.document.system.staminaRatio
         if (staminaRatio >= 1) {
@@ -138,8 +161,37 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         // Disable the Add Stat button when the stats list is full.
         if (this.document.system.colorStats.length >= 8) {
-            this.element.querySelector(`[data-action="onStatAdd"]`).style.display = 'none'
+            this.element.querySelector(`.JS-DisableStatAdd`).setAttribute("disabled", "disabled")
         }
+    }
+
+    /**
+     * Returns a record of navigation tabs.
+     * @returns {Record<string, ApplicationTab>}
+     */
+    getTabs() {
+        const tabs = {
+            kit:        { id: "kit", group: "character", icon: "check", label: "AC.NAV.Kit" },
+            biography:  { id: "biography", group: "character", icon: "person", label: "AC.NAV.Biography" }
+        }
+        for (const tab of Object.values(tabs)) {
+            tab.active = this.tabGroups[tab.group] === tab.id
+            tab.css = tab.active ? "active" : ""
+        }
+        return tabs
+    }
+
+    /** 
+     * This is really the only place changing the tab name can be done.
+     * @override 
+     */
+    changeTab (tab, group, options) {
+        const tabs = this.getTabs();
+        const label = tabs[tab].label
+
+        this.element.querySelector(".JS-TabName").textContent = game.i18n.localize(label)
+
+        super.changeTab(tab, group, options)
     }
 
     /** The context passed to each Handlebars template.
@@ -153,6 +205,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             system: this.document.system,
             palette: this.palette,
             stats: this.document.system.colorStats,
+            tabs: this.getTabs(),
 
             /* svg: {
                 bg: this.svgBackground,
