@@ -43,14 +43,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     /** The Handlebars templates for this application. These are rendered in order. */
     static PARTS = {
-        summary: {
-            template: "systems/animecampaign/templates/character-v2/summary.hbs" 
-        },
-        stats: { 
-            template: "systems/animecampaign/templates/character-v2/stats.hbs",
-        },
-        nav: {
-            template: "systems/animecampaign/templates/character-v2/nav.hbs",
+        template: {
+            template: "systems/animecampaign/templates/character-v2/template.hbs",
+            scrollable: [".Scrollable"]
         },
     }
 

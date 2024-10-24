@@ -11,6 +11,16 @@
     margin: 0 auto;
 }
 
+#SingleCellGrid () {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    > * {
+        grid-area: 1 / 1 / -1 / -1;
+    }
+}
+
 #ColorScheme (@rules, @opacity: 100%) {
     .theme-dark & {
         each(@rules, { 
@@ -133,11 +143,23 @@
 
 .animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
     min-width: @character-sheet-width;
-    min-height: @character-sheet-height;
+    //min-height: @character-sheet-height;
 }
 
-.animecampaign .Wrapper {
+.animecampaign .Template {
+    overflow-y: scroll;
+}
+
+.animecampaign .Wrapper--Fixed {
+    position: fixed;
+    z-index: 1;
+}
+.animecampaign .Wrapper--Absolute {
     position: absolute;
+    z-index: 1;
+}
+.animecampaign .Wrapper--Relative {
+    position: relative;
     z-index: 1;
 }
 

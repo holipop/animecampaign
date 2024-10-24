@@ -178,8 +178,10 @@
     }
 
     .StatEntry__Info {
+        #SingleCellGrid();
+
         width: 30%;
-        display: flex;
+        align-items: center;
 
         &:hover {
             cursor: grab;
@@ -187,6 +189,7 @@
     }
 
     .StatEntry__DragIndicator {
+        grid-column: 0;
         font-size: 1rem;
         line-height: 1.2;
         transition: opacity .1s;
@@ -233,7 +236,6 @@
         position: relative;
         height: 2rem;
         width: 2.5rem;
-        bottom: .4rem;
         left: 1rem;
         border: none;
         background-position: center;
@@ -254,6 +256,7 @@
         overflow: hidden;
         white-space: nowrap;
         padding: .1rem .25rem;
+        margin-left: 1rem;
         z-index: 2;
 
         font: .8rem "Libre Franklin";
@@ -273,8 +276,7 @@
         }
     }
     .StatEntry__Divider {
-        position: relative;
-        top: .5rem;
+        grid-column: -1;
 
         font: 1.5rem "Libre Franklin";
         line-height: 0;

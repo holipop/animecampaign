@@ -77,12 +77,10 @@ Hooks.once('init', () => {
     Settings.register();
 
     const partials = {
-        "stat-list": "systems/animecampaign/templates/stat-list.hbs",
-
-        "character.summary": "systems/animecampaign/templates/character/summary.hbs",
-        "character.main-stats": "systems/animecampaign/templates/character/main-stats.hbs",
-        "character.nav": "systems/animecampaign/templates/character/nav.hbs",
-        "character.kit": "systems/animecampaign/templates/character/kit.hbs",
+        "character.summary": "systems/animecampaign/templates/character-v2/summary.hbs",
+        "character.stats": "systems/animecampaign/templates/character-v2/stats.hbs",
+        "character.nav": "systems/animecampaign/templates/character-v2/nav.hbs",
+        "character.kit": "systems/animecampaign/templates/character-v2/kit.hbs",
 
         "feature.details": "systems/animecampaign/templates/feature/details.hbs",
     }
