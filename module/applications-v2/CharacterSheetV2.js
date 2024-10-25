@@ -139,10 +139,11 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     _onRender(context, options) {
         super._onRender(context, options)
 
-        // Set the name of the initial tab. Foundry code is so damn ugly.
+        // Set the initial tab. Foundry code is so damn ugly.
         const tabs = this.getTabs();
-        const label = tabs[this.tabGroups.character].label
-        this.element.querySelector(".JS-TabName").textContent = game.i18n.localize(label)
+        const tab = tabs[this.tabGroups.character]
+        this.element.querySelector(".JS-TabName").textContent = game.i18n.localize(tab.label)
+        this.element.querySelector(`.tab[data-tab="${tab.id}"]`).classList.add("active")
 
         // Make the little stamina bar change amount :3
         let staminaRatio = this.document.system.staminaRatio

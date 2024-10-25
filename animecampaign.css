@@ -162,19 +162,23 @@
   min-width: 600px;
 }
 .animecampaign .Template {
+  height: 100%;
+}
+.animecampaign .Scrollable {
   overflow-y: scroll;
+  height: calc(100% - 8.5rem);
+  scrollbar-color: currentColor transparent;
+  scrollbar-width: thin;
 }
-.animecampaign .Wrapper--Fixed {
-  position: fixed;
-  z-index: 1;
+.theme-dark .animecampaign .Scrollable {
+  color: #ebedf2;
 }
-.animecampaign .Wrapper--Absolute {
-  position: absolute;
-  z-index: 1;
+.theme-light .animecampaign .Scrollable {
+  color: #1f1e1e;
 }
-.animecampaign .Wrapper--Relative {
-  position: relative;
-  z-index: 1;
+.animecampaign .Scrollable::-webkit-scrollbar-thumb {
+  background-color: currentColor;
+  border-color: currentColor;
 }
 .animecampaign button.ACButton {
   min-height: 0;
@@ -675,8 +679,8 @@
 }
 .animecampaign.sheet .StatEntry__Info {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   width: 30%;
   align-items: center;
 }
@@ -777,6 +781,8 @@
   text-shadow: 0 0 0.25rem #f4f3ed, 0 0 0.25rem #f4f3ed;
 }
 .animecampaign.sheet .StatEntry__Divider {
+  position: relative;
+  bottom: 0.1rem;
   grid-column: -1;
   font: 1.5rem "Libre Franklin";
   line-height: 0;

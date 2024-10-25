@@ -178,7 +178,7 @@
     }
 
     .StatEntry__Info {
-        #SingleCellGrid();
+        #GenerateGrid(@columns: 2);
 
         width: 30%;
         align-items: center;
@@ -276,6 +276,8 @@
         }
     }
     .StatEntry__Divider {
+        position: relative;
+        bottom: .1rem;
         grid-column: -1;
 
         font: 1.5rem "Libre Franklin";

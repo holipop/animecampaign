@@ -11,10 +11,10 @@
     margin: 0 auto;
 }
 
-#SingleCellGrid () {
+#GenerateGrid (@columns: 1, @rows: 1) {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(@columns, 1fr);
+    grid-template-rows: repeat(@rows, 1fr);
 
     > * {
         grid-area: 1 / 1 / -1 / -1;
@@ -147,21 +147,25 @@
 }
 
 .animecampaign .Template {
+    height: 100%;
+}
+.animecampaign .Scrollable {
+    #ColorScheme({
+        color: "txt";
+    });
+
     overflow-y: scroll;
+    height: calc(100% - @summary-height);
+
+    scrollbar-color: currentColor transparent;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar-thumb {
+        background-color: currentColor;
+        border-color: currentColor;
+    }
 }
 
-.animecampaign .Wrapper--Fixed {
-    position: fixed;
-    z-index: 1;
-}
-.animecampaign .Wrapper--Absolute {
-    position: absolute;
-    z-index: 1;
-}
-.animecampaign .Wrapper--Relative {
-    position: relative;
-    z-index: 1;
-}
 
 .animecampaign button.ACButton {
     #ButtonSkinning();
