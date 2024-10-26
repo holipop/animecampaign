@@ -3,17 +3,17 @@
     <div class="Dialog__Content Config">
 
         <div class="Config__Group">
-            <label class="Config__Label">Tag</label>
+            <label class="Config__Label">{{localize "AC.DIALOG.AddStat.Tag.Label"}}</label>
             <input class="Config__Input Config__Input--Caps" type="text" name="tag" value="{{stat.tag}}" placeholder="{{localize "AC.DIALOG.AddStat.Placeholder"}}" autofocus>
         </div>
 
         <div class="Config__Group">
-            <label class="Config__Label">Display</label>
+            <label class="Config__Label">{{localize "AC.DIALOG.AddStat.Display.Label"}}</label>
             <select class="Config__Input" name="view">
                 {{selectOptions config.displays selected=stat.view localize=true}}
             </select>
             <p class="Config__Notes">
-                <b>Value</b> and <b>Resource</b> are numeric, <b>Label</b> can be any text.
+                {{{localize "AC.DIALOG.AddStat.Display.Notes"}}}
             </p>
         </div>
 
@@ -21,12 +21,12 @@
             <hr class="Config__HorizontalBreak">
 
             <div class="Config__Group">
-                <label class="Config__Label">Color</label>
+                <label class="Config__Label">{{localize "AC.DIALOG.AddStat.Color.Label"}}</label>
                 <select class="Config__Input" name="color">
                     {{selectOptions colors selected=stat.color localize=true}}
                 </select>
                 <p class="Config__Notes">
-                    Configure the stat for token attribute bars.
+                    {{{localize "AC.DIALOG.AddStat.Color.Notes"}}}
                 </p>
             </div>
         {{/if}}
@@ -39,9 +39,9 @@
             <span class="ACButton__Icon MSO">save</span>
             <span class="ACButton__Text">
                 {{#if isNew}}
-                    Add Stat
+                    {{localize "AC.DIALOG.AddStat.Submit"}}
                 {{else}}
-                    Update Stat
+                    {{localize "AC.DIALOG.EditStat.Submit"}}
                 {{/if}}
             </span>
         </button>

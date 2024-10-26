@@ -88,7 +88,8 @@
         "Stat": {
             "Collapse": "Collapse Stats",
             "Add": "Add Stat",
-            "Remove": "Remove Stat",
+            "Edit": "Edit Stat",
+            "Delete": "Delete Stat",
             "Value": "Set View to Value",
             "Resource": "Set View to Resource",
             "Label": "Set View to Label"
@@ -125,10 +126,23 @@
         "Tag": "Tag",
         "AddStat": {
             "Title": "Add Stat: {name}",
-            "Placeholder": "New Stat"
+            "Placeholder": "New Stat",
+            "Tag": {
+                "Label": "Tag"
+            },
+            "Display": {
+                "Label": "Display",
+                "Notes": "<b>Value</b> and <b>Resource</b> are numeric, <b>Label</b> can be any text."
+            },
+            "Color": {
+                "Label": "Color",
+                "Notes": "Configure the stat for token attribute bars."
+            },
+            "Submit": "Add Stat"
         },
         "EditStat": {
-            "Title": "Edit Stat [{tag}]: {name}"
+            "Title": "Edit Stat [{tag}]: {name}",
+            "Submit": "Edit Stat"
         },
         "DeleteColorStat": {
             "Title": "Delete Stat [{tag}]: {name}",
