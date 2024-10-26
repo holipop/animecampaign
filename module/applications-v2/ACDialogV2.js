@@ -25,8 +25,8 @@ export default class ACDialogV2 extends DialogV2 {
         //form.className = "dialog-form standard-form"
         form.autocomplete = "off"
         form.innerHTML = /* html */`
-            <div class="dialog__content">${this.options.content}</div>
-            <div class="dialog__button-list">${this._renderButtons()}</div>
+            <div class="Dialog__Content">${this.options.content}</div>
+            <div class="Dialog__Buttons">${this._renderButtons()}</div>
         `
         form.addEventListener("submit", event => this._onSubmit(event.submitter, event))
         return form
@@ -40,22 +40,14 @@ export default class ACDialogV2 extends DialogV2 {
         return Object.values(this.options.buttons).map(button => {
             const { action, label, icon, default: isDefault, class: cls = "" } = button
             return /* html */`
-                <button class="button dialog__button dialog-button ${cls}" data-action="${action}" ${isDefault ? "autofocus" : ""}>
-                    <span class="material-symbols-outlined">
+                <button class="ACButton ACButton--Dialog ${cls}" data-action="${action}" ${isDefault ? "autofocus" : ""}>
+                    <span class="ACButton__Icon MSO">
                         ${icon}
                     </span>
-                    <span class="button__text">
+                    <span class="ACButton__Text">
                         ${label}
                     </span>
                 </button>
-
-                <div class="dialog__button-svg--wrapper">
-                    <svg class="dialog__button-svg" viewBox="0 0 100 100">
-                        <text class="dialog__button-icon" x="0" y="100">
-                            ${icon}
-                        </text>
-                    </svg>
-                </div>
             `
         }).join("")
     }

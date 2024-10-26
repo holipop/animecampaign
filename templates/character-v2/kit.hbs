@@ -1,3 +1,23 @@
-<section class="Kit tab" data-tab="kit" data-group="character">
-    KIT
-</section>
+<ul class="Kit tab" data-tab="kit" data-group="character">
+
+    {{#each categories as |category index|}}
+        <li class="Category">
+
+            <div class="Category__Header">
+                {{category.name}}
+            </div>
+
+            <ul class="Category__Features">
+
+                {{#each category.features as |feature index|}}
+                    <li class="FeatureEntry">
+                        {{feature.name}}
+                    </li>
+                {{/each}}
+
+            </ul>
+
+        </li>
+    {{/each}}
+
+</ul>

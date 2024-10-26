@@ -1,214 +1,57 @@
 // main: ./animecampaign.less
 
-// dawg i dont fucking know dude
+// For some reason, this is the only way to get dialogs to display that aren't DialogV2
 .animecampaign.dialog.application:not([open]) {
     display: block;
 }
 
-.animecampaign.dialog .window-content {
-    background: @bg-color;
-    overflow: hidden;
-}
+.animecampaign.dialog {
 
-.animecampaign.dialog .dialog {
-    &__bg {
-        opacity: 1;
-    }
-    &__content {
-        margin: 1.25rem 0;
-    
-        font-family: "Libre Franklin";
-        color: @txt-color;
+    .Dialog__Content {
+        padding: 1.25rem 0;
+        
         text-align: center;
+        font-family: "Libre Franklin";
     }
-    &__button-list {
+
+    .Dialog__Buttons {
         display: flex;
-        flex-wrap: nowrap;
-        column-gap: .25rem;
-        margin-left: .25rem;
+        gap: .5rem;
+        margin-top: 1rem;
     }
-    &__button-svg {
-        position: absolute;
-        height: @dialog-icon-size;
-        width: @dialog-icon-size;
-        z-index: 1;
 
-        &--wrapper {
-            position: relative;
-            top: -2.5rem;
-            right: 7rem;
-            pointer-events: none;
-        }
-    }
-    &__button-icon {
-        transition: fill .2s;
+    button.ACButton--Dialog {
+        #ColorScheme({
+            color: "txt";
+        });
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
 
-        font-family: "Material Symbols Outlined";
-        stroke: mix(@bg-color, @txt-color, 85%);
-        fill: transparent;
-        font-size: 100px;
-    }
-    &__button:hover + .dialog__button-svg--wrapper .dialog__button-icon {
-        fill: mix(@bg-color, @txt-color, 85%);
-    }
-}
-
-.animecampaign.dialog .dialog__nav {
-    display: flex;
-    margin-top: .75rem;
-    align-items: center;
-
-    &--padding {
-        height: @dialog-nav-height;
-        width: 1rem;
-        border-bottom: (1 * @rpx) solid mix(@bg-color, @txt-color, 75%);
-    }
-    &-button {
         flex: 1;
         display: flex;
-        align-items: center;
         justify-content: center;
-        column-gap: .2rem;
-        height: @dialog-nav-height;
-        border: (1 * @rpx) solid transparent;
-        border-bottom-color: mix(@bg-color, @txt-color, 75%);
-        transition: text-shadow .2s;
-        text-shadow: 0 0 0 0;
+        gap: .25rem;
+        height: 2.5rem;
+        border-radius: 2 * @rpx;
+        border: (1 * @rpx) solid;
 
-        font: bold .85rem "Libre Franklin";
-    }
-    &-button:hover {
-        text-shadow: (2 * @rpx) (2 * @rpx) 0 fade(@ac-color, 33%);
-    }
-    &-button.active {
-        border-color: mix(@bg-color, @txt-color, 75%);
-        border-bottom-color: transparent;
-    }
-
-    .material-symbols-outlined {
-        font-size: 1rem;
-    }
-}
-
-.animecampaign.dialog .config {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    row-gap: .25rem;
-    text-align: unset;
-    z-index: 6;
-
-    font: .85rem "Libre Franklin";
-
-    &.tab {
-        display: none;
-    }
-    &.tab.active {
-        display: flex;
-    }
-
-    &__group {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-    &__label {
-        flex: 2;
-
-        font-weight: bold;
-    }
-    &__fields {
-        flex: 3.1;
-        display: flex;
-        align-items: center;
-        column-gap: .15rem;
-
-        & > .config__input {
-            flex: 1;
-            width: 100%;
-        }
-    }
-    &__notes {
-        width: 100%;
-        margin: .25rem 0;
-
-        font-size: .7rem;
-        color: mix(@bg-color, @txt-color, 20%);
-    }
-    &__hr {
-        width: 100%;
-        border: none;
-        border-top: (1 * @rpx) solid fade(@txt-color, 25%);
-        margin: .25rem 0;
-
-        height: unset;
-        color: unset;
-        background-image: unset;
-    }
-    &__inner-label {
-        margin: .2rem;
-
-        font-size: .7rem;
-        color: mix(@bg-color, @txt-color, 20%);
-    }
-    &__inner-button.material-symbols-outlined {
-        margin: 0;
-        border-radius: 0;
-        border-width: 1 * @rpx;
-        border-color: fade(@txt-color, 50%);
-        border-style: solid;
-        width: min-content;
-        text-shadow: none;
-        box-shadow: none;
-        transition: background .2s;
-        
-        font-size: 1.33rem;
-        background: transparent;
-
-        &:disabled {
-            pointer-events: none;
-            border: (1 * @rpx) solid fade(@txt-color, 15%);
-
-            &:hover {
-                background: transparent;
+        &:hover {
+            .theme-dark & {
+                box-shadow: 0 0 0 (1 * @rpx) fade(@dark-txt-color, 50%);
+            }
+            .theme-light & {
+                box-shadow: 0 0 0 (1 * @rpx) fade(@light-txt-color, 50%);
             }
         }
-        &:hover {
-            background: fade(@txt-color, 10%);
-        }
-        &:hover {
-            background: fade(@txt-color, 50%);
-        }
-        &:focus {
-            box-shadow: none;
-            outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+        &:active {
+            #ColorScheme(@opacity: 50%, {
+                background-color: "txt";
+            })
         }
     }
-}
-
-.animecampaign.dialog .config .config__input {
-    flex: 3;
-    border-radius: 2 * @rpx;
-    height: 1.75rem;
-    background: fade(@txt-color, 5%);
-    border-color: fade(@txt-color, 50%);
-    transition: @button-transition;
-    padding: 0 (3 * @rpx);
-
-    font-size: .85rem;
-
-    &::placeholder {
-        opacity: .66;
-    }
-    &:focus {
-        box-shadow: none;
-        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
-    }
-    &:disabled {
-        border: (1 * @rpx) solid fade(@txt-color, 15%);
+    button.ACButton--Dialog .ACButton__Text {
+        font: bold .9rem "Libre Franklin";
     }
 
-    &--caps {
-        text-transform: uppercase;
-    }
 }

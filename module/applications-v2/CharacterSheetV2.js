@@ -194,14 +194,16 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @returns {*}
      */
     async _prepareContext () {
+        
         return {
             ...super._prepareContext(),
             config: CONFIG.AC,
             document: this.document,
             system: this.document.system,
             palette: this.palette,
-            stats: this.document.system.colorStats,
             tabs: this.getTabs(),
+            stats: this.document.system.colorStats,
+            categories: this.document.system.categories
 
             /* svg: {
                 bg: this.svgBackground,
