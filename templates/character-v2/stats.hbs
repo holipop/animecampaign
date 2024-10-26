@@ -64,21 +64,23 @@
         <ul class="Stats__List JS-Drop">
 
             {{#each stats as |stat index|}}
+                <li class="StatEntry JS-Stat" data-stat="{{index}}">
 
-                <li class="StatEntry JS-Stat JS-Drag" data-stat="{{index}}" data-drag="stat">
-
-                    <div class="StatEntry__Info">
-                        <span class="StatEntry__DragIndicator MSO">drag_indicator</span>
-
-                        <!-- div class="Wrapper">
-                            <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
-                        </div -->
-
+                    <div class="StatEntry__InfoWrapper">
+                        
                         <img class="StatEntry__Image" src="{{stat.img}}">
 
-                        
-                        <span class="StatEntry__Tag">{{stat.tag}}</span>
-                        <div class="StatEntry__Divider">&VerticalBar;</div>
+                        <div class="StatEntry__Info JS-Drag" data-drag="stat">
+                            <span class="StatEntry__DragIndicator MSO">drag_indicator</span>
+
+                            <!-- div class="Wrapper">
+                                <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
+                            </div -->
+                            
+                            <span class="StatEntry__Tag">{{stat.tag}}</span>
+                            <div class="StatEntry__Divider">&VerticalBar;</div>
+                        </div>
+
                     </div>
                     
                     <div class="StatEntry__Inputs">
@@ -111,7 +113,6 @@
 
                     </div>
                 </li>
-
             {{/each}}
 
         </ul>

@@ -21,6 +21,16 @@
     }
 }
 
+#GridWrap () {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    > * {
+        grid-area: 1 / 1 / -1 / -1;
+    }
+}
+
 #ColorScheme (@rules, @opacity: 100%) {
     .theme-dark & {
         each(@rules, { 
@@ -144,7 +154,7 @@
 
 .animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
     min-width: @character-sheet-width;
-    //min-height: @character-sheet-height;
+    min-height: @character-sheet-height;
 }
 
 .animecampaign .Template {
@@ -166,7 +176,6 @@
         border-color: currentColor;
     }
 }
-
 
 .animecampaign button.ACButton {
     #ButtonSkinning();

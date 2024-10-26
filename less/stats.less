@@ -177,10 +177,30 @@
         height: 2rem - (1 * @rpx);
     }
 
-    .StatEntry__Info {
-        #GenerateGrid(@columns: 2);
-
+    .StatEntry__InfoWrapper {
+        #GridWrap();
+        
         width: 30%;
+    }
+
+    .StatEntry__Image {
+        position: relative;
+        height: 2rem;
+        width: 2.5rem;
+        left: 1rem;
+        border: none;
+        background-position: center;
+        object-fit: cover;
+        
+        opacity: .25;
+    }
+    .StatEntry__Image--CustomImage {
+        #ContrastImageFilter();
+    }
+
+    .StatEntry__Info {
+        //#GenerateGrid(@columns: 2);
+        display: flex;
         align-items: center;
 
         &:hover {
@@ -189,11 +209,9 @@
     }
 
     .StatEntry__DragIndicator {
-        grid-column: 0;
         font-size: 1rem;
         line-height: 1.2;
         transition: opacity .1s;
-        z-index: 2;
 
         opacity: 0;
 
@@ -232,21 +250,6 @@
     .StatEntry__Color--purple   { color: @purple-stat }
     .StatEntry__Color--grey     { color: @grey-stat }
 
-    .StatEntry__Image {
-        position: relative;
-        height: 2rem;
-        width: 2.5rem;
-        left: 1rem;
-        border: none;
-        background-position: center;
-        object-fit: cover;
-        
-        opacity: .25;
-    }
-    .StatEntry__Image--CustomImage {
-        #ContrastImageFilter();
-    }
-
     .StatEntry__Tag {
         #ColorScheme({
             color: "txt";
@@ -257,7 +260,6 @@
         white-space: nowrap;
         padding: .1rem .25rem;
         margin-left: 1rem;
-        z-index: 2;
 
         font: .8rem "Libre Franklin";
         text-transform: uppercase;
@@ -278,7 +280,6 @@
     .StatEntry__Divider {
         position: relative;
         bottom: .1rem;
-        grid-column: -1;
 
         font: 1.5rem "Libre Franklin";
         line-height: 0;

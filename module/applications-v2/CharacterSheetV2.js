@@ -73,9 +73,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         switch (type) {
             case 'stat':
-                const index = Number(dataset.stat)
-                data.index = index
-                data.object = this.document.system.colorStats[index]
+                const element = event.target.closest(".JS-Stat")
+                data.index = Number(element.dataset.stat)
+                data.object = this.document.system.colorStats[data.index]
                 break
 
             // case 'feature': break
@@ -115,7 +115,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         const stats = this.document.system.colorStats
         if (stats.length === 1) return  // can't sort single entry
 
-        const target = $(event.target).closest('[data-drag="stat"]')
+        const target = $(event.target).closest('.JS-Stat')
         if (target.length === 0) return  // no target found
         if (target.data('stat') === data.index) return  // don't sort on self 
 
@@ -167,7 +167,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     getTabs() {
         const tabs = {
-            kit:        { id: "kit", group: "character", icon: "check", label: "AC.NAV.Kit" },
+            kit:        { id: "kit", group: "character", icon: "stat_0", label: "AC.NAV.Kit" },
             biography:  { id: "biography", group: "character", icon: "person", label: "AC.NAV.Biography" }
         }
         for (const tab of Object.values(tabs)) {
