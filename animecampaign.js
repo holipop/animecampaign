@@ -25,6 +25,7 @@ import ACDialog from './module/applications/ACDialog.js'
 import StatConfig from './module/applications/StatConfig.js'
 
 import CharacterSheetV2 from './module/applications-v2/CharacterSheetV2.js'
+import FeatureSheetV2 from './module/applications-v2/FeatureSheetV2.js'
 
 import ButtonComponent from './module/components/ButtonComponent.js'
 import TextSelectComponent from './module/components/TextSelectComponent.js'
@@ -64,15 +65,15 @@ Hooks.once('init', () => {
         types: ["Character"],
         makeDefault: true 
     });
-    Actors.registerSheet("animecampaign", CharacterSheet, { 
+    /* Actors.registerSheet("animecampaign", CharacterSheet, { 
         types: ["Character"]
-    });
+    }); */
 
-    /* Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", FeatureSheet, { 
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("animecampaign", FeatureSheetV2, { 
         types: ["Feature"],
         makeDefault: true 
-    }); */
+    });
 
     Settings.register();
 

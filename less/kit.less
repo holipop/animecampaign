@@ -1,7 +1,128 @@
+// main: ./animecampaign.less
+
 .animecampaign.actor.sheet {
 
     .Kit {
+        #ListSkinning();
+
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+    }
+
+    .Category__Header {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        display: flex;
+        height: 2rem;
+        width: 100%;
+        border-bottom: (1 * @rpx) solid;
+        justify-content: center;
+        align-items: center;
+
+        background: lightblue;
+    }
+
+    .Category__HeaderLeft,
+    .Category__HeaderRight,
+    .Category__Buttons {
+        flex: 1;
+        display: flex;
+        gap: .15rem;
+        align-items: center;
+        padding: 0 .25rem;
+
+        transition: opacity .1s;
+        opacity: 0;
+    }
+    .Category:hover .Category__HeaderLeft,
+    .Category:hover .Category__HeaderRight,
+    .Category:hover .Category__Buttons {
+        opacity: .25;
+    }
+    .Category__Header:hover .Category__HeaderLeft,
+    .Category__Header:hover .Category__HeaderRight,
+    .Category__Header:hover .Category__Buttons {
         opacity: 1;
+    }
+    .Category__HeaderLeft {
+        justify-content: flex-end;
+    }
+    .Category__HeaderCenter {
+        display: flex;
+        width: @part-width;
+    }
+
+    .Category__Name {
+        margin-right: .5rem;
+        padding-top: .2rem;
+
+        font: italic 1.33rem "Gloock";
+        text-transform: uppercase;
+    }
+
+    .Category__Features {
+        #ListSkinning();
+
+        display: flex;
+        flex-direction: column;
+        margin: .1rem 0;
+        gap: .1rem;
+    }
+
+    .FeatureEntry {
+        //#DebugOutline();
+
+        display: flex;
+        height: 2rem;
+    }
+    .FeatureEntry__LeftPadding {
+        justify-content: end;
+    }
+    .FeatureEntry__LeftPadding,
+    .FeatureEntry__RightPadding {
+        width: @margin-width;
+        display: flex;
+        gap: .15rem;
+        align-items: center;
+        padding: 0 .25rem;
+
+        transition: opacity .1s;
+        opacity: 0;
+    }
+    .FeatureEntry:hover .FeatureEntry__LeftPadding,
+    .FeatureEntry:hover .FeatureEntry__RightPadding {
+        opacity: 1;
+    }
+
+    .FeatureEntry__Info {
+        #ColorScheme({
+            background-color: "bg";
+            color: "txt";
+        });
+
+        display: flex;
+        width: @part-width;
+        align-items: center;
+        border: (1 * @rpx) solid;
+        border-left: (10 * @rpx) solid;
+        border-radius: 2 * @rpx;
+    }
+    .FeatureEntry__Image {
+        #InputSkinning(); 
+
+        height: 2rem - (2 * @rpx);
+        width: 2rem - (2 * @rpx);
+    }
+
+    .FeatureEntry__InfoHeader {
+        margin: 0 .2rem;
+    }
+    .FeatureEntry__Name {
+        font: bold 1.2rem "Philosopher";
+        margin: 0 .2rem;
     }
 
 }

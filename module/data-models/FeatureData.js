@@ -56,6 +56,29 @@ export default class FeatureData extends foundry.abstract.DataModel {
         })
     }
 
+    /** Get the palette of this feature.
+     * @returns {*}
+     */
+    get palette () {
+        const color = this.color
+        const [h, s, l] = color.hsl
+
+        let [red, green, blue] = color.rgb
+        red *= 0.2126;
+        green *= 0.7152;
+        blue *= 0.0722;
+        const luma = (red + green + blue) / 1;
+        const contrast = (luma <= .5) 
+            ? CONFIG.AC.contrastColors.white
+            : CONFIG.AC.contrastColors.black;
+
+        return {
+            primary: color.css,
+            secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
+            contrast,
+        }
+    }
+
     /** Like trimming the fat but for data? 
      * @param {*} source 
      */

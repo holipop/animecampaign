@@ -26,14 +26,14 @@ declare module "./CharacterData.js" {
         class: string
         word: string
         type: string
-        color: string
+        color: Color
     }
 }
 
 declare module "./FeatureData.js" {
     export default interface FeatureData {
         parent: ACItem
-        color: string
+        color: Color
         category: string
         stats: Stat[]
         sections: Section[]
@@ -45,7 +45,7 @@ declare module "./Category.js" {
     export default interface Category {
         parent: ACActor
         name: string
-        color: string
+        color: Color
         collapsed: boolean
         details: Details
         trackers: { tag: string, img: string }[]
