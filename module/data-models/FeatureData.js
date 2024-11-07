@@ -57,7 +57,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
     }
 
     /** Get the palette of this feature.
-     * @returns {*}
+     * @returns {{ primary: string, secondary: string, contrast: string }}
      */
     get palette () {
         const color = this.color

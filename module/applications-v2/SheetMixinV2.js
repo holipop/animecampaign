@@ -27,30 +27,6 @@ export default function SheetMixinV2 (Base) {
             return this.#dragDrop;
         }
 
-        /** The set of colors derived from this document's color.
-         * @returns {{ primary: string, secondary: string, contrast: string }}
-         */
-        get palette () {
-            const color = this.document.system.color
-            const [h, s, l] = color.hsl
-
-            let [red, green, blue] = color.rgb
-            red *= 0.2126;
-            green *= 0.7152;
-            blue *= 0.0722;
-        
-            const luma = (red + green + blue) / 1;
-            const contrast = (luma <= .5) 
-                ? CONFIG.AC.contrastColors.white
-                : CONFIG.AC.contrastColors.black;
-
-            return {
-                primary: color.css,
-                secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
-                contrast,
-            }
-        }
-
         /** Create drag-and-drop workflow handlers for this Application
          * @returns {DragDrop[]}     An array of DragDrop handlers
          * @private

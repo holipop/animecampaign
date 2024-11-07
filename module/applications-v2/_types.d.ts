@@ -13,7 +13,6 @@ declare module "./SheetMixinV2.js" {
     type ACSheetInstance = {
         private dragDrop: DragDrop[]
         get dragDrop(): DragDrop[]
-        get palette(): { primary: string, secondary: string, contrast: string }
         private createDragDropHandlers(): DragDrop[]
         protected _canDragStart (selector: string): boolean 
         protected _canDragDrop (selector: string): boolean 

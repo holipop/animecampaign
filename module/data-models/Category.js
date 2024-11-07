@@ -30,7 +30,7 @@ export default class Category extends foundry.abstract.DataModel {
     }
 
     /** Get the palette of this category.
-     * @returns {*}
+     * @returns {{ primary: string, secondary: string, contrast: string }}
      */
     get palette () {
         const color = this.color ?? this.parent.color

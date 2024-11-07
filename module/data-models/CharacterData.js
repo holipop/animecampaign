@@ -49,6 +49,29 @@ export default class CharacterData extends foundry.abstract.DataModel {
         }
     }
 
+    /** Get the palette of this feature.
+     * @returns {{ primary: string, secondary: string, contrast: string }}
+     */
+    get palette () {
+        const color = this.color
+        const [h, s, l] = color.hsl
+
+        let [red, green, blue] = color.rgb
+        red *= 0.2126;
+        green *= 0.7152;
+        blue *= 0.0722;
+        const luma = (red + green + blue) / 1;
+        const contrast = (luma <= .5) 
+            ? CONFIG.AC.contrastColors.white
+            : CONFIG.AC.contrastColors.black;
+
+        return {
+            primary: color.css,
+            secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
+            contrast,
+        }
+    }
+
     /** Returns the class level as a roman numeral.
      * @returns {Number} 
      */
