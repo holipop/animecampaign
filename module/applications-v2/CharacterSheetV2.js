@@ -34,6 +34,14 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             onStatAdd: super.onStatAdd,
             onStatEdit: super.onStatEdit,
             onStatDelete: super.onStatDelete,
+            onCategoryCollapse: CharacterSheetV2.onCategoryCollapse,
+            onCategoryEdit: CharacterSheetV2.onCategoryEdit,
+            onCategoryFlood: CharacterSheetV2.onCategoryFlood,
+            onCategoryDelete: CharacterSheetV2.onCategoryDelete,
+            onFeatureAdd: CharacterSheetV2.onFeatureAdd,
+            onFeatureCollapse: CharacterSheetV2.onFeatureCollapse,
+            onFeatureEdit: CharacterSheetV2.onFeatureEdit,
+            onFeatureDelete: CharacterSheetV2.onFeatureDelete,
         },
         form: {
             submitOnChange: true,
@@ -167,8 +175,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     getTabs() {
         const tabs = {
-            kit:        { id: "kit", group: "character", icon: "stat_0", label: "AC.NAV.Kit" },
-            biography:  { id: "biography", group: "character", icon: "person", label: "AC.NAV.Biography" }
+            kit:        { id: "kit", group: "character", icon: "stat_0", label: "AC.CharacterSheet.Kit" },
+            biography:  { id: "biography", group: "character", icon: "person", label: "AC.CharacterSheet.Biography" }
         }
         for (const tab of Object.values(tabs)) {
             tab.active = this.tabGroups[tab.group] === tab.id
@@ -241,5 +249,24 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         super._processSubmitData(event, form, updates)
     }
+
+    static onCategoryCollapse (event, target) { }
+
+    static onCategoryEdit (event, target) {
+        
+    }
+
+    static onCategoryFlood (event, target) { }
+
+    static onCategoryDelete (event, target) { }
+
+    static onFeatureAdd (event, target) { }
+
+    static onFeatureCollapse (event, target) { }
+
+    static onFeatureEdit (event, target) { }
+
+    static onFeatureDelete (event, target) { }
+
 
 }

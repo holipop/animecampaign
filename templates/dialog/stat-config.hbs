@@ -3,17 +3,17 @@
     <div class="Dialog__Content Config">
 
         <div class="Config__Group">
-            <label class="Config__Label">{{localize "AC.DIALOG.AddStat.Tag.Label"}}</label>
-            <input class="Config__Input Config__Input--Caps" type="text" name="tag" value="{{stat.tag}}" placeholder="{{localize "AC.DIALOG.AddStat.Placeholder"}}" autofocus>
+            <label class="Config__Label">{{localize "AC.StatConfig.Tag.Label"}}</label>
+            <input class="Config__Input Config__Input--Caps" type="text" name="tag" value="{{stat.tag}}" placeholder="{{localize "AC.StatConfig.Tag.Placeholder"}}" autofocus>
         </div>
 
         <div class="Config__Group">
-            <label class="Config__Label">{{localize "AC.DIALOG.AddStat.Display.Label"}}</label>
+            <label class="Config__Label">{{localize "AC.StatConfig.Display.Label"}}</label>
             <select class="Config__Input" name="view">
                 {{selectOptions config.displays selected=stat.view localize=true}}
             </select>
             <p class="Config__Notes">
-                {{{localize "AC.DIALOG.AddStat.Display.Notes"}}}
+                {{{localize "AC.StatConfig.Display.Notes"}}}
             </p>
         </div>
 
@@ -21,12 +21,12 @@
             <hr class="Config__HorizontalBreak">
 
             <div class="Config__Group">
-                <label class="Config__Label">{{localize "AC.DIALOG.AddStat.Color.Label"}}</label>
+                <label class="Config__Label">{{localize "AC.StatConfig.Color.Label"}}</label>
                 <select class="Config__Input" name="color">
                     {{selectOptions colors selected=stat.color localize=true}}
                 </select>
                 <p class="Config__Notes">
-                    {{{localize "AC.DIALOG.AddStat.Color.Notes"}}}
+                    {{{localize "AC.StatConfig.Color.Notes"}}}
                 </p>
             </div>
         {{/if}}
@@ -39,9 +39,9 @@
             <span class="ACButton__Icon MSO">save</span>
             <span class="ACButton__Text">
                 {{#if isNew}}
-                    {{localize "AC.DIALOG.AddStat.Submit"}}
+                    {{localize "AC.StatConfig.AddStat.Submit"}}
                 {{else}}
-                    {{localize "AC.DIALOG.EditStat.Submit"}}
+                    {{localize "AC.StatConfig.EditStat.Submit"}}
                 {{/if}}
             </span>
         </button>

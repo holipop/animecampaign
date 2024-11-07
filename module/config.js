@@ -13,23 +13,23 @@ AC.ascii = `
 ▄███▄   ▄████▄ ▀▀█████▀   v1.1`
 
 AC.inscribed = {
-    epithet: "AC.TYPE.Epithet"
+    epithet: "AC.CharacterSheet.InscribedTypes.Epithet"
 }
 AC.mundie = {
-    expert: "AC.TYPE.Expert",
-    powerhouse: "AC.TYPE.Powerhouse"
+    expert: "AC.CharacterSheet.MundieTypes.Expert",
+    powerhouse: "AC.CharacterSheet.MundieTypes.Powerhouse"
 }
 
 AC.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 AC.colorStat = {
-    red: 'AC.COLOR.Red',
-    blue: 'AC.COLOR.Blue',
-    yellow: 'AC.COLOR.Yellow',
-    green: 'AC.COLOR.Green',
-    orange: 'AC.COLOR.Orange',
-    cyan: 'AC.COLOR.Cyan',
-    purple: 'AC.COLOR.Purple',
-    grey: 'AC.COLOR.Grey',
+    red: 'AC.Red',
+    blue: 'AC.Blue',
+    yellow: 'AC.Yellow',
+    green: 'AC.Green',
+    orange: 'AC.Orange',
+    cyan: 'AC.Cyan',
+    purple: 'AC.Purple',
+    grey: 'AC.Grey',
 }
 AC.contrastColors = {
     white: "#f4f3ed", 
@@ -46,10 +46,11 @@ AC.colors = {
     grey: '#807f84',
 };
 AC.defaultColor = "#cd3232";
+
 AC.displays = {
-    value: "AC.LABEL.Value",
-    resource: "AC.LABEL.Resource",
-    label: "AC.LABEL.Label",
+    value: "AC.StatConfig.Display.Options.Value",
+    resource: "AC.StatConfig.Display.Options.Resource",
+    label: "AC.StatConfig.Display.Options.Label",
 }
 AC.textEditors = {
     markdown: "AC.LABEL.Markdown",

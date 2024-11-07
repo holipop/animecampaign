@@ -1006,9 +1006,11 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+.animecampaign.actor.sheet .Kit.active {
+  display: flex;
 }
 .animecampaign.actor.sheet .Category__Header {
   display: flex;

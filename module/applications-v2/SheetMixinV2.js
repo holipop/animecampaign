@@ -71,7 +71,7 @@ export default function SheetMixinV2 (Base) {
 
             new StatConfigV2({
                 window: { 
-                    title: game.i18n.format("AC.DIALOG.AddStat.Title", { name: this.document.name }) 
+                    title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
                 },
                 document: this.document,
                 stat: {
@@ -91,7 +91,7 @@ export default function SheetMixinV2 (Base) {
 
             new StatConfigV2({ 
                 window: {
-                    title: game.i18n.format("AC.DIALOG.EditStat.Title", { 
+                    title: game.i18n.format("AC.StatConfig.EditStat.Title", { 
                         tag: stat.tag.toUpperCase(),
                         name: this.document.name
                     })
@@ -111,12 +111,12 @@ export default function SheetMixinV2 (Base) {
 
             const confirm = await ACDialogV2.confirm({
                 window: {
-                    title: game.i18n.format("AC.DIALOG.DeleteColorStat.Title", { 
+                    title: game.i18n.format("AC.DeleteStatDialog.Title", { 
                         tag: tag.toUpperCase(), 
                         name: this.document.name
                     }),
                 },
-                content: game.i18n.format("AC.DIALOG.DeleteColorStat.Content", {
+                content: game.i18n.format("AC.DeleteStatDialog.Content", {
                     tag: tag.toUpperCase(), 
                     color: color.toUpperCase()
                 }),
