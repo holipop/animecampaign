@@ -52,7 +52,7 @@
 
         <div class="Stats__MainStatsPadding">
 
-            <button class="ACButton ACButton--Rounded JS-DisableStatAdd JS-Color" type="button" data-action="onStatAdd" data-tooltip="{{localize "AC.CharacterSheet.StatA"}}" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <button class="ACButton JS-DisableStatAdd JS-Color" type="button" data-action="onStatAdd" data-tooltip="{{localize "AC.CharacterSheet.StatA"}}" data-color="{{palette.secondary}}" data-properties="border-color color">
                 <div class="ACButton__Icon MSO">add</div>
             </button>
 
@@ -103,11 +103,11 @@
                     
                     <div class="StatEntry__Buttons">
 
-                        <button class="ACButton ACButton--Circle JS-Color" type="button" data-action="onStatEdit" data-tooltip="{{localize "AC.CharacterSheet.StatEdit"}}" data-color="{{@root.palette.secondary}}" data-properties="border-color color">
+                        <button class="ACButton ACButton--Inline" type="button" data-action="onStatEdit" data-tooltip="{{localize "AC.CharacterSheet.StatEdit"}}">
                             <div class="ACButton__Icon MSO">edit</div>
                         </button>
 
-                        <button class="ACButton ACButton--Circle ACButton--Delete" type="button" data-action="onStatDelete" data-tooltip="{{localize "AC.CharacterSheet.StatDelete"}}">
+                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onStatDelete" data-tooltip="{{localize "AC.CharacterSheet.StatDelete"}}">
                             <div class="ACButton__Icon MSO">close</div>
                         </button>
 

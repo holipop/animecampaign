@@ -194,6 +194,8 @@
     place-items: center;
     height: 1.5rem;
     width: 1.5rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 12.5%;
     transition: box-shadow .25s, background-color .25s;
 
     &:hover {
@@ -216,6 +218,66 @@
             'opsz' 24;
     }
 }
+.animecampaign button.ACButton--Inline {
+    #ColorScheme({
+        color: "txt";
+        background: "bg";
+    });
+
+    height: 1.25rem;
+    width: 1.25rem;
+    border: none;
+
+    &:hover {
+        #ColorScheme(@opacity: 25%, {
+            background-color: "txt";
+        });
+
+        box-shadow: none;
+    }
+    &:hover:active {
+        background-color: currentColor;
+    }
+
+    .ACButton__Icon {
+        font-size: .85rem;
+
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 250,
+            'GRAD' 200,
+            'opsz' 22;
+    }
+}
+.animecampaign button.ACButton.ACButton--Delete {
+    color: @delete-color;
+
+    &:hover {
+        #ColorScheme({
+            color: "txt"
+        });
+
+        background-color: @delete-color;
+        border-color: @delete-color;
+    }
+}
+.animecampaign button.ACButton.ACButton--White {
+    color: @dark-txt-color;
+    background: transparent;
+
+    &:hover {
+        background-color: fade(@dark-txt-color, 25%);
+    }
+}
+.animecampaign button.ACButton.ACButton--Black {
+    color: @light-txt-color;
+    background: transparent;
+    
+    &:hover {
+        background-color: fade(@light-txt-color, 25%);
+    }
+}
+
 .animecampaign button.ACButton--Rounded {
     border: (1 * @rpx) solid currentColor;
     border-radius: 12.5%;
@@ -235,14 +297,6 @@
             'GRAD' 200,
             'opsz' 22;
     }
-}
-.animecampaign button.ACButton.ACButton--Delete {
-    #ColorScheme({
-        color: "txt"
-    });
-
-    background-color: @delete-color;
-    border-color: @delete-color;
 }
 
 .animecampaign.application {

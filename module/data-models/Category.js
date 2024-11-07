@@ -45,10 +45,13 @@ export default class Category extends foundry.abstract.DataModel {
             ? CONFIG.AC.contrastColors.white
             : CONFIG.AC.contrastColors.black;
 
+        const css = (luma <= .5) ? "White" : "Black";
+
         return {
             primary: color.css,
             secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
             contrast,
+            css,
         }
     }
 
