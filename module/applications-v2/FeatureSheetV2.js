@@ -27,13 +27,25 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         },
         form: {
             submitOnChange: true,
-        }
+        },
+        dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
     /** The Handlebars templates for this application. These are rendered in order. */
     static PARTS = {
-        summary:    { template: "systems/animecampaign/templates/feature-v2/summary.hbs" },
-        statList:   { template: "systems/animecampaign/templates/stat-list.hbs" },
+        template: { template: "systems/animecampaign/templates/feature-v2/template.hbs" },
+    }
+
+    /** The title of this application's window.
+     * @returns {String}
+     */
+    get title () {
+        return `${this.document.name}`
+    }
+
+    /** @override */
+    tabGroups = {
+        feature: "description"
     }
 
 }

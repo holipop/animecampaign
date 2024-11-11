@@ -4,8 +4,9 @@
         <li class="Category">
 
             <div class="Category__Header JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
+                
                 <div class="Category__HeaderLeft JS-Color" data-color="{{palette.contrast}}">
-
+                    
                     <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
                         <span class="ACButton__Icon MSO">keyboard_arrow_down</span>
                     </button>
@@ -13,11 +14,12 @@
                 </div>
 
                 <div class="Category__HeaderCenter JS-Color" data-color="{{palette.contrast}}">
+
                     <span class="Category__Name">
                         {{category.name}}
                     </span>
 
-                    <div class="Category__Buttons">
+                    <div class="Category__Buttons InlineButtonGroup">
                         <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
                             <span class="ACButton__Icon MSO">edit</span>
                         </button>
@@ -27,19 +29,26 @@
                         </button>
                     </div>
 
+                    <div class="Category__Padding"></div>
+
+                    <div class="Category__Trackers">
+                        {{! trackers}}
+                    </div>
+
+                    <div class="Category__Buttons InlineButtonGroup">
+                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
+                            <span class="ACButton__Icon MSO">add</span>
+                        </button>
+
+                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button">
+                            <span class="ACButton__Icon MSO">close</span>
+                        </button>
+                    </div>
+
                 </div>
 
-                <div class="Category__HeaderRight JS-Color" data-color="{{palette.contrast}}">
+                <div class="Category__HeaderRight"></div>
 
-                    <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
-                        <span class="ACButton__Icon MSO">add</span>
-                    </button>
-
-                    <button class="ACButton ACButton--Inline ACButton--Delete" type="button">
-                        <span class="ACButton__Icon MSO">close</span>
-                    </button>
-
-                </div>
             </div>
 
             <ul class="Category__Features">
@@ -47,28 +56,30 @@
                 {{#each category.features as |feature index|}}
 
                     {{log feature}}
-                    <li class="FeatureEntry">
+                    <li class="FeatureEntry JS-Color" data-color="{{feature.system.color}}" data-properties="border-color">
 
-                        <div class="FeatureEntry__LeftPadding">
-                        </div>
-
-                        <div class="FeatureEntry__Info JS-Color" data-color="{{feature.system.color}}" data-properties="border-color">
+                        <div class="FeatureEntry__Info">
                             <img class="FeatureEntry__Image" src="{{feature.img}}">
 
-                            <div class="FeatureEntry__InfoHeader">
-                                <span class="FeatureEntry__Name">{{feature.name}}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="FeatureEntry__RightPadding">
-                            <button class="ACButton ACButton--Circle JS-Color" type="button" data-color="{{feature.system.palette.secondary}}" data-properties="border-color color">
-                                <div class="ACButton__Icon MSO">edit</div>
+                            <button class="FeatureEntry__Name ACButton ACButton--Inline" type="button">
+                                <span class="FeatureEntry__NameText">{{feature.name}}</span>
+                                <div class="FeatureEntry__CollapseIcon ACButton__Icon MSO">arrow_drop_down</div>
                             </button>
 
-                            <button class="ACButton ACButton--Circle ACButton--Delete" type="button">
-                                <div class="ACButton__Icon MSO">close</div>
-                            </button>
+                            <div class="FeatureEntry__StatTrackers"></div>
+
+                            <div class="FeatureEntry__Buttons InlineButtonGroup">
+                                <button class="ACButton ACButton--Inline" type="button">
+                                    <div class="ACButton__Icon MSO">edit</div>
+                                </button>
+
+                                <button class="ACButton ACButton--Inline ACButton--Delete" type="button">
+                                    <div class="ACButton__Icon MSO">close</div>
+                                </button>
+                            </div>
                         </div>
+
+                        <div class="FeatureEntry__Content"></div>
                         
                     </li>
                 {{/each}}

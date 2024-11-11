@@ -1,0 +1,42 @@
+<section class="Summary">
+
+    <div class="Summary__ImageWrapper">
+        
+        <img class="Summary__Image JS-Color" src="{{document.img}}" data-color="{{palette.primary}}" data-properties="border-color">
+        <div class="Summary__ImageEdit" data-action="onEditImage" data-tooltip="AC.CharacterSheet.EditImage">
+            <span class="Summary__ImageEditIcon MSO">edit</span>
+        </div>
+
+    </div>
+    
+    <div class="Summary__Info">
+
+        <textarea class="Summary__Name JS-ResizeTextArea JS-Enter" name="name" spellcheck="false" placeholder="{{localize "AC.CharacterSheet.Name"}}">{{document.name}}</textarea>
+
+        <div class="Summary__InfoFooter JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
+
+            <select class="Summary__Type JS-Color" data-color="{{palette.contrast}}">
+            </select>
+            <input class="Summary__Word JS-Color" type="text" value="{{system.word}}" placeholder="{{localize "AC.CharacterSheet.Word"}}" data-color="{{palette.primary}}" data-properties="border-color">
+
+        </div>
+    </div>
+
+    <div class="Summary__Buttons">
+
+        <button class="ACButton JS-Color" type="button" data-action="onInvokeColorPicker" data-tooltip="{{localize "AC.CharacterSheet.EditColor"}}" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <span class="ACButton__Icon MSO">palette</span>
+        </button>
+        <input class="Summary__HiddenColor JS-InvokeColorPicker" type="color" name="system.color" value="{{system.color}}">
+
+        <button class="ACButton JS-Color" type="button" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <span class="ACButton__Icon MSO">casino</span>
+        </button>
+
+        <button class="ACButton JS-Color" type="button" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <span class="ACButton__Icon MSO">chat_bubble</span>
+        </button>
+
+    </div>
+
+</section>

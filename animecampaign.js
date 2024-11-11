@@ -83,7 +83,7 @@ Hooks.once('init', () => {
         "character.nav": "systems/animecampaign/templates/character-v2/nav.hbs",
         "character.kit": "systems/animecampaign/templates/character-v2/kit.hbs",
 
-        "feature.details": "systems/animecampaign/templates/feature/details.hbs",
+        "feature.summary": "systems/animecampaign/templates/feature-v2/summary.hbs",
     }
     loadTemplates(partials);
 

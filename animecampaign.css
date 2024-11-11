@@ -164,6 +164,18 @@
   min-width: 600px;
   min-height: 500px;
 }
+.animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
+  min-width: 600px;
+  min-height: 500px;
+}
+.animecampaign.sheet.item:not(.minimizing, .maximizing, .minimized) {
+  min-width: 550px;
+  min-height: 500px;
+}
+.animecampaign.sheet.item:not(.minimizing, .maximizing, .minimized) {
+  min-width: 550px;
+  min-height: 500px;
+}
 .animecampaign .Template {
   height: 100%;
 }
@@ -238,7 +250,7 @@
 }
 .animecampaign button.ACButton .ACButton__Icon {
   font-size: 1.25rem;
-  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: 'FILL' 0, 'wght' 250, 'GRAD' 0, 'opsz' 24;
 }
 .animecampaign button.ACButton--Inline {
   height: 1.25rem;
@@ -262,12 +274,15 @@
 .theme-light .animecampaign button.ACButton--Inline:hover {
   background-color: rgba(31, 30, 30, 0.25);
 }
-.animecampaign button.ACButton--Inline:hover:active {
-  background-color: currentColor;
+.theme-dark .animecampaign button.ACButton--Inline:active {
+  background-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign button.ACButton--Inline:active {
+  background-color: rgba(31, 30, 30, 0.75);
 }
 .animecampaign button.ACButton--Inline .ACButton__Icon {
-  font-size: 0.85rem;
-  font-variation-settings: 'FILL' 0, 'wght' 250, 'GRAD' 200, 'opsz' 22;
+  font-size: 1rem;
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 200, 'opsz' 20;
 }
 .animecampaign button.ACButton.ACButton--Delete {
   color: #f14545;
@@ -289,6 +304,9 @@
 .animecampaign button.ACButton.ACButton--White:hover {
   background-color: rgba(235, 237, 242, 0.25);
 }
+.animecampaign button.ACButton.ACButton--White:active {
+  background-color: rgba(235, 237, 242, 0.75);
+}
 .animecampaign button.ACButton.ACButton--Black {
   color: #1f1e1e;
   background: transparent;
@@ -296,19 +314,18 @@
 .animecampaign button.ACButton.ACButton--Black:hover {
   background-color: rgba(31, 30, 30, 0.25);
 }
-.animecampaign button.ACButton--Rounded {
-  border: 0.0625rem solid currentColor;
-  border-radius: 12.5%;
+.animecampaign button.ACButton.ACButton--Black:active {
+  background-color: rgba(31, 30, 30, 0.75);
 }
-.animecampaign button.ACButton--Circle {
-  height: 1.25rem;
-  width: 1.25rem;
-  border: 0.0625rem solid currentColor;
-  border-radius: 50%;
-}
-.animecampaign button.ACButton--Circle .ACButton__Icon {
-  font-size: 0.85rem;
-  font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 200, 'opsz' 22;
+.animecampaign .InlineButtonGroup {
+  display: flex;
+  gap: 0.05rem;
+  justify-content: end;
+  align-items: center;
+  min-width: 1.5rem;
+  padding: 0 0.125rem;
+  transition: opacity 0.1s;
+  opacity: 0;
 }
 .animecampaign.application .Config {
   display: flex;
@@ -411,6 +428,20 @@
 }
 .theme-light .animecampaign.application .Config__HorizontalBreak {
   border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign button.ACButton--Rounded {
+  border: 0.0625rem solid currentColor;
+  border-radius: 12.5%;
+}
+.animecampaign button.ACButton--Circle {
+  height: 1.25rem;
+  width: 1.25rem;
+  border: 0.0625rem solid currentColor;
+  border-radius: 50%;
+}
+.animecampaign button.ACButton--Circle .ACButton__Icon {
+  font-size: 0.85rem;
+  font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 200, 'opsz' 22;
 }
 .animecampaign.sheet .Summary {
   width: 80%;
@@ -999,13 +1030,6 @@
 .animecampaign.sheet .StatEntry__Input--Label {
   font-weight: normal;
 }
-.animecampaign.sheet .StatEntry__Buttons {
-  display: flex;
-  gap: 0.05rem;
-  align-items: center;
-  transition: opacity 0.05s;
-  opacity: 0;
-}
 .animecampaign.sheet .StatEntry:hover .StatEntry__Buttons {
   opacity: 1;
 }
@@ -1064,10 +1088,11 @@
   display: flex;
   height: 2rem;
   width: 100%;
+  padding: 0 0.0625rem;
   border-bottom: 0.0625rem solid;
   justify-content: center;
   align-items: center;
-  background: lightblue;
+  background: #cd3232;
 }
 .theme-dark .animecampaign.actor.sheet .Category__Header {
   border-color: rgba(235, 237, 242, 0.5);
@@ -1077,14 +1102,13 @@
 }
 .animecampaign.actor.sheet .Category__HeaderLeft,
 .animecampaign.actor.sheet .Category__HeaderRight,
-.animecampaign.actor.sheet .Category__Buttons {
+.animecampaign.actor.sheet .Category__Padding {
   flex: 1;
+}
+.animecampaign.actor.sheet .Category__HeaderLeft {
   display: flex;
-  gap: 0.05rem;
-  align-items: center;
-  padding: 0 0.25rem;
-  transition: opacity 0.1s;
-  opacity: 0;
+  padding-right: 0.1rem;
+  justify-content: end;
 }
 .animecampaign.actor.sheet .Category:hover .Category__HeaderLeft,
 .animecampaign.actor.sheet .Category:hover .Category__HeaderRight,
@@ -1115,37 +1139,22 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  margin: 0.1rem 0;
+  margin: 0.2rem 0;
   gap: 0.1rem;
 }
 .animecampaign.actor.sheet .FeatureEntry {
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   height: 2rem;
-}
-.animecampaign.actor.sheet .FeatureEntry__LeftPadding {
-  justify-content: end;
-}
-.animecampaign.actor.sheet .FeatureEntry__LeftPadding,
-.animecampaign.actor.sheet .FeatureEntry__RightPadding {
-  width: 10%;
-  display: flex;
-  gap: 0.15rem;
-  align-items: center;
-  padding: 0 0.25rem;
-  transition: opacity 0.1s;
-  opacity: 0;
-}
-.animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__LeftPadding,
-.animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__RightPadding {
-  opacity: 1;
-}
-.animecampaign.actor.sheet .FeatureEntry__Info {
-  display: flex;
-  width: 80%;
-  align-items: center;
   border: 0.0625rem solid;
   border-left: 0.625rem solid;
   border-radius: 0.125rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__Info {
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
 .theme-dark .animecampaign.actor.sheet .FeatureEntry__Info {
   background-color: #171718;
@@ -1164,6 +1173,7 @@
   transition: none;
   height: 1.875rem;
   width: 1.875rem;
+  margin-right: 0.25rem;
 }
 .theme-dark .animecampaign.actor.sheet .FeatureEntry__Image {
   color: #ebedf2;
@@ -1181,12 +1191,25 @@
   transition: none;
   box-shadow: none;
 }
-.animecampaign.actor.sheet .FeatureEntry__InfoHeader {
-  margin: 0 0.2rem;
-}
 .animecampaign.actor.sheet .FeatureEntry__Name {
+  display: flex;
+  gap: 0.1rem;
+  width: fit-content;
+  padding: 0 0.2rem;
+  border-radius: 0.125rem;
   font: bold 1.2rem "Philosopher";
   margin: 0 0.2rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__Name .ACButton__Icon {
+  width: 0.75rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__StatTrackers {
+  flex: 1;
+  display: flex;
+}
+.animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__CollapseIcon,
+.animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__Buttons {
+  opacity: 1;
 }
 .animecampaign.dialog.application:not([open]) {
   display: block;

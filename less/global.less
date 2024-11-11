@@ -145,6 +145,7 @@
         'opsz' 24;
 }
 
+// Generic Document Sheet Styling
 .animecampaign.application {
     #ColorScheme(@opacity: 80%, {
         background: "bg";
@@ -153,16 +154,25 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
-
 .animecampaign.sheet .window-content {
     padding: 0;
 }
-
 .animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
     min-width: @character-sheet-width;
     min-height: @character-sheet-height;
 }
-
+.animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
+    min-width: @character-sheet-width;
+    min-height: @character-sheet-height;
+}
+.animecampaign.sheet.item:not(.minimizing, .maximizing, .minimized) {
+    min-width: @feature-sheet-width;
+    min-height: @feature-sheet-height;
+}
+.animecampaign.sheet.item:not(.minimizing, .maximizing, .minimized) {
+    min-width: @feature-sheet-width;
+    min-height: @feature-sheet-height;
+}
 .animecampaign .Template {
     height: 100%;
 }
@@ -183,6 +193,7 @@
     }
 }
 
+// Button
 .animecampaign button.ACButton {
     #ButtonSkinning();
     #FocusOutline();
@@ -213,7 +224,7 @@
     
         font-variation-settings:
             'FILL' 0,
-            'wght' 300,
+            'wght' 250,
             'GRAD' 0,
             'opsz' 24;
     }
@@ -235,18 +246,20 @@
 
         box-shadow: none;
     }
-    &:hover:active {
-        background-color: currentColor;
+    &:active {
+        #ColorScheme(@opacity: 75%, {
+            background-color: "txt";
+        });
     }
 
     .ACButton__Icon {
-        font-size: .85rem;
+        font-size: 1rem;
 
         font-variation-settings:
             'FILL' 0,
-            'wght' 250,
+            'wght' 200,
             'GRAD' 200,
-            'opsz' 22;
+            'opsz' 20;
     }
 }
 .animecampaign button.ACButton.ACButton--Delete {
@@ -268,6 +281,9 @@
     &:hover {
         background-color: fade(@dark-txt-color, 25%);
     }
+    &:active {
+        background-color: fade(@dark-txt-color, 75%);
+    }
 }
 .animecampaign button.ACButton.ACButton--Black {
     color: @light-txt-color;
@@ -276,29 +292,23 @@
     &:hover {
         background-color: fade(@light-txt-color, 25%);
     }
-}
-
-.animecampaign button.ACButton--Rounded {
-    border: (1 * @rpx) solid currentColor;
-    border-radius: 12.5%;
-}
-.animecampaign button.ACButton--Circle {
-    height: 1.25rem;
-    width: 1.25rem;
-    border: (1 * @rpx) solid currentColor;
-    border-radius: 50%;
-
-    .ACButton__Icon {
-        font-size: .85rem;
-
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 350,
-            'GRAD' 200,
-            'opsz' 22;
+    &:active {
+        background-color: fade(@light-txt-color, 75%);
     }
 }
+.animecampaign .InlineButtonGroup {
+    display: flex;
+    gap: .05rem;
+    justify-content: end;
+    align-items: center;
+    min-width: 1.5rem;
+    padding: 0 .125rem;
 
+    transition: opacity 0.1s;
+    opacity: 0;
+}
+
+// Configuraion Dialogs
 .animecampaign.application {
     .Config {
         display: flex;
@@ -367,5 +377,27 @@
         height: unset;
         color: unset;
         background-image: unset;
+    }
+}
+
+// ! deprecated
+.animecampaign button.ACButton--Rounded {
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 12.5%;
+}
+.animecampaign button.ACButton--Circle {
+    height: 1.25rem;
+    width: 1.25rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 50%;
+
+    .ACButton__Icon {
+        font-size: .85rem;
+
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 350,
+            'GRAD' 200,
+            'opsz' 22;
     }
 }
