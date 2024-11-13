@@ -6,8 +6,8 @@
         #Part();
 
         display: flex;
-        height: @summary-height;
-        min-height: @summary-height;
+        height: @character-summary-height;
+        min-height: @character-summary-height;
         margin-bottom: .25rem;
     }
 
@@ -108,7 +108,7 @@
 
         background-color: @override;
     }
-    .Summary__Type {
+    .Summary__FooterSelect {
         #InputSkinning();
         #FocusOutline();
 
@@ -122,7 +122,7 @@
         font: 600 .8rem "Libre Franklin";
         color: @override;
     }
-    .Summary__Word {
+    .Summary__FooterInput {
         #InputSkinning();
         #FocusOutline();
         #ColorScheme({
@@ -134,7 +134,7 @@
         height: 1.33rem;
         border: 1 * @rpx solid @override;
         border-radius: 2 * @rpx;
-        padding: 0 .25rem;
+        padding: 0 .33rem;
         
         font: bold 1rem "Philosopher";
     }
@@ -142,7 +142,8 @@
     .Summary__Buttons {
         padding-bottom: .5rem;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
+        justify-content: end;
         gap: .25rem;
     }
     .Summary__HiddenColor {
@@ -156,18 +157,30 @@
 // Feature Specific Rules
 .animecampaign.sheet.item {
 
+    .Summary {
+        height: @feature-summary-height;
+        min-height: @feature-summary-height;
+    }
+
     .Summary__Image {
-        width: 5rem;
-        height: 5rem;
+        width: 4.75rem;
+        height: 4.75rem;
     }
     .Summary__ImageEdit {
-        width: 5rem;
-        height: 5rem;
+        width: 4.75rem;
+        height: 4.75rem;
     }
     .Summary__Name {
-        border: none;
-        font: 1.5rem "Gloock";
-        max-height: 100 * @rpx;
+        padding: .2rem 0;
+        margin-bottom: .33rem;
+
+        font: 1.75rem "Gloock";
+    }
+    .Summary__FooterSelect {
+        width: 1.1rem;
+    }
+    .Summary__FooterInput {
+        text-transform: capitalize;
     }
 
 }

@@ -16,7 +16,7 @@
 
         <div class="Summary__InfoFooter JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
 
-            <select class="Summary__Type JS-Color" name="system.type" data-color="{{palette.contrast}}">
+            <select class="Summary__FooterSelect JS-Color" name="system.type" data-color="{{palette.contrast}}">
                 <optgroup label="{{localize "AC.CharacterSheet.Inscribed"}}">
                     {{selectOptions config.inscribed localize=true selected=system.type}}
                 </optgroup>
@@ -25,7 +25,7 @@
                 </optgroup>
             </select>
 
-            <input class="Summary__Word JS-Color" type="text" name="system.word" value="{{system.word}}" placeholder="{{localize "AC.ChaaracterSheet.Word"}}" data-color="{{palette.primary}}" data-properties="border-color">
+            <input class="Summary__FooterInput JS-Color" type="text" name="system.word" value="{{system.word}}" placeholder="{{localize "AC.ChaaracterSheet.Word"}}" data-color="{{palette.primary}}" data-properties="border-color">
 
         </div>
     </div>

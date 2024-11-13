@@ -15,10 +15,13 @@
 
         <div class="Summary__InfoFooter JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
 
-            <select class="Summary__CategorySelect JS-Color" data-color="{{palette.contrast}}">
-                {{! options}}
+            <select class="Summary__FooterSelect JS-Color" data-color="{{palette.contrast}}">
+                <option value="">Weapon</option>
+                <option value="">Talent</option>
+                <option value="">Passive</option>
+                <option value="">Ability</option>
             </select>
-            <input class="Summary__CategoryInput JS-Color" type="text" value="{{system.category}}" placeholder="{{localize "AC.FeatureSheet.Category"}}" data-color="{{palette.primary}}" data-properties="border-color">
+            <input class="Summary__FooterInput JS-Color" type="text" value="{{system.category}}" placeholder="{{localize "AC.FeatureSheet.Category"}}" data-color="{{palette.primary}}" data-properties="border-color">
 
         </div>
     </div>
@@ -30,11 +33,11 @@
         </button>
         <input class="Summary__HiddenColor JS-InvokeColorPicker" type="color" name="system.color" value="{{system.color}}">
 
-        <button class="ACButton JS-Color" type="button" data-color="{{palette.secondary}}" data-properties="border-color color">
-            <span class="ACButton__Icon MSO">casino</span>
+        <button class="ACButton JS-Color" type="button" data-tooltip="{{localize "AC.FeatureSheet.FeatureRoll"}}" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <span class="ACButton__Icon MSO">ifl</span>
         </button>
 
-        <button class="ACButton JS-Color" type="button" data-color="{{palette.secondary}}" data-properties="border-color color">
+        <button class="ACButton JS-Color" type="button" data-tooltip="{{localize "AC.FeatureSheet.FeaturePost"}}" data-color="{{palette.secondary}}" data-properties="border-color color">
             <span class="ACButton__Icon MSO">chat_bubble</span>
         </button>
 

@@ -52,7 +52,15 @@
         "FeatureEdit": "Edit Category",
         "FeatureDelete": "Delete Category"
     },
-    "FeatureSheet": {},
+    "FeatureSheet": {
+        "Name": "Name",
+        "Category": "Category",
+
+        "EditImage": "Edit Image",
+        "EditColor": "Edit Color",
+        "FeaturePost": "Post Feature to Chat",
+        "FeatureRoll": "Roll Feature"
+    },
 
     "StatConfig": {
         "StatTagTaken": "\"{tag}\" is already taken by another stat.",

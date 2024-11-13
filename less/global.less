@@ -139,7 +139,7 @@
     direction: ltr;
 
     font-variation-settings:
-        'FILL' 0,
+        'FILL' 1,
         'wght' 400,
         'GRAD' 0,
         'opsz' 24;
@@ -182,8 +182,7 @@
     });
 
     overflow-y: scroll;
-    height: calc(100% - @summary-height);
-
+    
     scrollbar-color: currentColor transparent;
     scrollbar-width: thin;
 
@@ -192,6 +191,13 @@
         border-color: currentColor;
     }
 }
+.animecampaign.actor .Scrollable {
+    height: calc(100% - @character-summary-height);
+}
+.animecampaign.item .Scrollable {
+    height: calc(100% - @feature-summary-height);
+}
+
 
 // Button
 .animecampaign button.ACButton {
@@ -221,12 +227,6 @@
 
     .ACButton__Icon {
         font-size: 1.1rem;
-    
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 350,
-            'GRAD' 0,
-            'opsz' 24;
     }
 }
 .animecampaign button.ACButton--Inline {
@@ -254,12 +254,6 @@
 
     .ACButton__Icon {
         font-size: 1rem;
-
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 200,
-            'GRAD' 200,
-            'opsz' 20;
     }
 }
 .animecampaign button.ACButton.ACButton--Delete {
@@ -343,11 +337,9 @@
         flex: 3;
         border-radius: 2 * @rpx;
         border: (1 * @rpx) solid;
+        padding: 0 .4rem;
 
         text-align: left;
-    }
-    input.Config__Input {
-        padding: 0 .4rem;
     }
     input.Config__Input::placeholder {
         #ColorScheme(@opacity: 50%, {
@@ -395,9 +387,9 @@
         font-size: .85rem;
 
         font-variation-settings:
-            'FILL' 0,
-            'wght' 350,
-            'GRAD' 200,
-            'opsz' 22;
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
     }
 }
