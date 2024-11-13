@@ -1,4 +1,6 @@
 import SheetMixinV2 from "./SheetMixinV2.js"
+import ACDialogV2 from "./ACDialogV2.js"
+import StatConfigV2 from "./StatConfigV2.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
@@ -31,9 +33,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         actions: {
             onInvokeColorPicker: super.onInvokeColorPicker,
             onEditImage: super.onEditImage,
-            onStatAdd: super.onStatAdd,
-            onStatEdit: super.onStatEdit,
-            onStatDelete: super.onStatDelete,
+            onStatAdd: CharacterSheetV2.onStatAdd,
+            onStatEdit: CharacterSheetV2.onStatEdit,
+            onStatDelete: CharacterSheetV2.onStatDelete,
             onCategoryCollapse: CharacterSheetV2.onCategoryCollapse,
             onCategoryEdit: CharacterSheetV2.onCategoryEdit,
             onCategoryFlood: CharacterSheetV2.onCategoryFlood,
@@ -248,6 +250,74 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
 
         super._processSubmitData(event, form, updates)
+    }
+
+    /** 
+     * Invokes the Stat configuration window for creating a stat. 
+     */
+    static onStatAdd (event, target) {
+        const [color] = Object
+            .entries(this.document.system._stats)
+            .find(([_, stat]) => stat === null) // If the value is null, get the key
+
+        new StatConfigV2({
+            window: { 
+                title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
+            },
+            document: this.document,
+            stat: {
+                color, 
+                tag: "",
+            }
+        }).render(true)
+    }
+
+    /** 
+     * Invokes the Stat configuration window for editing the targetted stat. 
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     */
+    static onStatEdit (event, target) {
+        const index = target.closest('.JS-Stat').dataset.stat
+        const stat = this.document.system.colorStats[index];
+
+        new StatConfigV2({ 
+            window: {
+                title: game.i18n.format("AC.StatConfig.EditStat.Title", { 
+                    tag: stat.tag.toUpperCase(),
+                    name: this.document.name
+                })
+            },
+            document: this.document,
+            stat,
+        }).render(true)
+    }
+
+    /** Deletes the targetted stat.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     */
+    static async onStatDelete (event, target) {            
+        const index = target.closest('.JS-Stat').dataset.stat
+        const { tag, color } = this.document.system.colorStats[index]
+
+        const confirm = await ACDialogV2.confirm({
+            window: {
+                title: game.i18n.format("AC.DeleteStatDialog.Title", { 
+                    tag: tag.toUpperCase(), 
+                    name: this.document.name
+                }),
+            },
+            content: game.i18n.format("AC.DeleteStatDialog.Content", {
+                tag: tag.toUpperCase(), 
+                color: color.toUpperCase()
+            }),
+            modal: true
+        });
+        
+        if (confirm) {
+            this.document.update({ [`system._stats.${color}`]: null })
+        }
     }
 
     static onCategoryCollapse (event, target) { }

@@ -63,70 +63,23 @@ export default function SheetMixinV2 (Base) {
             fp.browse()
         }
 
-        /** Invokes the Stat configuration window for creating a stat. */
-        static onStatAdd () {
-            const [color] = Object
-                .entries(this.document.system._stats)
-                .find(([_, stat]) => stat === null) // If the value is null, get the key
+        /** 
+         * Invokes the Stat configuration window for creating a stat. 
+         */
+        static onStatAdd () { }
 
-            new StatConfigV2({
-                window: { 
-                    title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
-                },
-                document: this.document,
-                stat: {
-                    color, 
-                    tag: "",
-                }
-            }).render(true)
-        }
-
-        /** Invokes the Stat configuration window for editing the targetted stat. 
+        /** 
+         * Invokes the Stat configuration window for editing the targetted stat. 
          * @param {PointerEvent} event
          * @param {HTMLElement} target
          */
-        static onStatEdit (event, target) {
-            const index = target.closest('.JS-Stat').dataset.stat
-            const stat = this.document.system.colorStats[index];
-
-            new StatConfigV2({ 
-                window: {
-                    title: game.i18n.format("AC.StatConfig.EditStat.Title", { 
-                        tag: stat.tag.toUpperCase(),
-                        name: this.document.name
-                    })
-                },
-                document: this.document,
-                stat,
-            }).render(true)
-        }
+        static onStatEdit (event, target) { }
 
         /** Deletes the targetted stat.
          * @param {PointerEvent} event
          * @param {HTMLElement} target
          */
-        static async onStatDelete (event, target) {            
-            const index = target.closest('.JS-Stat').dataset.stat
-            const { tag, color } = this.document.system.colorStats[index]
-
-            const confirm = await ACDialogV2.confirm({
-                window: {
-                    title: game.i18n.format("AC.DeleteStatDialog.Title", { 
-                        tag: tag.toUpperCase(), 
-                        name: this.document.name
-                    }),
-                },
-                content: game.i18n.format("AC.DeleteStatDialog.Content", {
-                    tag: tag.toUpperCase(), 
-                    color: color.toUpperCase()
-                }),
-                modal: true
-            });
-            
-            if (confirm) {
-                this.document.update({ [`system._stats.${color}`]: null })
-            }
-        }
+        static async onStatDelete (event, target) { }
 
         /** Define whether a user is able to begin a dragstart workflow for a given drag selector
          * @param {string} selector       The candidate HTML selector for dragging

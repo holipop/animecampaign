@@ -1052,7 +1052,7 @@
 }
 .animecampaign.sheet .StatEntry__Input--Denominator {
   flex: 0;
-  min-width: 8rem;
+  min-width: 4rem;
   font-size: 1.2rem;
 }
 .animecampaign.sheet .StatEntry__Input--Label {

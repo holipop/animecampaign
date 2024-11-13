@@ -70,7 +70,7 @@
         },
         "EditStat": {
             "Title": "Edit Stat: {name}",
-            "Submit": "Edit Stat"
+            "Submit": "Update Stat"
         },
         "Tag": {
             "Label": "Tag",
