@@ -63,8 +63,10 @@
         #TextAreaSkinning();
         #FocusOutline();
         #ColorScheme({
-            border-color: "txt";
             color: "txt";
+        });
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
         });
 
         min-height: 0px;
@@ -138,15 +140,34 @@
     }
 
     .Summary__Buttons {
-        padding-top: 1.25rem;
+        padding-bottom: .5rem;
         display: flex;
-        flex-direction: column;
-        row-gap: .25rem;
+        flex-direction: column-reverse;
+        gap: .25rem;
     }
     .Summary__HiddenColor {
         position: absolute;
         opacity: 0;
         pointer-events: none;
+    }
+
+}
+
+// Feature Specific Rules
+.animecampaign.sheet.item {
+
+    .Summary__Image {
+        width: 5rem;
+        height: 5rem;
+    }
+    .Summary__ImageEdit {
+        width: 5rem;
+        height: 5rem;
+    }
+    .Summary__Name {
+        border: none;
+        font: 1.5rem "Gloock";
+        max-height: 100 * @rpx;
     }
 
 }

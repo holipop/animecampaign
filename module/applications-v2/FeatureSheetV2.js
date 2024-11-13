@@ -48,4 +48,23 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         feature: "description"
     }
 
+    /** The context passed to each Handlebars template.
+     * @returns {*}
+     */
+    async _prepareContext () {
+        return {
+            ...super._prepareContext(),
+            config: CONFIG.AC,
+            document: this.document,
+            system: this.document.system,
+            palette: this.document.system.palette,
+            //tabs: this.getTabs(),
+
+            /* svg: {
+                bg: this.svgBackground,
+                text: this.svgText,
+            }, */
+        }
+    }
+
 }

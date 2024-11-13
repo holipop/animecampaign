@@ -249,8 +249,8 @@
   opacity: 0.25;
 }
 .animecampaign button.ACButton .ACButton__Icon {
-  font-size: 1.25rem;
-  font-variation-settings: 'FILL' 0, 'wght' 250, 'GRAD' 0, 'opsz' 24;
+  font-size: 1.1rem;
+  font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 24;
 }
 .animecampaign button.ACButton--Inline {
   height: 1.25rem;
@@ -525,12 +525,16 @@
   outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
 }
 .theme-dark .animecampaign.sheet .Summary__Name {
-  border-color: #ebedf2;
   color: #ebedf2;
 }
 .theme-light .animecampaign.sheet .Summary__Name {
-  border-color: #1f1e1e;
   color: #1f1e1e;
+}
+.theme-dark .animecampaign.sheet .Summary__Name {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.sheet .Summary__Name {
+  border-color: rgba(31, 30, 30, 0.5);
 }
 .animecampaign.sheet .Summary__Class {
   min-height: 0;
@@ -660,15 +664,28 @@
   color: #1f1e1e;
 }
 .animecampaign.sheet .Summary__Buttons {
-  padding-top: 1.25rem;
+  padding-bottom: 0.5rem;
   display: flex;
-  flex-direction: column;
-  row-gap: 0.25rem;
+  flex-direction: column-reverse;
+  gap: 0.25rem;
 }
 .animecampaign.sheet .Summary__HiddenColor {
   position: absolute;
   opacity: 0;
   pointer-events: none;
+}
+.animecampaign.sheet.item .Summary__Image {
+  width: 5rem;
+  height: 5rem;
+}
+.animecampaign.sheet.item .Summary__ImageEdit {
+  width: 5rem;
+  height: 5rem;
+}
+.animecampaign.sheet.item .Summary__Name {
+  border: none;
+  font: 1.5rem "Gloock";
+  max-height: 6.25rem;
 }
 .animecampaign.sheet .Stats {
   width: 80%;
