@@ -63,24 +63,6 @@ export default function SheetMixinV2 (Base) {
             fp.browse()
         }
 
-        /** 
-         * Invokes the Stat configuration window for creating a stat. 
-         */
-        static onStatAdd () { }
-
-        /** 
-         * Invokes the Stat configuration window for editing the targetted stat. 
-         * @param {PointerEvent} event
-         * @param {HTMLElement} target
-         */
-        static onStatEdit (event, target) { }
-
-        /** Deletes the targetted stat.
-         * @param {PointerEvent} event
-         * @param {HTMLElement} target
-         */
-        static async onStatDelete (event, target) { }
-
         /** Define whether a user is able to begin a dragstart workflow for a given drag selector
          * @param {string} selector       The candidate HTML selector for dragging
          * @returns {boolean}             Can the current user drag this selector?

@@ -149,21 +149,10 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     _onRender(context, options) {
         super._onRender(context, options)
 
-        // Set the initial tab. Foundry code is so damn ugly.
+        // Sets the name of the tab.
         const tabs = this.getTabs();
         const tab = tabs[this.tabGroups.character]
         this.element.querySelector(".JS-TabName").textContent = game.i18n.localize(tab.label)
-        this.element.querySelector(`.tab[data-tab="${tab.id}"]`).classList.add("active")
-
-        // Make the little stamina bar change amount :3
-        let staminaRatio = this.document.system.staminaRatio
-        if (staminaRatio >= 1) {
-            staminaRatio = 1
-        } else if (staminaRatio <= 0) {
-            staminaRatio = 0
-        }
-        staminaRatio *= 100
-        //!!! this.element.querySelector('[data-stam-bar]').style.height = `${staminaRatio}%`
 
         // Disable the Add Stat button when the stats list is full.
         if (this.document.system.colorStats.length >= 8) {
@@ -236,8 +225,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         console.log(updates)
 
-        // intercept stat handling
-        if ("stats" in updates.system) {
+        /* // intercept stat handling
+        if ("stats" in updates?.system) {
             const statData = Object
                 .entries(updates.system.stats)
                 .map(([index, statChanges]) => {
@@ -247,7 +236,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
             updates.system.stats = null // v1.0 bandaid
             updates.system._stats = Object.fromEntries(statData)
-        }
+        } */
 
         super._processSubmitData(event, form, updates)
     }
@@ -322,21 +311,41 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     static onCategoryCollapse (event, target) { }
 
-    static onCategoryEdit (event, target) {
-        
-    }
+    static onCategoryEdit (event, target) { }
 
     static onCategoryFlood (event, target) { }
 
     static onCategoryDelete (event, target) { }
 
-    static onFeatureAdd (event, target) { }
+    /**
+     * Create a feature under this category.
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
+    static onFeatureAdd (event, target) {
+        this.document.createEmbeddedDocuments("Item", [
+            { name: "uhm", type: "Feature", system: { category: "weapon" } }
+        ])
+    }
 
     static onFeatureCollapse (event, target) { }
 
     static onFeatureEdit (event, target) { }
 
-    static onFeatureDelete (event, target) { }
+    /**
+     * Deletes a feature.
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
+    static onFeatureDelete (event, target) {
+        const id = target.closest(".JS-FeatureEntry").dataset.id
+
+        console.log(id)
+        
+        this.document.deleteEmbeddedDocuments("Item", [id])
+    }
 
 
 }

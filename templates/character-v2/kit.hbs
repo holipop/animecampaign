@@ -1,13 +1,15 @@
-<ul class="Kit tab" data-tab="kit" data-group="character">
+<ul class="Kit tab {{tabs.kit.css}}" data-tab="kit" data-group="character">
+
+    {{log this}}
 
     {{#each categories as |category index|}}
-        <li class="Category">
+        <li class="Category" data-category="{{category.name}}">
 
             <div class="Category__Header JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
                 
                 <div class="Category__HeaderLeft JS-Color" data-color="{{palette.contrast}}">
                     
-                    <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
+                    <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryCollapse" data-tooltip="AC.CharacterSheet.CategoryCollapse">
                         <span class="ACButton__Icon MSO">keyboard_arrow_down</span>
                     </button>
 
@@ -20,11 +22,11 @@
                     </span>
 
                     <div class="Category__Buttons InlineButtonGroup">
-                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
+                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryEdit" data-tooltip="AC.CharacterSheet.CategoryEdit">
                             <span class="ACButton__Icon MSO">edit</span>
                         </button>
 
-                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
+                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryFlood" data-tooltip="AC.CharacterSheet.CategoryFlood">
                             <span class="ACButton__Icon MSO">colors</span>
                         </button>
                     </div>
@@ -36,11 +38,11 @@
                     </div>
 
                     <div class="Category__Buttons InlineButtonGroup">
-                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button">
+                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onFeatureAdd" data-tooltip="AC.CharacterSheet.FeatureAdd">
                             <span class="ACButton__Icon MSO">add</span>
                         </button>
 
-                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button">
+                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onCategoryDelete" data-tooltip="AC.CharacterSheet.CategoryDelete">
                             <span class="ACButton__Icon MSO">close</span>
                         </button>
                     </div>
@@ -56,12 +58,12 @@
                 {{#each category.features as |feature index|}}
 
                     {{log feature}}
-                    <li class="FeatureEntry JS-Color" data-color="{{feature.system.color}}" data-properties="border-color">
+                    <li class="FeatureEntry JS-FeatureEntry JS-Color" data-id="{{feature.id}}" data-color="{{feature.system.color}}" data-properties="border-color">
 
                         <div class="FeatureEntry__Info">
                             <img class="FeatureEntry__Image" src="{{feature.img}}">
 
-                            <button class="FeatureEntry__Name ACButton ACButton--Inline" type="button">
+                            <button class="FeatureEntry__Name ACButton ACButton--Inline" type="button" data-action="onFeatureCollapse" data-tooltip="AC.CharacterSheet.FeatureCollapse">
                                 <span class="FeatureEntry__NameText">{{feature.name}}</span>
                                 <div class="FeatureEntry__CollapseIcon ACButton__Icon MSO">arrow_drop_down</div>
                             </button>
@@ -69,11 +71,11 @@
                             <div class="FeatureEntry__StatTrackers"></div>
 
                             <div class="FeatureEntry__Buttons InlineButtonGroup">
-                                <button class="ACButton ACButton--Inline" type="button">
+                                <button class="ACButton ACButton--Inline" type="button" data-action="onFeatureEdit" data-tooltip="AC.CharacterSheet.FeatureEdit">
                                     <div class="ACButton__Icon MSO">edit</div>
                                 </button>
 
-                                <button class="ACButton ACButton--Inline ACButton--Delete" type="button">
+                                <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onFeatureDelete" data-tooltip="AC.CharacterSheet.FeatureDelete">
                                     <div class="ACButton__Icon MSO">close</div>
                                 </button>
                             </div>

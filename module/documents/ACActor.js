@@ -24,7 +24,7 @@ export default class ACActor extends Actor {
      * @param {...*} args 
      */
     _onCreateDescendantDocuments (parent, collection, documents, ...args) {
-        if (collection == 'items') {
+        /* if (collection == 'items') {
             
             // if the category of the items don't exist in the owner, create it
             const features = documents.filter(document => document.type == 'Feature');
@@ -40,7 +40,7 @@ export default class ACActor extends Actor {
             })
             
             this.update({ 'system.categories': categories });
-        }
+        } */
 
         super._onCreateDescendantDocuments(parent, collection, documents, ...args);
     }

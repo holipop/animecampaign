@@ -33,7 +33,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     /** The Handlebars templates for this application. These are rendered in order. */
     static PARTS = {
-        template: { template: "systems/animecampaign/templates/feature-v2/template.hbs" },
+        part: { template: "systems/animecampaign/templates/feature-v2/template.hbs" },
     }
 
     /** The title of this application's window.
@@ -66,5 +66,23 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             }, */
         }
     }
+
+    /** 
+     * Invokes the Stat configuration window for creating a stat. 
+     */
+    static onStatAdd () { }
+
+    /** 
+     * Invokes the Stat configuration window for editing the targetted stat. 
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     */
+    static onStatEdit (event, target) { }
+
+    /** Deletes the targetted stat.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     */
+    static async onStatDelete (event, target) { }
 
 }
