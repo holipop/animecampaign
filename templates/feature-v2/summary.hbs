@@ -2,10 +2,19 @@
 
     <div class="Summary__ImageWrapper">
         
-        <img class="Summary__Image JS-Color" src="{{document.img}}" data-color="{{palette.primary}}" data-properties="border-color">
-        <div class="Summary__ImageEdit" data-action="onEditImage" data-tooltip="AC.FeatureSheet.EditImage">
-            <span class="Summary__ImageEditIcon MSO">edit</span>
-        </div>
+        {{#if document.img}}
+            <img class="Summary__Image JS-Color" src="{{document.img}}" data-color="{{palette.primary}}" data-properties="border-color">
+            <div class="Summary__ImageEdit" data-action="onEditImage" data-tooltip="AC.FeatureSheet.EditImage">
+                <span class="Summary__ImageEditIcon MSO">edit</span>
+            </div>
+        {{else}}
+            <div class="Summary__Image Summary__Image--Null JS-Color" data-color="{{palette.primary}}">
+                <div class="Summary__ImageIcon MSO">stat_0</div>
+            </div>
+            <div class="Summary__ImageEdit Summary__ImageEdit--Null" data-action="onEditImage" data-tooltip="AC.FeatureSheet.EditImage">
+                <span class="Summary__ImageEditIcon MSO">edit</span>
+            </div>
+        {{/if}}
 
     </div>
     
@@ -28,6 +37,12 @@
 
     <div class="Summary__Buttons">
 
+        {{#if document.img}}
+            <button class="ACButton ACButton--Delete" type="button" data-action="onRemoveImage" data-tooltip="AC.FeatureSheet.RemoveImage">
+                <span class="ACButton__Icon MSO">hide_image</span>
+            </button>
+        {{/if}}
+
         <button class="ACButton JS-Color" type="button" data-action="onInvokeColorPicker" data-tooltip="AC.FeatureSheet.EditColor" data-color="{{palette.secondary}}" data-properties="border-color color">
             <span class="ACButton__Icon MSO">palette</span>
         </button>
@@ -37,9 +52,9 @@
             <span class="ACButton__Icon MSO">ifl</span>
         </button>
 
-        <button class="ACButton JS-Color" type="button" data-tooltip="AC.FeatureSheet.FeaturePost" data-color="{{palette.secondary}}" data-properties="border-color color">
+        <!-- button class="ACButton JS-Color" type="button" data-tooltip="AC.FeatureSheet.FeaturePost" data-color="{{palette.secondary}}" data-properties="border-color color">
             <span class="ACButton__Icon MSO">chat_bubble</span>
-        </button>
+        </button -->
 
     </div>
 

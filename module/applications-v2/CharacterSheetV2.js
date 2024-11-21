@@ -1,6 +1,7 @@
 import SheetMixinV2 from "./SheetMixinV2.js"
 import ACDialogV2 from "./ACDialogV2.js"
 import StatConfigV2 from "./StatConfigV2.js"
+import ACItem from "../documents/ACItem.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
@@ -208,7 +209,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         console.log(updates)
 
-        /* // intercept stat handling
+        // intercept stat handling
         if ("stats" in updates?.system) {
             const statData = Object
                 .entries(updates.system.stats)
@@ -219,7 +220,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
             updates.system.stats = null // v1.0 bandaid
             updates.system._stats = Object.fromEntries(statData)
-        } */
+        }
 
         super._processSubmitData(event, form, updates)
     }
@@ -314,7 +315,19 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     static onFeatureCollapse (event, target) { }
 
-    static onFeatureEdit (event, target) { }
+    /**
+     * Create a feature under this category.
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
+    static onFeatureEdit (event, target) {
+        const { id } = target.closest(".JS-FeatureEntry").dataset
+
+        /** @type {ACItem} */
+        const item = this.document.items.get(id)
+        item.sheet.render(true)
+    }
 
     /**
      * Deletes a feature.
@@ -323,10 +336,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @this {CharacterSheetV2}
      */
     static onFeatureDelete (event, target) {
-        const id = target.closest(".JS-FeatureEntry").dataset.id
-
-        console.log(id)
-        
+        const { id } = target.closest(".JS-FeatureEntry").dataset
         this.document.deleteEmbeddedDocuments("Item", [id])
     }
 

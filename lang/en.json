@@ -43,14 +43,17 @@
         "StatAdd": "Add Stat",
         "StatEdit": "Edit Stat",
         "StatDelete": "Delete Stat",
+
         "CategoryCollapse": "Collapse Category",
         "CategoryEdit": "Edit Category",
         "CategoryFlood": "Flood Category",
         "CategoryDelete": "Delete Category",
+        
+        "FeatureRoll": "Roll Feature",
         "FeatureAdd": "Add Feature",
-        "FeatureCollapse": "Collapse Category",
-        "FeatureEdit": "Edit Category",
-        "FeatureDelete": "Delete Category"
+        "FeatureCollapse": "Collapse Feature",
+        "FeatureEdit": "Edit Feature",
+        "FeatureDelete": "Delete Feature"
     },
     "FeatureSheet": {
         "Name": "Name",

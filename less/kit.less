@@ -96,12 +96,49 @@
         width: 100%;
         align-items: center;
     }
+
+    .FeatureEntry__ImageWrapper {
+        display: grid;
+        place-items: center;
+    }
+
     .FeatureEntry__Image {
         #InputSkinning(); 
 
+        grid-area: 1 / 1 / -1 / -1;
         height: 2rem - (2 * @rpx);
         width: 2rem - (2 * @rpx);
-        margin-right: .25rem;
+        margin-right: .2rem;
+    }
+    .FeatureEntry__Image--Null {
+        display: grid;
+        place-items: center;
+    }
+    .FeatureEntry__ImageIcon {
+        font-size: 1rem;
+    }
+
+    .FeatureEntry__Roll {
+        #ColorScheme({
+            border-color: "txt";
+            color: "txt";
+            background-color: "bg";
+        });
+
+        position: relative;
+        right: .1rem;
+        grid-area: 1 / 1 / -1 / -1;
+        font-size: 1rem;
+        padding: .1rem;
+        border: (1 * @rpx) solid;
+        border-radius: 2 * @rpx;
+        cursor: pointer;
+        transition: opacity .075s;
+
+        opacity: 0;
+    }
+    .FeatureEntry__ImageWrapper:hover .FeatureEntry__Roll {
+        opacity: .75;
     }
 
     .FeatureEntry__Name {
@@ -112,7 +149,6 @@
         border-radius: 2 * @rpx;
 
         font: bold 1.2rem "Philosopher";
-        margin: 0 .2rem;
 
         .ACButton__Icon {
             width: 0.75rem;

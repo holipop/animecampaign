@@ -35,14 +35,11 @@ export default class ACItem extends Item {
         super._preCreate(data, options, user);
 
         const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
-        const isDefaultImageOwner = game.settings.get('animecampaign', 'defaultFeatureImage')
+        // const isDefaultImageOwner = game.settings.get('animecampaign', 'defaultFeatureImage')
 
         const updates = {
             'system.details.editor': defaultTextEditor,
-        }
-
-        if (this.isOwned && isDefaultImageOwner) {
-            updates.img = this.actor.img
+            'img': null
         }
 
         this.updateSource(updates);
@@ -114,7 +111,7 @@ export default class ACItem extends Item {
 
     /** Sends a chat message of this feature.
      * @param {Boolean} options.post
-     * @param {String?} options.customFormula
+     * @param {String?} options.formula
      */
     async roll ({ post = false, formula = null, template = null } = {}) {
         

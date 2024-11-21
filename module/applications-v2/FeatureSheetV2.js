@@ -21,9 +21,10 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         actions: {
             onInvokeColorPicker: super.onInvokeColorPicker,
             onEditImage: super.onEditImage,
-            onStatAdd: super.onStatAdd,
-            onStatEdit: super.onStatEdit,
-            onStatDelete: super.onStatDelete,
+            onRemoveImage: FeatureSheetV2.onRemoveImage,
+            onStatAdd: FeatureSheetV2.onStatAdd,
+            onStatEdit: FeatureSheetV2.onStatEdit,
+            onStatDelete: FeatureSheetV2.onStatDelete,
         },
         form: {
             submitOnChange: true,
@@ -65,6 +66,13 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
                 text: this.svgText,
             }, */
         }
+    }
+
+    /** 
+     * Invokes the Stat configuration window for creating a stat. 
+     */
+    static onRemoveImage () {
+        this.document.update({ img: null })
     }
 
     /** 

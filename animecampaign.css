@@ -289,10 +289,11 @@
 }
 .animecampaign button.ACButton.ACButton--Delete {
   color: #f14545;
+  border-color: #f14545;
 }
 .animecampaign button.ACButton.ACButton--Delete:hover {
-  background-color: #f14545;
   border-color: #f14545;
+  background-color: #f14545;
 }
 .theme-dark .animecampaign button.ACButton.ACButton--Delete:hover {
   color: #ebedf2;
@@ -687,6 +688,21 @@
 .animecampaign.sheet.item .Summary__ImageEdit {
   width: 4.75rem;
   height: 4.75rem;
+}
+.animecampaign.sheet.item .Summary__Image--Null {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.33rem;
+}
+.animecampaign.sheet.item .Summary__ImageIcon {
+  font-size: 2rem;
+}
+.animecampaign.sheet.item .Summary__ImageEdit--Null {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.33rem;
 }
 .animecampaign.sheet.item .Summary__Name {
   padding: 0.2rem 0;
@@ -1200,6 +1216,10 @@
   background-color: #f4f3ed;
   color: #1f1e1e;
 }
+.animecampaign.actor.sheet .FeatureEntry__ImageWrapper {
+  display: grid;
+  place-items: center;
+}
 .animecampaign.actor.sheet .FeatureEntry__Image {
   min-height: 0;
   padding: 0;
@@ -1207,9 +1227,10 @@
   border: none;
   background: none;
   transition: none;
+  grid-area: 1 / 1 / -1 / -1;
   height: 1.875rem;
   width: 1.875rem;
-  margin-right: 0.25rem;
+  margin-right: 0.2rem;
 }
 .theme-dark .animecampaign.actor.sheet .FeatureEntry__Image {
   color: #ebedf2;
@@ -1227,6 +1248,38 @@
   transition: none;
   box-shadow: none;
 }
+.animecampaign.actor.sheet .FeatureEntry__Image--Null {
+  display: grid;
+  place-items: center;
+}
+.animecampaign.actor.sheet .FeatureEntry__ImageIcon {
+  font-size: 1rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__Roll {
+  position: relative;
+  right: 0.1rem;
+  grid-area: 1 / 1 / -1 / -1;
+  font-size: 1rem;
+  padding: 0.1rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: opacity 0.075s;
+  opacity: 0;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureEntry__Roll {
+  border-color: #ebedf2;
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign.actor.sheet .FeatureEntry__Roll {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
+.animecampaign.actor.sheet .FeatureEntry__ImageWrapper:hover .FeatureEntry__Roll {
+  opacity: 0.75;
+}
 .animecampaign.actor.sheet .FeatureEntry__Name {
   display: flex;
   gap: 0.1rem;
@@ -1234,7 +1287,6 @@
   padding: 0 0.2rem;
   border-radius: 0.125rem;
   font: bold 1.2rem "Philosopher";
-  margin: 0 0.2rem;
 }
 .animecampaign.actor.sheet .FeatureEntry__Name .ACButton__Icon {
   width: 0.75rem;
