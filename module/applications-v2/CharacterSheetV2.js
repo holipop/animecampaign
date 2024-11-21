@@ -149,11 +149,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     _onRender(context, options) {
         super._onRender(context, options)
 
-        // Sets the name of the tab.
-        const tabs = this.getTabs();
-        const tab = tabs[this.tabGroups.character]
-        this.element.querySelector(".JS-TabName").textContent = game.i18n.localize(tab.label)
-
         // Disable the Add Stat button when the stats list is full.
         if (this.document.system.colorStats.length >= 8) {
             this.element.querySelector(`.JS-DisableStatAdd`).setAttribute("disabled", "disabled")
@@ -169,24 +164,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             kit:        { id: "kit", group: "character", icon: "stat_0", label: "AC.CharacterSheet.Kit" },
             biography:  { id: "biography", group: "character", icon: "person", label: "AC.CharacterSheet.Biography" }
         }
+        
         for (const tab of Object.values(tabs)) {
             tab.active = this.tabGroups[tab.group] === tab.id
             tab.css = tab.active ? "active" : ""
         }
         return tabs
-    }
-
-    /** 
-     * This is really the only place changing the tab name can be done.
-     * @override 
-     */
-    changeTab (tab, group, options) {
-        const tabs = this.getTabs();
-        const label = tabs[tab].label
-
-        this.element.querySelector(".JS-TabName").textContent = game.i18n.localize(label)
-
-        super.changeTab(tab, group, options)
     }
 
     /** The context passed to each Handlebars template.

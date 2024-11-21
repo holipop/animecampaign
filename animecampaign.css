@@ -1102,6 +1102,12 @@
   margin-top: 0.25rem;
   font: 1.25rem "Gloock";
 }
+.animecampaign.sheet .Navigation__TabNameContent {
+  display: none;
+}
+.animecampaign.sheet .Navigation__TabNameContent.active {
+  display: inline;
+}
 .animecampaign.actor.sheet .Kit {
   list-style-type: none;
   margin: 0;

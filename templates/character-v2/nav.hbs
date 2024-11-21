@@ -12,7 +12,15 @@
 
     </div>
 
-    <span class="Navigation__TabName JS-TabName"></span>
+    <span class="Navigation__TabName">
+
+        {{#each tabs as |tab id|}}
+
+            <span class="Navigation__TabNameContent {{tab.css}}">{{localize tab.label}}</span>
+
+        {{/each}}
+
+    </span>
 
     <!-- div class="Navigation__Controls"></div -->
 
