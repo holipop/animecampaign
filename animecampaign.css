@@ -256,6 +256,37 @@
 .animecampaign button.ACButton .ACButton__Icon {
   font-size: 1.1rem;
 }
+.animecampaign button.ACButton .ACButton__Text {
+  font: bold 0.9rem "Libre Franklin";
+}
+.animecampaign button.ACButton--Wide {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 2.5rem;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign button.ACButton--Wide {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign button.ACButton--Wide {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign button.ACButton--Wide:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign button.ACButton--Wide:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign button.ACButton--Wide:active {
+  background-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign button.ACButton--Wide:active {
+  background-color: rgba(31, 30, 30, 0.5);
+}
 .animecampaign button.ACButton--Inline {
   height: 1.25rem;
   width: 1.25rem;
@@ -1030,7 +1061,7 @@
   padding: 0;
   flex-direction: column;
   gap: 0.25rem;
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
 }
 .animecampaign.actor.sheet .Kit.active {
   display: flex;
@@ -1246,9 +1277,6 @@
 }
 .theme-light .animecampaign.dialog button.ACButton--Dialog:active {
   background-color: rgba(31, 30, 30, 0.5);
-}
-.animecampaign.dialog button.ACButton--Dialog .ACButton__Text {
-  font: bold 0.9rem "Libre Franklin";
 }
 .animecampaign.application .Config {
   display: flex;

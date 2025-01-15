@@ -1,5 +1,5 @@
+import Category from "../data-models/Category.js"
 import ACActor from "../documents/ACActor.js"
-import ACItem from "../documents/ACItem.js"
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
@@ -31,10 +31,16 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         hbs: { template: "systems/animecampaign/templates/dialog/category-config.hbs" }
     }
 
+    /**
+     * @returns {Category}
+     */
     get category () { 
         return this.options.category
     }
 
+    /**
+     * @returns {ACActor}
+     */
     get document () {
         return this.options.document
     }
@@ -43,9 +49,12 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
      * @returns {Boolean}
      */
     get isNew () {
-        return (this.options.category.name === "")
+        return !("name" in this.category)
     }
 
+    /**
+     * @returns {Color}
+     */
     get displayColor () {
         return this.category.color ?? this.document.system.color
     }
@@ -75,6 +84,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
      * @param {SubmitEvent} event 
      * @param {HTMLFormElement} form 
      * @param {*} data 
+     * @this {CategoryConfigV2}
      */
     static onSubmit (event, form, formData) {
         const data = formData.object
@@ -83,8 +93,15 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         data.name ||= "new category"
         data.name = data.name.toLowerCase()
 
-        if (this.isNew) {
+        const nameTaken = categories
+            .filter(c => c.name !== this.category.name)
+            .find(c => c.name == data.name)
+        if (nameTaken) {
+            throw game.i18n.format("AC.CategoryConfig.CategoryNameTaken", { name: data.name.toUpperCase() })
+        }
 
+        if (this.isNew) {
+            categories.push(data)
         } else {
             if (data.name !== this.category.name) {
                 const updates = this.category.features.map(item => { 

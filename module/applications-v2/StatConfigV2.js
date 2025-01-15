@@ -94,8 +94,6 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
      * @param {*} data 
      */
     static onSubmit (event, form, formData) {
-        console.log({event, form, formData})
-
         const data = formData.object
 
         data.tag ||= "new stat"
@@ -109,10 +107,9 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
             // tags must be unique
             const tagTaken = stats
                 .filter(stat => stat.color !== this.stat.color)
-                .map(stat => stat.tag)
-                .includes(data.tag)
+                .find(stat => stat.tag == data.tag)
             if (tagTaken) {
-                throw game.i18n.format("AC.NOTIFY.StatTagTaken", { tag: data.tag.toUpperCase() })
+                throw game.i18n.format("AC.StatConfig.StatTagTaken", { tag: data.tag.toUpperCase() })
             }
 
             // always place new stats at the end

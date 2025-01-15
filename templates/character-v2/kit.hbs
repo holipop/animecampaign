@@ -1,7 +1,5 @@
 <ul class="Kit tab {{tabs.kit.css}}" data-tab="kit" data-group="character">
 
-    {{log this}}
-
     {{#each categories as |category index|}}
         <li class="Category JS-Category" data-category="{{index}}">
 
@@ -9,7 +7,7 @@
                 
                 <div class="Category__HeaderLeft JS-Color" data-color="{{palette.contrast}}">
                     
-                    <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryCollapse" data-tooltip="AC.CharacterSheet.CategoryCollapse">
+                    <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryCollapse">
                         <span class="ACButton__Icon MSO">keyboard_arrow_down</span>
                     </button>
 
@@ -57,7 +55,6 @@
 
                 {{#each category.features as |feature index|}}
 
-                    {{log feature}}
                     <li class="FeatureEntry JS-FeatureEntry JS-Color" data-id="{{feature.id}}" data-color="{{feature.system.color}}" data-properties="border-color">
 
                         <div class="FeatureEntry__Info">
@@ -76,7 +73,7 @@
 
                             </div>
 
-                            <button class="FeatureEntry__Name ACButton ACButton--Inline" type="button" data-action="onFeatureCollapse" data-tooltip="AC.CharacterSheet.FeatureCollapse">
+                            <button class="FeatureEntry__Name ACButton ACButton--Inline" type="button" data-action="onFeatureCollapse">
                                 <span class="FeatureEntry__NameText">{{feature.name}}</span>
                                 <div class="FeatureEntry__CollapseIcon ACButton__Icon MSO">arrow_drop_down</div>
                             </button>
@@ -103,5 +100,12 @@
 
         </li>
     {{/each}}
+
+    <button class="ACButton ACButton--Wide" type="button" data-action="onCategoryCreate">
+        <span class="ACButton__Icon MSO">save</span>
+        <span class="ACButton__Text">
+            {{localize "AC.CharacterSheet.CategoryCreate"}}
+        </span>
+    </button>
 
 </ul>

@@ -42,6 +42,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             onCategoryEdit: CharacterSheetV2.onCategoryEdit,
             onCategoryFlood: CharacterSheetV2.onCategoryFlood,
             onCategoryDelete: CharacterSheetV2.onCategoryDelete,
+            onCategoryCreate: CharacterSheetV2.onCategoryCreate,
             onFeatureAdd: CharacterSheetV2.onFeatureAdd,
             onFeatureCollapse: CharacterSheetV2.onFeatureCollapse,
             onFeatureEdit: CharacterSheetV2.onFeatureEdit,
@@ -207,8 +208,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     async _processSubmitData(event, form, submitData) {
         const updates = submitData
-
-        console.log(updates)
 
         // intercept stat handling
         if ("stats" in updates?.system) {
@@ -383,9 +382,25 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             const categories = this.document.system.categories
             categories.splice(index, 1)
 
-            console.log(categories)
             this.document.update({ 'system.categories': categories })
         }
+    }
+
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
+    static async onCategoryCreate (event, target) {
+        new CategoryConfigV2({ 
+            window: {
+                title: game.i18n.format("AC.CategoryConfig.CreateCategory.Title", { 
+                    name: this.document.name
+                })
+            },
+            document: this.document,
+            category: {},
+        }).render(true)
     }
 
     /**
@@ -402,7 +417,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             name: "New Feature", 
             type: "Feature", 
             system: { 
-                category: category.name 
+                category: category.name,
+                color: category.palette.primary
             }
         }])
     }

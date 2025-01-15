@@ -228,6 +228,37 @@
     .ACButton__Icon {
         font-size: 1.1rem;
     }
+    .ACButton__Text {
+        font: bold .9rem "Libre Franklin";
+    }
+}
+.animecampaign button.ACButton--Wide { // Basically .ACButton--Dialog but not for flexboxes.
+    #ColorScheme(@opacity: 50%, {
+        border-color: "txt";
+    });
+
+    display: flex;
+    justify-content: center;
+    gap: .25rem;
+    height: 2.5rem;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 2 * @rpx;
+    border: (1 * @rpx) solid;
+
+    &:hover {
+        .theme-dark & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@dark-txt-color, 50%);
+        }
+        .theme-light & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@light-txt-color, 50%);
+        }
+    }
+    &:active {
+        #ColorScheme(@opacity: 50%, {
+            background-color: "txt";
+        })
+    }
 }
 .animecampaign button.ACButton--Inline {
     #ColorScheme({

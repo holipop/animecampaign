@@ -48,6 +48,7 @@
         "CategoryEdit": "Edit Category",
         "CategoryFlood": "Flood Category",
         "CategoryDelete": "Delete Category",
+        "CategoryCreate": "Create Category",
         
         "FeatureRoll": "Roll Feature",
         "FeatureAdd": "Add Feature",
@@ -101,6 +102,7 @@
     },
 
     "CategoryConfig": {
+        "CategoryNameTaken": "\"{name}\" is already taken by another category.",
         "CreateCategory": {
             "Title": "Create Category: {name}",
             "Submit": "Create Category"
@@ -125,7 +127,7 @@
 
     "DeleteCategoryDialog": {
         "Title": "Delete Category [{category}]: {name}",
-        "Content": "<p>Delete the \"<b>{category}</b>\" category? This will delete all features within this category.</p>"
+        "Content": "<p>Delete the \"<b>{category}</b>\" category?<br><em>This will delete all features within this category.</em></p>"
     }
 }
 }
