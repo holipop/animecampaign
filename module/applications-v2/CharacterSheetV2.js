@@ -149,7 +149,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @protected
      * @override
      */
-    _onRender(context, options) {
+    _onRender (context, options) {
         super._onRender(context, options)
 
         // Disable the Add Stat button when the stats list is full.
@@ -162,7 +162,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * Returns a record of navigation tabs.
      * @returns {Record<string, ApplicationTab>}
      */
-    getTabs() {
+    getTabs () {
         const tabs = {
             kit:        { id: "kit", group: "character", icon: "stat_0", label: "AC.CharacterSheet.Kit" },
             biography:  { id: "biography", group: "character", icon: "person", label: "AC.CharacterSheet.Biography" }
@@ -179,6 +179,10 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @returns {*}
      */
     async _prepareContext () {
+        const categoryNames = this.document.system.categories.map(c => c.name)
+        const uncategorizedFeatures = this.document.items.filter(item => {
+            return !categoryNames.includes(item.system.category)
+        })
         
         return {
             ...super._prepareContext(),
@@ -188,7 +192,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             palette: this.document.system.palette,
             tabs: this.getTabs(),
             stats: this.document.system.colorStats,
-            categories: this.document.system.categories
+            categories: this.document.system.categories,
+
+            uncategorizedFeatures
 
             /* svg: {
                 bg: this.svgBackground,
@@ -454,6 +460,5 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         const { id } = target.closest(".JS-FeatureEntry").dataset
         this.document.deleteEmbeddedDocuments("Item", [id])
     }
-
 
 }

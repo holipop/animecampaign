@@ -82,6 +82,7 @@ Hooks.once('init', () => {
         "character.stats": "systems/animecampaign/templates/character-v2/stats.hbs",
         "character.nav": "systems/animecampaign/templates/character-v2/nav.hbs",
         "character.kit": "systems/animecampaign/templates/character-v2/kit.hbs",
+        "character.feature-entry": "systems/animecampaign/templates/character-v2/feature-entry.hbs",
 
         "feature.summary": "systems/animecampaign/templates/feature-v2/summary.hbs",
     }

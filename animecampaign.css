@@ -1061,7 +1061,7 @@
   padding: 0;
   flex-direction: column;
   gap: 0.25rem;
-  margin: 0.75rem 0;
+  margin: 0.5rem 0;
 }
 .animecampaign.actor.sheet .Kit.active {
   display: flex;
@@ -1224,6 +1224,10 @@
 .animecampaign.actor.sheet .FeatureEntry__Name .ACButton__Icon {
   width: 0.75rem;
 }
+.animecampaign.actor.sheet .FeatureEntry__CollapseIcon {
+  opacity: 0;
+  transition: opacity 0.075s;
+}
 .animecampaign.actor.sheet .FeatureEntry__StatTrackers {
   flex: 1;
   display: flex;
@@ -1231,6 +1235,27 @@
 .animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__CollapseIcon,
 .animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__Buttons {
   opacity: 1;
+}
+.animecampaign.actor.sheet .UncategorizedFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.25rem 0;
+}
+.animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  font: italic 0.75rem "Libre Franklin";
+  width: 100%;
+  padding: 0 10%;
+  margin: 0.1rem 0;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  color: rgba(235, 237, 242, 0.5);
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  color: rgba(31, 30, 30, 0.5);
+  border-color: rgba(31, 30, 30, 0.5);
 }
 .animecampaign.dialog.application:not([open]) {
   display: block;

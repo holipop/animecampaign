@@ -16,7 +16,7 @@
 
         {{#each tabs as |tab id|}}
 
-            <span class="Navigation__TabNameContent {{tab.css}}">{{localize tab.label}}</span>
+            <span class="Navigation__TabNameContent tab {{tab.css}}" data-tab="{{tab.id}}" data-group="character">{{localize tab.label}}</span>
 
         {{/each}}
 

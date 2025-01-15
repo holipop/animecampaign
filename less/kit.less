@@ -7,7 +7,7 @@
 
         flex-direction: column;
         gap: .25rem;
-        margin: .75rem 0;
+        margin: .5rem 0;
     }
     .Kit.active {
         display: flex;
@@ -156,6 +156,10 @@
             width: 0.75rem;
         }
     }
+    .FeatureEntry__CollapseIcon {
+        opacity: 0;
+        transition: opacity .075s;
+    }
 
     .FeatureEntry__StatTrackers {
         flex: 1;
@@ -167,4 +171,22 @@
         opacity: 1;
     }
 
+    .UncategorizedFeatures {
+        display: flex;
+        flex-direction: column;
+        gap: .1rem;
+        padding: .25rem 0;
+    }
+    .UncategorizedFeatures__Label {
+        #ColorScheme(@opacity: 50%, {
+            color: "txt";
+            border-color: "txt";
+        });
+
+        font: italic 0.75rem "Libre Franklin";
+        width: 100%;
+        padding: 0 10%;
+        margin: .1rem 0;
+        border-bottom: (1 * @rpx) solid;
+    }
 }

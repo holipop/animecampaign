@@ -40,6 +40,8 @@
         "Kit": "Kit",
         "Biography": "Biography",
 
+        "UncategorizedFeatures": "Uncategorized",
+
         "StatAdd": "Add Stat",
         "StatEdit": "Edit Stat",
         "StatDelete": "Delete Stat",

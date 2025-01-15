@@ -49,6 +49,19 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         feature: "description"
     }
 
+    /**
+     * Actions performed after any render of the Application.
+     * Post-render steps are not awaited by the render process.
+     * @param {ApplicationRenderContext} context      Prepared context data
+     * @param {RenderOptions} options                 Provided render options
+     * @protected
+     * @override
+     */
+    _onRender (context, options) {
+        super._onRender(context, options)
+
+    }
+
     /** The context passed to each Handlebars template.
      * @returns {*}
      */

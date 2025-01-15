@@ -54,52 +54,23 @@
             <ul class="Category__Features">
 
                 {{#each category.features as |feature index|}}
-
-                    <li class="FeatureEntry JS-FeatureEntry JS-Color" data-id="{{feature.id}}" data-color="{{feature.system.color}}" data-properties="border-color">
-
-                        <div class="FeatureEntry__Info">
-
-                            <div class="FeatureEntry__ImageWrapper">
-
-                                {{#if feature.img}}
-                                    <img class="FeatureEntry__Image" src="{{feature.img}}">
-                                {{else}}
-                                    <span class="FeatureEntry__Image FeatureEntry__Image--Null JS-Color" data-color="{{feature.system.color}}">
-                                        <span class="FeatureEntry__ImageIcon MSO">stat_0</span>
-                                    </span>
-                                {{/if}}
-
-                                <span class="FeatureEntry__Roll MSO" data-tooltip="AC.CharacterSheet.FeatureRoll">ifl</span>
-
-                            </div>
-
-                            <button class="FeatureEntry__Name ACButton ACButton--Inline" type="button" data-action="onFeatureCollapse">
-                                <span class="FeatureEntry__NameText">{{feature.name}}</span>
-                                <div class="FeatureEntry__CollapseIcon ACButton__Icon MSO">arrow_drop_down</div>
-                            </button>
-
-                            <div class="FeatureEntry__StatTrackers"></div>
-
-                            <div class="FeatureEntry__Buttons InlineButtonGroup">
-                                <button class="ACButton ACButton--Inline" type="button" data-action="onFeatureEdit" data-tooltip="AC.CharacterSheet.FeatureEdit">
-                                    <div class="ACButton__Icon MSO">edit</div>
-                                </button>
-
-                                <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onFeatureDelete" data-tooltip="AC.CharacterSheet.FeatureDelete">
-                                    <div class="ACButton__Icon MSO">close</div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="FeatureEntry__Content"></div>
-                        
-                    </li>
+                    {{> "character.feature-entry" feature=feature}}
                 {{/each}}
 
             </ul>
 
         </li>
     {{/each}}
+
+    {{#if uncategorizedFeatures}}
+        <div class="UncategorizedFeatures">
+            <div class="UncategorizedFeatures__Label">{{localize "AC.CharacterSheet.UncategorizedFeatures"}}</div>
+
+            {{#each uncategorizedFeatures as |feature index|}}
+                {{> "character.feature-entry" feature=feature}}
+            {{/each}}
+        </div>
+    {{/if}}
 
     <button class="ACButton ACButton--Wide" type="button" data-action="onCategoryCreate">
         <span class="ACButton__Icon MSO">save</span>

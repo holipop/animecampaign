@@ -59,6 +59,29 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         return this.category.color ?? this.document.system.color
     }
 
+    /** @override */
+    tabGroups = {
+        category: "basic"
+    }
+
+    /**
+     * Returns a record of navigation tabs.
+     * @returns {Record<string, ApplicationTab>}
+     */
+    getTabs() {
+        const tabs = {
+            basic: { id: "basic", group: "category", icon: "deployed_code", label: "AC.CategoryConfig.Basic" },
+            stats: { id: "stats", group: "category", icon: "stat_0", label: "AC.CategoryConfig.Stats" },
+            details: { id: "details", group: "category", icon: "stat_0", label: "AC.CategoryConfig.Details" },
+        }
+        
+        for (const tab of Object.values(tabs)) {
+            tab.active = this.tabGroups[tab.group] === tab.id
+            tab.css = tab.active ? "active" : ""
+        }
+        return tabs
+    }
+
     async _prepareContext () {
         return {
             app: this,

@@ -10,6 +10,7 @@ declare module "./ACActor.js" {
     export default interface ACActor {
         system: CharacterData
         sheet: CharacterSheetV2
+        items: ACItem[]
     }
 }
 
