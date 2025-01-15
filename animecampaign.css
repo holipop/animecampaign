@@ -1030,6 +1030,7 @@
   padding: 0;
   flex-direction: column;
   gap: 0.25rem;
+  margin: 0.5rem 0;
 }
 .animecampaign.actor.sheet .Kit.active {
   display: flex;
@@ -1084,6 +1085,7 @@
   padding-top: 0.2rem;
   font: italic 1.33rem "Gloock";
   text-transform: uppercase;
+  letter-spacing: 0.05rem;
 }
 .animecampaign.actor.sheet .Category__Features {
   list-style-type: none;

@@ -62,7 +62,8 @@
         "EditImage": "Edit Image",
         "EditColor": "Edit Color",
         "FeaturePost": "Post Feature to Chat",
-        "FeatureRoll": "Roll Feature"
+        "FeatureRoll": "Roll Feature",
+        "RemoveImage": "Remove Image"
     },
 
     "StatConfig": {

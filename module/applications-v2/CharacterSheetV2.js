@@ -226,8 +226,11 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         super._processSubmitData(event, form, updates)
     }
 
-    /** 
+    /**
      * Invokes the Stat configuration window for creating a stat. 
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
      */
     static onStatAdd (event, target) {
         const [color] = Object
@@ -250,6 +253,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * Invokes the Stat configuration window for editing the targetted stat. 
      * @param {PointerEvent} event
      * @param {HTMLElement} target
+     * @this {CharacterSheetV2}
      */
     static onStatEdit (event, target) {
         const index = target.closest('.JS-Stat').dataset.stat
@@ -270,6 +274,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     /** Deletes the targetted stat.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
+     * @this {CharacterSheetV2}
      */
     static async onStatDelete (event, target) {            
         const index = target.closest('.JS-Stat').dataset.stat
@@ -294,8 +299,18 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
     static onCategoryCollapse (event, target) { }
 
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
     static onCategoryEdit (event, target) {
         const index = target.closest('.JS-Category').dataset.category
         const category = this.document.system.categories[index]
@@ -309,9 +324,13 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             document: this.document,
             category,
         }).render(true)
-
     }
 
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
     static async onCategoryFlood (event, target) {
         const index = target.closest('.JS-Category').dataset.category
         const category = this.document.system.categories[index]
@@ -334,7 +353,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             this.document.updateEmbeddedDocuments("Item", updates)
         }
     }
-
+    
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
     static async onCategoryDelete (event, target) {
         const index = target.closest('.JS-Category').dataset.category
         const category = this.document.system.categories[index]
@@ -371,12 +395,23 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @this {CharacterSheetV2}
      */
     static onFeatureAdd (event, target) {
-        // TODO: Create a Dialog for having a name
-        this.document.createEmbeddedDocuments("Item", [
-            { name: "uhm", type: "Feature", system: { category: "weapon" } }
-        ])
+        const index = target.closest('.JS-Category').dataset.category
+        const category = this.document.system.categories[index]
+
+        this.document.createEmbeddedDocuments("Item", [{
+            name: "New Feature", 
+            type: "Feature", 
+            system: { 
+                category: category.name 
+            }
+        }])
     }
 
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
     static onFeatureCollapse (event, target) { }
 
     /**
