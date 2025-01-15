@@ -1,0 +1,103 @@
+import ACActor from "../documents/ACActor.js"
+import ACItem from "../documents/ACItem.js"
+
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
+
+/**
+ * The configuration window for Categories.
+ */
+export default class CategoryConfigV2 extends HandlebarsApplicationMixin(ApplicationV2) {
+
+    /** The default configuration options which are assigned to every instance of this Application class. */
+    static DEFAULT_OPTIONS = {
+        classes: ["animecampaign", "dialog", "config"],
+        tag: "form",
+        position: {
+            width: 400,
+            height: "auto",
+        },
+        window: {
+            minimizable: false,
+        },
+        form: {
+            handler: CategoryConfigV2.onSubmit,
+            submitOnChange: false,
+            closeOnSubmit: true
+        }
+    }
+
+    /** The Handlebars templates for this application. These are rendered in order. */
+    static PARTS = {
+        hbs: { template: "systems/animecampaign/templates/dialog/category-config.hbs" }
+    }
+
+    get category () { 
+        return this.options.category
+    }
+
+    get document () {
+        return this.options.document
+    }
+
+    /** Is this configuring a new category?
+     * @returns {Boolean}
+     */
+    get isNew () {
+        return (this.options.category.name === "")
+    }
+
+    get displayColor () {
+        return this.category.color ?? this.document.system.color
+    }
+
+    async _prepareContext () {
+        return {
+            app: this,
+            config: CONFIG.AC,
+            category: this.category,
+            document: this.document,
+
+            isNew: this.isNew,
+            displayColor: this.displayColor,
+        }
+    }
+
+    _onRender(context, options) {
+        const picker = this.element.querySelector(".JS-ColorInput")
+        const text = this.element.querySelector(".JS-ColorText")
+        
+        picker.addEventListener("change", () => {
+            text.value = picker.value
+        })
+    }
+
+    /** Update the stats list for the Stat's document. 
+     * @param {SubmitEvent} event 
+     * @param {HTMLFormElement} form 
+     * @param {*} data 
+     */
+    static onSubmit (event, form, formData) {
+        const data = formData.object
+        const categories = this.document.system.categories
+
+        data.name ||= "new category"
+        data.name = data.name.toLowerCase()
+
+        if (this.isNew) {
+
+        } else {
+            if (data.name !== this.category.name) {
+                const updates = this.category.features.map(item => { 
+                    return { _id: item._id, 'system.category': data.name }
+                })
+                this.document.updateEmbeddedDocuments("Item", updates)
+            }
+
+            const index = categories.findIndex(c => c.name == this.category.name)
+            categories[index] = data
+        }
+
+        this.document.update({ 'system.categories': categories })
+    }
+
+}

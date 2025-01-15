@@ -1,6 +1,7 @@
 import SheetMixinV2 from "./SheetMixinV2.js"
 import ACDialogV2 from "./ACDialogV2.js"
 import StatConfigV2 from "./StatConfigV2.js"
+import CategoryConfigV2 from "./CategoryConfigV2.js"
 import ACItem from "../documents/ACItem.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
@@ -295,11 +296,73 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     static onCategoryCollapse (event, target) { }
 
-    static onCategoryEdit (event, target) { }
+    static onCategoryEdit (event, target) {
+        const index = target.closest('.JS-Category').dataset.category
+        const category = this.document.system.categories[index]
 
-    static onCategoryFlood (event, target) { }
+        new CategoryConfigV2({ 
+            window: {
+                title: game.i18n.format("AC.CategoryConfig.EditCategory.Title", { 
+                    name: this.document.name
+                })
+            },
+            document: this.document,
+            category,
+        }).render(true)
 
-    static onCategoryDelete (event, target) { }
+    }
+
+    static async onCategoryFlood (event, target) {
+        const index = target.closest('.JS-Category').dataset.category
+        const category = this.document.system.categories[index]
+
+        const confirm = await ACDialogV2.confirm({
+            window: {
+                title: game.i18n.format("AC.FloodCategoryDialog.Title", { 
+                    category: category.name.toUpperCase(), 
+                    name: this.document.name
+                }),
+            },
+            content: game.i18n.format("AC.FloodCategoryDialog.Content"),
+            modal: true
+        });
+        
+        if (confirm) {
+            const updates = category.features.map(item => {
+                return { _id: item._id, 'system.color': category.palette.primary }
+            })
+            this.document.updateEmbeddedDocuments("Item", updates)
+        }
+    }
+
+    static async onCategoryDelete (event, target) {
+        const index = target.closest('.JS-Category').dataset.category
+        const category = this.document.system.categories[index]
+
+        const confirm = await ACDialogV2.confirm({
+            window: {
+                title: game.i18n.format("AC.DeleteCategoryDialog.Title", { 
+                    category: category.name.toUpperCase(), 
+                    name: this.document.name
+                }),
+            },
+            content: game.i18n.format("AC.DeleteCategoryDialog.Content", {
+                category: category.name.toUpperCase(), 
+            }),
+            modal: true
+        })
+
+        if (confirm) {
+            const updates = category.features.map(item => item._id)
+            this.document.deleteEmbeddedDocuments("Item", updates)
+
+            const categories = this.document.system.categories
+            categories.splice(index, 1)
+
+            console.log(categories)
+            this.document.update({ 'system.categories': categories })
+        }
+    }
 
     /**
      * Create a feature under this category.
@@ -308,6 +371,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @this {CharacterSheetV2}
      */
     static onFeatureAdd (event, target) {
+        // TODO: Create a Dialog for having a name
         this.document.createEmbeddedDocuments("Item", [
             { name: "uhm", type: "Feature", system: { category: "weapon" } }
         ])

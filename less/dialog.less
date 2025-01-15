@@ -55,3 +55,82 @@
     }
 
 }
+
+// Configuraion Dialogs
+.animecampaign.application {
+    .Config {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        font-family: "Libre Franklin";
+    }
+
+    .Config__Group {
+        #ColorScheme({
+            color: "txt"
+        });
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .Config__Label {
+        flex: 2;
+
+        font-weight: bold;
+        text-align: left;
+    }
+    .Config__Fields {
+        flex: 3;
+        display: flex;
+        gap: .25rem;
+        align-items: center
+    }
+    input.Config__Input, select.Config__Input { // specificity to override foundry
+        #FocusOutline();
+        #InputSkinning();
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        flex: 3;
+        border-radius: 2 * @rpx;
+        border: (1 * @rpx) solid;
+        padding: 0 .4rem;
+
+        text-align: left;
+    }
+    input.Config__Input::placeholder {
+        #ColorScheme(@opacity: 50%, {
+            color: "txt";
+        });
+    }
+    input.Config__Input--Caps {
+        text-transform: uppercase;
+    }
+    input.Config__Input--Color {
+        flex: 1;
+    }
+    .Config__Notes {
+        width: 100%;
+        margin-bottom: 0;
+
+        font-size: .75rem;
+        text-align: left;
+        opacity: .8;
+    }
+    .Config__HorizontalBreak {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt"
+        });
+        width: 100%;
+        border: none;
+        border-top: (1 * @rpx) solid;
+        margin: .25rem 0;
+
+        height: unset;
+        color: unset;
+        background-image: unset;
+    }
+}

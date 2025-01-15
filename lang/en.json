@@ -93,9 +93,38 @@
             "Notes": "Configure the stat for token attribute bars."
         }
     },
+
     "DeleteStatDialog": {
         "Title": "Delete Stat [{tag}]: {name}",
         "Content": "<p>Delete the \"<b>{tag}</b>\" (<em>{color}</em>) stat?</p>"
+    },
+
+    "CategoryConfig": {
+        "CreateCategory": {
+            "Title": "Create Category: {name}",
+            "Submit": "Create Category"
+        },
+        "EditCategory": {
+            "Title": "Edit Category: {name}",
+            "Submit": "Update Category"
+        },
+        "Name": {
+            "Label": "Name",
+            "Placeholder": "New Category"
+        },
+        "Color": {
+            "Label": "Color"
+        }
+    },
+
+    "FloodCategoryDialog": {
+        "Title": "Flood Category [{category}]: {name}",
+        "Content": "<p>Apply the color of this category to its features?</p>"
+    },
+
+    "DeleteCategoryDialog": {
+        "Title": "Delete Category [{category}]: {name}",
+        "Content": "<p>Delete the \"<b>{category}</b>\" category? This will delete all features within this category.</p>"
     }
 }
 }

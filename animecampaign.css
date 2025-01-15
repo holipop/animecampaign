@@ -331,106 +331,6 @@
   transition: opacity 0.1s;
   opacity: 0;
 }
-.animecampaign.application .Config {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-family: "Libre Franklin";
-}
-.animecampaign.application .Config__Group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.theme-dark .animecampaign.application .Config__Group {
-  color: #ebedf2;
-}
-.theme-light .animecampaign.application .Config__Group {
-  color: #1f1e1e;
-}
-.animecampaign.application .Config__Label {
-  flex: 2;
-  font-weight: bold;
-  text-align: left;
-}
-.animecampaign.application input.Config__Input,
-.animecampaign.application select.Config__Input {
-  transition: outline 0.25s;
-  min-height: 0;
-  padding: 0;
-  border-radius: 0;
-  border: none;
-  background: none;
-  transition: none;
-  flex: 3;
-  border-radius: 0.125rem;
-  border: 0.0625rem solid;
-  padding: 0 0.4rem;
-  text-align: left;
-}
-.animecampaign.application input.Config__Input:focus,
-.animecampaign.application select.Config__Input:focus {
-  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
-}
-.theme-dark .animecampaign.application input.Config__Input,
-.theme-dark .animecampaign.application select.Config__Input {
-  color: #ebedf2;
-  border-color: #171718;
-}
-.theme-light .animecampaign.application input.Config__Input,
-.theme-light .animecampaign.application select.Config__Input {
-  color: #1f1e1e;
-  border-color: #f4f3ed;
-}
-.animecampaign.application input.Config__Input:focus,
-.animecampaign.application select.Config__Input:focus {
-  outline: none;
-  box-shadow: none;
-}
-.animecampaign.application input.Config__Input:hover,
-.animecampaign.application select.Config__Input:hover {
-  transition: none;
-  box-shadow: none;
-}
-.theme-dark .animecampaign.application input.Config__Input,
-.theme-dark .animecampaign.application select.Config__Input {
-  border-color: rgba(235, 237, 242, 0.5);
-}
-.theme-light .animecampaign.application input.Config__Input,
-.theme-light .animecampaign.application select.Config__Input {
-  border-color: rgba(31, 30, 30, 0.5);
-}
-.theme-dark .animecampaign.application input.Config__Input::placeholder {
-  color: rgba(235, 237, 242, 0.5);
-}
-.theme-light .animecampaign.application input.Config__Input::placeholder {
-  color: rgba(31, 30, 30, 0.5);
-}
-.animecampaign.application .Config__Input--Caps {
-  text-transform: uppercase;
-}
-.animecampaign.application .Config__Notes {
-  width: 100%;
-  margin-bottom: 0;
-  font-size: 0.75rem;
-  text-align: left;
-  opacity: 0.8;
-}
-.animecampaign.application .Config__HorizontalBreak {
-  width: 100%;
-  border: none;
-  border-top: 0.0625rem solid;
-  margin: 0.25rem 0;
-  height: unset;
-  color: unset;
-  background-image: unset;
-}
-.theme-dark .animecampaign.application .Config__HorizontalBreak {
-  border-color: rgba(235, 237, 242, 0.25);
-}
-.theme-light .animecampaign.application .Config__HorizontalBreak {
-  border-color: rgba(31, 30, 30, 0.25);
-}
 .animecampaign button.ACButton--Rounded {
   border: 0.0625rem solid currentColor;
   border-radius: 12.5%;
@@ -1347,4 +1247,113 @@
 }
 .animecampaign.dialog button.ACButton--Dialog .ACButton__Text {
   font: bold 0.9rem "Libre Franklin";
+}
+.animecampaign.application .Config {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Libre Franklin";
+}
+.animecampaign.application .Config__Group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.theme-dark .animecampaign.application .Config__Group {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.application .Config__Group {
+  color: #1f1e1e;
+}
+.animecampaign.application .Config__Label {
+  flex: 2;
+  font-weight: bold;
+  text-align: left;
+}
+.animecampaign.application .Config__Fields {
+  flex: 3;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+.animecampaign.application input.Config__Input,
+.animecampaign.application select.Config__Input {
+  transition: outline 0.25s;
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  flex: 3;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+  padding: 0 0.4rem;
+  text-align: left;
+}
+.animecampaign.application input.Config__Input:focus,
+.animecampaign.application select.Config__Input:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.application input.Config__Input,
+.theme-dark .animecampaign.application select.Config__Input {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.application input.Config__Input,
+.theme-light .animecampaign.application select.Config__Input {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.application input.Config__Input:focus,
+.animecampaign.application select.Config__Input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.application input.Config__Input:hover,
+.animecampaign.application select.Config__Input:hover {
+  transition: none;
+  box-shadow: none;
+}
+.theme-dark .animecampaign.application input.Config__Input,
+.theme-dark .animecampaign.application select.Config__Input {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.application input.Config__Input,
+.theme-light .animecampaign.application select.Config__Input {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign.application input.Config__Input::placeholder {
+  color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.application input.Config__Input::placeholder {
+  color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.application input.Config__Input--Caps {
+  text-transform: uppercase;
+}
+.animecampaign.application input.Config__Input--Color {
+  flex: 1;
+}
+.animecampaign.application .Config__Notes {
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 0.75rem;
+  text-align: left;
+  opacity: 0.8;
+}
+.animecampaign.application .Config__HorizontalBreak {
+  width: 100%;
+  border: none;
+  border-top: 0.0625rem solid;
+  margin: 0.25rem 0;
+  height: unset;
+  color: unset;
+  background-image: unset;
+}
+.theme-dark .animecampaign.application .Config__HorizontalBreak {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.application .Config__HorizontalBreak {
+  border-color: rgba(31, 30, 30, 0.25);
 }

@@ -60,7 +60,6 @@
                 Details set here will be assigned to features created within this category.
             </p>
             
-            {{> "feature.details"}}
 
         </div>
     </section>
@@ -97,15 +96,46 @@
 
     <nav class="Dialog__Navigation">
 
+        <!-- {{#each tabs as |tab id|}}
+
+            <button class="Dialog__NavigationTab {{tab.css}}" type="button" data-action="tab">
+                <span class="Dialog__NavigationTabIcon MSO">{{tab.icon}}</span>
+            </button>
+
+        {{/each}} -->
+
     </nav>
 
     <div class="Dialog__Content Config">
+
+        <div class="Config__Group">
+            <label class="Config__Label">{{localize "AC.CategoryConfig.Name.Label"}}</label>
+            <input class="Config__Input Config__Input--Caps" type="text" name="name" value="{{category.name}}" placeholder="{{localize "AC.CategoryConfig.Name.Placeholder"}}" autofocus>
+        </div>
+
+        <div class="Config__Group">
+            <label class="Config__Label">{{localize "AC.CategoryConfig.Color.Label"}}</label>
+            <div class="Config__Fields">
+                <input class="Config__Input Config__Input JS-ColorText" type="text" name="color" value="{{category.color}}" placeholder="{{document.system.color}}">
+                <input class="Config__Input Config__Input--Color JS-ColorInput" type="color" value="{{displayColor}}">
+            </div>
+        </div>
 
     </div>
 
     <div class="Dialog__Buttons">
 
         <!-- Create/Update Category -->
+        <button class="ACButton ACButton--Dialog" type="submit" autofocus>
+            <span class="ACButton__Icon MSO">save</span>
+            <span class="ACButton__Text">
+                {{#if isNew}}
+                    {{localize "AC.CategoryConfig.CreateCategory.Submit"}}
+                {{else}}
+                    {{localize "AC.CategoryConfig.EditCategory.Submit"}}
+                {{/if}}
+            </span>
+        </button>
 
     </div>
 
