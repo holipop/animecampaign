@@ -442,17 +442,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             system: { 
                 category: category.name,
                 color: category.palette.primary,
-                details: {
-                    // excuse the verbosity, for some reason foundry won't recognize the changes
-                    // for the editor or the action
-                    editor: category.details.editor,
-                    formula: category.details.formula,
-                    action: category.details.action,
-                    usage: {
-                        multiple: category.details.usage.multiple,
-                        timeframe: category.details.usage.timeframe
-                    }
-                }
+                details: category.details
             }
         }])
     }

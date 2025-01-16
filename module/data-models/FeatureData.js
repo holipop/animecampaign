@@ -78,12 +78,4 @@ export default class FeatureData extends foundry.abstract.DataModel {
             contrast,
         }
     }
-
-    /** Like trimming the fat but for data? 
-     * @param {*} source 
-     */
-    static shimData (source) {
-        source.details.action = source.details.action?.name;
-        return super.shimData(source);
-    }
 }
