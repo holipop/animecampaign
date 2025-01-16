@@ -53,12 +53,8 @@ AC.displays = {
     label: "AC.StatConfig.Display.Options.Label",
 }
 AC.textEditors = {
-    markdown: "AC.LABEL.Markdown",
-    prosemirror: "AC.LABEL.ProseMirror",
-}
-AC.statSizes = {
-    small: "AC.LABEL.Small",
-    big: "AC.LABEL.Big"
+    prosemirror: "AC.ProseMirror",
+    markdown: "AC.Markdown",
 }
 
 AC.defaultCategories = [

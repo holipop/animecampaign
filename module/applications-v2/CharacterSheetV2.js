@@ -410,7 +410,17 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
                 })
             },
             document: this.document,
-            category: {},
+            category: {
+                details: {
+                    editor: "prosemirror",
+                    formula: "1d20",
+                    action: "Main",
+                    usage: {
+                        multiple: "1",
+                        timeframe: "Round"
+                    }
+                }
+            },
         }).render(true)
     }
 
@@ -424,12 +434,25 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         const index = target.closest('.JS-Category').dataset.category
         const category = this.document.system.categories[index]
 
+        console.log(category)
+
         this.document.createEmbeddedDocuments("Item", [{
-            name: "New Feature", 
+            name: `New ${category.name.capitalize()}`, 
             type: "Feature", 
             system: { 
                 category: category.name,
-                color: category.palette.primary
+                color: category.palette.primary,
+                details: {
+                    // excuse the verbosity, for some reason foundry won't recognize the changes
+                    // for the editor or the action
+                    editor: category.details.editor,
+                    formula: category.details.formula,
+                    action: category.details.action,
+                    usage: {
+                        multiple: category.details.usage.multiple,
+                        timeframe: category.details.usage.timeframe
+                    }
+                }
             }
         }])
     }

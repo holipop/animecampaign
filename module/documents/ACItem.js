@@ -32,9 +32,12 @@ export default class ACItem extends Item {
      * @param {BaseUser} user 
      */
     _preCreate (data, options, user) {
-        super._preCreate(data, options, user);
-
+        console.log(data)
         const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
+        
+        super._preCreate(data, options, user);
+/* 
+
         // const isDefaultImageOwner = game.settings.get('animecampaign', 'defaultFeatureImage')
 
         const updates = {
@@ -42,7 +45,7 @@ export default class ACItem extends Item {
             'img': null
         }
 
-        this.updateSource(updates);
+        this.updateSource(updates); */
     }
 
     /** Render the summary partial of a chat message.

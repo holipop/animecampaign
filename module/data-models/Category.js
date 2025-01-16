@@ -19,6 +19,8 @@ export default class Category extends foundry.abstract.DataModel {
 
             details: new fields.EmbeddedDataField(Details),
 
+            snap: new fields.BooleanField({ nullable: false }),
+
             trackers: new fields.ArrayField(new fields.SchemaField({
                 tag: new fields.StringField(),
                 img: new fields.FilePathField({

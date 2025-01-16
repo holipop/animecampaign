@@ -6,6 +6,9 @@
     
     "Character": "Character",
     "Feature": "Feature",
+
+    "Markdown": "Markdown",
+    "ProseMirror": "ProseMirror",
     
     "Red": "Red",
     "Blue": "Blue",
@@ -67,7 +70,27 @@
         "EditColor": "Edit Color",
         "FeaturePost": "Post Feature to Chat",
         "FeatureRoll": "Roll Feature",
-        "RemoveImage": "Remove Image"
+        "RemoveImage": "Remove Image",
+
+        "Description": "Description",
+        "Details": "Details"
+    },
+
+    "Details": {
+        "RollFormula": {
+            "Label": "Roll Formula",
+            "Placeholder": "1d20"
+        },
+        "Action": {
+            "Label": "Action Cost",
+            "Placeholder": "Main"
+        },
+        "Usage": {
+            "Label": "Usage"
+        },
+        "TextEditor": {
+            "Label": "Text Editor"
+        }
     },
 
     "StatConfig": {
@@ -108,10 +131,12 @@
 
     "CategoryConfig": {
         "CategoryNameTaken": "\"{name}\" is already taken by another category.",
-
+        
         "Basic": "Basic",
         "Stats": "Stats",
         "Details": "Details",
+        
+        "DetailsNote": "Default details for any feature created under this category.",
 
         "CreateCategory": {
             "Title": "Create Category: {name}",

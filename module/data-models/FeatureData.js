@@ -83,7 +83,7 @@ export default class FeatureData extends foundry.abstract.DataModel {
      * @param {*} source 
      */
     static shimData (source) {
-        source.details.action = source.details.action.name;
+        source.details.action = source.details.action?.name;
         return super.shimData(source);
     }
 }

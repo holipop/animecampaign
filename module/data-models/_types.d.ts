@@ -43,6 +43,7 @@ declare module "./FeatureData.js" {
 
 declare module "./Category.js" {
     export default interface Category {
+        snap: boolean
         parent: ACActor
         name: string
         color: Color

@@ -1,4 +1,4 @@
-<div class="Template Template--Character">
+<div class="Template Template--Feature">
 
     {{> "feature.summary"}}
 
@@ -6,7 +6,11 @@
 
         {{!> "feature.stats"}}
             
-        {{!> "feature.nav"}}
+        {{> "generic.nav"}}
+
+        <div class="Details Config tab {{tabs.details.css}}" data-tab="details" data-group="feature">
+            {{> "generic.details" details=system.details prefix="system."}}
+        </div>
 
     </div>
 

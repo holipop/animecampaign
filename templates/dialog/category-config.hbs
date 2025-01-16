@@ -43,6 +43,12 @@
     </div>
 
     <div class="Dialog__Content Config tab {{tabs.details.css}}" data-tab="details" data-group="category">
+
+        <div class="Config__Group">
+            <div class="Config__Notes">{{localize "AC.CategoryConfig.DetailsNote"}}</div>
+        </div>
+
+        {{> "generic.details" details=category.details}}
     </div>
 
     <div class="Dialog__Buttons">

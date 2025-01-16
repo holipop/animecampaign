@@ -10,14 +10,14 @@ export default class Details extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
 
         return {
-            editor: new fields.StringField({ initial: 'markdown' }),
-            formula: new fields.StringField({ initial: '1d20' }),
+            editor: new fields.StringField({ initial: "prosemirror" }),
+            formula: new fields.StringField(),
 
-            action: new fields.StringField({ initial: 'Main' }),
+            action: new fields.StringField(),
 
             usage: new fields.SchemaField({
-                multiple: new fields.StringField({ initial: '1' }),
-                timeframe: new fields.StringField({ initial: 'Round' })
+                multiple: new fields.StringField(),
+                timeframe: new fields.StringField()
             }),
         }
     }

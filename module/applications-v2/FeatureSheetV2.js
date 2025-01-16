@@ -62,6 +62,23 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     }
 
+    /**
+     * Returns a record of navigation tabs.
+     * @returns {Record<string, ApplicationTab>}
+     */
+    getTabs () {
+        const tabs = {
+            decription: { id: "description", group: "feature", icon: "notes", label: "AC.FeatureSheet.Description" },
+            details:    { id: "details", group: "feature", icon: "info", label: "AC.FeatureSheet.Details" }
+        }
+        
+        for (const tab of Object.values(tabs)) {
+            tab.active = this.tabGroups[tab.group] === tab.id
+            tab.css = tab.active ? "active" : ""
+        }
+        return tabs
+    }
+
     /** The context passed to each Handlebars template.
      * @returns {*}
      */
@@ -72,7 +89,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             document: this.document,
             system: this.document.system,
             palette: this.document.system.palette,
-            //tabs: this.getTabs(),
+            tabs: this.getTabs(),
 
             /* svg: {
                 bg: this.svgBackground,

@@ -118,6 +118,12 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         data.name ||= "new category"
         data.name = data.name.toLowerCase()
 
+        // okay, so foundry's really finicky with array fields which warrants this useless field change.
+        // essentially, if this is submitted without any changes made to the category, it doesn't convert
+        // the data into a Category and a flattened plain object sticks around. this "snap" ensures foundry's
+        // paying attention.
+        data.snap = !this.category.snap
+
         const nameTaken = categories
             .filter(c => c.name !== this.category.name)
             .find(c => c.name == data.name)
@@ -129,6 +135,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
             categories.push(data)
         } else {
             if (data.name !== this.category.name) {
+                console.log(this.category)
                 const updates = this.category.features.map(item => { 
                     return { _id: item._id, 'system.category': data.name }
                 })
@@ -139,7 +146,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
             categories[index] = data
         }
 
-        this.document.update({ 'system.categories': categories })
+        this.document.update({ "system.categories": categories })
     }
 
 }

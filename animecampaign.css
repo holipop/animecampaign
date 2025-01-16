@@ -179,6 +179,10 @@
 .animecampaign .Template {
   height: 100%;
 }
+.animecampaign.item.sheet .Details {
+  width: 80%;
+  margin: 0.5rem auto;
+}
 .animecampaign .Scrollable {
   overflow-y: scroll;
   scrollbar-color: currentColor transparent;
@@ -1451,6 +1455,11 @@
 }
 .animecampaign.application input.Config__Input--Color {
   flex: 1;
+}
+.animecampaign.application .Config__InnerLabel {
+  flex: 0;
+  width: fit-content;
+  font-size: 0.9rem;
 }
 .animecampaign.application .Config__Notes {
   width: 100%;
