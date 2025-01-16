@@ -260,6 +260,31 @@
         })
     }
 }
+.animecampaign button.ACButton--Tab {
+    #ColorScheme({
+        border-color: "txt";
+        color: "txt";
+    });
+
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    bottom: 0;
+    margin-top: .25rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 6.25%;
+    transition: 
+        box-shadow .1s,
+        bottom .1s;
+
+    box-shadow: 0 0 0 currentColor;
+}
+.animecampaign button.ACButton--Tab.active {
+    bottom: .25rem;
+    box-shadow: 0 .25rem 0 currentColor;
+    text-shadow: none; // FUCK OFFFF
+    outline: none;
+}
 .animecampaign button.ACButton--Inline {
     #ColorScheme({
         color: "txt";

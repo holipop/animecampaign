@@ -287,6 +287,31 @@
 .theme-light .animecampaign button.ACButton--Wide:active {
   background-color: rgba(31, 30, 30, 0.5);
 }
+.animecampaign button.ACButton--Tab {
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  bottom: 0;
+  margin-top: 0.25rem;
+  border: 0.0625rem solid currentColor;
+  border-radius: 6.25%;
+  transition: box-shadow 0.1s, bottom 0.1s;
+  box-shadow: 0 0 0 currentColor;
+}
+.theme-dark .animecampaign button.ACButton--Tab {
+  border-color: #ebedf2;
+  color: #ebedf2;
+}
+.theme-light .animecampaign button.ACButton--Tab {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+}
+.animecampaign button.ACButton--Tab.active {
+  bottom: 0.25rem;
+  box-shadow: 0 0.25rem 0 currentColor;
+  text-shadow: none;
+  outline: none;
+}
 .animecampaign button.ACButton--Inline {
   height: 1.25rem;
   width: 1.25rem;
@@ -1026,23 +1051,6 @@
   display: flex;
   gap: 0.2rem;
 }
-.animecampaign.sheet button.ACButton--Tab {
-  position: relative;
-  height: 2rem;
-  width: 2rem;
-  bottom: 0;
-  margin-top: 0.25rem;
-  border: 0.0625rem solid currentColor;
-  border-radius: 6.25%;
-  transition: box-shadow 0.1s, bottom 0.1s;
-  box-shadow: 0 0 0 currentColor;
-}
-.animecampaign.sheet button.ACButton--Tab.active {
-  bottom: 0.25rem;
-  box-shadow: 0 0.25rem 0 currentColor;
-  text-shadow: none;
-  outline: none;
-}
 .animecampaign.sheet .Navigation__TabName {
   flex: 1;
   padding: 0 0.75rem;
@@ -1260,6 +1268,56 @@
 .animecampaign.dialog.application:not([open]) {
   display: block;
 }
+.animecampaign.dialog .Dialog__Navigation {
+  display: flex;
+  padding-bottom: 0.25rem;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.dialog .Dialog__Navigation {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.dialog .Dialog__Navigation {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.dialog .Dialog__NavigationTabs {
+  display: flex;
+  gap: 0.2rem;
+}
+.animecampaign.dialog .ACButton--DialogTab {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+.theme-dark .animecampaign.dialog .ACButton--DialogTab {
+  border-color: rgba(235, 237, 242, 0.5);
+  color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.dialog .ACButton--DialogTab {
+  border-color: rgba(31, 30, 30, 0.5);
+  color: rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign.dialog .ACButton--DialogTab.active {
+  border-color: #ebedf2;
+  color: #ebedf2;
+}
+.theme-light .animecampaign.dialog .ACButton--DialogTab.active {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+}
+.animecampaign.dialog .Dialog__NavigationTabName {
+  display: flex;
+  align-items: end;
+  margin-left: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+.theme-dark .animecampaign.dialog .Dialog__NavigationTabName {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.dialog .Dialog__NavigationTabName {
+  color: #1f1e1e;
+}
+.animecampaign.dialog .Dialog__NavigationTabNameContent {
+  font: 1.1rem "Gloock";
+}
 .animecampaign.dialog .Dialog__Content {
   padding: 1.25rem 0;
   text-align: center;
@@ -1271,6 +1329,7 @@
   margin-top: 1rem;
 }
 .animecampaign.dialog button.ACButton--Dialog {
+  transition: outline 0.25s;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -1290,6 +1349,9 @@
 }
 .theme-light .animecampaign.dialog button.ACButton--Dialog {
   border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.dialog button.ACButton--Dialog:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
 }
 .theme-dark .animecampaign.dialog button.ACButton--Dialog:hover {
   box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.5);
@@ -1333,22 +1395,18 @@
 }
 .animecampaign.application input.Config__Input,
 .animecampaign.application select.Config__Input {
-  transition: outline 0.25s;
   min-height: 0;
   padding: 0;
   border-radius: 0;
   border: none;
   background: none;
   transition: none;
+  transition: outline 0.25s;
   flex: 3;
   border-radius: 0.125rem;
   border: 0.0625rem solid;
   padding: 0 0.4rem;
   text-align: left;
-}
-.animecampaign.application input.Config__Input:focus,
-.animecampaign.application select.Config__Input:focus {
-  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
 }
 .theme-dark .animecampaign.application input.Config__Input,
 .theme-dark .animecampaign.application select.Config__Input {
@@ -1377,6 +1435,10 @@
 .theme-light .animecampaign.application input.Config__Input,
 .theme-light .animecampaign.application select.Config__Input {
   border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.application input.Config__Input:focus,
+.animecampaign.application select.Config__Input:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
 }
 .theme-dark .animecampaign.application input.Config__Input::placeholder {
   color: rgba(235, 237, 242, 0.5);

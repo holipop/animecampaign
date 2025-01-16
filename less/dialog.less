@@ -7,6 +7,49 @@
 
 .animecampaign.dialog {
 
+    .Dialog__Navigation {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+        
+        display: flex;
+        padding-bottom: 0.25rem;
+        border-bottom: (1 * @rpx) solid;
+    }
+    .Dialog__NavigationTabs {
+        display: flex;
+        gap: .2rem;
+    }
+    .ACButton--DialogTab {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+            color: "txt";
+        });
+
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+    .ACButton--DialogTab.active {
+        #ColorScheme({
+            border-color: "txt";
+            color: "txt";
+        });
+    }
+
+    .Dialog__NavigationTabName {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        display: flex;
+        align-items: end;
+        margin-left: .5rem;
+        margin-bottom: .2rem;
+    }
+    .Dialog__NavigationTabNameContent {
+        font: 1.1rem "Gloock";
+    }
+
     .Dialog__Content {
         padding: 1.25rem 0;
         
@@ -27,6 +70,7 @@
         #ColorScheme(@opacity: 50%, {
             border-color: "txt";
         });
+        #FocusOutline();
 
         flex: 1;
         display: flex;
@@ -85,11 +129,11 @@
         align-items: center
     }
     input.Config__Input, select.Config__Input { // specificity to override foundry
-        #FocusOutline();
         #InputSkinning();
         #ColorScheme(@opacity: 50%, {
             border-color: "txt";
         });
+        #FocusOutline();
 
         flex: 3;
         border-radius: 2 * @rpx;

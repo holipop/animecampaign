@@ -175,15 +175,20 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         return tabs
     }
 
+    /**
+     * @returns {ACItem[]}
+     */
+    getUncategorizedFeatures () {
+        const categoryNames = this.document.system.categories.map(c => c.name)
+        return this.document.items.filter(item => {
+            return !categoryNames.includes(item.system.category)
+        })
+    }
+
     /** The context passed to each Handlebars template.
      * @returns {*}
      */
     async _prepareContext () {
-        const categoryNames = this.document.system.categories.map(c => c.name)
-        const uncategorizedFeatures = this.document.items.filter(item => {
-            return !categoryNames.includes(item.system.category)
-        })
-        
         return {
             ...super._prepareContext(),
             config: CONFIG.AC,
@@ -194,7 +199,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             stats: this.document.system.colorStats,
             categories: this.document.system.categories,
 
-            uncategorizedFeatures
+            uncategorizedFeatures: this.getUncategorizedFeatures()
 
             /* svg: {
                 bg: this.svgBackground,
@@ -437,7 +442,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     static onFeatureCollapse (event, target) { }
 
     /**
-     * Create a feature under this category.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -451,14 +455,31 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /**
-     * Deletes a feature.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
      */
-    static onFeatureDelete (event, target) {
+    static async onFeatureDelete (event, target) {
         const { id } = target.closest(".JS-FeatureEntry").dataset
-        this.document.deleteEmbeddedDocuments("Item", [id])
+        const item = this.document.items.get(id)
+        console.log(item)
+
+        const confirm = await ACDialogV2.confirm({
+            window: {
+                title: game.i18n.format("AC.DeleteFeatureDialog.Title", { 
+                    id,
+                    name: this.document.name
+                }),
+            },
+            content: game.i18n.format("AC.DeleteFeatureDialog.Content", {
+                feature: item.name,
+            }),
+            modal: true
+        })
+
+        if (confirm) {
+            this.document.deleteEmbeddedDocuments("Item", [id])
+        }
     }
 
 }

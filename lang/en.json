@@ -58,6 +58,7 @@
         "FeatureEdit": "Edit Feature",
         "FeatureDelete": "Delete Feature"
     },
+
     "FeatureSheet": {
         "Name": "Name",
         "Category": "Category",
@@ -71,6 +72,7 @@
 
     "StatConfig": {
         "StatTagTaken": "\"{tag}\" is already taken by another stat.",
+
         "AddStat": {
             "Title": "Add Stat: {name}",
             "Submit": "Add Stat"
@@ -79,6 +81,7 @@
             "Title": "Edit Stat: {name}",
             "Submit": "Update Stat"
         },
+
         "Tag": {
             "Label": "Tag",
             "Placeholder": "New Stat"
@@ -105,6 +108,11 @@
 
     "CategoryConfig": {
         "CategoryNameTaken": "\"{name}\" is already taken by another category.",
+
+        "Basic": "Basic",
+        "Stats": "Stats",
+        "Details": "Details",
+
         "CreateCategory": {
             "Title": "Create Category: {name}",
             "Submit": "Create Category"
@@ -113,6 +121,7 @@
             "Title": "Edit Category: {name}",
             "Submit": "Update Category"
         },
+        
         "Name": {
             "Label": "Name",
             "Placeholder": "New Category"
@@ -124,12 +133,17 @@
 
     "FloodCategoryDialog": {
         "Title": "Flood Category [{category}]: {name}",
-        "Content": "<p>Apply the color of this category to its features?</p>"
+        "Content": "<p>Apply the color of this category to all of its features?</p>"
     },
 
     "DeleteCategoryDialog": {
         "Title": "Delete Category [{category}]: {name}",
         "Content": "<p>Delete the \"<b>{category}</b>\" category?<br><em>This will delete all features within this category.</em></p>"
+    },
+
+    "DeleteFeatureDialog": {
+        "Title": "Delete Feature [{id}]: {name}",
+        "Content": "<p>Delete \"<b>{feature}</b>\"?</p>"
     }
 }
 }

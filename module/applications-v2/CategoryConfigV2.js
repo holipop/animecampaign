@@ -71,8 +71,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
     getTabs() {
         const tabs = {
             basic: { id: "basic", group: "category", icon: "deployed_code", label: "AC.CategoryConfig.Basic" },
-            stats: { id: "stats", group: "category", icon: "stat_0", label: "AC.CategoryConfig.Stats" },
-            details: { id: "details", group: "category", icon: "stat_0", label: "AC.CategoryConfig.Details" },
+            stats: { id: "stats", group: "category", icon: "equalizer", label: "AC.CategoryConfig.Stats" },
+            details: { id: "details", group: "category", icon: "info", label: "AC.CategoryConfig.Details" },
         }
         
         for (const tab of Object.values(tabs)) {
@@ -91,10 +91,12 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
 
             isNew: this.isNew,
             displayColor: this.displayColor,
+            tabs: this.getTabs(),
         }
     }
 
     _onRender(context, options) {
+        // Link color picker values
         const picker = this.element.querySelector(".JS-ColorInput")
         const text = this.element.querySelector(".JS-ColorText")
         
