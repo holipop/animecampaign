@@ -8,6 +8,11 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
  */
 export default class CategoryConfigV2 extends HandlebarsApplicationMixin(ApplicationV2) {
 
+    constructor (options = {}) {
+        super(options)
+        this.#dragDrop = this.#createDragDropHandlers()
+    }
+
     /** The default configuration options which are assigned to every instance of this Application class. */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "dialog", "config"],
@@ -27,7 +32,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
             handler: CategoryConfigV2.onSubmit,
             submitOnChange: false,
             closeOnSubmit: true
-        }
+        },
+        dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
     /** The Handlebars templates for this application. These are rendered in order. */
@@ -63,9 +69,116 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         return this.category.color ?? this.document.system.color
     }
 
+    /** @type {DragDrop[]} */
+    #dragDrop
+
+    /**
+     * Returns an array of DragDrop instances
+     * @type {DragDrop[]}
+     */
+    get dragDrop() {
+        return this.#dragDrop;
+    }
+
+    /** Create drag-and-drop workflow handlers for this Application
+     * @returns {DragDrop[]}     An array of DragDrop handlers
+     * @private
+     */
+    #createDragDropHandlers () {
+        return this.options.dragDrop.map((d) => {
+            d.permissions = {
+                dragstart: this._canDragStart.bind(this),
+                drop: this._canDragDrop.bind(this),
+            }
+            d.callbacks = {
+                dragstart: this._onDragStart.bind(this),
+                dragover: this._onDragOver.bind(this),
+                drop: this._onDrop.bind(this),
+            }
+            return new DragDrop(d)
+        });
+    }
+
+    /** Define whether a user is able to begin a dragstart workflow for a given drag selector
+     * @param {string} selector       The candidate HTML selector for dragging
+     * @returns {boolean}             Can the current user drag this selector?
+     * @protected
+     */
+    _canDragStart (selector) {
+        return true;
+    }
+
+    /** Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
+     * @param {string} selector       The candidate HTML selector for the drop target
+     * @returns {boolean}             Can the current user drop on this selector?
+     * @protected
+     */
+    _canDragDrop (selector) {
+        return true;
+    }
+
+    /** Callback actions which occur at the beginning of a drag start workflow.
+     * @param {DragEvent} event
+     * @protected
+     */
+    _onDragStart (event) {
+        const index = Number(event.target.dataset.stat)
+        const stats = this.getLocalStats()
+
+        const data = { 
+            index: index,
+            object: stats[index]
+        }
+
+        event.dataTransfer.setData("text/plain", JSON.stringify(data))
+    }
+
+    /** Callback actions which occur when a dragged element is over a drop target.
+     * @param {DragEvent} event
+     * @protected
+     */
+    _onDragOver (event) { }
+
+    /** Callback actions which occur when a dragged element is dropped on a target.
+     * @param {DragEvent} event
+     * @protected
+     */
+    _onDrop (event) {
+        const data = TextEditor.getDragEventData(event)
+        const trackers = this.getLocalStats()
+        if (trackers.length === 1) return  // can't sort single entry
+
+        const target = event.target.closest('.JS-CategoryStat')
+        if (target.length === 0) return  // no target found
+        if (target.dataset.stat === data.index) return  // don't sort on self 
+
+        trackers.splice(data.index, 1)
+        trackers.splice(target.dataset.stat, 0, data.object)
+
+        this.category.updateSource({ trackers })
+        this.render(true)
+    }
+
     /** @override */
     tabGroups = {
         category: "basic"
+    }
+
+    /**
+     * Gets the local stats data without updating or removing changes.
+     * @returns {{ tag: string, display: "value"|"resource"|"label" }[]}
+     */
+    getLocalStats () {
+        const data = {}
+        const inputs = this.element.querySelectorAll(".JS-StatInput")
+        let trackers = []
+        if (inputs.length > 0) {
+            inputs.forEach(el => {
+                data[el.getAttribute("name")] = el.value
+            })
+            trackers = Object.values(foundry.utils.expandObject(data).trackers)
+        }
+        return trackers
     }
 
     /**
@@ -100,10 +213,12 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
     }
 
     _onRender(context, options) {
+        // bind DragDrop events
+        this.#dragDrop.forEach(d => d.bind(this.element))
+
         // Link color picker values
         const picker = this.element.querySelector(".JS-ColorInput")
         const text = this.element.querySelector(".JS-ColorText")
-        
         picker.addEventListener("change", () => {
             text.value = picker.value
         })
@@ -115,12 +230,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
      * @this {CategoryConfigV2}
      */
     static onStatAdd (event, target) {
-        // A roundabout way of preserving edited stat data without submitting
-        const data = {}
-        this.element.querySelectorAll(".JS-StatInput").forEach(el => {
-            data[el.getAttribute("name")] = el.value
-        })
-        const trackers = Object.values(foundry.utils.expandObject(data).trackers)
+        let trackers = this.getLocalStats()
 
         trackers.push({
             tag: "new stat",
@@ -138,11 +248,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
      */
     static onStatDelete (event, target) {
         // A roundabout way of preserving edited stat data without submitting
-        const data = {}
-        this.element.querySelectorAll(".JS-StatInput").forEach(el => {
-            data[el.getAttribute("name")] = el.value
-        })
-        const trackers = Object.values(foundry.utils.expandObject(data).trackers)
+        let trackers = this.getLocalStats()
         const index = target.closest(".JS-CategoryStat").dataset.stat
 
         trackers.splice(index, 1)

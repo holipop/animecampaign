@@ -144,7 +144,6 @@
 
         display: flex;
         flex-direction: column;
-        padding: .33rem 0;
         border: (1 * @rpx) solid;
         border-radius: 2 * @rpx;
     }
@@ -166,7 +165,7 @@
         gap: .5rem;
         width: 97%;
         margin: 0 auto;
-        padding: .25rem;
+        padding: .5rem .25rem;
         border-bottom: (1 * @rpx) solid;
     }
     .CategoryStats__Entry:last-child {
@@ -175,6 +174,17 @@
     .CategoryStats__DragIndicator {
         font-size: 1rem;
         line-height: 1.2;
+        opacity: .25;
+        transition: opacity .075s;
+    }
+    .CategoryStats .ACButton {
+        opacity: .25;
+        transition: opacity .075s;
+    }
+    .CategoryStats__Entry:hover .ACButton {
+        opacity: 1;
+    }
+    .CategoryStats__Entry:hover .CategoryStats__DragIndicator {
         opacity: .75;
     }
     .CategoryStats__Fields {
