@@ -43,13 +43,12 @@ declare module "./FeatureData.js" {
 
 declare module "./Category.js" {
     export default interface Category {
-        snap: boolean
         parent: ACActor
         name: string
         color: Color
         collapsed: boolean
         details: Details
-        trackers: { tag: string, img: string }[]
+        trackers: { tag: string, display: "value" | "resource" | "label" }[]
     }
 }
 

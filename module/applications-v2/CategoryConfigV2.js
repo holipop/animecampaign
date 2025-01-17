@@ -19,6 +19,10 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         window: {
             minimizable: false,
         },
+        actions: {
+            onStatAdd: CategoryConfigV2.onStatAdd,
+            onStatDelete: CategoryConfigV2.onStatDelete,
+        },
         form: {
             handler: CategoryConfigV2.onSubmit,
             submitOnChange: false,
@@ -49,7 +53,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
      * @returns {Boolean}
      */
     get isNew () {
-        return !("name" in this.category)
+        return this.category.name === ""
     }
 
     /**
@@ -105,6 +109,48 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         })
     }
 
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CategoryConfigV2}
+     */
+    static onStatAdd (event, target) {
+        // A roundabout way of preserving edited stat data without submitting
+        const data = {}
+        this.element.querySelectorAll(".JS-StatInput").forEach(el => {
+            data[el.getAttribute("name")] = el.value
+        })
+        const trackers = Object.values(foundry.utils.expandObject(data).trackers)
+
+        trackers.push({
+            tag: "new stat",
+            display: "value"
+        })
+
+        this.category.updateSource({ trackers })
+        this.render(true)
+    }
+
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CategoryConfigV2}
+     */
+    static onStatDelete (event, target) {
+        // A roundabout way of preserving edited stat data without submitting
+        const data = {}
+        this.element.querySelectorAll(".JS-StatInput").forEach(el => {
+            data[el.getAttribute("name")] = el.value
+        })
+        const trackers = Object.values(foundry.utils.expandObject(data).trackers)
+        const index = target.closest(".JS-CategoryStat").dataset.stat
+
+        trackers.splice(index, 1)
+        
+        this.category.updateSource({ trackers })
+        this.render(true)
+    }
+
     /** Update the stats list for the Stat's document. 
      * @param {SubmitEvent} event 
      * @param {HTMLFormElement} form 
@@ -113,16 +159,12 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
      */
     static onSubmit (event, form, formData) {
         const data = formData.object
-        const categories = this.document.system.categories
+        const categories = [...this.document.system.categories]
 
         data.name ||= "new category"
         data.name = data.name.toLowerCase()
 
-        // okay, so foundry's really finicky with array fields which warrants this useless field change.
-        // essentially, if this is submitted without any changes made to the category, it doesn't convert
-        // the data into a Category and a flattened plain object sticks around. this "snap" ensures foundry's
-        // paying attention.
-        data.snap = !this.category.snap
+        console.log(data)
 
         const nameTaken = categories
             .filter(c => c.name !== this.category.name)

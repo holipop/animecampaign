@@ -19,11 +19,11 @@ export default class Category extends foundry.abstract.DataModel {
 
             details: new fields.EmbeddedDataField(Details),
 
-            snap: new fields.BooleanField({ nullable: false }),
-
             trackers: new fields.ArrayField(new fields.SchemaField({
+                display: new fields.StringField(),
                 tag: new fields.StringField(),
-                img: new fields.FilePathField({
+                
+                img: new fields.FilePathField({ // !! deprecated
                     categories: ['IMAGE'],
                     initial: 'icons/svg/circle.svg'
                 })

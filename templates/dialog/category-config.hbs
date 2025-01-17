@@ -1,26 +1,25 @@
 <section>
 
-    <nav class="Dialog__Navigation">
+    {{#unless isNew}}
+        <nav class="Dialog__Navigation">
 
-        <div class="Dialog__NavigationTabs tabs">
+            <div class="Dialog__NavigationTabs tabs">
+                {{#each tabs as |tab id|}}
+                    <button class="ACButton ACButton--Tab ACButton--DialogTab {{tab.css}}" type="button" data-action="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+                        <span class="ACButton__Icon MSO">{{tab.icon}}</span>
+                    </button>
+                {{/each}}
+            </div>
 
-            {{#each tabs as |tab id|}}
-                <button class="ACButton ACButton--Tab ACButton--DialogTab {{tab.css}}" type="button" data-action="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}">
-                    <span class="ACButton__Icon MSO">{{tab.icon}}</span>
-                </button>
-            {{/each}}
+            <span class="Dialog__NavigationTabName">
+                {{#each tabs as |tab id|}}
+                    <span class="Dialog__NavigationTabNameContent tab {{tab.css}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">{{localize tab.label}}</span>
+                {{/each}}
+            </span>
 
-        </div>
+        </nav>
+    {{/unless}}
 
-        <span class="Dialog__NavigationTabName">
-
-            {{#each tabs as |tab id|}}
-                <span class="Dialog__NavigationTabNameContent tab {{tab.css}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">{{localize tab.label}}</span>
-            {{/each}}
-            
-        </span>
-
-    </nav>
 
     <div class="Dialog__Content Config tab {{tabs.basic.css}}" data-tab="basic" data-group="category">
 
@@ -40,6 +39,52 @@
     </div>
 
     <div class="Dialog__Content Config tab {{tabs.stats.css}}" data-tab="stats" data-group="category">
+
+        <div class="Config__Group">
+            <div class="Config__Notes">{{localize "AC.CategoryConfig.StatsNote"}}</div>
+        </div>
+
+        {{#if (gt category.trackers.length 0)}}
+            <ul class="CategoryStats">
+
+                {{#each category.trackers as |tracker index|}}
+                    <li class="CategoryStats__Entry JS-CategoryStat" data-stat="{{index}}">
+                        <span class="CategoryStats__DragIndicator MSO">drag_indicator</span>
+
+                        <div class="CategoryStats__Fields">
+
+                            <div class="Config__Group">
+                                <label class="Config__Label">{{localize "AC.CategoryConfig.Tag.Label"}}</label>
+                                <input class="Config__Input Config__Input--Caps JS-StatInput" type="text" name="trackers.{{index}}.tag" value="{{tracker.tag}}" placeholder="{{localize "AC.CategoryConfig.Tag.Placeholder"}}">
+                            </div>
+
+                            <div class="Config__Group">
+                                <label class="Config__Label">{{localize "AC.CategoryConfig.Display.Label"}}</label>
+                                <select class="Config__Input JS-StatInput" name="trackers.{{index}}.display">
+                                    {{selectOptions @root.config.displays selected=tracker.display localize=true}}
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onStatDelete">
+                            <div class="ACButton__Icon MSO">close</div>
+                        </button>
+                    </li>
+                {{/each}}
+
+            </ul>
+        {{/if}}
+
+        {{#if (lt category.trackers.length 4)}}
+            <button class="ACButton ACButton--DialogMinor" type="button" data-action="onStatAdd">
+                <span class="ACButton__Icon MSO">add</span>
+                <span class="ACButton__Text">
+                    {{localize "AC.CategoryConfig.StatAdd"}}
+                </span>
+            </button>
+        {{/if}}
+
     </div>
 
     <div class="Dialog__Content Config tab {{tabs.details.css}}" data-tab="details" data-group="category">

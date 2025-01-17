@@ -136,7 +136,23 @@
         "Stats": "Stats",
         "Details": "Details",
         
-        "DetailsNote": "Default details for any feature created under this category.",
+        "StatsNote": "Stats defined here are displayed on the character sheet and also act as the default stats for features under this category.",
+        "EmptyStats": "No stats defined.",
+        "Tag": {
+            "Label": "Tag",
+            "Placeholder": "Tag"
+        },
+        "Display": {
+            "Label": "Display",
+            "Options": {
+                "Value": "Value",
+                "Resource": "Resource",
+                "Label": "Label"
+            }
+        },
+        "StatAdd": "Add Stat",
+
+        "DetailsNote": "Default details for features created under this category.",
 
         "CreateCategory": {
             "Title": "Create Category: {name}",

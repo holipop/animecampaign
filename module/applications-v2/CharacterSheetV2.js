@@ -3,6 +3,7 @@ import ACDialogV2 from "./ACDialogV2.js"
 import StatConfigV2 from "./StatConfigV2.js"
 import CategoryConfigV2 from "./CategoryConfigV2.js"
 import ACItem from "../documents/ACItem.js"
+import Category from "../data-models/Category.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
@@ -403,6 +404,20 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @this {CharacterSheetV2}
      */
     static async onCategoryCreate (event, target) {
+        const category = {
+            name: "",
+            trackers: [],
+            details: {
+                editor: "prosemirror",
+                formula: "1d20",
+                action: "Main",
+                usage: {
+                    multiple: "1",
+                    timeframe: "Round"
+                }
+            },
+        }
+
         new CategoryConfigV2({ 
             window: {
                 title: game.i18n.format("AC.CategoryConfig.CreateCategory.Title", { 
@@ -410,17 +425,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
                 })
             },
             document: this.document,
-            category: {
-                details: {
-                    editor: "prosemirror",
-                    formula: "1d20",
-                    action: "Main",
-                    usage: {
-                        multiple: "1",
-                        timeframe: "Round"
-                    }
-                }
-            },
+            category,
         }).render(true)
     }
 
@@ -433,8 +438,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     static onFeatureAdd (event, target) {
         const index = target.closest('.JS-Category').dataset.category
         const category = this.document.system.categories[index]
-
-        console.log(category)
 
         this.document.createEmbeddedDocuments("Item", [{
             name: `New ${category.name.capitalize()}`, 

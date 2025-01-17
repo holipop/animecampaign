@@ -1278,10 +1278,10 @@
   border-bottom: 0.0625rem solid;
 }
 .theme-dark .animecampaign.dialog .Dialog__Navigation {
-  border-color: rgba(235, 237, 242, 0.5);
+  border-color: rgba(235, 237, 242, 0.25);
 }
 .theme-light .animecampaign.dialog .Dialog__Navigation {
-  border-color: rgba(31, 30, 30, 0.5);
+  border-color: rgba(31, 30, 30, 0.25);
 }
 .animecampaign.dialog .Dialog__NavigationTabs {
   display: flex;
@@ -1339,6 +1339,7 @@
   justify-content: center;
   gap: 0.25rem;
   height: 2.5rem;
+  width: 100%;
   border-radius: 0.125rem;
   border: 0.0625rem solid;
 }
@@ -1368,6 +1369,106 @@
 }
 .theme-light .animecampaign.dialog button.ACButton--Dialog:active {
   background-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.dialog button.ACButton--DialogMinor {
+  transition: outline 0.25s;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 2rem;
+  width: 100%;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog button.ACButton--DialogMinor:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.animecampaign.dialog button.ACButton--DialogMinor .ACButton__Text {
+  font-weight: normal;
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor:active {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor:active {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog .CategoryStats {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.33rem 0;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.dialog .CategoryStats {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog .CategoryStats {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign.dialog .CategoryStats {
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign.dialog .CategoryStats {
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
+.animecampaign.dialog .CategoryStats__Empty {
+  width: 100%;
+  font: 0.66rem "Libre Franklin";
+  text-align: center;
+  opacity: 0.5;
+  margin: 0.5rem 0;
+}
+.animecampaign.dialog .CategoryStats__Entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 97%;
+  margin: 0 auto;
+  padding: 0.25rem;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.dialog .CategoryStats__Entry {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog .CategoryStats__Entry {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog .CategoryStats__Entry:last-child {
+  border: none;
+}
+.animecampaign.dialog .CategoryStats__DragIndicator {
+  font-size: 1rem;
+  line-height: 1.2;
+  opacity: 0.75;
+}
+.animecampaign.dialog .CategoryStats__Fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 .animecampaign.application .Config {
   display: flex;

@@ -26,9 +26,6 @@ declare module "./SheetMixinV2.js" {
     type ACSheetStatic = {
         static onInvokeColorPicker(): void
         static onEditImage(): void
-        static onStatAdd(): void
-        static onStatEdit (event: PointerEvent, target: HTMLElement): void
-        static async onStatDelete (event: PointerEvent, target: HTMLElement): void
     }
 
     export default function SheetMixin<T extends ConstructorOf<ApplicationV2>>(Base: T):
