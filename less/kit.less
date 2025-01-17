@@ -57,16 +57,61 @@
     .Category__HeaderCenter {
         display: flex;
         width: @part-width;
-        padding-right: .05rem;
+        padding-right: .1rem;
     }
 
     .Category__Name {
-        margin-right: .5rem;
+        padding-right: .5rem;
         padding-top: .2rem;
 
         font: italic 1.33rem "Gloock";
         text-transform: uppercase;
         letter-spacing: .05rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .Category__Trackers {
+        display: flex;
+        align-items: center;
+    }
+    .StatTracker {
+        display: flex;
+        align-items: flex-end;
+        width: 5rem;
+        padding: .15rem;
+        height: 80%;
+        margin: auto 0;
+        
+        border-right: (1 * @rpx) solid;
+    }
+    .StatTracker.StatTracker--White {
+        border-color: fade(@dark-txt-color, 50%);
+    }
+    .StatTracker.StatTracker--Black {
+        border-color: fade(@light-txt-color, 50%);
+    }
+    .StatTracker:nth-child(1) {
+        border-left: (1 * @rpx) solid;
+
+        &.StatTracker.StatTracker--White {
+            border-color: fade(@dark-txt-color, 50%);
+        }
+        &.StatTracker.StatTracker--Black {
+            border-color: fade(@light-txt-color, 50%);
+        }
+    }
+    .StatTracker__Label {
+        font: bold .5rem "Libre Franklin";
+        text-transform: uppercase;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .Category__Buttons {
+        min-width: 3rem;
     }
 
     .Category__Features {
@@ -165,7 +210,9 @@
         flex: 1;
         display: flex;
     }
-
+    .FeatureEntry__Buttons {
+        min-width: 3rem;
+    }
     .FeatureEntry:hover .FeatureEntry__CollapseIcon,
     .FeatureEntry:hover .FeatureEntry__Buttons {
         opacity: 1;

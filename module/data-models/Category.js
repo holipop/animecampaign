@@ -17,6 +17,8 @@ export default class Category extends foundry.abstract.DataModel {
             color: new fields.ColorField(),
             collapsed: new fields.BooleanField({ initial: true }),
 
+            snap: new fields.BooleanField({ initial: true }),
+
             details: new fields.EmbeddedDataField(Details),
 
             trackers: new fields.ArrayField(new fields.SchemaField({

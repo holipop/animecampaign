@@ -270,7 +270,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         data.name ||= "new category"
         data.name = data.name.toLowerCase()
 
-        console.log(data)
+        // forces Foundry to update even when it *thinks* there's no changes.
+        data.snap = !this.category.snap
 
         const nameTaken = categories
             .filter(c => c.name !== this.category.name)
