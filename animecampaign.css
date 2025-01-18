@@ -678,9 +678,11 @@
 .animecampaign.sheet .Stats {
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 1rem;
 }
 .animecampaign.sheet .Stats__MainStats {
   display: flex;
+  margin-bottom: 0.3rem;
 }
 .animecampaign.sheet .Stats__MainStatsPadding {
   flex: 1;
@@ -1037,6 +1039,33 @@
 .animecampaign.sheet .StatEntry:hover .StatEntry__Buttons {
   opacity: 1;
 }
+.animecampaign button.ACButton--Wide.ACButton--AddStat {
+  height: 2rem;
+  width: 100%;
+  margin: 0;
+  margin-top: 0.2rem;
+}
+.theme-dark .animecampaign button.ACButton--Wide.ACButton--AddStat {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign button.ACButton--Wide.ACButton--AddStat {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign button.ACButton--Wide.ACButton--AddStat:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign button.ACButton--Wide.ACButton--AddStat:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign button.ACButton--Wide.ACButton--AddStat:active {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign button.ACButton--Wide.ACButton--AddStat:active {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign button.ACButton--Wide.ACButton--AddStat .ACButton__Text {
+  font-weight: normal;
+}
 .animecampaign.sheet .Navigation {
   display: flex;
   align-items: center;
@@ -1136,33 +1165,26 @@
 .animecampaign.actor.sheet .Category__Trackers {
   display: flex;
   align-items: center;
+  margin: 0 0.1rem;
 }
 .animecampaign.actor.sheet .StatTracker {
   display: flex;
   align-items: flex-end;
   width: 5rem;
   padding: 0.15rem;
-  height: 80%;
-  margin: auto 0;
-  border-right: 0.0625rem solid;
+  height: 100%;
 }
 .animecampaign.actor.sheet .StatTracker.StatTracker--White {
-  border-color: rgba(235, 237, 242, 0.5);
+  background-color: rgba(235, 237, 242, 0.15);
 }
 .animecampaign.actor.sheet .StatTracker.StatTracker--Black {
-  border-color: rgba(31, 30, 30, 0.5);
+  background-color: rgba(31, 30, 30, 0.15);
 }
-.animecampaign.actor.sheet .StatTracker:nth-child(1) {
-  border-left: 0.0625rem solid;
-}
-.animecampaign.actor.sheet .StatTracker:nth-child(1).StatTracker.StatTracker--White {
-  border-color: rgba(235, 237, 242, 0.5);
-}
-.animecampaign.actor.sheet .StatTracker:nth-child(1).StatTracker.StatTracker--Black {
-  border-color: rgba(31, 30, 30, 0.5);
+.animecampaign.actor.sheet .StatTracker:nth-child(even) {
+  background-color: transparent;
 }
 .animecampaign.actor.sheet .StatTracker__Label {
-  font: bold 0.5rem "Libre Franklin";
+  font: bold 0.6rem "Libre Franklin";
   text-transform: uppercase;
   overflow: hidden;
   white-space: nowrap;
@@ -1214,8 +1236,10 @@
   background: none;
   transition: none;
   grid-area: 1 / 1 / -1 / -1;
-  height: 1.875rem;
-  width: 1.875rem;
+  min-height: 1.875rem;
+  max-height: 1.875rem;
+  min-width: 1.875rem;
+  max-width: 1.875rem;
   margin-right: 0.2rem;
 }
 .theme-dark .animecampaign.actor.sheet .FeatureEntry__Image {
@@ -1272,6 +1296,9 @@
   width: fit-content;
   padding: 0 0.2rem;
   border-radius: 0.125rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font: bold 1.2rem "Philosopher";
 }
 .animecampaign.actor.sheet .FeatureEntry__Name .ACButton__Icon {
@@ -1281,9 +1308,49 @@
   opacity: 0;
   transition: opacity 0.075s;
 }
-.animecampaign.actor.sheet .FeatureEntry__StatTrackers {
+.animecampaign.actor.sheet .FeatureEntry__TrackedStats {
   flex: 1;
   display: flex;
+  justify-content: end;
+  height: 100%;
+  margin: 0 0.1rem;
+}
+.animecampaign.actor.sheet .TrackedStat {
+  display: flex;
+  align-items: center;
+  padding: 0.15rem 0.4rem;
+  min-width: 5rem;
+  max-width: 5rem;
+  height: 100%;
+  gap: 0.25rem;
+  font-family: "Philosopher";
+  font-style: italic;
+}
+.theme-dark .animecampaign.actor.sheet .TrackedStat {
+  background-color: rgba(235, 237, 242, 0.05);
+}
+.theme-light .animecampaign.actor.sheet .TrackedStat {
+  background-color: rgba(31, 30, 30, 0.05);
+}
+.animecampaign.actor.sheet .TrackedStat > * {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.animecampaign.actor.sheet .TrackedStat:nth-child(even) {
+  background-color: transparent;
+}
+.animecampaign.actor.sheet .TrackedStat__Value {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.animecampaign.actor.sheet .TrackedStat__Label {
+  font-size: 1rem;
+  font-style: normal;
+}
+.animecampaign.actor.sheet .TrackedStat__Max {
+  flex: 1;
+  font-size: 1rem;
 }
 .animecampaign.actor.sheet .FeatureEntry__Buttons {
   min-width: 3rem;

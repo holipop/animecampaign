@@ -32,7 +32,7 @@
                     <div class="Category__Padding"></div>
 
                     <div class="Category__Trackers">
-                        {{#each trackers as |tracker index|}}
+                        {{#each category.trackers as |tracker index|}}
                             <div class="StatTracker StatTracker--{{../palette.css}}">
                                 <span class="StatTracker__Label">{{tracker.tag}}</span>
                             </div>

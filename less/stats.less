@@ -3,11 +3,13 @@
 .animecampaign.sheet {
 
     .Stats {
-        #Part()
+        #Part();
+        margin-bottom: 1rem;
     }
 
     .Stats__MainStats {
         display: flex;
+        margin-bottom: .3rem;
     }
     .Stats__MainStatsPadding {
         flex: 1;
@@ -319,4 +321,33 @@
         opacity: 1;
     }
 
+}
+
+.animecampaign button.ACButton--Wide.ACButton--AddStat {
+    #ColorScheme(@opacity: 25%, {
+        border-color: "txt";
+    });
+
+    height: 2rem;
+    width: 100%;
+    margin: 0;
+    margin-top: .2rem;
+
+    &:hover {
+        .theme-dark & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@dark-txt-color, 25%);
+        }
+        .theme-light & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@light-txt-color, 25%);
+        }
+    }
+    &:active {
+        #ColorScheme(@opacity: 25%, {
+            background-color: "txt";
+        })
+    }
+
+    .ACButton__Text {
+        font-weight: normal;
+    }
 }

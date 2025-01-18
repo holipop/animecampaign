@@ -1,0 +1,68 @@
+<section class="Stats">
+
+    {{#if system.stats.length}}
+        <ul class="Stats__List JS-Drop">
+
+            {{#each system.stats as |stat index|}}
+                <li class="StatEntry JS-Stat" data-stat="{{index}}">
+                    
+                    <!-- dummy inputs to preserve data -->
+                    <input type="text" name="system.stats.{{index}}.tag" value="{{stat.tag}}" hidden>
+                    <input type="text" name="system.stats.{{index}}.view" value="{{stat.view}}" hidden>
+
+                    <div class="StatEntry__InfoWrapper">
+                        
+                        <!-- img class="StatEntry__Image" src="{{stat.img}}" -->
+
+                        <div class="StatEntry__Info JS-Drag" data-drag="stat">
+                            <span class="StatEntry__DragIndicator MSO">drag_indicator</span>
+
+                            <!-- div class="Wrapper">
+                                <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
+                            </div -->
+                            
+                            <span class="StatEntry__Tag">{{stat.tag}}</span>
+                            <div class="StatEntry__Divider">&VerticalBar;</div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="StatEntry__Inputs">
+                        {{#if (eq stat.view "value")}}
+                            <input class="StatEntry__Input StatEntry__Input--Value" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                        {{/if}}
+
+                        {{#if (eq stat.view "resource")}}
+                            <input class="StatEntry__Input StatEntry__Input--Numerator JS-ResizeInput" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                            <span class="StatCard__Label StatCard__Label--Divider">&sol;</span>
+                            <input class="StatEntry__Input StatEntry__Input--Denominator" type="number" name="system.stats.{{index}}.max" value="{{stat.max}}" placeholder="0">
+                        {{/if}}
+
+                        {{#if (eq stat.view "label")}}
+                            <input class="StatEntry__Input StatEntry__Input--Label" type="text" name="system.stats.{{index}}.label" value="{{stat.label}}" placeholder="...">
+                        {{/if}}
+                    </div>
+                    
+                    <div class="StatEntry__Buttons InlineButtonGroup">
+                        <button class="ACButton ACButton--Inline" type="button" data-action="onStatEdit" data-tooltip="AC.FeatureSheet.StatEdit">
+                            <div class="ACButton__Icon MSO">edit</div>
+                        </button>
+
+                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onStatDelete" data-tooltip="AC.FeatureSheet.StatDelete">
+                            <div class="ACButton__Icon MSO">close</div>
+                        </button>
+                    </div>
+                </li>
+            {{/each}}
+
+        </ul>
+    {{/if}}
+
+    <button class="ACButton ACButton--Wide ACButton--AddStat JS-DisableStatAdd" type="button" data-action="onStatAdd">
+        <span class="ACButton__Icon MSO">add</span>
+        <span class="ACButton__Text">
+            {{localize "AC.FeatureSheet.StatAdd"}}
+        </span>
+    </button>
+
+</section>

@@ -1,4 +1,3 @@
-import * as List from "../List.js"
 import Stat from "./Stat.js";
 import Section from "./Section.js";
 import Details from "./Details.js";
@@ -42,18 +41,11 @@ export default class FeatureData extends foundry.abstract.DataModel {
      * @returns {Object[]}
      */
     get trackedStats () {
-        if (!this.parent.isOwned) return null;
-        const categories = this.parent.parent.system.categories;
-        const trackers = List.get(categories, { name: this.category }).trackers;
+        if (!this.parent.isOwned) return [];
 
-        return trackers.map(tracker => {
-            const fallback = {
-                view: 'value',
-                value: '',
-                img: 'systems/animecampaign/assets/transparent.svg',
-            };
-            return List.get(this.stats, { tag: tracker.tag.toLowerCase() }) ?? fallback;
-        })
+        const category = this.parent.parent.system.categories.find(c => c.name === this.category);
+            
+        return category.trackers.map(t => this.stats.find(s => s.tag === t.tag) ?? {})
     }
 
     /** Get the palette of this feature.

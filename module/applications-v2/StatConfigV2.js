@@ -92,6 +92,7 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
      * @param {SubmitEvent} event 
      * @param {HTMLFormElement} form 
      * @param {*} data 
+     * @this {StatConfigV2}
      */
     static onSubmit (event, form, formData) {
         const data = formData.object
@@ -99,10 +100,10 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         data.tag ||= "new stat"
         data.tag = data.tag.toLowerCase()
 
-        data.sort = this.stat.sort
-
         if (this.document.documentName === "Actor") {
             const stats = this.document.system.colorStats
+
+            data.sort = this.stat.sort
 
             // tags must be unique
             const tagTaken = stats
@@ -131,9 +132,26 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
 
             this.document.update(updates)
         } else {
-
             // item
+            const stats = [...this.document.system.stats]
 
+            // tags must be unique
+            const tagTaken = stats
+                .filter(stat => stat.tag !== this.stat.tag)
+                .find(stat => stat.tag == data.tag)
+            if (tagTaken) {
+                throw game.i18n.format("AC.StatConfig.StatTagTaken", { tag: data.tag.toUpperCase() })
+            }
+
+            // always place new stats at the end
+            if (this.isNew) {
+                stats.push(data)
+            } else {
+                const index = stats.findIndex(stat => stat.tag === this.stat.tag)
+                stats[index] = data
+            }
+
+            this.document.update({ "system.stats": stats })
         }
     }
 

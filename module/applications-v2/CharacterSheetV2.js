@@ -293,12 +293,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         const confirm = await ACDialogV2.confirm({
             window: {
-                title: game.i18n.format("AC.DeleteStatDialog.Title", { 
+                title: game.i18n.format("AC.DeleteColorStatDialog.Title", { 
                     tag: tag.toUpperCase(), 
                     name: this.document.name
                 }),
             },
-            content: game.i18n.format("AC.DeleteStatDialog.Content", {
+            content: game.i18n.format("AC.DeleteColorStatDialog.Content", {
                 tag: tag.toUpperCase(), 
                 color: color.toUpperCase()
             }),
@@ -445,7 +445,10 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             system: { 
                 category: category.name,
                 color: category.palette.primary,
-                details: category.details
+                details: category.details,
+                stats: category.trackers.map(t => {
+                    return { tag: t.tag, view: t.display }
+                })
             }
         }])
     }

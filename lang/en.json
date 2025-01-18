@@ -73,7 +73,11 @@
         "RemoveImage": "Remove Image",
 
         "Description": "Description",
-        "Details": "Details"
+        "Details": "Details",
+
+        "StatAdd": "Add Stat",
+        "StatEdit": "Edit Stat",
+        "StatDelete": "Delete Stat"
     },
 
     "Details": {
@@ -125,6 +129,11 @@
     },
 
     "DeleteStatDialog": {
+        "Title": "Delete Stat [{tag}]: {name}",
+        "Content": "<p>Delete the \"<b>{tag}</b>\" stat?</p>"
+    },
+
+    "DeleteColorStatDialog": {
         "Title": "Delete Stat [{tag}]: {name}",
         "Content": "<p>Delete the \"<b>{tag}</b>\" (<em>{color}</em>) stat?</p>"
     },

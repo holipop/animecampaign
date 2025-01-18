@@ -19,5 +19,6 @@ declare module "./ACItem.js" {
     export default interface ACItem {
         system: FeatureData
         sheet: FeatureSheetV2
+        parent: ACActor
     }
 }

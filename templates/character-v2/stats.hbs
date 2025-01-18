@@ -52,10 +52,6 @@
 
         <div class="Stats__MainStatsPadding">
 
-            <button class="ACButton JS-DisableStatAdd JS-Color" type="button" data-action="onStatAdd" data-tooltip="AC.CharacterSheet.StatAdd" data-color="{{palette.secondary}}" data-properties="border-color color">
-                <div class="ACButton__Icon MSO">add</div>
-            </button>
-
         </div>
 
     </div>
@@ -114,6 +110,14 @@
             {{/each}}
 
         </ul>
+
     {{/if}}
+
+    <button class="ACButton ACButton--Wide ACButton--AddStat JS-DisableStatAdd" type="button" data-action="onStatAdd">
+        <span class="ACButton__Icon MSO">add</span>
+        <span class="ACButton__Text">
+            {{localize "AC.CharacterSheet.StatAdd"}}
+        </span>
+    </button>
 
 </section>

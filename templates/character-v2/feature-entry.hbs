@@ -21,7 +21,28 @@
             <div class="FeatureEntry__CollapseIcon ACButton__Icon MSO">arrow_drop_down</div>
         </button>
 
-        <div class="FeatureEntry__StatTrackers"></div>
+        <div class="FeatureEntry__TrackedStats">
+
+            {{#each feature.system.trackedStats as |stat index|}}
+                <div class="TrackedStat">
+
+                    {{#if (eq stat.view "value")}}
+                            <span class="TrackedStat__Value">{{stat.value}}</span>
+                    {{/if}}
+
+                    {{#if (eq stat.view "resource")}}
+                            <span class="TrackedStat__Value">{{stat.value}}</span>
+                            <span class="TrackedStat__Max">/ {{stat.max}}</span>
+                    {{/if}}
+
+                    {{#if (eq stat.view "label")}}
+                            <span class="TrackedStat__Label">{{stat.label}}</span>
+                    {{/if}}
+
+                </div>
+            {{/each}}
+
+        </div>
 
         <div class="FeatureEntry__Buttons InlineButtonGroup">
             <button class="ACButton ACButton--Inline" type="button" data-action="onFeatureEdit" data-tooltip="AC.CharacterSheet.FeatureEdit">

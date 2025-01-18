@@ -75,35 +75,26 @@
     .Category__Trackers {
         display: flex;
         align-items: center;
+        margin: 0 0.1rem;
     }
     .StatTracker {
         display: flex;
         align-items: flex-end;
         width: 5rem;
         padding: .15rem;
-        height: 80%;
-        margin: auto 0;
-        
-        border-right: (1 * @rpx) solid;
+        height: 100%;
     }
     .StatTracker.StatTracker--White {
-        border-color: fade(@dark-txt-color, 50%);
+        background-color: fade(@dark-txt-color, 15%);
     }
     .StatTracker.StatTracker--Black {
-        border-color: fade(@light-txt-color, 50%);
+        background-color: fade(@light-txt-color, 15%);
     }
-    .StatTracker:nth-child(1) {
-        border-left: (1 * @rpx) solid;
-
-        &.StatTracker.StatTracker--White {
-            border-color: fade(@dark-txt-color, 50%);
-        }
-        &.StatTracker.StatTracker--Black {
-            border-color: fade(@light-txt-color, 50%);
-        }
+    .StatTracker:nth-child(even) {
+        background-color: transparent;
     }
     .StatTracker__Label {
-        font: bold .5rem "Libre Franklin";
+        font: bold .6rem "Libre Franklin";
         text-transform: uppercase;
         overflow: hidden;
         white-space: nowrap;
@@ -153,8 +144,10 @@
         #InputSkinning(); 
 
         grid-area: 1 / 1 / -1 / -1;
-        height: 2rem - (2 * @rpx);
-        width: 2rem - (2 * @rpx);
+        min-height: 2rem - (2 * @rpx);
+        max-height: 2rem - (2 * @rpx);
+        min-width: 2rem - (2 * @rpx);
+        max-width: 2rem - (2 * @rpx);
         margin-right: .2rem;
     }
     .FeatureEntry__Image--Null {
@@ -195,6 +188,10 @@
         padding: 0 .2rem;
         border-radius: 2 * @rpx;
 
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
         font: bold 1.2rem "Philosopher";
 
         .ACButton__Icon {
@@ -206,10 +203,51 @@
         transition: opacity .075s;
     }
 
-    .FeatureEntry__StatTrackers {
+    .FeatureEntry__TrackedStats {
         flex: 1;
         display: flex;
+        justify-content: end;
+        height: 100%;
+        margin: 0 0.1rem;
     }
+    .TrackedStat {
+        #ColorScheme(@opacity: 5%, {
+            background-color: "txt";
+        });
+
+        display: flex;
+        align-items: center;
+        padding: .15rem .4rem;
+        min-width: 5rem;
+        max-width: 5rem;
+        height: 100%;
+        gap: .25rem;
+
+        font-family: "Philosopher";
+        font-style: italic;
+
+        > * {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+    .TrackedStat:nth-child(even) {
+        background-color: transparent;
+    }
+    .TrackedStat__Value {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    .TrackedStat__Label {
+        font-size: 1rem;
+        font-style: normal;
+    }
+    .TrackedStat__Max {
+        flex: 1;
+        font-size: 1rem;
+    }
+
     .FeatureEntry__Buttons {
         min-width: 3rem;
     }

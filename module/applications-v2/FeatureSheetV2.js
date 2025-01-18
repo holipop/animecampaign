@@ -1,4 +1,6 @@
 import SheetMixinV2 from "./SheetMixinV2.js"
+import StatConfigV2 from "./StatConfigV2.js"
+import ACDialogV2 from "./ACDialogV2.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ItemSheetV2 } = foundry.applications.sheets
@@ -59,7 +61,6 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      */
     _onRender (context, options) {
         super._onRender(context, options)
-
     }
 
     /**
@@ -100,6 +101,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     /** 
      * Invokes the Stat configuration window for creating a stat. 
+     * @this {FeatureSheetV2}
      */
     static onRemoveImage () {
         this.document.update({ img: null })
@@ -107,20 +109,68 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     /** 
      * Invokes the Stat configuration window for creating a stat. 
+     * @this {FeatureSheetV2}
      */
-    static onStatAdd () { }
+    static onStatAdd () {
+        new StatConfigV2({
+            window: { 
+                title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
+            },
+            document: this.document,
+            stat: {
+                view: "value", 
+                tag: "",
+            }
+        }).render(true)
+    }
 
     /** 
      * Invokes the Stat configuration window for editing the targetted stat. 
      * @param {PointerEvent} event
      * @param {HTMLElement} target
+     * @this {FeatureSheetV2}
      */
-    static onStatEdit (event, target) { }
+    static onStatEdit (event, target) {
+        const index = target.closest('.JS-Stat').dataset.stat
+        const stat = this.document.system.stats[index];
+
+        new StatConfigV2({
+            window: { 
+                title: game.i18n.format("AC.StatConfig.EditStat.Title", { name: this.document.name }) 
+            },
+            document: this.document,
+            stat
+        }).render(true)
+    }
 
     /** Deletes the targetted stat.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
+     * @this {FeatureSheetV2}
      */
-    static async onStatDelete (event, target) { }
+    static async onStatDelete (event, target) {
+        const index = target.closest('.JS-Stat').dataset.stat
+        const { tag } = this.document.system.stats[index]
+
+        const confirm = await ACDialogV2.confirm({
+            window: {
+                title: game.i18n.format("AC.DeleteStatDialog.Title", { 
+                    tag: tag.toUpperCase(), 
+                    name: this.document.name
+                }),
+            },
+            content: game.i18n.format("AC.DeleteStatDialog.Content", {
+                tag: tag.toUpperCase(), 
+            }),
+            modal: true
+        });
+
+        const stats = [...this.document.system.stats]
+        stats.splice(index, 1)
+        
+        if (confirm) {
+            this.document.update({ "system.stats": stats })
+        }
+    }
 
 }
