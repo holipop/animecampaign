@@ -8,7 +8,21 @@ import Stat from "./Stat.js"
 import ACActor from '../documents/ACActor.js';
 import ACItem from '../documents/ACItem.js';
 
-type ColorKeys = 'red' | 'blue' | 'yellow' | 'green' | 'orange' | 'cyan' | 'purple' | 'grey'
+declare global {
+    type ColorKeys = 'red' | 'blue' | 'yellow' | 'green' | 'orange' | 'cyan' | 'purple' | 'grey'
+
+    interface Palette {
+        primary: string
+        secondary: string
+        contrast: string
+        css?: string
+    }
+
+    interface StatTracker { 
+        tag: string
+        display: "value" | "resource" | "label" 
+    }
+}
 
 declare module "./CharacterData.js" {
     export default interface CharacterData {
@@ -47,8 +61,9 @@ declare module "./Category.js" {
         name: string
         color: Color
         collapsed: boolean
+        snap: boolean
         details: Details
-        trackers: { tag: string, display: "value" | "resource" | "label" }[]
+        trackers: StatTracker[]
     }
 }
 

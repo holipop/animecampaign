@@ -1,14 +1,12 @@
-import * as Utils from "../Utils.js"
 import Details from "./Details.js";
+import ACItem from "../documents/ACItem.js";
 
 /** 
  * Data structure for categories.
  */
 export default class Category extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model.
-     * @returns {Object}
-     */
+    /** @override */
     static defineSchema () {
         const fields = foundry.data.fields;
 
@@ -33,8 +31,9 @@ export default class Category extends foundry.abstract.DataModel {
         };
     }
 
-    /** Get the palette of this category.
-     * @returns {{ primary: string, secondary: string, contrast: string }}
+    /** 
+     * Get the palette of this category.
+     * @returns {Palette}
      */
     get palette () {
         const color = this.color ?? this.parent.color
@@ -59,18 +58,19 @@ export default class Category extends foundry.abstract.DataModel {
         }
     }
 
-    /** Get the HTML for this category's header.
+    /** 
+     * Get the HTML for this category's header.
      * @returns {String}
      */
     get nameHTML () {
         return `<span class="category__name--initial">${this.name.at(0)}</span>${this.name.slice(1)}`
     }
 
-    /** Get the list of features under this category.
+    /** 
+     * Get the list of features under this category.
      * @returns {ACItem[]}
      */
     get features () {
-        // parent.parent is ACActor
         return this.parent.parent.items.filter(item => item.system.category === this.name)
     }
 }

@@ -16,6 +16,10 @@ export default function SheetMixinV2 (Base) {
             this.#dragDrop = this.#createDragDropHandlers()
         }
 
+
+
+        // ---- Drag & Drop ----
+
         /** @type {DragDrop[]} */
         #dragDrop
 
@@ -27,7 +31,8 @@ export default function SheetMixinV2 (Base) {
             return this.#dragDrop;
         }
 
-        /** Create drag-and-drop workflow handlers for this Application
+        /** 
+         * Create drag-and-drop workflow handlers for this Application
          * @returns {DragDrop[]}     An array of DragDrop handlers
          * @private
          */
@@ -46,24 +51,8 @@ export default function SheetMixinV2 (Base) {
             });
         }
 
-        /** Manually invokes the color picker. */
-        static onInvokeColorPicker () {
-            this.element.querySelector('.JS-InvokeColorPicker').click()
-        }
-
-        /** Invokes the file picker for editing images. */
-        static onEditImage () {
-            const fp = new FilePicker({
-                current: this.document.img,
-                type: "image",
-                callback: (src) => {
-                    this.document.update({ "img": src })
-                }
-            })
-            fp.browse()
-        }
-
-        /** Define whether a user is able to begin a dragstart workflow for a given drag selector
+        /** 
+         * Define whether a user is able to begin a dragstart workflow for a given drag selector
          * @param {string} selector       The candidate HTML selector for dragging
          * @returns {boolean}             Can the current user drag this selector?
          * @protected
@@ -72,7 +61,8 @@ export default function SheetMixinV2 (Base) {
             return this.isEditable;
         }
 
-        /** Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
+        /** 
+         * Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
          * @param {string} selector       The candidate HTML selector for the drop target
          * @returns {boolean}             Can the current user drop on this selector?
          * @protected
@@ -81,23 +71,30 @@ export default function SheetMixinV2 (Base) {
             return this.isEditable;
         }
 
-        /** Callback actions which occur at the beginning of a drag start workflow.
+        /** 
+         * Callback actions which occur at the beginning of a drag start workflow.
          * @param {DragEvent} event
          * @protected
          */
         _onDragStart (event) { }
 
-        /** Callback actions which occur when a dragged element is over a drop target.
+        /** 
+         * Callback actions which occur when a dragged element is over a drop target.
          * @param {DragEvent} event
          * @protected
          */
         _onDragOver (event) { }
 
-        /** Callback actions which occur when a dragged element is dropped on a target.
+        /** 
+         * Callback actions which occur when a dragged element is dropped on a target.
          * @param {DragEvent} event
          * @protected
          */
         _onDrop (event) { }
+
+
+
+        // ---- Context ----
 
         /**
          * Actions performed after any render of the Application.
@@ -166,6 +163,33 @@ export default function SheetMixinV2 (Base) {
                 })
             }
 
+        }
+
+
+
+        // ---- Actions ----
+
+        /** 
+         * Manually invokes the color picker. 
+         * @this {ACSheetV2}
+         */
+        static onInvokeColorPicker () {
+            this.element.querySelector('.JS-InvokeColorPicker').click()
+        }
+
+        /** 
+         * Invokes the file picker for editing images. 
+         * @this {ACSheetV2}
+         */
+        static onEditImage () {
+            const fp = new FilePicker({
+                current: this.document.img,
+                type: "image",
+                callback: (src) => {
+                    this.document.update({ "img": src })
+                }
+            })
+            fp.browse()
         }
     }
 

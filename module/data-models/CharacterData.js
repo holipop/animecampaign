@@ -6,9 +6,7 @@ import Category from "./Category.js";
  */
 export default class CharacterData extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model.
-     * @returns {Object}
-     */
+    /** @override */
     static defineSchema () {
         const fields = foundry.data.fields;
 
@@ -49,8 +47,9 @@ export default class CharacterData extends foundry.abstract.DataModel {
         }
     }
 
-    /** Get the palette of this feature.
-     * @returns {{ primary: string, secondary: string, contrast: string }}
+    /** 
+     * Get the palette of this feature.
+     * @returns {Palette}
      */
     get palette () {
         const color = this.color
@@ -72,8 +71,9 @@ export default class CharacterData extends foundry.abstract.DataModel {
         }
     }
 
-    /** Returns the class level as a roman numeral.
-     * @returns {Number} 
+    /** 
+     * Returns the class level as a roman numeral.
+     * @returns {string} 
      */
     get classLevel () {
         const prof = this.proficiency.value
@@ -84,14 +84,16 @@ export default class CharacterData extends foundry.abstract.DataModel {
         return ""
     }
 
-    /** Returns stamina represented as a ratio.
-     * @returns {Number} 
+    /** 
+     * Returns stamina represented as a ratio.
+     * @returns {number} 
      */
     get staminaRatio () {
         return this.stamina.value / this.stamina.max
     }
 
-    /** The list of color stats without null colors, sorted.
+    /** 
+     * The list of color stats without null colors, sorted.
      * @returns {Stat[]}
      */
     get colorStats () {

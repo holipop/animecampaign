@@ -10,7 +10,7 @@ const { ItemSheetV2 } = foundry.applications.sheets
  */
 export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixinV2(ItemSheetV2)) {
 
-    /** The default configuration options which are assigned to every instance of this Application class. */
+    /** @override */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "item", "sheet"],
         position: {
@@ -34,21 +34,17 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
-    /** The Handlebars templates for this application. These are rendered in order. */
+    /** @override */
     static PARTS = {
         part: { template: "systems/animecampaign/templates/feature-v2/template.hbs" },
     }
 
-    /** The title of this application's window.
+    /** 
+     * The title of this application's window.
      * @returns {String}
      */
     get title () {
         return `${this.document.name}`
-    }
-
-    /** @override */
-    tabGroups = {
-        feature: "description"
     }
 
     /**
@@ -61,6 +57,15 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      */
     _onRender (context, options) {
         super._onRender(context, options)
+    }
+
+
+
+    // ---- Context ----
+
+    /** @override */
+    tabGroups = {
+        feature: "description"
     }
 
     /**
@@ -80,9 +85,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         return tabs
     }
 
-    /** The context passed to each Handlebars template.
-     * @returns {*}
-     */
+    /** @override */
     async _prepareContext () {
         return {
             ...super._prepareContext(),
@@ -91,16 +94,15 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             system: this.document.system,
             palette: this.document.system.palette,
             tabs: this.getTabs(),
-
-            /* svg: {
-                bg: this.svgBackground,
-                text: this.svgText,
-            }, */
         }
     }
 
+
+
+    // ---- Actions ----
+
     /** 
-     * Invokes the Stat configuration window for creating a stat. 
+     * Removes the Features's image.
      * @this {FeatureSheetV2}
      */
     static onRemoveImage () {
@@ -108,7 +110,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
     }
 
     /** 
-     * Invokes the Stat configuration window for creating a stat. 
+     * Invokes the Stat configuration window for creating a Stat. 
      * @this {FeatureSheetV2}
      */
     static onStatAdd () {
@@ -125,7 +127,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
     }
 
     /** 
-     * Invokes the Stat configuration window for editing the targetted stat. 
+     * Invokes the Stat configuration window for editing a Stat. 
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @this {FeatureSheetV2}
@@ -143,7 +145,8 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         }).render(true)
     }
 
-    /** Deletes the targetted stat.
+    /** 
+     * Deletes a targetted Stat.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @this {FeatureSheetV2}

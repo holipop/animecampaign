@@ -3,9 +3,7 @@
  */
 export default class Section extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model.
-     * @returns {Object}
-     */
+    /** @override */
     static defineSchema () {
         const fields = foundry.data.fields;
 

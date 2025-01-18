@@ -7,8 +7,19 @@ import ApplicationV2 from "@league-of-foundry-developers/foundry-vtt-types/src/f
 import ActorSheetV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/sheets/actor-sheet.mjs"
 import ItemSheetV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/sheets/item-sheet.mjs"
 
+declare global {
+    interface ApplicationTab {
+        id: string
+        group: string
+        icon: string
+        label: string
+        active: boolean
+        css: "active" | ""
+    }
+}
+
 declare module "./SheetMixinV2.js" {
-    // ! This is all close as we'll get lmao
+    // TypeScript is really weird about documenting mixins.
     type ConstructorOf<T> = new (...args: any[]) => T
 
     type ACSheetInstance = {

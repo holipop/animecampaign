@@ -3,27 +3,16 @@ import ACDialogV2 from "./ACDialogV2.js"
 import StatConfigV2 from "./StatConfigV2.js"
 import CategoryConfigV2 from "./CategoryConfigV2.js"
 import ACItem from "../documents/ACItem.js"
-import Category from "../data-models/Category.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
-
-/**
- * @typedef ApplicationTab
- * @property {string} id         The ID of the tab. Unique per group.
- * @property {string} group      The group this tab belongs to.
- * @property {string} icon       An icon to prepend to the tab
- * @property {string} label      Display text, will be run through `game.i18n.localize`
- * @property {boolean} active    If this is the active tab, set with `this.tabGroups[group] === id`
- * @property {string} css        "active" or "" based on the above boolean
- */
 
 /**
  * The application for Characters.
  */
 export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMixinV2(ActorSheetV2)) {
 
-    /** The default configuration options which are assigned to every instance of this Application class. */
+    /** @override */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "actor", "sheet"],
         position: {
@@ -55,7 +44,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
-    /** The Handlebars templates for this application. These are rendered in order. */
+    /** @override */
     static PARTS = {
         template: {
             template: "systems/animecampaign/templates/character-v2/template.hbs",
@@ -63,19 +52,20 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         },
     }
 
-    /** The title of this application's window.
+    /** 
+     * The title of this application's window.
      * @returns {String}
      */
     get title () {
         return `${this.document.name}`
     }
 
-    /** @override */
-    tabGroups = {
-        character: "kit"
-    }
 
-    /** Callback actions which occur at the beginning of a drag start workflow.
+
+    // ---- Drag & Drop ----
+
+    /** 
+     * Callback actions which occur at the beginning of a drag start workflow.
      * @param {DragEvent} event
      * @protected
      * @override
@@ -99,7 +89,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         event.dataTransfer.setData("text/plain", JSON.stringify(data))
     }
 
-    /** Callback actions which occur when a dragged element is dropped on a target.
+    /** 
+     * Callback actions which occur when a dragged element is dropped on a target.
      * @param {DragEvent} event
      * @protected
      * @override
@@ -121,7 +112,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
-    /** Handles the drop event for stats, setting their 'sort' key.
+    /** 
+     * Handles the drop event for stats, setting their 'sort' key.
      * @param {Event} event 
      * @param {*} data 
      */
@@ -142,21 +134,13 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         this.document.update({ 'system._stats': Object.fromEntries(updates) })
     }
 
-    /**
-     * Actions performed after any render of the Application.
-     * Post-render steps are not awaited by the render process.
-     * @param {ApplicationRenderContext} context      Prepared context data
-     * @param {RenderOptions} options                 Provided render options
-     * @protected
-     * @override
-     */
-    _onRender (context, options) {
-        super._onRender(context, options)
 
-        // Disable the Add Stat button when the stats list is full.
-        if (this.document.system.colorStats.length >= 8) {
-            this.element.querySelector(`.JS-DisableStatAdd`).setAttribute("disabled", "disabled")
-        }
+
+    // ---- Context ----
+
+    /** @override */
+    tabGroups = {
+        character: "kit"
     }
 
     /**
@@ -177,6 +161,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /**
+     * Gets the Features that don't belong to a Category. These used to be hidden.
      * @returns {ACItem[]}
      */
     getUncategorizedFeatures () {
@@ -186,9 +171,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         })
     }
 
-    /** The context passed to each Handlebars template.
-     * @returns {*}
-     */
+    /** @override */
     async _prepareContext () {
         return {
             ...super._prepareContext(),
@@ -199,21 +182,25 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             tabs: this.getTabs(),
             stats: this.document.system.colorStats,
             categories: this.document.system.categories,
-
             uncategorizedFeatures: this.getUncategorizedFeatures()
+        }
+    }
 
-            /* svg: {
-                bg: this.svgBackground,
-                text: this.svgText,
-            }, */
+    /** @override */
+    _onRender (context, options) {
+        super._onRender(context, options)
+
+        // Disable the Add Stat button when the stats list is full.
+        if (this.document.system.colorStats.length >= 8) {
+            this.element.querySelector(`.JS-DisableStatAdd`).setAttribute("disabled", "disabled")
         }
     }
 
     /**
      * Submit a document update based on the processed form data.
-     * @param {SubmitEvent} event                   The originating form submission event
-     * @param {HTMLFormElement} form                The form element that was submitted
-     * @param {object} submitData                   Processed and validated form data to be used for a document update
+     * @param {SubmitEvent} event       The originating form submission event
+     * @param {HTMLFormElement} form    The form element that was submitted
+     * @param {*} submitData            Processed and validated form data to be used for a document update
      * @returns {Promise<void>}
      * @protected
      * @override
@@ -237,8 +224,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         super._processSubmitData(event, form, updates)
     }
 
+
+
+    // ---- Actions ----
+
     /**
-     * Invokes the Stat configuration window for creating a stat. 
+     * Invokes the Stat configuration window for creating a Stat. 
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -261,7 +252,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /** 
-     * Invokes the Stat configuration window for editing the targetted stat. 
+     * Invokes the Stat configuration window for editing a Stat. 
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @this {CharacterSheetV2}
@@ -282,7 +273,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }).render(true)
     }
 
-    /** Deletes the targetted stat.
+    /** 
+     * Invokes a dialog for deleting a Stat.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @this {CharacterSheetV2}
@@ -318,6 +310,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     static onCategoryCollapse (event, target) { }
 
     /**
+     * Invokes the Category configuration window for editing.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -338,6 +331,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /**
+     * On confirm, sets every Feature's color to its Category's.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -366,6 +360,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
     
     /**
+     * Invokes a dialog for deleting a Category. 
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -399,6 +394,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /**
+     * Invokes the Category configuration window for creating a new Category.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -430,7 +426,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /**
-     * Create a feature under this category.
+     * Creates a Feature under a Category.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -461,6 +457,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     static onFeatureCollapse (event, target) { }
 
     /**
+     * Renders a Feature's sheet.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
@@ -474,6 +471,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /**
+     * On confirm, deletes a Feature.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}

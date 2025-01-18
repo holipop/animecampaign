@@ -3,20 +3,17 @@
  */ 
 export default class Stat extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model.
-     * @returns {Object}
-     */
+    /** @override */
     static defineSchema () {
         const fields = foundry.data.fields;
 
         return {
             tag: new fields.StringField(),
-            
+            color: new fields.StringField(),
             img: new fields.FilePathField({
                 categories: ['IMAGE'],
                 initial: 'icons/svg/circle.svg'
             }),
-            color: new fields.StringField(),
 
             view: new fields.StringField({ initial: 'value' }),
 

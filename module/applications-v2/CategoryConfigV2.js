@@ -13,7 +13,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         this.#dragDrop = this.#createDragDropHandlers()
     }
 
-    /** The default configuration options which are assigned to every instance of this Application class. */
+    /** @override */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "dialog", "config"],
         tag: "form",
@@ -36,12 +36,13 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
-    /** The Handlebars templates for this application. These are rendered in order. */
+    /** @override */
     static PARTS = {
         hbs: { template: "systems/animecampaign/templates/dialog/category-config.hbs" }
     }
 
     /**
+     * The Category being edited.
      * @returns {Category}
      */
     get category () { 
@@ -49,13 +50,15 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
     }
 
     /**
+     * The Character this Category belongs to.
      * @returns {ACActor}
      */
     get document () {
         return this.options.document
     }
 
-    /** Is this configuring a new category?
+    /** 
+     * Is this configuring a new category?
      * @returns {Boolean}
      */
     get isNew () {
@@ -63,11 +66,16 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
     }
 
     /**
+     * Gets the color of this Category if it is set, otherwise returns the color of the Character.
      * @returns {Color}
      */
     get displayColor () {
         return this.category.color ?? this.document.system.color
     }
+
+
+
+    // ---- Drag & Drop ----
 
     /** @type {DragDrop[]} */
     #dragDrop
@@ -80,7 +88,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         return this.#dragDrop;
     }
 
-    /** Create drag-and-drop workflow handlers for this Application
+    /** 
+     * Create drag-and-drop workflow handlers for this Application
      * @returns {DragDrop[]}     An array of DragDrop handlers
      * @private
      */
@@ -99,7 +108,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         });
     }
 
-    /** Define whether a user is able to begin a dragstart workflow for a given drag selector
+    /** 
+     * Define whether a user is able to begin a dragstart workflow for a given drag selector
      * @param {string} selector       The candidate HTML selector for dragging
      * @returns {boolean}             Can the current user drag this selector?
      * @protected
@@ -108,7 +118,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         return true;
     }
 
-    /** Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
+    /** 
+     * Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
      * @param {string} selector       The candidate HTML selector for the drop target
      * @returns {boolean}             Can the current user drop on this selector?
      * @protected
@@ -117,7 +128,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         return true;
     }
 
-    /** Callback actions which occur at the beginning of a drag start workflow.
+    /** 
+     * Callback actions which occur at the beginning of a drag start workflow.
      * @param {DragEvent} event
      * @protected
      */
@@ -133,13 +145,15 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         event.dataTransfer.setData("text/plain", JSON.stringify(data))
     }
 
-    /** Callback actions which occur when a dragged element is over a drop target.
+    /** 
+     * Callback actions which occur when a dragged element is over a drop target.
      * @param {DragEvent} event
      * @protected
      */
     _onDragOver (event) { }
 
-    /** Callback actions which occur when a dragged element is dropped on a target.
+    /** 
+     * Callback actions which occur when a dragged element is dropped on a target.
      * @param {DragEvent} event
      * @protected
      */
@@ -159,26 +173,13 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         this.render(true)
     }
 
+
+
+    // ---- Context ----
+
     /** @override */
     tabGroups = {
         category: "basic"
-    }
-
-    /**
-     * Gets the local stats data without updating or removing changes.
-     * @returns {{ tag: string, display: "value"|"resource"|"label" }[]}
-     */
-    getLocalStats () {
-        const data = {}
-        const inputs = this.element.querySelectorAll(".JS-StatInput")
-        let trackers = []
-        if (inputs.length > 0) {
-            inputs.forEach(el => {
-                data[el.getAttribute("name")] = el.value
-            })
-            trackers = Object.values(foundry.utils.expandObject(data).trackers)
-        }
-        return trackers
     }
 
     /**
@@ -199,19 +200,20 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         return tabs
     }
 
-    async _prepareContext () {
+    /** @override */
+    async _prepareContext (options) {
         return {
             app: this,
             config: CONFIG.AC,
             category: this.category,
             document: this.document,
-
             isNew: this.isNew,
             displayColor: this.displayColor,
             tabs: this.getTabs(),
         }
     }
 
+    /** @override */
     _onRender(context, options) {
         // bind DragDrop events
         this.#dragDrop.forEach(d => d.bind(this.element))
@@ -224,7 +226,30 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         })
     }
 
+
+
+    // ---- Actions ----
+
     /**
+     * Gets the local stats data directly from the form. 
+     * This ensures changes persist prior to rerendering.
+     * @returns {{ tag: string, display: "value"|"resource"|"label" }[]}
+     */
+    getLocalStats () {
+        const data = {}
+        const inputs = this.element.querySelectorAll(".JS-StatInput")
+        let trackers = []
+        if (inputs.length > 0) {
+            inputs.forEach(el => {
+                data[el.getAttribute("name")] = el.value
+            })
+            trackers = Object.values(foundry.utils.expandObject(data).trackers)
+        }
+        return trackers
+    }
+
+    /**
+     * Locally appends the Stats list with a new Stat.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CategoryConfigV2}
@@ -242,12 +267,12 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
     }
 
     /**
+     * Locally removes a Stat from the stats list.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CategoryConfigV2}
      */
     static onStatDelete (event, target) {
-        // A roundabout way of preserving edited stat data without submitting
         let trackers = this.getLocalStats()
         const index = target.closest(".JS-CategoryStat").dataset.stat
 
@@ -257,7 +282,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         this.render(true)
     }
 
-    /** Update the stats list for the Stat's document. 
+    /** 
+     * Form submission handler.
      * @param {SubmitEvent} event 
      * @param {HTMLFormElement} form 
      * @param {*} data 
@@ -283,8 +309,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         if (this.isNew) {
             categories.push(data)
         } else {
+            // if name was changed, change the category of all of its features
             if (data.name !== this.category.name) {
-                console.log(this.category)
                 const updates = this.category.features.map(item => { 
                     return { _id: item._id, 'system.category': data.name }
                 })

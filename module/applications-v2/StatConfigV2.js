@@ -8,7 +8,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
  */
 export default class StatConfigV2 extends HandlebarsApplicationMixin(ApplicationV2) {
 
-    /** The default configuration options which are assigned to every instance of this Application class. */
+    /** @override */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "dialog", "config"],
         tag: "form",
@@ -26,7 +26,7 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         }
     }
 
-    /** The Handlebars templates for this application. These are rendered in order. */
+    /** @override */
     static PARTS = {
         hbs: { template: "systems/animecampaign/templates/dialog/stat-config.hbs" }
     }
@@ -40,24 +40,30 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
     }
 
     /**
-     * The document which has the Stat being configured. 
+     * The document owns this Stat.
      * @returns {ACActor|ACItem}
      **/
     get document () {
         return this.options.document
     }
 
-    /** Is this configuring a new stat?
+    /** 
+     * Is this configuring a new Stat?
      * @returns {Boolean}
      */
     get isNew () {
         return (this.stat.tag === "")
     }
 
-    /** The stats that aren't occupied.
-     * @returns {*}
+
+
+    // ---- Context ----
+
+    /** 
+     * For editing Stats on Characters, returns the list of unoccupied Stats.
+     * @returns {Record<string, string>}
      */
-    get availableColors () {
+    getAvailableColors () {
         if (this.document.documentName === "Item") return {};
 
         const stats = this.document.system._stats;
@@ -73,9 +79,7 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         return Object.fromEntries(options)
     }
 
-    /** The context passed to each Handlebars template.
-     * @returns {*}
-     */
+    /** @override */
     async _prepareContext () {
         return {
             app: this,
@@ -84,9 +88,13 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
             document: this.document,
 
             isNew: this.isNew,
-            colors: this.availableColors,
+            colors: this.getAvailableColors(),
         }
     }
+
+
+
+    // ---- Actions ----
 
     /** Update the stats list for the Stat's document. 
      * @param {SubmitEvent} event 

@@ -5,6 +5,21 @@ import * as Utils from "../Utils.js"
  */
 export default class ACItem extends Item { 
 
+    /** 
+     * Fires before a document is created for preliminary operations.
+     * @param {*} data 
+     * @param {*} options 
+     * @param {User} user 
+     */
+    _preCreate (data, options, user) {
+        super._preCreate(data, options, user);
+        this.updateSource({ img: null })
+    }
+
+
+
+    // ---- Chat Message ----
+
     /** The file path to the chat message template.
      * @returns {String}
      */
@@ -26,29 +41,8 @@ export default class ACItem extends Item {
         }
     } 
 
-    /** Fires before a document is created. For preliminary operations.
-     * @param {*} data 
-     * @param {*} options 
-     * @param {BaseUser} user 
-     */
-    _preCreate (data, options, user) {
-        console.log(data)
-        const defaultTextEditor = game.settings.get('animecampaign', 'defaultTextEditor');
-        
-        super._preCreate(data, options, user);
-/* 
-
-        // const isDefaultImageOwner = game.settings.get('animecampaign', 'defaultFeatureImage')
-
-        const updates = {
-            'system.details.editor': defaultTextEditor,
-            'img': null
-        }
-
-        this.updateSource(updates); */
-    }
-
-    /** Render the summary partial of a chat message.
+    /** 
+     * Render the summary partial of a chat message.
      * @returns {Promise<String>}
      */
     async getSummaryContent () {
@@ -60,7 +54,8 @@ export default class ACItem extends Item {
         return renderTemplate(this.chatMessagePartial.summary, data)
     }
 
-    /** Render the dice partial of a chat message.
+    /** 
+     * Render the dice partial of a chat message.
      * @returns {Promise<String>}
      */
     async getDiceContent (roll, post = false) {
@@ -84,7 +79,8 @@ export default class ACItem extends Item {
         return renderTemplate(this.chatMessagePartial.dice, data)
     }
 
-    /** Render the stats partial of a chat message.
+    /** 
+     * Render the stats partial of a chat message.
      * @returns {Promise<String>}
      */
     async getStatsContent () {
@@ -92,7 +88,8 @@ export default class ACItem extends Item {
         return renderTemplate(this.chatMessagePartial.stats, data)
     }
 
-    /** Render the sections partial of a chat message.
+    /** 
+     * Render the sections partial of a chat message.
      * @returns {Promise<String>}
      */
     async getSectionsContent () {
@@ -100,7 +97,8 @@ export default class ACItem extends Item {
         return renderTemplate(this.chatMessagePartial.sections, data)
     }
 
-    /** Render the banner partial of a chat message.
+    /** 
+     * Render the banner partial of a chat message.
      * @returns {Promise<String>}
      */
     async getBannerContent () {
@@ -112,7 +110,8 @@ export default class ACItem extends Item {
         return renderTemplate(this.chatMessagePartial.banner, data)
     }
 
-    /** Sends a chat message of this feature.
+    /** 
+     * Sends a chat message of this feature.
      * @param {Boolean} options.post
      * @param {String?} options.formula
      */

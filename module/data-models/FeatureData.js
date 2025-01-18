@@ -7,9 +7,7 @@ import Details from "./Details.js";
  */
 export default class FeatureData extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model.
-     * @returns {Object}
-     */
+    /** @override */
     static defineSchema () {
         const fields = foundry.data.fields;
 
@@ -37,8 +35,9 @@ export default class FeatureData extends foundry.abstract.DataModel {
         };
     }
 
-    /** If this Feature is owned, returns the stats that are being tracked in its category.
-     * @returns {Object[]}
+    /** 
+     * If this Feature is owned, returns the stats that are being tracked in its category.
+     * @returns {StatTracker[]}
      */
     get trackedStats () {
         if (!this.parent.isOwned) return [];
@@ -48,8 +47,9 @@ export default class FeatureData extends foundry.abstract.DataModel {
         return category.trackers.map(t => this.stats.find(s => s.tag === t.tag) ?? {})
     }
 
-    /** Get the palette of this feature.
-     * @returns {{ primary: string, secondary: string, contrast: string }}
+    /** 
+     * Get the palette of this feature.
+     * @returns {Palette}
      */
     get palette () {
         const color = this.color
