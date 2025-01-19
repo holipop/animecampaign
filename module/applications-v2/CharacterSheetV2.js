@@ -307,7 +307,11 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
      */
-    static onCategoryCollapse (event, target) { }
+    static onCategoryCollapse (event, target) {
+        const element = target.closest(".JS-Category")
+
+        element.classList.toggle("Category--Collapsed")
+    }
 
     /**
      * Invokes the Category configuration window for editing.

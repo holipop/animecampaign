@@ -13,7 +13,7 @@ export default class Category extends foundry.abstract.DataModel {
         return {
             name: new fields.StringField(),
             color: new fields.ColorField(),
-            collapsed: new fields.BooleanField({ initial: true }),
+            collapsed: new fields.BooleanField({ initial: false }),
 
             snap: new fields.BooleanField({ initial: true }),
 
@@ -59,18 +59,19 @@ export default class Category extends foundry.abstract.DataModel {
     }
 
     /** 
-     * Get the HTML for this category's header.
-     * @returns {String}
-     */
-    get nameHTML () {
-        return `<span class="category__name--initial">${this.name.at(0)}</span>${this.name.slice(1)}`
-    }
-
-    /** 
      * Get the list of features under this category.
      * @returns {ACItem[]}
      */
     get features () {
         return this.parent.parent.items.filter(item => item.system.category === this.name)
+    }
+
+    /** 
+     * Get the HTML for this category's header.
+     * @returns {String}
+     * @deprecated
+     */
+    get nameHTML () {
+        return `<span class="category__name--initial">${this.name.at(0)}</span>${this.name.slice(1)}`
     }
 }

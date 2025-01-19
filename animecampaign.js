@@ -27,9 +27,6 @@ import StatConfig from './module/applications/StatConfig.js'
 import CharacterSheetV2 from './module/applications-v2/CharacterSheetV2.js'
 import FeatureSheetV2 from './module/applications-v2/FeatureSheetV2.js'
 
-import ButtonComponent from './module/components/ButtonComponent.js'
-import TextSelectComponent from './module/components/TextSelectComponent.js'
-
 globalThis.AC = {
     Actor: ACActor,
     Item: ACItem,
@@ -90,9 +87,6 @@ Hooks.once('init', () => {
         "feature.stats": "systems/animecampaign/templates/feature-v2/stats.hbs",
     }
     loadTemplates(partials);
-
-    customElements.define("ac-button", ButtonComponent)
-    customElements.define("ac-text-select", TextSelectComponent)
 })
 
 Hooks.on('ready', () => {
@@ -117,12 +111,6 @@ Hooks.on('ready', () => {
 
     const NEEDS_MIGRATION_VERSION = "v0.1";
 })
-
-// (Copied from DnD5e)
-Hooks.on("canvasInit", gameCanvas => {
-    gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
-    foundry.grid.SquareGrid.prototype.measureDistances = Utils.measureDistances;
-});
 
 Hooks.on('renderChatMessage', ChatMessage.activateListeners)
 Hooks.on('hotbarDrop', Macro.createMacro)

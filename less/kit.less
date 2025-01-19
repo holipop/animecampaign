@@ -13,6 +13,24 @@
         display: flex;
     }
 
+    .Category.Category--Collapsed {
+        .Category__Trackers, .Category__Features, .Category__Buttons { 
+            display: none;
+        }
+        .Category__Header {
+            height: 1.5rem;
+        }
+        .Category__Name {
+            font-size: 1rem;
+            font-style: normal;
+        }
+
+        // Collapse Button
+        .Category__HeaderLeft .ACButton__Icon {
+            rotate: -90deg;
+        }
+    }
+
     .Category__Header {
         #ColorScheme(@opacity: 50%, {
             border-color: "txt";
@@ -24,7 +42,7 @@
         padding: 0 (1 * @rpx);
         border-bottom: (1 * @rpx) solid;
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
 
         background: @override;
     }
@@ -38,6 +56,7 @@
         display: flex;
         padding-right: .1rem;
         justify-content: end;
+        align-items: center;
         opacity: 0;
     }
 
@@ -85,16 +104,16 @@
         height: 100%;
     }
     .StatTracker.StatTracker--White {
-        background-color: fade(@dark-txt-color, 15%);
+        background-color: fade(@dark-txt-color, 10%);
     }
     .StatTracker.StatTracker--Black {
-        background-color: fade(@light-txt-color, 15%);
+        background-color: fade(@light-txt-color, 10%);
     }
     .StatTracker:nth-child(even) {
         background-color: transparent;
     }
     .StatTracker__Label {
-        font: bold .6rem "Libre Franklin";
+        font: .6rem "Libre Franklin";
         text-transform: uppercase;
         overflow: hidden;
         white-space: nowrap;
@@ -185,6 +204,7 @@
         display: flex;
         gap: .1rem;
         width: fit-content;
+        height: 80%;
         padding: 0 .2rem;
         border-radius: 2 * @rpx;
 
@@ -265,6 +285,8 @@
     .UncategorizedFeatures__Label {
         #ColorScheme(@opacity: 50%, {
             color: "txt";
+        });
+        #ColorScheme(@opacity: 25%, {
             border-color: "txt";
         });
 

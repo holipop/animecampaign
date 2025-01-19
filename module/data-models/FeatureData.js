@@ -40,10 +40,11 @@ export default class FeatureData extends foundry.abstract.DataModel {
      * @returns {StatTracker[]}
      */
     get trackedStats () {
-        if (!this.parent.isOwned) return [];
+        if (!this.parent.isOwned) return []
 
-        const category = this.parent.parent.system.categories.find(c => c.name === this.category);
-            
+        const category = this.parent.parent.system.categories.find(c => c.name === this.category)
+        if (!category) return []
+        
         return category.trackers.map(t => this.stats.find(s => s.tag === t.tag) ?? {})
     }
 
