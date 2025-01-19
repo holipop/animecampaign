@@ -61,6 +61,74 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
 
 
+    // ---- Drag & Drop ----
+
+    /** 
+     * Callback actions which occur at the beginning of a drag start workflow.
+     * @param {DragEvent} event
+     * @protected
+     * @override
+     */
+    _onDragStart (event) {
+        const dataset = event.target.dataset
+        const type = dataset.drag
+        const data = { type, index: null, object: null }
+
+        switch (type) {
+            case 'stat':
+                const element = event.target.closest(".JS-Stat")
+                data.index = Number(element.dataset.stat)
+                data.object = this.document.system.stats[data.index]
+                break
+
+            // case 'section': break
+        }
+
+        event.dataTransfer.setData("text/plain", JSON.stringify(data))
+    }
+
+    /** 
+     * Callback actions which occur when a dragged element is dropped on a target.
+     * @param {DragEvent} event
+     * @protected
+     * @override
+     */
+    _onDrop (event) {
+        const data = TextEditor.getDragEventData(event)
+        
+        switch (data.type) {
+            case 'stat':
+                this.onDropStat(event, data)
+                break
+
+            /* case 'section': 
+                this.onDropSection(event, data)
+                break
+                */
+        }
+    }
+
+    /** 
+     * Handles the drop event for Stats, shifting their indeces.
+     * @param {Event} event 
+     * @param {*} data 
+     */
+    onDropStat (event, data) {
+        const stats = [...this.document.system.stats]
+        if (stats.length === 1) return  // can't sort single entry
+
+        const target = event.target.closest('.JS-Stat')
+        if (target.length === 0) return  // no target found
+        if (target.dataset.stat === data.index) return  // don't sort on self
+
+        stats.splice(data.index, 1)
+        stats.splice(target.dataset.stat, 0, data.object)
+
+        this.document.update({ "system.stats": stats })
+    }
+
+
+
     // ---- Context ----
 
     /** @override */
