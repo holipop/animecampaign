@@ -3,6 +3,8 @@ import ACDialogV2 from "./ACDialogV2.js"
 import StatConfigV2 from "./StatConfigV2.js"
 import CategoryConfigV2 from "./CategoryConfigV2.js"
 import ACItem from "../documents/ACItem.js"
+import Stat from "../data-models/Stat.js"
+import Category from "../data-models/Category.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
@@ -75,15 +77,23 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         const type = dataset.drag
         const data = { type, index: null, object: null }
 
+        let element
         switch (type) {
             case 'stat':
-                const element = event.target.closest(".JS-Stat")
+                element = event.target.closest(".JS-Stat")
                 data.index = Number(element.dataset.stat)
                 data.object = this.document.system.colorStats[data.index]
                 break
-
-            // case 'feature': break
-            // case 'category': break
+            case 'category': 
+                element = event.target.closest(".JS-Category")
+                data.index = Number(element.dataset.category)
+                data.object = this.document.system.categories[data.index]
+                break
+            case 'feature': 
+                element = event.target.closest(".JS-FeatureEntry")
+                data.object = this.document.items.get(element.dataset.id)
+                data.index = data.object.sort
+                break
         }
 
         event.dataTransfer.setData("text/plain", JSON.stringify(data))
@@ -102,36 +112,98 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             case 'stat':
                 this.onDropStat(event, data)
                 break
-
-            /* case 'feature': 
-                this.onDropFeature(event, data)
-                break
             case 'category': 
                 this.onDropCategory(event, data)
-                break */
+                break
+            case 'feature': 
+                this.onDropFeature(event, data)
+                break
         }
     }
 
     /** 
      * Handles the drop event for stats, setting their 'sort' key.
      * @param {Event} event 
-     * @param {*} data 
+     * @param {{ type: "stat", object: Stat, index: number }} data 
      */
     onDropStat (event, data) {
         const stats = this.document.system.colorStats
         if (stats.length === 1) return  // can't sort single entry
 
-        const target = $(event.target).closest('.JS-Stat')
-        if (target.length === 0) return  // no target found
-        if (target.data('stat') === data.index) return  // don't sort on self 
+        const target = event.target.closest('.JS-Stat')
+        if (!target) return  // no target found
+        if (target.dataset.stat === data.index) return  // don't sort on self 
 
         const sort = SortingHelpers.performIntegerSort(data.object, {
-            target: stats[target.data('stat')],
+            target: stats[target.dataset.stat],
             siblings: stats.toSpliced(data.index, 1)
         })
         const updates = sort.map(({ target, update }) => [target.color, update])
 
         this.document.update({ 'system._stats': Object.fromEntries(updates) })
+    }
+
+    /** 
+     * Handles the drop event for Categories, repositioning indices.
+     * @param {Event} event 
+     * @param {{ type: "category", object: Category, index: number }} data 
+     */
+    onDropCategory (event, data) {
+        const categories = [...this.document.system.categories]
+        if (categories.length === 1) return  // can't sort single entry
+
+        const target = event.target.closest('.JS-Category')
+        if (!target) return  // no target found
+        if (target.dataset.category === data.index) return  // don't sort on self 
+
+        categories.splice(data.index, 1)
+        categories.splice(target.dataset.category, 0, data.object)
+
+        this.document.update({ "system.categories": categories })
+    }
+
+    /** 
+     * Handles the drop event for Categories, repositioning indices.
+     * @param {Event} event 
+     * @param {{ type: "feature", object: ACItem, index: number }} data 
+     */
+    onDropFeature (event, data) {
+        const features = this.document.items
+        if (features.length === 1) return  // can't sort single entry
+        
+        const dropFeature = event.target.closest('.JS-FeatureEntry')
+        const dropCategory = event.target.closest('.JS-Category')
+        
+        if (!dropFeature && dropCategory) { 
+            const index = dropCategory.dataset.category
+            const category = this.document.system.categories[index]
+            this.document.updateEmbeddedDocuments("Item", [{
+                _id: data.object._id,
+                sort: 0,
+                system: { category: category.name }
+            }])
+            return
+        }
+        if (!dropFeature) return  // no target found
+
+        const target = features.get(dropFeature.dataset.id)
+        if (target._id === data.object._id) return  // don't sort on self 
+
+        const category = this.document.system.categories.find(c => c.name === target.system.category)
+        const siblings = (category)
+            ? category.features.filter(item => item._id !== data.object._id)
+            : this.getUncategorizedFeatures().filter(item => item._id !== data.object._id)
+
+        const sort = SortingHelpers.performIntegerSort(data.object, { target, siblings })
+        const updates = sort.map(({ target, update }) => {
+            update._id = target._id
+            update.system = {
+                category: (category) ? category.name : ""
+            }
+            return update
+        })
+        
+        this.document.updateEmbeddedDocuments("Item", updates)
     }
 
 
@@ -142,6 +214,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     tabGroups = {
         character: "kit"
     }
+
+    /** 
+     * The list of Category names that are collapsed.
+     * @type {Set<string>} 
+     */
+    collapsedCategories = new Set();
 
     /**
      * Returns a record of navigation tabs.
@@ -182,7 +260,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             tabs: this.getTabs(),
             stats: this.document.system.colorStats,
             categories: this.document.system.categories,
-            uncategorizedFeatures: this.getUncategorizedFeatures()
+            uncategorizedFeatures: this.getUncategorizedFeatures(),
         }
     }
 
@@ -309,8 +387,16 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     static onCategoryCollapse (event, target) {
         const element = target.closest(".JS-Category")
+        const index = element.dataset.category
+        const category = this.document.system.categories[index]
 
         element.classList.toggle("Category--Collapsed")
+
+        if (this.collapsedCategories.has(category.name)) {
+            this.collapsedCategories.delete(category.name)
+        } else {
+            this.collapsedCategories.add(category.name)
+        }
     }
 
     /**

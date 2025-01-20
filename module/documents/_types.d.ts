@@ -12,6 +12,7 @@ declare module "./ACActor.js" {
         system: CharacterData
         sheet: CharacterSheetV2
         items: EmbeddedCollection<ACItem, ACActor>
+        _id: string
     }
 }
 
@@ -20,5 +21,6 @@ declare module "./ACItem.js" {
         system: FeatureData
         sheet: FeatureSheetV2
         parent: ACActor
+        _id: string
     }
 }

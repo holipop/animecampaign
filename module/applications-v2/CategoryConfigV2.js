@@ -215,6 +215,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
 
     /** @override */
     _onRender(context, options) {
+        super._onRender(context, options)
+
         // bind DragDrop events
         this.#dragDrop.forEach(d => d.bind(this.element))
 
@@ -224,6 +226,11 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         picker.addEventListener("change", () => {
             text.value = picker.value
         })
+
+        // Disable the Add Stat button when the stats list is full.
+        if (this.category.trackers.length >= 4) {
+            this.element.querySelector(`.JS-DisableStatAdd`).setAttribute("disabled", "disabled")
+        }
     }
 
 

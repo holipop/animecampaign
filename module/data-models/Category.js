@@ -58,12 +58,23 @@ export default class Category extends foundry.abstract.DataModel {
         }
     }
 
+    /**
+     * Get the CSS class for if this Category is collapsed.
+     * @returns {string}
+     */
+    get collapsedCSS () {
+        const sheet = this.parent.parent.sheet
+        return (sheet.collapsedCategories.has(this.name)) ? "Category--Collapsed" : ""
+    }
+
     /** 
      * Get the list of features under this category.
      * @returns {ACItem[]}
      */
     get features () {
-        return this.parent.parent.items.filter(item => item.system.category === this.name)
+        return this.parent.parent.items
+            .filter(item => item.system.category === this.name)
+            .sort((a, b) => a.sort - b.sort)
     }
 
     /** 

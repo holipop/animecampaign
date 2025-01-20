@@ -1108,8 +1108,17 @@
 .animecampaign.actor.sheet .Kit.active {
   display: flex;
 }
-.animecampaign.actor.sheet .Category.Category--Collapsed .Category__Trackers,
+.animecampaign.actor.sheet .Category .Category__Header {
+  transition: height 0.075s;
+}
+.animecampaign.actor.sheet .Category .Category__Name {
+  transition: font-size 0.075s;
+}
+.animecampaign.actor.sheet .Category .Category__HeaderLeft .ACButton__Icon {
+  transition: rotate 0.075s;
+}
 .animecampaign.actor.sheet .Category.Category--Collapsed .Category__Features,
+.animecampaign.actor.sheet .Category.Category--Collapsed .Category__Trackers,
 .animecampaign.actor.sheet .Category.Category--Collapsed .Category__Buttons {
   display: none;
 }

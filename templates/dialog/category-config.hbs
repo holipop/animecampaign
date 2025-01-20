@@ -76,14 +76,12 @@
             </ul>
         {{/if}}
 
-        {{#if (lt category.trackers.length 4)}}
-            <button class="ACButton ACButton--DialogMinor" type="button" data-action="onStatAdd">
-                <span class="ACButton__Icon MSO">add</span>
-                <span class="ACButton__Text">
-                    {{localize "AC.CategoryConfig.StatAdd"}}
-                </span>
-            </button>
-        {{/if}}
+        <button class="ACButton ACButton--DialogMinor JS-DisableStatAdd" type="button" data-action="onStatAdd">
+            <span class="ACButton__Icon MSO">add</span>
+            <span class="ACButton__Text">
+                {{localize "AC.CategoryConfig.StatAdd"}}
+            </span>
+        </button>
 
     </div>
 

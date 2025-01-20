@@ -13,8 +13,20 @@
         display: flex;
     }
 
+    .Category {
+        .Category__Header {
+            transition: height .075s;
+        }
+        .Category__Name {
+            transition: font-size .075s;
+        }
+        .Category__HeaderLeft .ACButton__Icon {
+            transition: rotate .075s;
+        }
+    }
     .Category.Category--Collapsed {
-        .Category__Trackers, .Category__Features, .Category__Buttons { 
+
+        .Category__Features, .Category__Trackers, .Category__Buttons { 
             display: none;
         }
         .Category__Header {

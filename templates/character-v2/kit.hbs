@@ -1,9 +1,9 @@
-<ul class="Kit tab {{tabs.kit.css}}" data-tab="kit" data-group="character">
+<ul class="Kit tab {{tabs.kit.css}} JS-Drop" data-tab="kit" data-group="character">
 
     {{#each categories as |category index|}}
-        <li class="Category JS-Category" data-category="{{index}}">
+        <li class="Category JS-Category {{category.collapsedCSS}}" data-category="{{index}}">
 
-            <div class="Category__Header JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
+            <div class="Category__Header JS-Color JS-Drag" data-drag="category" data-color="{{palette.primary}}" data-properties="background-color">
                 
                 <div class="Category__HeaderLeft JS-Color" data-color="{{palette.contrast}}">
                     
@@ -55,7 +55,7 @@
 
             </div>
 
-            <ul class="Category__Features">
+            <ul class="Category__Features JS-Drop">
 
                 {{#each category.features as |feature index|}}
                     {{> "character.feature-entry" feature=feature}}
@@ -67,7 +67,7 @@
     {{/each}}
 
     {{#if uncategorizedFeatures}}
-        <div class="UncategorizedFeatures">
+        <div class="UncategorizedFeatures JS-Drop">
             <div class="UncategorizedFeatures__Label">{{localize "AC.CharacterSheet.UncategorizedFeatures"}}</div>
 
             {{#each uncategorizedFeatures as |feature index|}}
