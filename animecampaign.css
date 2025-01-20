@@ -204,6 +204,20 @@
 .animecampaign.item .Scrollable {
   height: calc(100% - 7.5rem);
 }
+.DragIndicator {
+  font-size: 1rem;
+  line-height: 1.2;
+  transition: opacity 0.1s;
+}
+.theme-dark .DragIndicator {
+  color: #ebedf2;
+}
+.theme-light .DragIndicator {
+  color: #1f1e1e;
+}
+.DragIndicator:hover {
+  cursor: grab;
+}
 .animecampaign button.ACButton {
   min-height: 0;
   border-radius: 0;
@@ -898,22 +912,10 @@
   display: flex;
   align-items: center;
 }
-.animecampaign.sheet .StatEntry__Info:hover {
-  cursor: grab;
-}
-.animecampaign.sheet .StatEntry__DragIndicator {
-  font-size: 1rem;
-  line-height: 1.2;
-  transition: opacity 0.1s;
+.animecampaign.sheet .StatEntry .DragIndicator {
   opacity: 0;
 }
-.theme-dark .animecampaign.sheet .StatEntry__DragIndicator {
-  text-shadow: 0 0 0.5rem #171718, 0 0 0.5rem #171718;
-}
-.theme-light .animecampaign.sheet .StatEntry__DragIndicator {
-  text-shadow: 0 0 0.5rem #f4f3ed, 0 0 0.5rem #f4f3ed;
-}
-.animecampaign.sheet .StatEntry:hover .StatEntry__DragIndicator {
+.animecampaign.sheet .StatEntry:hover .DragIndicator {
   opacity: 0.75;
 }
 .animecampaign.sheet .StatEntry__Color {
@@ -1234,8 +1236,18 @@
   display: flex;
   height: 2rem;
   border: 0.0625rem solid;
-  border-left: 0.625rem solid;
   border-radius: 0.125rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__Padding {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.animecampaign.actor.sheet .FeatureEntry .DragIndicator {
+  opacity: 0;
+}
+.animecampaign.actor.sheet .FeatureEntry:hover .DragIndicator {
+  opacity: 1;
 }
 .animecampaign.actor.sheet .FeatureEntry__Info {
   display: flex;
@@ -1600,12 +1612,6 @@
 .animecampaign.dialog .CategoryStats__Entry:last-child {
   border: none;
 }
-.animecampaign.dialog .CategoryStats__DragIndicator {
-  font-size: 1rem;
-  line-height: 1.2;
-  opacity: 0.25;
-  transition: opacity 0.075s;
-}
 .animecampaign.dialog .CategoryStats .ACButton {
   opacity: 0.25;
   transition: opacity 0.075s;
@@ -1613,7 +1619,10 @@
 .animecampaign.dialog .CategoryStats__Entry:hover .ACButton {
   opacity: 1;
 }
-.animecampaign.dialog .CategoryStats__Entry:hover .CategoryStats__DragIndicator {
+.animecampaign.dialog .CategoryStats__Entry .DragIndicator {
+  opacity: 0.25;
+}
+.animecampaign.dialog .CategoryStats__Entry:hover .DragIndicator {
   opacity: 0.75;
 }
 .animecampaign.dialog .CategoryStats__Fields {

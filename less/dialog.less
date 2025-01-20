@@ -171,12 +171,6 @@
     .CategoryStats__Entry:last-child {
         border: none
     }
-    .CategoryStats__DragIndicator {
-        font-size: 1rem;
-        line-height: 1.2;
-        opacity: .25;
-        transition: opacity .075s;
-    }
     .CategoryStats .ACButton {
         opacity: .25;
         transition: opacity .075s;
@@ -184,9 +178,14 @@
     .CategoryStats__Entry:hover .ACButton {
         opacity: 1;
     }
-    .CategoryStats__Entry:hover .CategoryStats__DragIndicator {
+
+    .CategoryStats__Entry .DragIndicator {
+        opacity: .25;
+    }
+    .CategoryStats__Entry:hover .DragIndicator {
         opacity: .75;
     }
+
     .CategoryStats__Fields {
         flex: 1;
         display: flex;

@@ -60,14 +60,14 @@
         <ul class="Stats__List JS-Drop">
 
             {{#each stats as |stat index|}}
-                <li class="StatEntry JS-Stat" data-stat="{{index}}">
+                <li class="StatEntry JS-Stat JS-Drag" data-drag="stat" data-stat="{{index}}">
 
                     <div class="StatEntry__InfoWrapper">
                         
                         <img class="StatEntry__Image" src="{{stat.img}}">
 
-                        <div class="StatEntry__Info JS-Drag" data-drag="stat">
-                            <span class="StatEntry__DragIndicator MSO">drag_indicator</span>
+                        <div class="StatEntry__Info">
+                            <span class="DragIndicator MSO">drag_indicator</span>
 
                             <!-- div class="Wrapper">
                                 <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>

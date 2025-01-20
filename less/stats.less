@@ -195,34 +195,14 @@
     }
 
     .StatEntry__Info {
-        //#GenerateGrid(@columns: 2);
         display: flex;
         align-items: center;
-
-        &:hover {
-            cursor: grab;
-        }
     }
 
-    .StatEntry__DragIndicator {
-        font-size: 1rem;
-        line-height: 1.2;
-        transition: opacity .1s;
-
+    .StatEntry .DragIndicator {
         opacity: 0;
-
-        .theme-dark & {
-            text-shadow: 
-                0 0 .5rem @dark-bg-color,
-                0 0 .5rem @dark-bg-color;
-        }
-        .theme-light & {
-            text-shadow: 
-                0 0 .5rem @light-bg-color,
-                0 0 .5rem @light-bg-color;
-        }
     }
-    .StatEntry:hover .StatEntry__DragIndicator {
+    .StatEntry:hover .DragIndicator {
         opacity: .75;
     }
 

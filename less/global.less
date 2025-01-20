@@ -203,6 +203,18 @@
     height: calc(100% - @feature-summary-height);
 }
 
+.DragIndicator {
+    #ColorScheme({
+        color: "txt";
+    });
+
+    font-size: 1rem;
+    line-height: 1.2;
+    transition: opacity .1s;
+}
+.DragIndicator:hover {
+    cursor: grab;
+}
 
 // Button
 .animecampaign button.ACButton {
