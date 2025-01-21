@@ -14,9 +14,11 @@
             EFFECTS
         </section -->
 
+        {{log this.system}}
+
         <section class="Biography tab {{tabs.biography.css}}" data-tab="biography" data-group="character">
-            <prose-mirror class="ACTextEditor" name="system.biography" value="{{system.biography}}" toggled="true">
-                {{{system.biography}}}
+            <prose-mirror class="ACTextEditor" name="system.description" value="{{system.description}}" toggled="true" compact="true">
+                {{{enrichedDescription}}}
             </prose-mirror>
         </section>
 

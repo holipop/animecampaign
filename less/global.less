@@ -157,21 +157,9 @@
 .animecampaign.sheet .window-content {
     padding: 0;
 }
-.animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
-    min-width: @character-sheet-width;
-    min-height: @character-sheet-height;
-}
-.animecampaign.sheet.actor:not(.minimizing, .maximizing, .minimized) {
-    min-width: @character-sheet-width;
-    min-height: @character-sheet-height;
-}
-.animecampaign.sheet.item:not(.minimizing, .maximizing, .minimized) {
-    min-width: @feature-sheet-width;
-    min-height: @feature-sheet-height;
-}
-.animecampaign.sheet.item:not(.minimizing, .maximizing, .minimized) {
-    min-width: @feature-sheet-width;
-    min-height: @feature-sheet-height;
+.animecampaign.sheet:not(.minimizing, .maximizing, .minimized) {
+    min-width: @sheet-width;
+    min-height: @sheet-height;
 }
 .animecampaign .Template {
     height: 100%;
@@ -232,6 +220,56 @@
 }
 .animecampaign .ACTextEditor .editor-content {
     padding: .2rem 5%;
+
+    * {
+        #ColorScheme({
+            color: "txt";
+        });
+        text-shadow: none; 
+    }
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: .5rem;
+        margin-top: .75rem;
+    }
+    h1, h2, h3 {
+        #ColorScheme(@opacity: 25% , {
+            border-color: "txt";
+        });
+        border-bottom: (1 * @rpx) solid;
+    }
+    h1 {
+        font: 1.33rem "Gloock";
+    }
+    h2 {
+        font: bold 1.25rem "Philosopher";
+    }
+    h3 {
+        font: 700 1.15rem "Libre Franklin";
+    }
+    h4 {
+        font: 1.1rem "Gloock";
+    }
+    h5 {
+        font: bold 1.1rem "Philosopher";
+    }
+    h6 {
+        font: 700 1.1rem "Libre Franklin";
+    }
+
+    code {
+        #ColorScheme({
+            background-color: "bg";
+        });
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+    }
+    blockquote {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        font-family: "Libre Franklin";
+    }
 }
 .animecampaign .ACTextEditor .editor-menu > li > button {
     #ColorScheme({
@@ -322,7 +360,7 @@
     gap: .25rem;
     height: 2.5rem;
     width: 80%;
-    margin: 0 auto;
+    margin: .25rem auto;
     border-radius: 2 * @rpx;
     border: (1 * @rpx) solid;
 

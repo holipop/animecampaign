@@ -82,8 +82,7 @@
 
     "Details": {
         "RollFormula": {
-            "Label": "Roll Formula",
-            "Placeholder": "1d20"
+            "Label": "Roll Formula"
         },
         "Action": {
             "Label": "Action Cost",
@@ -168,7 +167,7 @@
             "Submit": "Create Category"
         },
         "EditCategory": {
-            "Title": "Edit Category: {name}",
+            "Title": "Edit Category [{category}]: {name}",
             "Submit": "Update Category"
         },
         

@@ -14,7 +14,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "item", "sheet"],
         position: {
-            width: 550,
+            width: 600,
             height: 500,
         },
         window: {
@@ -162,6 +162,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             system: this.document.system,
             palette: this.document.system.palette,
             tabs: this.getTabs(),
+            enrichedDescription: await TextEditor.enrichHTML(this.document.system.description)
         }
     }
 

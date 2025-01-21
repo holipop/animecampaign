@@ -261,6 +261,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             stats: this.document.system.colorStats,
             categories: this.document.system.categories,
             uncategorizedFeatures: this.getUncategorizedFeatures(),
+            enrichedDescription: await TextEditor.enrichHTML(this.document.system.description),
         }
     }
 
@@ -412,7 +413,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         new CategoryConfigV2({ 
             window: {
                 title: game.i18n.format("AC.CategoryConfig.EditCategory.Title", { 
-                    name: this.document.name
+                    name: this.document.name,
+                    category: category.name.toUpperCase() 
                 })
             },
             document: this.document,
@@ -507,7 +509,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         new CategoryConfigV2({ 
             window: {
                 title: game.i18n.format("AC.CategoryConfig.CreateCategory.Title", { 
-                    name: this.document.name
+                    name: this.document.name,
                 })
             },
             document: this.document,

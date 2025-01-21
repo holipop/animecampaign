@@ -26,8 +26,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             _stats: new fields.SchemaField(colorStats), // remove underscores post v1.0
 
             categories: new fields.ArrayField(new fields.EmbeddedDataField(Category)),
-
-            biography: new fields.HTMLField(),
+            description: new fields.HTMLField(),
 
             class: new fields.StringField(),
             word: new fields.StringField(),
@@ -38,7 +37,11 @@ export default class CharacterData extends foundry.abstract.DataModel {
             }),
 
             // ! Pre-v1.0
-            description: new fields.HTMLField(),
+            biography: new fields.SchemaField({
+                editor: new fields.StringField({ initial: 'markdown' }),
+                plaintext: new fields.StringField(),
+                richtext: new fields.HTMLField(),
+            }),
             stats: new fields.ArrayField(new fields.ObjectField()),
         }
     }
