@@ -142,7 +142,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      */
     getTabs () {
         const tabs = {
-            decription: { id: "description", group: "feature", icon: "notes", label: "AC.FeatureSheet.Description" },
+            description: { id: "description", group: "feature", icon: "notes", label: "AC.FeatureSheet.Description" },
             details:    { id: "details", group: "feature", icon: "info", label: "AC.FeatureSheet.Details" }
         }
         

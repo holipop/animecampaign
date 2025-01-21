@@ -7,6 +7,12 @@
         {{> "feature.stats"}}
             
         {{> "generic.nav"}}
+        
+        <section class="Description tab {{tabs.description.css}}" data-tab="description" data-group="feature">
+            <prose-mirror class="ACTextEditor" name="system.description" value="{{system.description}}" toggled="true">
+                {{{system.description}}}
+            </prose-mirror>
+        </section>
 
         <div class="Details Config tab {{tabs.details.css}}" data-tab="details" data-group="feature">
             {{> "generic.details" details=system.details prefix="system."}}

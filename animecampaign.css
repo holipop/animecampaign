@@ -204,7 +204,76 @@
 .animecampaign.item .Scrollable {
   height: calc(100% - 7.5rem);
 }
+.animecampaign .Description,
+.animecampaign .Biography {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+.animecampaign .ACTextEditor {
+  max-height: none;
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign .ACTextEditor {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor {
+  color: #1f1e1e;
+}
+.animecampaign .ACTextEditor.active {
+  height: 100%;
+}
+.animecampaign .ACTextEditor .editor-menu {
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu {
+  border-color: rgba(235, 237, 242, 0.5);
+  background-color: rgba(23, 23, 24, 0.5);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu {
+  border-color: rgba(31, 30, 30, 0.5);
+  background-color: rgba(244, 243, 237, 0.5);
+}
+.animecampaign .ACTextEditor .editor-content {
+  padding: 0.2rem 5%;
+}
+.animecampaign .ACTextEditor .editor-menu > li > button {
+  border-radius: 0.125rem;
+  font-family: "Libre Franklin";
+  font-size: 0.7rem;
+  background-color: transparent;
+  transition: 0.075s background-color;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:hover {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:hover {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:active {
+  background-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:active {
+  background-color: rgba(31, 30, 30, 0.75);
+}
+.animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border-color: rgba(31, 30, 30, 0.25);
+}
 .DragIndicator {
+  opacity: 0.75;
   font-size: 1rem;
   line-height: 1.2;
   transition: opacity 0.1s;
@@ -1240,14 +1309,16 @@
 }
 .animecampaign.actor.sheet .FeatureEntry__Padding {
   height: 100%;
+  width: 1rem;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 .animecampaign.actor.sheet .FeatureEntry .DragIndicator {
   opacity: 0;
 }
 .animecampaign.actor.sheet .FeatureEntry:hover .DragIndicator {
-  opacity: 1;
+  opacity: 0.75;
 }
 .animecampaign.actor.sheet .FeatureEntry__Info {
   display: flex;

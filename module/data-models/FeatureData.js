@@ -24,6 +24,8 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 initial: [{ visible: true, collapsed: false, richtext: null }],
             }),
 
+            description: new fields.HTMLField(),
+
             details: new fields.EmbeddedDataField(Details),
 
             // ! Pre-v1.0

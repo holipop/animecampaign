@@ -27,11 +27,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
 
             categories: new fields.ArrayField(new fields.EmbeddedDataField(Category)),
 
-            biography: new fields.SchemaField({
-                editor: new fields.StringField({ initial: 'markdown' }),
-                plaintext: new fields.StringField(),
-                richtext: new fields.HTMLField(),
-            }),
+            biography: new fields.HTMLField(),
 
             class: new fields.StringField(),
             word: new fields.StringField(),

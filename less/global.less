@@ -203,11 +203,74 @@
     height: calc(100% - @feature-summary-height);
 }
 
+
+// Text Editor
+.animecampaign .Description, .animecampaign .Biography {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+.animecampaign .ACTextEditor {
+    #ColorScheme({
+        color: "txt";
+    });
+
+    max-height: none;
+    font-family: "Libre Franklin";
+}
+.animecampaign .ACTextEditor.active {
+    height: 100%;
+}
+.animecampaign .ACTextEditor .editor-menu {
+    #ColorScheme(@opacity: 50%, {
+        border-color: "txt";
+        background-color: "bg";
+    });
+
+    border: (1 * @rpx) solid;
+    border-radius: 2 * @rpx;
+}
+.animecampaign .ACTextEditor .editor-content {
+    padding: .2rem 5%;
+}
+.animecampaign .ACTextEditor .editor-menu > li > button {
+    #ColorScheme({
+        color: "txt";
+    });
+
+    border-radius: 2 * @rpx;
+    
+    font-family: "Libre Franklin";
+    font-size: .7rem;
+    background-color: transparent;
+    transition: .075s background-color;
+
+    &:hover {
+        #ColorScheme(@opacity: 25%, {
+            background-color: "txt";
+        })
+    }
+    &:active {
+        #ColorScheme(@opacity: 75%, {
+            background-color: "txt";
+        })
+    }
+
+    &.pm-dropdown {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        border: (1 * @rpx) solid;
+    }
+}
+
+
 .DragIndicator {
     #ColorScheme({
         color: "txt";
     });
 
+    opacity: .75;
     font-size: 1rem;
     line-height: 1.2;
     transition: opacity .1s;
