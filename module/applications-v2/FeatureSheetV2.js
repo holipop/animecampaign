@@ -24,6 +24,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             onInvokeColorPicker: super.onInvokeColorPicker,
             onEditImage: super.onEditImage,
             onRemoveImage: FeatureSheetV2.onRemoveImage,
+            onRoll: FeatureSheetV2.onRoll,
             onStatAdd: FeatureSheetV2.onStatAdd,
             onStatEdit: FeatureSheetV2.onStatEdit,
             onStatDelete: FeatureSheetV2.onStatDelete,
@@ -176,6 +177,14 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      */
     static onRemoveImage () {
         this.document.update({ img: null })
+    }
+
+    /** 
+     * Sends a chat message and rolls if this Feature has a valid formula.
+     * @this {FeatureSheetV2}
+     */
+    static onRoll () {
+        this.document.roll()
     }
 
     /** 

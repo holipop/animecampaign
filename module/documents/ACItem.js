@@ -20,14 +20,47 @@ export default class ACItem extends Item {
 
     // ---- Chat Message ----
 
-    /** The file path to the chat message template.
+    async roll ({ post = false } = {}) {
+        const formula = this.system.details.formula
+        let roll
+        if (Roll.validate(formula)) {
+            roll = await new Roll(formula).evaluate()
+        } else {
+            roll = await new Roll("1").evaluate()
+            post = true
+        }
+
+        const context = {
+            formula,
+            roll,
+            post,
+            document: this
+        }
+        
+        const template = "systems/animecampaign/templates/roll/template.hbs"
+        const message = {
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker(),
+            content: await renderTemplate(template, context),
+        }
+
+        if (post) {
+            ChatMessage.create(message);
+        } else {
+            roll.toMessage(message);
+        }
+    }
+
+    /** 
+     * The file path to the chat message template.
      * @returns {String}
      */
-    get chatMessageTemplate () { 
+    get __chatMessageTemplate () { 
         return 'systems/animecampaign/templates/roll/roll-template.hbs' 
     }
 
-    /** The file paths for the templates of chat message partials.
+    /** 
+     * The file paths for the templates of chat message partials.
      * @returns {*}
      * @enum
      */
@@ -40,6 +73,58 @@ export default class ACItem extends Item {
             banner: 'systems/animecampaign/templates/roll/banner.hbs',
         }
     } 
+
+    /** 
+     * Sends a chat message of this feature.
+     * @param {Boolean} options.post
+     * @param {String?} options.formula
+     */
+    async __roll ({ post = false, formula = null, template = null } = {}) {
+        
+        // If the formula is invalid, post the message.
+        formula ??= this.system.details.formula;
+        let roll;
+        if (Roll.validate(formula)) {
+            roll = await new Roll(formula).evaluate();
+        } else {
+            roll = await new Roll("1").evaluate();
+            post = true;
+        }
+
+        const data = {
+            ...this,
+            _id: this._id,
+            system: this.system,
+            roll,
+
+            summary: await this.getSummaryContent(),
+            dice: await this.getDiceContent(roll, post),
+            stats: await this.getStatsContent(),
+            sections: await this.getSectionsContent(),
+            banner: await this.getBannerContent(),
+        }
+
+        const customTemplate = `
+            <div class="animecampaign chat roll" data-id="{{_id}}">
+                ${template}
+            </div>`
+
+        const content = (template)
+            ? Handlebars.compile(customTemplate)(data)
+            : await renderTemplate(this.chatMessageTemplate, data);
+        
+        const message = {
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker(),
+            content,
+        }
+
+        if (post) {
+            ChatMessage.create(message);
+        } else {
+            roll.toMessage(message);
+        }
+    }
 
     /** 
      * Render the summary partial of a chat message.
@@ -108,58 +193,6 @@ export default class ACItem extends Item {
             details: this.system.details,
         }
         return renderTemplate(this.chatMessagePartial.banner, data)
-    }
-
-    /** 
-     * Sends a chat message of this feature.
-     * @param {Boolean} options.post
-     * @param {String?} options.formula
-     */
-    async roll ({ post = false, formula = null, template = null } = {}) {
-        
-        // If the formula is invalid, post the message.
-        formula ??= this.system.details.formula;
-        let roll;
-        if (Roll.validate(formula)) {
-            roll = await new Roll(formula).evaluate();
-        } else {
-            roll = await new Roll("1").evaluate();
-            post = true;
-        }
-
-        const data = {
-            ...this,
-            _id: this._id,
-            system: this.system,
-            roll,
-
-            summary: await this.getSummaryContent(),
-            dice: await this.getDiceContent(roll, post),
-            stats: await this.getStatsContent(),
-            sections: await this.getSectionsContent(),
-            banner: await this.getBannerContent(),
-        }
-
-        const customTemplate = `
-            <div class="animecampaign chat roll" data-id="{{_id}}">
-                ${template}
-            </div>`
-
-        const content = (template)
-            ? Handlebars.compile(customTemplate)(data)
-            : await renderTemplate(this.chatMessageTemplate, data);
-        
-        const message = {
-            user: game.user._id,
-            speaker: ChatMessage.getSpeaker(),
-            content,
-        }
-
-        if (post) {
-            ChatMessage.create(message);
-        } else {
-            roll.toMessage(message);
-        }
     }
 
 }

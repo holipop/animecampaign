@@ -36,6 +36,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             onCategoryDelete: CharacterSheetV2.onCategoryDelete,
             onCategoryCreate: CharacterSheetV2.onCategoryCreate,
             onFeatureAdd: CharacterSheetV2.onFeatureAdd,
+            onFeatureRoll: CharacterSheetV2.onFeatureRoll,
             onFeatureCollapse: CharacterSheetV2.onFeatureCollapse,
             onFeatureEdit: CharacterSheetV2.onFeatureEdit,
             onFeatureDelete: CharacterSheetV2.onFeatureDelete,
@@ -515,6 +516,19 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             document: this.document,
             category,
         }).render(true)
+    }
+
+    /**
+     * Rolls this Feature.
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
+    static onFeatureRoll (event, target) {
+        const { id } = target.closest(".JS-FeatureEntry").dataset
+        const item = this.document.items.get(id)
+
+        item.roll()
     }
 
     /**
