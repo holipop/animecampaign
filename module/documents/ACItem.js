@@ -30,10 +30,21 @@ export default class ACItem extends Item {
             post = true
         }
 
+        let crit
+        const max = await new Roll(formula).evaluate({ maximize: true })
+        const min = await new Roll(formula).evaluate({ minimize: true })
+        if (roll.isDeterministic) { }
+        else if (roll.total == max.total) {
+            crit = "ChatMessage__Total--CritSuccess"
+        } else if (roll.total == min.total) {
+            crit = "ChatMessage__Total--CritFailure"
+        }
+
         const context = {
             formula,
             roll,
             post,
+            crit,
             tooltip: await roll.getTooltip(),
 
             feature: this,

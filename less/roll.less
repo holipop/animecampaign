@@ -98,6 +98,19 @@
         font: bold 1.5rem "Philosopher";
         text-align: center;
     }
+    .ChatMessage__Total.ChatMessage__Total--CritSuccess {
+        border-color: darkgreen;
+        color: darkgreen;
+        text-shadow: white 0 (1 * @rpx);
+        background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+    }
+    .ChatMessage__Total.ChatMessage__Total--CritFailure {
+        border-color: darkred;
+        color: darkred;
+        text-shadow: white 0 (1 * @rpx);
+        background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
+    }
+
     .ChatMessage__Formula {
         #ColorScheme(@opacity: 25%, {
             border-color: "txt";
