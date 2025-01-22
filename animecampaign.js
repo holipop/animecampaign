@@ -2,13 +2,15 @@
 // by Holipop
 
 
-import * as config from './module/config.js'
 import * as Utils from './module/Utils.js'
 import * as ChatMessage from './module/ChatMessage.js'
 import * as List from './module/List.js'
 import * as Macro from './module/Macro.js'
 import * as Settings from './module/Settings.js'
 import * as Migrate from './module/Migrate.js'
+
+import * as config from './module/config.js'
+import * as Description from "./module/Description.js"
 
 import ACActor from './module/documents/ACActor.js'
 import ACItem from './module/documents/ACItem.js'
@@ -39,9 +41,6 @@ globalThis.AC = {
     FeatureSheet,
     Dialog: ACDialog,
     StatConfig,
-    Macro: { ...Macro },
-    List: { ...List },
-    Utils: { ...Utils },
 }
 
 Hooks.once('init', () => {
@@ -112,5 +111,26 @@ Hooks.on('ready', () => {
     const NEEDS_MIGRATION_VERSION = "v0.1";
 })
 
-Hooks.on('renderChatMessage', ChatMessage.activateListeners)
+Hooks.on('renderChatMessage', (message, html, data) => {
+
+    const messageElement = html[0].querySelector(".JS-ChatMessage")
+    if (!messageElement) return
+
+    // Expand roll tooltip on click
+    const roll = messageElement.querySelector(".JS-ExpandTooltip")
+    if (roll) {
+        const tooltip = messageElement.querySelector("div.dice-tooltip")
+
+        roll.addEventListener("click", event => {
+            const display = tooltip.style.display
+            tooltip.style.display = (display) ? "" : "block"
+        })
+    }
+    
+    const content = messageElement.querySelector(".JS-Content")
+    Description.attachSections(content)
+
+})
+
+
 Hooks.on('hotbarDrop', Macro.createMacro)

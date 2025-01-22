@@ -2,9 +2,13 @@ import SheetMixinV2 from "./SheetMixinV2.js"
 import ACDialogV2 from "./ACDialogV2.js"
 import StatConfigV2 from "./StatConfigV2.js"
 import CategoryConfigV2 from "./CategoryConfigV2.js"
+
 import ACItem from "../documents/ACItem.js"
+
 import Stat from "../data-models/Stat.js"
 import Category from "../data-models/Category.js"
+
+import * as Description from "../Description.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ActorSheetV2 } = foundry.applications.sheets
@@ -294,6 +298,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         if (this.document.system.colorStats.length >= 8) {
             this.element.querySelector(`.JS-DisableStatAdd`).setAttribute("disabled", "disabled")
         }
+
+        const feautreDescriptions = this.element.querySelectorAll(".JS-AttachSections")
+        feautreDescriptions.forEach(Description.attachSections)
     }
 
     /**
