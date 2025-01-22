@@ -259,6 +259,17 @@
         font: 700 1.1rem "Libre Franklin";
     }
 
+    hr {
+        #ColorScheme(@opacity: 25% , {
+            border-color: "txt";
+        });
+
+        background-image: none;
+        height: 0;
+        border: none;
+        border-bottom: (1 * @rpx) solid;
+    }
+
     code {
         #ColorScheme({
             background-color: "bg";

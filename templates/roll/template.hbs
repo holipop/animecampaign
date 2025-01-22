@@ -1,4 +1,4 @@
-<section class="animecampaign ChatMessage" data-id="{{feature._id}}" style="border-color: {{palette.primary}};">
+<section class="animecampaign ChatMessage JS-ChatMessage" data-id="{{feature._id}}" style="border-color: {{palette.primary}};">
     
     <div class="ChatMessage__Summary">
         {{#if feature.img}}
@@ -19,7 +19,7 @@
 
     {{#unless post}}
         <div class="ChatMessage__Dice">
-            <div class="ChatMessage__Result">
+            <div class="ChatMessage__Result JS-ExpandTooltip">
                 <span class="ChatMessage__Total {{!crit}}">{{roll._total}}</span>
                 <span class="ChatMessage__Formula">{{roll._formula}}</span>
             </div>
@@ -56,7 +56,7 @@
         </ul>
     {{/if}}
 
-    <div class="ChatMessage__Content">
+    <div class="ChatMessage__Content JS-Content">
         {{{enrichedDescription}}}
     </div>
 

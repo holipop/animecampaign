@@ -328,6 +328,24 @@
 .animecampaign .ChatMessage__Content h6 {
   font: 700 1.1rem "Libre Franklin";
 }
+.animecampaign .ACTextEditor .editor-content hr,
+.animecampaign .FeatureContent__Description hr,
+.animecampaign .ChatMessage__Content hr {
+  background-image: none;
+  height: 0;
+  border: none;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content hr,
+.theme-dark .animecampaign .FeatureContent__Description hr,
+.theme-dark .animecampaign .ChatMessage__Content hr {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content hr,
+.theme-light .animecampaign .FeatureContent__Description hr,
+.theme-light .animecampaign .ChatMessage__Content hr {
+  border-color: rgba(31, 30, 30, 0.25);
+}
 .theme-dark .animecampaign .ACTextEditor .editor-content code,
 .theme-dark .animecampaign .FeatureContent__Description code,
 .theme-dark .animecampaign .ChatMessage__Content code {
@@ -2151,6 +2169,9 @@
 }
 .animecampaign.ChatMessage .ChatMessage__Dice .part-header {
   padding: 0 0.35rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Dice .dice-tooltip {
+  display: none;
 }
 .animecampaign.ChatMessage .ChatMessage__Stats {
   list-style-type: none;
