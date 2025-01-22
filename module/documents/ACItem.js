@@ -34,7 +34,11 @@ export default class ACItem extends Item {
             formula,
             roll,
             post,
-            document: this
+            tooltip: await roll.getTooltip(),
+
+            feature: this,
+            palette: this.system.palette,
+            enrichedDescription: await TextEditor.enrichHTML(this.system.description)
         }
         
         const template = "systems/animecampaign/templates/roll/template.hbs"

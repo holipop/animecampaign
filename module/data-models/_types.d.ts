@@ -52,6 +52,7 @@ declare module "./FeatureData.js" {
         stats: Stat[]
         sections: Section[]
         details: Details
+        description: string
     }
 }
 

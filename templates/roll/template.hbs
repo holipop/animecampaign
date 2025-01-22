@@ -1,3 +1,76 @@
-<section class="animecampaign ChatMessage" data-id="{{document._id}}">
-    AHHHHHHHH
+<section class="animecampaign ChatMessage" data-id="{{feature._id}}" style="border-color: {{palette.primary}};">
+    
+    <div class="ChatMessage__Summary">
+        {{#if feature.img}}
+            <div class="ChatMessage__ImageWrapper">
+                <img class="ChatMessage__Image" src="{{feature.img}}">
+            </div>
+        {{/if}}
+
+        <div class="ChatMessage__Info">
+            <span class="ChatMessage__Name" style="color: {{palette.contrast}}; background-color: {{palette.primary}}">
+                {{feature.name}}
+            </span>
+            <span class="ChatMessage__Category">
+                {{feature.system.category}}
+            </span>
+        </div>
+    </div>
+
+    {{#unless post}}
+        <div class="ChatMessage__Dice">
+            <div class="ChatMessage__Result">
+                <span class="ChatMessage__Total {{!crit}}">{{roll._total}}</span>
+                <span class="ChatMessage__Formula">{{roll._formula}}</span>
+            </div>
+
+            {{{tooltip}}}
+        </div>
+    {{/unless}}
+
+    {{#if feature.system.stats}}
+        <ul class="ChatMessage__Stats">
+
+            {{#each feature.system.stats as |stat index|}}
+                <li class="ChatMessage__StatEntry">
+
+                    <span class="ChatMessage__StatEntryTag">{{stat.tag}}</span>
+                    <span class="ChatMessage__StatEntryDivider">|</span>
+
+                    {{#if (eq stat.view "value")}}
+                        <span class="ChatMessage__StatEntryValue">{{stat.value}}</span>
+                    {{/if}}
+
+                    {{#if (eq stat.view "resource")}}
+                        <span class="ChatMessage__StatEntryValue">{{stat.value}}</span>
+                        <span class="ChatMessage__StatEntryMax">/ {{stat.max}}</span>
+                    {{/if}}
+
+                    {{#if (eq stat.view "label")}}
+                        <span class="ChatMessage__StatEntryLabel">{{stat.label}}</span>
+                    {{/if}}
+
+                </li>
+            {{/each}}
+
+        </ul>
+    {{/if}}
+
+    <div class="ChatMessage__Content">
+        {{{enrichedDescription}}}
+    </div>
+
+    <div class="ChatMessage__Banner" style="background-color: {{palette.primary}}; color: {{palette.contrast}};">
+        {{#if feature.system.details.usage.multiple}}
+            <span class="ChatMessage__Usage">{{feature.system.details.usage.multiple}}</span>
+        {{/if}}
+
+        {{#if feature.system.details.usage.timeframe}}
+            <span class="ChatMessage__UsageIcon MSO">rotate_left</span>
+            <span class="ChatMessage__Usage">{{feature.system.details.usage.timeframe}}</span>
+        {{/if}}
+
+        <span class="ChatMessage__ActionCost">{{feature.system.details.action}}</span>
+    </div>
+
 </section>
