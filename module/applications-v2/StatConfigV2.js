@@ -151,6 +151,11 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
                 throw game.i18n.format("AC.StatConfig.StatTagTaken", { tag: data.tag.toUpperCase() })
             }
 
+            // preserve data
+            data.value = this.stat.value
+            data.max = this.stat.max
+            data.label = this.stat.label
+
             // always place new stats at the end
             if (this.isNew) {
                 stats.push(data)
