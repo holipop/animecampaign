@@ -65,40 +65,6 @@
 @grey-stat: #807f84;
 
 
-// ---- Mixins ----
-
-#AC() {
-    .TinyFont() {
-        font: .5rem "Rubik Mono One";
-    }
-    .Border() {
-        border: (1 * @rpx) solid black;
-        box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
-    }
-    .Active() {
-        background: linear-gradient(to top, #AC.Color(.5)[@return], transparent);
-    }
-    .HeadingSkinning() {
-        margin: 0;
-        border: 0;
-    }
-    .ListSkinning() {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-    .InputSkinning() {
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        background: transparent;
-    }
-    .Overflow() {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-}
 
 // ---- Font Faces ----
 

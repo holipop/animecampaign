@@ -1998,3 +1998,6 @@
 .theme-light .animecampaign.application .Config__HorizontalBreak {
   border-color: rgba(31, 30, 30, 0.25);
 }
+.animecampaign.ChatMessage {
+  opacity: 1;
+}
