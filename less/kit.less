@@ -142,17 +142,34 @@
         display: flex;
         flex-direction: column;
         margin: .2rem 0;
-        gap: .1rem;
+        gap: .2rem;
     }
 
     .FeatureEntry {
         #Part();
-
-        display: flex;
-        height: 2rem;
+        #ColorScheme({
+            background-color: "bg";
+            color: "txt";
+        });
+        
         border: (1 * @rpx) solid;
         border-radius: 2 * @rpx;
     }
+    .FeatureEntry .FeatureEntry__CollapseIcon {
+        rotate: 90deg;
+        transition: rotate .075s;
+    }
+    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__CollapseIcon {
+        rotate: 0deg;
+    }
+
+    .FeatureEntry__Info {
+        display: flex;
+        height: 2rem;
+        width: 100%;
+        align-items: center;
+    }
+
     .FeatureEntry__Padding {
         height: 100%;
         width: 1rem;
@@ -167,17 +184,6 @@
         opacity: .75;
     }
 
-    .FeatureEntry__Info {
-        #ColorScheme({
-            background-color: "bg";
-            color: "txt";
-        });
-        
-        display: flex;
-        width: 100%;
-        align-items: center;
-    }
-
     .FeatureEntry__ImageWrapper {
         display: grid;
         place-items: center;
@@ -187,10 +193,10 @@
         #InputSkinning(); 
 
         grid-area: 1 / 1 / -1 / -1;
-        min-height: 2rem - (2 * @rpx);
-        max-height: 2rem - (2 * @rpx);
-        min-width: 2rem - (2 * @rpx);
-        max-width: 2rem - (2 * @rpx);
+        min-height: 2rem;
+        max-height: 2rem;
+        min-width: 2rem;
+        max-width: 2rem;
         margin-right: .2rem;
     }
     .FeatureEntry__Image--Null {
@@ -247,12 +253,18 @@
         transition: opacity .075s;
     }
 
+
+    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__TrackedStats {
+        opacity: 0;
+    }
     .FeatureEntry__TrackedStats {
         flex: 1;
         display: flex;
         justify-content: end;
         height: 100%;
         margin: 0 0.1rem;
+
+        transition: opacity .075s;
     }
     .TrackedStat {
         #ColorScheme(@opacity: 5%, {
@@ -298,6 +310,74 @@
     .FeatureEntry:hover .FeatureEntry__CollapseIcon,
     .FeatureEntry:hover .FeatureEntry__Buttons {
         opacity: 1;
+    }
+
+    .FeatureContent {
+        display: none;
+        border-left: 1rem solid;
+    }
+    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureContent {
+        display: block;
+    }
+    .FeatureContent__StatsPadding {
+        height: .25rem;
+        width: 100%;
+    }
+    .FeatureContent__Stats {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        #ListSkinning();
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin-left: .5rem;
+        margin-right: 1.5rem;
+        border: (1 * @rpx) solid;
+        border-radius: (2 * @rpx);
+    }
+    .FeatureContent__StatEntry {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        height: 1.33rem;
+        border-bottom: (1 * @rpx) solid;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .FeatureContent__StatEntry:nth-child(even) {
+        #ColorScheme(@opacity: 10%, {
+            background-color: "txt";
+        });
+    }
+    .FeatureContent__StatEntry:last-child {
+        border-bottom: none;
+    }
+    .FeatureContent__StatEntryTag {
+        width: 25%;
+        
+        font: .8rem "Libre Franklin";
+        text-align: end;
+        text-transform: uppercase;
+    }
+    .FeatureContent__StatEntryDivider {
+        font: .66rem "Libre Franklin";
+        opacity: 50%;
+    }
+    .FeatureContent__StatEntryValue {
+        font: bold italic 1rem "Philosopher";
+    }
+    .FeatureContent__StatEntryMax {
+        font: italic .8rem "Philosopher";
+    }
+    .FeatureContent__StatEntryLabel {
+        font: 1rem "Philosopher";
     }
 
     .UncategorizedFeatures {

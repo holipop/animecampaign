@@ -222,6 +222,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     collapsedCategories = new Set();
 
+    /** 
+     * The list of Feature ids that are uncollapsed.
+     * @type {Set<string>} 
+     */
+    uncollapsedFeatures = new Set();
+
     /**
      * Returns a record of navigation tabs.
      * @returns {Record<string, ApplicationTab>}
@@ -250,6 +256,19 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         })
     }
 
+    /**
+     * Gets a record of enriched Featured descriptions.
+     * The keys are Feature ids and the values are the descriptions.
+     * @returns {Promise<Record<string, string>>}
+     */
+    async getEnrichedFeatureDescriptions () {
+        const items = this.document.items.map(async (item) => {
+            return [item._id, await TextEditor.enrichHTML(item.system.description)]
+        })
+        const descriptions = await Promise.all(items)
+        return Object.fromEntries(descriptions)
+    }
+
     /** @override */
     async _prepareContext () {
         return {
@@ -263,6 +282,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             categories: this.document.system.categories,
             uncategorizedFeatures: this.getUncategorizedFeatures(),
             enrichedDescription: await TextEditor.enrichHTML(this.document.system.description),
+            enrichedFeatureDescriptions: await this.getEnrichedFeatureDescriptions()
         }
     }
 
@@ -556,11 +576,23 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     }
 
     /**
+     * Uncollapse/collapse a Feature's description.
      * @param {PointerEvent} event 
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
      */
-    static onFeatureCollapse (event, target) { }
+    static onFeatureCollapse (event, target) {
+        const element = target.closest(".JS-FeatureEntry")
+        const { id } = element.dataset
+
+        element.classList.toggle("FeatureEntry--Uncollapsed")
+
+        if (this.uncollapsedFeatures.has(id)) {
+            this.uncollapsedFeatures.delete(id)
+        } else {
+            this.uncollapsedFeatures.add(id)
+        }
+    }
 
     /**
      * Renders a Feature's sheet.

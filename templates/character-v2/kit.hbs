@@ -60,7 +60,7 @@
             <ul class="Category__Features JS-Drop">
 
                 {{#each category.features as |feature index|}}
-                    {{> "character.feature-entry" feature=feature}}
+                    {{> "character.feature-entry" feature=feature content=(lookup @root.enrichedFeatureDescriptions feature._id)}}
                 {{/each}}
 
             </ul>
@@ -73,7 +73,7 @@
             <div class="UncategorizedFeatures__Label">{{localize "AC.CharacterSheet.UncategorizedFeatures"}}</div>
 
             {{#each uncategorizedFeatures as |feature index|}}
-                {{> "character.feature-entry" feature=feature}}
+                {{> "character.feature-entry" feature=feature content=(lookup @root.enrichedFeatureDescriptions feature._id)}}
             {{/each}}
         </div>
     {{/if}}

@@ -1,4 +1,4 @@
-<li class="FeatureEntry JS-FeatureEntry JS-Color JS-Drag" data-drag="feature" data-id="{{feature.id}}" data-color="{{feature.system.color}}" data-properties="border-color">
+<li class="FeatureEntry {{feature.system.uncollapsedCSS}} JS-FeatureEntry JS-Color JS-Drag" data-drag="feature" data-id="{{feature.id}}" data-color="{{feature.system.color}}" data-properties="border-color">
 
     <div class="FeatureEntry__Info">
 
@@ -57,8 +57,41 @@
                 <div class="ACButton__Icon MSO">close</div>
             </button>
         </div>
+
     </div>
 
-    <div class="FeatureEntry__Content"></div>
+    <div class="FeatureContent JS-Color" data-color="{{feature.system.color}}" data-properties="border-color">
+
+        {{#if feature.system.stats}}
+            <div class="FeatureContent__StatsPadding"></div>
+            <ul class="FeatureContent__Stats">
+                {{#each feature.system.stats as |stat index|}}
+                    <li class="FeatureContent__StatEntry">
+
+                        <span class="FeatureContent__StatEntryTag">{{stat.tag}}</span>
+                        <span class="FeatureContent__StatEntryDivider">|</span>
+
+                        {{#if (eq stat.view "value")}}
+                            <span class="FeatureContent__StatEntryValue">{{stat.value}}</span>
+                        {{/if}}
+
+                        {{#if (eq stat.view "resource")}}
+                            <span class="FeatureContent__StatEntryValue">{{stat.value}}</span>
+                            <span class="FeatureContent__StatEntryMax">/ {{stat.max}}</span>
+                        {{/if}}
+
+                        {{#if (eq stat.view "label")}}
+                            <span class="FeatureContent__StatEntryLabel">{{stat.label}}</span>
+                        {{/if}}
+
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+
+        <div class="FeatureContent__Description">
+            {{{content}}}
+        </div>
+    </div>
     
 </li>

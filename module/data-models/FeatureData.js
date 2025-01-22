@@ -73,4 +73,15 @@ export default class FeatureData extends foundry.abstract.DataModel {
             contrast,
         }
     }
+
+    /**
+     * Get the CSS class for if this Feature is uncollapsed.
+     * @returns {"FeatureEntry--Uncollapsed" | ""}
+     */
+    get uncollapsedCSS () {
+        if (!this.parent.isOwned) return ""
+        const sheet = this.parent.parent.sheet
+        return (sheet.uncollapsedFeatures.has(this.parent._id)) ? "FeatureEntry--Uncollapsed" : ""
+    }
+
 }

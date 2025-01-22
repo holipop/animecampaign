@@ -223,79 +223,112 @@
   border-color: rgba(31, 30, 30, 0.5);
   background-color: rgba(244, 243, 237, 0.5);
 }
-.animecampaign .ACTextEditor .editor-content {
+.animecampaign .ACTextEditor .editor-content,
+.animecampaign .FeatureContent__Description {
   padding: 0.2rem 5%;
 }
-.animecampaign .ACTextEditor .editor-content * {
+.animecampaign .ACTextEditor .editor-content *,
+.animecampaign .FeatureContent__Description * {
   text-shadow: none;
+  font-family: "Libre Franklin";
 }
-.theme-dark .animecampaign .ACTextEditor .editor-content * {
+.theme-dark .animecampaign .ACTextEditor .editor-content *,
+.theme-dark .animecampaign .FeatureContent__Description * {
   color: #ebedf2;
 }
-.theme-light .animecampaign .ACTextEditor .editor-content * {
+.theme-light .animecampaign .ACTextEditor .editor-content *,
+.theme-light .animecampaign .FeatureContent__Description * {
   color: #1f1e1e;
 }
 .animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .FeatureContent__Description h1,
 .animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .FeatureContent__Description h2,
 .animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .FeatureContent__Description h3,
 .animecampaign .ACTextEditor .editor-content h4,
+.animecampaign .FeatureContent__Description h4,
 .animecampaign .ACTextEditor .editor-content h5,
-.animecampaign .ACTextEditor .editor-content h6 {
+.animecampaign .FeatureContent__Description h5,
+.animecampaign .ACTextEditor .editor-content h6,
+.animecampaign .FeatureContent__Description h6 {
   margin-bottom: 0.5rem;
   margin-top: 0.75rem;
 }
 .animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .FeatureContent__Description h1,
 .animecampaign .ACTextEditor .editor-content h2,
-.animecampaign .ACTextEditor .editor-content h3 {
+.animecampaign .FeatureContent__Description h2,
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .FeatureContent__Description h3 {
   border-bottom: 0.0625rem solid;
 }
 .theme-dark .animecampaign .ACTextEditor .editor-content h1,
+.theme-dark .animecampaign .FeatureContent__Description h1,
 .theme-dark .animecampaign .ACTextEditor .editor-content h2,
-.theme-dark .animecampaign .ACTextEditor .editor-content h3 {
+.theme-dark .animecampaign .FeatureContent__Description h2,
+.theme-dark .animecampaign .ACTextEditor .editor-content h3,
+.theme-dark .animecampaign .FeatureContent__Description h3 {
   border-color: rgba(235, 237, 242, 0.25);
 }
 .theme-light .animecampaign .ACTextEditor .editor-content h1,
+.theme-light .animecampaign .FeatureContent__Description h1,
 .theme-light .animecampaign .ACTextEditor .editor-content h2,
-.theme-light .animecampaign .ACTextEditor .editor-content h3 {
+.theme-light .animecampaign .FeatureContent__Description h2,
+.theme-light .animecampaign .ACTextEditor .editor-content h3,
+.theme-light .animecampaign .FeatureContent__Description h3 {
   border-color: rgba(31, 30, 30, 0.25);
 }
-.animecampaign .ACTextEditor .editor-content h1 {
+.animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .FeatureContent__Description h1 {
   font: 1.33rem "Gloock";
 }
-.animecampaign .ACTextEditor .editor-content h2 {
+.animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .FeatureContent__Description h2 {
   font: bold 1.25rem "Philosopher";
 }
-.animecampaign .ACTextEditor .editor-content h3 {
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .FeatureContent__Description h3 {
   font: 700 1.15rem "Libre Franklin";
 }
-.animecampaign .ACTextEditor .editor-content h4 {
+.animecampaign .ACTextEditor .editor-content h4,
+.animecampaign .FeatureContent__Description h4 {
   font: 1.1rem "Gloock";
 }
-.animecampaign .ACTextEditor .editor-content h5 {
+.animecampaign .ACTextEditor .editor-content h5,
+.animecampaign .FeatureContent__Description h5 {
   font: bold 1.1rem "Philosopher";
 }
-.animecampaign .ACTextEditor .editor-content h6 {
+.animecampaign .ACTextEditor .editor-content h6,
+.animecampaign .FeatureContent__Description h6 {
   font: 700 1.1rem "Libre Franklin";
 }
-.theme-dark .animecampaign .ACTextEditor .editor-content code {
+.theme-dark .animecampaign .ACTextEditor .editor-content code,
+.theme-dark .animecampaign .FeatureContent__Description code {
   background-color: #171718;
 }
-.theme-light .animecampaign .ACTextEditor .editor-content code {
+.theme-light .animecampaign .ACTextEditor .editor-content code,
+.theme-light .animecampaign .FeatureContent__Description code {
   background-color: #f4f3ed;
 }
-.theme-dark .animecampaign .ACTextEditor .editor-content code {
+.theme-dark .animecampaign .ACTextEditor .editor-content code,
+.theme-dark .animecampaign .FeatureContent__Description code {
   border-color: rgba(235, 237, 242, 0.25);
 }
-.theme-light .animecampaign .ACTextEditor .editor-content code {
+.theme-light .animecampaign .ACTextEditor .editor-content code,
+.theme-light .animecampaign .FeatureContent__Description code {
   border-color: rgba(31, 30, 30, 0.25);
 }
-.animecampaign .ACTextEditor .editor-content blockquote {
+.animecampaign .ACTextEditor .editor-content blockquote,
+.animecampaign .FeatureContent__Description blockquote {
   font-family: "Libre Franklin";
 }
-.theme-dark .animecampaign .ACTextEditor .editor-content blockquote {
+.theme-dark .animecampaign .ACTextEditor .editor-content blockquote,
+.theme-dark .animecampaign .FeatureContent__Description blockquote {
   border-color: rgba(235, 237, 242, 0.25);
 }
-.theme-light .animecampaign .ACTextEditor .editor-content blockquote {
+.theme-light .animecampaign .ACTextEditor .editor-content blockquote,
+.theme-light .animecampaign .FeatureContent__Description blockquote {
   border-color: rgba(31, 30, 30, 0.25);
 }
 .animecampaign .ACTextEditor .editor-menu > li > button {
@@ -1358,15 +1391,34 @@
   display: flex;
   flex-direction: column;
   margin: 0.2rem 0;
-  gap: 0.1rem;
+  gap: 0.2rem;
 }
 .animecampaign.actor.sheet .FeatureEntry {
   width: 80%;
   margin: 0 auto;
-  display: flex;
-  height: 2rem;
   border: 0.0625rem solid;
   border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureEntry {
+  background-color: #171718;
+  color: #ebedf2;
+}
+.theme-light .animecampaign.actor.sheet .FeatureEntry {
+  background-color: #f4f3ed;
+  color: #1f1e1e;
+}
+.animecampaign.actor.sheet .FeatureEntry .FeatureEntry__CollapseIcon {
+  rotate: 90deg;
+  transition: rotate 0.075s;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__CollapseIcon {
+  rotate: 0deg;
+}
+.animecampaign.actor.sheet .FeatureEntry__Info {
+  display: flex;
+  height: 2rem;
+  width: 100%;
+  align-items: center;
 }
 .animecampaign.actor.sheet .FeatureEntry__Padding {
   height: 100%;
@@ -1381,19 +1433,6 @@
 .animecampaign.actor.sheet .FeatureEntry:hover .DragIndicator {
   opacity: 0.75;
 }
-.animecampaign.actor.sheet .FeatureEntry__Info {
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-.theme-dark .animecampaign.actor.sheet .FeatureEntry__Info {
-  background-color: #171718;
-  color: #ebedf2;
-}
-.theme-light .animecampaign.actor.sheet .FeatureEntry__Info {
-  background-color: #f4f3ed;
-  color: #1f1e1e;
-}
 .animecampaign.actor.sheet .FeatureEntry__ImageWrapper {
   display: grid;
   place-items: center;
@@ -1406,10 +1445,10 @@
   background: none;
   transition: none;
   grid-area: 1 / 1 / -1 / -1;
-  min-height: 1.875rem;
-  max-height: 1.875rem;
-  min-width: 1.875rem;
-  max-width: 1.875rem;
+  min-height: 2rem;
+  max-height: 2rem;
+  min-width: 2rem;
+  max-width: 2rem;
   margin-right: 0.2rem;
 }
 .theme-dark .animecampaign.actor.sheet .FeatureEntry__Image {
@@ -1479,12 +1518,16 @@
   opacity: 0;
   transition: opacity 0.075s;
 }
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__TrackedStats {
+  opacity: 0;
+}
 .animecampaign.actor.sheet .FeatureEntry__TrackedStats {
   flex: 1;
   display: flex;
   justify-content: end;
   height: 100%;
   margin: 0 0.1rem;
+  transition: opacity 0.075s;
 }
 .animecampaign.actor.sheet .TrackedStat {
   display: flex;
@@ -1529,6 +1572,79 @@
 .animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__CollapseIcon,
 .animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__Buttons {
   opacity: 1;
+}
+.animecampaign.actor.sheet .FeatureContent {
+  display: none;
+  border-left: 1rem solid;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureContent {
+  display: block;
+}
+.animecampaign.actor.sheet .FeatureContent__StatsPadding {
+  height: 0.25rem;
+  width: 100%;
+}
+.animecampaign.actor.sheet .FeatureContent__Stats {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-left: 0.5rem;
+  margin-right: 1.5rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureContent__Stats {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.actor.sheet .FeatureContent__Stats {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 1.33rem;
+  border-bottom: 0.0625rem solid;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureContent__StatEntry {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.actor.sheet .FeatureContent__StatEntry {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign.actor.sheet .FeatureContent__StatEntry:nth-child(even) {
+  background-color: rgba(235, 237, 242, 0.1);
+}
+.theme-light .animecampaign.actor.sheet .FeatureContent__StatEntry:nth-child(even) {
+  background-color: rgba(31, 30, 30, 0.1);
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntry:last-child {
+  border-bottom: none;
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryTag {
+  width: 25%;
+  font: 0.8rem "Libre Franklin";
+  text-align: end;
+  text-transform: uppercase;
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryDivider {
+  font: 0.66rem "Libre Franklin";
+  opacity: 50%;
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryValue {
+  font: bold italic 1rem "Philosopher";
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryMax {
+  font: italic 0.8rem "Philosopher";
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryLabel {
+  font: 1rem "Philosopher";
 }
 .animecampaign.actor.sheet .UncategorizedFeatures {
   display: flex;
