@@ -253,9 +253,14 @@
         transition: opacity .075s;
     }
 
-
+    .FeatureEntry .FeatureEntry__NamePadding {
+        flex: 0;
+    }
+    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__NamePadding {
+        flex: 1;
+    }
     .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__TrackedStats {
-        opacity: 0;
+        display: none;
     }
     .FeatureEntry__TrackedStats {
         flex: 1;
@@ -263,8 +268,6 @@
         justify-content: end;
         height: 100%;
         margin: 0 0.1rem;
-
-        transition: opacity .075s;
     }
     .TrackedStat {
         #ColorScheme(@opacity: 5%, {
