@@ -1,48 +1,84 @@
-/** A namespace for migration scripts.
- * @module Migrate
+/**
+ * Migrates a scene.
+ * @param {Scene} source 
  */
+function migrateScene (source) {
+    const tokens = source.tokens.map(token => {
+        const t = token instanceof foundry.abstract.DataModel 
+            ? token.toObject() 
+            : token
 
-/*
-import * as Utils from './Utils.js'
-import * as List from './List.js'
+        if (!game.actors.has(t.actorId)) t.actorId = null
+        if (!t.actorId || t.actorLink) t.actorData = {}
+        else if (!t.actorLink) {
+            const actor = token.delta?.toObject() ?? foundry.utils.deepClone(t.actorData)
+            const update = migrateActor(actor)
+            t.delta = update
+        }
+        
+        return t
+    })
 
-const convert = new showdown.Converter();
+    return { tokens }
+}
 
-/** Migration to v1.0 for anyone who used the previous version of AC FVTT
- * ! Change for v2.0.
-export async function toV1 () {
+/**
+ * Migrates a v1 Actor.
+ * @param {} source 
+ */
+function migrateActor (source) {
+
+
+    console.log(source)
+    return source
+}
+
+/**
+ * Migrates a v1 Item.
+ * @param {*} source 
+ */
+function migrateItem (source) {
+
+    console.log(source)
+    return source
+}
+
+export async function toV2 () {
     ui.notifications.warn(
-        game.i18n.localize("AC.MIGRATION.V1MigrationBegin"),
+        game.i18n.localize("AC.Migration.V2MigrationBegin"),
         { permanent: true }
-    );
-
+    )
+    
     // Migrate World Actors
     const actors = game.actors
         .map(actor => [actor, true])
         .concat(Array
             .from(game.actors.invalidDocumentIds)
             .map(id => [game.actors.getInvalid(id), false])
-        );
+        )
+    
     for (const [actor, valid] of actors) {
         try {
             const source = (valid)
                 ? actor.toObject()
-                : game.data.actors.find(a => a._id == actor._id);
-            const data = migrateActor(source);
-            Utils.log(game.i18n.format("AC.MIGRATION.Migrating", {
+                : game.data.actors.find(a => a._id == actor._id)
+            const data = migrateActor(source)
+
+            console.log(game.i18n.format("AC.Migration.MigratingDocument", {
                 document: 'Actor',
                 name: actor.name,
                 id: actor._id,
-            }))
-            await actor.update(data);
+            }), 'color: tomato;')
+
+            await actor.update(data)
         } catch (err) {
-            err.message = game.i18n.format("AC.MIGRATION.FailedMigration", {
+            err.message = game.i18n.format("AC.Migration.FailedMigration", {
                 document: 'Actor',
                 name: actor.name,
                 id: actor._id,
                 error: err.message
             })
-            console.error(err);
+            console.error(err)
         }
     }
 
@@ -52,27 +88,30 @@ export async function toV1 () {
         .concat(Array
             .from(game.items.invalidDocumentIds)
             .map(id => [game.items.getInvalid(id), false])
-        );
+        )
+
     for (const [item, valid] of items) {
         try {
             const source = (valid)
                 ? item.toObject()
-                : game.data.items.find(i => i._id == item._id);
-            const data = migrateItem(source);
-            Utils.log(game.i18n.format("AC.MIGRATION.Migrating", {
+                : game.data.items.find(i => i._id == item._id)
+            const data = migrateItem(source)
+
+            console.log(game.i18n.format("AC.Migration.MigratingDocument", {
                 document: 'Item',
                 name: item.name,
                 id: item._id,
-            }))
-            await item.update(data);
+            }), 'color: tomato;')
+
+            await item.update(data)
         } catch (err) {
-            err.message = game.i18n.format("AC.MIGRATION.FailedMigration", {
+            err.message = game.i18n.format("AC.Migration.FailedMigration", {
                 document: 'Item',
                 name: item.name,
                 id: item._id,
                 error: err.message
             })
-            console.error(err);
+            console.error(err)
         }
     }
 
@@ -80,81 +119,89 @@ export async function toV1 () {
     for (const scene of game.scenes) {
         try {
             const data = migrateScene(scene);
-            Utils.log(game.i18n.format("AC.MIGRATION.Migrating", {
+
+            console.log(game.i18n.format("AC.Migration.MigratingDocument", {
                 document: 'Scene',
                 name: scene.name,
                 id: scene._id,
-            }))
+            }), 'color: tomato;')
+            
             await scene.update(data);
         } catch (err) {
-            err.message = game.i18n.format("AC.MIGRATION.FailedMigration", {
+            err.message = game.i18n.format("AC.Migration.FailedMigration", {
                 document: 'Scene',
                 name: scene.name,
                 id: scene._id,
                 error: err.message
             })
+
             console.error(err);
         }
     }
 
     // Migrate Compendia
     for (const pack of game.packs) {
-        if ( pack.metadata.packageType !== "world" ) continue;
-        if ( !["Actor", "Item", "Scene"].includes(pack.documentName) ) continue;
+        if ( pack.metadata.packageType !== "world" ) continue
+        if ( !["Actor", "Item", "Scene"].includes(pack.documentName) ) continue
 
         // Unlock the pack for editing
-        const wasLocked = pack.locked;
-        await pack.configure({locked: false});
+        const wasLocked = pack.locked
+        await pack.configure({locked: false})
 
         // Begin by requesting server-side data model migration and get the migrated content
-        await pack.migrate();
-        const documents = await pack.getDocuments();
+        await pack.migrate()
+        const documents = await pack.getDocuments()
 
         // Migrate documents
         for (const doc of documents) {
-            let data = {};
-            const source = doc.toObject();
+            let data = {}
+            const source = doc.toObject()
 
             try {
                 switch (pack.documentName) {
                     case 'Actor':
-                        data = migrateActor(source);
-                        break;
+                        data = migrateActor(source)
+                        break
                     case 'Item':
-                        data = migrateItem(source);
-                        break;
+                        data = migrateItem(source)
+                        break
                     case 'Scene':
-                        data = migrateScene(source);
-                        break;
+                        data = migrateScene(source)
+                        break
                 }
-                await doc.update(data);
+                await doc.update(data)
             } catch (err) {
-                err.message = game.i18n.format("AC.MIGRATION.FailedPackMigration", {
+                err.message = game.i18n.format("AC.Migration.FailedMigrationInPack", {
                     document: pack.documentName,
                     name: doc.name,
                     id: doc._id,
                     error: err.message,
                     pack: pack.collection
                 })
-                console.error(err);
+                console.error(err)
             }
         }
 
-        await pack.configure({locked: wasLocked});
-        Utils.log(game.i18n.format("AC.MIGRATION.MigratingPack", {
+        await pack.configure({locked: wasLocked})
+        Utils.log(game.i18n.format("AC.Migration.MigratingPack", {
             document: pack.documentName,
             pack: pack.collection
-        }));
+        }))
     }
     
     // After 5 seconds, prompt to reload.
-    game.settings.set('animecampaign', 'systemMigrationVersion', 'v1.0')
+    game.settings.set('animecampaign', 'systemMigrationVersion', 'v2.0')
     ui.notifications.info(
-        game.i18n.localize("AC.MIGRATION.V1MigrationComplete"),
+        game.i18n.localize("AC.Migration.V2MigrationComplete"),
         { permanent: true }
-    );
+    )
 }
 
+
+
+
+
+/*
 
 /** Migrates pre-v1.0 actors.
  * @param {*} source 
