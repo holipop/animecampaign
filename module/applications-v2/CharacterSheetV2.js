@@ -48,7 +48,10 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         form: {
             submitOnChange: true,
         },
-        dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
+        dragDrop: [
+            { dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' },
+            { dragSelector: ".item-list .item", dropSelector: ".JS-DropItem" }
+        ],
     }
 
     /** @override */
@@ -112,18 +115,39 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     _onDrop (event) {
         const data = TextEditor.getDragEventData(event)
-        
+
         switch (data.type) {
-            case 'stat':
+            // This is when an Item from the Items List is dropped.
+            case "Item":
+                this.onDropItem(event, data)
+                break
+            case "stat":
                 this.onDropStat(event, data)
                 break
-            case 'category': 
+            case "category": 
                 this.onDropCategory(event, data)
                 break
-            case 'feature': 
+            case "feature": 
                 this.onDropFeature(event, data)
                 break
         }
+
+        event.stopPropagation()
+    }
+
+    /** 
+     * Handles the drop event for Items from the Item list.
+     * @param {Event} event 
+     * @param {{ type: "Item", uuid: string }} data 
+     */
+    onDropItem(event, data) {
+        const id = data.uuid.slice(data.uuid.indexOf(".") + 1)
+
+        /** @type {ACItem} */
+        const item = game.items.get(id)
+        if (!item) return
+
+        this.document.createEmbeddedDocuments("Item", [item.toObject()])
     }
 
     /** 
