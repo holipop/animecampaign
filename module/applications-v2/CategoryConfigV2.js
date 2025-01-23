@@ -171,6 +171,8 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
 
         this.category.updateSource({ trackers })
         this.render(true)
+
+        event.stopPropagation()
     }
 
 

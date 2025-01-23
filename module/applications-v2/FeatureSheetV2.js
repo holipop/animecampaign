@@ -107,6 +107,8 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
                 break
                 */
         }
+
+        event.stopPropagation()
     }
 
     /** 
