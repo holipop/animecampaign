@@ -3,20 +3,22 @@
     <div class="Summary__ImageWrapper">
         
         <img class="Summary__Image JS-Color" src="{{document.img}}" data-color="{{palette.primary}}" data-properties="border-color">
-        <div class="Summary__ImageEdit" data-action="onEditImage" data-tooltip="AC.CharacterSheet.EditImage">
-            <span class="Summary__ImageEditIcon MSO">edit</span>
-        </div>
+        {{#if (gte permission 3)}}
+            <div class="Summary__ImageEdit" data-action="onEditImage" data-tooltip="AC.CharacterSheet.EditImage">
+                <span class="Summary__ImageEditIcon MSO">edit</span>
+            </div>
+        {{/if}}
 
     </div>
     
     <div class="Summary__Info">
 
-        <textarea class="Summary__Name JS-ResizeTextArea JS-Enter" name="name" spellcheck="false" placeholder="{{localize "AC.CharacterSheet.Name"}}">{{document.name}}</textarea>
-        <input class="Summary__Class" type="text" name="system.class" placeholder="{{localize "AC.CharacterSheet.Class"}}" value="{{system.class}}">
+        <textarea class="Summary__Name JS-ResizeTextArea JS-Enter JS-OwnerInput" name="name" spellcheck="false" placeholder="{{localize "AC.CharacterSheet.Name"}}">{{document.name}}</textarea>
+        <input class="Summary__Class JS-OwnerInput" type="text" name="system.class" placeholder="{{localize "AC.CharacterSheet.Class"}}" value="{{system.class}}">
 
         <div class="Summary__InfoFooter JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
 
-            <select class="Summary__FooterSelect JS-Color" name="system.type" data-color="{{palette.contrast}}">
+            <select class="Summary__FooterSelect JS-Color JS-OwnerInput" name="system.type" data-color="{{palette.contrast}}">
                 <optgroup label="{{localize "AC.CharacterSheet.Inscribed"}}">
                     {{selectOptions config.inscribed localize=true selected=system.type}}
                 </optgroup>
@@ -25,17 +27,19 @@
                 </optgroup>
             </select>
 
-            <input class="Summary__FooterInput JS-Color" type="text" name="system.word" value="{{system.word}}" placeholder="{{localize "AC.ChaaracterSheet.Word"}}" data-color="{{palette.primary}}" data-properties="border-color">
+            <input class="Summary__FooterInput JS-Color JS-OwnerInput" type="text" name="system.word" value="{{system.word}}" placeholder="{{localize "AC.ChaaracterSheet.Word"}}" data-color="{{palette.primary}}" data-properties="border-color">
 
         </div>
     </div>
 
     <div class="Summary__Buttons">
 
-        <button class="ACButton JS-Color" type="button" data-action="onInvokeColorPicker" data-tooltip="AC.CharacterSheet.EditColor" data-color="{{palette.secondary}}" data-properties="border-color color">
-            <span class="ACButton__Icon MSO">palette</span>
-        </button>
-        <input class="Summary__HiddenColor JS-InvokeColorPicker" type="color" name="system.color" value="{{system.color}}">
+        {{#if (gte permission 3)}}
+            <button class="ACButton JS-Color" type="button" data-action="onInvokeColorPicker" data-tooltip="AC.CharacterSheet.EditColor" data-color="{{palette.secondary}}" data-properties="border-color color">
+                <span class="ACButton__Icon MSO">palette</span>
+            </button>
+            <input class="Summary__HiddenColor JS-InvokeColorPicker" type="color" name="system.color" value="{{system.color}}">
+        {{/if}}
 
     </div>
 

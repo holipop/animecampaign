@@ -108,6 +108,15 @@ export default function SheetMixinV2 (Base) {
             // bind DragDrop events
             this.#dragDrop.forEach(d => d.bind(this.element))
 
+            // Disable inputs if not an owner
+            /** @type {NodeListOf<Element>} */
+            const ownerInputs = this.element.querySelectorAll(".JS-OwnerInput")
+            ownerInputs.forEach(element => {
+                if (this.document.permission < 3) {
+                    element.setAttribute("disabled", "true")
+                }
+            })
+
             // Apply color palette
             const coloredElements = this.element.querySelectorAll(".JS-Color")
             for (const element of coloredElements) {

@@ -8,10 +8,8 @@ import * as Macro from './module/Macro.js'
 
 import ACActor from './module/documents/ACActor.js'
 import ACItem from './module/documents/ACItem.js'
-
 import CharacterData from './module/data-models/CharacterData.js'
 import FeatureData from './module/data-models/FeatureData.js'
-
 import CharacterSheetV2 from './module/applications-v2/CharacterSheetV2.js'
 import FeatureSheetV2 from './module/applications-v2/FeatureSheetV2.js'
 

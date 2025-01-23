@@ -1045,6 +1045,12 @@
   margin: 0.1rem 0.15rem 0;
   border-bottom: 0.0625rem solid;
 }
+.theme-dark .animecampaign.sheet .StatCard__Header {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.sheet .StatCard__Header {
+  border-color: rgba(31, 30, 30, 0.5);
+}
 .animecampaign.sheet .StatCard__Icon.MSO {
   font-size: 0.8rem;
   margin: 0 0.1rem;

@@ -7,7 +7,9 @@
                 
                 <div class="Category__HeaderLeft JS-Color" data-color="{{palette.contrast}}">
                     
-                    <span class="DragIndicator MSO JS-Color" data-color="{{palette.contrast}}">drag_indicator</span>
+                    {{#if (gte permission 3)}}
+                        <span class="DragIndicator MSO JS-Color" data-color="{{palette.contrast}}">drag_indicator</span>
+                    {{/if}}
 
                     <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryCollapse">
                         <span class="ACButton__Icon MSO">keyboard_arrow_down</span>
@@ -21,15 +23,17 @@
                         {{category.name}}
                     </span>
 
-                    <div class="Category__Buttons InlineButtonGroup">
-                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryEdit" data-tooltip="AC.CharacterSheet.CategoryEdit">
-                            <span class="ACButton__Icon MSO">edit</span>
-                        </button>
+                    {{#if (gte permission 3)}}
+                        <div class="Category__Buttons InlineButtonGroup">
+                            <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryEdit" data-tooltip="AC.CharacterSheet.CategoryEdit">
+                                <span class="ACButton__Icon MSO">edit</span>
+                            </button>
 
-                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryFlood" data-tooltip="AC.CharacterSheet.CategoryFlood">
-                            <span class="ACButton__Icon MSO">colors</span>
-                        </button>
-                    </div>
+                            <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryFlood" data-tooltip="AC.CharacterSheet.CategoryFlood">
+                                <span class="ACButton__Icon MSO">colors</span>
+                            </button>
+                        </div>
+                    {{/if}}
 
                     <div class="Category__Padding"></div>
 
@@ -42,13 +46,15 @@
                     </div>
 
                     <div class="Category__Buttons InlineButtonGroup">
-                        <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onFeatureAdd" data-tooltip="AC.CharacterSheet.FeatureAdd">
-                            <span class="ACButton__Icon MSO">add</span>
-                        </button>
+                        {{#if (gte permission 3)}}
+                            <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onFeatureAdd" data-tooltip="AC.CharacterSheet.FeatureAdd">
+                                <span class="ACButton__Icon MSO">add</span>
+                            </button>
 
-                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onCategoryDelete" data-tooltip="AC.CharacterSheet.CategoryDelete">
-                            <span class="ACButton__Icon MSO">close</span>
-                        </button>
+                            <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onCategoryDelete" data-tooltip="AC.CharacterSheet.CategoryDelete">
+                                <span class="ACButton__Icon MSO">close</span>
+                            </button>
+                        {{/if}}
                     </div>
 
                 </div>
@@ -78,11 +84,13 @@
         </div>
     {{/if}}
 
-    <button class="ACButton ACButton--Wide" type="button" data-action="onCategoryCreate">
-        <span class="ACButton__Icon MSO">save</span>
-        <span class="ACButton__Text">
-            {{localize "AC.CharacterSheet.CategoryCreate"}}
-        </span>
-    </button>
+    {{#if (gte permission 3)}}
+        <button class="ACButton ACButton--Wide" type="button" data-action="onCategoryCreate">
+            <span class="ACButton__Icon MSO">save</span>
+            <span class="ACButton__Text">
+                {{localize "AC.CharacterSheet.CategoryCreate"}}
+            </span>
+        </button>
+    {{/if}}
 
 </ul>

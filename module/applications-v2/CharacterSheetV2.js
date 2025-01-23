@@ -304,9 +304,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             this.getEnrichedFeatureDescriptions()
         ])
 
+        this.document.permission
+
         return {
             ...super._prepareContext(),
             config: CONFIG.AC,
+            permission: this.document.permission,
             document: this.document,
             system: this.document.system,
             palette: this.document.system.palette,

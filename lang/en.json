@@ -65,6 +65,7 @@
         "FeatureAdd": "Add Feature",
         "FeatureCollapse": "Collapse Feature",
         "FeatureEdit": "Edit Feature",
+        "FeatureView": "View Feature",
         "FeatureDelete": "Delete Feature"
     },
 
