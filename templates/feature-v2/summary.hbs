@@ -37,16 +37,18 @@
 
     <div class="Summary__Buttons">
 
-        {{#if document.img}}
-            <button class="ACButton ACButton--Delete" type="button" data-action="onRemoveImage" data-tooltip="AC.FeatureSheet.RemoveImage">
-                <span class="ACButton__Icon MSO">hide_image</span>
-            </button>
-        {{/if}}
+        {{#if (gte permission 3)}}
+            {{#if document.img}}
+                <button class="ACButton ACButton--Delete" type="button" data-action="onRemoveImage" data-tooltip="AC.FeatureSheet.RemoveImage">
+                    <span class="ACButton__Icon MSO">hide_image</span>
+                </button>
+            {{/if}}
 
-        <button class="ACButton JS-Color" type="button" data-action="onInvokeColorPicker" data-tooltip="AC.FeatureSheet.EditColor" data-color="{{palette.secondary}}" data-properties="border-color color">
-            <span class="ACButton__Icon MSO">palette</span>
-        </button>
-        <input class="Summary__HiddenColor JS-InvokeColorPicker" type="color" name="system.color" value="{{system.color}}">
+            <button class="ACButton JS-Color" type="button" data-action="onInvokeColorPicker" data-tooltip="AC.FeatureSheet.EditColor" data-color="{{palette.secondary}}" data-properties="border-color color">
+                <span class="ACButton__Icon MSO">palette</span>
+            </button>
+            <input class="Summary__HiddenColor JS-InvokeColorPicker" type="color" name="system.color" value="{{system.color}}">
+        {{/if}}
 
         <button class="ACButton JS-Color" type="button" data-action="onRoll" data-tooltip="AC.FeatureSheet.FeatureRoll" data-color="{{palette.secondary}}" data-properties="border-color color">
             <span class="ACButton__Icon MSO">ifl</span>

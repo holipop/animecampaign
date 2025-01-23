@@ -8,7 +8,9 @@
             
         {{> "generic.nav"}}
 
-        {{> "character.kit"}}
+        {{#if (gte permission 2)}}
+            {{> "character.kit"}}
+        {{/if}}
 
         <!-- section class="Effects tab" data-tab="effects" data-group="character">
             EFFECTS
@@ -20,7 +22,9 @@
                     {{{enrichedDescription}}}
                 </prose-mirror>
             {{else}}
-                {{{enrichedDescription}}}
+                <div class="NonOwnerDescription JS-AttachSections">
+                    {{{enrichedDescription}}}
+                </div>
             {{/if}}
         </section>
 

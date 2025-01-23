@@ -9,14 +9,22 @@
         {{> "generic.nav"}}
         
         <section class="Description tab {{tabs.description.css}}" data-tab="description" data-group="feature">
-            <prose-mirror class="ACTextEditor" name="system.description" value="{{system.description}}" toggled="true" compact="true">
-                {{{enrichedDescription}}}
-            </prose-mirror>
+            {{#if (gte permission 3)}}
+                <prose-mirror class="ACTextEditor" name="system.description" value="{{system.description}}" toggled="true" compact="true">
+                    {{{enrichedDescription}}}
+                </prose-mirror>
+            {{else}}
+                <div class="NonOwnerDescription JS-AttachSections">
+                    {{{enrichedDescription}}}
+                </div>
+            {{/if}}
         </section>
 
-        <div class="Details Config tab {{tabs.details.css}}" data-tab="details" data-group="feature">
-            {{> "generic.details" details=system.details prefix="system."}}
-        </div>
+        {{#if (gte permission 2)}}
+            <div class="Details Config tab {{tabs.details.css}}" data-tab="details" data-group="feature">
+                {{> "generic.details" details=system.details prefix="system."}}
+            </div>
+        {{/if}}
 
     </div>
 

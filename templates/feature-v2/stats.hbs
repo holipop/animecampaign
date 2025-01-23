@@ -15,7 +15,9 @@
                         <!-- img class="StatEntry__Image" src="{{stat.img}}" -->
 
                         <div class="StatEntry__Info JS-Drag" data-drag="stat">
-                            <span class="DragIndicator MSO">drag_indicator</span>
+                            {{#if (gte @root.permission 3)}}
+                                <span class="DragIndicator MSO">drag_indicator</span>
+                            {{/if}}
 
                             <!-- div class="Wrapper">
                                 <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
@@ -43,15 +45,17 @@
                         {{/if}}
                     </div>
                     
-                    <div class="StatEntry__Buttons InlineButtonGroup">
-                        <button class="ACButton ACButton--Inline" type="button" data-action="onStatEdit" data-tooltip="AC.FeatureSheet.StatEdit">
-                            <div class="ACButton__Icon MSO">edit</div>
-                        </button>
+                    {{#if (gte @root.permission 3)}}
+                        <div class="StatEntry__Buttons InlineButtonGroup">
+                            <button class="ACButton ACButton--Inline" type="button" data-action="onStatEdit" data-tooltip="AC.FeatureSheet.StatEdit">
+                                <div class="ACButton__Icon MSO">edit</div>
+                            </button>
 
-                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onStatDelete" data-tooltip="AC.FeatureSheet.StatDelete">
-                            <div class="ACButton__Icon MSO">close</div>
-                        </button>
-                    </div>
+                            <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onStatDelete" data-tooltip="AC.FeatureSheet.StatDelete">
+                                <div class="ACButton__Icon MSO">close</div>
+                            </button>
+                        </div>
+                    {{/if}}
                 </li>
             {{/each}}
 

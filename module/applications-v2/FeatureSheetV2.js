@@ -1,6 +1,7 @@
 import SheetMixinV2 from "./SheetMixinV2.js"
 import StatConfigV2 from "./StatConfigV2.js"
 import ACDialogV2 from "./ACDialogV2.js"
+import * as Description from "../Description.js"
 
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { ItemSheetV2 } = foundry.applications.sheets
@@ -46,18 +47,6 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      */
     get title () {
         return `${this.document.name}`
-    }
-
-    /**
-     * Actions performed after any render of the Application.
-     * Post-render steps are not awaited by the render process.
-     * @param {ApplicationRenderContext} context      Prepared context data
-     * @param {RenderOptions} options                 Provided render options
-     * @protected
-     * @override
-     */
-    _onRender (context, options) {
-        super._onRender(context, options)
     }
 
 
@@ -161,12 +150,21 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         return {
             ...super._prepareContext(),
             config: CONFIG.AC,
+            permission: this.document.permission,
             document: this.document,
             system: this.document.system,
             palette: this.document.system.palette,
             tabs: this.getTabs(),
             enrichedDescription: await TextEditor.enrichHTML(this.document.system.description)
         }
+    }
+
+    /** @override */
+    _onRender (context, options) {
+        super._onRender(context, options)
+
+        const descriptionContent = this.element.querySelector(".JS-AttachSections")
+        Description.attachSections(descriptionContent)
     }
 
 

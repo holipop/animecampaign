@@ -219,6 +219,7 @@
     border-radius: 2 * @rpx;
 }
 .animecampaign .ACTextEditor .editor-content, 
+.animecampaign .NonOwnerDescription,
 .animecampaign .FeatureContent__Description,
 .animecampaign .ChatMessage__Content {
     #ColorScheme({
@@ -281,6 +282,11 @@
         margin-bottom: .1rem;
         height: 1rem;
         width: 1rem;
+
+        .theme-dark &, 
+        .theme-light & { // specificity
+            background-color: transparent;
+        }
     }
      .Section__CollapseIcon {
         rotate: 0deg;

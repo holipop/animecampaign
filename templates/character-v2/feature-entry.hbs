@@ -18,9 +18,7 @@
                 </span>
             {{/if}}
 
-            {{#if (gte permission 3)}}
-                <span class="FeatureEntry__Roll MSO" data-action="onFeatureRoll" data-tooltip="AC.CharacterSheet.FeatureRoll">ifl</span>
-            {{/if}}
+            <span class="FeatureEntry__Roll MSO" data-action="onFeatureRoll" data-tooltip="AC.CharacterSheet.FeatureRoll">ifl</span>
 
         </div>
 
@@ -65,7 +63,7 @@
                     <div class="ACButton__Icon MSO">close</div>
                 </button>
             {{/if}}
-
+            
             {{#if (eq permission 2)}}
                 <button class="ACButton ACButton--Inline" type="button" data-action="onFeatureEdit" data-tooltip="AC.CharacterSheet.FeatureView">
                     <div class="ACButton__Icon MSO">open_in_full</div>

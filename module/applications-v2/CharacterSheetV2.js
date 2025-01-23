@@ -265,6 +265,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             kit:        { id: "kit", group: "character", icon: "stat_0", label: "AC.CharacterSheet.Kit" },
             biography:  { id: "biography", group: "character", icon: "person", label: "AC.CharacterSheet.Biography" }
         }
+
+        if (this.document.ownership >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER) {}
         
         for (const tab of Object.values(tabs)) {
             tab.active = this.tabGroups[tab.group] === tab.id
@@ -303,8 +305,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             TextEditor.enrichHTML(this.document.system.description),
             this.getEnrichedFeatureDescriptions()
         ])
-
-        this.document.permission
 
         return {
             ...super._prepareContext(),

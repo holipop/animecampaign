@@ -110,7 +110,7 @@ export default function SheetMixinV2 (Base) {
 
             // Disable inputs if not an owner
             /** @type {NodeListOf<Element>} */
-            const ownerInputs = this.element.querySelectorAll(".JS-OwnerInput")
+            const ownerInputs = this.element.querySelectorAll("input, select, textarea")
             ownerInputs.forEach(element => {
                 if (this.document.permission < 3) {
                     element.setAttribute("disabled", "true")
