@@ -20,12 +20,9 @@ export default class ACItem extends Item {
 
     // ---- Chat Message ----
 
-    /**
-     * 
-     * @param {*} param0 
-     */
     async roll ({ post = false } = {}) {
         const formula = this.system.details.formula
+
         let rollPromise
         if (Roll.validate(formula)) {
             rollPromise = new Roll(formula).evaluate()
@@ -34,16 +31,10 @@ export default class ACItem extends Item {
             post = true
         }
 
-        // I don't think this is actually saving much time?
-        // At the very least, if any of these promises take a fuck long time, it'll be the 
-        // most this function has to wait.
-        const [roll, max, min, tooltip, content, enrichedDescription] = await Promise.all([
+        const [roll, max, min] = await Promise.all([
             rollPromise,
             new Roll(formula).evaluate({ maximize: true }),
             new Roll(formula).evaluate({ minimize: true }),
-            roll.getTooltip(),
-            TextEditor.enrichHTML(this.system.description),
-            renderTemplate(template, context),
         ])
 
         let crit
@@ -54,6 +45,10 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritFailure"
         }
 
+        const [tooltip, enrichedDescription] = await Promise.all([
+            roll.getTooltip(),
+            TextEditor.enrichHTML(this.system.description)
+        ])
         const context = {
             formula,
             roll,
@@ -65,12 +60,11 @@ export default class ACItem extends Item {
             feature: this,
             palette: this.system.palette,
         }
-        
         const template = "systems/animecampaign/templates/roll/template.hbs"
         const message = {
-            content,
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
+            content: await renderTemplate(template, context),
         }
 
         if (post) {
