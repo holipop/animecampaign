@@ -134,8 +134,8 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      */
     getTabs () {
         const tabs = {
-            description: { id: "description", group: "feature", icon: "notes", label: "AC.FeatureSheet.Description" },
-            details:    { id: "details", group: "feature", icon: "info", label: "AC.FeatureSheet.Details" }
+            description: { id: "description", group: "feature", permission: 1, icon: "notes", label: "AC.FeatureSheet.Description" },
+            details:     { id: "details", group: "feature", permission: 2, icon: "info", label: "AC.FeatureSheet.Details" }
         }
         
         for (const tab of Object.values(tabs)) {
@@ -164,7 +164,9 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         super._onRender(context, options)
 
         const descriptionContent = this.element.querySelector(".JS-AttachSections")
-        Description.attachSections(descriptionContent)
+        if (descriptionContent) {
+            Description.attachSections(descriptionContent)
+        }
     }
 
 

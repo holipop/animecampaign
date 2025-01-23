@@ -15,6 +15,7 @@ declare global {
         label: string
         active: boolean
         css: "active" | ""
+        permission: 1 | 2 | 3
     }
 }
 

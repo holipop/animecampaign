@@ -2323,16 +2323,28 @@
 .theme-light .animecampaign.ChatMessage .ChatMessage__Total {
   border-color: rgba(31, 30, 30, 0.75);
 }
-.animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritSuccess {
+.theme-light .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritSuccess {
   border-color: darkgreen;
   color: darkgreen;
   text-shadow: white 0 0.0625rem;
   background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
 }
-.animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritFailure {
+.theme-light .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritFailure {
   border-color: darkred;
   color: darkred;
   text-shadow: white 0 0.0625rem;
+  background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritSuccess {
+  border-color: palegreen;
+  color: palegreen;
+  text-shadow: black 0 0.0625rem;
+  background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritFailure {
+  border-color: palevioletred;
+  color: palevioletred;
+  text-shadow: black 0 0.0625rem;
   background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
 }
 .animecampaign.ChatMessage .ChatMessage__Formula {

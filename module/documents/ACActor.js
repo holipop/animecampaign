@@ -14,15 +14,12 @@ export default class ACActor extends Actor {
      */
     async modifyTokenAttribute(attribute, value, isDelta=false, isBar=true) {
         const current = foundry.utils.getProperty(this.system, attribute);
-        const isClamp = game.settings.get('animecampaign', 'tokenBarClamp')
     
         // Determine the updates to make to the actor data
         let updates;
         if ( isBar ) {
             if (isDelta) {
-                value = (isClamp) 
-                    ? Math.clamp(0, Number(current.value) + value, current.max)
-                    : Number(current.value) + value
+                value = Number(current.value) + value
             }
             updates = {[`system.${attribute}.value`]: value};
         } else {

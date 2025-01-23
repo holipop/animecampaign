@@ -241,7 +241,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     /** @override */
     tabGroups = {
-        character: "kit"
+        character: (this.document.permission > CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
+            ? "kit"
+            : "biography"
     }
 
     /** 
@@ -262,11 +264,13 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     getTabs () {
         const tabs = {
-            kit:        { id: "kit", group: "character", icon: "stat_0", label: "AC.CharacterSheet.Kit" },
-            biography:  { id: "biography", group: "character", icon: "person", label: "AC.CharacterSheet.Biography" }
+            kit:        { id: "kit", group: "character", permission: 2, icon: "stat_0", label: "AC.CharacterSheet.Kit" },
+            biography:  { id: "biography", group: "character", permission: 1, icon: "person", label: "AC.CharacterSheet.Biography" }
         }
 
-        if (this.document.ownership >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER) {}
+        if (this.document.permission === CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED) {
+            this.tabGroups.character = "biography"
+        }
         
         for (const tab of Object.values(tabs)) {
             tab.active = this.tabGroups[tab.group] === tab.id
@@ -332,7 +336,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
 
         const feautreDescriptions = this.element.querySelectorAll(".JS-AttachSections")
-        feautreDescriptions.forEach(Description.attachSections)
+        if (feautreDescriptions) {
+            feautreDescriptions.forEach(Description.attachSections)
+        }
     }
 
     /**
