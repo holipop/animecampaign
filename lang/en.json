@@ -21,8 +21,12 @@
 
     "Macro": {
         "NotOwnedItemWarning": "You can only create macro buttons for owned Items.",
-        "ControlledActorWarning": "You must control an Actor to roll from the hotbar",
-        "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]"
+        "ControlledActorWarning": "You must control an Actor to roll from the hotbar.",
+        "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]."
+    },
+
+    "Migration": {
+
     },
 
     "CharacterSheet": {

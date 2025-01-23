@@ -6,7 +6,7 @@
 export async function createMacro (hotbar, data, slot) {
     if (data.type !== 'feature') return
     if (!('object' in data)) {
-        ui.notifications.warn('You can only create macro buttons for owned Items')
+        ui.notifications.warn(game.i18n.format('AC.Macro.NotOwnedItemWarning'))
         return 
     }
     const item = data.object
@@ -42,15 +42,15 @@ export function roll (id, options = {}) {
     actor ??= game.actors.get(speaker.actor)
 
     if (!actor) {
-        ui.notifications.warn(game.i18n.localize("AC.NOTIFY.Macro.ControlActorWarning"))
+        ui.notifications.warn(game.i18n.format("AC.Macro.ControlledActorWarning"))
         return
     }
 
     const item = actor.getEmbeddedDocument('Item', id)
     if (!item) {
-        ui.notifications.warn(game.i18n.format("AC.NOTIFY.Macro.MissingItemWarning", { id }))
+        ui.notifications.warn(game.i18n.format("AC.Macro.MissingItemWarning"), { id })
         return
     }
-
+ 
     item.roll(options)
 }
