@@ -2,29 +2,15 @@
 // by Holipop
 
 
-import * as Utils from './module/Utils.js'
-import * as ChatMessage from './module/ChatMessage.js'
-import * as List from './module/List.js'
-import * as Macro from './module/Macro.js'
-import * as Settings from './module/Settings.js'
-import * as Migrate from './module/Migrate.js'
-
 import * as config from './module/config.js'
 import * as Description from "./module/Description.js"
+import * as Macro from './module/Macro.js'
 
 import ACActor from './module/documents/ACActor.js'
 import ACItem from './module/documents/ACItem.js'
 
 import CharacterData from './module/data-models/CharacterData.js'
 import FeatureData from './module/data-models/FeatureData.js'
-import Stat from './module/data-models/Stat.js'
-import Section from './module/data-models/Section.js'
-import Category from './module/data-models/Category.js'
-
-import CharacterSheet from './module/applications/CharacterSheet.js'
-import FeatureSheet from './module/applications/FeatureSheet.js'
-import ACDialog from './module/applications/ACDialog.js'
-import StatConfig from './module/applications/StatConfig.js'
 
 import CharacterSheetV2 from './module/applications-v2/CharacterSheetV2.js'
 import FeatureSheetV2 from './module/applications-v2/FeatureSheetV2.js'
@@ -34,18 +20,14 @@ globalThis.AC = {
     Item: ACItem,
     CharacterData,
     FeatureData,
-    Stat,
-    Section,
-    Category,
-    CharacterSheet,
-    FeatureSheet,
-    Dialog: ACDialog,
-    StatConfig,
+    CharacterSheetV2,
+    FeatureSheetV2,
+    Macro: { ...Macro }
 }
 
 Hooks.once('init', () => {
-    Utils.log(config.AC.ascii);
-    Utils.log('Initializing Anime Campaign System!');
+    console.log(`%cAnime Campaign | ${config.AC.ascii}`, 'color: tomato;');
+    console.log("%cAnime Campaign | Initializing Anime Campaign System!", "color: tomato;");
 
     CONFIG.AC = config.AC;
     game.AC = AC
@@ -61,9 +43,6 @@ Hooks.once('init', () => {
         types: ["Character"],
         makeDefault: true 
     });
-    /* Actors.registerSheet("animecampaign", CharacterSheet, { 
-        types: ["Character"]
-    }); */
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("animecampaign", FeatureSheetV2, { 
@@ -71,7 +50,13 @@ Hooks.once('init', () => {
         makeDefault: true 
     });
 
-    Settings.register();
+    game.settings.register('animecampaign', 'systemMigrationVersion', {
+        name: "System Migration Version",
+        scope: 'world',
+        config: false,
+        type: String,
+        default: ""
+    })
 
     const partials = {
         "generic.nav": "systems/animecampaign/templates/generic/nav.hbs",
@@ -85,7 +70,7 @@ Hooks.once('init', () => {
         "feature.summary": "systems/animecampaign/templates/feature-v2/summary.hbs",
         "feature.stats": "systems/animecampaign/templates/feature-v2/stats.hbs",
     }
-    loadTemplates(partials);
+    loadTemplates(partials)
 })
 
 Hooks.on('ready', () => {
@@ -108,11 +93,10 @@ Hooks.on('ready', () => {
 
     game.settings.set("animecampaign", "systemMigrationVersion", game.system.version);
 
-    const NEEDS_MIGRATION_VERSION = "v0.1";
+    const NEEDS_MIGRATION_VERSION = "v1.0";
 })
 
 Hooks.on('renderChatMessage', (message, html, data) => {
-
     const messageElement = html[0].querySelector(".JS-ChatMessage")
     if (!messageElement) return
 
@@ -131,6 +115,5 @@ Hooks.on('renderChatMessage', (message, html, data) => {
     Description.attachSections(content)
 
 })
-
 
 Hooks.on('hotbarDrop', Macro.createMacro)

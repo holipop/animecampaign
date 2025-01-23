@@ -2,6 +2,7 @@
  * @module Migrate
  */
 
+/*
 import * as Utils from './Utils.js'
 import * as List from './List.js'
 
@@ -9,7 +10,6 @@ const convert = new showdown.Converter();
 
 /** Migration to v1.0 for anyone who used the previous version of AC FVTT
  * ! Change for v2.0.
- */
 export async function toV1 () {
     ui.notifications.warn(
         game.i18n.localize("AC.MIGRATION.V1MigrationBegin"),
@@ -159,7 +159,6 @@ export async function toV1 () {
 /** Migrates pre-v1.0 actors.
  * @param {*} source 
  * @returns {*}
- */
 function migrateScene (source) {
     const tokens = source.tokens.map(token => {
         const t = token instanceof foundry.abstract.DataModel 
@@ -183,7 +182,6 @@ function migrateScene (source) {
 /** Migrates pre-v1.0 actors.
  * @param {*} source 
  * @returns {*}
- */
 function migrateActor (source) {
     // Migrate Stats
     if (source.system.stats && source.system.stats.length > 0) {
@@ -234,7 +232,6 @@ function migrateActor (source) {
 /** Migrates pre-v1.0 items.
  * @param {*} source 
  * @returns {*}
- */
 function migrateItem (source) {
     source.type = 'Feature';
 
@@ -263,7 +260,6 @@ function migrateItem (source) {
  * @param {*} source 
  * @param {String?} color 
  * @returns {*}
- */
 function migrateStat (source, color = '') {
     const stat = {
         color,
@@ -292,7 +288,6 @@ function migrateStat (source, color = '') {
 /** Migrates pre-v1.0 sections.
  * @param {*} source 
  * @returns {*}
- */
 function migrateSection (source) {
     return {
         name: source.label,
@@ -302,3 +297,4 @@ function migrateSection (source) {
         plaintext: convert.makeMarkdown(source.text || '')
     }
 }
+*/
