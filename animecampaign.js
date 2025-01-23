@@ -5,6 +5,7 @@
 import * as config from './module/config.js'
 import * as Description from "./module/Description.js"
 import * as Macro from './module/Macro.js'
+import * as Migrate from "./module/Migrate.js"
 
 import ACActor from './module/documents/ACActor.js'
 import ACItem from './module/documents/ACItem.js'
@@ -73,25 +74,26 @@ Hooks.once('init', () => {
 
 Hooks.on('ready', () => {
     // !!! Remove post v1.0
-    const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion');
+    const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
 
     // If this is a brand new world, skip migration.
-    const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
-    if ( !currentVersion && totalDocuments === 0 ) { 
-        return game.settings.set("animecampaign", "systemMigrationVersion", game.system.version);
+    const totalDocuments = game.actors.size + game.scenes.size + game.items.size
+    if (!currentVersion && totalDocuments === 0) { 
+        return game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
     }
-
-    /* if (currentVersion == "") {
+    
+    /* 
+    if (currentVersion == "") {
         if (!game.user.isGM) {
-            ui.notifications.warn(game.i18n.localize("AC.MIGRATION.WarnForGM"));
-            return;
+            ui.notifications.warn(game.i18n.localize("AC.Migration.WarnForGM"))
+            return
         }
-        Migrate.toV1();
+        Migrate.toV2()
     } */
 
-    game.settings.set("animecampaign", "systemMigrationVersion", game.system.version);
+    game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
 
-    const NEEDS_MIGRATION_VERSION = "v1.0";
+    const NEEDS_MIGRATION_VERSION = "v1.0"
 })
 
 Hooks.on('renderChatMessage', (message, html, data) => {

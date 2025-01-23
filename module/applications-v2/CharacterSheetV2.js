@@ -169,7 +169,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         })
         const updates = sort.map(({ target, update }) => [target.color, update])
 
-        this.document.update({ 'system._stats': Object.fromEntries(updates) })
+        this.document.update({ 'system.stats': Object.fromEntries(updates) })
     }
 
     /** 
@@ -362,8 +362,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
                     return [stat.color, { ...stat, ...statChanges }]
                 })
 
-            updates.system.stats = null // v1.0 bandaid
-            updates.system._stats = Object.fromEntries(statData)
+            updates.system.stats = Object.fromEntries(statData)
         }
 
         super._processSubmitData(event, form, updates)
@@ -381,7 +380,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     static onStatAdd (event, target) {
         const [color] = Object
-            .entries(this.document.system._stats)
+            .entries(this.document.system.stats)
             .find(([_, stat]) => stat === null) // If the value is null, get the key
 
         new StatConfigV2({
@@ -443,7 +442,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         });
         
         if (confirm) {
-            this.document.update({ [`system._stats.${color}`]: null })
+            this.document.update({ [`system.stats.${color}`]: null })
         }
     }
 

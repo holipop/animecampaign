@@ -23,7 +23,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
             proficiency: new fields.EmbeddedDataField(Stat),
             movement: new fields.EmbeddedDataField(Stat),
 
-            _stats: new fields.SchemaField(colorStats), // remove underscores post v1.0
+            stats: new fields.SchemaField(colorStats), // remove underscores post v1.0
 
             categories: new fields.ArrayField(new fields.EmbeddedDataField(Category)),
             description: new fields.HTMLField(),
@@ -42,7 +42,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
                 plaintext: new fields.StringField(),
                 richtext: new fields.HTMLField(),
             }),
-            stats: new fields.ArrayField(new fields.ObjectField()),
+            _stats: new fields.ObjectField(),
         }
     }
 
@@ -97,7 +97,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
      */
     get colorStats () {
         return Object
-            .values(this._stats)
+            .values(this.stats)
             .filter(stat => stat !== null)
             .sort((a, b) => a.sort - b.sort)
     }

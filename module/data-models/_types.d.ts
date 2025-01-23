@@ -30,7 +30,7 @@ declare module "./CharacterData.js" {
         stamina: Stat
         proficiency: Stat
         movement: Stat
-        _stats: Record<ColorKeys, Stat>
+        stats: Record<ColorKeys, Stat>
         categories: Category[]
         biography: {
             editor: string

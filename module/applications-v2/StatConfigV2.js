@@ -66,7 +66,7 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
     getAvailableColors () {
         if (this.document.documentName === "Item") return {};
 
-        const stats = this.document.system._stats;
+        const stats = this.document.system.stats;
         const options = Object
             .entries(CONFIG.AC.colorStat)
             .filter(([color]) => {
@@ -118,7 +118,7 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
                 .filter(stat => stat.color !== this.stat.color)
                 .find(stat => stat.tag == data.tag)
             if (tagTaken) {
-                throw game.i18n.format("AC.StatConfig.StatTagTaken", { tag: data.tag.toUpperCase() })
+                throw game.i18n.format("AC.StatConfig.StatTagTaken", { tag: data.tag?.toUpperCase() })
             }
 
             // always place new stats at the end
@@ -130,12 +130,12 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
             }
             
             const updates = {
-                [`system._stats.${data.color}`]: data
+                [`system.stats.${data.color}`]: data
             }
 
             // if the color of an existing stat is changed, set the old color to null
             if (!this.isNew && data.color !== this.stat.color) {
-                updates[`system._stats.${this.stat.color}`] = null
+                updates[`system.stats.${this.stat.color}`] = null
             }
 
             this.document.update(updates)
