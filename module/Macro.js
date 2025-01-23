@@ -3,24 +3,28 @@
  * @param {*} data
  * @param {number} slot
  */
-export async function createMacro (_, data, slot) {
-    if (data.type !== 'Feature') return
-    if (!('obj' in data)) {
+export async function createMacro (hotbar, data, slot) {
+    if (data.type !== 'feature') return
+    if (!('object' in data)) {
         ui.notifications.warn('You can only create macro buttons for owned Items')
         return 
     }
-    const item = data.obj
+    const item = data.object
 
     // Macro creation.
-    const command = `AC.Macro.roll('${data.id}')`
+    const command = `AC.Macro.roll('${item._id}')`
     let macro = game.macros.find(m => (m.name === item.name) && (m.command == command))
     if (!macro) {
-        macro = await Macro.create({
+        const data = {
             name: item.name,
             type: 'script',
-            img: item.img,
             command,
-        })
+        }
+        if (item.img) {
+            data.img = item.img
+        }
+
+        macro = await Macro.create(data)
     }
 
     game.user.assignHotbarMacro(macro, slot)
