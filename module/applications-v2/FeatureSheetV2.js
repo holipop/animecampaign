@@ -245,11 +245,11 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             }),
             modal: true
         });
-
-        const stats = [...this.document.system.stats]
-        stats.splice(index, 1)
         
         if (confirm) {
+            const stats = [...this.document.system.stats]
+            stats.splice(index, 1)
+
             this.document.update({ "system.stats": stats })
         }
     }

@@ -20,19 +20,33 @@ export default class ACItem extends Item {
 
     // ---- Chat Message ----
 
+    /**
+     * 
+     * @param {*} param0 
+     */
     async roll ({ post = false } = {}) {
         const formula = this.system.details.formula
-        let roll
+        let rollPromise
         if (Roll.validate(formula)) {
-            roll = await new Roll(formula).evaluate()
+            rollPromise = new Roll(formula).evaluate()
         } else {
-            roll = await new Roll("1").evaluate()
+            rollPromise = new Roll("1").evaluate()
             post = true
         }
 
+        // I don't think this is actually saving much time?
+        // At the very least, if any of these promises take a fuck long time, it'll be the 
+        // most this function has to wait.
+        const [roll, max, min, tooltip, content, enrichedDescription] = await Promise.all([
+            rollPromise,
+            new Roll(formula).evaluate({ maximize: true }),
+            new Roll(formula).evaluate({ minimize: true }),
+            roll.getTooltip(),
+            TextEditor.enrichHTML(this.system.description),
+            renderTemplate(template, context),
+        ])
+
         let crit
-        const max = await new Roll(formula).evaluate({ maximize: true })
-        const min = await new Roll(formula).evaluate({ minimize: true })
         if (roll.isDeterministic) { }
         else if (roll.total == max.total) {
             crit = "ChatMessage__Total--CritSuccess"
@@ -45,18 +59,18 @@ export default class ACItem extends Item {
             roll,
             post,
             crit,
-            tooltip: await roll.getTooltip(),
+            tooltip,
+            enrichedDescription,
 
             feature: this,
             palette: this.system.palette,
-            enrichedDescription: await TextEditor.enrichHTML(this.system.description)
         }
         
         const template = "systems/animecampaign/templates/roll/template.hbs"
         const message = {
+            content,
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(template, context),
         }
 
         if (post) {

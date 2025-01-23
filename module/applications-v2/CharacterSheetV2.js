@@ -275,6 +275,11 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     /** @override */
     async _prepareContext () {
+        const [enrichedDescription, enrichedFeatureDescriptions] = await Promise.all([
+            TextEditor.enrichHTML(this.document.system.description),
+            this.getEnrichedFeatureDescriptions()
+        ])
+
         return {
             ...super._prepareContext(),
             config: CONFIG.AC,
@@ -285,8 +290,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             stats: this.document.system.colorStats,
             categories: this.document.system.categories,
             uncategorizedFeatures: this.getUncategorizedFeatures(),
-            enrichedDescription: await TextEditor.enrichHTML(this.document.system.description),
-            enrichedFeatureDescriptions: await this.getEnrichedFeatureDescriptions()
+            enrichedDescription,
+            enrichedFeatureDescriptions,
         }
     }
 
