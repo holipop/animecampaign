@@ -32,14 +32,11 @@
     }
     .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__NameText {
         text-align: left;
+        overflow: auto;
+        white-space: normal;
     }
     .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__Buttons {
         margin-top: .375rem;
-    }
-
-    .FeatureEntry__Lining {
-        flex: 1;
-        max-width: calc(100% - 1rem);
     }
 
     .FeatureEntry__Padding {
@@ -50,18 +47,23 @@
         justify-content: center;
         align-items: flex-start;
     }
+    .FeatureEntry .DragIndicator {
+        opacity: 0;
+    }
+    .FeatureEntry:hover .DragIndicator {
+        opacity: .75;
+    }
+
+    .FeatureEntry__Lining {
+        flex: 1;
+        max-width: calc(100% - 1rem);
+    }
 
     .FeatureEntry__Info {
         display: flex;
         height: 2rem;
         width: 100%;
         align-items: center;
-    }
-    .FeatureEntry .DragIndicator {
-        opacity: 0;
-    }
-    .FeatureEntry:hover .DragIndicator {
-        opacity: .75;
     }
 
     .FeatureEntry__ImageWrapper {
@@ -128,6 +130,11 @@
         .ACButton__Icon {
             width: 0.75rem;
         }
+    }
+    .FeatureEntry__NameText {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .FeatureEntry__CollapseIcon {
         opacity: 0;
