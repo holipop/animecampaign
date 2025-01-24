@@ -111,15 +111,21 @@
     .StatTracker {
         display: flex;
         align-items: flex-end;
-        width: 5rem;
+        width: 4rem;
         padding: .15rem;
         height: 100%;
+        border-right: (1 * @rpx) solid;
+    }
+    .StatTracker:first-child {
+        border-left: (1 * @rpx) solid;
     }
     .StatTracker.StatTracker--White {
-        background-color: fade(@dark-txt-color, 10%);
+        background-color: fade(@dark-txt-color, 2.5%);
+        border-color: fade(@dark-txt-color, 5%);
     }
     .StatTracker.StatTracker--Black {
-        background-color: fade(@light-txt-color, 10%);
+        background-color: fade(@light-txt-color, 2.5%);
+        border-color: fade(@light-txt-color, 5%);
     }
     .StatTracker:nth-child(even) {
         background-color: transparent;
@@ -143,244 +149,6 @@
         flex-direction: column;
         margin: .2rem 0;
         gap: .2rem;
-    }
-
-    .FeatureEntry {
-        #Part();
-        #ColorScheme({
-            background-color: "bg";
-            color: "txt";
-        });
-        
-        border: (1 * @rpx) solid;
-        border-radius: 2 * @rpx;
-    }
-    .FeatureEntry .FeatureEntry__CollapseIcon {
-        rotate: 90deg;
-        transition: rotate .075s;
-    }
-    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__CollapseIcon {
-        rotate: 0deg;
-    }
-
-    .FeatureEntry__Info {
-        display: flex;
-        height: 2rem;
-        width: 100%;
-        align-items: center;
-    }
-
-    .FeatureEntry__Padding {
-        height: 100%;
-        width: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .FeatureEntry .DragIndicator {
-        opacity: 0;
-    }
-    .FeatureEntry:hover .DragIndicator {
-        opacity: .75;
-    }
-
-    .FeatureEntry__ImageWrapper {
-        display: grid;
-        place-items: center;
-    }
-
-    .FeatureEntry__Image {
-        #InputSkinning(); 
-
-        grid-area: 1 / 1 / -1 / -1;
-        min-height: 2rem;
-        max-height: 2rem;
-        min-width: 2rem;
-        max-width: 2rem;
-        margin-right: .2rem;
-    }
-    .FeatureEntry__Image--Null {
-        display: grid;
-        place-items: center;
-    }
-    .FeatureEntry__ImageIcon {
-        font-size: 1rem;
-    }
-
-    .FeatureEntry__Roll {
-        #ColorScheme({
-            border-color: "txt";
-            color: "txt";
-            background-color: "bg";
-        });
-
-        position: relative;
-        right: .1rem;
-        grid-area: 1 / 1 / -1 / -1;
-        font-size: 1rem;
-        padding: .1rem;
-        border: (1 * @rpx) solid;
-        border-radius: 2 * @rpx;
-        cursor: pointer;
-        transition: opacity .075s;
-
-        opacity: 0;
-    }
-    .FeatureEntry__ImageWrapper:hover .FeatureEntry__Roll {
-        opacity: .75;
-    }
-
-    .FeatureEntry__Name {
-        display: flex;
-        gap: .1rem;
-        width: fit-content;
-        height: 80%;
-        padding: 0 .2rem;
-        border-radius: 2 * @rpx;
-
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-
-        font: bold 1.2rem "Philosopher";
-
-        .ACButton__Icon {
-            width: 0.75rem;
-        }
-    }
-    .FeatureEntry__CollapseIcon {
-        opacity: 0;
-        transition: opacity .075s;
-    }
-
-    .FeatureEntry .FeatureEntry__NamePadding {
-        flex: 0;
-    }
-    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__NamePadding {
-        flex: 1;
-    }
-    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__TrackedStats {
-        display: none;
-    }
-    .FeatureEntry__TrackedStats {
-        flex: 1;
-        display: flex;
-        justify-content: end;
-        height: 100%;
-        margin: 0 0.1rem;
-    }
-    .TrackedStat {
-        #ColorScheme(@opacity: 5%, {
-            background-color: "txt";
-        });
-
-        display: flex;
-        align-items: center;
-        padding: .15rem .4rem;
-        min-width: 5rem;
-        max-width: 5rem;
-        height: 100%;
-        gap: .25rem;
-
-        font-family: "Philosopher";
-        font-style: italic;
-
-        > * {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    }
-    .TrackedStat:nth-child(even) {
-        background-color: transparent;
-    }
-    .TrackedStat__Value {
-        font-size: 1.25rem;
-        font-weight: bold;
-    }
-    .TrackedStat__Label {
-        font-size: 1rem;
-        font-style: normal;
-    }
-    .TrackedStat__Max {
-        flex: 1;
-        font-size: 1rem;
-    }
-
-    .FeatureEntry__Buttons {
-        min-width: 3rem;
-    }
-    .FeatureEntry:hover .FeatureEntry__CollapseIcon,
-    .FeatureEntry:hover .FeatureEntry__Buttons {
-        opacity: 1;
-    }
-
-    .FeatureContent {
-        display: none;
-        border-left: 1rem solid;
-    }
-    .FeatureEntry.FeatureEntry--Uncollapsed .FeatureContent {
-        display: block;
-    }
-    .FeatureContent__StatsPadding {
-        height: .25rem;
-        width: 100%;
-    }
-    .FeatureContent__Stats {
-        #ColorScheme(@opacity: 25%, {
-            border-color: "txt";
-        });
-        #ListSkinning();
-
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        margin-left: .5rem;
-        margin-right: 1.5rem;
-        border: (1 * @rpx) solid;
-        border-radius: (2 * @rpx);
-    }
-    .FeatureContent__StatEntry {
-        #ColorScheme(@opacity: 25%, {
-            border-color: "txt";
-        });
-
-        display: flex;
-        align-items: center;
-        gap: .5rem;
-        height: 1.33rem;
-        border-bottom: (1 * @rpx) solid;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-    .FeatureContent__StatEntry:nth-child(even) {
-        #ColorScheme(@opacity: 10%, {
-            background-color: "txt";
-        });
-    }
-    .FeatureContent__StatEntry:last-child {
-        border-bottom: none;
-    }
-    .FeatureContent__StatEntryTag {
-        width: 25%;
-        
-        font: .8rem "Libre Franklin";
-        text-align: end;
-        text-transform: uppercase;
-    }
-    .FeatureContent__StatEntryDivider {
-        font: .66rem "Libre Franklin";
-        opacity: 50%;
-    }
-    .FeatureContent__StatEntryValue {
-        font: bold italic 1rem "Philosopher";
-    }
-    .FeatureContent__StatEntryMax {
-        font: italic .8rem "Philosopher";
-    }
-    .FeatureContent__StatEntryLabel {
-        font: 1rem "Philosopher";
     }
 
     .UncategorizedFeatures {
