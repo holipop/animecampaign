@@ -3,15 +3,14 @@
  */
 export default class ACActor extends Actor {
 
-    /** 
-     * Fires whenever an attribute is modified via a token.
-     * @param {string} attribute 
-     * @param {number} value 
-     * @param {boolean?} isDelta 
-     * @param {boolean?} isBar 
-     * @returns {Promise<ACActor>}
-     * @override
-     */
+    /** @override */
+    /* _preCreate (data, options, user) {
+        super._preCreate(data, options, user);
+
+        this.updateSource({ "system.categories": CONFIG.AC.defaultCategories })
+    } */
+
+    /** @override */
     async modifyTokenAttribute(attribute, value, isDelta=false, isBar=true) {
         const current = foundry.utils.getProperty(this.system, attribute);
     

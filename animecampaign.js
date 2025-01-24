@@ -76,12 +76,16 @@ Hooks.on('ready', () => {
     const NEEDS_MIGRATION_VERSION = "v1.0"
     const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
 
-    if (currentVersion === game.system.version) return
+    if (currentVersion === game.system.version) {
+        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+        return
+    }
 
     // If this is a brand new world, skip migration.
     const totalDocuments = game.actors.size + game.scenes.size + game.items.size
     if (!currentVersion && totalDocuments === 0) { 
-        return game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+        return 
     }
     
     if (foundry.utils.isNewerVersion(game.system.version, NEEDS_MIGRATION_VERSION)) {

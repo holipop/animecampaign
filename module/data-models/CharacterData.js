@@ -25,7 +25,9 @@ export default class CharacterData extends foundry.abstract.DataModel {
 
             stats: new fields.SchemaField(colorStats), // remove underscores post v1.0
 
-            categories: new fields.ArrayField(new fields.EmbeddedDataField(Category)),
+            categories: new fields.ArrayField(new fields.EmbeddedDataField(Category), {
+                initial: () => CONFIG.AC.defaultCategories
+            }),
             description: new fields.HTMLField(),
 
             class: new fields.StringField(),

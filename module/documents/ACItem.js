@@ -3,21 +3,16 @@
  */
 export default class ACItem extends Item { 
 
-    /** 
-     * Fires before a document is created for preliminary operations.
-     * @param {*} data 
-     * @param {*} options 
-     * @param {User} user 
-     */
+    /** @override */
     _preCreate (data, options, user) {
         super._preCreate(data, options, user);
         this.updateSource({ img: null })
     }
 
-
-
-    // ---- Chat Message ----
-
+    /**
+     * Sends a chat message displaying this feature, rolling if a valid roll formula is provided. 
+     * @param {boolean} options.post
+     */
     async roll ({ post = false } = {}) {
         const formula = this.system.details.formula
 

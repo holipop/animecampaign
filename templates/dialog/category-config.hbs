@@ -1,5 +1,7 @@
 <section>
 
+    {{log this}}
+
     {{#unless isNew}}
         <nav class="Dialog__Navigation">
 
@@ -44,7 +46,7 @@
             <div class="Config__Notes">{{localize "AC.CategoryConfig.StatsNote"}}</div>
         </div>
 
-        {{#if (gt category.trackers.length 0)}}
+        {{#if category.trackers}}
             <ul class="CategoryStats JS-Drop">
 
                 {{#each category.trackers as |tracker index|}}

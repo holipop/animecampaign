@@ -46,59 +46,56 @@ AC.colors = {
     grey: '#807f84',
 };
 AC.defaultColor = "#cd3232";
-
 AC.displays = {
     value: "AC.StatConfig.Display.Options.Value",
     resource: "AC.StatConfig.Display.Options.Resource",
     label: "AC.StatConfig.Display.Options.Label",
 }
-AC.textEditors = {
-    prosemirror: "AC.ProseMirror",
-    markdown: "AC.Markdown",
-}
-
 AC.defaultCategories = [
-    {
-        name: 'weapon',
+    { 
+        name: "weapon",
+        snap: true,
         trackers: [
-            { tag: 'damage', img: "icons/svg/sword.svg" },
-            { tag: 'range' , img: "icons/svg/thrust.svg" },
+            { tag: "damage", display: "value" },
+            { tag: "range", display: "value" },
         ],
+        details: {
+            formula: "1d20",
+            action: "Main",
+            usage: { multiple: "1", timeframe: "Turn" }
+        }
     },
-    {
-        name: 'talent',
-        trackers: [
-            { tag: 'bonus', img: "icons/svg/heal.svg" },
-        ],
-    },
-    {
-        name: 'passive',
+    { 
+        name: "talent",
+        snap: true,
         trackers: [],
+        details: {
+            formula: "",
+            action: "",
+            usage: { multiple: "", timeframe: "" }
+        }
     },
-    {
-        name: 'ability',
+    { 
+        name: "passive",
+        snap: true,
+        trackers: [],
+        details: {
+            formula: "",
+            action: "",
+            usage: { multiple: "", timeframe: "" }
+        }
+    },
+    { 
+        name: "ability", 
+        snap: true,
         trackers: [
-            { tag: 'cost', img: "icons/svg/degen.svg" },
+            { tag: "damage", display: "value" },
+            { tag: "range", display: "value" },
         ],
-    }
-];
-
-AC.textDialog = (name, placeholder) => `
-    <form autocomplete="off">
-        <div class="form-group">
-            <label>${name}</label>
-            <div class="form-fields">
-                <input type="text" name="name" placeholder="${placeholder}" autofocus>
-            </div>
-        </div>
-    </form>`;
-
-AC.colorDialog = hexcode => `
-    <form autocomplete="off">
-        <div class="form-group">
-            <label>Color</label>
-            <div class="form-fields">
-                <input type="color" name="color" value="${hexcode}">
-            </div>
-        </div>
-    </form>`;
+        details: {
+            formula: "1d20",
+            action: "Main",
+            usage: { multiple: "1", timeframe: "Turn" }
+        }
+    },
+]
