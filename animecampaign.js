@@ -25,8 +25,8 @@ globalThis.AC = {
 }
 
 Hooks.once('init', () => {
-    console.log(`%cAnime Campaign | ${config.AC.ascii}`, 'color: tomato;');
-    console.log("%cAnime Campaign | Initializing Anime Campaign System!", "color: tomato;");
+    console.log(`%cAnime Campaign | ${config.AC.ascii}`, 'color: #db7093;');
+    console.log("%cAnime Campaign | Initializing Anime Campaign System!", "color: #db7093;");
 
     CONFIG.AC = config.AC;
     game.AC = AC
@@ -73,8 +73,10 @@ Hooks.once('init', () => {
 })
 
 Hooks.on('ready', () => {
-    // !!! Remove post v1.0
+    const NEEDS_MIGRATION_VERSION = "v1.0"
     const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
+
+    if (currentVersion === game.system.version) return
 
     // If this is a brand new world, skip migration.
     const totalDocuments = game.actors.size + game.scenes.size + game.items.size
@@ -82,18 +84,15 @@ Hooks.on('ready', () => {
         return game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
     }
     
-    /* 
-    if (currentVersion == "") {
+    if (foundry.utils.isNewerVersion(game.system.version, NEEDS_MIGRATION_VERSION)) {
         if (!game.user.isGM) {
             ui.notifications.warn(game.i18n.localize("AC.Migration.WarnForGM"))
             return
         }
         Migrate.toV2()
-    } */
+    }
 
     game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
-
-    const NEEDS_MIGRATION_VERSION = "v1.0"
 })
 
 Hooks.on('renderChatMessage', (message, html, data) => {

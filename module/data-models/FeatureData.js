@@ -16,24 +16,15 @@ export default class FeatureData extends foundry.abstract.DataModel {
                 required: true,
                 initial: CONFIG.AC.defaultColor
             }),
-            category: new fields.StringField({ initial: 'weapon' }),
-
+            category: new fields.StringField(),
             stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
-            
+            description: new fields.HTMLField(),
+            details: new fields.EmbeddedDataField(Details),
+
+            // ! Pre-v2.0
             sections: new fields.ArrayField(new fields.EmbeddedDataField(Section), {
                 initial: [{ visible: true, collapsed: false, richtext: null }],
             }),
-
-            description: new fields.HTMLField(),
-
-            details: new fields.EmbeddedDataField(Details),
-
-            // ! Pre-v1.0
-            type: new fields.StringField(),
-            customType: new fields.StringField(),
-            formula: new fields.StringField(),
-            usage: new fields.StringField(),
-            action: new fields.StringField(),
         };
     }
 

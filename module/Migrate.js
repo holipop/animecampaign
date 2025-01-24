@@ -1,3 +1,59 @@
+import ACActor from "./documents/ACActor.js"
+import ACItem from "./documents/ACItem.js"
+
+/**
+ * Fancy printing for clarity.
+ * @param {string} message 
+ */
+function aclog (message) {
+    console.log(`%c${message}`, 'color: #db7093;')
+}
+
+/**
+ * Migrates a v1 Actor.
+ * @param {Partial<ACActor>} source 
+ */
+function migrateActor (source) {
+    // Migrate description
+    if (source.system) {
+        source.system.description = source?.system?.biography?.richtext
+        source.system.stats = source?.system?._stats
+    }
+
+    for (let item of source?.items) {
+        item.parentImage = source?.img
+        item = migrateItem(item)
+    }
+
+    console.log(source)
+    return source
+}
+
+/**
+ * Migrates a v1 Item.
+ * @param {Partial<ACItem>} source 
+ */
+function migrateItem (source) {
+    if (source.system) {
+        let description = ""
+        for (const section of source.system.sections) {
+            description += `<h1>${(section.visible) ? "" : "<"}${section.name}</h1>${section.richtext}`
+        }
+        source.system.description = description
+
+        if (source.system.details.action == "[object Object]") {
+            source.system.details.action = ""
+        }
+    }
+
+    if (source.img == "icons/svg/item-bag.svg" || source.img == source?.parentImage) {
+        source.img = null
+    }
+
+    console.log(source)
+    return source
+}
+
 /**
  * Migrates a scene.
  * @param {Scene} source 
@@ -22,27 +78,6 @@ function migrateScene (source) {
     return { tokens }
 }
 
-/**
- * Migrates a v1 Actor.
- * @param {} source 
- */
-function migrateActor (source) {
-
-
-    console.log(source)
-    return source
-}
-
-/**
- * Migrates a v1 Item.
- * @param {*} source 
- */
-function migrateItem (source) {
-
-    console.log(source)
-    return source
-}
-
 export async function toV2 () {
     ui.notifications.warn(
         game.i18n.localize("AC.Migration.V2MigrationBegin"),
@@ -64,7 +99,7 @@ export async function toV2 () {
                 : game.data.actors.find(a => a._id == actor._id)
             const data = migrateActor(source)
 
-            console.log(game.i18n.format("AC.Migration.MigratingDocument", {
+            aclog(game.i18n.format("AC.Migration.MigratingDocument", {
                 document: 'Actor',
                 name: actor.name,
                 id: actor._id,
@@ -97,7 +132,7 @@ export async function toV2 () {
                 : game.data.items.find(i => i._id == item._id)
             const data = migrateItem(source)
 
-            console.log(game.i18n.format("AC.Migration.MigratingDocument", {
+            aclog(game.i18n.format("AC.Migration.MigratingDocument", {
                 document: 'Item',
                 name: item.name,
                 id: item._id,
@@ -120,7 +155,7 @@ export async function toV2 () {
         try {
             const data = migrateScene(scene);
 
-            console.log(game.i18n.format("AC.Migration.MigratingDocument", {
+            aclog(game.i18n.format("AC.Migration.MigratingDocument", {
                 document: 'Scene',
                 name: scene.name,
                 id: scene._id,
@@ -188,9 +223,9 @@ export async function toV2 () {
             pack: pack.collection
         }))
     }
-    
-    // After 5 seconds, prompt to reload.
-    game.settings.set('animecampaign', 'systemMigrationVersion', 'v2.0')
+
+    // Prompt to reload.
+    game.settings.set('animecampaign', 'systemMigrationVersion', "v2.0")
     ui.notifications.info(
         game.i18n.localize("AC.Migration.V2MigrationComplete"),
         { permanent: true }

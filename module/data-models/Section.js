@@ -1,5 +1,6 @@
 /** 
  * Data structure for sections.
+ * @deprecated
  */
 export default class Section extends foundry.abstract.DataModel {
 

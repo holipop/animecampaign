@@ -36,7 +36,7 @@ export default class CharacterData extends foundry.abstract.DataModel {
                 initial: CONFIG.AC.defaultColor
             }),
 
-            // ! Pre-v1.0
+            // ! Pre-v2.0
             biography: new fields.SchemaField({
                 editor: new fields.StringField({ initial: 'markdown' }),
                 plaintext: new fields.StringField(),

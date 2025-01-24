@@ -22,12 +22,6 @@ export default class Stat extends foundry.abstract.DataModel {
             label: new fields.StringField(),
 
             sort: new fields.NumberField({ initial: 0 }),
-
-            // ! Pre-v1.0
-            name: new fields.StringField(),
-            settings: new fields.SchemaField({
-                display: new fields.StringField(),
-            }),
         }
     }
 }

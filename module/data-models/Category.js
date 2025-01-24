@@ -13,20 +13,11 @@ export default class Category extends foundry.abstract.DataModel {
         return {
             name: new fields.StringField(),
             color: new fields.ColorField(),
-            collapsed: new fields.BooleanField({ initial: false }),
-
             snap: new fields.BooleanField({ initial: true }),
-
             details: new fields.EmbeddedDataField(Details),
-
             trackers: new fields.ArrayField(new fields.SchemaField({
                 display: new fields.StringField(),
                 tag: new fields.StringField(),
-                
-                img: new fields.FilePathField({ // !! deprecated
-                    categories: ['IMAGE'],
-                    initial: 'icons/svg/circle.svg'
-                })
             }))
         };
     }
