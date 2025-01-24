@@ -5,7 +5,7 @@
  */
 export function attachSections (element) {
     const HEADER_NAMES = ["H1", "H2", "H3", "H4", "H5", "H6"]
-    const DEFAULT_COLLAPSED_CHARACTER = "<"
+    const DEFAULT_COLLAPSED_CHARACTER = "_"
     
     /** @type {NodeListOf<HTMLElement>} */
     const sections = element.querySelectorAll("h1, h2, h3, h4, h5, h6")
@@ -43,8 +43,8 @@ export function attachSections (element) {
         
         header.insertAdjacentElement("afterend", section)
 
-        const headerText = header.childNodes[1].textContent
-        if (headerText.startsWith(DEFAULT_COLLAPSED_CHARACTER)) {
+        const headerText = header.childNodes[1]?.textContent
+        if (headerText && headerText.startsWith(DEFAULT_COLLAPSED_CHARACTER)) {
             header.childNodes[1].textContent = headerText.slice(1)
             header.classList.add("Section__Header--Collapsed")
             section.classList.add("Section__Content--Collapsed")
