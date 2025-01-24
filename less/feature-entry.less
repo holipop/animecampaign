@@ -154,6 +154,9 @@
         #ColorScheme(@opacity: 2.5%, {
             background-color: "txt";
         });
+        #ColorScheme(@opacity: 5%, {
+            border-color: "txt";
+        });
 
         display: flex;
         align-items: center;
@@ -162,6 +165,7 @@
         max-width: 4rem;
         height: 100%;
         gap: .25rem;
+        border-right: (1 * @rpx) solid;
 
         font-family: "Philosopher";
         font-style: italic;
@@ -171,6 +175,12 @@
             white-space: nowrap;
             text-overflow: ellipsis;
         }
+    }
+    .TrackedStat:first-child {
+        #ColorScheme(@opacity: 5%, { // fuck you.
+            border-left-color: "txt";
+        });
+        border-left: (1 * @rpx) solid;
     }
     .TrackedStat:nth-child(even) {
         background-color: transparent;

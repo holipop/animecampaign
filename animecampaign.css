@@ -1814,6 +1814,7 @@
   max-width: 4rem;
   height: 100%;
   gap: 0.25rem;
+  border-right: 0.0625rem solid;
   font-family: "Philosopher";
   font-style: italic;
 }
@@ -1823,10 +1824,25 @@
 .theme-light .animecampaign.actor.sheet .TrackedStat {
   background-color: rgba(31, 30, 30, 0.025);
 }
+.theme-dark .animecampaign.actor.sheet .TrackedStat {
+  border-color: rgba(235, 237, 242, 0.05);
+}
+.theme-light .animecampaign.actor.sheet .TrackedStat {
+  border-color: rgba(31, 30, 30, 0.05);
+}
 .animecampaign.actor.sheet .TrackedStat > * {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.animecampaign.actor.sheet .TrackedStat:first-child {
+  border-left: 0.0625rem solid;
+}
+.theme-dark .animecampaign.actor.sheet .TrackedStat:first-child {
+  border-left-color: rgba(235, 237, 242, 0.05);
+}
+.theme-light .animecampaign.actor.sheet .TrackedStat:first-child {
+  border-left-color: rgba(31, 30, 30, 0.05);
 }
 .animecampaign.actor.sheet .TrackedStat:nth-child(even) {
   background-color: transparent;
