@@ -51,6 +51,10 @@ AC.displays = {
     resource: "AC.StatConfig.Display.Options.Resource",
     label: "AC.StatConfig.Display.Options.Label",
 }
+AC.textEditors = {
+    prosemirror: "AC.ProseMirror",
+    markdown: "AC.Markdown",
+}
 AC.defaultCategories = [
     { 
         name: "weapon",
