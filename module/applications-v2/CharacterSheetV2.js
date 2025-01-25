@@ -634,7 +634,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     static async onFeatureDelete (event, target) {
         const { id } = target.closest(".JS-FeatureEntry").dataset
         const item = this.document.items.get(id)
-        console.log(item)
 
         const confirm = await ACDialogV2.confirm({
             window: {
