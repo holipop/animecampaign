@@ -10,11 +10,6 @@ export default class Stat extends foundry.abstract.DataModel {
         return {
             tag: new fields.StringField(),
             color: new fields.StringField(),
-            img: new fields.FilePathField({
-                categories: ['IMAGE'],
-                initial: 'icons/svg/circle.svg'
-            }),
-
             view: new fields.StringField({ initial: 'value' }),
 
             value: new fields.NumberField(),
@@ -23,5 +18,14 @@ export default class Stat extends foundry.abstract.DataModel {
 
             sort: new fields.NumberField({ initial: 0 }),
         }
+    }
+
+    /**
+     * Gets the path of the corresponding color stat image.
+     * If this stat belongs to a feature, an empty string.
+     * @returns {string}
+     */
+    get img () {
+        return (this.color) ? `systems/animecampaign/assets/${this.color}.png` : ""
     }
 }
