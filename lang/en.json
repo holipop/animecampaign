@@ -156,6 +156,7 @@
 
     "CategoryConfig": {
         "CategoryNameTaken": "\"{name}\" is already taken by another category.",
+        "StatTagTaken": "At least two stats share the same tag.",
         
         "Basic": "Basic",
         "Stats": "Stats",

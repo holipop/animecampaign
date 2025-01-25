@@ -83,17 +83,17 @@
                     <div class="StatEntry__Inputs">
 
                         {{#if (eq stat.view "value")}}
-                            <input class="StatEntry__Input StatEntry__Input--Value" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                            <input class="StatEntry__Input StatEntry__Input--Value" type="number" name="system.stats.{{stat.color}}.value" value="{{stat.value}}" placeholder="0">
                         {{/if}}
 
                         {{#if (eq stat.view "resource")}}
-                            <input class="StatEntry__Input StatEntry__Input--Numerator JS-ResizeInput" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                            <input class="StatEntry__Input StatEntry__Input--Numerator JS-ResizeInput" type="number" name="system.stats.{{stat.color}}.value" value="{{stat.value}}" placeholder="0">
                             <span class="StatCard__Label StatCard__Label--Divider">&sol;</span>
-                            <input class="StatEntry__Input StatEntry__Input--Denominator" type="number" name="system.stats.{{index}}.max" value="{{stat.max}}" placeholder="0">
+                            <input class="StatEntry__Input StatEntry__Input--Denominator" type="number" name="system.stats.{{stat.color}}.max" value="{{stat.max}}" placeholder="0">
                         {{/if}}
 
                         {{#if (eq stat.view "label")}}
-                            <input class="StatEntry__Input StatEntry__Input--Label" type="text" name="system.stats.{{index}}.label" value="{{stat.label}}" placeholder="...">
+                            <input class="StatEntry__Input StatEntry__Input--Label" type="text" name="system.stats.{{stat.color}}.label" value="{{stat.label}}" placeholder="...">
                         {{/if}}
 
                     </div>

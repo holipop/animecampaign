@@ -89,13 +89,12 @@ AC.defaultCategories = [
         name: "ability", 
         snap: true,
         trackers: [
-            { tag: "damage", display: "value" },
-            { tag: "range", display: "value" },
+            { tag: "cost", display: "value" },
         ],
         details: {
             formula: "1d20",
             action: "Main",
-            usage: { multiple: "1", timeframe: "Turn" }
+            usage: { multiple: "1", timeframe: "Round" }
         }
     },
 ]

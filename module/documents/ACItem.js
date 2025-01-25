@@ -14,18 +14,14 @@ export default class ACItem extends Item {
      * @param {boolean} options.post
      */
     async roll ({ post = false } = {}) {
-        const formula = this.system.details.formula
-
-        let rollPromise
-        if (Roll.validate(formula)) {
-            rollPromise = new Roll(formula).evaluate()
-        } else {
-            rollPromise = new Roll("1").evaluate()
+        let formula = this.system.details.formula ?? ""
+        if (!Roll.validate(formula)) {
+            formula = "1"
             post = true
         }
 
         const [roll, max, min] = await Promise.all([
-            rollPromise,
+            new Roll(formula).evaluate(),
             new Roll(formula).evaluate({ maximize: true }),
             new Roll(formula).evaluate({ minimize: true }),
         ])

@@ -307,6 +307,18 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
 
         // forces Foundry to update even when it *thinks* there's no changes.
         data.snap = !this.category.snap
+        
+        const { trackers } = foundry.utils.expandObject(data)
+        const trackersArr = Object.values(trackers)
+
+        const uniqueTags = new Set(trackersArr.map(t => t.tag.toLowerCase()))
+        if (uniqueTags.size !== trackersArr.length) {
+            throw game.i18n.format("AC.CategoryConfig.StatTagTaken")
+        }
+
+        trackersArr.forEach((t, i) => {
+            data[`trackers.${i}.tag`] = t.tag.toLowerCase()
+        })
 
         const nameTaken = categories
             .filter(c => c.name !== this.category.name)

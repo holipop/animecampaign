@@ -341,33 +341,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
-    /**
-     * Submit a document update based on the processed form data.
-     * @param {SubmitEvent} event       The originating form submission event
-     * @param {HTMLFormElement} form    The form element that was submitted
-     * @param {*} submitData            Processed and validated form data to be used for a document update
-     * @returns {Promise<void>}
-     * @protected
-     * @override
-     */
-    async _processSubmitData(event, form, submitData) {
-        const updates = submitData
-
-        // intercept stat handling
-        if ("stats" in updates?.system) {
-            const statData = Object
-                .entries(updates.system.stats)
-                .map(([index, statChanges]) => {
-                    const stat = this.document.system.colorStats[index]
-                    return [stat.color, { ...stat, ...statChanges }]
-                })
-
-            updates.system.stats = Object.fromEntries(statData)
-        }
-
-        super._processSubmitData(event, form, updates)
-    }
-
 
 
     // ---- Actions ----
