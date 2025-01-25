@@ -1268,7 +1268,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  width: 30%;
+  width: 40%;
 }
 .animecampaign.sheet .StatEntry__InfoWrapper > * {
   grid-area: 1 / 1 / -1 / -1;
@@ -1292,6 +1292,7 @@
 .animecampaign.sheet .StatEntry__Info {
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 .animecampaign.sheet .StatEntry .DragIndicator {
   opacity: 0;
@@ -1337,7 +1338,6 @@
   overflow: hidden;
   white-space: nowrap;
   padding: 0.1rem 0.25rem;
-  margin-left: 1rem;
   font: 0.8rem "Libre Franklin";
   text-transform: uppercase;
   text-align: end;
