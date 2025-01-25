@@ -1,0 +1,237 @@
+{
+"AC": {
+    "Title": "Anime Campaign",
+    "Character": "Character",
+    "Feature": "Feature",
+    "Test": "Testing Testing One Two Three!",
+    "NotApplicable": "N/A",
+
+    "CATEGORY": {
+        "Weapon": "Weapon",
+        "Talent": "Talent",
+        "Passive": "Passive",
+        "Ability": "Ability"
+    },
+    "TYPE": {
+        "Inscribed": "Inscribed",
+        "Mundie": "Mundie",
+        "Epithet": "Epithet",
+        "Expert": "Expert",
+        "Powerhouse": "Powerhouse"
+    },
+    "STAT": {
+        "Stamina": "Stamina",
+        "Proficiency": "Proficiency",
+        "Movement": "Movement",
+        "Damage": "Damage",
+        "Range": "Range",
+        "Cost": "Cost",
+        "Bonus": "Bonus",
+        "RedStat": "Red Stat",
+        "BlueStat": "Blue Stat",
+        "YellowStat": "Yellow Stat",
+        "GreenStat": "Green Stat",
+        "OrangeStat": "Orange Stat",
+        "CyanStat": "Cyan Stat",
+        "PurpleStat": "Purple Stat",
+        "GreyStat": "Grey Stat"
+    },
+    "COLOR": {
+        "Red": "Red",
+        "Blue": "Blue",
+        "Yellow": "Yellow",
+        "Green": "Green",
+        "Orange": "Orange",
+        "Cyan": "Cyan",
+        "Purple": "Purple",
+        "Grey": "Grey"
+    },
+    "NAV": {
+        "Biography": "Biography",
+        "Kit": "Kit",
+        "Effects": "Effects",
+        "Description": "Description",
+        "Details": "Details",
+        "Basic": "Basic",
+        "Stats": "Stats"
+    },
+    "LABEL": {
+        "ColorStats": "Color Stats",
+        "Stat": "Stat",
+        "Stats": "Stats",
+        "View": "View",
+        "Spaces": "Spaces",
+        "Build": "Build",
+        "Value": "Value",
+        "Max": "Max",
+        "Resource": "Resource",
+        "Label": "Label",
+        "Text": "Text",
+        "Tag": "Tag",
+        "Word": "Epithet/Core Word",
+        "Class": "Class",
+        "Name": "Name",
+        "Control": "Control",
+        "Category": "Category",
+        "EmptyStats": "Empty Stats",
+        "EmptyCategory": "Empty Category",
+        "UpdateCategory": "Update Category",
+        "TextEditor": "Text Editor",
+        "Markdown": "Markdown",
+        "ProseMirror": "ProseMirror",
+        "Small": "Small",
+        "Big": "Big"
+    },
+    "TOOLTIP": {
+        "Color": "Edit Color",
+        "Roll": "Roll",
+        "Stat": {
+            "Collapse": "Collapse Stats",
+            "Add": "Add Stat",
+            "Edit": "Edit Stat",
+            "Delete": "Delete Stat",
+            "Value": "Set View to Value",
+            "Resource": "Set View to Resource",
+            "Label": "Set View to Label"
+        },
+        "Category": {
+            "Collapse": "Collapse Category",
+            "Create": "Create Category",
+            "Delete": "Delete Category",
+            "Edit": "Edit Category",
+            "Rename": "Rename Category",
+            "Color": "Color Category",
+            "Flood": "Flood Category",
+            "Reset": "Reset Category Color",
+            "Track": "Track Stat",
+            "Untrack": "Untrack Stat",
+            "EditTrackerImage": "Edit Tracker Image"
+        },
+        "Feature": {
+            "Expand": "Expand Feature",
+            "Create": "Create Feature",
+            "View": "View Feature",
+            "Delete": "Delete Feature"
+        },
+        "Section": {
+            "Collapse": "Collapse Section",
+            "Create": "Create Section",
+            "Remove": "Remove Section",
+            "ToggleVisibility": "Toggle Section Visibility"
+        }
+    },
+    "DIALOG": {
+        "Confirm": "Confirm",
+        "Name": "Name",
+        "Tag": "Tag",
+        "AddStat": {
+            "Title": "Add Stat: {name}",
+            "Placeholder": "New Stat",
+            "Tag": {
+                "Label": "Tag"
+            },
+            "Display": {
+                "Label": "Display",
+                "Notes": "<b>Value</b> and <b>Resource</b> are numeric, <b>Label</b> can be any text."
+            },
+            "Color": {
+                "Label": "Color",
+                "Notes": "Configure the stat for token attribute bars."
+            },
+            "Submit": "Add Stat"
+        },
+        "EditStat": {
+            "Title": "Edit Stat [{tag}]: {name}",
+            "Submit": "Edit Stat"
+        },
+        "DeleteColorStat": {
+            "Title": "Delete Stat [{tag}]: {name}",
+            "Content": "<p>Delete the \"<b>{tag}</b>\" (<em>{color}</em>) stat?</p>"
+        },
+        "DeleteStat": {
+            "Title": "Delete Stat [{tag}]: {name}",
+            "Content": "<p>Delete the \"<b>{tag}</b>\" stat?</p>"
+        },
+        "CreateCategory": {
+            "Title": "Create New Category: {name}",
+            "Placeholder": "New Category"
+        },
+        "ColorCategory": {
+            "Title": "Color Category [{category}]: {name}",
+            "Set": "Set Color",
+            "Reset": "Reset Color"
+        },
+        "RenameCategory": {
+            "Title": "Rename Category [{category}]: {name}"
+        },
+        "TrackStat": {
+            "Title": "Track Stat [{category}]: {name}"
+        },
+        "DeleteCategory": {
+            "Title": "Delete Category [{category}]: {name}"
+        },
+        "DeleteFeature": {
+            "Title": "Delete Feature [{id}]: {name}"
+        }
+    },
+    "DETAILS": {
+        "TextEditor": {
+            "Name": "Text Editor",
+            "Hint": "Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, \"what you see is what you get\"."
+        },
+        "RollFormula": {
+            "Name": "Roll Formula"
+        },
+        "Action": {
+            "Name": "Action"
+        },
+        "Usage": {
+            "Name": "Usage",
+            "Hint": "i.e. \"Once per Combat\".",
+            "Per": "per"
+        }
+    },
+    "SETTINGS": {
+        "TokenBarClamp": {
+            "Name": "Token Bar Clamp",
+            "Hint": "Disabling this allows you to modify token bars to go into negative numbers and past their maximum value."
+        },
+        "DefaultTextEditor": {
+            "Name": "Default Text Editor",
+            "Hint": "Configure which text editor is set on-creation for your actors and items."
+        },
+        "DiagonalMovement": {
+            "Name": "Diagonal Movement Rule",
+            "Hint": "Configure which diagonal movement rule should be used for games within this system.",
+            "555": "PHB: Equidistant (5/5/5)",
+            "5105": "DMG: Alternating (5/10/5)",
+            "EUCL": "Euclidean (7.07 ft. Diagonal)"
+        },
+        "DefaultFeatureImage": {
+            "Name": "Default Feature Image",
+            "Hint": "Enabling this sets the default image of created features to the image of the character that owns it."
+        }
+    },
+    "MIGRATION": {
+        "WarnForGM": "Please have a GM log in to begin migration to v1.0.",
+        "V1MigrationBegin": "<b>Beginning v1.0 Migration.</b> Please wait a moment and do not close your game or shut down your server.",
+        "V1MigrationComplete": "<b>v1.0 Migration Complete!</b> Please reload your world.",
+        "Migrating": "Migrating {document} document \"{name}\" [{id}]",
+        "MigratingPack": "Migrated all {document} documents from Compendium \"{pack}\"",
+        "FailedMigration": "Failed AC FVTT system migration for {document} document \"{name}\" [{id}]: {error}",
+        "FailedPackMigration": "Failed AC FVTT system migration for {document} document (\"{name}\" [{id}]) in Compendium {pack}: {error}"
+    },
+    "NOTIFY": {
+        "StatTagTaken": "\"{tag}\" is already taken by another stat.",
+        "Macro": {
+            "ControlActorWarning": "You must control an Actor to roll from the hotbar.",
+            "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]."
+        },
+        "Character": {
+            "CategoryNameTaken": "\"{name}\" is already taken by another category.",
+            "TrackerNameTaken": "\"{name}\" is already taken by another stat tracker.",
+            "BlankName": "Name field can't be blank."
+        }
+    }
+}
+}

@@ -1,0 +1,9 @@
+{
+    "include": [
+        "animecampaign.js", "animecampaign.d.ts"
+    ],
+    "exclude": ["node_modules"],
+    "typeAcquisition": {
+        "include": ["jquery", "handlebars"]
+    }
+}

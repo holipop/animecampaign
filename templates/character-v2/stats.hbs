@@ -1,0 +1,129 @@
+<section class="Stats">
+
+    <div class="Stats__MainStats">
+
+        <div class="Stats__MainStatsPadding"></div>
+
+        <div class="StatCard StatCard--Stamina">
+            
+            <div class="StatCard__Content">
+                <div class="StatCard__Header">
+                    <span class="StatCard__Icon MSO">favorite</span>
+                    <span class="StatCard__Name">{{localize "AC.CharacterSheet.Stamina"}}</span>
+                </div>
+                <div class="StatCard__Footer">
+                    <input class="StatCard__Input StatCard__Input--StaminaValue" type="number" name="system.stamina.value" value="{{system.stamina.value}}" placeholder="0">
+                    <span class="StatCard__Label StatCard__Label--Divider">&sol;</span>
+                    <input class="StatCard__Input StatCard__Input--StaminaMax" type="number" name="system.stamina.max" value="{{system.stamina.max}}" placeholder="0">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="StatCard StatCard--Proficiency">
+            
+            <div class="StatCard__Content">
+                <div class="StatCard__Header">
+                    <span class="StatCard__Icon MSO">star</span>
+                    <span class="StatCard__Name">{{localize "AC.CharacterSheet.Proficiency"}}</span>
+                </div>
+                <div class="StatCard__Footer">
+                    <span class="StatCard__Label StatCard__Label--ClassLevel">{{system.classLevel}}</span>
+                    <input class="StatCard__Input StatCard__Input--ProficiencyValue" type="number" name="system.proficiency.value" value="{{system.proficiency.value}}" placeholder="0">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="StatCard StatCard--Movement">
+            
+            <div class="StatCard__Content">
+                <div class="StatCard__Header">
+                    <span class="StatCard__Icon MSO">arrow_forward</span>
+                    <span class="StatCard__Name">{{localize "AC.CharacterSheet.Movement"}}</span>
+                </div>
+                <div class="StatCard__Footer">
+                    <input class="StatCard__Input StatCard__Input--Build" type="text" name="system.movement.label" value="{{system.movement.label}}" placeholder="{{localize "AC.CharacterSheet.Build"}}">
+                    <input class="StatCard__Input StatCard__Input--MovementValue" type="number" name="system.movement.value" value="{{system.movement.value}}" placeholder="0">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="Stats__MainStatsPadding"></div>
+
+    </div>
+
+    {{#if stats.length}}
+        <ul class="Stats__List JS-Drop">
+
+            {{#each stats as |stat index|}}
+                <li class="StatEntry JS-Stat JS-Drag" data-drag="stat" data-stat="{{index}}">
+
+                    <div class="StatEntry__InfoWrapper">
+                        
+                        <img class="StatEntry__Image" src="{{stat.img}}">
+
+                        <div class="StatEntry__Info">
+
+                            {{#if (gte @root.permission 3)}}
+                                <span class="DragIndicator MSO">drag_indicator</span>
+                            {{/if}}
+
+                            <!-- div class="Wrapper">
+                                <span class="StatEntry__Color StatEntry__Color--{{stat.color}}">{{stat.color}}</span>
+                            </div -->
+                            
+                            <span class="StatEntry__Tag">{{stat.tag}}</span>
+                            <div class="StatEntry__Divider">&VerticalBar;</div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="StatEntry__Inputs">
+
+                        {{#if (eq stat.view "value")}}
+                            <input class="StatEntry__Input StatEntry__Input--Value" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                        {{/if}}
+
+                        {{#if (eq stat.view "resource")}}
+                            <input class="StatEntry__Input StatEntry__Input--Numerator JS-ResizeInput" type="number" name="system.stats.{{index}}.value" value="{{stat.value}}" placeholder="0">
+                            <span class="StatCard__Label StatCard__Label--Divider">&sol;</span>
+                            <input class="StatEntry__Input StatEntry__Input--Denominator" type="number" name="system.stats.{{index}}.max" value="{{stat.max}}" placeholder="0">
+                        {{/if}}
+
+                        {{#if (eq stat.view "label")}}
+                            <input class="StatEntry__Input StatEntry__Input--Label" type="text" name="system.stats.{{index}}.label" value="{{stat.label}}" placeholder="...">
+                        {{/if}}
+
+                    </div>
+                    
+                    {{#if (gte @root.permission 3)}}
+                        <div class="StatEntry__Buttons InlineButtonGroup">
+                            <button class="ACButton ACButton--Inline" type="button" data-action="onStatEdit" data-tooltip="AC.CharacterSheet.StatEdit">
+                                <div class="ACButton__Icon MSO">edit</div>
+                            </button>
+
+                            <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onStatDelete" data-tooltip="AC.CharacterSheet.StatDelete">
+                                <div class="ACButton__Icon MSO">close</div>
+                            </button>
+                        </div>
+                    {{/if}}
+
+                </li>
+            {{/each}}
+
+        </ul>
+
+    {{/if}}
+
+    {{#if (gte permission 3)}}
+        <button class="ACButton ACButton--Wide ACButton--AddStat JS-DisableStatAdd" type="button" data-action="onStatAdd">
+            <span class="ACButton__Icon MSO">add</span>
+            <span class="ACButton__Text">
+                {{localize "AC.CharacterSheet.StatAdd"}}
+            </span>
+        </button>
+    {{/if}}
+
+</section>

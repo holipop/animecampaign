@@ -3,43 +3,30 @@
 
 
 import * as config from './module/config.js'
-import * as Utils from './module/Utils.js'
-import * as ChatMessage from './module/ChatMessage.js'
-import * as List from './module/List.js'
+import * as Description from "./module/Description.js"
 import * as Macro from './module/Macro.js'
-import * as Settings from './module/Settings.js'
-import * as Migrate from './module/Migrate.js'
+import * as Migrate from "./module/Migrate.js"
 
 import ACActor from './module/documents/ACActor.js'
-import CharacterData from './module/data-models/CharacterData.js'
-import CharacterSheet from './module/sheets/CharacterSheet.js'
-
 import ACItem from './module/documents/ACItem.js'
+import CharacterData from './module/data-models/CharacterData.js'
 import FeatureData from './module/data-models/FeatureData.js'
-import FeatureSheet from './module/sheets/FeatureSheet.js'
-
-import Stat from './module/data-models/Stat.js'
-import Section from './module/data-models/Section.js'
-import Category from './module/data-models/Category.js'
+import CharacterSheetV2 from './module/applications-v2/CharacterSheetV2.js'
+import FeatureSheetV2 from './module/applications-v2/FeatureSheetV2.js'
 
 globalThis.AC = {
     Actor: ACActor,
     Item: ACItem,
     CharacterData,
-    CharacterSheet,
     FeatureData,
-    FeatureSheet,
-    Stat,
-    Section,
-    Category,
-    Macro: { ...Macro },
-    List: { ...List },
-    Utils: { ...Utils },
+    CharacterSheetV2,
+    FeatureSheetV2,
+    Macro: { ...Macro }
 }
 
 Hooks.once('init', () => {
-    Utils.log(config.AC.ascii);
-    Utils.log('Initializing Anime Campaign System!');
+    console.log(`%cAnime Campaign | ${config.AC.ascii}`, 'color: #db7093;');
+    console.log("%cAnime Campaign | Initializing Anime Campaign System!", "color: #db7093;");
 
     CONFIG.AC = config.AC;
     game.AC = AC
@@ -51,68 +38,85 @@ Hooks.once('init', () => {
     CONFIG.Item.dataModels["Feature"] = FeatureData;
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("animecampaign", CharacterSheet, { makeDefault: true });
-    Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("animecampaign", FeatureSheet, { makeDefault: true });
+    Actors.registerSheet("animecampaign", CharacterSheetV2, { 
+        types: ["Character"],
+        makeDefault: true 
+    });
 
-    Settings.register();
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("animecampaign", FeatureSheetV2, { 
+        types: ["Feature"],
+        makeDefault: true 
+    });
+
+    game.settings.register('animecampaign', 'systemMigrationVersion', {
+        name: "System Migration Version",
+        scope: 'world',
+        config: false,
+        type: String,
+        default: ""
+    })
 
     const partials = {
-        // Global
-        'summary': 'systems/animecampaign/templates/sheets/partials/summary.hbs',
-        'stat-list': 'systems/animecampaign/templates/sheets/partials/stat-list.hbs',
-        'nav': 'systems/animecampaign/templates/sheets/partials/nav.hbs',
+        "generic.nav": "systems/animecampaign/templates/generic/nav.hbs",
+        "generic.details": "systems/animecampaign/templates/generic/details.hbs",
 
-        // Character
-        'main-stats': 'systems/animecampaign/templates/sheets/partials/main-stats.hbs',
-        'biography': 'systems/animecampaign/templates/sheets/partials/biography.hbs',
-        'kit': 'systems/animecampaign/templates/sheets/partials/kit.hbs',
-        'feature': 'systems/animecampaign/templates/sheets/partials/feature.hbs',
+        "character.summary": "systems/animecampaign/templates/character-v2/summary.hbs",
+        "character.stats": "systems/animecampaign/templates/character-v2/stats.hbs",
+        "character.kit": "systems/animecampaign/templates/character-v2/kit.hbs",
+        "character.feature-entry": "systems/animecampaign/templates/character-v2/feature-entry.hbs",
 
-        // Feature
-        'sections': 'systems/animecampaign/templates/sheets/partials/sections.hbs',
-        'details': 'systems/animecampaign/templates/sheets/partials/details.hbs',
-
-        // Roll
-        'roll-summary': 'systems/animecampaign/templates/roll/summary.hbs',
-        'roll-dice': 'systems/animecampaign/templates/roll/dice.hbs',
-        'roll-stats': 'systems/animecampaign/templates/roll/stats.hbs',
-        'roll-sections': 'systems/animecampaign/templates/roll/sections.hbs',
-        'roll-banner': 'systems/animecampaign/templates/roll/banner.hbs',
+        "feature.summary": "systems/animecampaign/templates/feature-v2/summary.hbs",
+        "feature.stats": "systems/animecampaign/templates/feature-v2/stats.hbs",
     }
-    loadTemplates(partials);
+    loadTemplates(partials)
 })
 
 Hooks.on('ready', () => {
-    // !!! Remove post v1.0
-    const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion');
+    const NEEDS_MIGRATION_VERSION = "v1.0"
+    const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
+
+    if (currentVersion === game.system.version) {
+        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+        return
+    }
 
     // If this is a brand new world, skip migration.
-    const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
-    if ( !currentVersion && totalDocuments === 0 ) { 
-        return game.settings.set("animecampaign", "systemMigrationVersion", game.system.version);
+    const totalDocuments = game.actors.size + game.scenes.size + game.items.size
+    if (!currentVersion && totalDocuments === 0) { 
+        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+        return 
     }
-
-    if (currentVersion == "") {
+    
+    if (foundry.utils.isNewerVersion(game.system.version, NEEDS_MIGRATION_VERSION)) {
         if (!game.user.isGM) {
-            ui.notifications.warn(game.i18n.localize("AC.MIGRATION.WarnForGM"));
-            return;
+            ui.notifications.warn(game.i18n.localize("AC.Migration.WarnForGM"))
+            return
         }
-        Migrate.toV1();
+        Migrate.toV2()
     }
 
-    const NEEDS_MIGRATION_VERSION = "v0.1";
+    game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
 })
 
-// (Copied from DnD5e)
-Hooks.on("canvasInit", gameCanvas => {
-    if (!foundry.utils.isNewerVersion(game.version, 12)) {
-        gameCanvas.grid.diagonalRule = game.settings.get("animecampaign", "diagonalMovement");
-        foundyr.grid.SquareGrid.prototype.measureDistances = Utils.measureDistances;
+Hooks.on('renderChatMessage', (message, html, data) => {
+    const messageElement = html[0].querySelector(".JS-ChatMessage")
+    if (!messageElement) return
+
+    // Expand roll tooltip on click
+    const roll = messageElement.querySelector(".JS-ExpandTooltip")
+    if (roll) {
+        const tooltip = messageElement.querySelector("div.dice-tooltip")
+
+        roll.addEventListener("click", event => {
+            const display = tooltip.style.display
+            tooltip.style.display = (display) ? "" : "block"
+        })
     }
-});
+    
+    const content = messageElement.querySelector(".JS-Content")
+    Description.attachSections(content)
 
-Hooks.on('renderChatMessage', ChatMessage.activateListeners)
+})
+
 Hooks.on('hotbarDrop', Macro.createMacro)
-
-// test?

@@ -1,113 +1,556 @@
 // main: ./animecampaign.less
 
+// ---- Mixins ----
+
+#DebugOutline (@color: red) {
+    outline: 1px solid @color;
+}
+
+#Part () {
+    width: @part-width;
+    margin: 0 auto;
+}
+
+#GenerateGrid (@columns: 1, @rows: 1) {
+    display: grid;
+    grid-template-columns: repeat(@columns, 1fr);
+    grid-template-rows: repeat(@rows, 1fr);
+
+    > * {
+        grid-area: 1 / 1 / -1 / -1;
+    }
+}
+
+#GridWrap () {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    > * {
+        grid-area: 1 / 1 / -1 / -1;
+    }
+}
+
+#ColorScheme (@rules, @opacity: 100%) {
+    .theme-dark & {
+        each(@rules, { 
+            @{key}: fade(
+                if(@value = "txt", @dark-txt-color, @dark-bg-color),
+                @opacity
+            ); 
+        });
+    }
+    .theme-light & {
+        each(@rules, { 
+            @{key}: fade(
+                if(@value = "txt", @light-txt-color, @light-bg-color),
+                @opacity
+            ); 
+        })
+    }
+}
+
+#ContrastImageFilter () {
+    .theme-dark & {
+        filter: brightness(0) saturate(100%) invert(100%);
+    }
+    .theme-light & {
+        filter: brightness(0) saturate(100%);
+    }
+}
+
+#FocusOutline () {
+    transition+: outline .25s;
+    &:focus {
+        outline: (2 * @rpx) fade(@ac-color, 50%) solid;
+    }
+}
+
+#ListSkinning () {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#TextAreaSkinning () {
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    border: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+#InputSkinning () {
+    #ColorScheme({
+        color: "txt";
+        border-color: "bg";
+    });
+    
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    background: none;
+    transition: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    &:hover {
+        transition: none;
+        box-shadow: none;
+    }
+}
+
+#ButtonSkinning () {
+    #InputSkinning();
+
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+    padding: 0;
+}
+
+#ListSkinning () {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+// ---- Global Rules ----
+
+.animecampaign .MSO {
+    font-family: 'Material Symbols Outlined' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: (24 * @rpx);  /* 24px Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+}
+
+// Generic Document Sheet Styling
+.animecampaign.application {
+    #ColorScheme(@opacity: 80%, {
+        background: "bg";
+    });
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
 .animecampaign.sheet .window-content {
-    #AC.Background();
+    padding: 0;
+}
+.animecampaign.sheet:not(.minimizing, .maximizing, .minimized) {
+    min-width: @sheet-width;
+    min-height: @sheet-height;
+}
+.animecampaign .Template {
+    height: 100%;
+}
+.animecampaign.item.sheet .Details {
+    width: 80%;
+    margin: .5rem auto;
 }
 
-.animecampaign.sheet form {
-    overflow-y: hidden;
+.animecampaign .Scrollable {
+    #ColorScheme({
+        color: "txt";
+    });
 
-    .scrollable {
-        overflow-y: scroll;
-        padding: 0 1rem;
+    overflow-y: scroll;
+    
+    scrollbar-color: currentColor transparent;
+    scrollbar-width: thin;
 
-        scrollbar-color: #AC.Color()[@return] rgba(0, 0, 0, 0.25);
-        scrollbar-width: thin;
+    &::-webkit-scrollbar-thumb {
+        background-color: currentColor;
+        border-color: currentColor;
     }
-    ::-webkit-scrollbar-thumb {
-        background-color: #AC.Color()[@return];
-        border-color: #AC.Color(.5)[@return];
+}
+.animecampaign.actor .Scrollable {
+    height: calc(100% - @character-summary-height);
+}
+.animecampaign.item .Scrollable {
+    height: calc(100% - @feature-summary-height);
+}
+
+
+// Text Editor
+.animecampaign .Description, .animecampaign .Biography {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+.animecampaign .ACTextEditor {
+    #ColorScheme({
+        color: "txt";
+    });
+
+    max-height: none;
+    font-family: "Libre Franklin";
+}
+.animecampaign .ACTextEditor.active {
+    height: 100%;
+}
+.animecampaign .ACTextEditor .editor-menu {
+    #ColorScheme(@opacity: 50%, {
+        border-color: "txt";
+        background-color: "bg";
+    });
+
+    border: (1 * @rpx) solid;
+    border-radius: 2 * @rpx;
+}
+.animecampaign .ACTextEditor .editor-content, 
+.animecampaign .NonOwnerDescription,
+.animecampaign .FeatureContent__Description,
+.animecampaign .ChatMessage__Content {
+    #ColorScheme({
+        color: "txt";
+    });
+    
+    padding: .2rem 5%;
+
+    font-family: "Libre Franklin";
+
+    h1, h2, h3, h4, h5, h6 {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        margin-bottom: .5rem;
+        margin-top: .75rem;
+        text-shadow: none;
+    }
+    h1, h2, h3 {
+        #ColorScheme(@opacity: 25% , {
+            border-color: "txt";
+        });
+        border-bottom: (1 * @rpx) solid;
+    }
+    h1 {
+        font: 1.33rem "Gloock";
+    }
+    h2 {
+        font: bold 1.25rem "Philosopher";
+    }
+    h3 {
+        font: 700 1.15rem "Libre Franklin";
+    }
+    h4 {
+        font: 1.1rem "Gloock";
+    }
+    h5 {
+        font: bold 1.1rem "Philosopher";
+    }
+    h6 {
+        font: 700 1.1rem "Libre Franklin";
     }
 
-    .editor {
-        min-height: 3rem;
-        border: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
-        border-left-width: (3 * @rpx);
-        border-right-width: (3 * @rpx);
+    .Section__Header {
+        display: flex;
+        align-items: flex-end;
 
-        font-family: "Libre Franklin";
-        background-color: rgba(0, 0, 0, 0.05);
-
-        .editor-menu {
-            border-radius: 0;
-
-            button {
-                margin: 0;
-            }
+        transition: font-size 0.075s;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        &.Section__Header.Section__Header--Collapsed {
+            opacity: .75;
+            font-size: 1rem;
         }
     }
-
-    .selected {
-        #AC.Active();
-    }
-
-    img {
-        -webkit-user-drag: none;
-        user-select: none;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-    }
-    a:hover {
-        text-shadow: #AC.Color()[@return] 0 0 (8 * @rpx);
-    }
-    button:not(.prosemirror *) {
-        #AC.InputSkinning();
-        #AC.Border();
-
-        padding: 0;
+    .Section__Collapse {
         margin: 0;
+        margin-right: .1rem;
+        margin-bottom: .1rem;
+        height: 1rem;
+        width: 1rem;
 
+        .theme-dark &, 
+        .theme-light & { // specificity
+            background-color: transparent;
+        }
+    }
+     .Section__CollapseIcon {
+        rotate: 0deg;
+        transition: rotate .075s;
+    }
+     .Section__Header--Collapsed .Section__CollapseIcon {
+        rotate: -90deg;
+    }
+     .Section__Content {
+        display: block;
+    }
+     .Section__Content--Collapsed {
+        display: none;
+    }
+
+    hr {
+        #ColorScheme(@opacity: 25% , {
+            border-color: "txt";
+        });
+
+        background-image: none;
+        height: 0;
+        border: none;
+        border-bottom: (1 * @rpx) solid;
+    }
+
+    code {
+        #ColorScheme({
+            background-color: "bg";
+        });
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+    }
+    blockquote {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
         font-family: "Libre Franklin";
-        font-weight: 600;
-
-        &:hover {
-            background-color: #AC.Color(.05)[@return];
-        }
-        &:active {
-            background-color: #AC.Color(.2)[@return];
-        }
-    }
-    input, select, textarea {
-        #AC.InputSkinning();
-
-        border: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
-        border-left: 0;
-        border-right: 0;
-        background-color: rgba(0, 0, 0, 0.05);
-
-        font-family: "Libre Franklin";
-        font-weight: 500;
-
-        &:focus:not([readonly]) {
-            border-color: #AC.Color(.66)[@return];
-        }
-    }
-    input, select {
-        border-top: 0;
-        &:focus:not([readonly]) {
-            box-shadow: inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx);
-        }
-    }
-    textarea:focus:not([readonly]) {
-        box-shadow: 
-            inset #AC.Color(.3)[@return] 0 (-5 * @rpx) (5 * @rpx) (-5 * @rpx),
-            inset #AC.Color(.3)[@return] 0 ( 5 * @rpx) (5 * @rpx) (-5 * @rpx);
     }
 }
-.animecampaign.actor.sheet {
-    min-width: 650px;
-    min-height: 550px;
+.animecampaign .ACTextEditor .editor-menu > li > button {
+    #ColorScheme({
+        color: "txt";
+    });
 
-    .scrollable {
-        height: calc(100% - @character-summary-height);
+    border-radius: 2 * @rpx;
+    
+    font-family: "Libre Franklin";
+    font-size: .7rem;
+    background-color: transparent;
+    transition: .075s background-color;
+
+    &:hover {
+        #ColorScheme(@opacity: 25%, {
+            background-color: "txt";
+        })
+    }
+    &:active {
+        #ColorScheme(@opacity: 75%, {
+            background-color: "txt";
+        })
+    }
+
+    &.pm-dropdown {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        border: (1 * @rpx) solid;
     }
 }
-.animecampaign.item.sheet {
-    min-width: 550px;
-    min-height: 500px;
 
-    .scrollable {
-        height: calc(100% - @feature-summary-height);
+.animecampaign .DragIndicator {
+    #ColorScheme({
+        color: "txt";
+    });
+
+    opacity: .75;
+    font-size: 1rem;
+    line-height: 1.2;
+    transition: opacity .1s;
+}
+.animecampaign .DragIndicator:hover {
+    cursor: grab;
+}
+
+// Button
+.animecampaign button.ACButton {
+    #ButtonSkinning();
+    #FocusOutline();
+    #ColorScheme({
+        background-color: "bg";
+    });
+
+    display: grid;
+    place-items: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 12.5%;
+    transition: box-shadow .25s, background-color .25s;
+
+    &:hover {
+        box-shadow: 0 0 0 (1 * @rpx) currentColor;
+    }
+    &:active {
+        background-color: currentColor;
+    }
+    &:disabled {
+        opacity: .25;
+    }
+
+    .ACButton__Icon {
+        font-size: 1.1rem;
+    }
+    .ACButton__Text {
+        font: bold .9rem "Libre Franklin";
+    }
+}
+.animecampaign button.ACButton--Wide { // Basically .ACButton--Dialog but not for flexboxes.
+    #ColorScheme(@opacity: 50%, {
+        border-color: "txt";
+    });
+
+    display: flex;
+    justify-content: center;
+    gap: .25rem;
+    height: 2.5rem;
+    width: 80%;
+    margin: .25rem auto;
+    border-radius: 2 * @rpx;
+    border: (1 * @rpx) solid;
+
+    &:hover {
+        .theme-dark & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@dark-txt-color, 50%);
+        }
+        .theme-light & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@light-txt-color, 50%);
+        }
+    }
+    &:active {
+        #ColorScheme(@opacity: 50%, {
+            background-color: "txt";
+        })
+    }
+}
+.animecampaign button.ACButton--Tab {
+    #ColorScheme({
+        border-color: "txt";
+        color: "txt";
+    });
+
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    bottom: 0;
+    margin-top: .25rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 6.25%;
+    transition: 
+        box-shadow .1s,
+        bottom .1s;
+
+    box-shadow: 0 0 0 currentColor;
+}
+.animecampaign button.ACButton--Tab.active {
+    bottom: .25rem;
+    box-shadow: 0 .25rem 0 currentColor;
+    text-shadow: none; // FUCK OFFFF
+    outline: none;
+}
+.animecampaign button.ACButton--Inline {
+    #ColorScheme({
+        color: "txt";
+        background: "bg";
+    });
+
+    height: 1.25rem;
+    width: 1.25rem;
+    border: none;
+
+    &:hover {
+        #ColorScheme(@opacity: 25%, {
+            background-color: "txt";
+        });
+
+        box-shadow: none;
+    }
+    &:active {
+        #ColorScheme(@opacity: 75%, {
+            background-color: "txt";
+        });
+    }
+
+    .ACButton__Icon {
+        font-size: 1rem;
+    }
+}
+.animecampaign button.ACButton.ACButton--Delete {
+    color: @delete-color;
+    border-color: @delete-color;
+
+    &:hover {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        border-color: @delete-color;
+        background-color: @delete-color;
+    }
+}
+.animecampaign button.ACButton.ACButton--White {
+    color: @dark-txt-color;
+    background: transparent;
+
+    &:hover {
+        background-color: fade(@dark-txt-color, 25%);
+    }
+    &:active {
+        background-color: fade(@dark-txt-color, 75%);
+    }
+}
+.animecampaign button.ACButton.ACButton--Black {
+    color: @light-txt-color;
+    background: transparent;
+    
+    &:hover {
+        background-color: fade(@light-txt-color, 25%);
+    }
+    &:active {
+        background-color: fade(@light-txt-color, 75%);
+    }
+}
+.animecampaign .InlineButtonGroup {
+    display: flex;
+    gap: .05rem;
+    justify-content: end;
+    align-items: center;
+    min-width: 1.5rem;
+    padding: 0 .125rem;
+
+    transition: opacity 0.1s;
+    opacity: 0;
+}
+
+// ! deprecated
+.animecampaign button.ACButton--Rounded {
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 12.5%;
+}
+.animecampaign button.ACButton--Circle {
+    height: 1.25rem;
+    width: 1.25rem;
+    border: (1 * @rpx) solid currentColor;
+    border-radius: 50%;
+
+    .ACButton__Icon {
+        font-size: .85rem;
+
+        font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
     }
 }

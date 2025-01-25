@@ -1,0 +1,297 @@
+// main: ./animecampaign.less
+
+#AC {
+    .Background() {
+        background: @bg-color;
+    }
+    .Color(@alpha: 1) {
+        @return: rgba(205, 50, 50, @alpha);
+    }
+    .Border() {
+        border: (1 * @rpx) solid black;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
+    }
+    .Active() {
+        background: linear-gradient(to top, #AC.Color(.5)[@return], transparent);
+    }
+    .HeadingSkinning() {
+        margin: 0;
+        border: 0;
+    }
+    .ListSkinning() {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .InputSkinning() {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+    }
+    .Overflow() {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.animecampaign.chat.roll {
+    #AC.Border();
+    #AC.Background();
+}
+
+.animecampaign.chat.roll .summary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1rem;
+    
+    .background {
+        box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
+
+        grid-column: 1 / -1;
+        grid-row: 1 / 2;
+    }
+    .img {
+        #AC.Border();
+
+        height: 2.25rem;
+        width: 2.25rem;
+        grid-column: 1 / 2;
+        grid-row: 1 / -1;
+        place-self: end;
+        margin: 4 * @rpx;
+        border-radius: 0;
+    }
+    .name {
+        #AC.HeadingSkinning();
+
+        grid-column: 2 / -1;
+        grid-row: 1 / 2;
+        place-self: end start;
+        margin: (4 * @rpx) 0;
+
+        font: 1.25rem "Gloock";
+        line-height: .9;
+        letter-spacing: (1 * @rpx);
+    }
+    .category {
+        #AC.Overflow();
+
+        width: 100%;
+        grid-column: 2 / -1;
+        grid-row: 2 / -1;
+        place-self: end start;
+
+        font: bold .7rem "Libre Franklin";
+        text-transform: uppercase;
+        opacity: .75;
+    }
+    .action {
+        #AC.InputSkinning();
+
+        height: 1.5rem;
+        width: 1.5rem;
+        grid-column: 2 / -1;
+        grid-row: 1 / 2;
+        margin: .15rem .25rem;
+        place-self: end;
+
+        opacity: .25;
+    }
+}
+
+.animecampaign.chat.roll .dice-roll {
+    margin: (4 * @rpx);
+
+    .result {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+
+        .total {
+            #AC.Border();
+            #AC.Overflow();
+
+            height: 1.5rem;
+            min-width: 3rem;
+            max-width: 5rem;
+            border-radius: (2 * @rpx);
+            border-color: rgba(0, 0, 0, 0.5);
+            
+            font: bold 1.25rem "Philosopher";
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.2);
+
+            &.success {
+                border-color: darkgreen;
+                color: darkgreen;
+                text-shadow: white 0 (1 * @rpx);
+                background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+            }
+            &.failure {
+                border-color: darkred;
+                color: darkred;
+                text-shadow: white 0 (1 * @rpx);
+                background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
+            }
+        }
+        .formula {
+            #AC.Overflow();
+
+            flex: 1;
+            margin-left: .25rem;
+            border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.33);
+            
+            font: 500 .8rem "Libre Franklin";
+            opacity: .75;
+        }
+    }
+
+    .dice-tooltip {
+        margin-top: .15rem;
+
+        font-family: "Libre Franklin";
+
+        .part-header {
+            align-items: flex-end;
+        }
+        .part-total, .roll {
+            font-family: "Philosopher";
+        }
+        .part-formula {
+            font-size: .8rem;
+            opacity: 0.66;
+            line-height: 1;
+        }
+    }
+}
+
+.animecampaign.chat.roll .stat-list {
+    #AC.ListSkinning();
+    #AC.Border();
+
+    margin-top: .5rem;
+    border-color: rgba(0, 0, 0, 0.5);
+    border-left: 0;
+    border-right: 0;
+
+    .stat {
+        display: grid;
+        grid-template-columns: 2fr 2.5fr;
+        height: 1.25rem;
+
+        &:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            #AC.InputSkinning();
+
+            height: 100%;
+            width: 1.25rem;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+
+            filter: brightness(0) saturate(100%);
+            opacity: .33;
+        }
+        .tag {
+            #AC.Overflow();
+
+            width: 100%;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            place-self: end end;
+            padding: 0 (4 * @rpx);
+
+            font: 600 .75rem "Libre Franklin";
+            text-align: end;
+            text-transform: uppercase;
+            opacity: .8;
+            
+        }
+
+        .stat-numbers {
+            #AC.Overflow();
+
+            width: 100%;
+            padding: 0 (4 * @rpx);
+            border-left: (1 * @rpx) solid rgba(0, 0, 0, 0.25);
+            place-self: end start;
+
+            font: italic bold 1.2rem "Philosopher";
+
+            .resource-max {
+                font-weight: normal;
+                font-size: .9rem;
+            }
+        }
+
+    }
+
+}
+
+.animecampaign.chat.roll .section-list {
+    #AC.ListSkinning();
+
+    .section {
+        border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.4);
+        box-shadow: rgba(0, 0, 0, 0.15) 0 (1 * @rpx);
+        padding-top: .25rem;
+        
+        > * {
+            padding: 0 .3rem;
+        }
+        &:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    header {
+        display: flex;
+        align-items: flex-end;
+
+        .collapse {
+            font-size: .66rem;
+
+            > i {
+                margin-right: .3rem;
+            }
+        }
+        .name {
+            height: min-content;
+
+            font: 800 .8rem "Libre Franklin";
+            line-height: 1;
+        }
+    }
+    .text {
+        margin: 0;
+        padding: .3rem;
+        border-top: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
+
+        font: 500 .775rem "Libre Franklin";
+    }
+}
+
+.animecampaign.chat.roll .roll-banner {
+    #AC.Overflow();
+
+    display: flex;
+    min-height: .33rem;
+    width: 100%;
+    align-items: center;
+    padding: .1rem .2rem;
+    
+    font: 600 .75rem "Libre Franklin";
+    
+    .action {
+        flex: 1;
+        text-align: end;
+
+        font-style: italic;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}

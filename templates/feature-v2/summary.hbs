@@ -1,0 +1,63 @@
+<section class="Summary">
+
+    <div class="Summary__ImageWrapper">
+        
+        {{#if document.img}}
+            <img class="Summary__Image JS-Color" src="{{document.img}}" data-color="{{palette.primary}}" data-properties="border-color">
+            <div class="Summary__ImageEdit" data-action="onEditImage" data-tooltip="AC.FeatureSheet.EditImage">
+                <span class="Summary__ImageEditIcon MSO">edit</span>
+            </div>
+        {{else}}
+            <div class="Summary__Image Summary__Image--Null JS-Color" data-color="{{palette.primary}}">
+                <div class="Summary__ImageIcon MSO">stat_0</div>
+            </div>
+            <div class="Summary__ImageEdit Summary__ImageEdit--Null" data-action="onEditImage" data-tooltip="AC.FeatureSheet.EditImage">
+                <span class="Summary__ImageEditIcon MSO">edit</span>
+            </div>
+        {{/if}}
+
+    </div>
+    
+    <div class="Summary__Info">
+
+        <textarea class="Summary__Name JS-ResizeTextArea JS-Enter" name="name" spellcheck="false" placeholder="{{localize "AC.FeatureSheet.Name"}}">{{document.name}}</textarea>
+
+        <div class="Summary__InfoFooter JS-Color" data-color="{{palette.primary}}" data-properties="background-color">
+
+            <select class="Summary__FooterSelect JS-Color" data-color="{{palette.contrast}}">
+                <option value="">Weapon</option>
+                <option value="">Talent</option>
+                <option value="">Passive</option>
+                <option value="">Ability</option>
+            </select>
+            <input class="Summary__FooterInput JS-Color" name="system.category" type="text" value="{{system.category}}" placeholder="{{localize "AC.FeatureSheet.Category"}}" data-color="{{palette.primary}}" data-properties="border-color">
+
+        </div>
+    </div>
+
+    <div class="Summary__Buttons">
+
+        {{#if (gte permission 3)}}
+            {{#if document.img}}
+                <button class="ACButton ACButton--Delete" type="button" data-action="onRemoveImage" data-tooltip="AC.FeatureSheet.RemoveImage">
+                    <span class="ACButton__Icon MSO">hide_image</span>
+                </button>
+            {{/if}}
+
+            <button class="ACButton JS-Color" type="button" data-action="onInvokeColorPicker" data-tooltip="AC.FeatureSheet.EditColor" data-color="{{palette.secondary}}" data-properties="border-color color">
+                <span class="ACButton__Icon MSO">palette</span>
+            </button>
+            <input class="Summary__HiddenColor JS-InvokeColorPicker" type="color" name="system.color" value="{{system.color}}">
+        {{/if}}
+
+        <button class="ACButton JS-Color" type="button" data-action="onRoll" data-tooltip="AC.FeatureSheet.FeatureRoll" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <span class="ACButton__Icon MSO">ifl</span>
+        </button>
+
+        <!-- button class="ACButton JS-Color" type="button" data-tooltip="AC.FeatureSheet.FeaturePost" data-color="{{palette.secondary}}" data-properties="border-color color">
+            <span class="ACButton__Icon MSO">chat_bubble</span>
+        </button -->
+
+    </div>
+
+</section>

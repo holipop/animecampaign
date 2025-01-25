@@ -1,0 +1,116 @@
+<li class="FeatureEntry {{feature.system.uncollapsedCSS}} JS-FeatureEntry JS-Color JS-Drag" data-drag="feature" data-id="{{feature.id}}" data-color="{{feature.system.color}}" data-properties="border-color">
+
+    <div class="FeatureEntry__Padding JS-Color" data-color="{{feature.system.color}}" data-properties="background-color">
+        {{#if (gte permission 3)}}
+            <span class="DragIndicator MSO JS-Color" data-color="{{feature.system.palette.contrast}}">drag_indicator</span>
+        {{/if}}
+    </div>
+
+    <div class="FeatureEntry__Lining">
+        
+        <div class="FeatureEntry__Info">
+
+            <div class="FeatureEntry__ImageWrapper">
+
+                {{#if feature.img}}
+                    <img class="FeatureEntry__Image" src="{{feature.img}}">
+                {{else}}
+                    <span class="FeatureEntry__Image FeatureEntry__Image--Null JS-Color" data-color="{{feature.system.color}}">
+                        <span class="FeatureEntry__ImageIcon MSO">stat_0</span>
+                    </span>
+                {{/if}}
+
+                <span class="FeatureEntry__Roll MSO" data-action="onFeatureRoll" data-tooltip="AC.CharacterSheet.FeatureRoll">ifl</span>
+
+            </div>
+
+            <button class="FeatureEntry__Name ACButton ACButton--Inline" type="button" data-action="onFeatureCollapse">
+                <span class="FeatureEntry__NameText">{{feature.name}}</span>
+                <div class="FeatureEntry__CollapseIcon ACButton__Icon MSO">arrow_drop_down</div>
+            </button>
+
+            <div class="FeatureEntry__NamePadding"></div>
+
+            <div class="FeatureEntry__TrackedStats">
+
+                {{#each feature.system.trackedStats as |stat index|}}
+                    <div class="TrackedStat">
+
+                        {{#if (eq stat.view "value")}}
+                                <span class="TrackedStat__Value">{{stat.value}}</span>
+                        {{/if}}
+
+                        {{#if (eq stat.view "resource")}}
+                                <span class="TrackedStat__Value">{{stat.value}}</span>
+                                <span class="TrackedStat__Max">/ {{stat.max}}</span>
+                        {{/if}}
+
+                        {{#if (eq stat.view "label")}}
+                                <span class="TrackedStat__Label">{{stat.label}}</span>
+                        {{/if}}
+
+                    </div>
+                {{/each}}
+
+            </div>
+
+            <div class="FeatureEntry__Buttons InlineButtonGroup">
+
+                {{#if (gte permission 3)}}
+                    <button class="ACButton ACButton--Inline" type="button" data-action="onFeatureEdit" data-tooltip="AC.CharacterSheet.FeatureEdit">
+                        <div class="ACButton__Icon MSO">edit</div>
+                    </button>
+
+                    <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onFeatureDelete" data-tooltip="AC.CharacterSheet.FeatureDelete">
+                        <div class="ACButton__Icon MSO">close</div>
+                    </button>
+                {{/if}}
+                
+                {{#if (eq permission 2)}}
+                    <button class="ACButton ACButton--Inline" type="button" data-action="onFeatureEdit" data-tooltip="AC.CharacterSheet.FeatureView">
+                        <div class="ACButton__Icon MSO">open_in_full</div>
+                    </button>
+                {{/if}}
+
+            </div>
+
+        </div>
+
+        <div class="FeatureContent">
+
+            {{#if feature.system.stats}}
+                <div class="FeatureContent__StatsPadding"></div>
+                <ul class="FeatureContent__Stats">
+                    {{#each feature.system.stats as |stat index|}}
+                        <li class="FeatureContent__StatEntry">
+
+                            <span class="FeatureContent__StatEntryTag">{{stat.tag}}</span>
+                            <span class="FeatureContent__StatEntryDivider">|</span>
+
+                            {{#if (eq stat.view "value")}}
+                                <span class="FeatureContent__StatEntryValue">{{stat.value}}</span>
+                            {{/if}}
+
+                            {{#if (eq stat.view "resource")}}
+                                <span class="FeatureContent__StatEntryValue">{{stat.value}}</span>
+                                <span class="FeatureContent__StatEntryMax">/ {{stat.max}}</span>
+                            {{/if}}
+
+                            {{#if (eq stat.view "label")}}
+                                <span class="FeatureContent__StatEntryLabel">{{stat.label}}</span>
+                            {{/if}}
+
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+
+            <div class="FeatureContent__Description JS-AttachSections">
+                {{{content}}}
+            </div>
+
+        </div>
+
+    </div>
+    
+</li>

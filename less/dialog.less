@@ -1,0 +1,281 @@
+// main: ./animecampaign.less
+
+// For some reason, this is the only way to get dialogs to display that aren't DialogV2
+.animecampaign.dialog.application:not([open]) {
+    display: block;
+}
+
+.animecampaign.dialog {
+
+    .Dialog__Navigation {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        
+        display: flex;
+        padding-bottom: 0.25rem;
+        border-bottom: (1 * @rpx) solid;
+    }
+    .Dialog__NavigationTabs {
+        display: flex;
+        gap: .2rem;
+    }
+    .ACButton--DialogTab {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+            color: "txt";
+        });
+
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+    .ACButton--DialogTab.active {
+        #ColorScheme({
+            border-color: "txt";
+            color: "txt";
+        });
+    }
+
+    .Dialog__NavigationTabName {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        display: flex;
+        align-items: end;
+        margin-left: .5rem;
+        margin-bottom: .2rem;
+    }
+    .Dialog__NavigationTabNameContent {
+        font: 1.1rem "Gloock";
+    }
+
+    .Dialog__Content {
+        padding: 1.25rem 0;
+        
+        text-align: center;
+        font-family: "Libre Franklin";
+    }
+
+    .Dialog__Buttons {
+        display: flex;
+        gap: .5rem;
+        margin-top: 1rem;
+    }
+
+    button.ACButton--Dialog {
+        #ColorScheme({
+            color: "txt";
+        });
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+        #FocusOutline();
+
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        gap: .25rem;
+        height: 2.5rem;
+        width: 100%;
+        border-radius: 2 * @rpx;
+        border: (1 * @rpx) solid;
+
+        &:hover {
+            .theme-dark & {
+                box-shadow: 0 0 0 (1 * @rpx) fade(@dark-txt-color, 50%);
+            }
+            .theme-light & {
+                box-shadow: 0 0 0 (1 * @rpx) fade(@light-txt-color, 50%);
+            }
+        }
+        &:active {
+            #ColorScheme(@opacity: 50%, {
+                background-color: "txt";
+            })
+        }
+    }
+    button.ACButton--DialogMinor {
+        #ColorScheme({
+            color: "txt";
+        });
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        #FocusOutline();
+
+        display: flex;
+        justify-content: center;
+        gap: .25rem;
+        height: 2rem;
+        width: 100%;
+        border-radius: 2 * @rpx;
+        border: (1 * @rpx) solid;
+
+        .ACButton__Text {
+            font-weight: normal;
+        }
+
+        &:hover {
+            .theme-dark & {
+                box-shadow: 0 0 0 (1 * @rpx) fade(@dark-txt-color, 25%);
+            }
+            .theme-light & {
+                box-shadow: 0 0 0 (1 * @rpx) fade(@light-txt-color, 25%);
+            }
+        }
+        &:active {
+            #ColorScheme(@opacity: 25%, {
+                background-color: "txt";
+            })
+        }
+    }
+
+    // Stat Trackers
+    .CategoryStats {
+        #ListSkinning();
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        #ColorScheme({
+            color: "txt";
+            background-color: "bg";
+        });
+
+        display: flex;
+        flex-direction: column;
+        border: (1 * @rpx) solid;
+        border-radius: 2 * @rpx;
+    }
+    .CategoryStats__Empty {
+        width: 100%;
+
+        font: .66rem "Libre Franklin";
+        text-align: center;
+        opacity: .5;
+        margin: .5rem 0;
+    }
+    .CategoryStats__Entry {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        width: 97%;
+        margin: 0 auto;
+        padding: .5rem .25rem;
+        border-bottom: (1 * @rpx) solid;
+    }
+    .CategoryStats__Entry:last-child {
+        border: none
+    }
+    .CategoryStats .ACButton {
+        opacity: .25;
+        transition: opacity .075s;
+    }
+    .CategoryStats__Entry:hover .ACButton {
+        opacity: 1;
+    }
+
+    .CategoryStats__Entry .DragIndicator {
+        opacity: .25;
+    }
+    .CategoryStats__Entry:hover .DragIndicator {
+        opacity: .75;
+    }
+
+    .CategoryStats__Fields {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+    }
+
+}
+
+// Configuraion Dialogs
+.animecampaign.application {
+    .Config {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        font-family: "Libre Franklin";
+    }
+
+    .Config__Group {
+        #ColorScheme({
+            color: "txt"
+        });
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .Config__Label {
+        flex: 2;
+
+        font-weight: bold;
+        text-align: left;
+    }
+    .Config__Fields {
+        flex: 3;
+        display: flex;
+        gap: .25rem;
+        align-items: center
+    }
+    input.Config__Input, select.Config__Input { // specificity to override foundry
+        #InputSkinning();
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+        #FocusOutline();
+
+        flex: 3;
+        border-radius: 2 * @rpx;
+        border: (1 * @rpx) solid;
+        padding: 0 .4rem;
+
+        text-align: left;
+    }
+    input.Config__Input::placeholder {
+        #ColorScheme(@opacity: 50%, {
+            color: "txt";
+        });
+    }
+    input.Config__Input--Caps {
+        text-transform: uppercase;
+    }
+    input.Config__Input--Color {
+        flex: 1;
+    }
+    .Config__InnerLabel {
+        flex: 0;
+        width: fit-content;
+
+        font-size: .9rem;
+    }
+    .Config__Notes {
+        width: 100%;
+        margin-bottom: 0;
+
+        font-size: .75rem;
+        text-align: left;
+        opacity: .8;
+    }
+    .Config__HorizontalBreak {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt"
+        });
+        width: 100%;
+        border: none;
+        border-top: (1 * @rpx) solid;
+        margin: .25rem 0;
+
+        height: unset;
+        color: unset;
+        background-image: unset;
+    }
+}

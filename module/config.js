@@ -1,5 +1,6 @@
-
-// An object containing language localization paths and default configurations.
+/** 
+ * An object containing language localization paths and default configurations.
+ */
 export const AC = {};
 
 AC.ascii = `
@@ -9,26 +10,30 @@ AC.ascii = `
    ▄█  ▀██   ██            ██         ███       ██       ██
    ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄
   █▀      ██ ▀██▄     ▄▀
-▄███▄   ▄████▄ ▀▀█████▀   v1.1`
+▄███▄   ▄████▄ ▀▀█████▀   v2.0`
 
 AC.inscribed = {
-    epithet: "AC.TYPE.Epithet"
+    epithet: "AC.CharacterSheet.InscribedTypes.Epithet"
 }
 AC.mundie = {
-    expert: "AC.TYPE.Expert",
-    powerhouse: "AC.TYPE.Powerhouse"
+    expert: "AC.CharacterSheet.MundieTypes.Expert",
+    powerhouse: "AC.CharacterSheet.MundieTypes.Powerhouse"
 }
 
 AC.colorKeys = ['red', 'blue', 'yellow', 'green', 'orange', 'cyan', 'purple', 'grey'];
 AC.colorStat = {
-    red: 'AC.COLOR.Red',
-    blue: 'AC.COLOR.Blue',
-    yellow: 'AC.COLOR.Yellow',
-    green: 'AC.COLOR.Green',
-    orange: 'AC.COLOR.Orange',
-    cyan: 'AC.COLOR.Cyan',
-    purple: 'AC.COLOR.Purple',
-    grey: 'AC.COLOR.Grey',
+    red: 'AC.Red',
+    blue: 'AC.Blue',
+    yellow: 'AC.Yellow',
+    green: 'AC.Green',
+    orange: 'AC.Orange',
+    cyan: 'AC.Cyan',
+    purple: 'AC.Purple',
+    grey: 'AC.Grey',
+}
+AC.contrastColors = {
+    white: "#f4f3ed", 
+    black: "#1f1e1e",
 }
 AC.colors = {
     red: '#df2d48',
@@ -40,50 +45,57 @@ AC.colors = {
     purple: '#9639cf',
     grey: '#807f84',
 };
-AC.defaultColor = "#cccccc";
-
+AC.defaultColor = "#cd3232";
+AC.displays = {
+    value: "AC.StatConfig.Display.Options.Value",
+    resource: "AC.StatConfig.Display.Options.Resource",
+    label: "AC.StatConfig.Display.Options.Label",
+}
 AC.defaultCategories = [
-    {
-        name: 'weapon',
+    { 
+        name: "weapon",
+        snap: true,
         trackers: [
-            { tag: 'damage', img: "icons/svg/sword.svg" },
-            { tag: 'range' , img: "icons/svg/thrust.svg" },
+            { tag: "damage", display: "value" },
+            { tag: "range", display: "value" },
         ],
+        details: {
+            formula: "1d20",
+            action: "Main",
+            usage: { multiple: "1", timeframe: "Turn" }
+        }
     },
-    {
-        name: 'talent',
-        trackers: [
-            { tag: 'bonus', img: "icons/svg/heal.svg" },
-        ],
-    },
-    {
-        name: 'passive',
+    { 
+        name: "talent",
+        snap: true,
         trackers: [],
+        details: {
+            formula: "",
+            action: "",
+            usage: { multiple: "", timeframe: "" }
+        }
     },
-    {
-        name: 'ability',
+    { 
+        name: "passive",
+        snap: true,
+        trackers: [],
+        details: {
+            formula: "",
+            action: "",
+            usage: { multiple: "", timeframe: "" }
+        }
+    },
+    { 
+        name: "ability", 
+        snap: true,
         trackers: [
-            { tag: 'cost', img: "icons/svg/degen.svg" },
+            { tag: "damage", display: "value" },
+            { tag: "range", display: "value" },
         ],
-    }
-];
-
-AC.textDialog = (name, placeholder) => `
-    <form autocomplete="off">
-        <div class="form-group">
-            <label>${name}</label>
-            <div class="form-fields">
-                <input type="text" name="name" placeholder="${placeholder}" autofocus>
-            </div>
-        </div>
-    </form>`;
-
-AC.colorDialog = hexcode => `
-    <form autocomplete="off">
-        <div class="form-group">
-            <label>Color</label>
-            <div class="form-fields">
-                <input type="color" name="color" value="${hexcode}">
-            </div>
-        </div>
-    </form>`;
+        details: {
+            formula: "1d20",
+            action: "Main",
+            usage: { multiple: "1", timeframe: "Turn" }
+        }
+    },
+]

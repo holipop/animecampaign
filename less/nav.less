@@ -1,77 +1,37 @@
 // main: ./animecampaign.less
 
-.animecampaign.sheet .navigation {
-    display: flex;
+.animecampaign.sheet {
 
-    nav {
+    .Navigation {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+
         display: flex;
-        padding: 0 .4rem;
-        gap: .4rem;
-
-        > * {
-            display: grid;
-            place-items: center;
-            height: 100%;
-            width: 1.5rem;
-
-            font-size: 1.1rem;
-            opacity: .33;
-        }
-        
-        > .active {
-            #AC.Active();
-
-            opacity: 1;
-        }
+        align-items: center;
+        width: 100%;
+        padding: .25rem @margin-width;
+        margin: .33rem 0;
+        border-bottom: (1 * @rpx) solid;
     }
 
-    .line {
-        height: 1.6rem;
-        align-self: center;
-        border-left: (1 * @rpx) solid black;
-    }
-
-    h1 {
-        #AC.HeadingSkinning();
-
-        flex: 1;
-        padding: .25rem .5rem;
-
-        font: 1.5rem "Gloock";
-        text-transform: uppercase;
-        line-height: 1;
-        letter-spacing: (1 * @rpx);
-
-        &::first-letter {
-            font-size: 1.9rem;
-        }
-    }
-
-    .control-list {
+    .Navigation__Tabs {
         display: flex;
-        align-items: flex-end;
-
-        font: .75rem "Libre Franklin";
+        gap: .2rem;
     }
-}
 
-.animecampaign.sheet .divider {
-    display: flex;
-    width: 100%;
-    margin-bottom: .6rem;
-
-    .line {
-        #AC.Border();
-        border-bottom: 0;
-
+    .Navigation__TabName {
         flex: 1;
-    }
-    .icon {
-        position: relative;
-        height: 0;
-        top: -.75rem;
-        margin: 0 .2rem;
+        padding: 0 .75rem;
+        margin-top: .25rem;
 
-        font-size: 1.25rem;
+        font: 1.25rem "Gloock";
     }
+    .Navigation__TabNameContent {
+        display: none;
+    }
+    .Navigation__TabNameContent.active {
+        display: inline;
+    }
+
 }

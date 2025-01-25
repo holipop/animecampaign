@@ -1,23 +1,59 @@
 // main: ./animecampaign.less
 
-//* VARIABLES */
-//* --------- */
+// ---- Variables ----
 
 @rpx: (1 / 16) * 1rem;
 
-@character-summary-height: 6.2rem;
-@feature-summary-height: 5.125rem;
-@max-name-height: 3.75rem; // 60 pixels;
+@character-sheet-height: 500px;
+@character-sheet-width: 600px;
 
-@stat-block-width: 26rem;
+@feature-sheet-height: 500px;
+@feature-sheet-width: 550px;
 
-@kit-controls-width: 3.25rem;
-@stat-tracker-width: 4.5rem;
+@sheet-height: 500px;
+@sheet-width: 600px;
 
-@feature-entry-height: 2.25rem;
+@part-width: 80%;
+@margin-width: (100% - @part-width) * .5;
 
-@bg-color: #e8e5db;
+@character-summary-height: 8.5rem;
+@feature-summary-height: 7.5rem;
+
+@stat-card-width: 8rem;
+@main-stat-card-width: 9.25rem;
+@stat-card-height: 3.5rem;
+@stat-card-header-height: 0.8rem;
+@stat-card-footer-height: @stat-card-height - @stat-card-header-height - .15rem;
+
+@button-transition: 0.05s;
+
+@dialog-icon-size: 8rem;
+@dialog-nav-height: 1.75rem;
+
 @ac-color: #cd3232;
+@delete-color: #f14545;
+@override: @ac-color;
+
+@txt-color: #1f1e1e;
+@bg-color: #f4f3ed;
+
+@light-txt-color: #1f1e1e;
+@light-bg-color: #f4f3ed;
+
+@dark-txt-color: #ebedf2;
+@dark-bg-color: #171718;
+
+@stam-color-primary: #7bd554;
+@stam-color-secondary: #4cc1b9;
+@stam-color-txt: #396641;
+
+@prof-color-primary: #6d9eeb;
+@prof-color-secondary: #5f69d4;
+@prof-color-txt: #335287;
+
+@move-color-primary: #bf6190;
+@move-color-secondary: #95509e;
+@move-color-txt: #632e4c;
 
 @red-stat: #df2d48;
 @blue-stat: #4d86d1;
@@ -28,83 +64,41 @@
 @purple-stat: #9639cf;
 @grey-stat: #807f84;
 
-@stamina-color: #6aa84f;
-@proficiency-color: #6d9eeb;
-@movement-color: #a64d79;
-@companionship-color: #e674af;
 
 
-//* MIXINS */
-//* ------ */
+// ---- Font Faces ----
 
-#AC {
-    .Background() {
-        background: @bg-color;
-    }
-    .Color(@alpha: 1) {
-        @return: rgba(205, 50, 50, @alpha);
-    }
-    .Border() {
-        border: (1 * @rpx) solid black;
-        box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
-    }
-    .Active() {
-        background: linear-gradient(to top, #AC.Color(.5)[@return], transparent);
-    }
-    .HeadingSkinning() {
-        margin: 0;
-        border: 0;
-    }
-    .ListSkinning() {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-    .InputSkinning() {
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        background: transparent;
-    }
-    .Overflow() {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
+// Material Symbols Outlined
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    src: url("./fonts/Material Symbols/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf");
 }
 
 
-//* FONT FACES */
-//* ---------- */
-
-//* Gloock
-
+// Gloock
 @font-face {
     font-family: "Gloock";
     src: url("./fonts/Gloock/Gloock-Regular.ttf");
 }
 
 
-//* Philosopher
-
+// Philosopher
 @font-face {
     font-family: "Philosopher";
     src: url("./fonts/Philosopher/Philosopher-Regular.ttf");
 }
-
 @font-face {
     font-family: "Philosopher";
     src: url("./fonts/Philosopher/Philosopher-Bold.ttf");
     font-weight: bold;
 }
-
 @font-face {
     font-family: "Philosopher";
     src: url("./fonts/Philosopher/Philosopher-BoldItalic.ttf");
     font-weight: bold;
     font-style: italic;
 }
-
 @font-face {
     font-family: "Philosopher";
     src: url("./fonts/Philosopher/Philosopher-Italic.ttf");
@@ -112,125 +106,112 @@
 }
 
 
-//* Fungka City
-
+// Fungka City
 @font-face {
     font-family: "Fungka City";
     src: url("./fonts/Fungka City/fungka-city.regular.ttf");
 }
 
 
-//* Libre Franklin
+// Rubik Mono One
+@font-face {
+    font-family: "Rubik Mono One";
+    src: url("./fonts/Rubik_Mono_One/RubikMonoOne-Regular.ttf");
+}
 
+
+// Libre Franklin
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-Regular.ttf");
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-Italic.ttf");
     font-style: italic;
 }
-
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-Thin.ttf");
     font-weight: 100;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-ThinItalic.ttf");
     font-style: italic;
     font-weight: 100;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-ExtraLight.ttf");
     font-weight: 200;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-ExtraLightItalic.ttf");
     font-style: italic;
     font-weight: 200;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-Light.ttf");
     font-weight: 300;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-LightItalic.ttf");
     font-style: italic;
     font-weight: 300;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-Medium.ttf");
     font-weight: 500;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-MediumItalic.ttf");
     font-style: italic;
     font-weight: 500;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-SemiBold.ttf");
     font-weight: 600;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-SemiBoldItalic.ttf");
     font-style: italic;
     font-weight: 600;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf");
     font-weight: 700;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-BoldItalic.ttf");
     font-style: italic;
     font-weight: 700;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-ExtraBold.ttf");
     font-weight: 800;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-ExtraBoldItalic.ttf");
     font-style: italic;
     font-weight: 800;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-Black.ttf");
     font-weight: 900;
 }
-
 @font-face {
     font-family: "Libre Franklin";
     src: url("./fonts/Libre_Franklin/static/LibreFranklin-BlackItalic.ttf");

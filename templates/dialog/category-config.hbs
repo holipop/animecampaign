@@ -1,0 +1,115 @@
+<section>
+
+    {{log this}}
+
+    {{#unless isNew}}
+        <nav class="Dialog__Navigation">
+
+            <div class="Dialog__NavigationTabs tabs">
+                {{#each tabs as |tab id|}}
+                    <button class="ACButton ACButton--Tab ACButton--DialogTab {{tab.css}}" type="button" data-action="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+                        <span class="ACButton__Icon MSO">{{tab.icon}}</span>
+                    </button>
+                {{/each}}
+            </div>
+
+            <span class="Dialog__NavigationTabName">
+                {{#each tabs as |tab id|}}
+                    <span class="Dialog__NavigationTabNameContent tab {{tab.css}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">{{localize tab.label}}</span>
+                {{/each}}
+            </span>
+
+        </nav>
+    {{/unless}}
+
+
+    <div class="Dialog__Content Config tab {{tabs.basic.css}}" data-tab="basic" data-group="category">
+
+        <div class="Config__Group">
+            <label class="Config__Label">{{localize "AC.CategoryConfig.Name.Label"}}</label>
+            <input class="Config__Input Config__Input--Caps" type="text" name="name" value="{{category.name}}" placeholder="{{localize "AC.CategoryConfig.Name.Placeholder"}}" autofocus>
+        </div>
+
+        <div class="Config__Group">
+            <label class="Config__Label">{{localize "AC.CategoryConfig.Color.Label"}}</label>
+            <div class="Config__Fields">
+                <input class="Config__Input Config__Input JS-ColorText" type="text" name="color" value="{{category.color}}" placeholder="{{document.system.color}}">
+                <input class="Config__Input Config__Input--Color JS-ColorInput" type="color" value="{{displayColor}}">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="Dialog__Content Config tab {{tabs.stats.css}}" data-tab="stats" data-group="category">
+
+        <div class="Config__Group">
+            <div class="Config__Notes">{{localize "AC.CategoryConfig.StatsNote"}}</div>
+        </div>
+
+        {{#if category.trackers}}
+            <ul class="CategoryStats JS-Drop">
+
+                {{#each category.trackers as |tracker index|}}
+                    <li class="CategoryStats__Entry JS-CategoryStat JS-Drag" data-stat="{{index}}">
+                        <span class="DragIndicator MSO">drag_indicator</span>
+
+                        <div class="CategoryStats__Fields">
+
+                            <div class="Config__Group">
+                                <label class="Config__Label">{{localize "AC.CategoryConfig.Tag.Label"}}</label>
+                                <input class="Config__Input Config__Input--Caps JS-StatInput" type="text" name="trackers.{{index}}.tag" value="{{tracker.tag}}" placeholder="{{localize "AC.CategoryConfig.Tag.Placeholder"}}">
+                            </div>
+
+                            <div class="Config__Group">
+                                <label class="Config__Label">{{localize "AC.CategoryConfig.Display.Label"}}</label>
+                                <select class="Config__Input JS-StatInput" name="trackers.{{index}}.display">
+                                    {{selectOptions @root.config.displays selected=tracker.display localize=true}}
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onStatDelete">
+                            <div class="ACButton__Icon MSO">close</div>
+                        </button>
+                    </li>
+                {{/each}}
+
+            </ul>
+        {{/if}}
+
+        <button class="ACButton ACButton--DialogMinor JS-DisableStatAdd" type="button" data-action="onStatAdd">
+            <span class="ACButton__Icon MSO">add</span>
+            <span class="ACButton__Text">
+                {{localize "AC.CategoryConfig.StatAdd"}}
+            </span>
+        </button>
+
+    </div>
+
+    <div class="Dialog__Content Config tab {{tabs.details.css}}" data-tab="details" data-group="category">
+
+        <div class="Config__Group">
+            <div class="Config__Notes">{{localize "AC.CategoryConfig.DetailsNote"}}</div>
+        </div>
+
+        {{> "generic.details" details=category.details}}
+    </div>
+
+    <div class="Dialog__Buttons">
+
+        <!-- Create/Update Category -->
+        <button class="ACButton ACButton--Dialog" type="submit" autofocus>
+            <span class="ACButton__Icon MSO">save</span>
+            <span class="ACButton__Text">
+                {{#if isNew}}
+                    {{localize "AC.CategoryConfig.CreateCategory.Submit"}}
+                {{else}}
+                    {{localize "AC.CategoryConfig.EditCategory.Submit"}}
+                {{/if}}
+            </span>
+        </button>
+
+    </div>
+
+</section>

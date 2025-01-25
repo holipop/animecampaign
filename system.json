@@ -9,9 +9,9 @@
             "flags": {}
         }
     ],
-    "version": "v1.3",
+    "version": "v2.0",
     "compatibility": {
-        "minimum": "11.315",
+        "minimum": "12",
         "verified": "12.331"
     },
     "esmodules": [
@@ -43,11 +43,13 @@
             "type": "JournalEntry"
         }
     ],
-    "gridDistance": 5,
-    "gridUnits": "ft",
+    "grid": {
+        "distance": 5,
+        "units": "ft"
+    },
     "initiative": "1d20",
-    "manifest": "https://github.com/holipop/animecampaign/releases/download/1.3/system.json",
-    "download": "https://github.com/holipop/animecampaign/releases/download/1.3/animecampaign.zip",
+    "manifest": "https://github.com/holipop/animecampaign/releases/download/2.0/system.json",
+    "download": "https://github.com/holipop/animecampaign/releases/download/2.0/animecampaign.zip",
     "primaryTokenAttribute": "stamina",
     "secondaryTokenAttribute": "proficiency",
     "documentTypes": {

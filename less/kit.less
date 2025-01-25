@@ -1,163 +1,174 @@
-// main: animecampaign.less
+// main: ./animecampaign.less
 
-@category-header-height: 2rem;
+.animecampaign.actor.sheet {
 
-.animecampaign.actor.sheet .kit {
-    #AC.ListSkinning();
+    .Kit {
+        #ListSkinning();
 
-    .control {
-        display: grid;
-        place-items: center;
-        width: 1.25rem;
+        flex-direction: column;
+        gap: .25rem;
+        margin: .5rem 0;
+    }
+    .Kit.active {
+        display: flex;
     }
 
-    .cap {
-        #AC.Border();
+    .Category {
+        .Category__Header {
+            transition: height .075s;
+        }
+        .Category__Name {
+            transition: font-size .075s;
+        }
+        .Category__HeaderLeft .ACButton__Icon {
+            transition: rotate .075s;
+        }
+    }
+    .Category.Category--Collapsed {
 
-        height: .25rem;
-        width: 100%;
-        margin-bottom: .4rem;
+        .Category__Features, .Category__Trackers, .Category__Buttons { 
+            display: none;
+        }
+        .Category__Header {
+            height: 1.5rem;
+        }
+        .Category__Name {
+            font-size: 1rem;
+            font-style: normal;
+        }
 
-        border-top: 0;
+        // Collapse Button
+        .Category__HeaderLeft .ACButton__Icon {
+            rotate: -90deg;
+        }
     }
 
-    button {
-        margin-bottom: 1rem;
-    }
-}
-
-.animecampaign.actor.sheet .kit .category {
-    header {
-        #AC.Border();
+    .Category__Header {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
 
         display: flex;
-        height: @category-header-height;
+        height: 2rem;
+        width: 100%;
+        padding: 0 (1 * @rpx);
+        border-bottom: (1 * @rpx) solid;
+        justify-content: center;
+        align-items: stretch;
+
+        background: @override;
+    }
+
+    .Category__HeaderLeft,
+    .Category__HeaderRight,
+    .Category__Padding {
+        flex: 1;
+    }
+    .Category__HeaderLeft {
+        display: flex;
+        padding-right: .1rem;
+        justify-content: end;
         align-items: center;
-
-        > div {
-            display: flex;
-            flex-shrink: 0;
-            align-items: center;
-        }
-        h2 {
-            #AC.HeadingSkinning();
-            #AC.Overflow();
-
-            margin-right: 4 * @rpx;
-
-            font-family: "Gloock";
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: (1 * @rpx);
-
-            .initial {
-                font-size: 1.5rem;
-                letter-spacing: -.25rem;
-            }
-        }
+        opacity: 0;
     }
 
-    .collapse {
-        flex-shrink: 0;
-        width: 1.75rem;
+    .Category:hover .Category__HeaderLeft,
+    .Category:hover .Category__HeaderRight,
+    .Category:hover .Category__Buttons {
+        opacity: .25;
     }
-
-    .category-controls, .tracked-stat-list, .list-controls {
-        i {
-            opacity: .25;
-        }
-    }
-    &:hover i {
+    .Category__Header:hover .Category__HeaderLeft,
+    .Category__Header:hover .Category__HeaderRight,
+    .Category__Header:hover .Category__Buttons {
         opacity: 1;
     }
-
-    .category-controls {
-        flex: 1;
-        margin-top: @category-header-height * .2;
-        
-        .control {
-            width: 1rem;
-        }
-        i {
-            font-size: .75rem;
-        }
+    .Category__HeaderLeft {
+        justify-content: flex-end;
+    }
+    .Category__HeaderCenter {
+        display: flex;
+        width: @part-width;
+        padding-right: .1rem;
     }
 
-    .tracked-stat-list {
-        .tracked-stat {
-            display: grid;
-            height: @category-header-height * .75;
-            width: @stat-tracker-width;
-            padding: 0 (4 * @rpx);
+    .Category__Name {
+        padding-right: .5rem;
+        padding-top: .2rem;
 
-            border-left: (1 * @rpx) solid black;
-
-            > * {
-                grid-column: 1 / 2;
-                grid-row: 1 / 2;
-            }
-        }
-        .tracker-image {
-            position: relative;
-            top: -6 * @rpx;
-            height: @category-header-height * .75;
-
-            > img {
-                #AC.InputSkinning();
-    
-                position: absolute;
-                height: @feature-entry-height;
-                width: @feature-entry-height;
-                place-self: center start;
-                cursor: pointer;
-    
-                clip-path: inset(8% 0 8% 0);
-                opacity: 25%;
-            }
-        }
-        .control.untrack {
-            place-self: start end;
-            position: relative;
-            top: -2 * @rpx;
-            left: 2 * @rpx;
-            height: min-content;
-            width: min-content;
-            
-            font-size: .75rem;
-        }
-        .label {
-            #AC.Overflow();
-
-            place-self: end;
-            padding-top: 6 * @rpx;
-            pointer-events: none;
-
-            font-family: "Fungka City";
-            line-height: .95;
-            text-transform: capitalize;
-        }
+        font: italic 1.33rem "Gloock";
+        text-transform: uppercase;
+        letter-spacing: .05rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
-    .list-controls {
-        height: @category-header-height * .75;
-        width: @kit-controls-width;
-        justify-content: space-evenly;
-        border-left: (1 * @rpx) solid black;
+    .Category__Trackers {
+        display: flex;
+        align-items: center;
+        margin: 0 0.1rem;
+    }
+    .StatTracker {
+        display: flex;
+        align-items: flex-end;
+        width: 4rem;
+        padding: .15rem;
+        height: 100%;
+        border-right: (1 * @rpx) solid;
+    }
+    .StatTracker:first-child {
+        border-left: (1 * @rpx) solid;
+    }
+    .StatTracker.StatTracker--White {
+        background-color: fade(@dark-txt-color, 2.5%);
+        border-color: fade(@dark-txt-color, 5%);
+    }
+    .StatTracker.StatTracker--Black {
+        background-color: fade(@light-txt-color, 2.5%);
+        border-color: fade(@light-txt-color, 5%);
+    }
+    .StatTracker:nth-child(even) {
+        background-color: transparent;
+    }
+    .StatTracker__Label {
+        font: .6rem "Libre Franklin";
+        text-transform: uppercase;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
-    .feature-list {
-        #AC.ListSkinning();
+    .Category__Buttons {
+        min-width: 3rem;
+    }
 
-        .empty {
-            padding: .15rem;
-            text-align: center;
-            border-bottom: (1 * @rpx) solid black;
-            box-shadow: 
-                inset rgba(0, 0, 0, 0.5) ( 1 * @rpx) 0,
-                inset rgba(0, 0, 0, 0.5) (-1 * @rpx) 0;
+    .Category__Features {
+        #ListSkinning();
 
-            font: 600 .75rem "Libre Franklin";
-            opacity: .5;
-        }
+        display: flex;
+        flex-direction: column;
+        margin: .2rem 0;
+        gap: .2rem;
+    }
+
+    .UncategorizedFeatures {
+        display: flex;
+        flex-direction: column;
+        gap: .1rem;
+        padding: .25rem 0;
+    }
+    .UncategorizedFeatures__Label {
+        #ColorScheme(@opacity: 50%, {
+            color: "txt";
+        });
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+
+        font: italic 0.75rem "Libre Franklin";
+        width: 100%;
+        padding: 0 10%;
+        margin: .1rem 0;
+        border-bottom: (1 * @rpx) solid;
     }
 }

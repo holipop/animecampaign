@@ -1,82 +1,78 @@
-import * as List from "../List.js"
 import Stat from "./Stat.js";
 import Section from "./Section.js";
+import Details from "./Details.js";
 
 /** 
  * Data structure for Kit Features. 
  */
 export default class FeatureData extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model. This cannot be changed post-init.
-     * @returns {Object}
-     */
+    /** @override */
     static defineSchema () {
         const fields = foundry.data.fields;
 
         return {
-            color: new fields.StringField({
+            color: new fields.ColorField({
                 required: true,
                 initial: CONFIG.AC.defaultColor
             }),
-            category: new fields.StringField({ initial: 'weapon' }),
-
+            category: new fields.StringField(),
             stats: new fields.ArrayField(new fields.EmbeddedDataField(Stat)),
-            
+            description: new fields.HTMLField(),
+            details: new fields.EmbeddedDataField(Details),
+
+            // ! Pre-v2.0
             sections: new fields.ArrayField(new fields.EmbeddedDataField(Section), {
                 initial: [{ visible: true, collapsed: false, richtext: null }],
             }),
-
-            details: new fields.SchemaField({
-                editor: new fields.StringField({ initial: 'markdown' }),
-                formula: new fields.StringField({ initial: '1d20' }),
-
-                action: new fields.SchemaField({
-                    name: new fields.StringField({ initial: '' }),
-                    img: new fields.FilePathField({
-                        categories: ['IMAGE'],
-                        blank: true,
-                        //initial: 'systems/animecampaign/assets/action/main.svg'
-                    }),
-                }),
-
-                usage: new fields.SchemaField({
-                    multiple: new fields.StringField({ initial: '' }),
-                    timeframe: new fields.StringField({ initial: '' })
-                }),
-            }),
-
-            // ! Pre-v1.0
-            type: new fields.StringField(),
-            customType: new fields.StringField(),
-            formula: new fields.StringField(),
-            usage: new fields.StringField(),
-            action: new fields.StringField(),
         };
     }
 
-    /** If this Feature is owned, returns the stats that are being tracked in its category.
-     * @returns {Object[]}
+    /** 
+     * If this Feature is owned, returns the stats that are being tracked in its category.
+     * @returns {StatTracker[]}
      */
     get trackedStats () {
-        if (!this.parent.isOwned) return null;
-        const categories = this.parent.parent.system.categories;
-        const trackers = List.get(categories, { name: this.category }).trackers;
+        if (!this.parent.isOwned) return []
 
-        return trackers.map(tracker => {
-            const fallback = {
-                view: 'value',
-                value: '',
-                img: 'systems/animecampaign/assets/transparent.svg',
-            };
-            return List.get(this.stats, { tag: tracker.tag.toLowerCase() }) ?? fallback;
-        })
+        const category = this.parent.parent.system.categories.find(c => c.name === this.category)
+        if (!category) return []
+        
+        return category.trackers.map(t => this.stats.find(s => s.tag === t.tag) ?? {})
     }
 
-    /** Like trimming the fat but for data? 
-     * @param {*} source 
+    /** 
+     * Get the palette of this feature.
+     * @returns {Palette}
      */
-    static shimData (source) {
-        source.details.action.img = "";
-        return super.shimData(source);
+    get palette () {
+        const color = this.color
+        const [h, s, l] = color.hsl
+
+        let [red, green, blue] = color.rgb
+        red *= 0.2126;
+        green *= 0.7152;
+        blue *= 0.0722;
+        const luma = (red + green + blue) / 1;
+        const contrast = (luma <= .5) 
+            ? CONFIG.AC.contrastColors.white
+            : CONFIG.AC.contrastColors.black;
+
+        return {
+            primary: color.css,
+            secondary: foundry.utils.Color.fromHSL([h, s * .66, .66]).css,
+            contrast,
+        }
     }
+
+    /**
+     * Get the CSS class for if this Feature is uncollapsed.
+     * @returns {"FeatureEntry--Uncollapsed" | ""}
+     */
+    get uncollapsedCSS () {
+        if (!this.parent.isOwned) return ""
+        const sheet = this.parent.parent.sheet
+        return (sheet.uncollapsedFeatures.has(this.parent._id)) ? "FeatureEntry--Uncollapsed" : ""
+    }
+
 }

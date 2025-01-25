@@ -1,4 +1,9 @@
 @font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  src: url("fonts/Material Symbols/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf");
+}
+@font-face {
   font-family: "Gloock";
   src: url("fonts/Gloock/Gloock-Regular.ttf");
 }
@@ -25,6 +30,10 @@
 @font-face {
   font-family: "Fungka City";
   src: url("fonts/Fungka City/fungka-city.regular.ttf");
+}
+@font-face {
+  font-family: "Rubik Mono One";
+  src: url("fonts/Rubik_Mono_One/RubikMonoOne-Regular.ttf");
 }
 @font-face {
   font-family: "Libre Franklin";
@@ -123,115 +132,2415 @@
   font-style: italic;
   font-weight: 900;
 }
+.animecampaign .MSO {
+  font-family: 'Material Symbols Outlined' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5rem;
+  /* 24px Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.animecampaign.application {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.theme-dark .animecampaign.application {
+  background: rgba(23, 23, 24, 0.8);
+}
+.theme-light .animecampaign.application {
+  background: rgba(244, 243, 237, 0.8);
+}
 .animecampaign.sheet .window-content {
-  background: #e8e5db;
-}
-.animecampaign.sheet form {
-  overflow-y: hidden;
-}
-.animecampaign.sheet form .scrollable {
-  overflow-y: scroll;
-  padding: 0 1rem;
-  scrollbar-color: #cd3232 rgba(0, 0, 0, 0.25);
-  scrollbar-width: thin;
-}
-.animecampaign.sheet form ::-webkit-scrollbar-thumb {
-  background-color: #cd3232;
-  border-color: rgba(205, 50, 50, 0.5);
-}
-.animecampaign.sheet form .editor {
-  min-height: 3rem;
-  border: 0.0625rem solid rgba(0, 0, 0, 0.15);
-  border-left-width: 0.1875rem;
-  border-right-width: 0.1875rem;
-  font-family: "Libre Franklin";
-  background-color: rgba(0, 0, 0, 0.05);
-}
-.animecampaign.sheet form .editor .editor-menu {
-  border-radius: 0;
-}
-.animecampaign.sheet form .editor .editor-menu button {
-  margin: 0;
-}
-.animecampaign.sheet form .selected {
-  background: linear-gradient(to top, rgba(205, 50, 50, 0.5), transparent);
-}
-.animecampaign.sheet form img {
-  -webkit-user-drag: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
-.animecampaign.sheet form a:hover {
-  text-shadow: #cd3232 0 0 0.5rem;
-}
-.animecampaign.sheet form button:not(.prosemirror *) {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
   padding: 0;
-  margin: 0;
-  font-family: "Libre Franklin";
-  font-weight: 600;
 }
-.animecampaign.sheet form button:not(.prosemirror *):hover {
-  background-color: rgba(205, 50, 50, 0.05);
-}
-.animecampaign.sheet form button:not(.prosemirror *):active {
-  background-color: rgba(205, 50, 50, 0.2);
-}
-.animecampaign.sheet form input,
-.animecampaign.sheet form select,
-.animecampaign.sheet form textarea {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  border: 0.0625rem solid rgba(0, 0, 0, 0.15);
-  border-left: 0;
-  border-right: 0;
-  background-color: rgba(0, 0, 0, 0.05);
-  font-family: "Libre Franklin";
-  font-weight: 500;
-}
-.animecampaign.sheet form input:focus:not([readonly]),
-.animecampaign.sheet form select:focus:not([readonly]),
-.animecampaign.sheet form textarea:focus:not([readonly]) {
-  border-color: rgba(205, 50, 50, 0.66);
-}
-.animecampaign.sheet form input,
-.animecampaign.sheet form select {
-  border-top: 0;
-}
-.animecampaign.sheet form input:focus:not([readonly]),
-.animecampaign.sheet form select:focus:not([readonly]) {
-  box-shadow: inset rgba(205, 50, 50, 0.3) 0 -0.3125rem 0.3125rem -0.3125rem;
-}
-.animecampaign.sheet form textarea:focus:not([readonly]) {
-  box-shadow: inset rgba(205, 50, 50, 0.3) 0 -0.3125rem 0.3125rem -0.3125rem, inset rgba(205, 50, 50, 0.3) 0 0.3125rem 0.3125rem -0.3125rem;
-}
-.animecampaign.actor.sheet {
-  min-width: 650px;
-  min-height: 550px;
-}
-.animecampaign.actor.sheet .scrollable {
-  height: calc(100% - 6.2rem);
-}
-.animecampaign.item.sheet {
-  min-width: 550px;
+.animecampaign.sheet:not(.minimizing, .maximizing, .minimized) {
+  min-width: 600px;
   min-height: 500px;
 }
-.animecampaign.item.sheet .scrollable {
-  height: calc(100% - 5.125rem);
+.animecampaign .Template {
+  height: 100%;
+}
+.animecampaign.item.sheet .Details {
+  width: 80%;
+  margin: 0.5rem auto;
+}
+.animecampaign .Scrollable {
+  overflow-y: scroll;
+  scrollbar-color: currentColor transparent;
+  scrollbar-width: thin;
+}
+.theme-dark .animecampaign .Scrollable {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .Scrollable {
+  color: #1f1e1e;
+}
+.animecampaign .Scrollable::-webkit-scrollbar-thumb {
+  background-color: currentColor;
+  border-color: currentColor;
+}
+.animecampaign.actor .Scrollable {
+  height: calc(100% - 8.5rem);
+}
+.animecampaign.item .Scrollable {
+  height: calc(100% - 7.5rem);
+}
+.animecampaign .Description,
+.animecampaign .Biography {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+.animecampaign .ACTextEditor {
+  max-height: none;
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign .ACTextEditor {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor {
+  color: #1f1e1e;
+}
+.animecampaign .ACTextEditor.active {
+  height: 100%;
+}
+.animecampaign .ACTextEditor .editor-menu {
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu {
+  border-color: rgba(235, 237, 242, 0.5);
+  background-color: rgba(23, 23, 24, 0.5);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu {
+  border-color: rgba(31, 30, 30, 0.5);
+  background-color: rgba(244, 243, 237, 0.5);
+}
+.animecampaign .ACTextEditor .editor-content,
+.animecampaign .NonOwnerDescription,
+.animecampaign .FeatureContent__Description,
+.animecampaign .ChatMessage__Content {
+  padding: 0.2rem 5%;
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content,
+.theme-dark .animecampaign .NonOwnerDescription,
+.theme-dark .animecampaign .FeatureContent__Description,
+.theme-dark .animecampaign .ChatMessage__Content {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor .editor-content,
+.theme-light .animecampaign .NonOwnerDescription,
+.theme-light .animecampaign .FeatureContent__Description,
+.theme-light .animecampaign .ChatMessage__Content {
+  color: #1f1e1e;
+}
+.animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .NonOwnerDescription h1,
+.animecampaign .FeatureContent__Description h1,
+.animecampaign .ChatMessage__Content h1,
+.animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .NonOwnerDescription h2,
+.animecampaign .FeatureContent__Description h2,
+.animecampaign .ChatMessage__Content h2,
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .NonOwnerDescription h3,
+.animecampaign .FeatureContent__Description h3,
+.animecampaign .ChatMessage__Content h3,
+.animecampaign .ACTextEditor .editor-content h4,
+.animecampaign .NonOwnerDescription h4,
+.animecampaign .FeatureContent__Description h4,
+.animecampaign .ChatMessage__Content h4,
+.animecampaign .ACTextEditor .editor-content h5,
+.animecampaign .NonOwnerDescription h5,
+.animecampaign .FeatureContent__Description h5,
+.animecampaign .ChatMessage__Content h5,
+.animecampaign .ACTextEditor .editor-content h6,
+.animecampaign .NonOwnerDescription h6,
+.animecampaign .FeatureContent__Description h6,
+.animecampaign .ChatMessage__Content h6 {
+  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+  text-shadow: none;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content h1,
+.theme-dark .animecampaign .NonOwnerDescription h1,
+.theme-dark .animecampaign .FeatureContent__Description h1,
+.theme-dark .animecampaign .ChatMessage__Content h1,
+.theme-dark .animecampaign .ACTextEditor .editor-content h2,
+.theme-dark .animecampaign .NonOwnerDescription h2,
+.theme-dark .animecampaign .FeatureContent__Description h2,
+.theme-dark .animecampaign .ChatMessage__Content h2,
+.theme-dark .animecampaign .ACTextEditor .editor-content h3,
+.theme-dark .animecampaign .NonOwnerDescription h3,
+.theme-dark .animecampaign .FeatureContent__Description h3,
+.theme-dark .animecampaign .ChatMessage__Content h3,
+.theme-dark .animecampaign .ACTextEditor .editor-content h4,
+.theme-dark .animecampaign .NonOwnerDescription h4,
+.theme-dark .animecampaign .FeatureContent__Description h4,
+.theme-dark .animecampaign .ChatMessage__Content h4,
+.theme-dark .animecampaign .ACTextEditor .editor-content h5,
+.theme-dark .animecampaign .NonOwnerDescription h5,
+.theme-dark .animecampaign .FeatureContent__Description h5,
+.theme-dark .animecampaign .ChatMessage__Content h5,
+.theme-dark .animecampaign .ACTextEditor .editor-content h6,
+.theme-dark .animecampaign .NonOwnerDescription h6,
+.theme-dark .animecampaign .FeatureContent__Description h6,
+.theme-dark .animecampaign .ChatMessage__Content h6 {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor .editor-content h1,
+.theme-light .animecampaign .NonOwnerDescription h1,
+.theme-light .animecampaign .FeatureContent__Description h1,
+.theme-light .animecampaign .ChatMessage__Content h1,
+.theme-light .animecampaign .ACTextEditor .editor-content h2,
+.theme-light .animecampaign .NonOwnerDescription h2,
+.theme-light .animecampaign .FeatureContent__Description h2,
+.theme-light .animecampaign .ChatMessage__Content h2,
+.theme-light .animecampaign .ACTextEditor .editor-content h3,
+.theme-light .animecampaign .NonOwnerDescription h3,
+.theme-light .animecampaign .FeatureContent__Description h3,
+.theme-light .animecampaign .ChatMessage__Content h3,
+.theme-light .animecampaign .ACTextEditor .editor-content h4,
+.theme-light .animecampaign .NonOwnerDescription h4,
+.theme-light .animecampaign .FeatureContent__Description h4,
+.theme-light .animecampaign .ChatMessage__Content h4,
+.theme-light .animecampaign .ACTextEditor .editor-content h5,
+.theme-light .animecampaign .NonOwnerDescription h5,
+.theme-light .animecampaign .FeatureContent__Description h5,
+.theme-light .animecampaign .ChatMessage__Content h5,
+.theme-light .animecampaign .ACTextEditor .editor-content h6,
+.theme-light .animecampaign .NonOwnerDescription h6,
+.theme-light .animecampaign .FeatureContent__Description h6,
+.theme-light .animecampaign .ChatMessage__Content h6 {
+  color: #1f1e1e;
+}
+.animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .NonOwnerDescription h1,
+.animecampaign .FeatureContent__Description h1,
+.animecampaign .ChatMessage__Content h1,
+.animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .NonOwnerDescription h2,
+.animecampaign .FeatureContent__Description h2,
+.animecampaign .ChatMessage__Content h2,
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .NonOwnerDescription h3,
+.animecampaign .FeatureContent__Description h3,
+.animecampaign .ChatMessage__Content h3 {
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content h1,
+.theme-dark .animecampaign .NonOwnerDescription h1,
+.theme-dark .animecampaign .FeatureContent__Description h1,
+.theme-dark .animecampaign .ChatMessage__Content h1,
+.theme-dark .animecampaign .ACTextEditor .editor-content h2,
+.theme-dark .animecampaign .NonOwnerDescription h2,
+.theme-dark .animecampaign .FeatureContent__Description h2,
+.theme-dark .animecampaign .ChatMessage__Content h2,
+.theme-dark .animecampaign .ACTextEditor .editor-content h3,
+.theme-dark .animecampaign .NonOwnerDescription h3,
+.theme-dark .animecampaign .FeatureContent__Description h3,
+.theme-dark .animecampaign .ChatMessage__Content h3 {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content h1,
+.theme-light .animecampaign .NonOwnerDescription h1,
+.theme-light .animecampaign .FeatureContent__Description h1,
+.theme-light .animecampaign .ChatMessage__Content h1,
+.theme-light .animecampaign .ACTextEditor .editor-content h2,
+.theme-light .animecampaign .NonOwnerDescription h2,
+.theme-light .animecampaign .FeatureContent__Description h2,
+.theme-light .animecampaign .ChatMessage__Content h2,
+.theme-light .animecampaign .ACTextEditor .editor-content h3,
+.theme-light .animecampaign .NonOwnerDescription h3,
+.theme-light .animecampaign .FeatureContent__Description h3,
+.theme-light .animecampaign .ChatMessage__Content h3 {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .NonOwnerDescription h1,
+.animecampaign .FeatureContent__Description h1,
+.animecampaign .ChatMessage__Content h1 {
+  font: 1.33rem "Gloock";
+}
+.animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .NonOwnerDescription h2,
+.animecampaign .FeatureContent__Description h2,
+.animecampaign .ChatMessage__Content h2 {
+  font: bold 1.25rem "Philosopher";
+}
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .NonOwnerDescription h3,
+.animecampaign .FeatureContent__Description h3,
+.animecampaign .ChatMessage__Content h3 {
+  font: 700 1.15rem "Libre Franklin";
+}
+.animecampaign .ACTextEditor .editor-content h4,
+.animecampaign .NonOwnerDescription h4,
+.animecampaign .FeatureContent__Description h4,
+.animecampaign .ChatMessage__Content h4 {
+  font: 1.1rem "Gloock";
+}
+.animecampaign .ACTextEditor .editor-content h5,
+.animecampaign .NonOwnerDescription h5,
+.animecampaign .FeatureContent__Description h5,
+.animecampaign .ChatMessage__Content h5 {
+  font: bold 1.1rem "Philosopher";
+}
+.animecampaign .ACTextEditor .editor-content h6,
+.animecampaign .NonOwnerDescription h6,
+.animecampaign .FeatureContent__Description h6,
+.animecampaign .ChatMessage__Content h6 {
+  font: 700 1.1rem "Libre Franklin";
+}
+.animecampaign .ACTextEditor .editor-content .Section__Header,
+.animecampaign .NonOwnerDescription .Section__Header,
+.animecampaign .FeatureContent__Description .Section__Header,
+.animecampaign .ChatMessage__Content .Section__Header {
+  display: flex;
+  align-items: flex-end;
+  transition: font-size 0.075s;
+}
+.animecampaign .ACTextEditor .editor-content h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h6.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h6.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h6.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h6.Section__Header.Section__Header--Collapsed {
+  opacity: 0.75;
+  font-size: 1rem;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Collapse,
+.animecampaign .NonOwnerDescription .Section__Collapse,
+.animecampaign .FeatureContent__Description .Section__Collapse,
+.animecampaign .ChatMessage__Content .Section__Collapse {
+  margin: 0;
+  margin-right: 0.1rem;
+  margin-bottom: 0.1rem;
+  height: 1rem;
+  width: 1rem;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content .Section__Collapse,
+.theme-dark .animecampaign .NonOwnerDescription .Section__Collapse,
+.theme-dark .animecampaign .FeatureContent__Description .Section__Collapse,
+.theme-dark .animecampaign .ChatMessage__Content .Section__Collapse,
+.theme-light .animecampaign .ACTextEditor .editor-content .Section__Collapse,
+.theme-light .animecampaign .NonOwnerDescription .Section__Collapse,
+.theme-light .animecampaign .FeatureContent__Description .Section__Collapse,
+.theme-light .animecampaign .ChatMessage__Content .Section__Collapse {
+  background-color: transparent;
+}
+.animecampaign .ACTextEditor .editor-content .Section__CollapseIcon,
+.animecampaign .NonOwnerDescription .Section__CollapseIcon,
+.animecampaign .FeatureContent__Description .Section__CollapseIcon,
+.animecampaign .ChatMessage__Content .Section__CollapseIcon {
+  rotate: 0deg;
+  transition: rotate 0.075s;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Header--Collapsed .Section__CollapseIcon,
+.animecampaign .NonOwnerDescription .Section__Header--Collapsed .Section__CollapseIcon,
+.animecampaign .FeatureContent__Description .Section__Header--Collapsed .Section__CollapseIcon,
+.animecampaign .ChatMessage__Content .Section__Header--Collapsed .Section__CollapseIcon {
+  rotate: -90deg;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Content,
+.animecampaign .NonOwnerDescription .Section__Content,
+.animecampaign .FeatureContent__Description .Section__Content,
+.animecampaign .ChatMessage__Content .Section__Content {
+  display: block;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Content--Collapsed,
+.animecampaign .NonOwnerDescription .Section__Content--Collapsed,
+.animecampaign .FeatureContent__Description .Section__Content--Collapsed,
+.animecampaign .ChatMessage__Content .Section__Content--Collapsed {
+  display: none;
+}
+.animecampaign .ACTextEditor .editor-content hr,
+.animecampaign .NonOwnerDescription hr,
+.animecampaign .FeatureContent__Description hr,
+.animecampaign .ChatMessage__Content hr {
+  background-image: none;
+  height: 0;
+  border: none;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content hr,
+.theme-dark .animecampaign .NonOwnerDescription hr,
+.theme-dark .animecampaign .FeatureContent__Description hr,
+.theme-dark .animecampaign .ChatMessage__Content hr {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content hr,
+.theme-light .animecampaign .NonOwnerDescription hr,
+.theme-light .animecampaign .FeatureContent__Description hr,
+.theme-light .animecampaign .ChatMessage__Content hr {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content code,
+.theme-dark .animecampaign .NonOwnerDescription code,
+.theme-dark .animecampaign .FeatureContent__Description code,
+.theme-dark .animecampaign .ChatMessage__Content code {
+  background-color: #171718;
+}
+.theme-light .animecampaign .ACTextEditor .editor-content code,
+.theme-light .animecampaign .NonOwnerDescription code,
+.theme-light .animecampaign .FeatureContent__Description code,
+.theme-light .animecampaign .ChatMessage__Content code {
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content code,
+.theme-dark .animecampaign .NonOwnerDescription code,
+.theme-dark .animecampaign .FeatureContent__Description code,
+.theme-dark .animecampaign .ChatMessage__Content code {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content code,
+.theme-light .animecampaign .NonOwnerDescription code,
+.theme-light .animecampaign .FeatureContent__Description code,
+.theme-light .animecampaign .ChatMessage__Content code {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .ACTextEditor .editor-content blockquote,
+.animecampaign .NonOwnerDescription blockquote,
+.animecampaign .FeatureContent__Description blockquote,
+.animecampaign .ChatMessage__Content blockquote {
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content blockquote,
+.theme-dark .animecampaign .NonOwnerDescription blockquote,
+.theme-dark .animecampaign .FeatureContent__Description blockquote,
+.theme-dark .animecampaign .ChatMessage__Content blockquote {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content blockquote,
+.theme-light .animecampaign .NonOwnerDescription blockquote,
+.theme-light .animecampaign .FeatureContent__Description blockquote,
+.theme-light .animecampaign .ChatMessage__Content blockquote {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .ACTextEditor .editor-menu > li > button {
+  border-radius: 0.125rem;
+  font-family: "Libre Franklin";
+  font-size: 0.7rem;
+  background-color: transparent;
+  transition: 0.075s background-color;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:hover {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:hover {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:active {
+  background-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:active {
+  background-color: rgba(31, 30, 30, 0.75);
+}
+.animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .DragIndicator {
+  opacity: 0.75;
+  font-size: 1rem;
+  line-height: 1.2;
+  transition: opacity 0.1s;
+}
+.theme-dark .animecampaign .DragIndicator {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .DragIndicator {
+  color: #1f1e1e;
+}
+.animecampaign .DragIndicator:hover {
+  cursor: grab;
+}
+.animecampaign button.ACButton {
+  min-height: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  display: block;
+  align-items: unset;
+  justify-content: unset;
+  padding: 0;
+  transition: outline 0.25s;
+  display: grid;
+  place-items: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 0.0625rem solid currentColor;
+  border-radius: 12.5%;
+  transition: box-shadow 0.25s, background-color 0.25s;
+}
+.theme-dark .animecampaign button.ACButton {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign button.ACButton {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign button.ACButton:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign button.ACButton:hover {
+  transition: none;
+  box-shadow: none;
+}
+.animecampaign button.ACButton:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign button.ACButton {
+  background-color: #171718;
+}
+.theme-light .animecampaign button.ACButton {
+  background-color: #f4f3ed;
+}
+.animecampaign button.ACButton:hover {
+  box-shadow: 0 0 0 0.0625rem currentColor;
+}
+.animecampaign button.ACButton:active {
+  background-color: currentColor;
+}
+.animecampaign button.ACButton:disabled {
+  opacity: 0.25;
+}
+.animecampaign button.ACButton .ACButton__Icon {
+  font-size: 1.1rem;
+}
+.animecampaign button.ACButton .ACButton__Text {
+  font: bold 0.9rem "Libre Franklin";
+}
+.animecampaign button.ACButton--Wide {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 2.5rem;
+  width: 80%;
+  margin: 0.25rem auto;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign button.ACButton--Wide {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign button.ACButton--Wide {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign button.ACButton--Wide:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign button.ACButton--Wide:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign button.ACButton--Wide:active {
+  background-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign button.ACButton--Wide:active {
+  background-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign button.ACButton--Tab {
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  bottom: 0;
+  margin-top: 0.25rem;
+  border: 0.0625rem solid currentColor;
+  border-radius: 6.25%;
+  transition: box-shadow 0.1s, bottom 0.1s;
+  box-shadow: 0 0 0 currentColor;
+}
+.theme-dark .animecampaign button.ACButton--Tab {
+  border-color: #ebedf2;
+  color: #ebedf2;
+}
+.theme-light .animecampaign button.ACButton--Tab {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+}
+.animecampaign button.ACButton--Tab.active {
+  bottom: 0.25rem;
+  box-shadow: 0 0.25rem 0 currentColor;
+  text-shadow: none;
+  outline: none;
+}
+.animecampaign button.ACButton--Inline {
+  height: 1.25rem;
+  width: 1.25rem;
+  border: none;
+}
+.theme-dark .animecampaign button.ACButton--Inline {
+  color: #ebedf2;
+  background: #171718;
+}
+.theme-light .animecampaign button.ACButton--Inline {
+  color: #1f1e1e;
+  background: #f4f3ed;
+}
+.animecampaign button.ACButton--Inline:hover {
+  box-shadow: none;
+}
+.theme-dark .animecampaign button.ACButton--Inline:hover {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign button.ACButton--Inline:hover {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign button.ACButton--Inline:active {
+  background-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign button.ACButton--Inline:active {
+  background-color: rgba(31, 30, 30, 0.75);
+}
+.animecampaign button.ACButton--Inline .ACButton__Icon {
+  font-size: 1rem;
+}
+.animecampaign button.ACButton.ACButton--Delete {
+  color: #f14545;
+  border-color: #f14545;
+}
+.animecampaign button.ACButton.ACButton--Delete:hover {
+  border-color: #f14545;
+  background-color: #f14545;
+}
+.theme-dark .animecampaign button.ACButton.ACButton--Delete:hover {
+  color: #ebedf2;
+}
+.theme-light .animecampaign button.ACButton.ACButton--Delete:hover {
+  color: #1f1e1e;
+}
+.animecampaign button.ACButton.ACButton--White {
+  color: #ebedf2;
+  background: transparent;
+}
+.animecampaign button.ACButton.ACButton--White:hover {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.animecampaign button.ACButton.ACButton--White:active {
+  background-color: rgba(235, 237, 242, 0.75);
+}
+.animecampaign button.ACButton.ACButton--Black {
+  color: #1f1e1e;
+  background: transparent;
+}
+.animecampaign button.ACButton.ACButton--Black:hover {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign button.ACButton.ACButton--Black:active {
+  background-color: rgba(31, 30, 30, 0.75);
+}
+.animecampaign .InlineButtonGroup {
+  display: flex;
+  gap: 0.05rem;
+  justify-content: end;
+  align-items: center;
+  min-width: 1.5rem;
+  padding: 0 0.125rem;
+  transition: opacity 0.1s;
+  opacity: 0;
+}
+.animecampaign button.ACButton--Rounded {
+  border: 0.0625rem solid currentColor;
+  border-radius: 12.5%;
+}
+.animecampaign button.ACButton--Circle {
+  height: 1.25rem;
+  width: 1.25rem;
+  border: 0.0625rem solid currentColor;
+  border-radius: 50%;
+}
+.animecampaign button.ACButton--Circle .ACButton__Icon {
+  font-size: 0.85rem;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.animecampaign.sheet .Summary {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  height: 8.5rem;
+  min-height: 8.5rem;
+  margin-bottom: 0.25rem;
+}
+.animecampaign.sheet .Summary__ImageWrapper {
+  display: grid;
+  grid-area: 1 / 1 / -1 / -1;
+  place-items: end;
+  margin-bottom: 0.5rem;
+}
+.animecampaign.sheet .Summary__Image {
+  width: 5.75rem;
+  height: 5.75rem;
+}
+.animecampaign.sheet .Summary__ImageEdit {
+  position: absolute;
+  width: 5.75rem;
+  height: 5.75rem;
+  display: grid;
+  place-items: end;
+  grid-area: 1 / 1 / -1 / -1;
+  place-self: end end;
+  cursor: pointer;
+}
+.animecampaign.sheet .Summary__ImageEditIcon {
+  font-size: 0.8rem;
+  padding: 0.1rem;
+  margin: 0.25rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  transition: opacity 0.075s;
+  opacity: 0;
+}
+.theme-dark .animecampaign.sheet .Summary__ImageEditIcon {
+  border-color: #ebedf2;
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign.sheet .Summary__ImageEditIcon {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
+.animecampaign.sheet .Summary__ImageEdit:hover > .Summary__ImageEditIcon {
+  opacity: 0.75;
+}
+.animecampaign.sheet .Summary__Info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin: 0 0.5rem;
+}
+.animecampaign.sheet .Summary__Name {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  border: none;
+  transition: outline 0.25s;
+  min-height: 0px;
+  max-height: 4.375rem;
+  resize: none;
+  overflow-y: hidden;
+  padding: 0.4rem 0;
+  border-bottom: 0.0625rem solid;
+  border-radius: 0.125rem;
+  font: 2rem "Gloock";
+  line-height: 0.9;
+}
+.animecampaign.sheet .Summary__Name:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .Summary__Name:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.sheet .Summary__Name {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .Summary__Name {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign.sheet .Summary__Name {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.sheet .Summary__Name {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.sheet .Summary__Class {
+  min-height: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  transition: outline 0.25s;
+  height: 1.2rem;
+  padding: 0;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  border-radius: 0.125rem;
+  font: italic bold 0.8rem "Libre Franklin";
+}
+.theme-dark .animecampaign.sheet .Summary__Class {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.sheet .Summary__Class {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.sheet .Summary__Class:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .Summary__Class:hover {
+  transition: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .Summary__Class:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.sheet .Summary__Class {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .Summary__Class {
+  color: #1f1e1e;
+}
+.animecampaign.sheet .Summary__Name::placeholder,
+.animecampaign.sheet .Summary__Class::placeholder,
+.animecampaign.sheet .Summary__FooterInput::placeholder {
+  opacity: 0.5;
+}
+.animecampaign.sheet .Summary__InfoFooter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-radius: 0.125rem;
+  background-color: #cd3232;
+}
+.animecampaign.sheet .Summary__FooterSelect {
+  min-height: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  transition: outline 0.25s;
+  height: 1.33rem;
+  width: min-content;
+  padding: 0;
+  padding-left: 0.2rem;
+  border-radius: 0.125rem;
+  cursor: pointer;
+  font: 600 0.8rem "Libre Franklin";
+  color: #cd3232;
+}
+.theme-dark .animecampaign.sheet .Summary__FooterSelect {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.sheet .Summary__FooterSelect {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.sheet .Summary__FooterSelect:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .Summary__FooterSelect:hover {
+  transition: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .Summary__FooterSelect:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.animecampaign.sheet .Summary__FooterInput {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  transition: outline 0.25s;
+  flex: 1;
+  height: 1.33rem;
+  border: 0.0625rem solid #cd3232;
+  border-radius: 0.125rem;
+  padding: 0 0.33rem;
+  font: bold 1rem "Philosopher";
+}
+.theme-dark .animecampaign.sheet .Summary__FooterInput {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.sheet .Summary__FooterInput {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.sheet .Summary__FooterInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .Summary__FooterInput:hover {
+  transition: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .Summary__FooterInput:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.sheet .Summary__FooterInput {
+  background-color: #171718;
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .Summary__FooterInput {
+  background-color: #f4f3ed;
+  color: #1f1e1e;
+}
+.animecampaign.sheet .Summary__Buttons {
+  padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 0.25rem;
+}
+.animecampaign.sheet .Summary__HiddenColor {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.animecampaign.sheet.item .Summary {
+  height: 7.5rem;
+  min-height: 7.5rem;
+}
+.animecampaign.sheet.item .Summary__Image {
+  width: 4.75rem;
+  height: 4.75rem;
+}
+.animecampaign.sheet.item .Summary__ImageEdit {
+  width: 4.75rem;
+  height: 4.75rem;
+}
+.animecampaign.sheet.item .Summary__Image--Null {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.33rem;
+}
+.animecampaign.sheet.item .Summary__ImageIcon {
+  font-size: 2rem;
+}
+.animecampaign.sheet.item .Summary__ImageEdit--Null {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.33rem;
+}
+.animecampaign.sheet.item .Summary__Name {
+  padding: 0.2rem 0;
+  margin-bottom: 0.33rem;
+  font: 1.75rem "Gloock";
+}
+.animecampaign.sheet.item .Summary__FooterSelect {
+  width: 1.1rem;
+}
+.animecampaign.sheet.item .Summary__FooterInput {
+  text-transform: uppercase;
+  font: 600 0.8rem "Libre Franklin";
+}
+.animecampaign.sheet .Stats {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+.animecampaign.sheet .Stats__MainStats {
+  display: flex;
+  margin-bottom: 0.3rem;
+}
+.animecampaign.sheet .Stats__MainStatsPadding {
+  flex: 1;
+  display: grid;
+  place-items: end;
+}
+.animecampaign.sheet .StatCard {
+  margin: 0 0.2rem;
+  padding: 0.0625rem;
+  border-radius: 0.1875rem;
+  background: #cd3232;
+}
+.animecampaign.sheet .StatCard--Stamina {
+  background: linear-gradient(#7bd554, #4cc1b9);
+}
+.animecampaign.sheet .StatCard--Proficiency {
+  background: linear-gradient(#6d9eeb, #5f69d4);
+}
+.animecampaign.sheet .StatCard--Movement {
+  background: linear-gradient(#bf6190, #95509e);
+}
+.animecampaign.sheet .StatCard__Content {
+  display: flex;
+  flex-direction: column;
+  width: 8.75rem;
+  height: 4.125rem;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.sheet .StatCard__Content {
+  background-color: #171718;
+}
+.theme-light .animecampaign.sheet .StatCard__Content {
+  background-color: #f4f3ed;
+}
+.animecampaign.sheet .StatCard__Header {
+  display: flex;
+  align-items: center;
+  margin: 0.1rem 0.15rem 0;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.sheet .StatCard__Header {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.sheet .StatCard__Header {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.sheet .StatCard__Icon.MSO {
+  font-size: 0.8rem;
+  margin: 0 0.1rem;
+}
+.animecampaign.sheet .StatCard__Name {
+  font: 0.75rem "Libre Franklin";
+  text-transform: uppercase;
+}
+.theme-dark .animecampaign.sheet .StatCard__Name {
+  color: #ebedf2;
+  border-color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .StatCard__Name {
+  color: #1f1e1e;
+  border-color: #1f1e1e;
+}
+.animecampaign.sheet .StatCard__Footer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0.4rem;
+}
+.animecampaign.sheet .StatCard__Input {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  transition: outline 0.25s;
+  font: bold 2.25rem "Philosopher";
+  border-radius: 0.125rem;
+  text-overflow: clip;
+}
+.theme-dark .animecampaign.sheet .StatCard__Input {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.sheet .StatCard__Input {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.sheet .StatCard__Input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .StatCard__Input:hover {
+  transition: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .StatCard__Input:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.sheet .StatCard__Input {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .StatCard__Input {
+  color: #1f1e1e;
+}
+.animecampaign.sheet .StatCard__Input::placeholder {
+  opacity: 0.5;
+}
+.animecampaign.sheet .StatCard__Label {
+  font: 1rem "Libre Franklin";
+  opacity: 0.5;
+}
+.theme-dark .animecampaign.sheet .StatCard__Label {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .StatCard__Label {
+  color: #1f1e1e;
+}
+.animecampaign.sheet .StatCard__Label--Divider {
+  margin: 0 0.2rem;
+}
+.animecampaign.sheet .StatCard__Input--StaminaValue {
+  flex: 2;
+  text-align: end;
+}
+.animecampaign.sheet .StatCard__Input--StaminaMax {
+  flex: 1;
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+.animecampaign.sheet .StatCard__Input--ProficiencyValue {
+  text-align: end;
+  padding: 0 0.3rem;
+  font-size: 2.66rem;
+}
+.animecampaign.sheet .StatCard__Label--ClassLevel {
+  height: 66%;
+  width: 1.75rem;
+  font: italic 1.5rem "Gloock";
+  align-self: flex-end;
+}
+.animecampaign.sheet .StatCard__Input--Build {
+  height: 50%;
+  flex: 2;
+  align-self: flex-end;
+  font-size: 1rem;
+  font-weight: normal;
+}
+.animecampaign.sheet .StatCard__Input--MovementValue {
+  flex: 1.5;
+  text-align: end;
+  padding: 0 0.3rem;
+  font-size: 2.66rem;
+}
+.animecampaign.sheet .Stats__List {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin: 0.4rem 0;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign.sheet .Stats__List {
+  background-color: #171718;
+}
+.theme-light .animecampaign.sheet .Stats__List {
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign.sheet .Stats__List {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.sheet .Stats__List {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.sheet .StatEntry {
+  display: flex;
+  align-items: center;
+  margin: 0 0.2rem;
+  height: 2rem;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.sheet .StatEntry {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.sheet .StatEntry {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.sheet .StatEntry:last-of-type {
+  border: none;
+  height: 1.9375rem;
+}
+.animecampaign.sheet .StatEntry__InfoWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width: 30%;
+}
+.animecampaign.sheet .StatEntry__InfoWrapper > * {
+  grid-area: 1 / 1 / -1 / -1;
+}
+.animecampaign.sheet .StatEntry__Image {
+  position: relative;
+  height: 2rem;
+  width: 2.5rem;
+  left: 1rem;
+  border: none;
+  background-position: center;
+  object-fit: cover;
+  opacity: 0.25;
+}
+.theme-dark .animecampaign.sheet .StatEntry__Image--CustomImage {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+.theme-light .animecampaign.sheet .StatEntry__Image--CustomImage {
+  filter: brightness(0) saturate(100%);
+}
+.animecampaign.sheet .StatEntry__Info {
+  display: flex;
+  align-items: center;
+}
+.animecampaign.sheet .StatEntry .DragIndicator {
+  opacity: 0;
+}
+.animecampaign.sheet .StatEntry:hover .DragIndicator {
+  opacity: 0.75;
+}
+.animecampaign.sheet .StatEntry__Color {
+  position: relative;
+  right: 0.2rem;
+  font: italic 1.5rem "Gloock";
+  text-transform: uppercase;
+  line-height: 0;
+  color: #cd3232;
+  opacity: 0.5;
+}
+.animecampaign.sheet .StatEntry__Color--red {
+  color: #df2d48;
+}
+.animecampaign.sheet .StatEntry__Color--blue {
+  color: #4d86d1;
+}
+.animecampaign.sheet .StatEntry__Color--yellow {
+  color: #f1cd00;
+}
+.animecampaign.sheet .StatEntry__Color--green {
+  color: #3ea35a;
+}
+.animecampaign.sheet .StatEntry__Color--orange {
+  color: #ee8420;
+}
+.animecampaign.sheet .StatEntry__Color--cyan {
+  color: #28d5c1;
+}
+.animecampaign.sheet .StatEntry__Color--purple {
+  color: #9639cf;
+}
+.animecampaign.sheet .StatEntry__Color--grey {
+  color: #807f84;
+}
+.animecampaign.sheet .StatEntry__Tag {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.1rem 0.25rem;
+  margin-left: 1rem;
+  font: 0.8rem "Libre Franklin";
+  text-transform: uppercase;
+  text-align: end;
+  text-overflow: ellipsis;
+}
+.theme-dark .animecampaign.sheet .StatEntry__Tag {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .StatEntry__Tag {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign.sheet .StatEntry__Tag {
+  text-shadow: 0 0 0.25rem #171718, 0 0 0.25rem #171718;
+}
+.theme-light .animecampaign.sheet .StatEntry__Tag {
+  text-shadow: 0 0 0.25rem #f4f3ed, 0 0 0.25rem #f4f3ed;
+}
+.animecampaign.sheet .StatEntry__Divider {
+  position: relative;
+  bottom: 0.1rem;
+  font: 1.5rem "Libre Franklin";
+  line-height: 0;
+  opacity: 0.5;
+}
+.animecampaign.sheet .StatEntry__Inputs {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0.1rem 0.25rem;
+}
+.animecampaign.sheet .StatEntry__Input {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  transition: outline 0.25s;
+  height: 100%;
+  padding: 0 0.2rem;
+  font: bold 1.5rem "Philosopher";
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.sheet .StatEntry__Input {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.sheet .StatEntry__Input {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.sheet .StatEntry__Input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .StatEntry__Input:hover {
+  transition: none;
+  box-shadow: none;
+}
+.animecampaign.sheet .StatEntry__Input:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.sheet .StatEntry__Input {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.sheet .StatEntry__Input {
+  color: #1f1e1e;
+}
+.animecampaign.sheet .StatEntry__Input:placeholder {
+  opacity: 0.5;
+}
+.animecampaign.sheet .StatEntry__Input--Numerator {
+  max-width: 12rem;
+}
+.animecampaign.sheet .StatEntry__Input--Denominator {
+  flex: 0;
+  min-width: 4rem;
+  font-size: 1.2rem;
+}
+.animecampaign.sheet .StatEntry__Input--Label {
+  font-weight: normal;
+}
+.animecampaign.sheet .StatEntry:hover .StatEntry__Buttons {
+  opacity: 1;
+}
+.animecampaign button.ACButton--Wide.ACButton--AddStat {
+  height: 1.75rem;
+  width: 100%;
+  margin: 0;
+  margin-top: 0.2rem;
+}
+.theme-dark .animecampaign button.ACButton--Wide.ACButton--AddStat {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign button.ACButton--Wide.ACButton--AddStat {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign button.ACButton--Wide.ACButton--AddStat:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign button.ACButton--Wide.ACButton--AddStat:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign button.ACButton--Wide.ACButton--AddStat:active {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign button.ACButton--Wide.ACButton--AddStat:active {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign button.ACButton--Wide.ACButton--AddStat .ACButton__Text {
+  font-weight: normal;
+}
+.animecampaign.sheet .Navigation {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.25rem 10%;
+  margin: 0.33rem 0;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.sheet .Navigation {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.sheet .Navigation {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.sheet .Navigation__Tabs {
+  display: flex;
+  gap: 0.2rem;
+}
+.animecampaign.sheet .Navigation__TabName {
+  flex: 1;
+  padding: 0 0.75rem;
+  margin-top: 0.25rem;
+  font: 1.25rem "Gloock";
+}
+.animecampaign.sheet .Navigation__TabNameContent {
+  display: none;
+}
+.animecampaign.sheet .Navigation__TabNameContent.active {
+  display: inline;
+}
+.animecampaign.actor.sheet .Kit {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+.animecampaign.actor.sheet .Kit.active {
+  display: flex;
+}
+.animecampaign.actor.sheet .Category .Category__Header {
+  transition: height 0.075s;
+}
+.animecampaign.actor.sheet .Category .Category__Name {
+  transition: font-size 0.075s;
+}
+.animecampaign.actor.sheet .Category .Category__HeaderLeft .ACButton__Icon {
+  transition: rotate 0.075s;
+}
+.animecampaign.actor.sheet .Category.Category--Collapsed .Category__Features,
+.animecampaign.actor.sheet .Category.Category--Collapsed .Category__Trackers,
+.animecampaign.actor.sheet .Category.Category--Collapsed .Category__Buttons {
+  display: none;
+}
+.animecampaign.actor.sheet .Category.Category--Collapsed .Category__Header {
+  height: 1.5rem;
+}
+.animecampaign.actor.sheet .Category.Category--Collapsed .Category__Name {
+  font-size: 1rem;
+  font-style: normal;
+}
+.animecampaign.actor.sheet .Category.Category--Collapsed .Category__HeaderLeft .ACButton__Icon {
+  rotate: -90deg;
+}
+.animecampaign.actor.sheet .Category__Header {
+  display: flex;
+  height: 2rem;
+  width: 100%;
+  padding: 0 0.0625rem;
+  border-bottom: 0.0625rem solid;
+  justify-content: center;
+  align-items: stretch;
+  background: #cd3232;
+}
+.theme-dark .animecampaign.actor.sheet .Category__Header {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.actor.sheet .Category__Header {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.actor.sheet .Category__HeaderLeft,
+.animecampaign.actor.sheet .Category__HeaderRight,
+.animecampaign.actor.sheet .Category__Padding {
+  flex: 1;
+}
+.animecampaign.actor.sheet .Category__HeaderLeft {
+  display: flex;
+  padding-right: 0.1rem;
+  justify-content: end;
+  align-items: center;
+  opacity: 0;
+}
+.animecampaign.actor.sheet .Category:hover .Category__HeaderLeft,
+.animecampaign.actor.sheet .Category:hover .Category__HeaderRight,
+.animecampaign.actor.sheet .Category:hover .Category__Buttons {
+  opacity: 0.25;
+}
+.animecampaign.actor.sheet .Category__Header:hover .Category__HeaderLeft,
+.animecampaign.actor.sheet .Category__Header:hover .Category__HeaderRight,
+.animecampaign.actor.sheet .Category__Header:hover .Category__Buttons {
+  opacity: 1;
+}
+.animecampaign.actor.sheet .Category__HeaderLeft {
+  justify-content: flex-end;
+}
+.animecampaign.actor.sheet .Category__HeaderCenter {
+  display: flex;
+  width: 80%;
+  padding-right: 0.1rem;
+}
+.animecampaign.actor.sheet .Category__Name {
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  font: italic 1.33rem "Gloock";
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.animecampaign.actor.sheet .Category__Trackers {
+  display: flex;
+  align-items: center;
+  margin: 0 0.1rem;
+}
+.animecampaign.actor.sheet .StatTracker {
+  display: flex;
+  align-items: flex-end;
+  width: 4rem;
+  padding: 0.15rem;
+  height: 100%;
+  border-right: 0.0625rem solid;
+}
+.animecampaign.actor.sheet .StatTracker:first-child {
+  border-left: 0.0625rem solid;
+}
+.animecampaign.actor.sheet .StatTracker.StatTracker--White {
+  background-color: rgba(235, 237, 242, 0.025);
+  border-color: rgba(235, 237, 242, 0.05);
+}
+.animecampaign.actor.sheet .StatTracker.StatTracker--Black {
+  background-color: rgba(31, 30, 30, 0.025);
+  border-color: rgba(31, 30, 30, 0.05);
+}
+.animecampaign.actor.sheet .StatTracker:nth-child(even) {
+  background-color: transparent;
+}
+.animecampaign.actor.sheet .StatTracker__Label {
+  font: 0.6rem "Libre Franklin";
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.animecampaign.actor.sheet .Category__Buttons {
+  min-width: 3rem;
+}
+.animecampaign.actor.sheet .Category__Features {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0.2rem 0;
+  gap: 0.2rem;
+}
+.animecampaign.actor.sheet .UncategorizedFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.25rem 0;
+}
+.animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  font: italic 0.75rem "Libre Franklin";
+  width: 100%;
+  padding: 0 10%;
+  margin: 0.1rem 0;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  color: rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.actor.sheet .UncategorizedFeatures__Label {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.actor.sheet .FeatureEntry {
+  width: 80%;
+  margin: 0 auto;
+  min-height: 2rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  display: flex;
+  align-items: stretch;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureEntry {
+  background-color: #171718;
+  color: #ebedf2;
+}
+.theme-light .animecampaign.actor.sheet .FeatureEntry {
+  background-color: #f4f3ed;
+  color: #1f1e1e;
+}
+.animecampaign.actor.sheet .FeatureEntry .FeatureEntry__CollapseIcon {
+  rotate: 90deg;
+  transition: rotate 0.075s;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__Info {
+  align-items: flex-start;
+  height: fit-content;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__Name {
+  white-space: normal;
+  margin-top: 0.2rem;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__CollapseIcon {
+  rotate: 0deg;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__NameText {
+  text-align: left;
+  overflow: auto;
+  white-space: normal;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__Buttons {
+  margin-top: 0.375rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__Padding {
+  min-height: 2rem;
+  padding-top: 0.375rem;
+  width: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.animecampaign.actor.sheet .FeatureEntry .DragIndicator {
+  opacity: 0;
+}
+.animecampaign.actor.sheet .FeatureEntry:hover .DragIndicator {
+  opacity: 0.75;
+}
+.animecampaign.actor.sheet .FeatureEntry__Lining {
+  flex: 1;
+  max-width: calc(100% - 1rem);
+}
+.animecampaign.actor.sheet .FeatureEntry__Info {
+  display: flex;
+  height: 2rem;
+  width: 100%;
+  align-items: center;
+}
+.animecampaign.actor.sheet .FeatureEntry__ImageWrapper {
+  display: grid;
+  place-items: center;
+}
+.animecampaign.actor.sheet .FeatureEntry__Image {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  grid-area: 1 / 1 / -1 / -1;
+  min-height: 2rem;
+  max-height: 2rem;
+  min-width: 2rem;
+  max-width: 2rem;
+  margin-right: 0.2rem;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureEntry__Image {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.actor.sheet .FeatureEntry__Image {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.actor.sheet .FeatureEntry__Image:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.actor.sheet .FeatureEntry__Image:hover {
+  transition: none;
+  box-shadow: none;
+}
+.animecampaign.actor.sheet .FeatureEntry__Image--Null {
+  display: grid;
+  place-items: center;
+}
+.animecampaign.actor.sheet .FeatureEntry__ImageIcon {
+  font-size: 1rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__Roll {
+  position: relative;
+  right: 0.1rem;
+  grid-area: 1 / 1 / -1 / -1;
+  font-size: 1rem;
+  padding: 0.1rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: opacity 0.075s;
+  opacity: 0;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureEntry__Roll {
+  border-color: #ebedf2;
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign.actor.sheet .FeatureEntry__Roll {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
+.animecampaign.actor.sheet .FeatureEntry__ImageWrapper:hover .FeatureEntry__Roll {
+  opacity: 0.75;
+}
+.animecampaign.actor.sheet .FeatureEntry__Name {
+  display: flex;
+  gap: 0.1rem;
+  width: fit-content;
+  min-height: 1.6rem;
+  height: 80%;
+  padding: 0 0.2rem;
+  border-radius: 0.125rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: bold 1.2rem "Philosopher";
+}
+.animecampaign.actor.sheet .FeatureEntry__Name .ACButton__Icon {
+  width: 0.75rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__NameText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.animecampaign.actor.sheet .FeatureEntry__CollapseIcon {
+  opacity: 0;
+  transition: opacity 0.075s;
+}
+.animecampaign.actor.sheet .FeatureEntry .FeatureEntry__NamePadding {
+  flex: 0;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__NamePadding {
+  flex: 1;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureEntry__TrackedStats {
+  display: none;
+}
+.animecampaign.actor.sheet .FeatureEntry__TrackedStats {
+  flex: 1;
+  display: flex;
+  justify-content: end;
+  height: 100%;
+  margin: 0 0.1rem;
+}
+.animecampaign.actor.sheet .TrackedStat {
+  display: flex;
+  align-items: center;
+  padding: 0.15rem 0.4rem;
+  min-width: 4rem;
+  max-width: 4rem;
+  height: 100%;
+  gap: 0.25rem;
+  border-right: 0.0625rem solid;
+  font-family: "Philosopher";
+  font-style: italic;
+}
+.theme-dark .animecampaign.actor.sheet .TrackedStat {
+  background-color: rgba(235, 237, 242, 0.025);
+}
+.theme-light .animecampaign.actor.sheet .TrackedStat {
+  background-color: rgba(31, 30, 30, 0.025);
+}
+.theme-dark .animecampaign.actor.sheet .TrackedStat {
+  border-color: rgba(235, 237, 242, 0.05);
+}
+.theme-light .animecampaign.actor.sheet .TrackedStat {
+  border-color: rgba(31, 30, 30, 0.05);
+}
+.animecampaign.actor.sheet .TrackedStat > * {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.animecampaign.actor.sheet .TrackedStat:first-child {
+  border-left: 0.0625rem solid;
+}
+.theme-dark .animecampaign.actor.sheet .TrackedStat:first-child {
+  border-left-color: rgba(235, 237, 242, 0.05);
+}
+.theme-light .animecampaign.actor.sheet .TrackedStat:first-child {
+  border-left-color: rgba(31, 30, 30, 0.05);
+}
+.animecampaign.actor.sheet .TrackedStat:nth-child(even) {
+  background-color: transparent;
+}
+.animecampaign.actor.sheet .TrackedStat__Value {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.animecampaign.actor.sheet .TrackedStat__Label {
+  font-size: 1.25rem;
+  font-style: normal;
+}
+.animecampaign.actor.sheet .TrackedStat__Max {
+  flex: 1;
+  font-size: 1rem;
+}
+.animecampaign.actor.sheet .FeatureEntry__Buttons {
+  min-width: 3rem;
+}
+.animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__CollapseIcon,
+.animecampaign.actor.sheet .FeatureEntry:hover .FeatureEntry__Buttons {
+  opacity: 1;
+}
+.animecampaign.actor.sheet .FeatureContent {
+  display: none;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Uncollapsed .FeatureContent {
+  display: block;
+}
+.animecampaign.actor.sheet .FeatureContent__StatsPadding {
+  height: 0.25rem;
+  width: 100%;
+}
+.animecampaign.actor.sheet .FeatureContent__Stats {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-left: 0.5rem;
+  margin-right: 1.5rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureContent__Stats {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.actor.sheet .FeatureContent__Stats {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 1.33rem;
+  border-bottom: 0.0625rem solid;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.theme-dark .animecampaign.actor.sheet .FeatureContent__StatEntry {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.actor.sheet .FeatureContent__StatEntry {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign.actor.sheet .FeatureContent__StatEntry:nth-child(even) {
+  background-color: rgba(235, 237, 242, 0.05);
+}
+.theme-light .animecampaign.actor.sheet .FeatureContent__StatEntry:nth-child(even) {
+  background-color: rgba(31, 30, 30, 0.05);
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntry:last-child {
+  border-bottom: none;
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryTag {
+  width: 25%;
+  font: 0.8rem "Libre Franklin";
+  text-align: end;
+  text-transform: uppercase;
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryDivider {
+  font: 0.66rem "Libre Franklin";
+  opacity: 50%;
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryValue {
+  font: bold italic 1rem "Philosopher";
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryMax {
+  font: italic 0.8rem "Philosopher";
+}
+.animecampaign.actor.sheet .FeatureContent__StatEntryLabel {
+  font: 1rem "Philosopher";
+}
+.animecampaign.dialog.application:not([open]) {
+  display: block;
+}
+.animecampaign.dialog .Dialog__Navigation {
+  display: flex;
+  padding-bottom: 0.25rem;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.dialog .Dialog__Navigation {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog .Dialog__Navigation {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog .Dialog__NavigationTabs {
+  display: flex;
+  gap: 0.2rem;
+}
+.animecampaign.dialog .ACButton--DialogTab {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+.theme-dark .animecampaign.dialog .ACButton--DialogTab {
+  border-color: rgba(235, 237, 242, 0.5);
+  color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.dialog .ACButton--DialogTab {
+  border-color: rgba(31, 30, 30, 0.5);
+  color: rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign.dialog .ACButton--DialogTab.active {
+  border-color: #ebedf2;
+  color: #ebedf2;
+}
+.theme-light .animecampaign.dialog .ACButton--DialogTab.active {
+  border-color: #1f1e1e;
+  color: #1f1e1e;
+}
+.animecampaign.dialog .Dialog__NavigationTabName {
+  display: flex;
+  align-items: end;
+  margin-left: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+.theme-dark .animecampaign.dialog .Dialog__NavigationTabName {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.dialog .Dialog__NavigationTabName {
+  color: #1f1e1e;
+}
+.animecampaign.dialog .Dialog__NavigationTabNameContent {
+  font: 1.1rem "Gloock";
+}
+.animecampaign.dialog .Dialog__Content {
+  padding: 1.25rem 0;
+  text-align: center;
+  font-family: "Libre Franklin";
+}
+.animecampaign.dialog .Dialog__Buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.animecampaign.dialog button.ACButton--Dialog {
+  transition: outline 0.25s;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign.dialog button.ACButton--Dialog {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.dialog button.ACButton--Dialog {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign.dialog button.ACButton--Dialog {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.dialog button.ACButton--Dialog {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.dialog button.ACButton--Dialog:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.dialog button.ACButton--Dialog:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.dialog button.ACButton--Dialog:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(31, 30, 30, 0.5);
+}
+.theme-dark .animecampaign.dialog button.ACButton--Dialog:active {
+  background-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.dialog button.ACButton--Dialog:active {
+  background-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.dialog button.ACButton--DialogMinor {
+  transition: outline 0.25s;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 2rem;
+  width: 100%;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog button.ACButton--DialogMinor:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.animecampaign.dialog button.ACButton--DialogMinor .ACButton__Text {
+  font-weight: normal;
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor:hover {
+  box-shadow: 0 0 0 0.0625rem rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign.dialog button.ACButton--DialogMinor:active {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog button.ACButton--DialogMinor:active {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog .CategoryStats {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.dialog .CategoryStats {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog .CategoryStats {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign.dialog .CategoryStats {
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign.dialog .CategoryStats {
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
+.animecampaign.dialog .CategoryStats__Empty {
+  width: 100%;
+  font: 0.66rem "Libre Franklin";
+  text-align: center;
+  opacity: 0.5;
+  margin: 0.5rem 0;
+}
+.animecampaign.dialog .CategoryStats__Entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 97%;
+  margin: 0 auto;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign.dialog .CategoryStats__Entry {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.dialog .CategoryStats__Entry {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.dialog .CategoryStats__Entry:last-child {
+  border: none;
+}
+.animecampaign.dialog .CategoryStats .ACButton {
+  opacity: 0.25;
+  transition: opacity 0.075s;
+}
+.animecampaign.dialog .CategoryStats__Entry:hover .ACButton {
+  opacity: 1;
+}
+.animecampaign.dialog .CategoryStats__Entry .DragIndicator {
+  opacity: 0.25;
+}
+.animecampaign.dialog .CategoryStats__Entry:hover .DragIndicator {
+  opacity: 0.75;
+}
+.animecampaign.dialog .CategoryStats__Fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.animecampaign.application .Config {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Libre Franklin";
+}
+.animecampaign.application .Config__Group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.theme-dark .animecampaign.application .Config__Group {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.application .Config__Group {
+  color: #1f1e1e;
+}
+.animecampaign.application .Config__Label {
+  flex: 2;
+  font-weight: bold;
+  text-align: left;
+}
+.animecampaign.application .Config__Fields {
+  flex: 3;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+.animecampaign.application input.Config__Input,
+.animecampaign.application select.Config__Input {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  transition: outline 0.25s;
+  flex: 3;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+  padding: 0 0.4rem;
+  text-align: left;
+}
+.theme-dark .animecampaign.application input.Config__Input,
+.theme-dark .animecampaign.application select.Config__Input {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.application input.Config__Input,
+.theme-light .animecampaign.application select.Config__Input {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.application input.Config__Input:focus,
+.animecampaign.application select.Config__Input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.application input.Config__Input:hover,
+.animecampaign.application select.Config__Input:hover {
+  transition: none;
+  box-shadow: none;
+}
+.theme-dark .animecampaign.application input.Config__Input,
+.theme-dark .animecampaign.application select.Config__Input {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.application input.Config__Input,
+.theme-light .animecampaign.application select.Config__Input {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.application input.Config__Input:focus,
+.animecampaign.application select.Config__Input:focus {
+  outline: 0.125rem rgba(205, 50, 50, 0.5) solid;
+}
+.theme-dark .animecampaign.application input.Config__Input::placeholder {
+  color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.application input.Config__Input::placeholder {
+  color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.application input.Config__Input--Caps {
+  text-transform: uppercase;
+}
+.animecampaign.application input.Config__Input--Color {
+  flex: 1;
+}
+.animecampaign.application .Config__InnerLabel {
+  flex: 0;
+  width: fit-content;
+  font-size: 0.9rem;
+}
+.animecampaign.application .Config__Notes {
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 0.75rem;
+  text-align: left;
+  opacity: 0.8;
+}
+.animecampaign.application .Config__HorizontalBreak {
+  width: 100%;
+  border: none;
+  border-top: 0.0625rem solid;
+  margin: 0.25rem 0;
+  height: unset;
+  color: unset;
+  background-image: unset;
+}
+.theme-dark .animecampaign.application .Config__HorizontalBreak {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.application .Config__HorizontalBreak {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.ChatMessage {
+  outline: 0.0625rem solid rgba(31, 30, 30, 0.33);
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign.ChatMessage {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.ChatMessage {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign.ChatMessage {
+  background-color: rgba(23, 23, 24, 0.95);
+}
+.theme-light .animecampaign.ChatMessage {
+  background-color: rgba(244, 243, 237, 0.95);
+}
+.animecampaign.ChatMessage .ChatMessage__Summary {
+  display: flex;
+  align-items: end;
+}
+.animecampaign.ChatMessage .ChatMessage__ImageWrapper {
+  position: relative;
+  left: 0.3rem;
+  bottom: 2.25rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Image {
+  position: absolute;
+  min-height: 2.25rem;
+  min-width: 2.25rem;
+  max-height: 2.25rem;
+  max-width: 2.25rem;
+  border-width: 0.0625rem;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Image {
+  border-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Image {
+  border-color: rgba(31, 30, 30, 0.75);
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Image {
+  background-color: #171718;
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Image {
+  background-color: #f4f3ed;
+}
+.animecampaign.ChatMessage .ChatMessage__Info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.animecampaign.ChatMessage .ChatMessage__ImageWrapper + .ChatMessage__Info .ChatMessage__Name,
+.animecampaign.ChatMessage .ChatMessage__ImageWrapper + .ChatMessage__Info .ChatMessage__Category {
+  padding-left: 3rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Name {
+  padding: 0.25rem;
+  padding-bottom: 0.1rem;
+  border-bottom: 0.0625rem solid;
+  font: 1.25rem "Gloock";
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Name {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Name {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.ChatMessage .ChatMessage__Category {
+  padding: 0.1rem 0.25rem;
+  padding-bottom: none;
+  font: bold 0.8em "Libre Franklin";
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.animecampaign.ChatMessage .ChatMessage__Dice {
+  margin: 0.25rem 0;
+}
+.animecampaign.ChatMessage .ChatMessage__Result {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  margin: 0.35rem;
+  gap: 0.25rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Total {
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  padding: 0.1rem 0.25rem;
+  min-width: 3rem;
+  max-width: 50%;
+  height: 2rem;
+  font: bold 1.5rem "Philosopher";
+  text-align: center;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Total {
+  background-color: #171718;
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Total {
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Total {
+  border-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Total {
+  border-color: rgba(31, 30, 30, 0.75);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritSuccess {
+  border-color: darkgreen;
+  color: darkgreen;
+  text-shadow: white 0 0.0625rem;
+  background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritFailure {
+  border-color: darkred;
+  color: darkred;
+  text-shadow: white 0 0.0625rem;
+  background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritSuccess {
+  border-color: palegreen;
+  color: palegreen;
+  text-shadow: black 0 0.0625rem;
+  background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Total.ChatMessage__Total--CritFailure {
+  border-color: palevioletred;
+  color: palevioletred;
+  text-shadow: black 0 0.0625rem;
+  background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
+}
+.animecampaign.ChatMessage .ChatMessage__Formula {
+  flex: 1;
+  border-bottom: 0.0625rem solid;
+  font: 500 0.8rem "Libre Franklin";
+  opacity: 0.75;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Formula {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Formula {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.ChatMessage .ChatMessage__Dice .part-header {
+  padding: 0 0.35rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Dice .dice-tooltip {
+  display: none;
+}
+.animecampaign.ChatMessage .ChatMessage__Stats {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0.1rem 0.35rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Stats {
+  background-color: #171718;
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Stats {
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Stats {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Stats {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.ChatMessage .ChatMessage__StatEntry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 1.33rem;
+  border-bottom: 0.0625rem solid;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__StatEntry {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__StatEntry {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__StatEntry:nth-child(even) {
+  background-color: rgba(235, 237, 242, 0.1);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__StatEntry:nth-child(even) {
+  background-color: rgba(31, 30, 30, 0.1);
+}
+.animecampaign.ChatMessage .ChatMessage__StatEntry:last-child {
+  border-bottom: none;
+}
+.animecampaign.ChatMessage .ChatMessage__StatEntryTag {
+  width: 40%;
+  font: 0.8rem "Libre Franklin";
+  text-align: end;
+  text-transform: uppercase;
+}
+.animecampaign.ChatMessage .ChatMessage__StatEntryDivider {
+  font: 0.66rem "Libre Franklin";
+  opacity: 50%;
+}
+.animecampaign.ChatMessage .ChatMessage__StatEntryValue {
+  font: bold italic 1rem "Philosopher";
+}
+.animecampaign.ChatMessage .ChatMessage__StatEntryMax {
+  font: italic 0.8rem "Philosopher";
+}
+.animecampaign.ChatMessage .ChatMessage__StatEntryLabel {
+  font: 1rem "Philosopher";
+}
+.animecampaign.ChatMessage .ChatMessage__Content {
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Content h1 {
+  font-size: 1.15rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Content h2 {
+  font-size: 1.15rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Content h3 {
+  font-size: 1.1rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Content h4 {
+  font-size: 1rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Content h5 {
+  font-size: 1rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Content h6 {
+  font-size: 1rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Content h1.Section__Header.Section__Header--Collapsed,
+.animecampaign.ChatMessage .ChatMessage__Content h2.Section__Header.Section__Header--Collapsed,
+.animecampaign.ChatMessage .ChatMessage__Content h3.Section__Header.Section__Header--Collapsed,
+.animecampaign.ChatMessage .ChatMessage__Content h4.Section__Header.Section__Header--Collapsed,
+.animecampaign.ChatMessage .ChatMessage__Content h5.Section__Header.Section__Header--Collapsed,
+.animecampaign.ChatMessage .ChatMessage__Content h6.Section__Header.Section__Header--Collapsed {
+  font-size: 0.95rem;
+}
+.animecampaign.ChatMessage .ChatMessage__Banner {
+  border-top: 0.0625rem solid;
+  display: flex;
+  align-items: center;
+  padding: 0.1rem 0.35rem;
+}
+.theme-dark .animecampaign.ChatMessage .ChatMessage__Banner {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.ChatMessage .ChatMessage__Banner {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.ChatMessage .ChatMessage__Usage {
+  font: 500 0.8rem "Libre Franklin";
+}
+.animecampaign.ChatMessage .ChatMessage__UsageIcon {
+  margin: 0 0.1rem;
+  font-size: 0.8rem;
+}
+.animecampaign.ChatMessage .ChatMessage__ActionCost {
+  flex: 1;
+  text-align: end;
+  font: bold italic 0.8rem "Libre Franklin";
 }
 .animecampaign.chat.roll {
   border: 0.0625rem solid black;
   box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  background: #e8e5db;
+  background: #f4f3ed;
 }
 .animecampaign.chat.roll .summary {
   display: grid;
@@ -464,902 +2773,4 @@
   font-style: italic;
   font-weight: 700;
   text-transform: uppercase;
-}
-.animecampaign.sheet .summary {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  padding-bottom: 0.125rem;
-}
-.animecampaign.sheet .summary .background {
-  position: absolute;
-  top: 30px;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-  border-bottom: 1px solid black;
-}
-.animecampaign.sheet .summary section {
-  z-index: 2;
-}
-.animecampaign.sheet .summary .profile {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  grid-column: 1 / 1;
-  grid-row: 1 / -1;
-  place-self: end end;
-}
-.animecampaign.sheet .summary .profile .buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  place-self: start;
-  margin: 0;
-}
-.animecampaign.sheet .summary .profile .buttons > * {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  height: 1.2rem;
-  width: 1.2rem;
-  display: grid;
-  place-items: center;
-}
-.animecampaign.sheet .summary .color-button {
-  pointer-events: none;
-}
-.animecampaign.sheet .summary .color {
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  position: absolute;
-  margin: 0;
-  border: none;
-  opacity: 0;
-}
-.animecampaign.sheet .summary .color:hover {
-  cursor: pointer;
-}
-.animecampaign.sheet .summary .img {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  place-self: end;
-  border-radius: 0;
-}
-.animecampaign.sheet .summary .summary-top {
-  display: grid;
-  grid-column: 2 / -1;
-  grid-row: 1 / 2;
-  grid-template-columns: 2fr 0.8fr;
-  align-items: end;
-  padding-left: 0.25rem;
-}
-.animecampaign.sheet .summary textarea {
-  resize: none;
-  overflow-y: hidden;
-}
-.animecampaign.sheet .summary .name {
-  position: absolute;
-  max-height: 3.75rem;
-  width: calc((100% * (4 / 5) * (2 / 2.8)) - 1rem);
-  margin: 0;
-  padding: 0.4375rem;
-  overflow-wrap: break-word;
-  overflow: none;
-  vertical-align: bottom;
-  z-index: 1;
-  font-family: "Gloock";
-  line-height: 0.85;
-  letter-spacing: 0.0625rem;
-  opacity: 0;
-}
-.animecampaign.sheet .summary .name.facade {
-  pointer-events: none;
-  opacity: 1;
-}
-.animecampaign.sheet .summary .class {
-  text-align: end;
-  grid-column: 2 / -1;
-  max-height: 4rem;
-  max-width: 9rem;
-  place-self: end end;
-}
-.animecampaign.sheet .summary .summary-bottom {
-  display: flex;
-  grid-row: 2 / -1;
-  align-items: flex-end;
-  padding-left: 0.25rem;
-  gap: 0.125rem;
-}
-.animecampaign.sheet .summary .summary-bottom > * {
-  height: 1.6rem;
-}
-.animecampaign.sheet .summary .word {
-  font-family: "Philosopher";
-  font-size: 1.25rem;
-  font-style: italic;
-  font-weight: bold;
-}
-.animecampaign.actor.sheet .summary {
-  grid-template-rows: 7fr 3fr;
-  height: 6.2rem;
-}
-.animecampaign.actor.sheet .summary .background {
-  height: 4.84rem;
-}
-.animecampaign.actor.sheet .summary .img {
-  height: 5.4rem;
-  width: 5.4rem;
-}
-.animecampaign.actor.sheet .summary .name {
-  font-size: 3rem;
-}
-.animecampaign.actor.sheet .summary .class {
-  min-height: 0;
-  height: 1rem;
-  font-weight: 800;
-  line-height: 0.9;
-}
-.animecampaign.item.sheet .summary {
-  grid-template-rows: 2fr 1fr;
-  height: 5.125rem;
-}
-.animecampaign.item.sheet .summary .background {
-  height: 3.91666667rem;
-}
-.animecampaign.item.sheet .summary .img {
-  height: 4.4rem;
-  width: 4.4rem;
-}
-.animecampaign.item.sheet .summary .name {
-  font-size: 2.5rem;
-}
-.animecampaign.item.sheet .summary .action {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  height: 2.75rem;
-  width: 2.75rem;
-  grid-column: 2 / -1;
-  grid-row: 1 / 2;
-  place-self: start end;
-  opacity: 0.5;
-}
-.animecampaign.item.sheet .summary .summary-bottom > * {
-  height: 1.5rem;
-}
-.animecampaign.item.sheet .summary .category-select {
-  width: 0.94rem;
-}
-.animecampaign.item.sheet .summary .category-select option {
-  text-transform: capitalize;
-}
-.animecampaign.item.sheet .summary .category-input {
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.animecampaign.actor.sheet .main-stats {
-  width: 26rem;
-  border: 0;
-  margin: 0.5rem auto;
-  background-color: transparent;
-}
-.animecampaign.actor.sheet .main-stats th {
-  width: 8.66666667rem;
-  padding: 0;
-  font-family: "Libre Franklin";
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  line-height: 0.75;
-}
-.animecampaign.actor.sheet .main-stats td {
-  height: 3rem;
-  padding: 0 1rem;
-  border-left: 0.0625rem solid black;
-}
-.animecampaign.actor.sheet .main-stats td:last-child {
-  border-right: 0.0625rem solid black;
-}
-.animecampaign.actor.sheet .main-stats input {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  position: relative;
-  height: fit-content;
-  text-align: center;
-  z-index: 2;
-  font: bold 2.75rem "Philosopher";
-  line-height: 0.5;
-}
-.animecampaign.actor.sheet .main-stats input.top {
-  border-bottom: 0.0625rem solid black;
-  font-size: 1.75rem;
-}
-.animecampaign.actor.sheet .main-stats input.bottom {
-  font-size: 1.1rem;
-}
-.animecampaign.actor.sheet .main-stats .class-level {
-  position: relative;
-  height: 0;
-  top: -3.7rem;
-  left: 0.5rem;
-  z-index: 1;
-  font: 3.5rem "Gloock";
-  text-align: center;
-  color: #6d9eeb;
-  opacity: 0.5;
-  transform: skew(-15deg);
-}
-.animecampaign.item.sheet .stat-list {
-  margin-top: 0.5rem;
-}
-.animecampaign.sheet .stat-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 29.5rem;
-  margin: 0 auto;
-}
-.animecampaign.sheet .stat-list .control {
-  display: grid;
-  place-items: center;
-  width: 1.75rem;
-}
-.animecampaign.sheet .stat-list .view {
-  width: 4rem;
-}
-.animecampaign.sheet .stat-list .line {
-  height: 55%;
-  border-left: 0.0625rem solid black;
-}
-.animecampaign.sheet .stat-list .stat-header {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  display: flex;
-  height: 1.2rem;
-  border: 0;
-  border-bottom: 0.0625rem solid black;
-  align-items: center;
-}
-.animecampaign.sheet .stat-list .stat-header h2,
-.animecampaign.sheet .stat-list .stat-header .label {
-  margin: 0;
-  border: 0;
-  font-family: "Libre Franklin";
-  font-weight: 600;
-  font-size: 0.65rem;
-}
-.animecampaign.sheet .stat-list .stat-header h2 {
-  flex: 1;
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-.animecampaign.sheet .stat-list .stat-header .label {
-  text-align: center;
-}
-.animecampaign.sheet .stat-list .stat-header .label.view {
-  border: 0.0625rem solid black;
-  border-top: 0;
-  border-bottom: 0;
-}
-.animecampaign.sheet .stat-list .stat-header .add-stat {
-  margin-right: 0.0625rem;
-}
-.animecampaign.sheet .stat-list .cap {
-  height: 0.25rem;
-  margin-bottom: 0.4rem;
-  border: 0;
-  box-shadow: none;
-}
-.animecampaign.sheet .stat-list .stat {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  display: flex;
-  align-items: center;
-  height: 1.75rem;
-  border-top: 0;
-  border-bottom: 0;
-  border-color: transparent;
-}
-.animecampaign.sheet .stat-list .stat > * {
-  border-left: 0.0625rem solid black;
-}
-.animecampaign.sheet .stat-list .stat input {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  height: 1.75rem;
-}
-.animecampaign.sheet .stat-list .stat .color {
-  width: 1.75rem;
-  padding: 0;
-  padding-left: 0.425rem;
-  border: 0;
-  appearance: none;
-  font: italic bold 1.15rem "Philosopher";
-  letter-spacing: 2rem;
-}
-.animecampaign.sheet .stat-list .stat .img {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  height: 1.75rem;
-  width: 1.75rem;
-  border-color: rgba(0, 0, 0, 0.25);
-  border-top: 0;
-  border-bottom: 0;
-  filter: brightness(0) saturate(100%);
-  opacity: 0.75;
-}
-.animecampaign.sheet .stat-list .stat .tag,
-.animecampaign.sheet .stat-list .stat .content {
-  flex: 1;
-}
-.animecampaign.sheet .stat-list .stat .tag {
-  height: 80%;
-  margin-left: 0.0625rem;
-  text-transform: uppercase;
-}
-.animecampaign.sheet .stat-list .stat .content {
-  display: flex;
-  align-items: center;
-  font-family: "Philosopher";
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-.animecampaign.sheet .stat-list .stat .content > input {
-  flex: 1;
-  height: calc(80% + 0.0625rem);
-}
-.animecampaign.sheet .stat-list .stat .divider {
-  flex: 0;
-  position: relative;
-  top: 0.3rem;
-  font-family: "Libre Franklin";
-  font-weight: 100;
-  font-size: 1.25rem;
-  line-height: 0.5;
-}
-.animecampaign.sheet .stat-list .stat .view {
-  display: flex;
-  border: 0;
-  justify-content: space-evenly;
-  align-items: stretch;
-}
-.animecampaign.sheet .stat-list .stat .view a,
-.animecampaign.sheet .stat-list .stat .view i {
-  height: 1.75rem;
-  width: 1rem;
-}
-.animecampaign.sheet .stat-list .stat .view i {
-  text-align: center;
-  padding-top: 40%;
-  opacity: 0.33;
-}
-.animecampaign.sheet .stat-list .stat .view .selected {
-  opacity: 1;
-}
-.animecampaign.sheet .stat-list .empty {
-  padding: 0.1rem;
-  text-align: center;
-  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.5);
-  font: 600 0.75rem "Libre Franklin";
-  opacity: 0.5;
-}
-.animecampaign.actor.sheet .kit {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.animecampaign.actor.sheet .kit .control {
-  display: grid;
-  place-items: center;
-  width: 1.25rem;
-}
-.animecampaign.actor.sheet .kit .cap {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  height: 0.25rem;
-  width: 100%;
-  margin-bottom: 0.4rem;
-  border-top: 0;
-}
-.animecampaign.actor.sheet .kit button {
-  margin-bottom: 1rem;
-}
-.animecampaign.actor.sheet .kit .category header {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  display: flex;
-  height: 2rem;
-  align-items: center;
-}
-.animecampaign.actor.sheet .kit .category header > div {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-}
-.animecampaign.actor.sheet .kit .category header h2 {
-  margin: 0;
-  border: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-right: 0.25rem;
-  font-family: "Gloock";
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.0625rem;
-}
-.animecampaign.actor.sheet .kit .category header h2 .initial {
-  font-size: 1.5rem;
-  letter-spacing: -0.25rem;
-}
-.animecampaign.actor.sheet .kit .category .collapse {
-  flex-shrink: 0;
-  width: 1.75rem;
-}
-.animecampaign.actor.sheet .kit .category .category-controls i,
-.animecampaign.actor.sheet .kit .category .tracked-stat-list i,
-.animecampaign.actor.sheet .kit .category .list-controls i {
-  opacity: 0.25;
-}
-.animecampaign.actor.sheet .kit .category:hover i {
-  opacity: 1;
-}
-.animecampaign.actor.sheet .kit .category .category-controls {
-  flex: 1;
-  margin-top: 0.4rem;
-}
-.animecampaign.actor.sheet .kit .category .category-controls .control {
-  width: 1rem;
-}
-.animecampaign.actor.sheet .kit .category .category-controls i {
-  font-size: 0.75rem;
-}
-.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat {
-  display: grid;
-  height: 1.5rem;
-  width: 4.5rem;
-  padding: 0 0.25rem;
-  border-left: 0.0625rem solid black;
-}
-.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracked-stat > * {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-}
-.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracker-image {
-  position: relative;
-  top: -0.375rem;
-  height: 1.5rem;
-}
-.animecampaign.actor.sheet .kit .category .tracked-stat-list .tracker-image > img {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  position: absolute;
-  height: 2.25rem;
-  width: 2.25rem;
-  place-self: center start;
-  cursor: pointer;
-  clip-path: inset(8% 0 8% 0);
-  opacity: 25%;
-}
-.animecampaign.actor.sheet .kit .category .tracked-stat-list .control.untrack {
-  place-self: start end;
-  position: relative;
-  top: -0.125rem;
-  left: 0.125rem;
-  height: min-content;
-  width: min-content;
-  font-size: 0.75rem;
-}
-.animecampaign.actor.sheet .kit .category .tracked-stat-list .label {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  place-self: end;
-  padding-top: 0.375rem;
-  pointer-events: none;
-  font-family: "Fungka City";
-  line-height: 0.95;
-  text-transform: capitalize;
-}
-.animecampaign.actor.sheet .kit .category .list-controls {
-  height: 1.5rem;
-  width: 3.25rem;
-  justify-content: space-evenly;
-  border-left: 0.0625rem solid black;
-}
-.animecampaign.actor.sheet .kit .category .feature-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.animecampaign.actor.sheet .kit .category .feature-list .empty {
-  padding: 0.15rem;
-  text-align: center;
-  border-bottom: 0.0625rem solid black;
-  box-shadow: inset rgba(0, 0, 0, 0.5) 0.0625rem 0, inset rgba(0, 0, 0, 0.5) -0.0625rem 0;
-  font: 600 0.75rem "Libre Franklin";
-  opacity: 0.5;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  border-color: transparent;
-  border-left-color: black;
-  border-bottom-color: black;
-  border-top: 0;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .entry {
-  display: flex;
-  height: 2.25rem;
-  align-items: center;
-  background: linear-gradient(to right, currentColor 0%, transparent 15%);
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .entry > * {
-  color: black;
-  flex-shrink: 0;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .entry:hover i {
-  opacity: 1;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .img {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  height: 2.25rem;
-  width: 2.8125rem;
-  border-left: 0.5rem solid black;
-  border-right: 0.0625rem solid black;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .img:hover {
-  cursor: pointer;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: min-content;
-  padding: 0 0.25rem;
-  flex-shrink: 1;
-  font-family: "Philosopher";
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .action {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  height: 1.5rem;
-  width: 1.5rem;
-  opacity: 0.5;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .spacing {
-  flex: 1;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-controls {
-  display: flex;
-  width: 3.25rem;
-  height: 1.6875rem;
-  justify-content: space-evenly;
-  border-left: 0.0625rem solid rgba(0, 0, 0, 0.25);
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-controls i {
-  opacity: 0.25;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list {
-  display: flex;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat {
-  display: grid;
-  height: 1.8rem;
-  width: 4.5rem;
-  border-left: 0.0625rem solid rgba(0, 0, 0, 0.25);
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-img {
-  position: relative;
-  left: 0.3125rem;
-  top: -0.25rem;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-img > img {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  height: 2.25rem;
-  width: 2.25rem;
-  position: absolute;
-  z-index: 1;
-  filter: brightness(0) saturate(100%);
-  opacity: 0.15;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: flex;
-  flex-direction: column;
-  place-self: center stretch;
-  text-align: end;
-  text-overflow: clip;
-  z-index: 2;
-  font-family: "Philosopher";
-  font-size: 2rem;
-  font-weight: bold;
-  font-style: italic;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers > * {
-  padding: 0 0.25rem;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers .resource-value {
-  font-size: 1.7rem;
-  line-height: 0.75;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers .resource-max {
-  font-size: 0.8rem;
-  font-weight: normal;
-  line-height: 0.75;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .feature-tracked-stat-list .stat-numbers .label {
-  position: relative;
-  top: 0.1875rem;
-  padding: 0 0.0625rem;
-  font-family: "Fungka City";
-  font-size: 1.75rem;
-  font-style: normal;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .expanded {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 0.25rem;
-  border-right: 0.0625rem solid rgba(0, 0, 0, 0.25);
-  border-left: 0.5rem solid aqua;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0, transparent 0.25rem);
-  box-shadow: inset rgba(0, 0, 0, 0.75) 0.0625rem 0.0625rem;
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .expanded > li {
-  padding-top: 0.2rem;
-  border-top: 0.0625rem solid rgba(0, 0, 0, 0.3);
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .expanded > li:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .expanded .label {
-  padding: 0 0.3rem;
-  font: 800 0.8rem "Libre Franklin";
-}
-.animecampaign.actor.sheet .kit .feature-list .feature .expanded .text {
-  margin: 0;
-  padding: 0.3rem;
-  border-top: 0.0625rem solid rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.15) 0 0.0625rem;
-  font: 500 0.775rem "Libre Franklin";
-}
-.animecampaign.sheet .navigation {
-  display: flex;
-}
-.animecampaign.sheet .navigation nav {
-  display: flex;
-  padding: 0 0.4rem;
-  gap: 0.4rem;
-}
-.animecampaign.sheet .navigation nav > * {
-  display: grid;
-  place-items: center;
-  height: 100%;
-  width: 1.5rem;
-  font-size: 1.1rem;
-  opacity: 0.33;
-}
-.animecampaign.sheet .navigation nav > .active {
-  background: linear-gradient(to top, rgba(205, 50, 50, 0.5), transparent);
-  opacity: 1;
-}
-.animecampaign.sheet .navigation .line {
-  height: 1.6rem;
-  align-self: center;
-  border-left: 0.0625rem solid black;
-}
-.animecampaign.sheet .navigation h1 {
-  margin: 0;
-  border: 0;
-  flex: 1;
-  padding: 0.25rem 0.5rem;
-  font: 1.5rem "Gloock";
-  text-transform: uppercase;
-  line-height: 1;
-  letter-spacing: 0.0625rem;
-}
-.animecampaign.sheet .navigation h1::first-letter {
-  font-size: 1.9rem;
-}
-.animecampaign.sheet .navigation .control-list {
-  display: flex;
-  align-items: flex-end;
-  font: 0.75rem "Libre Franklin";
-}
-.animecampaign.sheet .divider {
-  display: flex;
-  width: 100%;
-  margin-bottom: 0.6rem;
-}
-.animecampaign.sheet .divider .line {
-  border: 0.0625rem solid black;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 0.0625rem;
-  border-bottom: 0;
-  flex: 1;
-}
-.animecampaign.sheet .divider .icon {
-  position: relative;
-  height: 0;
-  top: -0.75rem;
-  margin: 0 0.2rem;
-  font-size: 1.25rem;
-}
-.animecampaign.item.sheet .section-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.animecampaign.item.sheet .section-list textarea {
-  resize: none;
-  overflow-y: hidden;
-}
-.animecampaign.item.sheet .section-list .panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 1rem;
-}
-.animecampaign.item.sheet .section-list .collapse i {
-  font-size: 0.8rem;
-}
-.animecampaign.item.sheet .section-list .grip {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  cursor: grab;
-}
-.animecampaign.item.sheet .section-list .section {
-  display: flex;
-  padding: 0.2rem 0;
-}
-.animecampaign.item.sheet .section-list .section:first-child {
-  padding-top: 0;
-}
-.animecampaign.item.sheet .section-list .section-body {
-  flex: 1;
-  border-left: 0.0625rem solid black;
-  padding: 0 0.4rem;
-  margin-left: 0.4rem;
-  box-shadow: inset rgba(0, 0, 0, 0.25) 0.0625rem 0;
-}
-.animecampaign.item.sheet .section-list .section-body header {
-  display: flex;
-  align-items: stretch;
-  margin: 0.2rem 0;
-}
-.animecampaign.item.sheet .section-list .section-body header a {
-  display: grid;
-  place-items: center;
-  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.15);
-}
-.animecampaign.item.sheet .section-list .section-body header a:last-child i {
-  margin: 0 0.3rem;
-}
-.animecampaign.item.sheet .section-list .section-body header a i {
-  height: 100%;
-  width: 1.25rem;
-  margin-left: 0.4rem;
-  padding-top: 0.35rem;
-  text-align: center;
-}
-.animecampaign.item.sheet .section-list .section-body header .name {
-  font-weight: 700;
-}
-.animecampaign.item.sheet .section-list .section-body header .toggle-view i {
-  color: rgba(0, 0, 0, 0.25);
-}
-.animecampaign.item.sheet .section-list .section-body header .toggle-view i.selected {
-  color: black;
-}
-.animecampaign.item.sheet .section-list button {
-  margin-top: 0.2rem;
-  margin-bottom: 1rem;
-}
-.animecampaign.item.sheet .section-list .editor.prosemirror {
-  height: 20rem;
-}
-.animecampaign.item.sheet .detail-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.animecampaign.item.sheet .detail-list .detail {
-  padding: 0.25rem 0.35rem;
-  margin-bottom: 0.3rem;
-  border-left: 0.0625rem solid black;
-  box-shadow: inset rgba(0, 0, 0, 0.25) 0.0625rem 0;
-  font-family: "Libre Franklin";
-}
-.animecampaign.item.sheet .detail-list header,
-.animecampaign.item.sheet .detail-list header > * {
-  display: flex;
-  align-items: center;
-}
-.animecampaign.item.sheet .detail-list .labels,
-.animecampaign.item.sheet .detail-list .fields {
-  flex: 1;
-}
-.animecampaign.item.sheet .detail-list .labels > *,
-.animecampaign.item.sheet .detail-list .fields > * {
-  margin: 0 0.1rem;
-}
-.animecampaign.item.sheet .detail-list .labels .unit,
-.animecampaign.item.sheet .detail-list .fields label,
-.animecampaign.item.sheet .detail-list .note {
-  opacity: 0.7;
-  font-size: 0.8rem;
-}
-.animecampaign.item.sheet .detail-list .labels label {
-  font-weight: 800;
-}
-.animecampaign.item.sheet .detail-list .fields {
-  justify-content: flex-end;
-}
-.animecampaign.item.sheet .detail-list .note {
-  font-size: 0.6rem;
-}
-.animecampaign.actor.sheet .biography {
-  opacity: 1;
-}
-.animecampaign.actor.sheet .biography .control {
-  display: flex;
-  align-items: baseline;
-  justify-content: end;
-  padding-bottom: 0.2rem;
-  font-size: 0.66rem;
-}
-.animecampaign.actor.sheet .biography .control select {
-  height: 1.2rem;
-}
-.animecampaign.actor.sheet .biography .control label {
-  margin: 0 0.15rem;
-  font-family: "Libre Franklin";
-  font-weight: 700;
-}
-.animecampaign.actor.sheet .biography textarea {
-  resize: none;
-  overflow-y: hidden;
-  min-height: 3rem;
-}
-.animecampaign.actor.sheet .biography .editor.prosemirror {
-  height: 20rem;
-}
-.sheet.category-config .name {
-  text-transform: uppercase;
-}
-.sheet.category-config .tracker {
-  text-transform: capitalize;
-}
-.sheet.category-config button > .fas {
-  margin: auto;
 }
