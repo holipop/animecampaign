@@ -309,16 +309,23 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         data.snap = !this.category.snap
         
         const { trackers } = foundry.utils.expandObject(data)
-        const trackersArr = Object.values(trackers)
+        if (trackers) {
+            const trackersArr = Object.values(trackers)
 
-        const uniqueTags = new Set(trackersArr.map(t => t.tag.toLowerCase()))
-        if (uniqueTags.size !== trackersArr.length) {
-            throw game.i18n.format("AC.CategoryConfig.StatTagTaken")
+            const uniqueTags = new Set(trackersArr.map(t => t.tag.toLowerCase()))
+
+            if (uniqueTags.has("")) {
+                throw game.i18n.format("AC.CategoryConfig.StatTagEmpty")
+            }
+
+            if (uniqueTags.size !== trackersArr.length) {
+                throw game.i18n.format("AC.CategoryConfig.StatTagTaken")
+            }
+    
+            trackersArr.forEach((t, i) => {
+                data[`trackers.${i}.tag`] = t.tag.toLowerCase()
+            })
         }
-
-        trackersArr.forEach((t, i) => {
-            data[`trackers.${i}.tag`] = t.tag.toLowerCase()
-        })
 
         const nameTaken = categories
             .filter(c => c.name !== this.category.name)
@@ -327,22 +334,24 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
             throw game.i18n.format("AC.CategoryConfig.CategoryNameTaken", { name: data.name.toUpperCase() })
         }
 
+        const updates = { "system.categories": categories }
+
         if (this.isNew) {
             categories.push(data)
         } else {
             // if name was changed, change the category of all of its features
             if (data.name !== this.category.name) {
-                const updates = this.category.features.map(item => { 
+                const updatedItems = this.category.features.map(item => { 
                     return { _id: item._id, 'system.category': data.name }
                 })
-                this.document.updateEmbeddedDocuments("Item", updates)
+                updates.items = updatedItems
             }
 
             const index = categories.findIndex(c => c.name == this.category.name)
             categories[index] = data
         }
 
-        this.document.update({ "system.categories": categories })
+        this.document.update(updates)
     }
 
 }

@@ -1281,7 +1281,8 @@
   border: none;
   background-position: center;
   object-fit: cover;
-  opacity: 0.25;
+  opacity: 0.5;
+  z-index: 1;
 }
 .theme-dark .animecampaign.sheet .StatEntry__Image--CustomImage {
   filter: brightness(0) saturate(100%) invert(100%);
@@ -1293,6 +1294,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  z-index: 2;
 }
 .animecampaign.sheet .StatEntry .DragIndicator {
   opacity: 0;
