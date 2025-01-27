@@ -1,0 +1,31 @@
+<div class="Template Template--Character JS-DropItem">
+
+    {{> "character.summary"}}
+
+    <div class="Scrollable">
+
+        {{> "character.stats"}}
+            
+        {{> "generic.nav"}}
+
+        {{> "character.kit"}}
+
+        <!-- section class="Effects tab" data-tab="effects" data-group="character">
+            EFFECTS
+        </section -->
+
+        <section class="Biography tab {{tabs.biography.css}}" data-tab="biography" data-group="character">
+            {{#if (gte permission 3)}}
+                <prose-mirror class="ACTextEditor" name="system.description" value="{{system.description}}" toggled="true" compact="true">
+                    {{{enrichedDescription}}}
+                </prose-mirror>
+            {{else}}
+                <div class="NonOwnerDescription JS-AttachSections">
+                    {{{enrichedDescription}}}
+                </div>
+            {{/if}}
+        </section>
+
+    </div>
+
+</div>

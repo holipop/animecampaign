@@ -1,202 +1,218 @@
 {
 "AC": {
     "Title": "Anime Campaign",
-    "Character": "Character",
-    "Feature": "Feature",
     "Test": "Testing Testing One Two Three!",
     "NotApplicable": "N/A",
+    
+    "Character": "Character",
+    "Feature": "Feature",
 
-    "CATEGORY": {
-        "Weapon": "Weapon",
-        "Talent": "Talent",
-        "Passive": "Passive",
-        "Ability": "Ability"
+    "Markdown": "Markdown",
+    "ProseMirror": "ProseMirror",
+    
+    "Red": "Red",
+    "Blue": "Blue",
+    "Yellow": "Yellow",
+    "Green": "Green",
+    "Orange": "Orange",
+    "Cyan": "Cyan",
+    "Purple": "Purple",
+    "Grey": "Grey",
+
+    "Macro": {
+        "NotOwnedItemWarning": "You can only create macro buttons for owned Items.",
+        "ControlledActorWarning": "You must control an Actor to roll from the hotbar.",
+        "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]."
     },
-    "TYPE": {
+
+    "Migration": {
+        "WarnForGM": "Please have a GM log in to begin migration to v2.0.",
+        "V2MigrationBegin": "<b>Beginning v2.0 Migration.</b> Please wait a moment and do not close your game or shut down your server.",
+        "V2MigrationComplete": "<b>v2.0 Migration Complete!</b> Please reload your world.",
+        "MigratingDocument": "Migrating {document} document \"{name}\" [{id}]",
+        "MigratingPack": "Migrated all {document} documents from Compendium \"{pack}\"",
+        "FailedMigration": "Failed AC FVTT system migration for {document} document \"{name}\" [{id}]: {error}",
+        "FailedMigrationInPack": "Failed AC FVTT system migration for {document} document (\"{name}\" [{id}]) in Compendium {pack}: {error}"
+    },
+
+    "CharacterSheet": {
+        "Name": "Name",
+        "Class": "Class",
         "Inscribed": "Inscribed",
         "Mundie": "Mundie",
-        "Epithet": "Epithet",
-        "Expert": "Expert",
-        "Powerhouse": "Powerhouse"
-    },
-    "STAT": {
+        "MundieTypes": {
+            "Powerhouse": "Powerhouse",
+            "Expert": "Expert"
+        },
+        "InscribedTypes": {
+            "Epithet": "Epithet"
+        },
+        "Word": "Epithet/Core Word",
+        "EditImage": "Edit Image",
+        "EditColor": "Edit Color",
+
         "Stamina": "Stamina",
         "Proficiency": "Proficiency",
         "Movement": "Movement",
-        "Damage": "Damage",
-        "Range": "Range",
-        "Cost": "Cost",
-        "Bonus": "Bonus",
-        "RedStat": "Red Stat",
-        "BlueStat": "Blue Stat",
-        "YellowStat": "Yellow Stat",
-        "GreenStat": "Green Stat",
-        "OrangeStat": "Orange Stat",
-        "CyanStat": "Cyan Stat",
-        "PurpleStat": "Purple Stat",
-        "GreyStat": "Grey Stat"
-    },
-    "COLOR": {
-        "Red": "Red",
-        "Blue": "Blue",
-        "Yellow": "Yellow",
-        "Green": "Green",
-        "Orange": "Orange",
-        "Cyan": "Cyan",
-        "Purple": "Purple",
-        "Grey": "Grey"
-    },
-    "NAV": {
-        "Biography": "Biography",
-        "Kit": "Kit",
-        "Description": "Description",
-        "Details": "Details",
-        "Basic": "Basic",
-        "Stats": "Stats"
-    },
-    "LABEL": {
-        "ColorStats": "Color Stats",
-        "Stat": "Stat",
-        "Stats": "Stats",
-        "View": "View",
-        "Value": "Value",
-        "Max": "Max",
-        "Spaces": "Spaces",
         "Build": "Build",
-        "Label": "Label",
-        "Text": "Text",
-        "Tag": "Tag",
-        "Word": "Epithet/Core Word",
-        "Class": "Class",
+        
+        "Kit": "Kit",
+        "Biography": "Biography",
+
+        "UncategorizedFeatures": "Uncategorized",
+
+        "StatAdd": "Add Stat",
+        "StatEdit": "Edit Stat",
+        "StatDelete": "Delete Stat",
+
+        "CategoryCollapse": "Collapse Category",
+        "CategoryEdit": "Edit Category",
+        "CategoryFlood": "Flood Category",
+        "CategoryDelete": "Delete Category",
+        "CategoryCreate": "Create Category",
+        
+        "FeatureRoll": "Roll Feature",
+        "FeatureAdd": "Add Feature",
+        "FeatureCollapse": "Collapse Feature",
+        "FeatureEdit": "Edit Feature",
+        "FeatureView": "View Feature",
+        "FeatureDelete": "Delete Feature"
+    },
+
+    "FeatureSheet": {
         "Name": "Name",
         "Category": "Category",
-        "EmptyStats": "Empty Stats",
-        "EmptyCategory": "Empty Category",
-        "UpdateCategory": "Update Category",
-        "TextEditor": "Text Editor",
-        "Markdown": "Markdown",
-        "ProseMirror": "ProseMirror"
+
+        "EditImage": "Edit Image",
+        "EditColor": "Edit Color",
+        "FeaturePost": "Post Feature to Chat",
+        "FeatureRoll": "Roll Feature",
+        "RemoveImage": "Remove Image",
+
+        "Description": "Description",
+        "Details": "Details",
+
+        "StatAdd": "Add Stat",
+        "StatEdit": "Edit Stat",
+        "StatDelete": "Delete Stat"
     },
-    "TOOLTIP": {
-        "Color": "Edit Color",
-        "Roll": "Roll",
-        "Stat": {
-            "Collapse": "Collapse Stats",
-            "Add": "Add Stat",
-            "Remove": "Remove Stat",
-            "Value": "Set View to Value",
-            "Resource": "Set View to Resource",
-            "Label": "Set View to Label"
-        },
-        "Category": {
-            "Collapse": "Collapse Category",
-            "Create": "Create Category",
-            "Delete": "Delete Category",
-            "Edit": "Edit Category",
-            "Rename": "Rename Category",
-            "Color": "Color Category",
-            "Flood": "Flood Category",
-            "Reset": "Reset Category Color",
-            "Track": "Track Stat",
-            "Untrack": "Untrack Stat",
-            "EditTrackerImage": "Edit Tracker Image"
-        },
-        "Feature": {
-            "Expand": "Expand Feature",
-            "Create": "Create Feature",
-            "View": "View Feature",
-            "Delete": "Delete Feature"
-        },
-        "Section": {
-            "Collapse": "Collapse Section",
-            "Create": "Create Section",
-            "Remove": "Remove Section",
-            "ToggleVisibility": "Toggle Section Visibility"
-        }
-    },
-    "DIALOG": {
-        "Confirm": "Confirm",
-        "Name": "Name",
-        "Tag": "Tag",
-        "CreateCategory": {
-            "Title": "Create New Category: {name}",
-            "Placeholder": "New Category"
-        },
-        "ColorCategory": {
-            "Title": "Color Category [{category}]: {name}",
-            "Set": "Set Color",
-            "Reset": "Reset Color"
-        },
-        "RenameCategory": {
-            "Title": "Rename Category [{category}]: {name}"
-        },
-        "TrackStat": {
-            "Title": "Track Stat [{category}]: {name}"
-        },
-        "DeleteCategory": {
-            "Title": "Delete Category [{category}]: {name}"
-        },
-        "DeleteFeature": {
-            "Title": "Delete Feature [{id}]: {name}"
-        }
-    },
-    "DETAILS": {
-        "TextEditor": {
-            "Name": "Text Editor",
-            "Hint": "Markdown is using plaintext for simple styling. ProseMirror is a rich text editor, \"what you see is what you get\"."
-        },
+
+    "Details": {
         "RollFormula": {
-            "Name": "Roll Formula"
+            "Label": "Roll Formula"
         },
         "Action": {
-            "Name": "Action"
+            "Label": "Action Cost",
+            "Placeholder": "Main"
         },
         "Usage": {
-            "Name": "Usage",
-            "Hint": "i.e. \"Once per Combat\".",
-            "Per": "per"
+            "Label": "Usage"
+        },
+        "TextEditor": {
+            "Label": "Text Editor"
         }
     },
-    "SETTINGS": {
-        "TokenBarClamp": {
-            "Name": "Token Bar Clamp",
-            "Hint": "Disabling this allows you to modify token bars to go into negative numbers and past their maximum value."
+
+    "StatConfig": {
+        "StatTagTaken": "\"{tag}\" is already taken by another stat.",
+
+        "AddStat": {
+            "Title": "Add Stat: {name}",
+            "Submit": "Add Stat"
         },
-        "DefaultTextEditor": {
-            "Name": "Default Text Editor",
-            "Hint": "Configure which text editor is set on-creation for your actors and items."
+        "EditStat": {
+            "Title": "Edit Stat: {name}",
+            "Submit": "Update Stat"
         },
-        "DiagonalMovement": {
-            "Name": "Diagonal Movement Rule",
-            "Hint": "Configure which diagonal movement rule should be used for games within this system.",
-            "555": "PHB: Equidistant (5/5/5)",
-            "5105": "DMG: Alternating (5/10/5)",
-            "EUCL": "Euclidean (7.07 ft. Diagonal)"
+
+        "Tag": {
+            "Label": "Tag",
+            "Placeholder": "New Stat"
         },
-        "DefaultFeatureImage": {
-            "Name": "Default Feature Image",
-            "Hint": "Enabling this sets the default image of created features to the image of the character that owns it."
+        "Display": {
+            "Label": "Display",
+            "Notes": "<b>Value</b> and <b>Resource</b> are numeric, <b>Label</b> can be any text.",
+            "Options": {
+                "Value": "Value",
+                "Resource": "Resource",
+                "Label": "Label"
+            }
+        },
+        "Color": {
+            "Label": "Color",
+            "Notes": "Configure the stat for token attribute bars."
         }
     },
-    "MIGRATION": {
-        "WarnForGM": "Please have a GM log in to begin migration to v1.0.",
-        "V1MigrationBegin": "<b>Beginning v1.0 Migration.</b> Please wait a moment and do not close your game or shut down your server.",
-        "V1MigrationComplete": "<b>v1.0 Migration Complete!</b> Please reload your world.",
-        "Migrating": "Migrating {document} document \"{name}\" [{id}]",
-        "MigratingPack": "Migrated all {document} documents from Compendium \"{pack}\"",
-        "FailedMigration": "Failed AC FVTT system migration for {document} document \"{name}\" [{id}]: {error}",
-        "FailedPackMigration": "Failed AC FVTT system migration for {document} document (\"{name}\" [{id}]) in Compendium {pack}: {error}"
+
+    "DeleteStatDialog": {
+        "Title": "Delete Stat [{tag}]: {name}",
+        "Content": "<p>Delete the \"<b>{tag}</b>\" stat?</p>"
     },
-    "NOTIFY": {
-        "Macro": {
-            "ControlActorWarning": "You must control an Actor to roll from the hotbar.",
-            "MissingItemWarning": "Your controlled Actor doesn't have an item with id [{id}]."
+
+    "DeleteColorStatDialog": {
+        "Title": "Delete Stat [{tag}]: {name}",
+        "Content": "<p>Delete the \"<b>{tag}</b>\" (<em>{color}</em>) stat?</p>"
+    },
+
+    "CategoryConfig": {
+        "CategoryNameTaken": "\"{name}\" is already taken by another category.",
+        "StatTagTaken": "At least two stats share the same tag.",
+        "StatTagEmpty": "At least one stat has no tag.",
+        
+        "Basic": "Basic",
+        "Stats": "Stats",
+        "Details": "Details",
+        
+        "StatsNote": "Stats defined here are displayed on the character sheet and also act as the default stats for features under this category.",
+        "EmptyStats": "No stats defined.",
+        "Tag": {
+            "Label": "Tag",
+            "Placeholder": "Tag"
         },
-        "Character": {
-            "CategoryNameTaken": "\"{name}\" is already taken by another category.",
-            "TrackerNameTaken": "\"{name}\" is already taken by another stat tracker.",
-            "BlankName": "Name field can't be blank."
+        "Display": {
+            "Label": "Display",
+            "Options": {
+                "Value": "Value",
+                "Resource": "Resource",
+                "Label": "Label"
+            }
+        },
+        "StatAdd": "Add Stat",
+
+        "DetailsNote": "Default details for features created under this category.",
+
+        "CreateCategory": {
+            "Title": "Create Category: {name}",
+            "Submit": "Create Category"
+        },
+        "EditCategory": {
+            "Title": "Edit Category [{category}]: {name}",
+            "Submit": "Update Category"
+        },
+        
+        "Name": {
+            "Label": "Name",
+            "Placeholder": "New Category"
+        },
+        "Color": {
+            "Label": "Color"
         }
+    },
+
+    "FloodCategoryDialog": {
+        "Title": "Flood Category [{category}]: {name}",
+        "Content": "<p>Apply the color of this category to all of its features?</p>"
+    },
+
+    "DeleteCategoryDialog": {
+        "Title": "Delete Category [{category}]: {name}",
+        "Content": "<p>Delete the \"<b>{category}</b>\" category?<br><em>This will delete all features within this category.</em></p>"
+    },
+
+    "DeleteFeatureDialog": {
+        "Title": "Delete Feature [{id}]: {name}",
+        "Content": "<p>Delete \"<b>{feature}</b>\"?</p>"
     }
+
 }
 }

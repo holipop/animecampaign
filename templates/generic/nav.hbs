@@ -1,0 +1,21 @@
+<section class="Navigation">
+
+    <div class="Navigation__Tabs tabs">
+        {{#each tabs as |tab id|}}
+            {{#if (gte @root.permission tab.permission)}}
+                <button class="ACButton ACButton--Tab JS-Color {{tab.css}}" type="button" data-action="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}" data-color="{{@root.palette.secondary}}" data-properties="color border-color">
+                    <span class="ACButton__Icon MSO">{{tab.icon}}</span>
+                </button>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <span class="Navigation__TabName">
+        {{#each tabs as |tab id|}}
+            {{#if (gte @root.permission tab.permission)}}
+                <span class="Navigation__TabNameContent tab {{tab.css}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">{{localize tab.label}}</span>
+            {{/if}}
+        {{/each}}
+    </span>
+
+</section>

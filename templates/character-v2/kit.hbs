@@ -1,0 +1,96 @@
+<ul class="Kit tab {{tabs.kit.css}} JS-Drop" data-tab="kit" data-group="character">
+
+    {{#each categories as |category index|}}
+        <li class="Category JS-Category {{category.collapsedCSS}}" data-category="{{index}}">
+
+            <div class="Category__Header JS-Color JS-Drag" data-drag="category" data-color="{{palette.primary}}" data-properties="background-color">
+                
+                <div class="Category__HeaderLeft JS-Color" data-color="{{palette.contrast}}">
+                    
+                    {{#if (gte @root.permission 3)}}
+                        <span class="DragIndicator MSO JS-Color" data-color="{{palette.contrast}}">drag_indicator</span>
+                    {{/if}}
+
+                    <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryCollapse">
+                        <span class="ACButton__Icon MSO">keyboard_arrow_down</span>
+                    </button>
+
+                </div>
+
+                <div class="Category__HeaderCenter JS-Color" data-color="{{palette.contrast}}">
+
+                    <span class="Category__Name">
+                        {{category.name}}
+                    </span>
+
+                    {{#if (gte @root.permission 3)}}
+                        <div class="Category__Buttons InlineButtonGroup">
+                            <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryEdit" data-tooltip="AC.CharacterSheet.CategoryEdit">
+                                <span class="ACButton__Icon MSO">edit</span>
+                            </button>
+
+                            <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryFlood" data-tooltip="AC.CharacterSheet.CategoryFlood">
+                                <span class="ACButton__Icon MSO">colors</span>
+                            </button>
+                        </div>
+                    {{/if}}
+
+                    <div class="Category__Padding"></div>
+
+                    <div class="Category__Trackers">
+                        {{#each category.trackers as |tracker index|}}
+                            <div class="StatTracker StatTracker--{{../palette.css}}">
+                                <span class="StatTracker__Label">{{tracker.tag}}</span>
+                            </div>
+                        {{/each}}
+                    </div>
+
+                    <div class="Category__Buttons InlineButtonGroup">
+                        {{#if (gte @root.permission 3)}}
+                            <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onFeatureAdd" data-tooltip="AC.CharacterSheet.FeatureAdd">
+                                <span class="ACButton__Icon MSO">add</span>
+                            </button>
+
+                            <button class="ACButton ACButton--Inline ACButton--Delete" type="button" data-action="onCategoryDelete" data-tooltip="AC.CharacterSheet.CategoryDelete">
+                                <span class="ACButton__Icon MSO">close</span>
+                            </button>
+                        {{/if}}
+                    </div>
+
+                </div>
+
+                <div class="Category__HeaderRight"></div>
+
+            </div>
+
+            <ul class="Category__Features JS-Drop">
+
+                {{#each category.features as |feature index|}}
+                    {{> "character.feature-entry" feature=feature permission=@root.permission content=(lookup @root.enrichedFeatureDescriptions feature._id)}}
+                {{/each}}
+
+            </ul>
+
+        </li>
+    {{/each}}
+
+    {{#if uncategorizedFeatures}}
+        <div class="UncategorizedFeatures JS-Drop">
+            <div class="UncategorizedFeatures__Label">{{localize "AC.CharacterSheet.UncategorizedFeatures"}}</div>
+
+            {{#each uncategorizedFeatures as |feature index|}}
+                {{> "character.feature-entry" feature=feature permission=@root.permission content=(lookup @root.enrichedFeatureDescriptions feature._id)}}
+            {{/each}}
+        </div>
+    {{/if}}
+
+    {{#if (gte permission 3)}}
+        <button class="ACButton ACButton--Wide" type="button" data-action="onCategoryCreate">
+            <span class="ACButton__Icon MSO">save</span>
+            <span class="ACButton__Text">
+                {{localize "AC.CharacterSheet.CategoryCreate"}}
+            </span>
+        </button>
+    {{/if}}
+
+</ul>

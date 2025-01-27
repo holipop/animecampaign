@@ -1,0 +1,339 @@
+// main: ./animecampaign.less
+
+.animecampaign.sheet {
+
+    .Stats {
+        #Part();
+        margin-bottom: 1rem;
+    }
+
+    .Stats__MainStats {
+        display: flex;
+        margin-bottom: .3rem;
+    }
+    .Stats__MainStatsPadding {
+        flex: 1;
+        display: grid;
+        place-items: end;
+    }
+    
+    .StatCard {
+        margin: 0 0.2rem;
+        padding: 1 * @rpx;
+        border-radius: 3 * @rpx;
+
+        background: @override;
+    }
+    .StatCard--Stamina {
+        background: linear-gradient(@stam-color-primary, @stam-color-secondary);
+    }
+    .StatCard--Proficiency {
+        background: linear-gradient(@prof-color-primary, @prof-color-secondary);
+    }
+    .StatCard--Movement {
+        background: linear-gradient(@move-color-primary, @move-color-secondary);
+    }
+
+    .StatCard__Content {
+        #ColorScheme({
+            background-color: "bg";
+        });
+
+        display: flex;
+        flex-direction: column;
+        width: 8.75rem;
+        height: 4.125rem;
+        border-radius: 2 * @rpx;
+    }
+
+    .StatCard__Header {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        display: flex;
+        align-items: center;
+        margin: .1rem .15rem 0;
+        border-bottom: (1 * @rpx) solid;
+    }
+    .StatCard__Icon.MSO {
+        font-size: 0.8rem;
+        margin: 0 0.1rem;
+    }
+    .StatCard__Name {
+        #ColorScheme({
+            color: "txt";
+            border-color: "txt";
+        });
+
+        font: 0.75rem "Libre Franklin";
+        text-transform: uppercase;
+    }
+
+    .StatCard__Footer {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: .4rem;
+    }
+    .StatCard__Input {
+        #InputSkinning();
+        #FocusOutline();
+        #ColorScheme({
+            color: "txt";
+        });
+        
+        font: bold 2.25rem "Philosopher";
+        border-radius: 2 * @rpx;
+        text-overflow: clip;
+    }
+    .StatCard__Input::placeholder {
+        opacity: .5;
+    }
+    .StatCard__Label {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        font: 1rem "Libre Franklin";
+        opacity: .5;
+    }
+    .StatCard__Label--Divider {
+        margin: 0 .2rem;
+    }
+
+    // ---- Stamina ----
+    .StatCard__Input--StaminaValue {
+        flex: 2;
+
+        text-align: end;
+    }
+    .StatCard__Input--StaminaMax {
+        flex: 1;
+
+        font-size: 1.25rem;
+        font-weight: normal;
+    }
+
+    // ---- Proficiency ----
+    .StatCard__Input--ProficiencyValue {
+        text-align: end;
+        padding: 0 .3rem;
+
+        font-size: 2.66rem;
+    }
+    .StatCard__Label--ClassLevel {
+        height: 66%;
+        width: 1.75rem;
+
+        font: italic 1.5rem "Gloock";
+        align-self: flex-end;
+    }
+
+    // ---- Movement ----
+    .StatCard__Input--Build {
+        height: 50%;
+        flex: 2;
+        align-self: flex-end;
+
+        font-size: 1rem;
+        font-weight: normal;
+    }
+    .StatCard__Input--MovementValue {
+        flex: 1.5;
+        text-align: end;
+        padding: 0 .3rem;
+
+        font-size: 2.66rem;
+    }
+
+    .Stats__List {
+        #ListSkinning();
+        #ColorScheme({
+            background-color: "bg";
+        });
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        margin: .4rem 0;
+        border-radius: 2 * @rpx;
+        border: (1 * @rpx) solid;
+    }
+
+    .StatEntry {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        display: flex;
+        align-items: center;
+        margin: 0 .2rem;
+        height: 2rem;
+        border-bottom: (1 * @rpx) solid;
+    }
+    .StatEntry:last-of-type {
+        border: none;
+        height: 2rem - (1 * @rpx);
+    }
+
+    .StatEntry__InfoWrapper {
+        #GridWrap();
+        
+        width: 40%;
+    }
+
+    .StatEntry__Image {
+        position: relative;
+        height: 2rem;
+        width: 2.5rem;
+        left: 1rem;
+        border: none;
+        background-position: center;
+        object-fit: cover;
+        
+        opacity: .5;
+        z-index: 1;
+    }
+    .StatEntry__Image--CustomImage {
+        #ContrastImageFilter();
+    }
+
+    .StatEntry__Info {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        z-index: 2;
+    }
+
+    .StatEntry .DragIndicator {
+        opacity: 0;
+    }
+    .StatEntry:hover .DragIndicator {
+        opacity: .75;
+    }
+
+    .StatEntry__Color {
+        position: relative;
+        right: .2rem;
+
+        font: italic 1.5rem "Gloock";
+        text-transform: uppercase;
+        line-height: 0;
+        color: @override;
+        opacity: .5;
+        // clip-path: inset(0 -20% 32% 0);
+    }
+    .StatEntry__Color--red      { color: @red-stat }
+    .StatEntry__Color--blue     { color: @blue-stat }
+    .StatEntry__Color--yellow   { color: @yellow-stat }
+    .StatEntry__Color--green    { color: @green-stat }
+    .StatEntry__Color--orange   { color: @orange-stat }
+    .StatEntry__Color--cyan     { color: @cyan-stat }
+    .StatEntry__Color--purple   { color: @purple-stat }
+    .StatEntry__Color--grey     { color: @grey-stat }
+
+    .StatEntry__Tag {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        padding: .1rem .25rem;
+
+        font: .8rem "Libre Franklin";
+        text-transform: uppercase;
+        text-align: end;
+        text-overflow: ellipsis;
+
+        .theme-dark & {
+            text-shadow: 
+                0 0 .25rem @dark-bg-color,
+                0 0 .25rem @dark-bg-color;
+        }
+        .theme-light & {
+            text-shadow: 
+                0 0 .25rem @light-bg-color,
+                0 0 .25rem @light-bg-color;
+        }
+    }
+    .StatEntry__Divider {
+        position: relative;
+        bottom: .1rem;
+
+        font: 1.5rem "Libre Franklin";
+        line-height: 0;
+        opacity: .5;
+    }
+
+    .StatEntry__Inputs {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: .1rem .25rem;
+    }
+    .StatEntry__Input {
+        #InputSkinning();
+        #FocusOutline();
+        #ColorScheme({
+            color: "txt";
+        });
+
+        height: 100%;
+        padding: 0 .2rem;
+        
+        font: bold 1.5rem "Philosopher";
+        border-radius: 2 * @rpx;
+    }
+    .StatEntry__Input:placeholder {
+        opacity: .5;
+    }
+    .StatEntry__Input--Numerator {
+        max-width: 12rem;
+    }
+    .StatEntry__Input--Denominator {
+        flex: 0;
+        min-width: 4rem; // fuck you.
+
+        font-size: 1.2rem;
+    }
+    .StatEntry__Input--Label {
+        font-weight: normal;
+    }
+    
+    .StatEntry:hover .StatEntry__Buttons {
+        opacity: 1;
+    }
+
+}
+
+.animecampaign button.ACButton--Wide.ACButton--AddStat {
+    #ColorScheme(@opacity: 25%, {
+        border-color: "txt";
+    });
+
+    height: 1.75rem;
+    width: 100%;
+    margin: 0;
+    margin-top: .2rem;
+
+    &:hover {
+        .theme-dark & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@dark-txt-color, 25%);
+        }
+        .theme-light & {
+            box-shadow: 0 0 0 (1 * @rpx) fade(@light-txt-color, 25%);
+        }
+    }
+    &:active {
+        #ColorScheme(@opacity: 25%, {
+            background-color: "txt";
+        })
+    }
+
+    .ACButton__Text {
+        font-weight: normal;
+    }
+}

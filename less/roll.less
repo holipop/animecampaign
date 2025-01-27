@@ -1,261 +1,258 @@
 // main: ./animecampaign.less
 
-.animecampaign.chat.roll {
-    #AC.Border();
-    #AC.Background();
-}
+.animecampaign.ChatMessage {
 
-.animecampaign.chat.roll .summary {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1rem;
+    #ColorScheme({
+        color: "txt";
+    });
+    #ColorScheme(@opacity: 95%, {
+        background-color: "bg";
+    });
+
+    outline: (1 * @rpx) solid fade(@light-txt-color, 33%);
+    border: (1 * @rpx) solid;
+    border-radius: 2 * @rpx;
     
-    .background {
-        box-shadow: rgba(0, 0, 0, 0.25) 0 (1 * @rpx);
+    font-family: "Libre Franklin";
 
-        grid-column: 1 / -1;
-        grid-row: 1 / 2;
+    .ChatMessage__Summary {
+        display: flex;
+        align-items: end;
     }
-    .img {
-        #AC.Border();
 
-        height: 2.25rem;
-        width: 2.25rem;
-        grid-column: 1 / 2;
-        grid-row: 1 / -1;
-        place-self: end;
-        margin: 4 * @rpx;
-        border-radius: 0;
+    .ChatMessage__ImageWrapper {
+        position: relative;
+        left: .3rem;
+        bottom: 2.25rem;
     }
-    .name {
-        #AC.HeadingSkinning();
+    .ChatMessage__Image {
+        #ColorScheme(@opacity: 75%, {
+            border-color: "txt";
+        });
+        #ColorScheme({
+            background-color: "bg";
+        });
 
-        grid-column: 2 / -1;
-        grid-row: 1 / 2;
-        place-self: end start;
-        margin: (4 * @rpx) 0;
+        position: absolute;
+        min-height: 2.25rem;
+        min-width: 2.25rem;
+        max-height: 2.25rem;
+        max-width: 2.25rem;
+        border-width: 1 * @rpx;
+    }
+
+    .ChatMessage__Info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .ChatMessage__ImageWrapper + .ChatMessage__Info .ChatMessage__Name, 
+    .ChatMessage__ImageWrapper + .ChatMessage__Info .ChatMessage__Category {
+        padding-left: 3rem;
+    }
+    .ChatMessage__Name {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        padding: .25rem;
+        padding-bottom: .1rem;
+        border-bottom: (1 * @rpx) solid;
 
         font: 1.25rem "Gloock";
-        line-height: .9;
-        letter-spacing: (1 * @rpx);
     }
-    .category {
-        #AC.Overflow();
+    .ChatMessage__Category {
+        padding: .1rem .25rem;
+        padding-bottom: none;
 
-        width: 100%;
-        grid-column: 2 / -1;
-        grid-row: 2 / -1;
-        place-self: end start;
-
-        font: bold .7rem "Libre Franklin";
+        font: bold .8em "Libre Franklin";
         text-transform: uppercase;
         opacity: .75;
     }
-    .action {
-        #AC.InputSkinning();
 
-        height: 1.5rem;
-        width: 1.5rem;
-        grid-column: 2 / -1;
-        grid-row: 1 / 2;
-        margin: .15rem .25rem;
-        place-self: end;
-
-        opacity: .25;
+    .ChatMessage__Dice {
+        margin: .25rem 0;
     }
-}
-
-.animecampaign.chat.roll .dice-roll {
-    margin: (4 * @rpx);
-
-    .result {
-        width: 100%;
+    .ChatMessage__Result {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
+        height: 2rem;
+        margin: .35rem;
+        gap: .25rem;
+    }
+    .ChatMessage__Total {
+        #ColorScheme({
+            background-color: "bg";
+        });
+        #ColorScheme(@opacity: 75%, {
+            border-color: "txt";
+        });
 
-        .total {
-            #AC.Border();
-            #AC.Overflow();
+        border: (1 * @rpx) solid;
+        border-radius: 2 * @rpx;
+        padding: .1rem .25rem;
+        min-width: 3rem;
+        max-width: 50%;
+        height: 2rem;
 
-            height: 1.5rem;
-            min-width: 3rem;
-            max-width: 5rem;
-            border-radius: (2 * @rpx);
-            border-color: rgba(0, 0, 0, 0.5);
-            
-            font: bold 1.25rem "Philosopher";
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.2);
-
-            &.success {
-                border-color: darkgreen;
-                color: darkgreen;
-                text-shadow: white 0 (1 * @rpx);
-                background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
-            }
-            &.failure {
-                border-color: darkred;
-                color: darkred;
-                text-shadow: white 0 (1 * @rpx);
-                background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
-            }
-        }
-        .formula {
-            #AC.Overflow();
-
-            flex: 1;
-            margin-left: .25rem;
-            border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.33);
-            
-            font: 500 .8rem "Libre Franklin";
-            opacity: .75;
-        }
+        font: bold 1.5rem "Philosopher";
+        text-align: center;
+    }
+    .theme-light & .ChatMessage__Total.ChatMessage__Total--CritSuccess {
+        border-color: darkgreen;
+        color: darkgreen;
+        text-shadow: white 0 (1 * @rpx);
+        background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+    }
+    .theme-light & .ChatMessage__Total.ChatMessage__Total--CritFailure {
+        border-color: darkred;
+        color: darkred;
+        text-shadow: white 0 (1 * @rpx);
+        background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
+    }
+    .theme-dark & .ChatMessage__Total.ChatMessage__Total--CritSuccess {
+        border-color: palegreen;
+        color: palegreen;
+        text-shadow: black 0 (1 * @rpx);
+        background: linear-gradient(to top, rgba(0, 255, 0, 0.25) 0%, transparent 100%);
+    }
+    .theme-dark & .ChatMessage__Total.ChatMessage__Total--CritFailure {
+        border-color: palevioletred;
+        color: palevioletred;
+        text-shadow: black 0 (1 * @rpx);
+        background: linear-gradient(to top, rgba(255, 0, 0, 0.25) 0%, transparent 100%);
     }
 
-    .dice-tooltip {
-        margin-top: .15rem;
+    .ChatMessage__Formula {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
 
-        font-family: "Libre Franklin";
+        flex: 1;
+        border-bottom: (1 * @rpx) solid;
 
-        .part-header {
-            align-items: flex-end;
-        }
-        .part-total, .roll {
-            font-family: "Philosopher";
-        }
-        .part-formula {
-            font-size: .8rem;
-            opacity: 0.66;
-            line-height: 1;
-        }
+        font: 500 .8rem "Libre Franklin";
+        opacity: .75;
     }
-}
-
-.animecampaign.chat.roll .stat-list {
-    #AC.ListSkinning();
-    #AC.Border();
-
-    margin-top: .5rem;
-    border-color: rgba(0, 0, 0, 0.5);
-    border-left: 0;
-    border-right: 0;
-
-    .stat {
-        display: grid;
-        grid-template-columns: 2fr 2.5fr;
-        height: 1.25rem;
-
-        &:nth-child(even) {
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        img {
-            #AC.InputSkinning();
-
-            height: 100%;
-            width: 1.25rem;
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-
-            filter: brightness(0) saturate(100%);
-            opacity: .33;
-        }
-        .tag {
-            #AC.Overflow();
-
-            width: 100%;
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-            place-self: end end;
-            padding: 0 (4 * @rpx);
-
-            font: 600 .75rem "Libre Franklin";
-            text-align: end;
-            text-transform: uppercase;
-            opacity: .8;
-            
-        }
-
-        .stat-numbers {
-            #AC.Overflow();
-
-            width: 100%;
-            padding: 0 (4 * @rpx);
-            border-left: (1 * @rpx) solid rgba(0, 0, 0, 0.25);
-            place-self: end start;
-
-            font: italic bold 1.2rem "Philosopher";
-
-            .resource-max {
-                font-weight: normal;
-                font-size: .9rem;
-            }
-        }
-
+    .ChatMessage__Dice .part-header {
+        padding: 0 .35rem;
+    }
+    .ChatMessage__Dice .dice-tooltip {
+        display: none;
     }
 
-}
 
-.animecampaign.chat.roll .section-list {
-    #AC.ListSkinning();
+    .ChatMessage__Stats {
+        #ColorScheme({
+            background-color: "bg";
+        });
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+        #ListSkinning();
 
-    .section {
-        border-bottom: (1 * @rpx) solid rgba(0, 0, 0, 0.4);
-        box-shadow: rgba(0, 0, 0, 0.15) 0 (1 * @rpx);
-        padding-top: .25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: .1rem .35rem;
+        border: (1 * @rpx) solid;
+        border-radius: (2 * @rpx);
+    }
+    .ChatMessage__StatEntry {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        height: 1.33rem;
+        border-bottom: (1 * @rpx) solid;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .ChatMessage__StatEntry:nth-child(even) {
+        #ColorScheme(@opacity: 10%, {
+            background-color: "txt";
+        });
+    }
+    .ChatMessage__StatEntry:last-child {
+        border-bottom: none;
+    }
+    .ChatMessage__StatEntryTag {
+        width: 40%;
         
-        > * {
-            padding: 0 .3rem;
-        }
-        &:nth-child(even) {
-            background-color: rgba(0, 0, 0, 0.1);
-        }
+        font: .8rem "Libre Franklin";
+        text-align: end;
+        text-transform: uppercase;
+    }
+    .ChatMessage__StatEntryDivider {
+        font: .66rem "Libre Franklin";
+        opacity: 50%;
+    }
+    .ChatMessage__StatEntryValue {
+        font: bold italic 1rem "Philosopher";
+    }
+    .ChatMessage__StatEntryMax {
+        font: italic .8rem "Philosopher";
+    }
+    .ChatMessage__StatEntryLabel {
+        font: 1rem "Philosopher";
     }
 
-    header {
-        display: flex;
-        align-items: flex-end;
+    .ChatMessage__Content {
+        padding: .1rem .5rem;
+        font-size: 0.8rem;
 
-        .collapse {
-            font-size: .66rem;
+        h1 {
+            font-size: 1.15rem;
+        }
+        h2 {
+            font-size: 1.15rem;
+        }
+        h3 {
+            font-size: 1.1rem;
+        }
+        h4 {
+            font-size: 1rem;
+        }
+        h5 {
+            font-size: 1rem;
+        }
+        h6 {
+            font-size: 1rem;
+        }
 
-            > i {
-                margin-right: .3rem;
+        h1, h2, h3, h4, h5, h6 {
+            &.Section__Header.Section__Header--Collapsed {
+                font-size: .95rem;
             }
         }
-        .name {
-            height: min-content;
-
-            font: 800 .8rem "Libre Franklin";
-            line-height: 1;
-        }
     }
-    .text {
-        margin: 0;
-        padding: .3rem;
-        border-top: (1 * @rpx) solid rgba(0, 0, 0, 0.15);
 
-        font: 500 .775rem "Libre Franklin";
+    .ChatMessage__Banner {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        border-top: (1 * @rpx) solid;
+        display: flex;
+        align-items: center;
+        padding: .1rem .35rem;
     }
-}
-
-.animecampaign.chat.roll .roll-banner {
-    #AC.Overflow();
-
-    display: flex;
-    min-height: .33rem;
-    width: 100%;
-    align-items: center;
-    padding: .1rem .2rem;
-    
-    font: 600 .75rem "Libre Franklin";
-    
-    .action {
+    .ChatMessage__Usage {
+        font: 500 .8rem "Libre Franklin";
+    }
+    .ChatMessage__UsageIcon {
+        margin: 0 .1rem;
+        font-size: .8rem;
+    }
+    .ChatMessage__ActionCost {
         flex: 1;
         text-align: end;
 
-        font-style: italic;
-        font-weight: 700;
-        text-transform: uppercase;
+        font: bold italic .8rem "Libre Franklin";
     }
+
 }

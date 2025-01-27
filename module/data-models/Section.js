@@ -1,11 +1,10 @@
 /** 
  * Data structure for sections.
+ * @deprecated
  */
 export default class Section extends foundry.abstract.DataModel {
 
-    /** Defining the data structure of this data model. This cannot be changed post-init.
-     * @returns {Object}
-     */
+    /** @override */
     static defineSchema () {
         const fields = foundry.data.fields;
 
