@@ -530,8 +530,9 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @this {CharacterSheetV2}
      */
     static async onCategoryCreate (event, target) {
-        const category = {
+        const category = new Category({
             name: "",
+            snap: false, // this is required, my fault.
             trackers: [],
             details: {
                 editor: "prosemirror",
@@ -542,7 +543,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
                     timeframe: "Round"
                 }
             },
-        }
+        })
 
         new CategoryConfigV2({ 
             window: {
