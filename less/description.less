@@ -1,0 +1,180 @@
+// main: ./animecampaign.less
+
+// Text Editor
+.animecampaign {
+
+    .Description, .Biography {
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    .ACTextEditor {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        max-height: none;
+        font-family: "Libre Franklin";
+    }
+    .ACTextEditor.active {
+        height: 100%;
+    }
+    .ACTextEditor .editor-menu {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+            background-color: "bg";
+        });
+
+        border: (1 * @rpx) solid;
+        border-radius: 2 * @rpx;
+    }
+
+    .ACTextEditor .editor-content, 
+    .NonOwnerDescription,
+    .FeatureContent__Description,
+    .ChatMessage__Content,
+    .EnrichedDescription {
+        #ColorScheme({
+            color: "txt";
+        });
+        
+        padding: .2rem 5%;
+
+        font-family: "Libre Franklin";
+
+        h1, h2, h3, h4, h5, h6 {
+            #ColorScheme({
+                color: "txt";
+            });
+
+            margin-bottom: .5rem;
+            margin-top: .75rem;
+            text-shadow: none;
+        }
+        h1, h2, h3 {
+            #ColorScheme(@opacity: 25% , {
+                border-color: "txt";
+            });
+            border-bottom: (1 * @rpx) solid;
+        }
+        h1 {
+            font: 1.33rem "Gloock";
+        }
+        h2 {
+            font: bold 1.25rem "Philosopher";
+        }
+        h3 {
+            font: 700 1.15rem "Libre Franklin";
+        }
+        h4 {
+            font: 1.1rem "Gloock";
+        }
+        h5 {
+            font: bold 1.1rem "Philosopher";
+        }
+        h6 {
+            font: 700 1.1rem "Libre Franklin";
+        }
+
+        .Section__Header {
+            display: flex;
+            align-items: flex-end;
+
+            transition: font-size 0.075s;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            &.Section__Header.Section__Header--Collapsed {
+                opacity: .75;
+                font-size: 1rem;
+            }
+        }
+        .Section__Collapse {
+            margin: 0;
+            margin-right: .1rem;
+            margin-bottom: .1rem;
+            height: 1rem;
+            width: 1rem;
+
+            .theme-dark &, 
+            .theme-light & { // specificity
+                background-color: transparent;
+            }
+        }
+        .Section__CollapseIcon {
+            rotate: 0deg;
+            transition: rotate .075s;
+        }
+        .Section__Header--Collapsed .Section__CollapseIcon {
+            rotate: -90deg;
+        }
+        .Section__Content {
+            display: block;
+        }
+        .Section__Content--Collapsed {
+            display: none;
+        }
+
+        hr {
+            #ColorScheme(@opacity: 25% , {
+                border-color: "txt";
+            });
+
+            background-image: none;
+            height: 0;
+            border: none;
+            border-bottom: (1 * @rpx) solid;
+        }
+
+        code {
+            #ColorScheme({
+                background-color: "bg";
+            });
+            #ColorScheme(@opacity: 25%, {
+                border-color: "txt";
+            });
+        }
+        blockquote {
+            #ColorScheme(@opacity: 25%, {
+                border-color: "txt";
+            });
+            font-family: "Libre Franklin";
+        }
+    }
+
+    .ACTextEditor .editor-menu > li > button {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        border-radius: 2 * @rpx;
+        
+        font-family: "Libre Franklin";
+        font-size: .7rem;
+        background-color: transparent;
+        transition: .075s background-color;
+
+        &:hover {
+            #ColorScheme(@opacity: 25%, {
+                background-color: "txt";
+            })
+        }
+        &:active {
+            #ColorScheme(@opacity: 75%, {
+                background-color: "txt";
+            })
+        }
+
+        &.pm-dropdown {
+            #ColorScheme(@opacity: 25%, {
+                border-color: "txt";
+            });
+            border: (1 * @rpx) solid;
+        }
+    }
+
+    .Enricher {
+        opacity: 0;
+    }
+
+}

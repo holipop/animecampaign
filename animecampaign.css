@@ -192,391 +192,6 @@
 .animecampaign.item .Scrollable {
   height: calc(100% - 7.5rem);
 }
-.animecampaign .Description,
-.animecampaign .Biography {
-  width: 90%;
-  height: 100%;
-  margin: 0 auto;
-}
-.animecampaign .ACTextEditor {
-  max-height: none;
-  font-family: "Libre Franklin";
-}
-.theme-dark .animecampaign .ACTextEditor {
-  color: #ebedf2;
-}
-.theme-light .animecampaign .ACTextEditor {
-  color: #1f1e1e;
-}
-.animecampaign .ACTextEditor.active {
-  height: 100%;
-}
-.animecampaign .ACTextEditor .editor-menu {
-  border: 0.0625rem solid;
-  border-radius: 0.125rem;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-menu {
-  border-color: rgba(235, 237, 242, 0.5);
-  background-color: rgba(23, 23, 24, 0.5);
-}
-.theme-light .animecampaign .ACTextEditor .editor-menu {
-  border-color: rgba(31, 30, 30, 0.5);
-  background-color: rgba(244, 243, 237, 0.5);
-}
-.animecampaign .ACTextEditor .editor-content,
-.animecampaign .NonOwnerDescription,
-.animecampaign .FeatureContent__Description,
-.animecampaign .ChatMessage__Content {
-  padding: 0.2rem 5%;
-  font-family: "Libre Franklin";
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content,
-.theme-dark .animecampaign .NonOwnerDescription,
-.theme-dark .animecampaign .FeatureContent__Description,
-.theme-dark .animecampaign .ChatMessage__Content {
-  color: #ebedf2;
-}
-.theme-light .animecampaign .ACTextEditor .editor-content,
-.theme-light .animecampaign .NonOwnerDescription,
-.theme-light .animecampaign .FeatureContent__Description,
-.theme-light .animecampaign .ChatMessage__Content {
-  color: #1f1e1e;
-}
-.animecampaign .ACTextEditor .editor-content h1,
-.animecampaign .NonOwnerDescription h1,
-.animecampaign .FeatureContent__Description h1,
-.animecampaign .ChatMessage__Content h1,
-.animecampaign .ACTextEditor .editor-content h2,
-.animecampaign .NonOwnerDescription h2,
-.animecampaign .FeatureContent__Description h2,
-.animecampaign .ChatMessage__Content h2,
-.animecampaign .ACTextEditor .editor-content h3,
-.animecampaign .NonOwnerDescription h3,
-.animecampaign .FeatureContent__Description h3,
-.animecampaign .ChatMessage__Content h3,
-.animecampaign .ACTextEditor .editor-content h4,
-.animecampaign .NonOwnerDescription h4,
-.animecampaign .FeatureContent__Description h4,
-.animecampaign .ChatMessage__Content h4,
-.animecampaign .ACTextEditor .editor-content h5,
-.animecampaign .NonOwnerDescription h5,
-.animecampaign .FeatureContent__Description h5,
-.animecampaign .ChatMessage__Content h5,
-.animecampaign .ACTextEditor .editor-content h6,
-.animecampaign .NonOwnerDescription h6,
-.animecampaign .FeatureContent__Description h6,
-.animecampaign .ChatMessage__Content h6 {
-  margin-bottom: 0.5rem;
-  margin-top: 0.75rem;
-  text-shadow: none;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content h1,
-.theme-dark .animecampaign .NonOwnerDescription h1,
-.theme-dark .animecampaign .FeatureContent__Description h1,
-.theme-dark .animecampaign .ChatMessage__Content h1,
-.theme-dark .animecampaign .ACTextEditor .editor-content h2,
-.theme-dark .animecampaign .NonOwnerDescription h2,
-.theme-dark .animecampaign .FeatureContent__Description h2,
-.theme-dark .animecampaign .ChatMessage__Content h2,
-.theme-dark .animecampaign .ACTextEditor .editor-content h3,
-.theme-dark .animecampaign .NonOwnerDescription h3,
-.theme-dark .animecampaign .FeatureContent__Description h3,
-.theme-dark .animecampaign .ChatMessage__Content h3,
-.theme-dark .animecampaign .ACTextEditor .editor-content h4,
-.theme-dark .animecampaign .NonOwnerDescription h4,
-.theme-dark .animecampaign .FeatureContent__Description h4,
-.theme-dark .animecampaign .ChatMessage__Content h4,
-.theme-dark .animecampaign .ACTextEditor .editor-content h5,
-.theme-dark .animecampaign .NonOwnerDescription h5,
-.theme-dark .animecampaign .FeatureContent__Description h5,
-.theme-dark .animecampaign .ChatMessage__Content h5,
-.theme-dark .animecampaign .ACTextEditor .editor-content h6,
-.theme-dark .animecampaign .NonOwnerDescription h6,
-.theme-dark .animecampaign .FeatureContent__Description h6,
-.theme-dark .animecampaign .ChatMessage__Content h6 {
-  color: #ebedf2;
-}
-.theme-light .animecampaign .ACTextEditor .editor-content h1,
-.theme-light .animecampaign .NonOwnerDescription h1,
-.theme-light .animecampaign .FeatureContent__Description h1,
-.theme-light .animecampaign .ChatMessage__Content h1,
-.theme-light .animecampaign .ACTextEditor .editor-content h2,
-.theme-light .animecampaign .NonOwnerDescription h2,
-.theme-light .animecampaign .FeatureContent__Description h2,
-.theme-light .animecampaign .ChatMessage__Content h2,
-.theme-light .animecampaign .ACTextEditor .editor-content h3,
-.theme-light .animecampaign .NonOwnerDescription h3,
-.theme-light .animecampaign .FeatureContent__Description h3,
-.theme-light .animecampaign .ChatMessage__Content h3,
-.theme-light .animecampaign .ACTextEditor .editor-content h4,
-.theme-light .animecampaign .NonOwnerDescription h4,
-.theme-light .animecampaign .FeatureContent__Description h4,
-.theme-light .animecampaign .ChatMessage__Content h4,
-.theme-light .animecampaign .ACTextEditor .editor-content h5,
-.theme-light .animecampaign .NonOwnerDescription h5,
-.theme-light .animecampaign .FeatureContent__Description h5,
-.theme-light .animecampaign .ChatMessage__Content h5,
-.theme-light .animecampaign .ACTextEditor .editor-content h6,
-.theme-light .animecampaign .NonOwnerDescription h6,
-.theme-light .animecampaign .FeatureContent__Description h6,
-.theme-light .animecampaign .ChatMessage__Content h6 {
-  color: #1f1e1e;
-}
-.animecampaign .ACTextEditor .editor-content h1,
-.animecampaign .NonOwnerDescription h1,
-.animecampaign .FeatureContent__Description h1,
-.animecampaign .ChatMessage__Content h1,
-.animecampaign .ACTextEditor .editor-content h2,
-.animecampaign .NonOwnerDescription h2,
-.animecampaign .FeatureContent__Description h2,
-.animecampaign .ChatMessage__Content h2,
-.animecampaign .ACTextEditor .editor-content h3,
-.animecampaign .NonOwnerDescription h3,
-.animecampaign .FeatureContent__Description h3,
-.animecampaign .ChatMessage__Content h3 {
-  border-bottom: 0.0625rem solid;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content h1,
-.theme-dark .animecampaign .NonOwnerDescription h1,
-.theme-dark .animecampaign .FeatureContent__Description h1,
-.theme-dark .animecampaign .ChatMessage__Content h1,
-.theme-dark .animecampaign .ACTextEditor .editor-content h2,
-.theme-dark .animecampaign .NonOwnerDescription h2,
-.theme-dark .animecampaign .FeatureContent__Description h2,
-.theme-dark .animecampaign .ChatMessage__Content h2,
-.theme-dark .animecampaign .ACTextEditor .editor-content h3,
-.theme-dark .animecampaign .NonOwnerDescription h3,
-.theme-dark .animecampaign .FeatureContent__Description h3,
-.theme-dark .animecampaign .ChatMessage__Content h3 {
-  border-color: rgba(235, 237, 242, 0.25);
-}
-.theme-light .animecampaign .ACTextEditor .editor-content h1,
-.theme-light .animecampaign .NonOwnerDescription h1,
-.theme-light .animecampaign .FeatureContent__Description h1,
-.theme-light .animecampaign .ChatMessage__Content h1,
-.theme-light .animecampaign .ACTextEditor .editor-content h2,
-.theme-light .animecampaign .NonOwnerDescription h2,
-.theme-light .animecampaign .FeatureContent__Description h2,
-.theme-light .animecampaign .ChatMessage__Content h2,
-.theme-light .animecampaign .ACTextEditor .editor-content h3,
-.theme-light .animecampaign .NonOwnerDescription h3,
-.theme-light .animecampaign .FeatureContent__Description h3,
-.theme-light .animecampaign .ChatMessage__Content h3 {
-  border-color: rgba(31, 30, 30, 0.25);
-}
-.animecampaign .ACTextEditor .editor-content h1,
-.animecampaign .NonOwnerDescription h1,
-.animecampaign .FeatureContent__Description h1,
-.animecampaign .ChatMessage__Content h1 {
-  font: 1.33rem "Gloock";
-}
-.animecampaign .ACTextEditor .editor-content h2,
-.animecampaign .NonOwnerDescription h2,
-.animecampaign .FeatureContent__Description h2,
-.animecampaign .ChatMessage__Content h2 {
-  font: bold 1.25rem "Philosopher";
-}
-.animecampaign .ACTextEditor .editor-content h3,
-.animecampaign .NonOwnerDescription h3,
-.animecampaign .FeatureContent__Description h3,
-.animecampaign .ChatMessage__Content h3 {
-  font: 700 1.15rem "Libre Franklin";
-}
-.animecampaign .ACTextEditor .editor-content h4,
-.animecampaign .NonOwnerDescription h4,
-.animecampaign .FeatureContent__Description h4,
-.animecampaign .ChatMessage__Content h4 {
-  font: 1.1rem "Gloock";
-}
-.animecampaign .ACTextEditor .editor-content h5,
-.animecampaign .NonOwnerDescription h5,
-.animecampaign .FeatureContent__Description h5,
-.animecampaign .ChatMessage__Content h5 {
-  font: bold 1.1rem "Philosopher";
-}
-.animecampaign .ACTextEditor .editor-content h6,
-.animecampaign .NonOwnerDescription h6,
-.animecampaign .FeatureContent__Description h6,
-.animecampaign .ChatMessage__Content h6 {
-  font: 700 1.1rem "Libre Franklin";
-}
-.animecampaign .ACTextEditor .editor-content .Section__Header,
-.animecampaign .NonOwnerDescription .Section__Header,
-.animecampaign .FeatureContent__Description .Section__Header,
-.animecampaign .ChatMessage__Content .Section__Header {
-  display: flex;
-  align-items: flex-end;
-  transition: font-size 0.075s;
-}
-.animecampaign .ACTextEditor .editor-content h1.Section__Header.Section__Header--Collapsed,
-.animecampaign .NonOwnerDescription h1.Section__Header.Section__Header--Collapsed,
-.animecampaign .FeatureContent__Description h1.Section__Header.Section__Header--Collapsed,
-.animecampaign .ChatMessage__Content h1.Section__Header.Section__Header--Collapsed,
-.animecampaign .ACTextEditor .editor-content h2.Section__Header.Section__Header--Collapsed,
-.animecampaign .NonOwnerDescription h2.Section__Header.Section__Header--Collapsed,
-.animecampaign .FeatureContent__Description h2.Section__Header.Section__Header--Collapsed,
-.animecampaign .ChatMessage__Content h2.Section__Header.Section__Header--Collapsed,
-.animecampaign .ACTextEditor .editor-content h3.Section__Header.Section__Header--Collapsed,
-.animecampaign .NonOwnerDescription h3.Section__Header.Section__Header--Collapsed,
-.animecampaign .FeatureContent__Description h3.Section__Header.Section__Header--Collapsed,
-.animecampaign .ChatMessage__Content h3.Section__Header.Section__Header--Collapsed,
-.animecampaign .ACTextEditor .editor-content h4.Section__Header.Section__Header--Collapsed,
-.animecampaign .NonOwnerDescription h4.Section__Header.Section__Header--Collapsed,
-.animecampaign .FeatureContent__Description h4.Section__Header.Section__Header--Collapsed,
-.animecampaign .ChatMessage__Content h4.Section__Header.Section__Header--Collapsed,
-.animecampaign .ACTextEditor .editor-content h5.Section__Header.Section__Header--Collapsed,
-.animecampaign .NonOwnerDescription h5.Section__Header.Section__Header--Collapsed,
-.animecampaign .FeatureContent__Description h5.Section__Header.Section__Header--Collapsed,
-.animecampaign .ChatMessage__Content h5.Section__Header.Section__Header--Collapsed,
-.animecampaign .ACTextEditor .editor-content h6.Section__Header.Section__Header--Collapsed,
-.animecampaign .NonOwnerDescription h6.Section__Header.Section__Header--Collapsed,
-.animecampaign .FeatureContent__Description h6.Section__Header.Section__Header--Collapsed,
-.animecampaign .ChatMessage__Content h6.Section__Header.Section__Header--Collapsed {
-  opacity: 0.75;
-  font-size: 1rem;
-}
-.animecampaign .ACTextEditor .editor-content .Section__Collapse,
-.animecampaign .NonOwnerDescription .Section__Collapse,
-.animecampaign .FeatureContent__Description .Section__Collapse,
-.animecampaign .ChatMessage__Content .Section__Collapse {
-  margin: 0;
-  margin-right: 0.1rem;
-  margin-bottom: 0.1rem;
-  height: 1rem;
-  width: 1rem;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content .Section__Collapse,
-.theme-dark .animecampaign .NonOwnerDescription .Section__Collapse,
-.theme-dark .animecampaign .FeatureContent__Description .Section__Collapse,
-.theme-dark .animecampaign .ChatMessage__Content .Section__Collapse,
-.theme-light .animecampaign .ACTextEditor .editor-content .Section__Collapse,
-.theme-light .animecampaign .NonOwnerDescription .Section__Collapse,
-.theme-light .animecampaign .FeatureContent__Description .Section__Collapse,
-.theme-light .animecampaign .ChatMessage__Content .Section__Collapse {
-  background-color: transparent;
-}
-.animecampaign .ACTextEditor .editor-content .Section__CollapseIcon,
-.animecampaign .NonOwnerDescription .Section__CollapseIcon,
-.animecampaign .FeatureContent__Description .Section__CollapseIcon,
-.animecampaign .ChatMessage__Content .Section__CollapseIcon {
-  rotate: 0deg;
-  transition: rotate 0.075s;
-}
-.animecampaign .ACTextEditor .editor-content .Section__Header--Collapsed .Section__CollapseIcon,
-.animecampaign .NonOwnerDescription .Section__Header--Collapsed .Section__CollapseIcon,
-.animecampaign .FeatureContent__Description .Section__Header--Collapsed .Section__CollapseIcon,
-.animecampaign .ChatMessage__Content .Section__Header--Collapsed .Section__CollapseIcon {
-  rotate: -90deg;
-}
-.animecampaign .ACTextEditor .editor-content .Section__Content,
-.animecampaign .NonOwnerDescription .Section__Content,
-.animecampaign .FeatureContent__Description .Section__Content,
-.animecampaign .ChatMessage__Content .Section__Content {
-  display: block;
-}
-.animecampaign .ACTextEditor .editor-content .Section__Content--Collapsed,
-.animecampaign .NonOwnerDescription .Section__Content--Collapsed,
-.animecampaign .FeatureContent__Description .Section__Content--Collapsed,
-.animecampaign .ChatMessage__Content .Section__Content--Collapsed {
-  display: none;
-}
-.animecampaign .ACTextEditor .editor-content hr,
-.animecampaign .NonOwnerDescription hr,
-.animecampaign .FeatureContent__Description hr,
-.animecampaign .ChatMessage__Content hr {
-  background-image: none;
-  height: 0;
-  border: none;
-  border-bottom: 0.0625rem solid;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content hr,
-.theme-dark .animecampaign .NonOwnerDescription hr,
-.theme-dark .animecampaign .FeatureContent__Description hr,
-.theme-dark .animecampaign .ChatMessage__Content hr {
-  border-color: rgba(235, 237, 242, 0.25);
-}
-.theme-light .animecampaign .ACTextEditor .editor-content hr,
-.theme-light .animecampaign .NonOwnerDescription hr,
-.theme-light .animecampaign .FeatureContent__Description hr,
-.theme-light .animecampaign .ChatMessage__Content hr {
-  border-color: rgba(31, 30, 30, 0.25);
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content code,
-.theme-dark .animecampaign .NonOwnerDescription code,
-.theme-dark .animecampaign .FeatureContent__Description code,
-.theme-dark .animecampaign .ChatMessage__Content code {
-  background-color: #171718;
-}
-.theme-light .animecampaign .ACTextEditor .editor-content code,
-.theme-light .animecampaign .NonOwnerDescription code,
-.theme-light .animecampaign .FeatureContent__Description code,
-.theme-light .animecampaign .ChatMessage__Content code {
-  background-color: #f4f3ed;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content code,
-.theme-dark .animecampaign .NonOwnerDescription code,
-.theme-dark .animecampaign .FeatureContent__Description code,
-.theme-dark .animecampaign .ChatMessage__Content code {
-  border-color: rgba(235, 237, 242, 0.25);
-}
-.theme-light .animecampaign .ACTextEditor .editor-content code,
-.theme-light .animecampaign .NonOwnerDescription code,
-.theme-light .animecampaign .FeatureContent__Description code,
-.theme-light .animecampaign .ChatMessage__Content code {
-  border-color: rgba(31, 30, 30, 0.25);
-}
-.animecampaign .ACTextEditor .editor-content blockquote,
-.animecampaign .NonOwnerDescription blockquote,
-.animecampaign .FeatureContent__Description blockquote,
-.animecampaign .ChatMessage__Content blockquote {
-  font-family: "Libre Franklin";
-}
-.theme-dark .animecampaign .ACTextEditor .editor-content blockquote,
-.theme-dark .animecampaign .NonOwnerDescription blockquote,
-.theme-dark .animecampaign .FeatureContent__Description blockquote,
-.theme-dark .animecampaign .ChatMessage__Content blockquote {
-  border-color: rgba(235, 237, 242, 0.25);
-}
-.theme-light .animecampaign .ACTextEditor .editor-content blockquote,
-.theme-light .animecampaign .NonOwnerDescription blockquote,
-.theme-light .animecampaign .FeatureContent__Description blockquote,
-.theme-light .animecampaign .ChatMessage__Content blockquote {
-  border-color: rgba(31, 30, 30, 0.25);
-}
-.animecampaign .ACTextEditor .editor-menu > li > button {
-  border-radius: 0.125rem;
-  font-family: "Libre Franklin";
-  font-size: 0.7rem;
-  background-color: transparent;
-  transition: 0.075s background-color;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button {
-  color: #ebedf2;
-}
-.theme-light .animecampaign .ACTextEditor .editor-menu > li > button {
-  color: #1f1e1e;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:hover {
-  background-color: rgba(235, 237, 242, 0.25);
-}
-.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:hover {
-  background-color: rgba(31, 30, 30, 0.25);
-}
-.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:active {
-  background-color: rgba(235, 237, 242, 0.75);
-}
-.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:active {
-  background-color: rgba(31, 30, 30, 0.75);
-}
-.animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
-  border: 0.0625rem solid;
-}
-.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
-  border-color: rgba(235, 237, 242, 0.25);
-}
-.theme-light .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
-  border-color: rgba(31, 30, 30, 0.25);
-}
 .animecampaign .DragIndicator {
   opacity: 0.75;
   font-size: 1rem;
@@ -1946,6 +1561,454 @@
 }
 .animecampaign.actor.sheet .FeatureContent__StatEntryLabel {
   font: 1rem "Philosopher";
+}
+.animecampaign .Description,
+.animecampaign .Biography {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+.animecampaign .ACTextEditor {
+  max-height: none;
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign .ACTextEditor {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor {
+  color: #1f1e1e;
+}
+.animecampaign .ACTextEditor.active {
+  height: 100%;
+}
+.animecampaign .ACTextEditor .editor-menu {
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu {
+  border-color: rgba(235, 237, 242, 0.5);
+  background-color: rgba(23, 23, 24, 0.5);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu {
+  border-color: rgba(31, 30, 30, 0.5);
+  background-color: rgba(244, 243, 237, 0.5);
+}
+.animecampaign .ACTextEditor .editor-content,
+.animecampaign .NonOwnerDescription,
+.animecampaign .FeatureContent__Description,
+.animecampaign .ChatMessage__Content,
+.animecampaign .EnrichedDescription {
+  padding: 0.2rem 5%;
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content,
+.theme-dark .animecampaign .NonOwnerDescription,
+.theme-dark .animecampaign .FeatureContent__Description,
+.theme-dark .animecampaign .ChatMessage__Content,
+.theme-dark .animecampaign .EnrichedDescription {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor .editor-content,
+.theme-light .animecampaign .NonOwnerDescription,
+.theme-light .animecampaign .FeatureContent__Description,
+.theme-light .animecampaign .ChatMessage__Content,
+.theme-light .animecampaign .EnrichedDescription {
+  color: #1f1e1e;
+}
+.animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .NonOwnerDescription h1,
+.animecampaign .FeatureContent__Description h1,
+.animecampaign .ChatMessage__Content h1,
+.animecampaign .EnrichedDescription h1,
+.animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .NonOwnerDescription h2,
+.animecampaign .FeatureContent__Description h2,
+.animecampaign .ChatMessage__Content h2,
+.animecampaign .EnrichedDescription h2,
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .NonOwnerDescription h3,
+.animecampaign .FeatureContent__Description h3,
+.animecampaign .ChatMessage__Content h3,
+.animecampaign .EnrichedDescription h3,
+.animecampaign .ACTextEditor .editor-content h4,
+.animecampaign .NonOwnerDescription h4,
+.animecampaign .FeatureContent__Description h4,
+.animecampaign .ChatMessage__Content h4,
+.animecampaign .EnrichedDescription h4,
+.animecampaign .ACTextEditor .editor-content h5,
+.animecampaign .NonOwnerDescription h5,
+.animecampaign .FeatureContent__Description h5,
+.animecampaign .ChatMessage__Content h5,
+.animecampaign .EnrichedDescription h5,
+.animecampaign .ACTextEditor .editor-content h6,
+.animecampaign .NonOwnerDescription h6,
+.animecampaign .FeatureContent__Description h6,
+.animecampaign .ChatMessage__Content h6,
+.animecampaign .EnrichedDescription h6 {
+  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+  text-shadow: none;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content h1,
+.theme-dark .animecampaign .NonOwnerDescription h1,
+.theme-dark .animecampaign .FeatureContent__Description h1,
+.theme-dark .animecampaign .ChatMessage__Content h1,
+.theme-dark .animecampaign .EnrichedDescription h1,
+.theme-dark .animecampaign .ACTextEditor .editor-content h2,
+.theme-dark .animecampaign .NonOwnerDescription h2,
+.theme-dark .animecampaign .FeatureContent__Description h2,
+.theme-dark .animecampaign .ChatMessage__Content h2,
+.theme-dark .animecampaign .EnrichedDescription h2,
+.theme-dark .animecampaign .ACTextEditor .editor-content h3,
+.theme-dark .animecampaign .NonOwnerDescription h3,
+.theme-dark .animecampaign .FeatureContent__Description h3,
+.theme-dark .animecampaign .ChatMessage__Content h3,
+.theme-dark .animecampaign .EnrichedDescription h3,
+.theme-dark .animecampaign .ACTextEditor .editor-content h4,
+.theme-dark .animecampaign .NonOwnerDescription h4,
+.theme-dark .animecampaign .FeatureContent__Description h4,
+.theme-dark .animecampaign .ChatMessage__Content h4,
+.theme-dark .animecampaign .EnrichedDescription h4,
+.theme-dark .animecampaign .ACTextEditor .editor-content h5,
+.theme-dark .animecampaign .NonOwnerDescription h5,
+.theme-dark .animecampaign .FeatureContent__Description h5,
+.theme-dark .animecampaign .ChatMessage__Content h5,
+.theme-dark .animecampaign .EnrichedDescription h5,
+.theme-dark .animecampaign .ACTextEditor .editor-content h6,
+.theme-dark .animecampaign .NonOwnerDescription h6,
+.theme-dark .animecampaign .FeatureContent__Description h6,
+.theme-dark .animecampaign .ChatMessage__Content h6,
+.theme-dark .animecampaign .EnrichedDescription h6 {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor .editor-content h1,
+.theme-light .animecampaign .NonOwnerDescription h1,
+.theme-light .animecampaign .FeatureContent__Description h1,
+.theme-light .animecampaign .ChatMessage__Content h1,
+.theme-light .animecampaign .EnrichedDescription h1,
+.theme-light .animecampaign .ACTextEditor .editor-content h2,
+.theme-light .animecampaign .NonOwnerDescription h2,
+.theme-light .animecampaign .FeatureContent__Description h2,
+.theme-light .animecampaign .ChatMessage__Content h2,
+.theme-light .animecampaign .EnrichedDescription h2,
+.theme-light .animecampaign .ACTextEditor .editor-content h3,
+.theme-light .animecampaign .NonOwnerDescription h3,
+.theme-light .animecampaign .FeatureContent__Description h3,
+.theme-light .animecampaign .ChatMessage__Content h3,
+.theme-light .animecampaign .EnrichedDescription h3,
+.theme-light .animecampaign .ACTextEditor .editor-content h4,
+.theme-light .animecampaign .NonOwnerDescription h4,
+.theme-light .animecampaign .FeatureContent__Description h4,
+.theme-light .animecampaign .ChatMessage__Content h4,
+.theme-light .animecampaign .EnrichedDescription h4,
+.theme-light .animecampaign .ACTextEditor .editor-content h5,
+.theme-light .animecampaign .NonOwnerDescription h5,
+.theme-light .animecampaign .FeatureContent__Description h5,
+.theme-light .animecampaign .ChatMessage__Content h5,
+.theme-light .animecampaign .EnrichedDescription h5,
+.theme-light .animecampaign .ACTextEditor .editor-content h6,
+.theme-light .animecampaign .NonOwnerDescription h6,
+.theme-light .animecampaign .FeatureContent__Description h6,
+.theme-light .animecampaign .ChatMessage__Content h6,
+.theme-light .animecampaign .EnrichedDescription h6 {
+  color: #1f1e1e;
+}
+.animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .NonOwnerDescription h1,
+.animecampaign .FeatureContent__Description h1,
+.animecampaign .ChatMessage__Content h1,
+.animecampaign .EnrichedDescription h1,
+.animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .NonOwnerDescription h2,
+.animecampaign .FeatureContent__Description h2,
+.animecampaign .ChatMessage__Content h2,
+.animecampaign .EnrichedDescription h2,
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .NonOwnerDescription h3,
+.animecampaign .FeatureContent__Description h3,
+.animecampaign .ChatMessage__Content h3,
+.animecampaign .EnrichedDescription h3 {
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content h1,
+.theme-dark .animecampaign .NonOwnerDescription h1,
+.theme-dark .animecampaign .FeatureContent__Description h1,
+.theme-dark .animecampaign .ChatMessage__Content h1,
+.theme-dark .animecampaign .EnrichedDescription h1,
+.theme-dark .animecampaign .ACTextEditor .editor-content h2,
+.theme-dark .animecampaign .NonOwnerDescription h2,
+.theme-dark .animecampaign .FeatureContent__Description h2,
+.theme-dark .animecampaign .ChatMessage__Content h2,
+.theme-dark .animecampaign .EnrichedDescription h2,
+.theme-dark .animecampaign .ACTextEditor .editor-content h3,
+.theme-dark .animecampaign .NonOwnerDescription h3,
+.theme-dark .animecampaign .FeatureContent__Description h3,
+.theme-dark .animecampaign .ChatMessage__Content h3,
+.theme-dark .animecampaign .EnrichedDescription h3 {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content h1,
+.theme-light .animecampaign .NonOwnerDescription h1,
+.theme-light .animecampaign .FeatureContent__Description h1,
+.theme-light .animecampaign .ChatMessage__Content h1,
+.theme-light .animecampaign .EnrichedDescription h1,
+.theme-light .animecampaign .ACTextEditor .editor-content h2,
+.theme-light .animecampaign .NonOwnerDescription h2,
+.theme-light .animecampaign .FeatureContent__Description h2,
+.theme-light .animecampaign .ChatMessage__Content h2,
+.theme-light .animecampaign .EnrichedDescription h2,
+.theme-light .animecampaign .ACTextEditor .editor-content h3,
+.theme-light .animecampaign .NonOwnerDescription h3,
+.theme-light .animecampaign .FeatureContent__Description h3,
+.theme-light .animecampaign .ChatMessage__Content h3,
+.theme-light .animecampaign .EnrichedDescription h3 {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .ACTextEditor .editor-content h1,
+.animecampaign .NonOwnerDescription h1,
+.animecampaign .FeatureContent__Description h1,
+.animecampaign .ChatMessage__Content h1,
+.animecampaign .EnrichedDescription h1 {
+  font: 1.33rem "Gloock";
+}
+.animecampaign .ACTextEditor .editor-content h2,
+.animecampaign .NonOwnerDescription h2,
+.animecampaign .FeatureContent__Description h2,
+.animecampaign .ChatMessage__Content h2,
+.animecampaign .EnrichedDescription h2 {
+  font: bold 1.25rem "Philosopher";
+}
+.animecampaign .ACTextEditor .editor-content h3,
+.animecampaign .NonOwnerDescription h3,
+.animecampaign .FeatureContent__Description h3,
+.animecampaign .ChatMessage__Content h3,
+.animecampaign .EnrichedDescription h3 {
+  font: 700 1.15rem "Libre Franklin";
+}
+.animecampaign .ACTextEditor .editor-content h4,
+.animecampaign .NonOwnerDescription h4,
+.animecampaign .FeatureContent__Description h4,
+.animecampaign .ChatMessage__Content h4,
+.animecampaign .EnrichedDescription h4 {
+  font: 1.1rem "Gloock";
+}
+.animecampaign .ACTextEditor .editor-content h5,
+.animecampaign .NonOwnerDescription h5,
+.animecampaign .FeatureContent__Description h5,
+.animecampaign .ChatMessage__Content h5,
+.animecampaign .EnrichedDescription h5 {
+  font: bold 1.1rem "Philosopher";
+}
+.animecampaign .ACTextEditor .editor-content h6,
+.animecampaign .NonOwnerDescription h6,
+.animecampaign .FeatureContent__Description h6,
+.animecampaign .ChatMessage__Content h6,
+.animecampaign .EnrichedDescription h6 {
+  font: 700 1.1rem "Libre Franklin";
+}
+.animecampaign .ACTextEditor .editor-content .Section__Header,
+.animecampaign .NonOwnerDescription .Section__Header,
+.animecampaign .FeatureContent__Description .Section__Header,
+.animecampaign .ChatMessage__Content .Section__Header,
+.animecampaign .EnrichedDescription .Section__Header {
+  display: flex;
+  align-items: flex-end;
+  transition: font-size 0.075s;
+}
+.animecampaign .ACTextEditor .editor-content h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .EnrichedDescription h1.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .EnrichedDescription h2.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .EnrichedDescription h3.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .EnrichedDescription h4.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .EnrichedDescription h5.Section__Header.Section__Header--Collapsed,
+.animecampaign .ACTextEditor .editor-content h6.Section__Header.Section__Header--Collapsed,
+.animecampaign .NonOwnerDescription h6.Section__Header.Section__Header--Collapsed,
+.animecampaign .FeatureContent__Description h6.Section__Header.Section__Header--Collapsed,
+.animecampaign .ChatMessage__Content h6.Section__Header.Section__Header--Collapsed,
+.animecampaign .EnrichedDescription h6.Section__Header.Section__Header--Collapsed {
+  opacity: 0.75;
+  font-size: 1rem;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Collapse,
+.animecampaign .NonOwnerDescription .Section__Collapse,
+.animecampaign .FeatureContent__Description .Section__Collapse,
+.animecampaign .ChatMessage__Content .Section__Collapse,
+.animecampaign .EnrichedDescription .Section__Collapse {
+  margin: 0;
+  margin-right: 0.1rem;
+  margin-bottom: 0.1rem;
+  height: 1rem;
+  width: 1rem;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content .Section__Collapse,
+.theme-dark .animecampaign .NonOwnerDescription .Section__Collapse,
+.theme-dark .animecampaign .FeatureContent__Description .Section__Collapse,
+.theme-dark .animecampaign .ChatMessage__Content .Section__Collapse,
+.theme-dark .animecampaign .EnrichedDescription .Section__Collapse,
+.theme-light .animecampaign .ACTextEditor .editor-content .Section__Collapse,
+.theme-light .animecampaign .NonOwnerDescription .Section__Collapse,
+.theme-light .animecampaign .FeatureContent__Description .Section__Collapse,
+.theme-light .animecampaign .ChatMessage__Content .Section__Collapse,
+.theme-light .animecampaign .EnrichedDescription .Section__Collapse {
+  background-color: transparent;
+}
+.animecampaign .ACTextEditor .editor-content .Section__CollapseIcon,
+.animecampaign .NonOwnerDescription .Section__CollapseIcon,
+.animecampaign .FeatureContent__Description .Section__CollapseIcon,
+.animecampaign .ChatMessage__Content .Section__CollapseIcon,
+.animecampaign .EnrichedDescription .Section__CollapseIcon {
+  rotate: 0deg;
+  transition: rotate 0.075s;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Header--Collapsed .Section__CollapseIcon,
+.animecampaign .NonOwnerDescription .Section__Header--Collapsed .Section__CollapseIcon,
+.animecampaign .FeatureContent__Description .Section__Header--Collapsed .Section__CollapseIcon,
+.animecampaign .ChatMessage__Content .Section__Header--Collapsed .Section__CollapseIcon,
+.animecampaign .EnrichedDescription .Section__Header--Collapsed .Section__CollapseIcon {
+  rotate: -90deg;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Content,
+.animecampaign .NonOwnerDescription .Section__Content,
+.animecampaign .FeatureContent__Description .Section__Content,
+.animecampaign .ChatMessage__Content .Section__Content,
+.animecampaign .EnrichedDescription .Section__Content {
+  display: block;
+}
+.animecampaign .ACTextEditor .editor-content .Section__Content--Collapsed,
+.animecampaign .NonOwnerDescription .Section__Content--Collapsed,
+.animecampaign .FeatureContent__Description .Section__Content--Collapsed,
+.animecampaign .ChatMessage__Content .Section__Content--Collapsed,
+.animecampaign .EnrichedDescription .Section__Content--Collapsed {
+  display: none;
+}
+.animecampaign .ACTextEditor .editor-content hr,
+.animecampaign .NonOwnerDescription hr,
+.animecampaign .FeatureContent__Description hr,
+.animecampaign .ChatMessage__Content hr,
+.animecampaign .EnrichedDescription hr {
+  background-image: none;
+  height: 0;
+  border: none;
+  border-bottom: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content hr,
+.theme-dark .animecampaign .NonOwnerDescription hr,
+.theme-dark .animecampaign .FeatureContent__Description hr,
+.theme-dark .animecampaign .ChatMessage__Content hr,
+.theme-dark .animecampaign .EnrichedDescription hr {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content hr,
+.theme-light .animecampaign .NonOwnerDescription hr,
+.theme-light .animecampaign .FeatureContent__Description hr,
+.theme-light .animecampaign .ChatMessage__Content hr,
+.theme-light .animecampaign .EnrichedDescription hr {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content code,
+.theme-dark .animecampaign .NonOwnerDescription code,
+.theme-dark .animecampaign .FeatureContent__Description code,
+.theme-dark .animecampaign .ChatMessage__Content code,
+.theme-dark .animecampaign .EnrichedDescription code {
+  background-color: #171718;
+}
+.theme-light .animecampaign .ACTextEditor .editor-content code,
+.theme-light .animecampaign .NonOwnerDescription code,
+.theme-light .animecampaign .FeatureContent__Description code,
+.theme-light .animecampaign .ChatMessage__Content code,
+.theme-light .animecampaign .EnrichedDescription code {
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content code,
+.theme-dark .animecampaign .NonOwnerDescription code,
+.theme-dark .animecampaign .FeatureContent__Description code,
+.theme-dark .animecampaign .ChatMessage__Content code,
+.theme-dark .animecampaign .EnrichedDescription code {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content code,
+.theme-light .animecampaign .NonOwnerDescription code,
+.theme-light .animecampaign .FeatureContent__Description code,
+.theme-light .animecampaign .ChatMessage__Content code,
+.theme-light .animecampaign .EnrichedDescription code {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .ACTextEditor .editor-content blockquote,
+.animecampaign .NonOwnerDescription blockquote,
+.animecampaign .FeatureContent__Description blockquote,
+.animecampaign .ChatMessage__Content blockquote,
+.animecampaign .EnrichedDescription blockquote {
+  font-family: "Libre Franklin";
+}
+.theme-dark .animecampaign .ACTextEditor .editor-content blockquote,
+.theme-dark .animecampaign .NonOwnerDescription blockquote,
+.theme-dark .animecampaign .FeatureContent__Description blockquote,
+.theme-dark .animecampaign .ChatMessage__Content blockquote,
+.theme-dark .animecampaign .EnrichedDescription blockquote {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-content blockquote,
+.theme-light .animecampaign .NonOwnerDescription blockquote,
+.theme-light .animecampaign .FeatureContent__Description blockquote,
+.theme-light .animecampaign .ChatMessage__Content blockquote,
+.theme-light .animecampaign .EnrichedDescription blockquote {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .ACTextEditor .editor-menu > li > button {
+  border-radius: 0.125rem;
+  font-family: "Libre Franklin";
+  font-size: 0.7rem;
+  background-color: transparent;
+  transition: 0.075s background-color;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button {
+  color: #ebedf2;
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button {
+  color: #1f1e1e;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:hover {
+  background-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:hover {
+  background-color: rgba(31, 30, 30, 0.25);
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button:active {
+  background-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button:active {
+  background-color: rgba(31, 30, 30, 0.75);
+}
+.animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign .ACTextEditor .editor-menu > li > button.pm-dropdown {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign .Enricher {
+  opacity: 0;
 }
 .animecampaign.dialog.application:not([open]) {
   display: block;

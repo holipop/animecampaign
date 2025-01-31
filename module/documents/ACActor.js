@@ -4,29 +4,23 @@
 export default class ACActor extends Actor {
 
     /** @override */
-    /* _preCreate (data, options, user) {
-        super._preCreate(data, options, user);
-
-        this.updateSource({ "system.categories": CONFIG.AC.defaultCategories })
-    } */
-
-    /** @override */
     async modifyTokenAttribute(attribute, value, isDelta=false, isBar=true) {
-        const current = foundry.utils.getProperty(this.system, attribute);
+        const current = foundry.utils.getProperty(this.system, attribute)
     
         // Determine the updates to make to the actor data
-        let updates;
-        if ( isBar ) {
+        let updates
+        if (isBar) {
             if (isDelta) {
-                value = Number(current.value) + value
+                // remove clamp so token bars can go into the negatives
+                value = Number(current.value) + value 
             }
-            updates = {[`system.${attribute}.value`]: value};
+            updates = {[`system.${attribute}.value`]: value}
         } else {
-            if ( isDelta ) value = Number(current) + value;
-            updates = {[`system.${attribute}`]: value};
+            if (isDelta) value = Number(current) + value
+            updates = {[`system.${attribute}`]: value}
         }
-        const allowed = Hooks.call("modifyTokenAttribute", {attribute, value, isDelta, isBar}, updates);
-        return allowed !== false ? this.update(updates) : this;
+        const allowed = Hooks.call("modifyTokenAttribute", {attribute, value, isDelta, isBar}, updates)
+        return allowed !== false ? this.update(updates) : this
     }
 
 }
