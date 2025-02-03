@@ -10,7 +10,7 @@
         
         <section class="Description tab {{tabs.description.css}}" data-tab="description" data-group="feature">
             {{#if (gte permission 3)}}
-                <prose-mirror class="ACTextEditor" name="system.description" value="{{system.description}}" toggled="true" compact="true">
+                <prose-mirror class="ACTextEditor JS-TextEditor JS-AttachSectionControls" name="system.description" value="{{system.description}}" toggled="true" compact="true">
                     {{{enrichedDescription}}}
                 </prose-mirror>
             {{else}}

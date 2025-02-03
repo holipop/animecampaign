@@ -1815,6 +1815,13 @@
   align-items: flex-end;
   transition: font-size 0.075s;
 }
+.animecampaign .ACTextEditor .editor-content .Section__Header:has(.Section__ToggleVisibilityWrapper),
+.animecampaign .NonOwnerDescription .Section__Header:has(.Section__ToggleVisibilityWrapper),
+.animecampaign .FeatureContent__Description .Section__Header:has(.Section__ToggleVisibilityWrapper),
+.animecampaign .ChatMessage__Content .Section__Header:has(.Section__ToggleVisibilityWrapper),
+.animecampaign .EnrichedDescription .Section__Header:has(.Section__ToggleVisibilityWrapper) {
+  transition: none;
+}
 .animecampaign .ACTextEditor .editor-content h1.Section__Header.Section__Header--Collapsed,
 .animecampaign .NonOwnerDescription h1.Section__Header.Section__Header--Collapsed,
 .animecampaign .FeatureContent__Description h1.Section__Header.Section__Header--Collapsed,
@@ -1847,6 +1854,24 @@
 .animecampaign .EnrichedDescription h6.Section__Header.Section__Header--Collapsed {
   opacity: 0.75;
   font-size: 1rem;
+}
+.animecampaign .ACTextEditor .editor-content .Section__ToggleVisibilityWrapper,
+.animecampaign .NonOwnerDescription .Section__ToggleVisibilityWrapper,
+.animecampaign .FeatureContent__Description .Section__ToggleVisibilityWrapper,
+.animecampaign .ChatMessage__Content .Section__ToggleVisibilityWrapper,
+.animecampaign .EnrichedDescription .Section__ToggleVisibilityWrapper {
+  position: relative;
+  right: 1.5rem;
+  height: 1.25rem;
+}
+.animecampaign .ACTextEditor .editor-content .Section__ToggleVisibility,
+.animecampaign .NonOwnerDescription .Section__ToggleVisibility,
+.animecampaign .FeatureContent__Description .Section__ToggleVisibility,
+.animecampaign .ChatMessage__Content .Section__ToggleVisibility,
+.animecampaign .EnrichedDescription .Section__ToggleVisibility {
+  position: absolute;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 .animecampaign .ACTextEditor .editor-content .Section__Collapse,
 .animecampaign .NonOwnerDescription .Section__Collapse,

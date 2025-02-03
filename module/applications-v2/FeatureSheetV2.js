@@ -29,6 +29,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             onStatAdd: FeatureSheetV2.onStatAdd,
             onStatEdit: FeatureSheetV2.onStatEdit,
             onStatDelete: FeatureSheetV2.onStatDelete,
+            onToggleSectionVisibility: FeatureSheetV2.onToggleSectionVisibility,
         },
         form: {
             submitOnChange: true,
@@ -38,7 +39,10 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     /** @override */
     static PARTS = {
-        part: { template: "systems/animecampaign/templates/feature-v2/template.hbs" },
+        part: { 
+            template: "systems/animecampaign/templates/feature-v2/template.hbs",
+            scrollable: [".Scrollable"]
+        },
     }
 
     /** 
@@ -159,6 +163,41 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         }
     }
 
+    /**
+     * Attaches visibility toggles to each header
+     * Each button invokes FeatureSheetV2.onToggleSectionVisibility.
+     */
+    attachSectionControls () {
+        const ownerDescriptionContent = this.element.querySelector(".JS-TextEditor .editor-content")
+
+        /** @type {NodeListOf<HTMLElement>} */
+        const sections = ownerDescriptionContent.querySelectorAll("h1, h2, h3, h4, h5, h6")
+        if (!sections) return
+
+        sections.forEach((header, key) => {
+            header.classList.add("Section__Header")
+            const isHidden = header.hasAttribute("data-hide")
+            if (isHidden) header.classList.add("Section__Header--Collapsed")
+
+            // Attach button on Section header
+            const visibilityToggle = document.createElement("button")
+            visibilityToggle.setAttribute("type", "button")
+            visibilityToggle.setAttribute("data-action", "onToggleSectionVisibility")
+            visibilityToggle.setAttribute("data-index", key)
+            visibilityToggle.classList = "Section__ToggleVisibility ACButton ACButton--Inline"
+            visibilityToggle.innerHTML = 
+                `<span class="ACButton__Icon MSO">
+                    ${(isHidden) ? "visibility_off" : "visibility"}
+                </span>`
+
+            const wrapper = document.createElement("div")
+            wrapper.classList = "Section__ToggleVisibilityWrapper"
+            wrapper.append(visibilityToggle)
+
+            header.insertAdjacentElement("afterbegin", wrapper)
+        })
+    }
+
     /** @override */
     _onRender (context, options) {
         super._onRender(context, options)
@@ -167,6 +206,16 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         if (descriptionContent) {
             Description.attachSections(descriptionContent)
         }
+
+        this.attachSectionControls()
+
+        // Attaches the visibility toggles for when a re-render hasn't been invoked.
+        // This is incredibly hack-y. Do not touch.
+        const toggleEditor = this.element.querySelector(`.JS-TextEditor button.icon.toggle`)
+        toggleEditor.addEventListener("click", () => {
+            const saveButton = this.element.querySelector(`.JS-TextEditor button[data-action="save"]`)
+            saveButton.addEventListener("click", () => this.attachSectionControls())
+        })
     }
 
 
@@ -254,6 +303,28 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
             this.document.update({ "system.stats": stats })
         }
+    }
+
+    /** 
+     * Toggles each section's visibility by inserting data-hide in the HTML string.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     * @this {FeatureSheetV2}
+     */
+    static onToggleSectionVisibility (event, target) {
+        const index = Number(target.dataset.index)
+        const descriptionHTML = document.createElement("div")
+        descriptionHTML.innerHTML = this.document.system.description
+
+        const section = descriptionHTML.querySelectorAll("h1, h2, h3, h4, h5, h6")[index]
+
+        if (section.hasAttribute("data-hide")) {
+            section.removeAttribute("data-hide")
+        } else {
+            section.setAttribute("data-hide", "")
+        }
+
+        this.document.update({ "system.description": descriptionHTML.innerHTML })
     }
 
 }

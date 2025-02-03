@@ -83,11 +83,24 @@
 
             transition: font-size 0.075s;
         }
+        .Section__Header:has(.Section__ToggleVisibilityWrapper) {
+            transition: none;
+        }
         h1, h2, h3, h4, h5, h6 {
             &.Section__Header.Section__Header--Collapsed {
                 opacity: .75;
                 font-size: 1rem;
             }
+        }
+        .Section__ToggleVisibilityWrapper {
+            position: relative;
+            right: 1.5rem;
+            height: 1.25rem;
+        }
+        .Section__ToggleVisibility {
+            position: absolute;
+            margin-right: .25rem;
+            margin-bottom: .25rem;
         }
         .Section__Collapse {
             margin: 0;
