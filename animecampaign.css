@@ -192,6 +192,14 @@
 .animecampaign.item .Scrollable {
   height: calc(100% - 7.5rem);
 }
+.theme-dark .animecampaign select {
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign select {
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
 .animecampaign .DragIndicator {
   opacity: 0.75;
   font-size: 1rem;
