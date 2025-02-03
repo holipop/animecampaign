@@ -37,7 +37,7 @@ function migrateItem (source) {
     if (source.system) {
         let description = ""
         for (const section of source.system.sections) {
-            description += `<h1>${(section.visible) ? "" : "_"}${section.name}</h1>${section.richtext}`
+            description += `<h1${(section.visible) ? "" : " data-hide"}>${section.name}</h1>${section.richtext}`
         }
         source.system.description = description
 
