@@ -2041,7 +2041,70 @@
   border-color: rgba(31, 30, 30, 0.25);
 }
 .animecampaign .Enricher {
-  opacity: 0;
+  padding: 0 0.2rem;
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  font: bold 0.9rem "Philosopher";
+  background-origin: border-box;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: 1.5rem;
+  background-blend-mode: lighten;
+}
+.theme-dark .animecampaign .Enricher {
+  border-color: rgba(235, 237, 242, 0.5);
+  background-color: rgba(23, 23, 24, 0.5);
+}
+.theme-light .animecampaign .Enricher {
+  border-color: rgba(31, 30, 30, 0.5);
+  background-color: rgba(244, 243, 237, 0.5);
+}
+.theme-dark .animecampaign .Enricher {
+  text-shadow: 0 0 0.3rem #171718, 0 0 0.3rem #171718;
+}
+.theme-light .animecampaign .Enricher {
+  text-shadow: 0 0 0.3rem #f4f3ed, 0 0 0.3rem #f4f3ed;
+}
+.animecampaign .Enricher.Enricher--stamina {
+  border-color: #7bd554;
+}
+.animecampaign .Enricher.Enricher--proficiency {
+  border-color: #6d9eeb;
+}
+.animecampaign .Enricher.Enricher--movement {
+  border-color: #bf6190;
+}
+.animecampaign .Enricher.Enricher--red {
+  border-color: #df2d48;
+  background-image: url("assets/red.png");
+}
+.animecampaign .Enricher.Enricher--blue {
+  border-color: #4d86d1;
+  background-image: url("assets/blue.png");
+}
+.animecampaign .Enricher.Enricher--yellow {
+  border-color: #f1cd00;
+  background-image: url("assets/yellow.png");
+}
+.animecampaign .Enricher.Enricher--green {
+  border-color: #3ea35a;
+  background-image: url("assets/green.png");
+}
+.animecampaign .Enricher.Enricher--orange {
+  border-color: #ee8420;
+  background-image: url("assets/orange.png");
+}
+.animecampaign .Enricher.Enricher--cyan {
+  border-color: #28d5c1;
+  background-image: url("assets/cyan.png");
+}
+.animecampaign .Enricher.Enricher--purple {
+  border-color: #9639cf;
+  background-image: url("assets/purple.png");
+}
+.animecampaign .Enricher.Enricher--grey {
+  border-color: #807f84;
+  background-image: url("assets/grey.png");
 }
 .animecampaign.dialog.application:not([open]) {
   display: block;

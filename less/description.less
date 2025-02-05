@@ -187,7 +187,44 @@
     }
 
     .Enricher {
-        opacity: 0;
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+            background-color: "bg";
+        });
+        
+        padding: 0 .2rem;
+        border: (1 * @rpx) solid;
+        border-radius: 2 * @rpx;
+
+        font: bold .9rem "Philosopher";
+        background-origin: border-box;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        background-size: 1.5rem;
+        background-blend-mode: lighten;
+
+        .theme-dark & {
+            text-shadow: 
+                0 0 .3rem @dark-bg-color,
+                0 0 .3rem @dark-bg-color,
+        }
+        .theme-light & {
+            text-shadow: 
+                0 0 .3rem @light-bg-color,
+                0 0 .3rem @light-bg-color,
+        }
     }
+    .Enricher.Enricher--stamina     { border-color: @stam-color-primary }
+    .Enricher.Enricher--proficiency { border-color: @prof-color-primary }
+    .Enricher.Enricher--movement    { border-color: @move-color-primary }
+
+    .Enricher.Enricher--red      { border-color: @red-stat;      background-image: url("./assets/red.png"); }
+    .Enricher.Enricher--blue     { border-color: @blue-stat;     background-image: url("./assets/blue.png"); }
+    .Enricher.Enricher--yellow   { border-color: @yellow-stat;   background-image: url("./assets/yellow.png"); }
+    .Enricher.Enricher--green    { border-color: @green-stat;    background-image: url("./assets/green.png"); }
+    .Enricher.Enricher--orange   { border-color: @orange-stat;   background-image: url("./assets/orange.png"); }
+    .Enricher.Enricher--cyan     { border-color: @cyan-stat;     background-image: url("./assets/cyan.png"); }
+    .Enricher.Enricher--purple   { border-color: @purple-stat;   background-image: url("./assets/purple.png"); }
+    .Enricher.Enricher--grey     { border-color: @grey-stat;     background-image: url("./assets/grey.png"); }
 
 }

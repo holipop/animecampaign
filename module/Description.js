@@ -23,36 +23,32 @@ function rpx (px = 1) {
 
 /** @type {TextEditor.EnricherConfig} */
 const enrichConfigStat = {
-    pattern: buildPattern("stat", "{0,1}"),
+    pattern: new RegExp("@stat\\[([^\\]]+)]((?:{[^}]+}){0,1})", "gim"),
     replaceParent: false,
     
     async enricher (match, options) {
         const MAIN_STATS = ["stamina", "proficiency", "movement"]
         const [_, tag] = match
-        const { context } = options
-        console.log({ tag, context })
+        console.log({ tag, options })
 
         const span = document.createElement("span")
-        span.style.padding = "0 .2rem"
-        span.style.borderRadius = rpx(2)
+        span.className = "Enricher Enricher--Stat"
 
-        if (tag in context) {
-            /** @type {Stat} */
-            const stat = context[tag]
-            span.style.border = `${rpx()} solid`
-    
-            if (!MAIN_STATS.includes(stat.tag)) {
-                span.style.borderColor = CONFIG.AC.colors[stat.color]
-            } else {
-                span.style.borderColor = "grey"
-            }
-            
-            span.innerText = (stat.view == "label") ? stat.label : stat.value
-        } else {
-            span.style.border = `${rpx()} dashed`
-            span.style.borderColor = "red"
-            span.innerText = tag
+        /** @type {Stat} */
+        const stat = options.context[tag]
+        if (!stat) {
+            span.classList.add(`Enricher--Invalid`)
+            return
         }
+
+        if (MAIN_STATS.includes(tag)) {
+            span.classList.add(`Enricher--${tag}`)
+        } else {
+            span.classList.add(`Enricher--${stat.color}`)
+            span.classList.add(`Enricher--ColorStat`)
+        }
+
+        span.innerText = (stat.view == "label") ? stat.label : stat.value
 
         return span
     }
