@@ -2049,7 +2049,6 @@
   background-position-y: center;
   background-repeat: no-repeat;
   background-size: 1.5rem;
-  background-blend-mode: lighten;
 }
 .theme-dark .animecampaign .Enricher {
   border-color: rgba(235, 237, 242, 0.5);
@@ -2060,10 +2059,21 @@
   background-color: rgba(244, 243, 237, 0.5);
 }
 .theme-dark .animecampaign .Enricher {
-  text-shadow: 0 0 0.3rem #171718, 0 0 0.3rem #171718;
+  background-blend-mode: darken;
+  text-shadow: 0 0 0.3rem #171718;
 }
 .theme-light .animecampaign .Enricher {
-  text-shadow: 0 0 0.3rem #f4f3ed, 0 0 0.3rem #f4f3ed;
+  background-blend-mode: lighten;
+  text-shadow: 0 0 0.3rem #f4f3ed;
+}
+.animecampaign .Enricher.Enricher--Invalid {
+  border-style: dashed;
+  border-color: red;
+  font-weight: normal;
+}
+.animecampaign .Enricher__Max {
+  font-weight: normal;
+  font-size: 0.8rem;
 }
 .animecampaign .Enricher.Enricher--stamina {
   border-color: #7bd554;

@@ -1,5 +1,6 @@
 import Stat from "./data-models/Stat.js"
 import ACActor from "./documents/ACActor.js"
+import ACItem from "./documents/ACItem.js"
 
 /**
  * Returns a Regular Expression for system enrichers.
@@ -38,17 +39,34 @@ const enrichConfigStat = {
         const stat = options.context[tag]
         if (!stat) {
             span.classList.add(`Enricher--Invalid`)
-            return
+            span.innerText = tag
+            return span
         }
 
-        if (MAIN_STATS.includes(tag)) {
-            span.classList.add(`Enricher--${tag}`)
-        } else {
-            span.classList.add(`Enricher--${stat.color}`)
-            span.classList.add(`Enricher--ColorStat`)
+        const isParentStat = (options.type == "character") || (tag.startsWith("actor."))
+        if (isParentStat) {
+            if (MAIN_STATS.includes(stat.tag)) {
+                span.classList.add(`Enricher--${stat.tag}`)
+            } else {
+                span.classList.add(`Enricher--${stat.color}`)
+                span.classList.add(`Enricher--ColorStat`)
+            }
         }
 
         span.innerText = (stat.view == "label") ? stat.label : stat.value
+
+        switch (stat.view) {
+            case "label":
+                span.innerText = stat.label
+                break
+            case "value":
+                span.innerText = stat.value
+                break
+            case "resource":
+                span.innerHTML = `${stat.value} <span class="Enricher__Max">/ ${stat.max}</span>`
+                break
+            default: break
+        }
 
         return span
     }
@@ -117,6 +135,47 @@ export async function enrichCharacterHTML (text, document) {
 
     const options = {
         type: "character",
+        context: Object.fromEntries(context)
+    }
+
+    const enrichedText = await TextEditor.enrichHTML(text || '', options)
+  
+    CONFIG.TextEditor.enrichers.filter(e => {
+        return (e != enrichConfigStat)// || (e != enrichConfigUnless)
+    })
+  
+    return enrichedText;
+}
+
+/**
+ * Enriches text for Feature descriptions.
+ * @param {string} text 
+ * @param {ACItem} document 
+ * @returns string
+ */
+export async function enrichFeatureHTML (text, document) {
+    CONFIG.TextEditor.enrichers.push(enrichConfigStat)
+
+    const { system } = document
+    let context = system.stats.map(stat => [stat.tag, stat])
+        
+    if (document.isOwned) {
+        const actorStats = document.parent.system.colorStats
+            .map(stat => {
+                return [[`actor.${stat.tag}`, stat], [`actor.stat.${stat.color}`, stat]]
+            })
+            .flat()
+            .concat([
+                ["actor.stamina", document.parent.system.stamina],
+                ["actor.proficiency", document.parent.system.proficiency],
+                ["actor.movement", document.parent.system.movement],
+            ])
+
+        context = context.concat(actorStats)
+    }
+
+    const options = {
+        type: "feature",
         context: Object.fromEntries(context)
     }
 

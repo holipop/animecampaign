@@ -159,7 +159,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             system: this.document.system,
             palette: this.document.system.palette,
             tabs: this.getTabs(),
-            enrichedDescription: await TextEditor.enrichHTML(this.document.system.description)
+            enrichedDescription: await Description.enrichFeatureHTML(this.document.system.description, this.document)
         }
     }
 

@@ -201,19 +201,30 @@
         background-position-y: center;
         background-repeat: no-repeat;
         background-size: 1.5rem;
-        background-blend-mode: lighten;
 
         .theme-dark & {
+            background-blend-mode: darken;
             text-shadow: 
-                0 0 .3rem @dark-bg-color,
                 0 0 .3rem @dark-bg-color,
         }
         .theme-light & {
+            background-blend-mode: lighten;
             text-shadow: 
-                0 0 .3rem @light-bg-color,
                 0 0 .3rem @light-bg-color,
         }
     }
+    .Enricher.Enricher--Invalid {
+        border-style: dashed;
+        border-color: red;
+
+        font-weight: normal;
+    }
+
+    .Enricher__Max {
+        font-weight: normal;
+        font-size: .8rem;
+    }
+
     .Enricher.Enricher--stamina     { border-color: @stam-color-primary }
     .Enricher.Enricher--proficiency { border-color: @prof-color-primary }
     .Enricher.Enricher--movement    { border-color: @move-color-primary }
