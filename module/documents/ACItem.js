@@ -20,10 +20,29 @@ export default class ACItem extends Item {
             post = true
         }
 
+        let rollData = this.system.stats
+            .filter(stat => stat.view != "label")
+            .map(stat => [stat.tag.replace(" ", "_"), stat.value])
+
+        if (this.isOwned) {
+            const actorRollData = this.parent.system.colorStats
+                .filter(stat => stat.view != "label")
+                .map(stat => [[`actor.${stat.tag.replace(" ", "_")}`, stat.value], [`actor.stat.${stat.color}`, stat.value]])
+                .flat()
+                .concat([
+                    ["actor.stamina", this.parent.system.stamina.value],
+                    ["actor.proficiency", this.parent.system.proficiency.value],
+                    ["actor.movement", this.parent.system.movement.value],
+                ])
+
+            rollData = rollData.concat(actorRollData)
+        }
+        rollData = Object.fromEntries(rollData)
+
         const [roll, max, min] = await Promise.all([
-            new Roll(formula).evaluate(),
-            new Roll(formula).evaluate({ maximize: true }),
-            new Roll(formula).evaluate({ minimize: true }),
+            new Roll(formula, rollData).evaluate(),
+            new Roll(formula, rollData).evaluate({ maximize: true }),
+            new Roll(formula, rollData).evaluate({ minimize: true }),
         ])
 
         let crit

@@ -30,7 +30,6 @@ const enrichConfigStat = {
     async enricher (match, options) {
         const MAIN_STATS = ["stamina", "proficiency", "movement"]
         const [_, tag] = match
-        console.log({ tag, options })
 
         const span = document.createElement("span")
         span.className = "Enricher Enricher--Stat"
@@ -140,9 +139,7 @@ export async function enrichCharacterHTML (text, document) {
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
   
-    CONFIG.TextEditor.enrichers.filter(e => {
-        return (e != enrichConfigStat)// || (e != enrichConfigUnless)
-    })
+    CONFIG.TextEditor.enrichers = []
   
     return enrichedText;
 }
@@ -181,9 +178,7 @@ export async function enrichFeatureHTML (text, document) {
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
   
-    CONFIG.TextEditor.enrichers.filter(e => {
-        return (e != enrichConfigStat)// || (e != enrichConfigUnless)
-    })
+    CONFIG.TextEditor.enrichers = []
   
     return enrichedText;
 }
