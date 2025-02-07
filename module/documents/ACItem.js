@@ -9,6 +9,21 @@ export default class ACItem extends Item {
         this.updateSource({ img: null })
     }
 
+    /** @override */
+    getRollData() {
+        const data = this.system.stats
+            .map(stat => [stat.tag.replace(" ", "_"), stat.value])
+            .filter(([_, value]) => value)
+            .concat((this.isOwned) 
+                ? Object
+                    .entries(this.parent.getRollData())
+                    .map(([tag, value]) => [`actor.${tag}`, value])
+                : []
+            )
+
+        return Object.fromEntries(data)
+    }
+
     /**
      * Sends a chat message displaying this feature, rolling if a valid roll formula is provided. 
      * @param {boolean} options.post
@@ -20,25 +35,7 @@ export default class ACItem extends Item {
             post = true
         }
 
-        let rollData = this.system.stats
-            .filter(stat => stat.view != "label")
-            .map(stat => [stat.tag.replace(" ", "_"), stat.value])
-
-        if (this.isOwned) {
-            const actorRollData = this.parent.system.colorStats
-                .filter(stat => stat.view != "label")
-                .map(stat => [[`actor.${stat.tag.replace(" ", "_")}`, stat.value], [`actor.stat.${stat.color}`, stat.value]])
-                .flat()
-                .concat([
-                    ["actor.stamina", this.parent.system.stamina.value],
-                    ["actor.proficiency", this.parent.system.proficiency.value],
-                    ["actor.movement", this.parent.system.movement.value],
-                ])
-
-            rollData = rollData.concat(actorRollData)
-        }
-        rollData = Object.fromEntries(rollData)
-
+        const rollData = this.getRollData()
         const [roll, max, min] = await Promise.all([
             new Roll(formula, rollData).evaluate(),
             new Roll(formula, rollData).evaluate({ maximize: true }),

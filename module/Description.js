@@ -30,6 +30,7 @@ const enrichConfigStat = {
     async enricher (match, options) {
         const MAIN_STATS = ["stamina", "proficiency", "movement"]
         const [_, tag] = match
+        tag.toLowerCase()
 
         const span = document.createElement("span")
         span.className = "Enricher Enricher--Stat"
@@ -120,21 +121,9 @@ const enrichConfigSelect = {
 export async function enrichCharacterHTML (text, document) {
     CONFIG.TextEditor.enrichers.push(enrichConfigStat)
 
-    const { system } = document
-    const context = system.colorStats
-        .map(stat => {
-            return [[stat.tag, stat], [`stat.${stat.color}`, stat]]
-        })
-        .flat()
-        .concat([
-            ["stamina", system.stamina],
-            ["proficiency", system.proficiency],
-            ["movement", system.movement],
-        ])
-
     const options = {
         type: "character",
-        context: Object.fromEntries(context)
+        context: document.getRollData()
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
@@ -153,27 +142,11 @@ export async function enrichCharacterHTML (text, document) {
 export async function enrichFeatureHTML (text, document) {
     CONFIG.TextEditor.enrichers.push(enrichConfigStat)
 
-    const { system } = document
-    let context = system.stats.map(stat => [stat.tag, stat])
-        
-    if (document.isOwned) {
-        const actorStats = document.parent.system.colorStats
-            .map(stat => {
-                return [[`actor.${stat.tag}`, stat], [`actor.stat.${stat.color}`, stat]]
-            })
-            .flat()
-            .concat([
-                ["actor.stamina", document.parent.system.stamina],
-                ["actor.proficiency", document.parent.system.proficiency],
-                ["actor.movement", document.parent.system.movement],
-            ])
-
-        context = context.concat(actorStats)
-    }
+    // TODO: merge this with enrichCharacterHTML since they're essentially the same
 
     const options = {
         type: "feature",
-        context: Object.fromEntries(context)
+        context: document.getRollData()
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
