@@ -1,3 +1,5 @@
+import * as Description from "../Description.js"
+
 /**
  * Extending the Item class for system-specific logic.
  */
@@ -10,8 +12,7 @@ export default class ACItem extends Item {
     }
 
     /**
-     * Returns a record of this character's color stats and main stats.
-     * Color stats appear twice with their tag and their color being used as keys.
+     * Returns a record of this features's stats.
      * @returns {Record<string, Stat>}
      */
     getStatContext() {
@@ -69,7 +70,7 @@ export default class ACItem extends Item {
 
         const [tooltip, enrichedDescription] = await Promise.all([
             roll.getTooltip(),
-            TextEditor.enrichHTML(this.system.description)
+            Description.enrichChatMessage(this.system.description, this)
         ])
         const context = {
             formula,

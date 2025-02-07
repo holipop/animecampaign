@@ -13,15 +13,6 @@ function buildPattern (tag, quantifier) {
     return new RegExp(`@${tag}\\[([^\\]]+)]((?:{[^}]+})${quantifier})`, "gim")
 }
 
-/**
- * Gets rem units in terms of pixels.
- * By default, 1rem is 16px.
- * @param {number} px 
- */
-function rpx (px = 1) {
-    return `${px * (1 / 16)}rem`
-}
-
 /** @type {TextEditor.EnricherConfig} */
 const enrichConfigStat = {
     pattern: new RegExp("@stat\\[([^\\]]+)]((?:{[^}]+}){0,1})", "gim"),
@@ -76,7 +67,7 @@ const enrichConfigStat = {
 const enrichConfigIf = {
     pattern: buildPattern("if", "{1,2}"),
     replaceParent: false,
-
+    
     async enricher (match, options) {
         const [all, condition, outputs] = match // TODO :3
     }
@@ -86,7 +77,7 @@ const enrichConfigIf = {
 const enrichConfigUnless = {
     pattern: buildPattern("unless", "{1,2}"),
     replaceParent: false,
-
+    
     async enricher (match, options) {
         const [all, condition, outputs] = match
     }
@@ -96,7 +87,7 @@ const enrichConfigUnless = {
 const enrichConfigInput = {
     pattern: buildPattern("input", "{0,1}"),
     replaceParent: false,
-
+    
     async enricher (match, options) {
         const [all, condition, outputs] = match
     }
@@ -106,52 +97,56 @@ const enrichConfigInput = {
 const enrichConfigSelect = {
     pattern: buildPattern("select", "{1,}"),
     replaceParent: false,
-
+    
     async enricher (match, options) {
         const [all, condition, outputs] = match
     }
 }
 
 /**
- * Enriches text for Character biographies.
+ * Enriches text with system-specific enrichers.
  * @param {string} text 
- * @param {ACActor} document 
+ * @param {ACActor|ACItem} document 
  * @returns string
  */
-export async function enrichCharacterHTML (text, document) {
-    CONFIG.TextEditor.enrichers.push(enrichConfigStat)
+export async function enrichHTML (text, document) {
+    const enrichers = [
+        enrichConfigStat,
+        enrichConfigIf,
+        enrichConfigUnless,
+        enrichConfigInput,
+        enrichConfigSelect,
+    ]
+    CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
     const options = {
-        type: "character",
+        type: document.type,
         context: document.getStatContext()
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
   
-    CONFIG.TextEditor.enrichers = []
+    CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers
+        .filter(e => enrichers.includes(e))
   
     return enrichedText;
 }
 
-/**
- * Enriches text for Feature descriptions.
- * @param {string} text 
- * @param {ACItem} document 
- * @returns string
- */
-export async function enrichFeatureHTML (text, document) {
-    CONFIG.TextEditor.enrichers.push(enrichConfigStat)
-
-    // TODO: merge this with enrichCharacterHTML since they're essentially the same
+export async function enrichChatMessage (text, item) {
+    const enrichers = [
+        enrichConfigStat,
+    ]
+    CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
     const options = {
-        type: "feature",
-        context: document.getStatContext()
+        type: "message",
+        context: item.getStatContext()
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
   
-    CONFIG.TextEditor.enrichers = []
+    CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers
+        .filter(e => enrichers.includes(e))
   
     return enrichedText;
 }
