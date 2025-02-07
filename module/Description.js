@@ -123,7 +123,7 @@ export async function enrichCharacterHTML (text, document) {
 
     const options = {
         type: "character",
-        context: document.getRollData()
+        context: document.getStatContext()
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
@@ -146,7 +146,7 @@ export async function enrichFeatureHTML (text, document) {
 
     const options = {
         type: "feature",
-        context: document.getRollData()
+        context: document.getStatContext()
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)

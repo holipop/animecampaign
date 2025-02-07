@@ -1,3 +1,5 @@
+import Stat from "../data-models/Stat.js"
+
 /**
  * Extending the Actor class for system-specific logic.
  */
@@ -26,21 +28,34 @@ export default class ACActor extends Actor {
         return allowed !== false ? this.update(updates) : this
     }
 
+    /**
+     * Returns a record of this character's color stats and main stats.
+     * Color stats appear twice with their tag and their color being used as keys.
+     * @returns {Record<string, Stat>}
+     */
+    getStatContext() {
+        const data = this.system.colorStats
+            .map(stat => [[stat.tag, stat], [`stat.${stat.color}`, stat]])
+            .flat()
+            .concat([
+                ["stamina", this.system.stamina],
+                ["proficiency", this.system.proficiency],
+                ["movement", this.system.movement],
+            ])
+
+        return Object.fromEntries(data)
+    }
+
     /** 
      * @inheritdoc 
      * @override
      * @returns {Record<string, number>}
      */
     getRollData() {
-        const data = this.system.colorStats
-            .map(stat => [[stat.tag.replace(" ", "_"), stat.value], [`stat.${stat.color}`, stat.value]])
-            .flat()
-            .concat([
-                ["stamina", this.system.stamina.value],
-                ["proficiency", this.system.proficiency.value],
-                ["movement", this.system.movement.value],
-            ])
-            .filter(([_, value]) => value) // if value exists
+        const data = Object
+            .entries(this.getStatContext())
+            .map(([tag, stat]) => [tag.replace(" ", "_"), stat.value])
+            .filter(([_, value]) => value)
 
         return Object.fromEntries(data)
     }

@@ -9,17 +9,34 @@ export default class ACItem extends Item {
         this.updateSource({ img: null })
     }
 
-    /** @override */
-    getRollData() {
+    /**
+     * Returns a record of this character's color stats and main stats.
+     * Color stats appear twice with their tag and their color being used as keys.
+     * @returns {Record<string, Stat>}
+     */
+    getStatContext() {
         const data = this.system.stats
-            .map(stat => [stat.tag.replace(" ", "_"), stat.value])
-            .filter(([_, value]) => value)
+            .map(stat => [stat.tag, stat])
             .concat((this.isOwned) 
                 ? Object
-                    .entries(this.parent.getRollData())
-                    .map(([tag, value]) => [`actor.${tag}`, value])
+                    .entries(this.parent.getStatContext())
+                    .map(([tag, stat]) => [`actor.${tag}`, stat])
                 : []
             )
+
+        return Object.fromEntries(data)
+    }
+
+    /** 
+     * @override 
+     * @inheritdoc 
+     * @returns {Record<string, number>}
+     */
+    getRollData() {
+        const data = Object
+            .entries(this.getStatContext())
+            .map(([tag, stat]) => [tag.replace(" ", "_"), stat.value])
+            .filter(([_, value]) => value)
 
         return Object.fromEntries(data)
     }
