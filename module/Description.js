@@ -20,8 +20,8 @@ const enrichConfigStat = {
     
     async enricher (match, options) {
         const MAIN_STATS = ["stamina", "proficiency", "movement"]
-        const [_, tag] = match
-        tag.toLowerCase()
+        const [_, input] = match
+        const tag = input.toLowerCase()
 
         const span = document.createElement("span")
         span.className = "Enricher Enricher--Stat"
@@ -34,7 +34,7 @@ const enrichConfigStat = {
             return span
         }
 
-        const isParentStat = (options.type == "character") || (tag.startsWith("actor."))
+        const isParentStat = (options.type == "Character") || (tag.startsWith("actor."))
         if (isParentStat) {
             if (MAIN_STATS.includes(stat.tag)) {
                 span.classList.add(`Enricher--${stat.tag}`)
@@ -64,8 +64,24 @@ const enrichConfigStat = {
 }
 
 /** @type {TextEditor.EnricherConfig} */
+const enrichConfigStatic = {
+    pattern: new RegExp("@(if|unless|input|select)\\[([^\\]]+)]((?:{[^}]+}){0,})", "gim"),
+    replaceParent: false,
+    
+    async enricher (match, options) {
+        const [_, type, input] = match // TODO :3
+
+        const span = document.createElement("span")
+        span.className = "Enricher Enricher--Static"
+        span.innerHTML = `${type.toLowerCase()}<span class="Enricher__Input">${input}</span>`
+
+        return span
+    }
+}
+
+/** @type {TextEditor.EnricherConfig} */
 const enrichConfigIf = {
-    pattern: buildPattern("if", "{1,2}"),
+    pattern: null,
     replaceParent: false,
     
     async enricher (match, options) {
@@ -109,29 +125,32 @@ const enrichConfigSelect = {
  * @param {ACActor|ACItem} document 
  * @returns string
  */
-export async function enrichHTML (text, document) {
+export async function enrichStaticHTML (text, document) {
     const enrichers = [
         enrichConfigStat,
-        enrichConfigIf,
-        enrichConfigUnless,
-        enrichConfigInput,
-        enrichConfigSelect,
+        enrichConfigStatic
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
     const options = {
         type: document.type,
-        context: document.getStatContext()
+        context: document.getStatContext(),
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)
   
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers
-        .filter(e => enrichers.includes(e))
+        .filter(e => !enrichers.includes(e))
   
     return enrichedText;
 }
 
+/**
+ * Enriches posted ChatMessages with system-specific enrichers.
+ * @param {string} text 
+ * @param {ACItem} item
+ * @returns string
+ */
 export async function enrichChatMessage (text, item) {
     const enrichers = [
         enrichConfigStat,

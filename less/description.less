@@ -213,6 +213,20 @@
                 0 0 .3rem @light-bg-color,
         }
     }
+    .Enricher.Enricher--Static {
+        #ColorScheme(@opacity: 75%, {
+            background-color: "txt";
+        });
+        #ColorScheme({
+            color: "bg";
+        });
+
+        padding: 0;
+        padding-left: 2 * @rpx;
+
+        font: bold .75rem "Libre Franklin";
+        text-shadow: none;
+    }
     .Enricher.Enricher--Invalid {
         border-style: dashed;
         border-color: red;
@@ -220,6 +234,18 @@
         font-weight: normal;
     }
 
+    .Enricher__Input {
+        #ColorScheme({
+            color: "txt";
+            background-color: "bg";
+        });
+
+        border-radius: .1rem;
+        margin-left: .2rem;
+        padding: 0 .2rem;
+
+        font: .8rem "Philosopher";
+    }
     .Enricher__Max {
         font-weight: normal;
         font-size: .8rem;

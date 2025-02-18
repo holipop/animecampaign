@@ -2066,10 +2066,42 @@
   background-blend-mode: lighten;
   text-shadow: 0 0 0.3rem #f4f3ed;
 }
+.animecampaign .Enricher.Enricher--Static {
+  padding: 0;
+  padding-left: 0.125rem;
+  font: bold 0.75rem "Libre Franklin";
+  text-shadow: none;
+}
+.theme-dark .animecampaign .Enricher.Enricher--Static {
+  background-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign .Enricher.Enricher--Static {
+  background-color: rgba(31, 30, 30, 0.75);
+}
+.theme-dark .animecampaign .Enricher.Enricher--Static {
+  color: #171718;
+}
+.theme-light .animecampaign .Enricher.Enricher--Static {
+  color: #f4f3ed;
+}
 .animecampaign .Enricher.Enricher--Invalid {
   border-style: dashed;
   border-color: red;
   font-weight: normal;
+}
+.animecampaign .Enricher__Input {
+  border-radius: 0.1rem;
+  margin-left: 0.2rem;
+  padding: 0 0.2rem;
+  font: 0.8rem "Philosopher";
+}
+.theme-dark .animecampaign .Enricher__Input {
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign .Enricher__Input {
+  color: #1f1e1e;
+  background-color: #f4f3ed;
 }
 .animecampaign .Enricher__Max {
   font-weight: normal;

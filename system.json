@@ -2,6 +2,7 @@
     "id": "animecampaign",
     "title": "Epithet/Anime Campaign TTRPG",
     "description": "An unofficial fanmade system based on JelloApocalypse's Epithet/Anime Campaign system.",
+    "version": "v2.0",
     "authors": [
         {
             "name": "Holipop",
@@ -9,10 +10,15 @@
             "flags": {}
         }
     ],
-    "version": "v2.0",
     "compatibility": {
         "minimum": "12",
         "verified": "12.331"
+    },
+    "flags": {
+        "hotReload": {
+            "extensions": ["css", "hbs", "json"],
+            "paths": ["animecampaign.css", "templates", "lang"]
+        }
     },
     "esmodules": [
         "animecampaign.js"
