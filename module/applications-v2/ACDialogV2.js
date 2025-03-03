@@ -16,7 +16,7 @@ export default class ACDialogV2 extends DialogV2 {
         }
     }
 
-    /** @override */
+    /** @inheritdoc */
     async _renderHTML (context, options) {
         const form = document.createElement("form")
         //form.className = "dialog-form standard-form"
@@ -29,7 +29,7 @@ export default class ACDialogV2 extends DialogV2 {
         return form
     }
 
-    /** @override */
+    /** @inheritdoc */
     _renderButtons () {
         return Object.values(this.options.buttons).map(button => {
             const { action, label, icon, default: isDefault, class: cls = "" } = button
@@ -46,7 +46,7 @@ export default class ACDialogV2 extends DialogV2 {
         }).join("")
     }
 
-    /** @override */
+    /** @inheritdoc */
     static async confirm ({ yes = {}, no = {}, ...options }={}) {
         const { mergeObject } = foundry.utils
         options.buttons ??= []
@@ -58,7 +58,7 @@ export default class ACDialogV2 extends DialogV2 {
         return this.wait(options)
     }
 
-    /** @override */
+    /** @inheritdoc */
     static async prompt ({ ok = {}, ...options } = {}) {
         const { mergeObject } = foundry.utils
         options.buttons ??= []

@@ -18,7 +18,7 @@ const { ActorSheetV2 } = foundry.applications.sheets
  */
 export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMixinV2(ActorSheetV2)) {
 
-    /** @override */
+    /** @inheritdoc */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "actor", "sheet"],
         position: {
@@ -54,7 +54,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         ],
     }
 
-    /** @override */
+    /** @inheritdoc */
     static PARTS = {
         template: {
             template: "systems/animecampaign/templates/character-v2/template.hbs",
@@ -239,7 +239,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
     // ---- Context ----
 
-    /** @override */
+    /** @inheritdoc */
     tabGroups = {
         character: (this.document.permission > CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
             ? "kit"
@@ -303,7 +303,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         return Object.fromEntries(descriptions)
     }
 
-    /** @override */
+    /** @inheritdoc */
     async _prepareContext () {
         const [enrichedDescription, enrichedFeatureDescriptions] = await Promise.all([
             Description.enrichStaticHTML(this.document.system.description, this.document),
@@ -326,7 +326,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
-    /** @override */
+    /** @inheritdoc */
     _onRender (context, options) {
         super._onRender(context, options)
 

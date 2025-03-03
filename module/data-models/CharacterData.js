@@ -6,7 +6,7 @@ import Category from "./Category.js";
  */
 export default class CharacterData extends foundry.abstract.DataModel {
 
-    /** @override */
+    /** @inheritdoc */
     static defineSchema () {
         const fields = foundry.data.fields;
 

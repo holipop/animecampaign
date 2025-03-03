@@ -13,7 +13,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         this.#dragDrop = this.#createDragDropHandlers()
     }
 
-    /** @override */
+    /** @inheritdoc */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "dialog", "config"],
         tag: "form",
@@ -36,7 +36,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
-    /** @override */
+    /** @inheritdoc */
     static PARTS = {
         hbs: { template: "systems/animecampaign/templates/dialog/category-config.hbs" }
     }
@@ -179,7 +179,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
 
     // ---- Context ----
 
-    /** @override */
+    /** @inheritdoc */
     tabGroups = {
         category: "basic"
     }
@@ -202,7 +202,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         return tabs
     }
 
-    /** @override */
+    /** @inheritdoc */
     async _prepareContext (options) {
         return {
             app: this,
@@ -215,7 +215,7 @@ export default class CategoryConfigV2 extends HandlebarsApplicationMixin(Applica
         }
     }
 
-    /** @override */
+    /** @inheritdoc */
     _onRender(context, options) {
         super._onRender(context, options)
 

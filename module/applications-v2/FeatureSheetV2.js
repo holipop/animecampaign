@@ -11,7 +11,7 @@ const { ItemSheetV2 } = foundry.applications.sheets
  */
 export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixinV2(ItemSheetV2)) {
 
-    /** @override */
+    /** @inheritdoc */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "item", "sheet"],
         position: {
@@ -37,7 +37,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         dragDrop: [{ dragSelector: '.JS-Drag', dropSelector: '.JS-Drop' }],
     }
 
-    /** @override */
+    /** @inheritdoc */
     static PARTS = {
         part: { 
             template: "systems/animecampaign/templates/feature-v2/template.hbs",
@@ -127,7 +127,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     // ---- Context ----
 
-    /** @override */
+    /** @inheritdoc */
     tabGroups = {
         feature: "description"
     }
@@ -149,7 +149,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         return tabs
     }
 
-    /** @override */
+    /** @inheritdoc */
     async _prepareContext () {
         return {
             ...super._prepareContext(),
@@ -198,7 +198,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         })
     }
 
-    /** @override */
+    /** @inheritdoc */
     _onRender (context, options) {
         super._onRender(context, options)
 

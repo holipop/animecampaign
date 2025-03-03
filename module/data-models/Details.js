@@ -3,7 +3,7 @@
  */
 export default class Details extends foundry.abstract.DataModel {
 
-    /** @override */
+    /** @inheritdoc */
     static defineSchema () {
         const fields = foundry.data.fields;
 

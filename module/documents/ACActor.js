@@ -5,10 +5,7 @@ import Stat from "../data-models/Stat.js"
  */
 export default class ACActor extends Actor {
 
-    /** 
-     * @inheritdoc 
-     * @override
-     */
+    /** @inheritdoc */
     async modifyTokenAttribute(attribute, value, isDelta = false, isBar = true) {
         const current = foundry.utils.getProperty(this.system, attribute)
     

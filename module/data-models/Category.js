@@ -6,7 +6,7 @@ import ACItem from "../documents/ACItem.js";
  */
 export default class Category extends foundry.abstract.DataModel {
 
-    /** @override */
+    /** @inheritdoc */
     static defineSchema () {
         const fields = foundry.data.fields;
 

@@ -5,7 +5,7 @@ import * as Description from "../Description.js"
  */
 export default class ACItem extends Item { 
 
-    /** @override */
+    /** @inheritdoc */
     _preCreate (data, options, user) {
         super._preCreate(data, options, user);
         this.updateSource({ img: null })
@@ -29,7 +29,6 @@ export default class ACItem extends Item {
     }
 
     /** 
-     * @override 
      * @inheritdoc 
      * @returns {Record<string, number>}
      */
