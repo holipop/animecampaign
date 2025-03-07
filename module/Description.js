@@ -2,18 +2,7 @@ import Stat from "./data-models/Stat.js"
 import ACActor from "./documents/ACActor.js"
 import ACItem from "./documents/ACItem.js"
 
-/**
- * Returns a Regular Expression for system enrichers.
- * All regex for custom enrichers follow the @tag[input]{output} schema.
- * @param {string} tag 
- * @param {string} quantifier 
- * @returns {RegExp}
- */
-function buildPattern (tag, quantifier) {
-    return new RegExp(`@${tag}\\[([^\\]]+)]((?:{[^}]+})${quantifier})`, "gim")
-}
-
-/** @type {TextEditor.EnricherConfig} */
+/** @type {ACEnricherConfig} */
 const enrichConfigStat = {
     pattern: new RegExp("@stat\\[([^\\]]+)]((?:{[^}]+}){0,1})", "gim"),
     replaceParent: false,
@@ -63,59 +52,65 @@ const enrichConfigStat = {
     }
 }
 
-/** @type {TextEditor.EnricherConfig} */
+const tags = {
+    input: ">",
+    select: "?",
+}
+
+/** @type {ACEnricherConfig} */
 const enrichConfigStatic = {
-    pattern: new RegExp("@(if|unless|input|select)\\[([^\\]]+)]((?:{[^}]+}){0,})", "gim"),
+    pattern: new RegExp(`@(${Object.keys(tags).join("|")})\\[([^\\]]+)]((?:{[^}]+}){0,})`, "gim"),
     replaceParent: false,
     
     async enricher (match, options) {
-        const [_, type, input] = match // TODO :3
+        let [_, type, label, entries] = match
+        type = type.toLowerCase()
+
+        if (options.document instanceof ACItem) {
+            const query = { type }
+
+            entries = entries
+                .slice(1, entries.length - 1)
+                .split("}{")
+                .map(e => e.split("|"))
+
+            switch (type) {
+                case "input":
+                    query.defaultOutput = entries[0][0]
+                    break
+                case "select":
+                    query.options = Object.fromEntries(entries)
+                    break
+            }
+
+            options.document.queries.add(query)
+        }
 
         const span = document.createElement("span")
         span.className = "Enricher Enricher--Static"
-        span.innerHTML = `${type.toLowerCase()}<span class="Enricher__Input">${input}</span>`
+        span.innerHTML = `${tags[type]}<span class="Enricher__Input">${label}</span>`
 
         return span
     }
 }
 
-/** @type {TextEditor.EnricherConfig} */
-const enrichConfigIf = {
-    pattern: null,
-    replaceParent: false,
-    
-    async enricher (match, options) {
-        const [all, condition, outputs] = match // TODO :3
-    }
-}
-
-/** @type {TextEditor.EnricherConfig} */
-const enrichConfigUnless = {
-    pattern: buildPattern("unless", "{1,2}"),
-    replaceParent: false,
-    
-    async enricher (match, options) {
-        const [all, condition, outputs] = match
-    }
-}
-
-/** @type {TextEditor.EnricherConfig} */
+/** @type {ACEnricherConfig} */
 const enrichConfigInput = {
-    pattern: buildPattern("input", "{0,1}"),
+    pattern: new RegExp("@input\\[([^\\]]+)]((?:{[^}]+}){0,1})", "gim"),
     replaceParent: false,
     
     async enricher (match, options) {
-        const [all, condition, outputs] = match
+        const [all, label, defaultOutput] = match
     }
 }
 
-/** @type {TextEditor.EnricherConfig} */
+/** @type {ACEnricherConfig} */
 const enrichConfigSelect = {
-    pattern: buildPattern("select", "{1,}"),
+    pattern: new RegExp("@select\\[([^\\]]+)]((?:{[^}]+}){1,})", "gim"),
     replaceParent: false,
     
     async enricher (match, options) {
-        const [all, condition, outputs] = match
+        const [all, label, entries] = match
     }
 }
 
@@ -132,7 +127,10 @@ export async function enrichStaticHTML (text, document) {
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
+    console.log(Object.keys(tags).join("|"))
+
     const options = {
+        document,
         type: document.type,
         context: document.getStatContext(),
     }
@@ -154,10 +152,13 @@ export async function enrichStaticHTML (text, document) {
 export async function enrichChatMessage (text, item) {
     const enrichers = [
         enrichConfigStat,
+        enrichConfigInput,
+        enrichConfigSelect,
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
     const options = {
+        document: item,
         type: "message",
         context: item.getStatContext()
     }

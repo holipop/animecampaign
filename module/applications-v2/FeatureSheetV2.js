@@ -151,6 +151,12 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     /** @inheritdoc */
     async _prepareContext () {
+        this.document.queries.clear()
+
+        const enrichedDescription = await Description.enrichStaticHTML(this.document.system.description, this.document)
+
+        console.log(this.document.queries)
+
         return {
             ...super._prepareContext(),
             config: CONFIG.AC,
@@ -159,7 +165,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             system: this.document.system,
             palette: this.document.system.palette,
             tabs: this.getTabs(),
-            enrichedDescription: await Description.enrichStaticHTML(this.document.system.description, this.document)
+            enrichedDescription
         }
     }
 

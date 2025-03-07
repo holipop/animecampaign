@@ -11,6 +11,17 @@ export default class ACItem extends Item {
         this.updateSource({ img: null })
     }
 
+
+
+    // ---- Roll ----
+
+    /**
+     * The set of input/select query objects derived from enriched tags.
+     * This is appended in `enrichConfigStatic.enricher` and cleared in `FeatureSheet#_prepareContext`.
+     * @type {Set<Query>}
+     */
+    queries = new Set()
+
     /**
      * Returns a record of this features's stats.
      * @returns {Record<string, Stat>}
@@ -46,6 +57,9 @@ export default class ACItem extends Item {
      * @param {boolean} options.post
      */
     async roll ({ post = false } = {}) {
+
+        // TODO: Take the queries, parse them into a dialog, and then inject the results into the description
+
         let formula = this.system.details.formula ?? ""
         if (!Roll.validate(formula)) {
             formula = "1"
