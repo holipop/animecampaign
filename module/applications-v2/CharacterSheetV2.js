@@ -297,6 +297,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      */
     async getEnrichedFeatureDescriptions () {
         const items = this.document.items.map(async (item) => {
+            item.queries = []
             return [item._id, await Description.enrichStaticHTML(item.system.description, item)]
         })
         const descriptions = await Promise.all(items)

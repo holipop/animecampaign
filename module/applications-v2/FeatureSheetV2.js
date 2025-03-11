@@ -151,11 +151,9 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
 
     /** @inheritdoc */
     async _prepareContext () {
-        this.document.queries.clear()
+        this.document.queries = []
 
         const enrichedDescription = await Description.enrichStaticHTML(this.document.system.description, this.document)
-
-        console.log(this.document.queries)
 
         return {
             ...super._prepareContext(),

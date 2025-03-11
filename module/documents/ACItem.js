@@ -14,10 +14,10 @@ export default class ACItem extends Item {
 
     /**
      * The set of input/select query objects derived from enriched tags.
-     * This is appended in `enrichConfigStatic.enricher` and cleared in `FeatureSheet#_prepareContext`.
-     * @type {Set<Query>}
+     * This is appended in `enrichConfigStatic.enricher` and cleared in `FeatureSheetV2#_prepareContext`.
+     * @type {Query[]}
      */
-    queries = new Set()
+    queries = []
 
     /**
      * Returns a record of this features's stats.
@@ -54,17 +54,6 @@ export default class ACItem extends Item {
      * @param {boolean} options.post
      */
     async roll ({ post = false } = {}) {
-
-        // TODO: Take the queries, parse them into a dialog, and then inject the results into the description
-
-        if (this.queries.size > 0) {
-            /*
-
-            const data =  
-
-            */
-        }
-
         let formula = this.system.details.formula ?? ""
         if (!Roll.validate(formula)) {
             formula = "1"
@@ -86,9 +75,31 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritFailure"
         }
 
+        // TODO: Take the queries, parse them into a dialog, and then inject the results into the description
+
+        let answers = []
+        if (this.queries.length > 0) {
+            const content = await renderTemplate('systems/animecampaign/templates/dialog/roll-config.hbs', {
+                queries: this.queries
+            })
+            const data = await ACDialogV2.prompt({
+                window: {
+                    title: game.i18n.format("AC.RollConfig.Title")
+                },
+                content,
+                ok: {
+                    label: "Roll",
+                    icon: "ifl",
+                    callback: (event, button, dialog) => new FormDataExtended(button.form).object
+                },
+            })
+
+            answers = Object.values(foundry.utils.expandObject(data).queries)
+        }
+
         const [tooltip, enrichedDescription] = await Promise.all([
             roll.getTooltip(),
-            Description.enrichChatMessage(this.system.description, this)
+            Description.enrichChatMessage(this.system.description, this, answers)
         ])
         const context = {
             formula,

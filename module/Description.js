@@ -83,7 +83,7 @@ const enrichConfigStatic = {
                     break
             }
 
-            options.document.queries.add(query)
+            options.document.queries.push(query)
         }
 
         const span = document.createElement("span")
@@ -100,7 +100,23 @@ const enrichConfigQuery = {
     replaceParent: false,
     
     async enricher (match, options) {
-        const [all, label, defaultOutput] = match
+        const current = options.currentQuery
+        const answer = options.answers[current]
+        /** @type {Query} */
+        const query = options.document.queries[current]
+
+        const span = document.createElement("span")
+        switch (query.type) {
+            case "input":
+                span.innerHTML = answer || query.defaultValue
+                break
+            case "select":
+                span.innerHTML = query.options[answer]
+                break
+        }
+
+        options.currentQuery++
+        return span
     }
 }
 
@@ -135,9 +151,10 @@ export async function enrichStaticHTML (text, document) {
  * Enriches posted ChatMessages with system-specific enrichers.
  * @param {string} text 
  * @param {ACItem} item
+ * @param {string[]} answers
  * @returns string
  */
-export async function enrichChatMessage (text, item) {
+export async function enrichChatMessage (text, item, answers) {
     const enrichers = [
         enrichConfigStat,
         enrichConfigQuery,
@@ -147,7 +164,9 @@ export async function enrichChatMessage (text, item) {
     const options = {
         document: item,
         type: "message",
-        context: item.getStatContext()
+        context: item.getStatContext(),
+        answers,
+        currentQuery: 0,
     }
 
     const enrichedText = await TextEditor.enrichHTML(text || '', options)

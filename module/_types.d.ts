@@ -16,6 +16,8 @@ declare module "./Description.js" {
         document: ACActor|ACItem
         type: "Character"|"Feature"
         context: Record<string, Stat>
+        answers?: string[]
+        currentQuery?: number
     }
 
     interface ACEnricherConfig extends TextEditor.EnricherConfig {
