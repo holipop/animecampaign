@@ -17,12 +17,6 @@ declare module "./ACActor.js" {
 }
 
 declare module "./ACItem.js" {
-    type Query = {
-        type: "input"|"select"
-        options?: Record<string, string>
-        defaultValue?: string
-    }
-
     export default interface ACItem {
         system: FeatureData
         sheet: FeatureSheetV2

@@ -17,6 +17,12 @@ declare global {
         css: "active" | ""
         permission: 1 | 2 | 3
     }
+
+    interface Query {
+        type: "input"|"select"
+        options?: Record<string, string>
+        defaultValue?: string
+    }
 }
 
 declare module "./SheetMixinV2.js" {

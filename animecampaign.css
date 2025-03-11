@@ -1213,12 +1213,12 @@
   border-left: 0.0625rem solid;
 }
 .animecampaign.actor.sheet .StatTracker.StatTracker--White {
-  background-color: rgba(235, 237, 242, 0.025);
-  border-color: rgba(235, 237, 242, 0.05);
+  background-color: rgba(235, 237, 242, 0.05);
+  border-color: rgba(235, 237, 242, 0.1);
 }
 .animecampaign.actor.sheet .StatTracker.StatTracker--Black {
-  background-color: rgba(31, 30, 30, 0.025);
-  border-color: rgba(31, 30, 30, 0.05);
+  background-color: rgba(31, 30, 30, 0.05);
+  border-color: rgba(31, 30, 30, 0.1);
 }
 .animecampaign.actor.sheet .StatTracker:nth-child(even) {
   background-color: transparent;

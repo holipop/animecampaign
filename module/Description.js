@@ -67,18 +67,18 @@ const enrichConfigStatic = {
         type = type.toLowerCase()
 
         if (options.document instanceof ACItem) {
-            const query = { type }
-
+            const query = { type, label }
+            
             entries = entries
                 .slice(1, entries.length - 1)
                 .split("}{")
-                .map(e => e.split("|"))
 
             switch (type) {
                 case "input":
-                    query.defaultOutput = entries[0][0]
+                    query.defaultValue = entries[0]
                     break
                 case "select":
+                    entries = entries.map(e => e.split("|"))
                     query.options = Object.fromEntries(entries)
                     break
             }
@@ -95,22 +95,12 @@ const enrichConfigStatic = {
 }
 
 /** @type {ACEnricherConfig} */
-const enrichConfigInput = {
-    pattern: new RegExp("@input\\[([^\\]]+)]((?:{[^}]+}){0,1})", "gim"),
+const enrichConfigQuery = {
+    pattern: new RegExp(`@(${Object.keys(tags).join("|")})\\[([^\\]]+)]((?:{[^}]+}){0,})`, "gim"),
     replaceParent: false,
     
     async enricher (match, options) {
         const [all, label, defaultOutput] = match
-    }
-}
-
-/** @type {ACEnricherConfig} */
-const enrichConfigSelect = {
-    pattern: new RegExp("@select\\[([^\\]]+)]((?:{[^}]+}){1,})", "gim"),
-    replaceParent: false,
-    
-    async enricher (match, options) {
-        const [all, label, entries] = match
     }
 }
 
@@ -126,8 +116,6 @@ export async function enrichStaticHTML (text, document) {
         enrichConfigStatic
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
-
-    console.log(Object.keys(tags).join("|"))
 
     const options = {
         document,
@@ -152,8 +140,7 @@ export async function enrichStaticHTML (text, document) {
 export async function enrichChatMessage (text, item) {
     const enrichers = [
         enrichConfigStat,
-        enrichConfigInput,
-        enrichConfigSelect,
+        enrichConfigQuery,
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 

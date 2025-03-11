@@ -1,3 +1,4 @@
+import ACDialogV2 from "../applications-v2/ACDialogV2.js";
 import * as Description from "../Description.js"
 
 /**
@@ -10,10 +11,6 @@ export default class ACItem extends Item {
         super._preCreate(data, options, user);
         this.updateSource({ img: null })
     }
-
-
-
-    // ---- Roll ----
 
     /**
      * The set of input/select query objects derived from enriched tags.
@@ -59,6 +56,14 @@ export default class ACItem extends Item {
     async roll ({ post = false } = {}) {
 
         // TODO: Take the queries, parse them into a dialog, and then inject the results into the description
+
+        if (this.queries.size > 0) {
+            /*
+
+            const data =  
+
+            */
+        }
 
         let formula = this.system.details.formula ?? ""
         if (!Roll.validate(formula)) {
