@@ -10,7 +10,7 @@ AC.ascii = `
    ▄█  ▀██   ██            ██         ███       ██       ██
    ████████  ██▄          ▄██▄         █       ▄██▄     ▄██▄
   █▀      ██ ▀██▄     ▄▀
-▄███▄   ▄████▄ ▀▀█████▀   v2.0`
+▄███▄   ▄████▄ ▀▀█████▀   v2.1`
 
 AC.inscribed = {
     epithet: "AC.CharacterSheet.InscribedTypes.Epithet"

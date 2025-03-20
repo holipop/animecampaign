@@ -2,7 +2,7 @@
     "id": "animecampaign",
     "title": "Epithet/Anime Campaign TTRPG",
     "description": "An unofficial fanmade system based on JelloApocalypse's Epithet/Anime Campaign system.",
-    "version": "v2.0",
+    "version": "v2.1",
     "authors": [
         {
             "name": "Holipop",
@@ -54,8 +54,8 @@
         "units": "ft"
     },
     "initiative": "1d20",
-    "manifest": "https://github.com/holipop/animecampaign/releases/download/2.0/system.json",
-    "download": "https://github.com/holipop/animecampaign/releases/download/2.0/animecampaign.zip",
+    "manifest": "https://github.com/holipop/animecampaign/releases/download/2.1/system.json",
+    "download": "https://github.com/holipop/animecampaign/releases/download/2.1/animecampaign.zip",
     "primaryTokenAttribute": "stamina",
     "secondaryTokenAttribute": "proficiency",
     "documentTypes": {
