@@ -3,7 +3,7 @@ import ACActor from "./documents/ACActor.js"
 import ACItem from "./documents/ACItem.js"
 
 /** @type {ACEnricherConfig} */
-const enrichConfigStat = {
+const configStat = {
     pattern: new RegExp("@stat\\[([^\\]]+)]((?:{[^}]+}){0,1})", "gim"),
     replaceParent: false,
     
@@ -58,7 +58,8 @@ const tags = {
 }
 
 /** @type {ACEnricherConfig} */
-const enrichConfigStatic = {
+const configStatic = {
+    // This RegExp only works with a query on a single line. In the future, this should work multiline.
     pattern: new RegExp(`@(${Object.keys(tags).join("|")})\\[([^\\]]+)]((?:{[^}]+}){0,})`, "gim"),
     replaceParent: false,
     
@@ -95,7 +96,7 @@ const enrichConfigStatic = {
 }
 
 /** @type {ACEnricherConfig} */
-const enrichConfigQuery = {
+const configQuery = {
     pattern: new RegExp(`@(${Object.keys(tags).join("|")})\\[([^\\]]+)]((?:{[^}]+}){0,})`, "gim"),
     replaceParent: false,
     
@@ -128,8 +129,8 @@ const enrichConfigQuery = {
  */
 export async function enrichStaticHTML (text, document) {
     const enrichers = [
-        enrichConfigStat,
-        enrichConfigStatic
+        configStat,
+        configStatic
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
@@ -156,8 +157,8 @@ export async function enrichStaticHTML (text, document) {
  */
 export async function enrichChatMessage (text, item, answers) {
     const enrichers = [
-        enrichConfigStat,
-        enrichConfigQuery,
+        configStat,
+        configQuery,
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 

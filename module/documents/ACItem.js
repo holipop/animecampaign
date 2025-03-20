@@ -75,8 +75,7 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritFailure"
         }
 
-        // TODO: Take the queries, parse them into a dialog, and then inject the results into the description
-
+        // Query handling
         let answers = []
         if (this.queries.length > 0) {
             const content = await renderTemplate('systems/animecampaign/templates/dialog/roll-config.hbs', {
