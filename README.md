@@ -10,4 +10,4 @@ All artwork under the `assets` directory is created by Sunny Holiday and marked 
 The software of this system is distributed under the MIT License.
 
 ## Contributing
-See [CONTRIBUTING.md]
+See [CONTRIBUTING.md](/CONTRIBUTING.md)
