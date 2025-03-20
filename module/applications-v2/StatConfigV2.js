@@ -8,7 +8,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
  */
 export default class StatConfigV2 extends HandlebarsApplicationMixin(ApplicationV2) {
 
-    /** @override */
+    /** @inheritdoc */
     static DEFAULT_OPTIONS = {
         classes: ["animecampaign", "dialog", "config"],
         tag: "form",
@@ -26,7 +26,7 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         }
     }
 
-    /** @override */
+    /** @inheritdoc */
     static PARTS = {
         hbs: { template: "systems/animecampaign/templates/dialog/stat-config.hbs" }
     }
@@ -79,7 +79,7 @@ export default class StatConfigV2 extends HandlebarsApplicationMixin(Application
         return Object.fromEntries(options)
     }
 
-    /** @override */
+    /** @inheritdoc */
     async _prepareContext () {
         return {
             app: this,

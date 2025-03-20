@@ -4,7 +4,7 @@
  */
 export default class Section extends foundry.abstract.DataModel {
 
-    /** @override */
+    /** @inheritdoc */
     static defineSchema () {
         const fields = foundry.data.fields;
 

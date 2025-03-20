@@ -6,7 +6,7 @@ import Category from "./Category.js";
  */
 export default class CharacterData extends foundry.abstract.DataModel {
 
-    /** @override */
+    /** @inheritdoc */
     static defineSchema () {
         const fields = foundry.data.fields;
 
@@ -19,9 +19,15 @@ export default class CharacterData extends foundry.abstract.DataModel {
         }
 
         return {
-            stamina: new fields.EmbeddedDataField(Stat),
-            proficiency: new fields.EmbeddedDataField(Stat),
-            movement: new fields.EmbeddedDataField(Stat),
+            stamina: new fields.EmbeddedDataField(Stat, {
+                initial: { tag: "stamina", view: "resource" }
+            }),
+            proficiency: new fields.EmbeddedDataField(Stat, {
+                initial: { tag: "proficiency" }
+            }),
+            movement: new fields.EmbeddedDataField(Stat, {
+                initial: { tag: "movement" }
+            }),
 
             stats: new fields.SchemaField(colorStats), // remove underscores post v1.0
 

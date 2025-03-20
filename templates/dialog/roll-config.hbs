@@ -1,0 +1,17 @@
+{{#each queries as |query index|}}
+    <div class="Config__Group">
+        <label class="Config__Label">{{query.label}}</label>
+
+        {{#if (eq query.type "input")}}
+            <input class="Config__Input" type="text" name="queries.{{index}}" placeholder="{{query.defaultValue}}" autofocus>
+        {{/if}}
+
+        {{#if (eq query.type "select")}}
+            <select class="Config__Input" type="text" name="queries.{{index}}" autofocus>
+                {{#each query.options as |value key|}}
+                    <option value="{{key}}">{{key}}</option>
+                {{/each}}
+            </select>
+        {{/if}}
+    </div>
+{{/each}}

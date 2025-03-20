@@ -1,0 +1,267 @@
+// main: ./animecampaign.less
+
+// Text Editor
+.animecampaign {
+
+    .Description, .Biography {
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    .ACTextEditor {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        max-height: none;
+        font-family: "Libre Franklin";
+    }
+    .ACTextEditor.active {
+        height: 100%;
+    }
+    .ACTextEditor .editor-menu {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+            background-color: "bg";
+        });
+
+        border: (1 * @rpx) solid;
+        border-radius: 2 * @rpx;
+    }
+
+    .ACTextEditor .editor-content, 
+    .NonOwnerDescription,
+    .FeatureContent__Description,
+    .ChatMessage__Content,
+    .EnrichedDescription {
+        #ColorScheme({
+            color: "txt";
+        });
+        
+        padding: .2rem 5%;
+
+        font-family: "Libre Franklin";
+
+        h1, h2, h3, h4, h5, h6 {
+            #ColorScheme({
+                color: "txt";
+            });
+
+            margin-bottom: .5rem;
+            margin-top: .75rem;
+            text-shadow: none;
+        }
+        h1, h2, h3 {
+            #ColorScheme(@opacity: 25% , {
+                border-color: "txt";
+            });
+            border-bottom: (1 * @rpx) solid;
+        }
+        h1 {
+            font: 1.33rem "Gloock";
+        }
+        h2 {
+            font: bold 1.25rem "Philosopher";
+        }
+        h3 {
+            font: 700 1.15rem "Libre Franklin";
+        }
+        h4 {
+            font: 1.1rem "Gloock";
+        }
+        h5 {
+            font: bold 1.1rem "Philosopher";
+        }
+        h6 {
+            font: 700 1.1rem "Libre Franklin";
+        }
+
+        .Section__Header {
+            display: flex;
+            align-items: flex-end;
+
+            transition: font-size 0.075s;
+        }
+        .Section__Header:has(.Section__ToggleVisibilityWrapper) {
+            transition: none;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            &.Section__Header.Section__Header--Collapsed {
+                opacity: .75;
+                font-size: 1rem;
+            }
+        }
+        .Section__ToggleVisibilityWrapper {
+            position: relative;
+            right: 1.5rem;
+            height: 1.25rem;
+        }
+        .Section__ToggleVisibility {
+            position: absolute;
+            margin-right: .25rem;
+            margin-bottom: .25rem;
+        }
+        .Section__Collapse {
+            margin: 0;
+            margin-right: .1rem;
+            margin-bottom: .1rem;
+            height: 1rem;
+            width: 1rem;
+
+            .theme-dark &, 
+            .theme-light & { // specificity
+                background-color: transparent;
+            }
+        }
+        .Section__CollapseIcon {
+            rotate: 0deg;
+            transition: rotate .075s;
+        }
+        .Section__Header--Collapsed .Section__CollapseIcon {
+            rotate: -90deg;
+        }
+        .Section__Content {
+            display: block;
+        }
+        .Section__Content--Collapsed {
+            display: none;
+        }
+
+        hr {
+            #ColorScheme(@opacity: 25% , {
+                border-color: "txt";
+            });
+
+            background-image: none;
+            height: 0;
+            border: none;
+            border-bottom: (1 * @rpx) solid;
+        }
+
+        code {
+            #ColorScheme({
+                background-color: "bg";
+            });
+            #ColorScheme(@opacity: 25%, {
+                border-color: "txt";
+            });
+        }
+        blockquote {
+            #ColorScheme(@opacity: 25%, {
+                border-color: "txt";
+            });
+            font-family: "Libre Franklin";
+        }
+    }
+
+    .ACTextEditor .editor-menu > li > button {
+        #ColorScheme({
+            color: "txt";
+        });
+
+        border-radius: 2 * @rpx;
+        
+        font-family: "Libre Franklin";
+        font-size: .7rem;
+        background-color: transparent;
+        transition: .075s background-color;
+
+        &:hover {
+            #ColorScheme(@opacity: 25%, {
+                background-color: "txt";
+            })
+        }
+        &:active {
+            #ColorScheme(@opacity: 75%, {
+                background-color: "txt";
+            })
+        }
+
+        &.pm-dropdown {
+            #ColorScheme(@opacity: 25%, {
+                border-color: "txt";
+            });
+            border: (1 * @rpx) solid;
+        }
+    }
+
+    .Enricher {
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+            background-color: "bg";
+        });
+        
+        padding: 0 .2rem;
+        border: (1 * @rpx) solid;
+        border-radius: 2 * @rpx;
+
+        font: bold .9rem "Philosopher";
+        background-origin: border-box;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        background-size: 1.5rem;
+
+        .theme-dark & {
+            background-blend-mode: darken;
+            text-shadow: 
+                0 0 .3rem @dark-bg-color,
+        }
+        .theme-light & {
+            background-blend-mode: lighten;
+            text-shadow: 
+                0 0 .3rem @light-bg-color,
+        }
+    }
+    .Enricher.Enricher--Static {
+        #ColorScheme(@opacity: 75%, {
+            background-color: "txt";
+        });
+        #ColorScheme({
+            color: "bg";
+        });
+
+        padding: 0;
+        padding-left: 2 * @rpx;
+
+        font: bold .75rem "Libre Franklin";
+        text-shadow: none;
+    }
+    .Enricher.Enricher--Invalid {
+        border-style: dashed;
+        border-color: red;
+
+        font-weight: normal;
+    }
+
+    .Enricher__Input {
+        #ColorScheme({
+            color: "txt";
+            background-color: "bg";
+        });
+
+        border-radius: .1rem;
+        margin-left: .2rem;
+        padding: 0 .2rem;
+
+        font: .8rem "Philosopher";
+    }
+    .Enricher__Max {
+        font-weight: normal;
+        font-size: .8rem;
+    }
+
+    .Enricher.Enricher--stamina     { border-color: @stam-color-primary }
+    .Enricher.Enricher--proficiency { border-color: @prof-color-primary }
+    .Enricher.Enricher--movement    { border-color: @move-color-primary }
+
+    .Enricher.Enricher--red      { border-color: @red-stat;      background-image: url("./assets/red.png"); }
+    .Enricher.Enricher--blue     { border-color: @blue-stat;     background-image: url("./assets/blue.png"); }
+    .Enricher.Enricher--yellow   { border-color: @yellow-stat;   background-image: url("./assets/yellow.png"); }
+    .Enricher.Enricher--green    { border-color: @green-stat;    background-image: url("./assets/green.png"); }
+    .Enricher.Enricher--orange   { border-color: @orange-stat;   background-image: url("./assets/orange.png"); }
+    .Enricher.Enricher--cyan     { border-color: @cyan-stat;     background-image: url("./assets/cyan.png"); }
+    .Enricher.Enricher--purple   { border-color: @purple-stat;   background-image: url("./assets/purple.png"); }
+    .Enricher.Enricher--grey     { border-color: @grey-stat;     background-image: url("./assets/grey.png"); }
+
+}

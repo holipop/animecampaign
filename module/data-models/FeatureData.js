@@ -7,7 +7,7 @@ import Details from "./Details.js";
  */
 export default class FeatureData extends foundry.abstract.DataModel {
 
-    /** @override */
+    /** @inheritdoc */
     static defineSchema () {
         const fields = foundry.data.fields;
 

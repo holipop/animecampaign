@@ -9,27 +9,27 @@ export default class ACDialogV2 extends DialogV2 {
      * The default configuration options which are assigned to every instance of this Application class. 
      */
     static DEFAULT_OPTIONS = {
-        classes: ["animecampaign", "dialog"],
+        classes: ["animecampaign", "dialog", "config"],
         position: {
             width: 400,
             height: "auto"
         }
     }
 
-    /** @override */
+    /** @inheritdoc */
     async _renderHTML (context, options) {
         const form = document.createElement("form")
         //form.className = "dialog-form standard-form"
         form.autocomplete = "off"
         form.innerHTML = /* html */`
-            <div class="Dialog__Content">${this.options.content}</div>
+            <div class="Dialog__Content Config">${this.options.content}</div>
             <div class="Dialog__Buttons">${this._renderButtons()}</div>
         `
         form.addEventListener("submit", event => this._onSubmit(event.submitter, event))
         return form
     }
 
-    /** @override */
+    /** @inheritdoc */
     _renderButtons () {
         return Object.values(this.options.buttons).map(button => {
             const { action, label, icon, default: isDefault, class: cls = "" } = button
@@ -46,7 +46,7 @@ export default class ACDialogV2 extends DialogV2 {
         }).join("")
     }
 
-    /** @override */
+    /** @inheritdoc */
     static async confirm ({ yes = {}, no = {}, ...options }={}) {
         const { mergeObject } = foundry.utils
         options.buttons ??= []
@@ -58,7 +58,7 @@ export default class ACDialogV2 extends DialogV2 {
         return this.wait(options)
     }
 
-    /** @override */
+    /** @inheritdoc */
     static async prompt ({ ok = {}, ...options } = {}) {
         const { mergeObject } = foundry.utils
         options.buttons ??= []

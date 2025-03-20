@@ -1,12 +1,52 @@
+import ACDialogV2 from "../applications-v2/ACDialogV2.js";
+import * as Description from "../Description.js"
+
 /**
  * Extending the Item class for system-specific logic.
  */
 export default class ACItem extends Item { 
 
-    /** @override */
+    /** @inheritdoc */
     _preCreate (data, options, user) {
         super._preCreate(data, options, user);
         this.updateSource({ img: null })
+    }
+
+    /**
+     * The set of input/select query objects derived from enriched tags.
+     * This is appended in `enrichConfigStatic.enricher` and cleared in `FeatureSheetV2#_prepareContext`.
+     * @type {Query[]}
+     */
+    queries = []
+
+    /**
+     * Returns a record of this features's stats.
+     * @returns {Record<string, Stat>}
+     */
+    getStatContext() {
+        const data = this.system.stats
+            .map(stat => [stat.tag, stat])
+            .concat((this.isOwned) 
+                ? Object
+                    .entries(this.parent.getStatContext())
+                    .map(([tag, stat]) => [`actor.${tag}`, stat])
+                : []
+            )
+
+        return Object.fromEntries(data)
+    }
+
+    /** 
+     * @inheritdoc 
+     * @returns {Record<string, number>}
+     */
+    getRollData() {
+        const data = Object
+            .entries(this.getStatContext())
+            .map(([tag, stat]) => [tag.replace(" ", "_"), stat.value])
+            .filter(([_, value]) => value)
+
+        return Object.fromEntries(data)
     }
 
     /**
@@ -20,10 +60,11 @@ export default class ACItem extends Item {
             post = true
         }
 
+        const rollData = this.getRollData()
         const [roll, max, min] = await Promise.all([
-            new Roll(formula).evaluate(),
-            new Roll(formula).evaluate({ maximize: true }),
-            new Roll(formula).evaluate({ minimize: true }),
+            new Roll(formula, rollData).evaluate(),
+            new Roll(formula, rollData).evaluate({ maximize: true }),
+            new Roll(formula, rollData).evaluate({ minimize: true }),
         ])
 
         let crit
@@ -34,9 +75,30 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritFailure"
         }
 
+        // !! Query handling WIP
+        /* let answers = []
+        if (this.queries.length > 0) {
+            const content = await renderTemplate('systems/animecampaign/templates/dialog/roll-config.hbs', {
+                queries: this.queries
+            })
+            const data = await ACDialogV2.prompt({
+                window: {
+                    title: game.i18n.format("AC.RollConfig.Title")
+                },
+                content,
+                ok: {
+                    label: "Roll",
+                    icon: "ifl",
+                    callback: (event, button, dialog) => new FormDataExtended(button.form).object
+                },
+            })
+
+            answers = Object.values(foundry.utils.expandObject(data).queries)
+        } */
+
         const [tooltip, enrichedDescription] = await Promise.all([
             roll.getTooltip(),
-            TextEditor.enrichHTML(this.system.description)
+            Description.enrichChatMessage(this.system.description, this /*, answers */)
         ])
         const context = {
             formula,
