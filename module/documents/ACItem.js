@@ -75,8 +75,8 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritFailure"
         }
 
-        // Query handling
-        let answers = []
+        // !! Query handling WIP
+        /* let answers = []
         if (this.queries.length > 0) {
             const content = await renderTemplate('systems/animecampaign/templates/dialog/roll-config.hbs', {
                 queries: this.queries
@@ -94,7 +94,7 @@ export default class ACItem extends Item {
             })
 
             answers = Object.values(foundry.utils.expandObject(data).queries)
-        }
+        } */
 
         const [tooltip, enrichedDescription] = await Promise.all([
             roll.getTooltip(),

@@ -101,6 +101,8 @@ const configQuery = {
     replaceParent: false,
     
     async enricher (match, options) {
+
+        console.log(options)
         const current = options.currentQuery
         const answer = options.answers[current]
         /** @type {Query} */
@@ -130,7 +132,7 @@ const configQuery = {
 export async function enrichStaticHTML (text, document) {
     const enrichers = [
         configStat,
-        configStatic
+        // !! WIP configStatic
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
@@ -158,7 +160,7 @@ export async function enrichStaticHTML (text, document) {
 export async function enrichChatMessage (text, item, answers) {
     const enrichers = [
         configStat,
-        configQuery,
+        // !! WIP configQuery,
     ]
     CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat(enrichers)
 
