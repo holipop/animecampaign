@@ -98,7 +98,7 @@ export default class ACItem extends Item {
 
         const [tooltip, enrichedDescription] = await Promise.all([
             roll.getTooltip(),
-            Description.enrichChatMessage(this.system.description, this, answers)
+            Description.enrichChatMessage(this.system.description, this /*, answers */)
         ])
         const context = {
             formula,
