@@ -225,7 +225,7 @@ export async function toV2 () {
     }
 
     // Prompt to reload.
-    game.settings.set('animecampaign', 'systemMigrationVersion', "v2.0")
+    game.settings.set('animecampaign', 'systemMigrationVersion', "v2.1")
     ui.notifications.info(
         game.i18n.localize("AC.Migration.V2MigrationComplete"),
         { permanent: true }
