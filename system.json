@@ -11,8 +11,8 @@
         }
     ],
     "compatibility": {
-        "minimum": "12",
-        "verified": "12.331"
+        "minimum": 12,
+        "verified": 12.331
     },
     "flags": {
         "hotReload": {

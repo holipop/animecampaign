@@ -76,7 +76,9 @@ Hooks.on('ready', () => {
     const NEEDS_MIGRATION_VERSION = "v1.0"
     const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
 
-    if (currentVersion === game.system.version) {
+    console.log(currentVersion)
+
+    if (currentVersion === game.system.version || foundry.utils.isNewerVersion(game.system.version, "v2.0")) {
         game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
         return
     }
