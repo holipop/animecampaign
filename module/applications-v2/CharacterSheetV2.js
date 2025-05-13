@@ -67,7 +67,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @returns {String}
      */
     get title () {
-        return `${this.document.name}`
+        return `${this.document.isToken ? "[Token]" : ""} ${this.document.name}`
     }
 
 
