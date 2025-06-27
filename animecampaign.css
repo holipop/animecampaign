@@ -2993,3 +2993,11 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+.theme-dark .animecampaign .inline-roll {
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign .inline-roll {
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
