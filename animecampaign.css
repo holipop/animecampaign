@@ -200,6 +200,22 @@
   color: #1f1e1e;
   background-color: #f4f3ed;
 }
+.theme-dark .animecampaign optgroup {
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign optgroup {
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign option {
+  color: #ebedf2;
+  background-color: #171718;
+}
+.theme-light .animecampaign option {
+  color: #1f1e1e;
+  background-color: #f4f3ed;
+}
 .animecampaign .DragIndicator {
   opacity: 0.75;
   font-size: 1rem;
