@@ -19,6 +19,8 @@
     "Purple": "Purple",
     "Grey": "Grey",
 
+    "ToggleVisibility": "Toggle Header Visibility",
+
     "Macro": {
         "NotOwnedItemWarning": "You can only create macro buttons for owned Items.",
         "ControlledActorWarning": "You must control an Actor to roll from the hotbar.",

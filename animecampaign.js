@@ -76,8 +76,6 @@ Hooks.on('ready', () => {
     const NEEDS_MIGRATION_VERSION = "v1.0"
     const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
 
-    console.log(currentVersion)
-
     if (currentVersion === game.system.version || foundry.utils.isNewerVersion(game.system.version, "v2.0")) {
         game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
         return
@@ -118,7 +116,78 @@ Hooks.on('renderChatMessage', (message, html, data) => {
     
     const content = messageElement.querySelector(".JS-Content")
     Description.attachSections(content)
-
 })
 
 Hooks.on('hotbarDrop', Macro.createMacro)
+
+
+/**
+ * This was an attempt at making buttons inside the prosemirror editor for marking sections as hidden.
+ * No matter what, it doesn't really like to budge.
+ */
+Hooks.on('createProseMirrorEditor', (uuid, plugins, options) => {
+    //console.log(uuid, plugins, options)
+
+    // override headings to allow for toggling section visibility
+    /* const heading = {
+        attrs: {
+            level: {default: 1},
+            hidden: {default: false},
+        },
+        content: "inline*",
+        group: "block",
+        defining: true,
+        parseDOM: [
+            {tag: "h1", attrs: {level: 1}},
+            {tag: "h2", attrs: {level: 2}},
+            {tag: "h3", attrs: {level: 3}},
+            {tag: "h4", attrs: {level: 4}},
+            {tag: "h5", attrs: {level: 5}},
+            {tag: "h6", attrs: {level: 6}}
+        ],
+        toDOM: node => [`h${node.attrs.level}`, { 
+            "attr-hidden": (node.attrs.hidden) ? true : false, 
+            style: `opacity: ${(node.attrs.hidden) ? .75 : 1}; color: red;`
+        }, 0 ]
+    }
+
+    const schema = new ProseMirror.Schema({
+        nodes: options.state.schema.spec.nodes.update("heading", heading),
+        marks: options.state.schema.spec.marks
+    })
+
+    // override the editor state with new content
+    const content = ProseMirror.dom.serializeString(options.state.doc, { schema })
+    options.state = ProseMirror.EditorState.create({ doc: ProseMirror.dom.parseString(content) }) */
+
+    /* const serializer = ProseMirror.DOMSerializer.fromSchema(schema)
+    const html = serializer.serializeFragment(options.state.doc.content)
+    console.log(html)
+
+    options.state = ProseMirror.EditorState.create({
+        doc: ProseMirror.DOMParser.fromSchema(schema).parse(html),
+        plugins: options.state.plugins
+    }) */
+
+    /* const state = ProseMirror.EditorState.create({ schema, plugins: options.state.plugins })
+
+    state.doc = options.state.doc
+    options.state = state*/
+})
+
+Hooks.on('getProseMirrorMenuItems', (menu, items) => {
+    //console.log(menu, items)
+
+    /* menu.items = items.unshift({
+        action: "toggle-visibility",
+        title: "AC.ToggleVisibility",
+        icon: '<i class="fa-solid fa-eye-slash"></i>',
+        scope: "text",
+        cmd: (state, dispatch) => {
+            console.log(state, dispatch)
+            /* if (state.selection.empty) return false
+            if (dispatch) dispatch(state.tr.insertText("sexo!!").scrollIntoView())
+            return true
+        }
+    }) */
+})
