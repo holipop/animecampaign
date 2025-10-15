@@ -128,8 +128,8 @@ Hooks.on('hotbarDrop', Macro.createMacro)
 Hooks.on('createProseMirrorEditor', (uuid, plugins, options) => {
     //console.log(uuid, plugins, options)
 
-    // override headings to allow for toggling section visibility
-    /* const heading = {
+    /* // override headings to allow for toggling section visibility
+    const heading = {
         attrs: {
             level: {default: 1},
             hidden: {default: false},
@@ -146,8 +146,8 @@ Hooks.on('createProseMirrorEditor', (uuid, plugins, options) => {
             {tag: "h6", attrs: {level: 6}}
         ],
         toDOM: node => [`h${node.attrs.level}`, { 
-            "attr-hidden": (node.attrs.hidden) ? true : false, 
-            style: `opacity: ${(node.attrs.hidden) ? .75 : 1}; color: red;`
+            "attr-hide": (node.attrs.hidden) ? true : false, 
+            style: `opacity: ${(node.attrs.hidden) ? .75 : 1};`
         }, 0 ]
     }
 
@@ -158,7 +158,9 @@ Hooks.on('createProseMirrorEditor', (uuid, plugins, options) => {
 
     // override the editor state with new content
     const content = ProseMirror.dom.serializeString(options.state.doc, { schema })
-    options.state = ProseMirror.EditorState.create({ doc: ProseMirror.dom.parseString(content) }) */
+    const state = ProseMirror.EditorState.create({ doc: ProseMirror.dom.parseString(content) })
+
+    console.log(content, state) */
 
     /* const serializer = ProseMirror.DOMSerializer.fromSchema(schema)
     const html = serializer.serializeFragment(options.state.doc.content)
@@ -183,8 +185,21 @@ Hooks.on('getProseMirrorMenuItems', (menu, items) => {
         title: "AC.ToggleVisibility",
         icon: '<i class="fa-solid fa-eye-slash"></i>',
         scope: "text",
-        cmd: (state, dispatch) => {
-            console.log(state, dispatch)
+        cmd: (state, dispatch, view) => {
+            console.log(state, dispatch, view)
+
+            // get header node
+            const { $from } = state.selection
+            const node = $from.parent
+
+            if (!node || node.type.name != "heading" ) return false
+            console.log(node)
+
+            if (dispatch) {
+                //console.log(state.tr.setNodeAttribute(node, "_preserve", { "style": "color:red;" }))
+                //dispatch(state.tr.setNodeAttribute(state.selection.from, "_preserve", { "style": "color:red;" }))
+            }
+
             /* if (state.selection.empty) return false
             if (dispatch) dispatch(state.tr.insertText("sexo!!").scrollIntoView())
             return true
