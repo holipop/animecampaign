@@ -121,6 +121,119 @@ Hooks.on('renderChatMessage', (message, html, data) => {
 Hooks.on('hotbarDrop', Macro.createMacro)
 
 
+
+/**
+ * Attempt #3 in my own style, specifically for overriding.
+ * Holy shit.
+ */
+Hooks.on("init", () => {
+    // override headings to allow for toggling section visibility
+    const heading = {
+        attrs: {
+            level: {default: 1},
+            hidden: {default: false},
+        },
+        content: "inline*",
+        group: "block",
+        defining: true,
+        parseDOM: [
+            {tag: "h1[data-hide]", attrs: { level: 1, hidden: true }},
+            {tag: "h2[data-hide]", attrs: { level: 2, hidden: true }},
+            {tag: "h3[data-hide]", attrs: { level: 3, hidden: true }},
+            {tag: "h4[data-hide]", attrs: { level: 4, hidden: true }},
+            {tag: "h5[data-hide]", attrs: { level: 5, hidden: true }},
+            {tag: "h6[data-hide]", attrs: { level: 6, hidden: true }},
+
+            {tag: "h1", attrs: { level: 1 }},
+            {tag: "h2", attrs: { level: 2 }},
+            {tag: "h3", attrs: { level: 3 }},
+            {tag: "h4", attrs: { level: 4 }},
+            {tag: "h5", attrs: { level: 5 }},
+            {tag: "h6", attrs: { level: 6 }},
+        ],
+        toDOM: node => {
+            const expression = [`h${node.attrs.level}`]
+            if (node.attrs.hidden) expression.push({ "data-hide": "" })
+            expression.push(0)
+            return expression
+        }
+    }
+
+    const extendedSchema = new ProseMirror.Schema({
+        nodes: foundry.prosemirror.defaultSchema.spec.nodes.update("heading", heading),
+        marks: foundry.prosemirror.defaultSchema.spec.marks,
+    })
+
+    // Using the extended schema breaks the automatic heading insertion.
+    const extendedPlugins = { 
+        inputRules: foundry.prosemirror.ProseMirrorInputRules.build(extendedSchema),
+    }
+
+    Object.assign(foundry.prosemirror.defaultSchema, extendedSchema);
+    Object.assign(foundry.prosemirror.defaultPlugins, extendedPlugins);
+})
+
+Hooks.on('getProseMirrorMenuItems', (menu, items) => {
+    menu.items = items.unshift({
+        action: "toggle-visibility",
+        title: "AC.ToggleVisibility",
+        icon: '<i class="fa-solid fa-eye-slash"></i>',
+        scope: "text",
+        cmd: (state, dispatch) => {
+            const { $from } = state.selection
+            const node = $from.parent
+            if (node.type.name != "heading") return false
+
+            // I'm assuming without using the -1, this position points to the TextNode and not the heading Node itself
+            const nodePos = $from.pos - $from.parentOffset - 1
+            dispatch(state.tr.setNodeAttribute(nodePos, "hidden", !node.attrs.hidden))
+            return true
+        }
+    })
+})
+
+/** 
+ * Attempt #2 with ProseMirror Editing 
+ * Credit to joaquinp98 in the Foundry server for this
+*/
+/* Hooks.on("init", () => {
+    const { defaultSchema, Schema } = foundry.prosemirror;
+    const { deepClone } = foundry.utils;
+    
+    const colorMark = {
+        inclusive: true,
+        excludes: "span", // this is essential 
+        // ProseMirror parses <span style="color:red"> as both a span mark and a color mark
+        parseDOM: [
+            { style: "color=red" }
+        ],
+        toDOM: () => ["span", { style: "color: red" }, 0],
+    };
+
+    const extendedSchema = new Schema({
+        nodes: defaultSchema.spec.nodes,
+        marks: deepClone(defaultSchema.spec.marks).addToStart("colorMark", colorMark),
+    });
+
+    Object.assign(foundry.prosemirror.defaultSchema, extendedSchema);
+});
+
+Hooks.on("getProseMirrorMenuItems",(menu, config) => {
+    const { TEXT } = foundry.prosemirror.ProseMirrorMenu._MENU_ITEM_SCOPES;
+    const { toggleMark } = foundry.prosemirror.commands;
+
+    config.push({
+        action: "text-color",
+        title: "Text Color",
+        mark: menu.schema.marks.colorMark,
+        icon: `<i class="fa-solid fa-palette"></i>`,
+        scope: TEXT,
+        cmd: toggleMark(menu.schema.marks.colorMark),
+    });
+  
+}); */
+
+
 /**
  * This was an attempt at making buttons inside the prosemirror editor for marking sections as hidden.
  * No matter what, it doesn't really like to budge.
