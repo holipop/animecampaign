@@ -1618,12 +1618,12 @@
   border-color: rgba(31, 30, 30, 0.5);
   background-color: rgba(244, 243, 237, 0.5);
 }
-.animecampaign .ACTextEditor.active .editor-content h1[data-hide],
-.animecampaign .ACTextEditor.active .editor-content h2[data-hide],
-.animecampaign .ACTextEditor.active .editor-content h3[data-hide],
-.animecampaign .ACTextEditor.active .editor-content h4[data-hide],
-.animecampaign .ACTextEditor.active .editor-content h5[data-hide],
-.animecampaign .ACTextEditor.active .editor-content h6[data-hide] {
+.animecampaign .ACTextEditor .editor-content h1[data-hide],
+.animecampaign .ACTextEditor .editor-content h2[data-hide],
+.animecampaign .ACTextEditor .editor-content h3[data-hide],
+.animecampaign .ACTextEditor .editor-content h4[data-hide],
+.animecampaign .ACTextEditor .editor-content h5[data-hide],
+.animecampaign .ACTextEditor .editor-content h6[data-hide] {
   opacity: 0.75;
   font-size: 1rem;
 }

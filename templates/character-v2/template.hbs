@@ -16,7 +16,7 @@
 
         <section class="Biography tab {{tabs.biography.css}}" data-tab="biography" data-group="character">
             {{#if (gte permission 3)}}
-                <prose-mirror class="ACTextEditor" name="system.description" value="{{system.description}}" toggled="true" compact="true">
+                <prose-mirror class="ACTextEditor JS-IsCharacter" name="system.description" value="{{system.description}}" toggled="true" compact="true">
                     {{{enrichedDescription}}}
                 </prose-mirror>
             {{else}}

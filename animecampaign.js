@@ -174,6 +174,14 @@ Hooks.on("init", () => {
 })
 
 Hooks.on('getProseMirrorMenuItems', (menu, items) => {
+    console.log(menu)
+
+    const isEditingFeature = menu.view.dom.closest(".JS-IsFeature")
+    const isEditingCharacter = menu.view.dom.closest(".JS-IsCharacter")
+    if (!isEditingFeature && !isEditingCharacter) return
+
+    console.log("PASSED")
+
     menu.items = items.unshift({
         action: "toggle-visibility",
         title: "AC.ToggleVisibility",
