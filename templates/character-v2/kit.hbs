@@ -1,5 +1,14 @@
 <ul class="Kit tab {{tabs.kit.css}} JS-Drop" data-tab="kit" data-group="character">
 
+    <div class="SearchBar JS-SearchBar">
+        <span class="SearchBar__Icon MSO">search</span>
+        <input class="SearchBar__Input JS-SearchInput" type="text" value="" placeholder="{{localize "AC.CharacterSheet.Search"}}">
+
+        <button class="SearchBar__Clear ACButton ACButton--Inline" type="button" data-action="onClearSearch" data-tooltip="AC.CharacterSheet.ClearSearch">
+            <span class="ACButton__Icon MSO">close</span>
+        </button>
+    </div>
+
     {{#each categories as |category index|}}
         <li class="Category JS-Category {{category.collapsedCSS}}" data-category="{{index}}">
 

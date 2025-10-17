@@ -327,6 +327,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
+    /**
+     * The search query used to filter kit features.
+     * @type {string}
+     */
+    query = "";
+
     /** @inheritdoc */
     _onRender (context, options) {
         super._onRender(context, options)
@@ -340,6 +346,16 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         if (feautreDescriptions) {
             feautreDescriptions.forEach(Description.attachSections)
         }
+
+        // Filters kit features
+        const searchBar = this.element.querySelector(".JS-SearchBar")
+        const searchInput = this.element.querySelector(".JS-SearchInput")
+        searchInput.addEventListener("input", event => {
+            const query = searchInput.value
+            const regex = new RegExp(query, "gi")
+
+            
+        })
     }
 
 
