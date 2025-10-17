@@ -1139,9 +1139,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 2.5rem;
+  height: 2rem;
   margin-bottom: 0.2rem;
-  padding: 0 0.5rem;
+  padding: 0 0.25rem;
   gap: 0.5rem;
   border-radius: 0.125rem;
   border: 0.0625rem solid;
@@ -1159,7 +1159,8 @@
   border-color: rgba(31, 30, 30, 0.5);
 }
 .animecampaign.actor.sheet .SearchBar__Icon {
-  font-size: 1.25rem;
+  margin: 0 0.25rem;
+  font-size: 1rem;
 }
 .theme-dark .animecampaign.actor.sheet .SearchBar__Icon {
   color: rgba(235, 237, 242, 0.5);
@@ -1210,6 +1211,9 @@
 .animecampaign.actor.sheet .SearchBar:hover .SearchBar__Clear {
   opacity: 1;
 }
+.animecampaign.actor.sheet .Category {
+  display: none;
+}
 .animecampaign.actor.sheet .Category .Category__Header {
   transition: height 0.075s;
 }
@@ -1218,6 +1222,9 @@
 }
 .animecampaign.actor.sheet .Category .Category__HeaderLeft .ACButton__Icon {
   transition: rotate 0.075s;
+}
+.animecampaign.actor.sheet .Category.Category--Active {
+  display: block;
 }
 .animecampaign.actor.sheet .Category.Category--Collapsed .Category__Features,
 .animecampaign.actor.sheet .Category.Category--Collapsed .Category__Trackers,
@@ -1367,7 +1374,7 @@
   min-height: 2rem;
   border: 0.0625rem solid;
   border-radius: 0.125rem;
-  display: flex;
+  display: none;
   align-items: stretch;
 }
 .theme-dark .animecampaign.actor.sheet .FeatureEntry {
@@ -1377,6 +1384,9 @@
 .theme-light .animecampaign.actor.sheet .FeatureEntry {
   background-color: #f4f3ed;
   color: #1f1e1e;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Active {
+  display: flex;
 }
 .animecampaign.actor.sheet .FeatureEntry .FeatureEntry__CollapseIcon {
   rotate: 90deg;

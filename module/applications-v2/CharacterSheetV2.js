@@ -34,6 +34,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             onStatAdd: CharacterSheetV2.onStatAdd,
             onStatEdit: CharacterSheetV2.onStatEdit,
             onStatDelete: CharacterSheetV2.onStatDelete,
+            onClearSearch: CharacterSheetV2.onClearSearch,
             onCategoryCollapse: CharacterSheetV2.onCategoryCollapse,
             onCategoryEdit: CharacterSheetV2.onCategoryEdit,
             onCategoryFlood: CharacterSheetV2.onCategoryFlood,
@@ -348,13 +349,35 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
 
         // Filters kit features
-        const searchBar = this.element.querySelector(".JS-SearchBar")
         const searchInput = this.element.querySelector(".JS-SearchInput")
-        searchInput.addEventListener("input", event => {
-            const query = searchInput.value
-            const regex = new RegExp(query, "gi")
 
-            
+        const featureEntries = this.element.querySelectorAll(".JS-FeatureEntry")
+        const categories = this.element.querySelectorAll(".JS-Category")
+        searchInput.addEventListener("input", event => {
+            this.query = searchInput.value
+            const regex = new RegExp(this.query, "gi")
+
+            featureEntries.forEach((element) => {
+                const id = element.dataset.id
+                const feature = this.document.items.get(id)
+
+                if (regex.test(feature.name)) {
+                    element.classList.add("FeatureEntry--Active")
+                } else {
+                    element.classList.remove("FeatureEntry--Active")
+                }
+            })
+
+            categories.forEach((element) => {
+                const list = element.querySelector(".Category__Features")
+                const entries = list.querySelectorAll(".FeatureEntry--Active")
+
+                if (entries.length > 0) {
+                    element.classList.add("Category--Active")
+                } else {
+                    element.classList.remove("Category--Active")
+                }
+            }) 
         })
     }
 
@@ -434,6 +457,15 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         if (confirm) {
             this.document.update({ [`system.stats.${color}`]: null })
         }
+    }
+
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
+    static onClearSearch (event, target) {
+
     }
 
     /**
