@@ -1625,6 +1625,7 @@
 .animecampaign .ACTextEditor.active .editor-content h5[data-hide],
 .animecampaign .ACTextEditor.active .editor-content h6[data-hide] {
   opacity: 0.75;
+  font-size: 1rem;
 }
 .animecampaign .ACTextEditor.active .editor-content h1::before,
 .animecampaign .ACTextEditor.active .editor-content h2::before,
