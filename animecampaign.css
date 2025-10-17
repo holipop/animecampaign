@@ -133,7 +133,7 @@
   font-weight: 900;
 }
 .animecampaign .MSO {
-  font-family: 'Material Symbols Outlined' !important;
+  font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
   font-size: 1.5rem;
@@ -146,6 +146,7 @@
   white-space: nowrap;
   direction: ltr;
   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined' !important;
 }
 .animecampaign.application {
   backdrop-filter: blur(4px);
@@ -1616,6 +1617,65 @@
 .theme-light .animecampaign .ACTextEditor .editor-menu {
   border-color: rgba(31, 30, 30, 0.5);
   background-color: rgba(244, 243, 237, 0.5);
+}
+.animecampaign .ACTextEditor .editor-content h1[data-hide],
+.animecampaign .ACTextEditor .editor-content h2[data-hide],
+.animecampaign .ACTextEditor .editor-content h3[data-hide],
+.animecampaign .ACTextEditor .editor-content h4[data-hide],
+.animecampaign .ACTextEditor .editor-content h5[data-hide],
+.animecampaign .ACTextEditor .editor-content h6[data-hide] {
+  opacity: 0.75;
+  font-size: 1rem;
+}
+.animecampaign .ACTextEditor.active .editor-content h1::before,
+.animecampaign .ACTextEditor.active .editor-content h2::before,
+.animecampaign .ACTextEditor.active .editor-content h3::before,
+.animecampaign .ACTextEditor.active .editor-content h4::before,
+.animecampaign .ACTextEditor.active .editor-content h5::before,
+.animecampaign .ACTextEditor.active .editor-content h6::before {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5rem;
+  /* 24px Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  position: relative;
+  width: 0;
+  left: -1.5rem;
+  content: "visibility";
+  font-size: 1rem;
+}
+.animecampaign .ACTextEditor.active .editor-content h1[data-hide]::before,
+.animecampaign .ACTextEditor.active .editor-content h2[data-hide]::before,
+.animecampaign .ACTextEditor.active .editor-content h3[data-hide]::before,
+.animecampaign .ACTextEditor.active .editor-content h4[data-hide]::before,
+.animecampaign .ACTextEditor.active .editor-content h5[data-hide]::before,
+.animecampaign .ACTextEditor.active .editor-content h6[data-hide]::before {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5rem;
+  /* 24px Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  position: relative;
+  width: 0;
+  left: -1.5rem;
+  content: "visibility_off";
+  font-size: 1rem;
 }
 .animecampaign .ACTextEditor .editor-content,
 .animecampaign .NonOwnerDescription,

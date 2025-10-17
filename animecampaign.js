@@ -24,6 +24,9 @@ globalThis.AC = {
     Macro: { ...Macro }
 }
 
+/**
+ * System Initialization
+ */
 Hooks.once('init', () => {
     console.log(`%cAnime Campaign | ${config.AC.ascii}`, 'color: #db7093;');
     console.log("%cAnime Campaign | Initializing Anime Campaign System!", "color: #db7093;");
@@ -72,6 +75,9 @@ Hooks.once('init', () => {
     loadTemplates(partials)
 })
 
+/**
+ * Migration Handling
+ */
 Hooks.on('ready', () => {
     const NEEDS_MIGRATION_VERSION = "v1.0"
     const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
@@ -99,6 +105,9 @@ Hooks.on('ready', () => {
     game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
 })
 
+/**
+ * Attach Buttons to Chat Messages
+ */
 Hooks.on('renderChatMessage', (message, html, data) => {
     const messageElement = html[0].querySelector(".JS-ChatMessage")
     if (!messageElement) return
@@ -120,16 +129,12 @@ Hooks.on('renderChatMessage', (message, html, data) => {
 
 Hooks.on('hotbarDrop', Macro.createMacro)
 
-
 /**
- * This was an attempt at making buttons inside the prosemirror editor for marking sections as hidden.
- * No matter what, it doesn't really like to budge.
+ * ProseMirror Overriding
  */
-Hooks.on('createProseMirrorEditor', (uuid, plugins, options) => {
-    //console.log(uuid, plugins, options)
-
+Hooks.on("init", () => {
     // override headings to allow for toggling section visibility
-    /* const heading = {
+    const heading = {
         attrs: {
             level: {default: 1},
             hidden: {default: false},
@@ -138,56 +143,61 @@ Hooks.on('createProseMirrorEditor', (uuid, plugins, options) => {
         group: "block",
         defining: true,
         parseDOM: [
-            {tag: "h1", attrs: {level: 1}},
-            {tag: "h2", attrs: {level: 2}},
-            {tag: "h3", attrs: {level: 3}},
-            {tag: "h4", attrs: {level: 4}},
-            {tag: "h5", attrs: {level: 5}},
-            {tag: "h6", attrs: {level: 6}}
+            {tag: "h1[data-hide]", attrs: { level: 1, hidden: true }},
+            {tag: "h2[data-hide]", attrs: { level: 2, hidden: true }},
+            {tag: "h3[data-hide]", attrs: { level: 3, hidden: true }},
+            {tag: "h4[data-hide]", attrs: { level: 4, hidden: true }},
+            {tag: "h5[data-hide]", attrs: { level: 5, hidden: true }},
+            {tag: "h6[data-hide]", attrs: { level: 6, hidden: true }},
+
+            {tag: "h1", attrs: { level: 1 }},
+            {tag: "h2", attrs: { level: 2 }},
+            {tag: "h3", attrs: { level: 3 }},
+            {tag: "h4", attrs: { level: 4 }},
+            {tag: "h5", attrs: { level: 5 }},
+            {tag: "h6", attrs: { level: 6 }},
         ],
-        toDOM: node => [`h${node.attrs.level}`, { 
-            "attr-hidden": (node.attrs.hidden) ? true : false, 
-            style: `opacity: ${(node.attrs.hidden) ? .75 : 1}; color: red;`
-        }, 0 ]
+        toDOM: node => {
+            const expression = [`h${node.attrs.level}`]
+            if (node.attrs.hidden) expression.push({ "data-hide": "" })
+            expression.push(0)
+            return expression
+        }
     }
 
-    const schema = new ProseMirror.Schema({
-        nodes: options.state.schema.spec.nodes.update("heading", heading),
-        marks: options.state.schema.spec.marks
+    const extendedSchema = new ProseMirror.Schema({
+        nodes: foundry.prosemirror.defaultSchema.spec.nodes.update("heading", heading),
+        marks: foundry.prosemirror.defaultSchema.spec.marks,
     })
 
-    // override the editor state with new content
-    const content = ProseMirror.dom.serializeString(options.state.doc, { schema })
-    options.state = ProseMirror.EditorState.create({ doc: ProseMirror.dom.parseString(content) }) */
+    // Using the extended schema breaks the automatic heading insertion.
+    const extendedPlugins = { 
+        inputRules: foundry.prosemirror.ProseMirrorInputRules.build(extendedSchema),
+    }
 
-    /* const serializer = ProseMirror.DOMSerializer.fromSchema(schema)
-    const html = serializer.serializeFragment(options.state.doc.content)
-    console.log(html)
-
-    options.state = ProseMirror.EditorState.create({
-        doc: ProseMirror.DOMParser.fromSchema(schema).parse(html),
-        plugins: options.state.plugins
-    }) */
-
-    /* const state = ProseMirror.EditorState.create({ schema, plugins: options.state.plugins })
-
-    state.doc = options.state.doc
-    options.state = state*/
+    Object.assign(foundry.prosemirror.defaultSchema, extendedSchema);
+    Object.assign(foundry.prosemirror.defaultPlugins, extendedPlugins);
 })
 
 Hooks.on('getProseMirrorMenuItems', (menu, items) => {
-    //console.log(menu, items)
+    const isEditingFeature = menu.view.dom.closest(".JS-IsFeature")
+    const isEditingCharacter = menu.view.dom.closest(".JS-IsCharacter")
+    if (!isEditingFeature && !isEditingCharacter) return
 
-    /* menu.items = items.unshift({
+    menu.items = items.unshift({
         action: "toggle-visibility",
         title: "AC.ToggleVisibility",
         icon: '<i class="fa-solid fa-eye-slash"></i>',
         scope: "text",
         cmd: (state, dispatch) => {
-            console.log(state, dispatch)
-            /* if (state.selection.empty) return false
-            if (dispatch) dispatch(state.tr.insertText("sexo!!").scrollIntoView())
+            const { $from } = state.selection
+            const node = $from.parent
+            if (node.type.name != "heading") return false
+
+            // I'm assuming without using the -1, this position points to the TextNode and not the heading Node itself
+            const nodePos = $from.pos - $from.parentOffset - 1
+            dispatch(state.tr.setNodeAttribute(nodePos, "hidden", !node.attrs.hidden))
             return true
         }
-    }) */
+    })
 })
