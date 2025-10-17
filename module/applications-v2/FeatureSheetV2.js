@@ -170,6 +170,8 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
     /**
      * Attaches visibility toggles to each header
      * Each button invokes FeatureSheetV2.onToggleSectionVisibility.
+     * 
+     * @deprecated
      */
     attachSectionControls () {
         const ownerDescriptionContent = this.element.querySelector(".JS-TextEditor .editor-content")
@@ -211,7 +213,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
             Description.attachSections(descriptionContent)
         }
 
-        this.attachSectionControls()
+        /* this.attachSectionControls()
 
         // Attaches the visibility toggles for when a re-render hasn't been invoked.
         // This is incredibly hack-y. Do not touch.
@@ -219,7 +221,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
         toggleEditor.addEventListener("click", () => {
             const saveButton = this.element.querySelector(`.JS-TextEditor button[data-action="save"]`)
             saveButton.addEventListener("click", () => this.attachSectionControls())
-        })
+        }) */
     }
 
 
@@ -314,6 +316,8 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @this {FeatureSheetV2}
+     * 
+     * @deprecated
      */
     static onToggleSectionVisibility (event, target) {
         const index = Number(target.dataset.index)

@@ -29,6 +29,33 @@
         border: (1 * @rpx) solid;
         border-radius: 2 * @rpx;
     }
+    .ACTextEditor.active .editor-content {
+        h1, h2, h3, h4, h5, h6 {
+            &[data-hide] {
+                opacity: .75;
+            }
+            &::before {
+                #MSO();
+
+                position: relative;
+                width: 0;
+                left: -1.5rem;
+
+                content: "visibility";
+                font-size: 1rem;
+            }
+            &[data-hide]::before {
+                #MSO();
+                
+                position: relative;
+                width: 0;
+                left: -1.5rem;
+
+                content: "visibility_off";
+                font-size: 1rem;
+            }
+        }
+    }
 
     .ACTextEditor .editor-content, 
     .NonOwnerDescription,
