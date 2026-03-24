@@ -350,18 +350,19 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         // Filters kit features
         const searchInput = this.element.querySelector(".JS-SearchInput")
+        // const escapeCharactersRegExp = new RegExp("[\+\-\*\?\^\$\\\.\[\]\{\}\(\)\|\/])")
 
         const featureEntries = this.element.querySelectorAll(".JS-FeatureEntry")
         const categories = this.element.querySelectorAll(".JS-Category")
         searchInput.addEventListener("input", event => {
             this.query = searchInput.value
-            const regex = new RegExp(this.query, "gi")
+            //const regex = new RegExp(this.query, "gi")
 
             featureEntries.forEach((element) => {
                 const id = element.dataset.id
                 const feature = this.document.items.get(id)
 
-                if (regex.test(feature.name)) {
+                if (feature.name.includes(this.query)) {
                     element.classList.add("FeatureEntry--Active")
                 } else {
                     element.classList.remove("FeatureEntry--Active")
