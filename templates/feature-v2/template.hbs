@@ -21,8 +21,10 @@
         </section>
 
         {{#if (gte permission 2)}}
-            <div class="Details Config tab {{tabs.details.css}}" data-tab="details" data-group="feature">
-                {{> "generic.details" details=system.details prefix="system."}}
+            <div class="Details tab {{tabs.details.css}}" data-tab="details" data-group="feature">
+                <div class="Config">
+                    {{> "generic.details" details=system.details prefix="system."}}
+                </div>
             </div>
         {{/if}}
 
