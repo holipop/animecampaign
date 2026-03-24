@@ -137,7 +137,7 @@ Hooks.on('hotbarDrop', Macro.createMacro)
 /**
  * ProseMirror Overriding
  */
-Hooks.on("init", () => {
+/* Hooks.on("init", () => {
     // override headings to allow for toggling section visibility
     const heading = {
         attrs: {
@@ -205,4 +205,4 @@ Hooks.on('getProseMirrorMenuItems', (menu, items) => {
             return true
         }
     })
-})
+}) */
