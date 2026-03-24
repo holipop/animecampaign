@@ -87,7 +87,11 @@ Hooks.on('ready', () => {
         currentVersion = currentVersion.slice(1) // remove "v"
     }
 
-    if (currentVersion === targetVersion || foundry.utils.isNewerVersion(targetVersion, "v2.0")) {
+    if (
+        currentVersion === targetVersion || 
+        foundry.utils.isNewerVersion(targetVersion, "v2.0") || 
+        foundry.utils.isNewerVersion(targetVersion, "2.0")
+    ) {
         game.settings.set("animecampaign", "systemMigrationVersion", targetVersion)
         return
     }

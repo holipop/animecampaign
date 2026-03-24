@@ -38,10 +38,15 @@ function migrateItem (source) {
         console.log(source)
 
         let description = ""
-        for (const section of source.system.sections) {
-            description += `<h1${(section.visible) ? "" : " data-hide"}>${section.name}</h1>${section.richtext}`
+        if (source.system.description === "") { // pre v2.0 characters don't have descriptions
+            for (const section of source.system.sections) {
+                description += `<h1${(section.visible) ? "" : " data-hide"}>${section.name}</h1>${section.richtext}`
+            }
+        } else {
+            description = source.system.description
         }
-        source.system.description = description
+
+        source.system.description = description        
 
         if (source.system.details.action == "[object Object]") {
             source.system.details.action = ""
