@@ -355,14 +355,14 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         const featureEntries = this.element.querySelectorAll(".JS-FeatureEntry")
         const categories = this.element.querySelectorAll(".JS-Category")
         searchInput.addEventListener("input", event => {
-            this.query = searchInput.value
+            this.query = searchInput.value.toLowerCase()
             //const regex = new RegExp(this.query, "gi")
 
             featureEntries.forEach((element) => {
                 const id = element.dataset.id
                 const feature = this.document.items.get(id)
 
-                if (feature.name.includes(this.query)) {
+                if (feature.name.toLowerCase().includes(this.query)) {
                     element.classList.add("FeatureEntry--Active")
                 } else {
                     element.classList.remove("FeatureEntry--Active")
