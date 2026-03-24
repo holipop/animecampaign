@@ -372,7 +372,8 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
                 const list = element.querySelector(".Category__Features")
                 const entries = list.querySelectorAll(".FeatureEntry--Active")
 
-                if (entries.length > 0) {
+                if (entries.length > 0 || this.query == "") {
+                    // Clearing the search bar should reveal empty categories. 
                     element.classList.add("Category--Active")
                 } else {
                     element.classList.remove("Category--Active")
@@ -465,7 +466,19 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @this {CharacterSheetV2}
      */
     static onClearSearch (event, target) {
+        const searchInput = this.element.querySelector(".JS-SearchInput")
+        searchInput.value = ""
+        this.query = ""
 
+        const featureEntries = this.element.querySelectorAll(".JS-FeatureEntry")
+        const categories = this.element.querySelectorAll(".JS-Category")
+
+        featureEntries.forEach((element) => {
+            element.classList.add("FeatureEntry--Active")
+        })
+        categories.forEach((element) => {
+            element.classList.add("Category--Active")
+        })
     }
 
     /**
