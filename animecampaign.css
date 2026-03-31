@@ -1133,6 +1133,87 @@
 .animecampaign.actor.sheet .Kit.active {
   display: flex;
 }
+.animecampaign.actor.sheet .SearchBar {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2.5rem;
+  margin-bottom: 0.2rem;
+  padding: 0 0.25rem;
+  gap: 0.5rem;
+  border-radius: 0.125rem;
+  border: 0.0625rem solid;
+}
+.theme-dark .animecampaign.actor.sheet .SearchBar {
+  background-color: #171718;
+}
+.theme-light .animecampaign.actor.sheet .SearchBar {
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign.actor.sheet .SearchBar {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.actor.sheet .SearchBar {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.actor.sheet .SearchBar__Icon {
+  margin: 0 0.25rem;
+  font-size: 1rem;
+}
+.theme-dark .animecampaign.actor.sheet .SearchBar__Icon {
+  color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.actor.sheet .SearchBar__Icon {
+  color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.actor.sheet .SearchBar__Input {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  transition: none;
+  flex: 1;
+  font: 1rem "Libre Franklin";
+}
+.theme-dark .animecampaign.actor.sheet .SearchBar__Input {
+  color: #ebedf2;
+  border-color: #171718;
+}
+.theme-light .animecampaign.actor.sheet .SearchBar__Input {
+  color: #1f1e1e;
+  border-color: #f4f3ed;
+}
+.animecampaign.actor.sheet .SearchBar__Input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.animecampaign.actor.sheet .SearchBar__Input:hover {
+  transition: none;
+  box-shadow: none;
+}
+.theme-dark .animecampaign.actor.sheet .SearchBar__Input {
+  color: #ebedf2;
+}
+.theme-light .animecampaign.actor.sheet .SearchBar__Input {
+  color: #1f1e1e;
+}
+.animecampaign.actor.sheet .SearchBar__Input::placeholder {
+  opacity: 0.5;
+}
+.animecampaign.actor.sheet .SearchBar .SearchBar__Clear {
+  display: block;
+  opacity: 0.25;
+  transition: opacity 0.075s;
+}
+.animecampaign.actor.sheet .SearchBar:hover .SearchBar__Clear {
+  opacity: 1;
+}
+.animecampaign.actor.sheet .Category {
+  display: none;
+}
 .animecampaign.actor.sheet .Category .Category__Header {
   transition: height 0.075s;
 }
@@ -1141,6 +1222,9 @@
 }
 .animecampaign.actor.sheet .Category .Category__HeaderLeft .ACButton__Icon {
   transition: rotate 0.075s;
+}
+.animecampaign.actor.sheet .Category.Category--Active {
+  display: block;
 }
 .animecampaign.actor.sheet .Category.Category--Collapsed .Category__Features,
 .animecampaign.actor.sheet .Category.Category--Collapsed .Category__Trackers,
@@ -1290,7 +1374,7 @@
   min-height: 2rem;
   border: 0.0625rem solid;
   border-radius: 0.125rem;
-  display: flex;
+  display: none;
   align-items: stretch;
 }
 .theme-dark .animecampaign.actor.sheet .FeatureEntry {
@@ -1300,6 +1384,9 @@
 .theme-light .animecampaign.actor.sheet .FeatureEntry {
   background-color: #f4f3ed;
   color: #1f1e1e;
+}
+.animecampaign.actor.sheet .FeatureEntry.FeatureEntry--Active {
+  display: flex;
 }
 .animecampaign.actor.sheet .FeatureEntry .FeatureEntry__CollapseIcon {
   rotate: 90deg;

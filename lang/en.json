@@ -28,9 +28,9 @@
     },
 
     "Migration": {
-        "WarnForGM": "Please have a GM log in to begin migration to v2.0.",
-        "V2MigrationBegin": "<b>Beginning v2.0 Migration.</b> Please wait a moment and do not close your game or shut down your server.",
-        "V2MigrationComplete": "<b>v2.0 Migration Complete!</b> Please reload your world.",
+        "WarnForGM": "Please have a GM log in to begin migration to {version}.",
+        "V2MigrationBegin": "<b>Beginning {version} Migration.</b> Please wait a moment and do not close your game or shut down your server.",
+        "V2MigrationComplete": "<b>{version} Migration Complete!</b> Please reload your world.",
         "MigratingDocument": "Migrating {document} document \"{name}\" [{id}]",
         "MigratingPack": "Migrated all {document} documents from Compendium \"{pack}\"",
         "FailedMigration": "Failed AC FVTT system migration for {document} document \"{name}\" [{id}]: {error}",
@@ -61,6 +61,8 @@
         "Kit": "Kit",
         "Biography": "Biography",
 
+        "Search": "Search Kit",
+
         "UncategorizedFeatures": "Uncategorized",
 
         "StatAdd": "Add Stat",
@@ -69,7 +71,7 @@
 
         "CategoryCollapse": "Collapse Category",
         "CategoryEdit": "Edit Category",
-        "CategoryFlood": "Flood Category",
+        "CategoryFlood": "Apply Color to Features",
         "CategoryDelete": "Delete Category",
         "CategoryCreate": "Create Category",
         

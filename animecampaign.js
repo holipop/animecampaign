@@ -79,30 +79,39 @@ Hooks.once('init', () => {
  * Migration Handling
  */
 Hooks.on('ready', () => {
-    const NEEDS_MIGRATION_VERSION = "v1.0"
-    const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
+    const NEEDS_MIGRATION_VERSION = "1.0"
+    let currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
+    let targetVersion = game.system.version
 
-    if (currentVersion === game.system.version || foundry.utils.isNewerVersion(game.system.version, "v2.0")) {
-        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+    if (!targetVersion.startsWith("v") && currentVersion.startsWith("v")) {
+        currentVersion = currentVersion.slice(1) // remove "v"
+    }
+
+    if (
+        currentVersion === targetVersion || 
+        foundry.utils.isNewerVersion(targetVersion, "v2.0") || 
+        foundry.utils.isNewerVersion(targetVersion, "2.0")
+    ) {
+        game.settings.set("animecampaign", "systemMigrationVersion", targetVersion)
         return
     }
 
     // If this is a brand new world, skip migration.
     const totalDocuments = game.actors.size + game.scenes.size + game.items.size
     if (!currentVersion && totalDocuments === 0) { 
-        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+        game.settings.set("animecampaign", "systemMigrationVersion", targetVersion)
         return 
     }
     
-    if (foundry.utils.isNewerVersion(game.system.version, NEEDS_MIGRATION_VERSION)) {
+    if (foundry.utils.isNewerVersion(targetVersion, NEEDS_MIGRATION_VERSION)) {
         if (!game.user.isGM) {
-            ui.notifications.warn(game.i18n.localize("AC.Migration.WarnForGM"))
+            ui.notifications.warn(game.i18n.format("AC.Migration.WarnForGM", { version: targetVersion }))
             return
         }
         Migrate.toV2()
     }
 
-    game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+    game.settings.set("animecampaign", "systemMigrationVersion", targetVersion)
 })
 
 /**
@@ -132,7 +141,7 @@ Hooks.on('hotbarDrop', Macro.createMacro)
 /**
  * ProseMirror Overriding
  */
-Hooks.on("init", () => {
+/* Hooks.on("init", () => {
     // override headings to allow for toggling section visibility
     const heading = {
         attrs: {
@@ -200,4 +209,4 @@ Hooks.on('getProseMirrorMenuItems', (menu, items) => {
             return true
         }
     })
-})
+}) */
