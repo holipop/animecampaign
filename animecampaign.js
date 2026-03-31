@@ -24,6 +24,9 @@ globalThis.AC = {
     Macro: { ...Macro }
 }
 
+/**
+ * System Initialization
+ */
 Hooks.once('init', () => {
     console.log(`%cAnime Campaign | ${config.AC.ascii}`, 'color: #db7093;');
     console.log("%cAnime Campaign | Initializing Anime Campaign System!", "color: #db7093;");
@@ -72,35 +75,48 @@ Hooks.once('init', () => {
     loadTemplates(partials)
 })
 
+/**
+ * Migration Handling
+ */
 Hooks.on('ready', () => {
-    const NEEDS_MIGRATION_VERSION = "v1.0"
-    const currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
+    const NEEDS_MIGRATION_VERSION = "1.0"
+    let currentVersion = game.settings.get('animecampaign', 'systemMigrationVersion')
+    let targetVersion = game.system.version
 
-    console.log(currentVersion)
+    if (!targetVersion.startsWith("v") && currentVersion.startsWith("v")) {
+        currentVersion = currentVersion.slice(1) // remove "v"
+    }
 
-    if (currentVersion === game.system.version || foundry.utils.isNewerVersion(game.system.version, "v2.0")) {
-        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+    if (
+        currentVersion === targetVersion || 
+        foundry.utils.isNewerVersion(targetVersion, "v2.0") || 
+        foundry.utils.isNewerVersion(targetVersion, "2.0")
+    ) {
+        game.settings.set("animecampaign", "systemMigrationVersion", targetVersion)
         return
     }
 
     // If this is a brand new world, skip migration.
     const totalDocuments = game.actors.size + game.scenes.size + game.items.size
     if (!currentVersion && totalDocuments === 0) { 
-        game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+        game.settings.set("animecampaign", "systemMigrationVersion", targetVersion)
         return 
     }
     
-    if (foundry.utils.isNewerVersion(game.system.version, NEEDS_MIGRATION_VERSION)) {
+    if (foundry.utils.isNewerVersion(targetVersion, NEEDS_MIGRATION_VERSION)) {
         if (!game.user.isGM) {
-            ui.notifications.warn(game.i18n.localize("AC.Migration.WarnForGM"))
+            ui.notifications.warn(game.i18n.format("AC.Migration.WarnForGM", { version: targetVersion }))
             return
         }
         Migrate.toV2()
     }
 
-    game.settings.set("animecampaign", "systemMigrationVersion", game.system.version)
+    game.settings.set("animecampaign", "systemMigrationVersion", targetVersion)
 })
 
+/**
+ * Attach Buttons to Chat Messages
+ */
 Hooks.on('renderChatMessage', (message, html, data) => {
     const messageElement = html[0].querySelector(".JS-ChatMessage")
     if (!messageElement) return
@@ -118,7 +134,79 @@ Hooks.on('renderChatMessage', (message, html, data) => {
     
     const content = messageElement.querySelector(".JS-Content")
     Description.attachSections(content)
-
 })
 
 Hooks.on('hotbarDrop', Macro.createMacro)
+
+/**
+ * ProseMirror Overriding
+ */
+/* Hooks.on("init", () => {
+    // override headings to allow for toggling section visibility
+    const heading = {
+        attrs: {
+            level: {default: 1},
+            hidden: {default: false},
+        },
+        content: "inline*",
+        group: "block",
+        defining: true,
+        parseDOM: [
+            {tag: "h1[data-hide]", attrs: { level: 1, hidden: true }},
+            {tag: "h2[data-hide]", attrs: { level: 2, hidden: true }},
+            {tag: "h3[data-hide]", attrs: { level: 3, hidden: true }},
+            {tag: "h4[data-hide]", attrs: { level: 4, hidden: true }},
+            {tag: "h5[data-hide]", attrs: { level: 5, hidden: true }},
+            {tag: "h6[data-hide]", attrs: { level: 6, hidden: true }},
+
+            {tag: "h1", attrs: { level: 1 }},
+            {tag: "h2", attrs: { level: 2 }},
+            {tag: "h3", attrs: { level: 3 }},
+            {tag: "h4", attrs: { level: 4 }},
+            {tag: "h5", attrs: { level: 5 }},
+            {tag: "h6", attrs: { level: 6 }},
+        ],
+        toDOM: node => {
+            const expression = [`h${node.attrs.level}`]
+            if (node.attrs.hidden) expression.push({ "data-hide": "" })
+            expression.push(0)
+            return expression
+        }
+    }
+
+    const extendedSchema = new ProseMirror.Schema({
+        nodes: foundry.prosemirror.defaultSchema.spec.nodes.update("heading", heading),
+        marks: foundry.prosemirror.defaultSchema.spec.marks,
+    })
+
+    // Using the extended schema breaks the automatic heading insertion.
+    const extendedPlugins = { 
+        inputRules: foundry.prosemirror.ProseMirrorInputRules.build(extendedSchema),
+    }
+
+    Object.assign(foundry.prosemirror.defaultSchema, extendedSchema);
+    Object.assign(foundry.prosemirror.defaultPlugins, extendedPlugins);
+})
+
+Hooks.on('getProseMirrorMenuItems', (menu, items) => {
+    const isEditingFeature = menu.view.dom.closest(".JS-IsFeature")
+    const isEditingCharacter = menu.view.dom.closest(".JS-IsCharacter")
+    if (!isEditingFeature && !isEditingCharacter) return
+
+    menu.items = items.unshift({
+        action: "toggle-visibility",
+        title: "AC.ToggleVisibility",
+        icon: '<i class="fa-solid fa-eye-slash"></i>',
+        scope: "text",
+        cmd: (state, dispatch) => {
+            const { $from } = state.selection
+            const node = $from.parent
+            if (node.type.name != "heading") return false
+
+            // I'm assuming without using the -1, this position points to the TextNode and not the heading Node itself
+            const nodePos = $from.pos - $from.parentOffset - 1
+            dispatch(state.tr.setNodeAttribute(nodePos, "hidden", !node.attrs.hidden))
+            return true
+        }
+    })
+}) */

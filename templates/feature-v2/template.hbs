@@ -10,7 +10,7 @@
         
         <section class="Description tab {{tabs.description.css}}" data-tab="description" data-group="feature">
             {{#if (gte permission 3)}}
-                <prose-mirror class="ACTextEditor JS-TextEditor JS-AttachSectionControls" name="system.description" value="{{system.description}}" toggled="true" compact="true">
+                <prose-mirror class="ACTextEditor JS-IsFeature JS-TextEditor JS-AttachSectionControls" name="system.description" value="{{system.description}}" toggled="true" compact="true">
                     {{{enrichedDescription}}}
                 </prose-mirror>
             {{else}}
@@ -21,8 +21,10 @@
         </section>
 
         {{#if (gte permission 2)}}
-            <div class="Details Config tab {{tabs.details.css}}" data-tab="details" data-group="feature">
-                {{> "generic.details" details=system.details prefix="system."}}
+            <div class="Details tab {{tabs.details.css}}" data-tab="details" data-group="feature">
+                <div class="Config">
+                    {{> "generic.details" details=system.details prefix="system."}}
+                </div>
             </div>
         {{/if}}
 

@@ -34,6 +34,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             onStatAdd: CharacterSheetV2.onStatAdd,
             onStatEdit: CharacterSheetV2.onStatEdit,
             onStatDelete: CharacterSheetV2.onStatDelete,
+            onClearSearch: CharacterSheetV2.onClearSearch,
             onCategoryCollapse: CharacterSheetV2.onCategoryCollapse,
             onCategoryEdit: CharacterSheetV2.onCategoryEdit,
             onCategoryFlood: CharacterSheetV2.onCategoryFlood,
@@ -67,7 +68,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @returns {String}
      */
     get title () {
-        return `${this.document.name}`
+        return `${this.document.isToken ? "[Token]" : ""} ${this.document.name}`
     }
 
 
@@ -327,6 +328,12 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         }
     }
 
+    /**
+     * The search query used to filter kit features.
+     * @type {string}
+     */
+    query = "";
+
     /** @inheritdoc */
     _onRender (context, options) {
         super._onRender(context, options)
@@ -340,6 +347,40 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         if (feautreDescriptions) {
             feautreDescriptions.forEach(Description.attachSections)
         }
+
+        // Filters kit features
+        const searchInput = this.element.querySelector(".JS-SearchInput")
+        // const escapeCharactersRegExp = new RegExp("[\+\-\*\?\^\$\\\.\[\]\{\}\(\)\|\/])")
+
+        const featureEntries = this.element.querySelectorAll(".JS-FeatureEntry")
+        const categories = this.element.querySelectorAll(".JS-Category")
+        searchInput.addEventListener("input", event => {
+            this.query = searchInput.value.toLowerCase()
+            //const regex = new RegExp(this.query, "gi")
+
+            featureEntries.forEach((element) => {
+                const id = element.dataset.id
+                const feature = this.document.items.get(id)
+
+                if (feature.name.toLowerCase().includes(this.query)) {
+                    element.classList.add("FeatureEntry--Active")
+                } else {
+                    element.classList.remove("FeatureEntry--Active")
+                }
+            })
+
+            categories.forEach((element) => {
+                const list = element.querySelector(".Category__Features")
+                const entries = list.querySelectorAll(".FeatureEntry--Active")
+
+                if (entries.length > 0 || this.query == "") {
+                    // Clearing the search bar should reveal empty categories. 
+                    element.classList.add("Category--Active")
+                } else {
+                    element.classList.remove("Category--Active")
+                }
+            }) 
+        })
     }
 
 
@@ -418,6 +459,27 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         if (confirm) {
             this.document.update({ [`system.stats.${color}`]: null })
         }
+    }
+
+    /**
+     * @param {PointerEvent} event 
+     * @param {HTMLElement} target 
+     * @this {CharacterSheetV2}
+     */
+    static onClearSearch (event, target) {
+        const searchInput = this.element.querySelector(".JS-SearchInput")
+        searchInput.value = ""
+        this.query = ""
+
+        const featureEntries = this.element.querySelectorAll(".JS-FeatureEntry")
+        const categories = this.element.querySelectorAll(".JS-Category")
+
+        featureEntries.forEach((element) => {
+            element.classList.add("FeatureEntry--Active")
+        })
+        categories.forEach((element) => {
+            element.classList.add("Category--Active")
+        })
     }
 
     /**

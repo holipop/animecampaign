@@ -35,11 +35,18 @@ function migrateActor (source) {
  */
 function migrateItem (source) {
     if (source.system) {
+        console.log(source)
+
         let description = ""
-        for (const section of source.system.sections) {
-            description += `<h1${(section.visible) ? "" : " data-hide"}>${section.name}</h1>${section.richtext}`
+        if (source.system.description === "") { // pre v2.0 characters don't have descriptions
+            for (const section of source.system.sections) {
+                description += `<h1${(section.visible) ? "" : " data-hide"}>${section.name}</h1>${section.richtext}`
+            }
+        } else {
+            description = source.system.description
         }
-        source.system.description = description
+
+        source.system.description = description        
 
         if (source.system.details.action == "[object Object]") {
             source.system.details.action = ""
@@ -80,7 +87,7 @@ function migrateScene (source) {
 
 export async function toV2 () {
     ui.notifications.warn(
-        game.i18n.localize("AC.Migration.V2MigrationBegin"),
+        game.i18n.format("AC.Migration.V2MigrationBegin", { version: game.system.version }),
         { permanent: true }
     )
     
@@ -227,14 +234,10 @@ export async function toV2 () {
     // Prompt to reload.
     game.settings.set('animecampaign', 'systemMigrationVersion', game.system.version)
     ui.notifications.info(
-        game.i18n.localize("AC.Migration.V2MigrationComplete"),
+        game.i18n.format("AC.Migration.V2MigrationComplete", { version: game.system.version }),
         { permanent: true }
     )
 }
-
-
-
-
 
 /*
 

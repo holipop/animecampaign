@@ -13,7 +13,60 @@
         display: flex;
     }
 
+    .SearchBar {
+        #Part();
+        #ColorScheme({
+            background-color: "bg";
+        });
+        #ColorScheme(@opacity: 50%, {
+            border-color: "txt";
+        });
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 2.5rem;
+        margin-bottom: .2rem;
+        padding: 0 .25rem;
+        gap: .5rem;
+        border-radius: 2 * @rpx;
+        border: (1 * @rpx) solid;
+    }
+    .SearchBar__Icon {
+        #ColorScheme(@opacity: 50%, {
+            color: "txt";
+        });
+
+        margin: 0 .25rem;
+        font-size: 1rem;
+    }
+    .SearchBar__Input {
+        #InputSkinning();
+        #ColorScheme({
+            color: "txt";
+        });
+
+        flex: 1;
+        
+        font: 1rem "Libre Franklin";
+    }
+    .SearchBar__Input::placeholder {
+        opacity: .5;
+    }
+    .SearchBar .SearchBar__Clear {
+        display: block;
+        
+        opacity: .25;
+        transition: opacity .075s;
+    }
+    .SearchBar:hover .SearchBar__Clear {
+        opacity: 1;
+    }
+    
+
     .Category {
+        display: none;
+
         .Category__Header {
             transition: height .075s;
         }
@@ -23,6 +76,9 @@
         .Category__HeaderLeft .ACButton__Icon {
             transition: rotate .075s;
         }
+    }
+    .Category.Category--Active {
+        display: block;
     }
     .Category.Category--Collapsed {
 

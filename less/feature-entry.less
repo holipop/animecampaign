@@ -12,9 +12,13 @@
         min-height: 2rem;
         border: (1 * @rpx) solid;
         border-radius: 2 * @rpx;
-        display: flex;
+        display: none;
         align-items: stretch;
     }
+    .FeatureEntry.FeatureEntry--Active {
+        display: flex;
+    }
+
     .FeatureEntry .FeatureEntry__CollapseIcon {
         rotate: 90deg;
         transition: rotate .075s;
