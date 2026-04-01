@@ -153,10 +153,10 @@
   -webkit-backdrop-filter: blur(4px);
 }
 .theme-dark .animecampaign.application {
-  background: rgba(23, 23, 24, 0.8);
+  background: rgba(23, 23, 24, 0.9);
 }
 .theme-light .animecampaign.application {
-  background: rgba(244, 243, 237, 0.8);
+  background: rgba(244, 243, 237, 0.9);
 }
 .animecampaign.sheet .window-content {
   padding: 0;
@@ -1374,6 +1374,7 @@
   min-height: 2rem;
   border: 0.0625rem solid;
   border-radius: 0.125rem;
+  box-shadow: 0 0.0625rem rgba(138, 137, 134, 0.5);
   display: none;
   align-items: stretch;
 }
@@ -1584,12 +1585,13 @@
   background-color: transparent;
 }
 .animecampaign.actor.sheet .TrackedStat__Value {
+  min-width: 0.75rem;
   font-size: 1.25rem;
   font-weight: bold;
 }
 .animecampaign.actor.sheet .TrackedStat__Label {
+  flex: 1;
   font-size: 1.25rem;
-  font-style: normal;
 }
 .animecampaign.actor.sheet .TrackedStat__Max {
   flex: 1;

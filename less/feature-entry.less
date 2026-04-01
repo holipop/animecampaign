@@ -12,6 +12,7 @@
         min-height: 2rem;
         border: (1 * @rpx) solid;
         border-radius: 2 * @rpx;
+        box-shadow: 0 (1 * @rpx) fade(@mid-color, 50%);
         display: none;
         align-items: stretch;
     }
@@ -197,12 +198,13 @@
         background-color: transparent;
     }
     .TrackedStat__Value {
+        min-width: .75rem;
         font-size: 1.25rem;
         font-weight: bold;
     }
     .TrackedStat__Label {
+        flex: 1;
         font-size: 1.25rem;
-        font-style: normal;
     }
     .TrackedStat__Max {
         flex: 1;
