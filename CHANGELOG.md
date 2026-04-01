@@ -9,3 +9,4 @@ Started tracking on 3/23/2026
 ## v2.3
 [4/1/26]
 - Increased opacity on backgrounds of applications.
+- Deprecated JS-Color class.
