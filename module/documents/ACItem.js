@@ -1,4 +1,5 @@
-import ACDialogV2 from "../applications-v2/ACDialogV2.js";
+import ACDialogV2 from "../applications-v2/ACDialogV2.js"
+import RollConfigV2 from "../applications-v2/RollConfigV2.js"
 import * as Description from "../Description.js"
 
 /**
@@ -54,7 +55,20 @@ export default class ACItem extends Item {
      * @param {boolean} options.post
      */
     async roll ({ post = false } = {}) {
-        let formula = this.system.details.formula ?? ""
+
+        // TODO: hoist this logic into RollConfigV2
+        const config = new RollConfigV2({
+            window: {
+                title: game.i18n.format("AC.RollConfig.Title", { 
+                    name: this.name, 
+                })
+            },
+            document: this,
+        })
+
+        config.render(true)
+
+        /* let formula = this.system.details.formula ?? ""
         if (!Roll.validate(formula)) {
             formula = "1"
             post = true
@@ -73,7 +87,7 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritSuccess"
         } else if (roll.total == min.total) {
             crit = "ChatMessage__Total--CritFailure"
-        }
+        } */
 
         // !! Query handling WIP
         /* let answers = []
@@ -96,9 +110,9 @@ export default class ACItem extends Item {
             answers = Object.values(foundry.utils.expandObject(data).queries)
         } */
 
-        const [tooltip, enrichedDescription] = await Promise.all([
+        /* const [tooltip, enrichedDescription] = await Promise.all([
             roll.getTooltip(),
-            Description.enrichChatMessage(this.system.description, this /*, answers */)
+            Description.enrichChatMessage(this.system.description, this)
         ])
         const context = {
             formula,
@@ -122,7 +136,7 @@ export default class ACItem extends Item {
             ChatMessage.create(message);
         } else {
             roll.toMessage(message);
-        }
+        } */
     }
 
 }
