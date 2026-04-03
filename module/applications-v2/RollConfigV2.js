@@ -54,22 +54,22 @@ export default class RollConfigV2 extends HandlebarsApplicationMixin(Application
      */
     static async onSubmit (event, form, formData) {
         const data = formData.object
-        const rollType = event.submitter.dataset.type 
 
-        const feature = this.options.document
         let formula = data.formula + data.modifier ?? ""
         if (!Roll.validate(formula)) {
             formula = "1"
         }
 
+        const feature = this.options.document
         const rollData = feature.getRollData()
         const [roll, max, min] = await Promise.all([
             new Roll(formula, rollData),
             new Roll(formula, rollData).evaluate({ maximize: true }),
             new Roll(formula, rollData).evaluate({ minimize: true }),
         ])
+        
+        const rollType = event.submitter.dataset.type 
         const firstDie = roll.terms[0]
-
         switch (rollType) {
             case "disadvantage":
                 firstDie.alter(1, 1)
@@ -96,6 +96,7 @@ export default class RollConfigV2 extends HandlebarsApplicationMixin(Application
             roll.getTooltip(),
             Description.enrichChatMessage(feature.system.description, feature)
         ])
+        const template = "systems/animecampaign/templates/roll/template.hbs"
         const context = {
             roll,
             result: roll.result,
@@ -107,7 +108,6 @@ export default class RollConfigV2 extends HandlebarsApplicationMixin(Application
             feature: feature,
             palette: feature.system.palette,
         }
-        const template = "systems/animecampaign/templates/roll/template.hbs"
         const message = {
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
@@ -115,9 +115,10 @@ export default class RollConfigV2 extends HandlebarsApplicationMixin(Application
         }
 
         if (false) {
-            ChatMessage.create(message);
+            ChatMessage.create(message, { rollMode: data.rollmode });
         } else {
-            roll.toMessage(message);
+            roll.toMessage(message, { rollMode: data.rollmode })
+            
         }
     }
 

@@ -11,3 +11,5 @@ Started tracking on 3/23/2026
 - Increased opacity on backgrounds of applications.
 - Deprecated JS-Color class.
 - Basic implementation of Roll Configuration.
+[4/3/26]
+- Added roll modes to Roll Configuration.

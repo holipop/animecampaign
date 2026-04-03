@@ -56,7 +56,7 @@ export default class ACItem extends Item {
      */
     async roll ({ post = false } = {}) {
 
-        // TODO: hoist this logic into RollConfigV2
+        // TODO: All of the logic shouldn't be contained in dialogs, it should just return true if the dialog was submitted.
         const config = new RollConfigV2({
             window: {
                 title: game.i18n.format("AC.RollConfig.Title", { 
