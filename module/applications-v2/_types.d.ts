@@ -3,10 +3,6 @@ import CharacterSheetV2 from "./CharacterSheetV2.js"
 import ACActor from "../documents/ACActor.js"
 import ACItem from "../documents/ACItem.js"
 
-import ApplicationV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/api/application.mjs"
-import ActorSheetV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/sheets/actor-sheet.mjs"
-import ItemSheetV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/sheets/item-sheet.mjs"
-
 declare global {
     interface ApplicationTab {
         id: string
