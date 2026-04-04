@@ -3,11 +3,10 @@
         "module": "esnext",
         "target": "esnext",
     },
-    "include": [
-        "animecampaign.js", "animecampaign.d.ts"
-    ],
+    "include": ["animecampaign.js", "animecampaign.d.ts"],
     "exclude": ["node_modules"],
     "typeAcquisition": {
+        "enable": true,
         "include": ["jquery", "handlebars", "fvtt-types"]
     }
 }
