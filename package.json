@@ -17,11 +17,8 @@
   },
   "homepage": "https://github.com/holipop/animecampaign#readme",
   "devDependencies": {
-    "fvtt-types": "npm:@league-of-foundry-developers/foundry-vtt-types@^12.331.5",
+    "@league-of-foundry-developers/foundry-vtt-types": "^12.331.5",
     "handlebars": "^4.7.9",
     "jquery": "^4.0.0"
-  },
-  "dependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "^13.340.1"
   }
 }

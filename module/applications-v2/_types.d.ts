@@ -42,7 +42,7 @@ declare module "./SheetMixinV2.js" {
         static onEditImage(): void
     }
 
-    export default function SheetMixin<T extends ConstructorOf<ApplicationV2>>(Base: T):
+    export default function SheetMixin<T extends ConstructorOf<foundry.applications.api.ApplicationV2>>(Base: T):
         ((new (...args: any[]) => ACSheetInstance) & ACSheetStatic) & T
 }
 
