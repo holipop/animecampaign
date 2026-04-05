@@ -126,14 +126,27 @@ export default class ACItem extends Item {
             Description.enrichChatMessage(this.system.description, this),
         ])
 
+        const parts = roll.dice.map(term => term.getTooltipData())
+        const remainder = parts.reduce(
+            (acculumator, term) => acculumator - term.total,
+            roll.total
+        )
+
+        if (remainder) {
+            parts.push({ total: remainder })
+        }
+
+        console.log(parts)
+        
+
         const template = "systems/animecampaign/templates/roll/template.hbs"
         const context = {
-            formula: formula,
             roll: roll,
             post: post,
             crit: crit,
-            tooltip: tooltip,
             description: description,
+            tooltip: tooltip,
+            parts: parts,
             feature: this,
             palette: this.system.palette,
         }
