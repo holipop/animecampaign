@@ -153,10 +153,10 @@
   -webkit-backdrop-filter: blur(4px);
 }
 .theme-dark .animecampaign.application {
-  background: rgba(23, 23, 24, 0.8);
+  background: rgba(23, 23, 24, 0.9);
 }
 .theme-light .animecampaign.application {
-  background: rgba(244, 243, 237, 0.8);
+  background: rgba(244, 243, 237, 0.9);
 }
 .animecampaign.sheet .window-content {
   padding: 0;
@@ -1374,6 +1374,7 @@
   min-height: 2rem;
   border: 0.0625rem solid;
   border-radius: 0.125rem;
+  box-shadow: 0 0.0625rem rgba(138, 137, 134, 0.5);
   display: none;
   align-items: stretch;
 }
@@ -1584,12 +1585,13 @@
   background-color: transparent;
 }
 .animecampaign.actor.sheet .TrackedStat__Value {
+  min-width: 0.75rem;
   font-size: 1.25rem;
   font-weight: bold;
 }
 .animecampaign.actor.sheet .TrackedStat__Label {
+  flex: 1;
   font-size: 1.25rem;
-  font-style: normal;
 }
 .animecampaign.actor.sheet .TrackedStat__Max {
   flex: 1;
@@ -2702,8 +2704,8 @@
   border-color: rgba(31, 30, 30, 0.5);
 }
 .animecampaign.ChatMessage .ChatMessage__Category {
-  padding: 0.1rem 0.25rem;
-  padding-bottom: none;
+  padding: 0.25rem 0.5rem;
+  padding-bottom: 0;
   font: bold 0.8em "Libre Franklin";
   text-transform: uppercase;
   opacity: 0.75;
@@ -2781,6 +2783,60 @@
 }
 .animecampaign.ChatMessage .ChatMessage__Dice .dice-tooltip {
   display: none;
+  margin: 0 0.5rem;
+}
+.animecampaign.ChatMessage .DiceTooltip {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin: 0 0.5rem;
+  padding-left: 0.5rem;
+  border-left-width: 0.0625rem;
+  border-left-style: solid;
+  font: 1rem "Philosopher";
+}
+.theme-dark .animecampaign.ChatMessage .DiceTooltip {
+  border-color: rgba(235, 237, 242, 0.5);
+}
+.theme-light .animecampaign.ChatMessage .DiceTooltip {
+  border-color: rgba(31, 30, 30, 0.5);
+}
+.animecampaign.ChatMessage .DiceTooltip__Values {
+  display: flex;
+}
+.animecampaign.ChatMessage .DiceTooltip__Total {
+  border: 0.0625rem solid;
+  border-radius: 0.125rem;
+  padding: 0.1rem 0.25rem;
+  min-width: 2rem;
+  max-width: 50%;
+  height: 1.5rem;
+  text-align: center;
+}
+.theme-dark .animecampaign.ChatMessage .DiceTooltip__Total {
+  background-color: #171718;
+}
+.theme-light .animecampaign.ChatMessage .DiceTooltip__Total {
+  background-color: #f4f3ed;
+}
+.theme-dark .animecampaign.ChatMessage .DiceTooltip__Total {
+  border-color: rgba(235, 237, 242, 0.75);
+}
+.theme-light .animecampaign.ChatMessage .DiceTooltip__Total {
+  border-color: rgba(31, 30, 30, 0.75);
+}
+.animecampaign.ChatMessage .DiceTooltip__Rolls {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 0.25rem;
+}
+.animecampaign.ChatMessage .DiceTooltip__Roll {
+  width: 1.5rem;
+  text-align: center;
 }
 .animecampaign.ChatMessage .ChatMessage__Stats {
   list-style-type: none;
@@ -2789,7 +2845,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin: 0.1rem 0.35rem;
+  margin: 0.1rem 0.5rem;
   border: 0.0625rem solid;
   border-radius: 0.125rem;
 }
@@ -2883,7 +2939,7 @@
   border-top: 0.0625rem solid;
   display: flex;
   align-items: center;
-  padding: 0.1rem 0.35rem;
+  padding: 0.1rem 0.5rem;
 }
 .theme-dark .animecampaign.ChatMessage .ChatMessage__Banner {
   border-color: rgba(235, 237, 242, 0.5);

@@ -118,14 +118,15 @@ export default function SheetMixinV2 (Base) {
             })
 
             // Apply color palette
-            const coloredElements = this.element.querySelectorAll(".JS-Color")
+            // ! Deprecated
+            /* const coloredElements = this.element.querySelectorAll(".JS-Color")
             for (const element of coloredElements) {
                 const { color, properties } = element.dataset
                 const css = (properties)
                     ? properties.split(" ").map(p => `${p}: ${color};`).join("")
                     : `color: ${color};`
                 element.style.cssText += css
-            }
+            } */
 
             // Resizes the height of a textarea dynamically as you type more.
             const resizeableTextAreas = this.element.querySelectorAll("textarea.JS-ResizeTextArea")

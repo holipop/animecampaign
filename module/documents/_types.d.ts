@@ -5,13 +5,12 @@ import FeatureSheetV2 from "../applications-v2/FeatureSheetV2.js"
 
 import CharacterData from "../data-models/CharacterData.js"
 import FeatureData from "../data-models/FeatureData.js"
-import EmbeddedCollection from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/embedded-collection.mjs"
 
 declare module "./ACActor.js" {
     export default interface ACActor {
         system: CharacterData
         sheet: CharacterSheetV2
-        items: EmbeddedCollection<ACItem, ACActor>
+        items: foundry.abstract.EmbeddedCollection<ACItem, ACActor>
         _id: string
     }
 }

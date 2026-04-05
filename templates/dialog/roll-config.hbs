@@ -1,17 +1,16 @@
-{{#each queries as |query index|}}
-    <div class="Config__Group">
-        <label class="Config__Label">{{query.label}}</label>
+<div class="Config__Group">
+    <label class="Config__Label">{{localize "AC.RollConfig.Formula.Label"}}</label>
+    <input class="Config__Input" type="text" name="formula" value="{{formula}}" placeholder="1d20">
+</div>
 
-        {{#if (eq query.type "input")}}
-            <input class="Config__Input" type="text" name="queries.{{index}}" placeholder="{{query.defaultValue}}" autofocus>
-        {{/if}}
+<div class="Config__Group">
+    <label class="Config__Label">{{localize "AC.RollConfig.Modifier.Label"}}</label>
+    <input class="Config__Input" type="text" name="modifier" placeholder="{{localize "AC.RollConfig.Modifier.Placeholder"}}">
+</div>
 
-        {{#if (eq query.type "select")}}
-            <select class="Config__Input" type="text" name="queries.{{index}}" autofocus>
-                {{#each query.options as |value key|}}
-                    <option value="{{key}}">{{key}}</option>
-                {{/each}}
-            </select>
-        {{/if}}
-    </div>
-{{/each}}
+<div class="Config__Group">
+    <label class="Config__Label">{{localize "AC.RollConfig.RollMode.Label"}}</label>
+    <select class="Config__Input" name="rollMode">
+        {{selectOptions rollmodes localize=true}}
+    </select>
+</div>

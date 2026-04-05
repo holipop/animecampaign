@@ -1,0 +1,19 @@
+{{#if parts.length}}
+    <ol class="DiceTooltip">
+        {{#each parts}}
+            <li class="DiceTooltip__Part">
+                <span class="DiceTooltip__Flavor">{{{this.flavor}}}</span>
+                <div class="DiceTooltip__Values">
+                    <div class="DiceTooltip__Total">
+                        {{this.total}}
+                    </div>
+                    <ul class="DiceTooltip__Rolls">
+                        {{#each this.rolls}}
+                            <li class="DiceTooltip__Roll {{this.classes}}">{{{this.result}}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+        {{/each}}
+    </ol>
+{{/if}}

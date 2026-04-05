@@ -393,21 +393,48 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @param {HTMLElement} target 
      * @this {CharacterSheetV2}
      */
-    static onStatAdd (event, target) {
-        const [color] = Object
-            .entries(this.document.system.stats)
-            .find(([_, stat]) => stat === null) // If the value is null, get the key
+    static async onStatAdd (event, target) {
+        const colors = Object  
+            .entries(CONFIG.AC.colorStat)
+            .filter(([color, _]) => this.document.system.stats[color] === null)
 
-        new StatConfigV2({
+        const data = await ACDialogV2.from({
+            template: "systems/animecampaign/templates/dialog/stat-config.hbs",
+            context: {
+                config: CONFIG.AC,
+                document: this.document,
+                stat: {},
+                colors: Object.fromEntries(colors),
+            },
             window: { 
                 title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
             },
-            document: this.document,
-            stat: {
-                color, 
-                tag: "",
+            buttons: [{
+                label: "AC.StatConfig.AddStat.Submit",
+                icon: "save",
+            }]
+        })
+
+        if (data) {
+            data.tag ||= `${game.i18n.localize(CONFIG.AC.colorStat[data.color])} ${game.i18n.localize("AC.Stat")}`
+            data.tag.toLowerCase()
+    
+            const stats = this.document.system.colorStats
+    
+            if (stats.find(stat => stat.tag === data.tag)) {
+                return ui.notifications.error(game.i18n.format("AC.StatConfig.StatTagTaken", { 
+                    tag: data.tag.toUpperCase() 
+                }))
             }
-        }).render(true)
+    
+            if (stats.length > 0) {
+                // sets the stat's sorting position at the end of the list
+                // for some reason, foundry only sorts in ten-thousands.
+                data.sort = stats.at(-1).sort + 10000 
+            }
+    
+            this.document.update({ [`system.stats.${data.color}`]: data })
+        }
     }
 
     /** 
@@ -416,20 +443,55 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @param {HTMLElement} target
      * @this {CharacterSheetV2}
      */
-    static onStatEdit (event, target) {
+    static async onStatEdit (event, target) {
         const index = target.closest('.JS-Stat').dataset.stat
-        const stat = this.document.system.colorStats[index];
+        const current = this.document.system.colorStats[index]
 
-        new StatConfigV2({ 
-            window: {
-                title: game.i18n.format("AC.StatConfig.EditStat.Title", { 
-                    tag: stat.tag.toUpperCase(),
-                    name: this.document.name
-                })
+        const colors = Object  
+            .entries(CONFIG.AC.colorStat)
+            .filter(([color, _]) => this.document.system.stats[color] === null || color === current.color)
+        
+        const data = await ACDialogV2.from({
+            template: "systems/animecampaign/templates/dialog/stat-config.hbs",
+            context: {
+                config: CONFIG.AC,
+                document: this.document,
+                stat: current,
+                colors: Object.fromEntries(colors),
             },
-            document: this.document,
-            stat,
-        }).render(true)
+            window: { 
+                title: game.i18n.format("AC.StatConfig.EditStat.Title", { name: this.document.name }) 
+            },
+            buttons: [{
+                label: "AC.StatConfig.EditStat.Submit",
+                icon: "save",
+                default: true,
+            }]
+        })
+
+        if (data) {
+            data.tag ||= `${game.i18n.localize(CONFIG.AC.colorStats[data.color])} ${game.i18n.localize("AC.Stat")}`
+            data.tag.toLowerCase()
+    
+            const stats = this.document.system.colorStats
+    
+            if (stats.find(stat => stat.tag === data.tag && stat.color !== current.color)) {
+                return ui.notifications.error(game.i18n.format("AC.StatConfig.StatTagTaken", { 
+                    tag: data.tag.toUpperCase() 
+                }))
+            }
+
+            data.sort = current.sort
+    
+            const updates = { 
+                [`system.stats.${data.color}`]: data, 
+            }
+            if (current.color !== data.color) {
+                updates[`system.stats.${current.color}`] = null
+            }
+    
+            this.document.update(updates)
+        }
     }
 
     /** 

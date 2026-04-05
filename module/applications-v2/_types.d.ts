@@ -3,10 +3,6 @@ import CharacterSheetV2 from "./CharacterSheetV2.js"
 import ACActor from "../documents/ACActor.js"
 import ACItem from "../documents/ACItem.js"
 
-import ApplicationV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/api/application.mjs"
-import ActorSheetV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/sheets/actor-sheet.mjs"
-import ItemSheetV2 from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client-esm/applications/sheets/item-sheet.mjs"
-
 declare global {
     interface ApplicationTab {
         id: string
@@ -22,6 +18,12 @@ declare global {
         type: "input"|"select"
         options?: Record<string, string>
         defaultValue?: string
+    }
+}
+
+declare module "./ACDialogV2.js" {
+    export default interface ACDialogV2 {
+        options: foundry.applications.api.DialogV2.Configuration
     }
 }
 
@@ -46,7 +48,7 @@ declare module "./SheetMixinV2.js" {
         static onEditImage(): void
     }
 
-    export default function SheetMixin<T extends ConstructorOf<ApplicationV2>>(Base: T):
+    export default function SheetMixin<T extends ConstructorOf<foundry.applications.api.ApplicationV2>>(Base: T):
         ((new (...args: any[]) => ACSheetInstance) & ACSheetStatic) & T
 }
 
