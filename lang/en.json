@@ -19,6 +19,8 @@
     "Purple": "Purple",
     "Grey": "Grey",
 
+    "Stat": "Stat",
+
     "ToggleVisibility": "Toggle Header Visibility",
 
     "Macro": {
@@ -130,8 +132,8 @@
         },
 
         "Tag": {
-            "Label": "Tag",
-            "Placeholder": "New Stat"
+            "Label": "Name",
+            "Placeholder": "Stat"
         },
         "Display": {
             "Label": "Display",

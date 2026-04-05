@@ -15,3 +15,5 @@ Started tracking on 3/23/2026
 - Added roll modes to Roll Configuration.
 [4/4/26]
 - Updated type definitions.
+- Deprecated StatConfigV2, CategoryConfigV2, and RollConfigV2 in favor of ACDialogV2.from
+- Roll Configuration works with both Characters and Features.
