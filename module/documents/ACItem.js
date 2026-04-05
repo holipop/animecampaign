@@ -82,6 +82,8 @@ export default class ACItem extends Item {
                 }
             ]
         })
+
+        if (!data) return
         
         let formula = data.formula + data.modifier ?? ""
         if (!Roll.validate(formula)) {
