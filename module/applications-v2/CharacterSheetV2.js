@@ -435,18 +435,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     
             this.document.update({ [`system.stats.${data.color}`]: data })
         }
-
-
-        /* new StatConfigV2({
-            window: { 
-                title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
-            },
-            document: this.document,
-            stat: {
-                color, 
-                tag: "",
-            }
-        }).render(true) */
     }
 
     /** 
@@ -504,17 +492,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     
             this.document.update(updates)
         }
-
-        /* new StatConfigV2({ 
-            window: {
-                title: game.i18n.format("AC.StatConfig.EditStat.Title", { 
-                    tag: stat.tag.toUpperCase(),
-                    name: this.document.name
-                })
-            },
-            document: this.document,
-            stat,
-        }).render(true) */
     }
 
     /** 
