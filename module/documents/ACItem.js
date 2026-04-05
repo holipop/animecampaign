@@ -93,7 +93,7 @@ export default class ACItem extends Item {
         
         const roll = new Roll(formula, this.getRollData())
         
-        const { button: rollType } = data
+        const rollType = data.button
         const firstDie = roll.terms[0]
 
         if (rollType === "disadvantage") {
@@ -106,10 +106,13 @@ export default class ACItem extends Item {
         
         roll.resetFormula() // doesn't do anything for normal rolls
 
-        const [_, max, min] = await Promise.all([
+        const [_, max, min, tooltip, description, content] = await Promise.all([
             roll.evaluate(),
             roll.clone().evaluate({ maximize: true }),
             roll.clone().evaluate({ minimize: true }),
+            roll.getTooltip(),
+            Description.enrichChatMessage(this.system.description, this),
+            renderTemplate(template, context)
         ])
 
         let crit = ""
@@ -119,26 +122,21 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritFailure"
         }
 
-        const [tooltip, enrichedDescription] = await Promise.all([
-            roll.getTooltip(),
-            Description.enrichChatMessage(this.system.description, this)
-        ])
-
         const template = "systems/animecampaign/templates/roll/template.hbs"
         const context = {
-            formula,
-            roll,
-            post,
-            crit,
-            tooltip,
-            enrichedDescription,
+            formula: formula,
+            roll: roll,
+            post: post,
+            crit: crit,
+            tooltip: tooltip,
+            description: description,
             feature: this,
             palette: this.system.palette,
         }
         const message = {
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(template, context),
+            content: content
         }
 
         if (post) {
@@ -146,89 +144,6 @@ export default class ACItem extends Item {
         } else {
             roll.toMessage(message, { rollMode: data.rollMode });
         }
-
-
-        /* // TODO: All of the logic shouldn't be contained in dialogs, it should just return true if the dialog was submitted.
-        const config = new RollConfigV2({
-            window: {
-                title: game.i18n.format("AC.RollConfig.Title", { 
-                    name: this.name, 
-                })
-            },
-            document: this,
-        })
-
-        config.render(true) */
-
-        /* let formula = this.system.details.formula ?? ""
-        if (!Roll.validate(formula)) {
-            formula = "1"
-            post = true
-        }
-
-        const rollData = this.getRollData()
-        const [roll, max, min] = await Promise.all([
-            new Roll(formula, rollData).evaluate(),
-            new Roll(formula, rollData).evaluate({ maximize: true }),
-            new Roll(formula, rollData).evaluate({ minimize: true }),
-        ])
-
-        let crit
-        if (roll.isDeterministic) { }
-        else if (roll.total == max.total) {
-            crit = "ChatMessage__Total--CritSuccess"
-        } else if (roll.total == min.total) {
-            crit = "ChatMessage__Total--CritFailure"
-        } */
-
-        // !! Query handling WIP
-        /* let answers = []
-        if (this.queries.length > 0) {
-            const content = await renderTemplate('systems/animecampaign/templates/dialog/roll-config.hbs', {
-                queries: this.queries
-            })
-            const data = await ACDialogV2.prompt({
-                window: {
-                    title: game.i18n.format("AC.RollConfig.Title")
-                },
-                content,
-                ok: {
-                    label: "Roll",
-                    icon: "ifl",
-                    callback: (event, button, dialog) => new FormDataExtended(button.form).object
-                },
-            })
-
-            answers = Object.values(foundry.utils.expandObject(data).queries)
-        } */
-
-        /* const [tooltip, enrichedDescription] = await Promise.all([
-            roll.getTooltip(),
-            Description.enrichChatMessage(this.system.description, this)
-        ])
-        const context = {
-            formula,
-            roll,
-            post,
-            crit,
-            tooltip,
-            enrichedDescription,
-
-            feature: this,
-            palette: this.system.palette,
-        }
-        const template = "systems/animecampaign/templates/roll/template.hbs"
-        const message = {
-            user: game.user._id,
-            speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(template, context),
-        }
-
-        if (post) {
-            ChatMessage.create(message);
-        } else {
-            roll.toMessage(message);
-        } */
     }
 
 }
