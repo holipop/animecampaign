@@ -6,6 +6,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 /**
  * The configuration window for Stats.
+ * @deprecated
  */
 export default class RollConfigV2 extends HandlebarsApplicationMixin(ApplicationV2) {
     

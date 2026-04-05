@@ -1,45 +1,16 @@
-<section>
+<div class="Config__Group">
+    <label class="Config__Label">{{localize "AC.RollConfig.Formula.Label"}}</label>
+    <input class="Config__Input" type="text" name="formula" value="{{formula}}" placeholder="1d20">
+</div>
 
-    <div class="Dialog__Content Config">
+<div class="Config__Group">
+    <label class="Config__Label">{{localize "AC.RollConfig.Modifier.Label"}}</label>
+    <input class="Config__Input" type="text" name="modifier" placeholder="{{localize "AC.RollConfig.Modifier.Placeholder"}}">
+</div>
 
-        <div class="Config__Group">
-            <label class="Config__Label">{{localize "AC.RollConfig.Formula.Label"}}</label>
-            <input class="Config__Input" type="text" name="formula" value="{{formula}}" placeholder="1d20">
-        </div>
-
-        <div class="Config__Group">
-            <label class="Config__Label">{{localize "AC.RollConfig.Modifier.Label"}}</label>
-            <input class="Config__Input" type="text" name="modifier" placeholder="{{localize "AC.RollConfig.Modifier.Placeholder"}}">
-        </div>
-
-        <div class="Config__Group">
-            <label class="Config__Label">{{localize "AC.RollConfig.RollMode.Label"}}</label>
-            <select class="Config__Input" name="rollmode">
-                {{selectOptions rollmodes localize=true}}
-            </select>
-        </div>
-
-    </div>
-
-    <div class="Dialog__Buttons">
-        <button class="ACButton ACButton--Dialog" data-type="disadvantage">
-            <span class="ACButton__Text">
-                {{localize "AC.RollConfig.Disadvantage"}}
-            </span>
-        </button>
-        
-        <button class="ACButton ACButton--Dialog" data-type="normal" autofocus>
-            <span class="ACButton__Text">
-                {{localize "AC.RollConfig.Normal"}}
-            </span>
-        </button>
-
-        <button class="ACButton ACButton--Dialog" data-type="advantage">
-            <span class="ACButton__Text">
-                {{localize "AC.RollConfig.Advantage"}}
-            </span>
-        </button>
-
-    </div>
-
-</section>
+<div class="Config__Group">
+    <label class="Config__Label">{{localize "AC.RollConfig.RollMode.Label"}}</label>
+    <select class="Config__Input" name="rollMode">
+        {{selectOptions rollmodes localize=true}}
+    </select>
+</div>

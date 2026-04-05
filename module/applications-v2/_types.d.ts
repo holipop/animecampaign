@@ -21,6 +21,12 @@ declare global {
     }
 }
 
+declare module "./ACDialogV2.js" {
+    export default interface ACDialogV2 {
+        options: foundry.applications.api.DialogV2.Configuration
+    }
+}
+
 declare module "./SheetMixinV2.js" {
     // TypeScript is really weird about documenting mixins.
     type ConstructorOf<T> = new (...args: any[]) => T

@@ -55,8 +55,98 @@ export default class ACItem extends Item {
      * @param {boolean} options.post
      */
     async roll ({ post = false } = {}) {
+        const data = await ACDialogV2.from({
+            template: "systems/animecampaign/templates/dialog/roll-config.hbs",
+            context: {
+                rollmodes: CONFIG.Dice.rollModes,
+                formula: this.system.details.formula
+            },
+            window: {
+                title: game.i18n.format("AC.RollConfig.Title", { 
+                    name: this.name, 
+                }),
+            },
+            buttons: [
+                {
+                    action: "disadvantage",
+                    label: "AC.RollConfig.Disadvantage",
+                },
+                {
+                    action: "normal",
+                    label: "AC.RollConfig.Normal",
+                    default: true
+                },
+                {
+                    action: "advantage",
+                    label: "AC.RollConfig.Advantage",
+                }
+            ]
+        })
+        
+        let formula = data.formula + data.modifier ?? ""
+        if (!Roll.validate(formula)) {
+            formula = "1"
+            post = true
+        }
+        
+        const roll = new Roll(formula, this.getRollData())
+        
+        const { button: rollType } = data
+        const firstDie = roll.terms[0]
 
-        // TODO: All of the logic shouldn't be contained in dialogs, it should just return true if the dialog was submitted.
+        if (rollType === "disadvantage") {
+            firstDie.alter(1, 1)
+            firstDie.modifiers.push("kl")
+        } else if (rollType === "advantage") {
+            firstDie.alter(1, 1)
+            firstDie.modifiers.push("kh")
+        }
+        
+        roll.resetFormula() // doesn't do anything for normal rolls
+
+        const [_, max, min] = await Promise.all([
+            roll.evaluate(),
+            roll.clone().evaluate({ maximize: true }),
+            roll.clone().evaluate({ minimize: true }),
+        ])
+
+        let crit = ""
+        if (roll.total == max.total) {
+            crit = "ChatMessage__Total--CritSuccess"
+        } else if (roll.total == min.total) {
+            crit = "ChatMessage__Total--CritFailure"
+        }
+
+        const [tooltip, enrichedDescription] = await Promise.all([
+            roll.getTooltip(),
+            Description.enrichChatMessage(this.system.description, this)
+        ])
+
+        const template = "systems/animecampaign/templates/roll/template.hbs"
+        const context = {
+            formula,
+            roll,
+            post,
+            crit,
+            tooltip,
+            enrichedDescription,
+            feature: this,
+            palette: this.system.palette,
+        }
+        const message = {
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker(),
+            content: await renderTemplate(template, context),
+        }
+
+        if (post) {
+            ChatMessage.create(message, { rollMode: data.rollMode });
+        } else {
+            roll.toMessage(message, { rollMode: data.rollMode });
+        }
+
+
+        /* // TODO: All of the logic shouldn't be contained in dialogs, it should just return true if the dialog was submitted.
         const config = new RollConfigV2({
             window: {
                 title: game.i18n.format("AC.RollConfig.Title", { 
@@ -66,7 +156,7 @@ export default class ACItem extends Item {
             document: this,
         })
 
-        config.render(true)
+        config.render(true) */
 
         /* let formula = this.system.details.formula ?? ""
         if (!Roll.validate(formula)) {

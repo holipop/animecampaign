@@ -13,3 +13,5 @@ Started tracking on 3/23/2026
 - Basic implementation of Roll Configuration.
 [4/3/26]
 - Added roll modes to Roll Configuration.
+[4/4/26]
+- Updated type definitions.
