@@ -48,7 +48,7 @@
 
                     <div class="Category__Trackers">
                         {{#each category.trackers as |tracker index|}}
-                            <div class="StatTracker StatTracker--{{../palette.css}}">
+                            <div class="StatTracker StatTracker--{{../palette.css}}" data-tooltip="<span style='text-transform:capitalize'>{{tracker.tag}}</span>">
                                 <span class="StatTracker__Label">{{tracker.tag}}</span>
                             </div>
                         {{/each}}

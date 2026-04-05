@@ -19,3 +19,4 @@ Started tracking on 3/23/2026
 - Updated type definitions.
 - Deprecated `StatConfigV2`, `CategoryConfigV2`, and `RollConfigV2` in favor of `ACDialogV2.from`
 - Roll Configuration works with both Characters and Features.
+- Added tooltips for feature entry stats and their headers.

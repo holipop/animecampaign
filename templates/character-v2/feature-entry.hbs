@@ -34,7 +34,20 @@
             <div class="FeatureEntry__TrackedStats">
 
                 {{#each feature.system.trackedStats as |stat index|}}
-                    <div class="TrackedStat">
+                    <div 
+                        class="TrackedStat"
+                        {{#if (eq stat.view "value")}}
+                            data-tooltip="{{stat.value}}"
+                        {{/if}}
+
+                        {{#if (eq stat.view "resource")}}
+                            data-tooltip="{{stat.value}} / {{stat.max}}"
+                        {{/if}}
+
+                        {{#if (eq stat.view "label")}}
+                            data-tooltip="{{stat.label}}"
+                        {{/if}}
+                    >
 
                         {{#if (eq stat.view "value")}}
                                 <span class="TrackedStat__Value">{{stat.value}}</span>
