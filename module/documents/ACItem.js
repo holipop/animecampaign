@@ -55,33 +55,35 @@ export default class ACItem extends Item {
      * @param {boolean} options.post
      */
     async roll ({ post = false } = {}) {
-        const data = await ACDialogV2.from({
-            template: "systems/animecampaign/templates/dialog/roll-config.hbs",
-            context: {
-                rollmodes: CONFIG.Dice.rollModes,
-                formula: this.system.details.formula
-            },
-            window: {
-                title: game.i18n.format("AC.RollConfig.Title", { 
-                    name: this.name, 
-                }),
-            },
-            buttons: [
-                {
-                    action: "disadvantage",
-                    label: "AC.RollConfig.Disadvantage",
+        const data = (post)
+            ? { formula: "1", modifier: "", rollMode: "public", button: "normal" } 
+            : await ACDialogV2.from({
+                template: "systems/animecampaign/templates/dialog/roll-config.hbs",
+                context: {
+                    rollmodes: CONFIG.Dice.rollModes,
+                    formula: this.system.details.formula
                 },
-                {
-                    action: "normal",
-                    label: "AC.RollConfig.Normal",
-                    default: true
+                window: {
+                    title: game.i18n.format("AC.RollConfig.Title", { 
+                        name: this.name, 
+                    }),
                 },
-                {
-                    action: "advantage",
-                    label: "AC.RollConfig.Advantage",
-                }
-            ]
-        })
+                buttons: [
+                    {
+                        action: "disadvantage",
+                        label: "AC.RollConfig.Disadvantage",
+                    },
+                    {
+                        action: "normal",
+                        label: "AC.RollConfig.Normal",
+                        default: true
+                    },
+                    {
+                        action: "advantage",
+                        label: "AC.RollConfig.Advantage",
+                    }
+                ]
+            })
 
         if (!data) return
         
@@ -106,13 +108,11 @@ export default class ACItem extends Item {
         
         roll.resetFormula() // doesn't do anything for normal rolls
 
-        const [_, max, min, tooltip, description, content] = await Promise.all([
+        const [_, max, min, tooltip] = await Promise.all([
             roll.evaluate(),
             roll.clone().evaluate({ maximize: true }),
             roll.clone().evaluate({ minimize: true }),
             roll.getTooltip(),
-            Description.enrichChatMessage(this.system.description, this),
-            renderTemplate(template, context)
         ])
 
         let crit = ""
@@ -121,6 +121,11 @@ export default class ACItem extends Item {
         } else if (roll.total == min.total) {
             crit = "ChatMessage__Total--CritFailure"
         }
+
+        const [description, content] = await Promise.all([
+            Description.enrichChatMessage(this.system.description, this),
+            renderTemplate(template, context)
+        ])
 
         const template = "systems/animecampaign/templates/roll/template.hbs"
         const context = {
@@ -133,6 +138,7 @@ export default class ACItem extends Item {
             feature: this,
             palette: this.system.palette,
         }
+
         const message = {
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
