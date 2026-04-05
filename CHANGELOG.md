@@ -11,8 +11,10 @@ Started tracking on 3/23/2026
 - Increased opacity on backgrounds of applications.
 - Deprecated JS-Color class.
 - Basic implementation of Roll Configuration.
+
 [4/3/26]
 - Added roll modes to Roll Configuration.
+
 [4/4/26]
 - Updated type definitions.
 - Deprecated StatConfigV2, CategoryConfigV2, and RollConfigV2 in favor of ACDialogV2.from
