@@ -94,6 +94,11 @@ export default class ACItem extends Item {
         }
         
         const roll = new Roll(formula, this.getRollData())
+
+        const [max, min] = await Promise.all([
+            roll.clone().evaluate({ maximize: true }),
+            roll.clone().evaluate({ minimize: true }),
+        ])
         
         const rollType = data.button
         const firstDie = roll.terms[0]
@@ -107,13 +112,7 @@ export default class ACItem extends Item {
         }
         
         roll.resetFormula() // doesn't do anything for normal rolls
-
-        const [_, max, min, tooltip] = await Promise.all([
-            roll.evaluate(),
-            roll.clone().evaluate({ maximize: true }),
-            roll.clone().evaluate({ minimize: true }),
-            roll.getTooltip(),
-        ])
+        await roll.evaluate() 
 
         let crit = ""
         if (roll.total == max.total) {
@@ -122,9 +121,9 @@ export default class ACItem extends Item {
             crit = "ChatMessage__Total--CritFailure"
         }
 
-        const [description, content] = await Promise.all([
+        const [tooltip, description] = await Promise.all([
+            roll.getTooltip(),
             Description.enrichChatMessage(this.system.description, this),
-            renderTemplate(template, context)
         ])
 
         const template = "systems/animecampaign/templates/roll/template.hbs"
@@ -142,7 +141,7 @@ export default class ACItem extends Item {
         const message = {
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
-            content: content
+            content: await renderTemplate(template, context)
         }
 
         if (post) {
