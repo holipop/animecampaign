@@ -23,5 +23,6 @@ Started tracking on 3/23/2026
 
 [4/5/26]
 - Added tooltip for roll formulas on chat messages.
+- Updated styling for chat messages.
 
 ## v2.4
