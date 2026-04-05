@@ -1,9 +1,13 @@
 {
-    "include": [
-        "animecampaign.js", "animecampaign.d.ts"
-    ],
-    "exclude": ["node_modules"],
-    "typeAcquisition": {
-        "include": ["jquery", "handlebars"]
-    }
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "esnext",
+        "types": [
+            "jquery",
+            "handlebars",
+            "@league-of-foundry-developers/foundry-vtt-types"
+        ]
+    },
+    "include": ["animecampaign.js", "animecampaign.d.ts"],
+    "exclude": ["node_modules"]
 }

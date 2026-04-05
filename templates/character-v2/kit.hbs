@@ -12,12 +12,12 @@
     {{#each categories as |category index|}}
         <li class="Category Category--Active JS-Category {{category.collapsedCSS}}" data-category="{{index}}">
 
-            <div class="Category__Header JS-Color JS-Drag" data-drag="category" data-color="{{palette.primary}}" data-properties="background-color">
+            <div class="Category__Header JS-Drag" data-drag="category" style="background-color: {{palette.primary}};">
                 
-                <div class="Category__HeaderLeft JS-Color" data-color="{{palette.contrast}}">
+                <div class="Category__HeaderLeft" style="color:{{palette.contrast}}">
                     
                     {{#if (gte @root.permission 3)}}
-                        <span class="DragIndicator MSO JS-Color" data-color="{{palette.contrast}}">drag_indicator</span>
+                        <span class="DragIndicator MSO" style="color: {{palette.contrast}};">drag_indicator</span>
                     {{/if}}
 
                     <button class="ACButton ACButton--Inline ACButton--{{palette.css}}" type="button" data-action="onCategoryCollapse">
@@ -26,7 +26,7 @@
 
                 </div>
 
-                <div class="Category__HeaderCenter JS-Color" data-color="{{palette.contrast}}">
+                <div class="Category__HeaderCenter" style="color: {{palette.contrast}};">
 
                     <span class="Category__Name">
                         {{category.name}}
@@ -48,7 +48,7 @@
 
                     <div class="Category__Trackers">
                         {{#each category.trackers as |tracker index|}}
-                            <div class="StatTracker StatTracker--{{../palette.css}}">
+                            <div class="StatTracker StatTracker--{{../palette.css}}" data-tooltip="<span style='text-transform:capitalize'>{{tracker.tag}}</span>">
                                 <span class="StatTracker__Label">{{tracker.tag}}</span>
                             </div>
                         {{/each}}

@@ -20,11 +20,12 @@
     {{#unless post}}
         <div class="ChatMessage__Dice">
             <div class="ChatMessage__Result JS-ExpandTooltip">
-                <span class="ChatMessage__Total {{crit}}">{{roll._total}}</span>
-                <span class="ChatMessage__Formula">{{roll._formula}}</span>
+                <span class="ChatMessage__Total {{crit}}">{{roll.total}}</span>
+                <span class="ChatMessage__Formula" data-tooltip="{{roll.formula}}">{{roll.formula}}</span>
             </div>
 
             {{{tooltip}}}
+            <!-- {{> "roll.tooltip"}} -->
         </div>
     {{/unless}}
 
@@ -57,7 +58,7 @@
     {{/if}}
 
     <div class="ChatMessage__Content JS-Content">
-        {{{enrichedDescription}}}
+        {{{description}}}
     </div>
 
     <div class="ChatMessage__Banner" style="background-color: {{palette.primary}}; color: {{palette.contrast}};">

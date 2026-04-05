@@ -19,6 +19,8 @@
     "Purple": "Purple",
     "Grey": "Grey",
 
+    "Stat": "Stat",
+
     "ToggleVisibility": "Toggle Header Visibility",
 
     "Macro": {
@@ -130,8 +132,8 @@
         },
 
         "Tag": {
-            "Label": "Tag",
-            "Placeholder": "New Stat"
+            "Label": "Name",
+            "Placeholder": "Stat"
         },
         "Display": {
             "Label": "Display",
@@ -216,6 +218,26 @@
     "DeleteFeatureDialog": {
         "Title": "Delete Feature [{id}]: {name}",
         "Content": "<p>Delete \"<b>{feature}</b>\"?</p>"
+    },
+
+    "RollConfig": {
+        "Title": "Roll Feature: {name}",
+        
+        "Formula": {
+            "Label": "Formula",
+            "Placeholder": "1d20"
+        },
+        "Modifier": {
+            "Label": "Modifier (Optional)",
+            "Placeholder": "e.g. +2"
+        },
+        "RollMode": {
+            "Label": "Roll Mode"
+        },
+
+        "Normal": "Normal",
+        "Disadvantage": "Disadvantage",
+        "Advantage": "Advantage"
     }
 
 }

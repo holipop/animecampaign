@@ -1,4 +1,5 @@
-import ACDialogV2 from "../applications-v2/ACDialogV2.js";
+import ACDialogV2 from "../applications-v2/ACDialogV2.js"
+import RollConfigV2 from "../applications-v2/RollConfigV2.js"
 import * as Description from "../Description.js"
 
 /**
@@ -54,74 +55,112 @@ export default class ACItem extends Item {
      * @param {boolean} options.post
      */
     async roll ({ post = false } = {}) {
-        let formula = this.system.details.formula ?? ""
+        const data = (post)
+            ? { formula: "1", modifier: "", rollMode: "public", button: "normal" } 
+            : await ACDialogV2.from({
+                template: "systems/animecampaign/templates/dialog/roll-config.hbs",
+                context: {
+                    rollmodes: CONFIG.Dice.rollModes,
+                    formula: this.system.details.formula
+                },
+                window: {
+                    title: game.i18n.format("AC.RollConfig.Title", { 
+                        name: this.name, 
+                    }),
+                },
+                buttons: [
+                    {
+                        action: "disadvantage",
+                        label: "AC.RollConfig.Disadvantage",
+                    },
+                    {
+                        action: "normal",
+                        label: "AC.RollConfig.Normal",
+                        default: true
+                    },
+                    {
+                        action: "advantage",
+                        label: "AC.RollConfig.Advantage",
+                    }
+                ]
+            })
+
+        if (!data) return
+        
+        let formula = data.formula + data.modifier ?? ""
         if (!Roll.validate(formula)) {
             formula = "1"
             post = true
         }
+        
+        const roll = new Roll(formula, this.getRollData())
 
-        const rollData = this.getRollData()
-        const [roll, max, min] = await Promise.all([
-            new Roll(formula, rollData).evaluate(),
-            new Roll(formula, rollData).evaluate({ maximize: true }),
-            new Roll(formula, rollData).evaluate({ minimize: true }),
+        const [max, min] = await Promise.all([
+            roll.clone().evaluate({ maximize: true }),
+            roll.clone().evaluate({ minimize: true }),
         ])
+        
+        const rollType = data.button
+        const firstDie = roll.terms[0]
 
-        let crit
-        if (roll.isDeterministic) { }
-        else if (roll.total == max.total) {
+        if (rollType === "disadvantage") {
+            firstDie.alter(1, 1)
+            firstDie.modifiers.push("kl")
+        } else if (rollType === "advantage") {
+            firstDie.alter(1, 1)
+            firstDie.modifiers.push("kh")
+        }
+        
+        roll.resetFormula() // doesn't do anything for normal rolls
+        await roll.evaluate() 
+
+        let crit = ""
+        if (roll.total == max.total) {
             crit = "ChatMessage__Total--CritSuccess"
         } else if (roll.total == min.total) {
             crit = "ChatMessage__Total--CritFailure"
         }
 
-        // !! Query handling WIP
-        /* let answers = []
-        if (this.queries.length > 0) {
-            const content = await renderTemplate('systems/animecampaign/templates/dialog/roll-config.hbs', {
-                queries: this.queries
-            })
-            const data = await ACDialogV2.prompt({
-                window: {
-                    title: game.i18n.format("AC.RollConfig.Title")
-                },
-                content,
-                ok: {
-                    label: "Roll",
-                    icon: "ifl",
-                    callback: (event, button, dialog) => new FormDataExtended(button.form).object
-                },
-            })
-
-            answers = Object.values(foundry.utils.expandObject(data).queries)
-        } */
-
-        const [tooltip, enrichedDescription] = await Promise.all([
+        const [tooltip, description] = await Promise.all([
             roll.getTooltip(),
-            Description.enrichChatMessage(this.system.description, this /*, answers */)
+            Description.enrichChatMessage(this.system.description, this),
         ])
-        const context = {
-            formula,
-            roll,
-            post,
-            crit,
-            tooltip,
-            enrichedDescription,
 
+        const parts = roll.dice.map(term => term.getTooltipData())
+        const remainder = parts.reduce(
+            (acculumator, term) => acculumator - term.total,
+            roll.total
+        )
+
+        if (remainder) {
+            parts.push({ total: remainder })
+        }
+
+        console.log(parts)
+        
+
+        const template = "systems/animecampaign/templates/roll/template.hbs"
+        const context = {
+            roll: roll,
+            post: post,
+            crit: crit,
+            description: description,
+            tooltip: tooltip,
+            parts: parts,
             feature: this,
             palette: this.system.palette,
         }
-        const template = "systems/animecampaign/templates/roll/template.hbs"
+
         const message = {
             user: game.user._id,
             speaker: ChatMessage.getSpeaker(),
-            content: await renderTemplate(template, context),
+            content: await renderTemplate(template, context)
         }
 
         if (post) {
-            ChatMessage.create(message);
+            ChatMessage.create(message, { rollMode: data.rollMode });
         } else {
-            roll.toMessage(message);
+            roll.toMessage(message, { rollMode: data.rollMode });
         }
     }
 

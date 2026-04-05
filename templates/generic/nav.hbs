@@ -3,7 +3,7 @@
     <div class="Navigation__Tabs tabs">
         {{#each tabs as |tab id|}}
             {{#if (gte @root.permission tab.permission)}}
-                <button class="ACButton ACButton--Tab JS-Color {{tab.css}}" type="button" data-action="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}" data-color="{{@root.palette.secondary}}" data-properties="color border-color">
+                <button class="ACButton ACButton--Tab {{tab.css}}" type="button" data-action="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}" style="color: {{@root.palette.secondary}}; border-color: {{@root.palette.secondary}};">
                     <span class="ACButton__Icon MSO">{{tab.icon}}</span>
                 </button>
             {{/if}}

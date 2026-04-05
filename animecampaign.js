@@ -71,6 +71,8 @@ Hooks.once('init', () => {
 
         "feature.summary": "systems/animecampaign/templates/feature-v2/summary.hbs",
         "feature.stats": "systems/animecampaign/templates/feature-v2/stats.hbs",
+
+        "roll.tooltip": "systems/animecampaign/templates/roll/tooltip.hbs",
     }
     loadTemplates(partials)
 })
@@ -127,8 +129,10 @@ Hooks.on('renderChatMessage', (message, html, data) => {
         const tooltip = messageElement.querySelector("div.dice-tooltip")
 
         roll.addEventListener("click", event => {
+            $(tooltip).slideToggle("fast")
+            /* 
             const display = tooltip.style.display
-            tooltip.style.display = (display) ? "" : "block"
+            tooltip.style.display = (display) ? "" : "block" */
         })
     }
     
