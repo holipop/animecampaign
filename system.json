@@ -60,10 +60,14 @@
     "secondaryTokenAttribute": "proficiency",
     "documentTypes": {
         "Actor": {
-            "Character": {}
+            "Character": {
+                "htmlFields": ["description"]
+            }
         },
         "Item": {
-            "Feature": {}
+            "Feature": {
+                "htmlFields": ["description"]
+            }
         }
     }
 }
