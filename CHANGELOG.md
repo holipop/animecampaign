@@ -28,3 +28,4 @@ Started tracking on 3/23/2026
 ## v2.4
 [4/14/26]
 - Fixed a oversight where Features couldn't add or edit stats.
+- Prevented Foundry from triggering the "You do not have permission to view this Actor" warning.
