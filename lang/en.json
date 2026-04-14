@@ -19,7 +19,9 @@
     "Purple": "Purple",
     "Grey": "Grey",
 
+    "New": "New",
     "Stat": "Stat",
+    "Category": "Category",
 
     "ToggleVisibility": "Toggle Header Visibility",
 
@@ -169,7 +171,7 @@
         "Stats": "Stats",
         "Details": "Details",
         
-        "StatsNote": "Stats defined here are displayed on the character sheet and also act as the default stats for features under this category.",
+        "StatsNote": "Stats defined here are displayed on the character sheet and act as default stats for features created under this category.",
         "EmptyStats": "No stats defined.",
         "Tag": {
             "Label": "Tag",
