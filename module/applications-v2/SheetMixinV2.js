@@ -16,6 +16,15 @@ export default function SheetMixinV2 (Base) {
             this.#dragDrop = this.#createDragDropHandlers()
         }
 
+        /**
+         * ! This can be removed when the system is updated for v14.
+         * It makes it so the "You do not have permission to view thisAActor" warning doesn't show up.
+         */
+        _canRender(options) {
+            const isFirstRender = this.state <= foundry.applications.api.ApplicationV2.RENDER_STATES.NONE
+            if (isFirstRender && !options.force && !this.isVisible) return false
+            return super._canRender(options)
+        }
 
 
         // ---- Drag & Drop ----
