@@ -417,7 +417,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         if (data) {
             data.tag ||= `${game.i18n.localize(CONFIG.AC.colorStat[data.color])} ${game.i18n.localize("AC.Stat")}`
-            data.tag.toLowerCase()
+            data.tag = data.tag.toLowerCase()
     
             const stats = this.document.system.colorStats
     
@@ -471,7 +471,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
         if (data) {
             data.tag ||= `${game.i18n.localize(CONFIG.AC.colorStats[data.color])} ${game.i18n.localize("AC.Stat")}`
-            data.tag.toLowerCase()
+            data.tag = data.tag.toLowerCase()
     
             const stats = this.document.system.colorStats
     

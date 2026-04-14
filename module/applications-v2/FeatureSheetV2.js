@@ -246,8 +246,41 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      * Invokes the Stat configuration window for creating a Stat. 
      * @this {FeatureSheetV2}
      */
-    static onStatAdd () {
-        new StatConfigV2({
+    static async onStatAdd () {
+        const data = await ACDialogV2.from({
+            template: "systems/animecampaign/templates/dialog/stat-config.hbs",
+            context: {
+                config: CONFIG.AC,
+                document: this.document,
+                stat: {},
+            },
+            window: { 
+                title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
+            },
+            buttons: [{
+                label: "AC.StatConfig.AddStat.Submit",
+                icon: "save",
+            }]
+        })
+
+        if (data) {
+            data.tag ||= `${game.i18n.localize("AC.New")} ${game.i18n.localize("AC.Stat")}`
+            data.tag = data.tag.toLowerCase()
+
+            const stats = this.document.system.stats
+
+            if (stats.find(stat => stat.tag === data.tag)) {
+                return ui.notifications.error(game.i18n.format("AC.StatConfig.StatTagTaken", { 
+                    tag: data.tag.toUpperCase() 
+                }))
+            }
+
+            stats.push(data)
+            
+            this.document.update({ "system.stats": stats })
+        }
+
+        /* new StatConfigV2({
             window: { 
                 title: game.i18n.format("AC.StatConfig.AddStat.Title", { name: this.document.name }) 
             },
@@ -256,7 +289,7 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
                 view: "value", 
                 tag: "",
             }
-        }).render(true)
+        }).render(true) */
     }
 
     /** 
@@ -265,17 +298,56 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
      * @param {HTMLElement} target
      * @this {FeatureSheetV2}
      */
-    static onStatEdit (event, target) {
-        const index = target.closest('.JS-Stat').dataset.stat
+    static async onStatEdit (event, target) {
+        const index = Number(target.closest('.JS-Stat').dataset.stat)
         const stat = this.document.system.stats[index];
 
-        new StatConfigV2({
+        const data = await ACDialogV2.from({
+            template: "systems/animecampaign/templates/dialog/stat-config.hbs",
+            context: {
+                config: CONFIG.AC,
+                document: this.document,
+                stat: stat,
+            },
+            window: { 
+                title: game.i18n.format("AC.StatConfig.EditStat.Title", { name: this.document.name }) 
+            },
+            buttons: [{
+                label: "AC.StatConfig.EditStat.Submit",
+                icon: "save",
+            }]
+        })
+
+        if (data) {
+            data.tag ||= `${game.i18n.localize("AC.New")} ${game.i18n.localize("AC.Stat")}`
+            data.tag = data.tag.toLowerCase()
+
+            const stats = this.document.system.stats
+
+            if (stats.find((stat, i) => i !== index && stat.tag === data.tag)) {
+                console.log(index)
+                return ui.notifications.error(game.i18n.format("AC.StatConfig.StatTagTaken", { 
+                    tag: data.tag.toUpperCase() 
+                }))
+            }
+
+            // preserves data
+            data.value = stat.value
+            data.max = stat.max
+            data.label = stat.label
+
+            stats[index] = data
+
+            this.document.update({ "system.stats": stats })
+        }
+
+        /* new StatConfigV2({
             window: { 
                 title: game.i18n.format("AC.StatConfig.EditStat.Title", { name: this.document.name }) 
             },
             document: this.document,
             stat
-        }).render(true)
+        }).render(true) */
     }
 
     /** 

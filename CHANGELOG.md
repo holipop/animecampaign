@@ -26,3 +26,5 @@ Started tracking on 3/23/2026
 - Updated styling for chat messages.
 
 ## v2.4
+[4/14/26]
+- Fixed a oversight where Features couldn't add or edit stats.
