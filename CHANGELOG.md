@@ -30,3 +30,6 @@ Started tracking on 3/23/2026
 - Fixed a oversight where Features couldn't add or edit stats.
 - Prevented Foundry from triggering the "You do not have permission to view this Actor" warning.
 - Updated system.json
+
+[4/15/26]
+- Roll types in roll configuration are now radio buttons.

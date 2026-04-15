@@ -2538,6 +2538,25 @@
 .theme-light .animecampaign.application .Config__Group {
   color: #1f1e1e;
 }
+.animecampaign.application .Config__Group--RadioBoxes {
+  border-radius: 0.125rem;
+  border-width: 0.0625rem;
+  border-style: solid;
+  padding: 1rem;
+}
+.theme-dark .animecampaign.application .Config__Group--RadioBoxes {
+  border-color: rgba(235, 237, 242, 0.25);
+}
+.theme-light .animecampaign.application .Config__Group--RadioBoxes {
+  border-color: rgba(31, 30, 30, 0.25);
+}
+.animecampaign.application .Config__Group--RadioBoxes .checkbox {
+  font-size: 0.875rem;
+}
+.animecampaign.application .Config__Group--RadioBoxes .checkbox input {
+  margin-bottom: 0.2rem;
+  margin-right: 0.25rem;
+}
 .animecampaign.application .Config__Label {
   flex: 2;
   font-weight: bold;

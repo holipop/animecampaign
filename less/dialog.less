@@ -214,6 +214,25 @@
         flex-wrap: wrap;
         align-items: center;
     }
+    .Config__Group--RadioBoxes {
+        #ColorScheme(@opacity: 25%, {
+            border-color: "txt";
+        });
+
+        border-radius: 2 * @rpx;
+        border-width: 1 * @rpx;
+        border-style: solid;
+        padding: 1rem;
+
+        .checkbox {
+            font-size: .875rem;
+        }
+        .checkbox input {
+            margin-bottom: .2rem;
+            margin-right: .25rem;
+        }
+    }
+
     .Config__Label {
         flex: 2;
 

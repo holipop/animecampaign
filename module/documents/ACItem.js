@@ -60,7 +60,8 @@ export default class ACItem extends Item {
             : await ACDialogV2.from({
                 template: "systems/animecampaign/templates/dialog/roll-config.hbs",
                 context: {
-                    rollmodes: CONFIG.Dice.rollModes,
+                    rollModes: CONFIG.Dice.rollModes,
+                    rollTypes: CONFIG.AC.rollTypes, 
                     formula: this.system.details.formula
                 },
                 window: {
@@ -70,18 +71,11 @@ export default class ACItem extends Item {
                 },
                 buttons: [
                     {
-                        action: "disadvantage",
-                        label: "AC.RollConfig.Disadvantage",
-                    },
-                    {
                         action: "normal",
-                        label: "AC.RollConfig.Normal",
+                        icon: "ifl",
+                        label: "AC.RollConfig.Roll",
                         default: true
                     },
-                    {
-                        action: "advantage",
-                        label: "AC.RollConfig.Advantage",
-                    }
                 ]
             })
 
@@ -100,13 +94,12 @@ export default class ACItem extends Item {
             roll.clone().evaluate({ minimize: true }),
         ])
         
-        const rollType = data.button
         const firstDie = roll.terms[0]
 
-        if (rollType === "disadvantage") {
+        if (data.rollType === "disadvantage") {
             firstDie.alter(1, 1)
             firstDie.modifiers.push("kl")
-        } else if (rollType === "advantage") {
+        } else if (data.rollType === "advantage") {
             firstDie.alter(1, 1)
             firstDie.modifiers.push("kh")
         }
