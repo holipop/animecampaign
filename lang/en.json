@@ -239,7 +239,9 @@
 
         "Normal": "Normal",
         "Disadvantage": "Disadvantage",
-        "Advantage": "Advantage"
+        "Advantage": "Advantage",
+        
+        "Roll": "Roll"
     }
 
 }

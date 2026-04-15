@@ -11,6 +11,10 @@
 <div class="Config__Group">
     <label class="Config__Label">{{localize "AC.RollConfig.RollMode.Label"}}</label>
     <select class="Config__Input" name="rollMode">
-        {{selectOptions rollmodes localize=true}}
+        {{selectOptions rollModes localize=true}}
     </select>
+</div>
+
+<div class="Config__Group Config__Group--RadioBoxes">
+    {{radioBoxes "rollType" rollTypes checked="normal" localize=true}}
 </div>
