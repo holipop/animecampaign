@@ -51,6 +51,13 @@ AC.displays = {
     resource: "AC.StatConfig.Display.Options.Resource",
     label: "AC.StatConfig.Display.Options.Label",
 }
+
+AC.rollTypes = {
+    disadvantage: "AC.RollConfig.Disadvantage",
+    normal: "AC.RollConfig.Normal",
+    advantage: "AC.RollConfig.Advantage",
+}
+
 AC.defaultCategories = [
     { 
         name: "weapon",
