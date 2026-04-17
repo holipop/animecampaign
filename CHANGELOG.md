@@ -33,3 +33,4 @@ Started tracking on 3/23/2026
 
 [4/15/26]
 - Roll types in roll configuration are now radio buttons.
+- Removed searching with `string.contains` in favor of `SearchFilter`.
