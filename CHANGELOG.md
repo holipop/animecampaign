@@ -31,5 +31,11 @@ Started tracking on 3/23/2026
 - Prevented Foundry from triggering the "You do not have permission to view this Actor" warning.
 - Updated system.json
 
+## v2.5
 [4/15/26]
 - Roll types in roll configuration are now radio buttons.
+- Removed searching with `string.contains` in favor of `SearchFilter`.
+
+[4/19/26]
+- Added an option in Feature details and roll dialog to skip roll configuration.
+- Shift-clicking the "Roll Feature" button on Character and Feature sheets skips dialog.

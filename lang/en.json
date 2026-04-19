@@ -66,6 +66,7 @@
         "Biography": "Biography",
 
         "Search": "Search Kit",
+        "ClearSearch": "Clear Search",
 
         "UncategorizedFeatures": "Uncategorized",
 
@@ -106,6 +107,9 @@
     },
 
     "Details": {
+        "SkipRoll": {
+            "Label": "Always Skip Roll Dialog"
+        },
         "RollFormula": {
             "Label": "Roll Formula"
         },
@@ -224,7 +228,6 @@
 
     "RollConfig": {
         "Title": "Roll Feature: {name}",
-        
         "Formula": {
             "Label": "Formula",
             "Placeholder": "1d20"
@@ -235,6 +238,9 @@
         },
         "RollMode": {
             "Label": "Roll Mode"
+        },
+        "SkipDialog": {
+            "Label": "Always Skip Dialog"
         },
 
         "Normal": "Normal",

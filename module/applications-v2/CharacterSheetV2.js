@@ -1,10 +1,8 @@
 import SheetMixinV2 from "./SheetMixinV2.js"
 import ACDialogV2 from "./ACDialogV2.js"
-import StatConfigV2 from "./StatConfigV2.js"
 import CategoryConfigV2 from "./CategoryConfigV2.js"
 
 import ACItem from "../documents/ACItem.js"
-
 import Stat from "../data-models/Stat.js"
 import Category from "../data-models/Category.js"
 
@@ -238,6 +236,55 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
 
 
 
+    // ---- Search Filter ----
+
+    /** @type {SearchFilter} */
+    #search = new SearchFilter({
+        inputSelector: '.JS-SearchInput',
+        contentSelector: ".JS-SearchFilter",
+        callback: this.#onSearchFilter.bind(this)
+    })
+
+    /**
+     * Filter features and categories.
+     * @param {KeyboardEvent} event   The key-up event from keyboard input
+     * @param {string} query          The raw string input to the search field
+     * @param {RegExp} rgx            The regular expression to test against
+     * @param {HTMLElement} html      The HTML element which should be filtered
+     */
+    #onSearchFilter(event, query, rgx, html) {
+        const featureEntries = html.querySelectorAll(".JS-FeatureEntry")
+        const categories = html.querySelectorAll(".JS-Category")
+            //this.query = searchInput.value.toLowerCase()
+            //const regex = new RegExp(this.query, "gi")
+
+        featureEntries.forEach((element) => {
+            const id = element.dataset.id
+            const feature = this.document.items.get(id)
+
+            //if (feature.name.toLowerCase().includes(this.query)) {
+            if (rgx.test(SearchFilter.cleanQuery(feature.name))) {
+                element.classList.add("FeatureEntry--Active")
+            } else {
+                element.classList.remove("FeatureEntry--Active")
+            }
+        })
+
+        categories.forEach((element) => {
+            const list = element.querySelector(".Category__Features")
+            const entries = list.querySelectorAll(".FeatureEntry--Active")
+
+            if (entries.length > 0) {
+                // Clearing the search bar should reveal empty categories. 
+                element.classList.add("Category--Active")
+            } else {
+                element.classList.remove("Category--Active")
+            }
+        }) 
+    }
+
+
+
     // ---- Context ----
 
     /** @inheritdoc */
@@ -337,6 +384,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
     /** @inheritdoc */
     _onRender (context, options) {
         super._onRender(context, options)
+        this.#search.bind(this.element)
 
         // Disable the Add Stat button when the stats list is full.
         if (this.document.system.colorStats.length >= 8) {
@@ -348,7 +396,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
             feautreDescriptions.forEach(Description.attachSections)
         }
 
-        // Filters kit features
+        /* // Filters kit features
         const searchInput = this.element.querySelector(".JS-SearchInput")
         // const escapeCharactersRegExp = new RegExp("[\+\-\*\?\^\$\\\.\[\]\{\}\(\)\|\/])")
 
@@ -380,7 +428,7 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
                     element.classList.remove("Category--Active")
                 }
             }) 
-        })
+        }) */
     }
 
 
@@ -691,7 +739,10 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         const { id } = target.closest(".JS-FeatureEntry").dataset
         const item = this.document.items.get(id)
 
-        item.roll()
+        const skip = (event.shiftKey || item.system.details.skip)
+        const post = !Roll.validate(item.system.details.formula)
+
+        item.roll({ post, skip })
     }
 
     /**
