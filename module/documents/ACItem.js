@@ -52,33 +52,45 @@ export default class ACItem extends Item {
 
     /**
      * Sends a chat message displaying this feature, rolling if a valid roll formula is provided. 
-     * @param {boolean} options.post
+     * @param {any} options
+     * @param {boolean} options.post Should this roll dice, if any?
+     * @param {boolean} options.skip Should this skip the dialog?
      */
-    async roll ({ post = false } = {}) {
-        const data = (post)
-            ? { formula: "1", modifier: "", rollMode: "public", button: "normal" } 
-            : await ACDialogV2.from({
-                template: "systems/animecampaign/templates/dialog/roll-config.hbs",
-                context: {
-                    rollModes: CONFIG.Dice.rollModes,
-                    rollTypes: CONFIG.AC.rollTypes, 
-                    formula: this.system.details.formula
-                },
-                window: {
-                    title: game.i18n.format("AC.RollConfig.Title", { 
-                        name: this.name, 
-                    }),
-                },
-                buttons: [
-                    {
-                        action: "normal",
-                        icon: "ifl",
-                        label: "AC.RollConfig.Roll",
-                        default: true
-                    },
-                ]
-            })
+    async roll ({ post = false, skip = false } = {}) {
+        console.log({post, skip})
 
+        const fallback = {
+            formula: this.system.details.formula, 
+            modifier: "", 
+            rollMode: "public", 
+            rollType: "normal",
+            skip: this.system.details.skip,
+        }
+        const options = {
+            template: "systems/animecampaign/templates/dialog/roll-config.hbs",
+            context: {
+                rollModes: CONFIG.Dice.rollModes,
+                rollTypes: CONFIG.AC.rollTypes, 
+                formula: this.system.details.formula
+            },
+            window: {
+                title: game.i18n.format("AC.RollConfig.Title", { 
+                    name: this.name, 
+                }),
+            },
+            buttons: [
+                {
+                    action: "normal",
+                    icon: "ifl",
+                    label: "AC.RollConfig.Roll",
+                    default: true
+                },
+            ]
+        }
+
+        const data = (post || skip) 
+            ? fallback 
+            : await ACDialogV2.from(options)
         if (!data) return
         
         let formula = data.formula + data.modifier ?? ""
@@ -129,9 +141,6 @@ export default class ACItem extends Item {
             parts.push({ total: remainder })
         }
 
-        console.log(parts)
-        
-
         const template = "systems/animecampaign/templates/roll/template.hbs"
         const context = {
             roll: roll,
@@ -154,6 +163,10 @@ export default class ACItem extends Item {
             ChatMessage.create(message, { rollMode: data.rollMode });
         } else {
             roll.toMessage(message, { rollMode: data.rollMode });
+        }
+
+        if (this.system.details.skip !== data.skip) {
+            this.update({ "system.details.skip": data.skip })
         }
     }
 

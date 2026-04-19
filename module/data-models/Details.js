@@ -8,6 +8,7 @@ export default class Details extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
 
         return {
+            skip: new fields.BooleanField({ initial: false }),
             formula: new fields.StringField(),
             action: new fields.StringField(),
             usage: new fields.SchemaField({

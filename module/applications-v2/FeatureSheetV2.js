@@ -235,11 +235,18 @@ export default class FeatureSheetV2 extends HandlebarsApplicationMixin(SheetMixi
     }
 
     /** 
-     * Sends a chat message and rolls if this Feature has a valid formula.
+     * Sends a chat message and rolls if this Feature has a valid formula. 
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @this {FeatureSheetV2}
      */
-    static onRoll () {
-        this.document.roll()
+    static onRoll (event, target) {
+        const item = this.document
+        
+        const skip = (event.shiftKey || item.system.details.skip)
+        const post = !Roll.validate(item.system.details.formula)
+
+        item.roll({ skip, post })
     }
 
     /** 

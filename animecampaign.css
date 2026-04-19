@@ -2621,6 +2621,11 @@
 .theme-light .animecampaign.application input.Config__Input::placeholder {
   color: rgba(31, 30, 30, 0.5);
 }
+.animecampaign.application input.Config__Input--Checkbox {
+  flex: 0;
+  border: none;
+  padding: 0;
+}
 .animecampaign.application input.Config__Input--Caps {
   text-transform: uppercase;
 }

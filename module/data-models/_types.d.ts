@@ -70,6 +70,7 @@ declare module "./Category.js" {
 
 declare module "./Details.js" {
     export default interface Details {
+        skip: boolean
         parent: ACItem
         editor: "markdown" | "prosemirror"
         formula: string
