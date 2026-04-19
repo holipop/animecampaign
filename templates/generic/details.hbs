@@ -1,4 +1,9 @@
 <div class="Config__Group">
+    <label class="Config__Label">{{localize "AC.Details.SkipRoll.Label"}}</label>
+    <input class="Config__Input Config__Input--Checkbox" type="checkbox" name="{{prefix}}details.skip" {{checked details.skip}}>
+</div>
+
+<div class="Config__Group">
     <label class="Config__Label">{{localize "AC.Details.RollFormula.Label"}}</label>
     <input class="Config__Input" type="text" name="{{prefix}}details.formula" value="{{details.formula}}" placeholder="{{localize "AC.NotApplicable"}}">
 </div>

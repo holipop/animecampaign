@@ -253,8 +253,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
      * @param {HTMLElement} html      The HTML element which should be filtered
      */
     #onSearchFilter(event, query, rgx, html) {
-        console.log(event, query, rgx, html)
-
         const featureEntries = html.querySelectorAll(".JS-FeatureEntry")
         const categories = html.querySelectorAll(".JS-Category")
             //this.query = searchInput.value.toLowerCase()
@@ -275,8 +273,6 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         categories.forEach((element) => {
             const list = element.querySelector(".Category__Features")
             const entries = list.querySelectorAll(".FeatureEntry--Active")
-
-            console.log(entries)
 
             if (entries.length > 0) {
                 // Clearing the search bar should reveal empty categories. 
@@ -743,7 +739,10 @@ export default class CharacterSheetV2 extends HandlebarsApplicationMixin(SheetMi
         const { id } = target.closest(".JS-FeatureEntry").dataset
         const item = this.document.items.get(id)
 
-        item.roll()
+        const skip = (event.shiftKey || item.system.details.skip)
+        const post = !Roll.validate(item.system.details.formula)
+
+        item.roll({ post, skip })
     }
 
     /**
